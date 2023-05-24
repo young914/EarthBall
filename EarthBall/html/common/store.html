@@ -10,25 +10,7 @@
     <link rel="stylesheet" href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d4ce7a8706f16f48bba913a5def2af6a"></script>
-    <script>
-        $(function(){
-            $('.mainSlide').slick({
-                dots: true,
-                autoplay : true,
-                autoplaySpeed : 1000,
-                speed : 2000,
-                infinite : true
-            });
-            // $('.mainSlide').slick({
-            //     dots: true,
-            //     infinite: true,
-            //     speed: 500,
-            //     fade: true,
-            //     cssEase: 'linear'
-            // });
-        })
-    </script>
+    
 
     <style>
         html, body{
@@ -45,17 +27,17 @@
             top: 0;
             z-index: 9999;
             background-color: white;
-            min-width: 1200px;
+            min-width: 1000px;
         }
         .header{
-            width: 70%;
+            width: 1000px;
             height: 120px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
         }
         .menu{
-            width: 70%;
+            width: 1000px;
             height: 50px;
             margin: 0 auto;
             display: flex;
@@ -99,6 +81,7 @@
         .dropdown-content a:hover{
             background-color : #19A7CE;
             color : white;
+            border-radius: 8px;
         }
         .dropdown:hover .dropdown-content{
             display : block;
@@ -113,12 +96,12 @@
             color : #19A7CE;
         }
 
-        .search {
+        .search>form {
             position: relative;
             width: 200px;
         }
 
-        .search>input {
+        .search>form>input {
             width: 100%;
             border: 1px solid #bbb;
             border-radius: 8px;
@@ -126,7 +109,7 @@
             font-size: 14px;
         }
 
-        .search>img {
+        .search>form>img {
             position : absolute;
             width: 17px;
             top: 10px;
@@ -138,13 +121,61 @@
 
         /* 메인영역 */
         #container{
-            width: 70%;
+            width: 1000px;
             height: auto;
             margin: 0 auto;
             padding-top: 170px;
             /* background-color: aliceblue; */
         }
 
+        /* store */
+
+        .title{
+            display: flex;
+        }
+        .title div{
+            width: 12px;
+            height: 70px;
+            background-color: #146C94;
+        }
+
+        .title span{
+            font-size: 40px;
+            padding-top: 15px;
+        }
+        .mapSearch{
+            display : grid; 
+            grid-template-columns: 30% 50% 20%; 
+            padding-top : 20px
+        }
+        .mapSearch form{
+            position: relative
+            
+        }
+        .mapSearch input{
+            width: 100%;
+            border: 1px solid #bbb;
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 14px;
+            padding-left: 30px;
+        }
+        .mapSearch img{
+            position: absolute;
+            padding: 10px;
+            width: 18px;
+            
+        }
+        .mapSearch select{
+            width: 100%; 
+            height: 100%; 
+            border: 1px solid #bbb; 
+            border-radius: 8px; 
+            font-size: 14px; 
+            padding-left: 10px;
+        }
+
+        
         /* ---------------------------------- */
         /* footer */
         #footer{
@@ -158,18 +189,19 @@
     </style>
 </head>
 <body>
+    <!-- 로그인 영역 -->
     <div id="headers">
         <div class="header">
             <div style="width: 120px;"></div>
             <div class="logo">
-                <a href=""><img src="image/logo.png" style="width: 250px;"></a>
+                <a href=""><img src="../resources/img/logo.png" style="width: 250px;"></a>
             </div>
             <div class="login-area">
                 <div><a href="">로그인</a></div>&nbsp;|&nbsp;
                 <div><a href="">회원가입</a></div>
             </div>
         </div>
-    
+        <!-- 매뉴바 -->
         <div class="menu">
             <div>
                 <div class="dropdown">
@@ -222,31 +254,100 @@
             </div>
             
     
-            <div class="search" style="padding-right: 25px;">
-                <input type="text" placeholder="검색어 입력">
-                <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"">
+            <div class="search">
+                <form action="">
+                    <input type="text" placeholder="검색어 입력">
+                    <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+                </form>
             </div>
     
         </div>
     </div>
 
     <div id="container">
-        <div id="map" style="width:1200px;height:800px; border: 1px solid black;"></div>
-        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=발급받은 APP KEY를 넣으시면 됩니다."></script>
-        <script>
-            var container = document.getElementById('map');
-            var options = {
-                center: new kakao.maps.LatLng(33.450701, 126.570667),
-                level: 3
-            };
+        <div class="store map" style="display: flex; justify-content: center;">
+            <div style="width: 1000px; height: 600px; border: 1px solid black;">
+                
+            </div>
+        </div>
+        <div>
+            <p style="color: gray;">전국의 x개의 매장</p>
+            <div class="common title">
+                <div></div>
+                <span>친환경 매장 찾기</span>
+            </div>
+        </div>
+        <div class="mapSearch">
+            <div>
+                <form action="">
+                    <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+                    <input type="text" placeholder="검색어 입력">
+                </form>
+            </div>
+            <div></div>
+            <div>
+                <select name="" id="">
+                    <option value="">거리순</option>
+                    <option value="">좋아요순</option>
+                </select>
+            </div>
+        </div>
 
-            var map = new kakao.maps.Map(container, options);
-        </script>
+        <div class="mapList" style="margin-top: 30px;">
+            <div style="margin: 30px 0px; border: 1px solid black; width: 100%; height: 130px;">
+                <div style="padding: 20px;">
+                    <p style="margin: 0;">
+                        이게 가게이름 <br>
+                        여기 가게주소여기 가게주소여기 가게주소여기 가게주소여기 가게주소여기 가게주소여기 가게주소여기 가게주소 <br> <br>
+                        위치 찍기 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 영업시간 : 00:00 ~ 00:00
+                    </p>
+                </div>
+            </div>
+            <div style="margin: 30px 0px; border: 1px solid black; width: 100%; height: 130px;">
+                <div style="padding: 20px;">
+                    <p style="margin: 0;">
+                        이게 가게이름 <br>
+                        여기 가게주소여기 가게주소여기 가게주소여기 가게주소여기 가게주소여기 가게주소여기 가게주소여기 가게주소 <br> <br>
+                        위치 찍기 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 영업시간 : 00:00 ~ 00:00
+                    </p>
+                </div>
+            </div>
+            <div style="margin: 30px 0px; border: 1px solid black; width: 100%; height: 130px;">
+                <div style="padding: 20px;">
+                    <p style="margin: 0;">
+                        이게 가게이름 <br>
+                        여기 가게주소여기 가게주소여기 가게주소여기 가게주소여기 가게주소여기 가게주소여기 가게주소여기 가게주소 <br> <br>
+                        위치 찍기 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 영업시간 : 00:00 ~ 00:00
+                    </p>
+                </div>
+            </div>
+            <div style="margin: 30px 0px; border: 1px solid black; width: 100%; height: 130px;">
+                <div style="padding: 20px;">
+                    <p style="margin: 0;">
+                        이게 가게이름 <br>
+                        여기 가게주소여기 가게주소여기 가게주소여기 가게주소여기 가게주소여기 가게주소여기 가게주소여기 가게주소 <br> <br>
+                        위치 찍기 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 영업시간 : 00:00 ~ 00:00
+                    </p>
+                </div>
+            </div>
+            <div style="margin: 30px 0px; border: 1px solid black; width: 100%; height: 130px;">
+                <div style="padding: 20px;">
+                    <p style="margin: 0;">
+                        이게 가게이름 <br>
+                        여기 가게주소여기 가게주소여기 가게주소여기 가게주소여기 가게주소여기 가게주소여기 가게주소여기 가게주소 <br> <br>
+                        위치 찍기 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 영업시간 : 00:00 ~ 00:00
+                    </p>
+                </div>
+            </div>
+            
+            
+            
+        </div>
     </div>
 
     <div id="footer">
         <div style="width: 100px;"></div>
-        <div><img src="image/logo2.png" style="width: 400px; padding-top: 20px;"></div>
+        <div><img src="../resources/img/logo2.png" style="width: 400px; padding-top: 20px;"></div>
         <div style="margin-top: 30px; color: white;">
             <p style="font-weight: bold;">
                 이용약관  |  개인정보처리방침  |  도매 전용 B2B몰
