@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+    <link rel="stylesheet" href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script>
+        $(function(){
+            $('.mainSlide').slick({
+                dots: true,
+                autoplay : true,
+                autoplaySpeed : 1000,
+                speed : 2000,
+                infinite : true
+            });
+        })
+        $(function(){
+            $('.diarySlide').slick({
+                autoplay : true,
+                autoplaySpeed : 1000,
+                speed : 2000,
+                infinite: true,
+                slidesToShow: 3,
+                slidesToScroll: 3
+            })
+        })
+    </script>
+
+    <style>
+        html, body{
+            margin: 0;
+            padding: 0;
+            min-width: 1500px;
+        }
+
+        /* header */
+        #headers{
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            z-index: 9999;
+            background-color: white;
+            min-width: 1200px;
+        }
+        .header{
+            width: 1200px;
+            height: 120px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+        .menu{
+            width: 1200px;
+            height: 50px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+        .login-area{
+            display: flex;
+            justify-content: space-between;
+            width: 130px;
+            margin-top: 30px;
+            color: #19A7CE;
+        }
+        .login-area a{
+            text-decoration: none;
+            color: #19A7CE;
+        }
+        .logo{
+            width: 250px;
+        }
+
+        /* 드롭다운 */
+        .dropdown{
+            position : relative;
+            display : inline-block;
+        }
+        .dropdown-content{
+            display : none;
+            position : absolute;
+            z-index : 1; /*다른 요소들보다 앞에 배치*/
+            background-color : white;
+            width : 100px;
+            border-radius : 8px;
+            box-shadow : 0 0 10px rgba(0,0,0,0.2);
+        }
+        .dropdown-content a{
+            display : block;
+            text-decoration : none;
+            color : black;
+            padding: 10px;
+        }
+        .dropdown-content a:hover{
+            background-color : #19A7CE;
+            color : white;
+            border-radius: 8px;
+        }
+        .dropdown:hover .dropdown-content{
+            display : block;
+        }
+        .dropdown>span{
+            display: block;
+            padding: 20px;
+            cursor: pointer;
+            color: #19A7CE;
+        }
+        .dropdown-content a{
+            color : #19A7CE;
+        }
+
+        .search>form {
+            position: relative;
+            width: 200px;
+        }
+
+        .search>form>input {
+            width: 100%;
+            border: 1px solid #bbb;
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 14px;
+        }
+
+        .search>form>img {
+            position : absolute;
+            width: 17px;
+            top: 10px;
+            right: 1px;
+            margin: 0;
+        }
+
+        /* ---------------------------------- */
+
+        /* 메인영역 */
+        #container{
+            width: 1200px;
+            height: 3000px;
+            margin: 0 auto;
+            padding-top: 170px;
+            /* background-color: aliceblue; */
+        }
+
+        /* 매인 배너 */
+        .mainSlide { 
+            position: relative;
+            margin-top: 50px;
+        }
+        .mainSlide img { 
+            width: 100%;
+            height: 550px;
+        }
+        .mainSlide button { 
+            position: absolute;
+            z-index: 10;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 100px;
+            background: rgba(0,0,0,0.5);
+            border: none;
+        }
+        .mainSlide button::before{
+            font-family: 'xeicon'; 
+            color: #fff; 
+            font-size: 45px;
+        }
+        .mainSlide button.slick-prev {
+            left: 50px; 
+            font-size: 0; 
+            color: transparent;
+        }
+        .mainSlide button.slick-prev:before{
+            content:"\e93d";
+        }
+        .mainSlide button.slick-next {
+            right: 50px; 
+            font-size: 0; 
+            color: transparent;
+        }
+        .mainSlide button.slick-next::before{
+            content:"\e940";
+        }
+        .slick-dots{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* 베스트아이템 */
+        #bestArea{
+            width: 100%;
+            height: 700px;
+            margin: 0 auto;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            display: grid;
+            grid-template-columns: 40% 60%;
+            
+        }
+        #bestList{
+            width: 100%;
+            display: grid;
+            grid-template-columns: 33% 33% 33%;
+            grid-template-rows: 50% 50%;
+            margin-right: 30px;
+        }
+        #bestList>div{
+            border: 1px solid #19A7CE;
+            margin: 10px;
+        }
+        #bestList>div>img{
+            width: 100%;
+        }
+        #bestText{
+            margin-left: 20px;
+        }
+        #bestImg{
+            margin-left: 20px;
+            width: 300px; 
+            height: 300px; 
+            border-radius: 100%; 
+            margin-top: 100px;
+        }
+        /* 챌린지 */
+        #challengeArea{
+            margin-top: 50px;
+        }
+        #challengeBox{
+            display: grid;
+            grid-template-columns: 25% 75%;
+        }
+        #challengeList{
+            display: flex;
+            justify-content: space-evenly;
+            width: 100%;
+            height: 300px;
+            margin-top: 50px;
+        }
+        #challengeList>div{
+            border: 1px solid black;
+        }
+        #challengeText{
+            margin-left: 20px;
+        }
+        #challengeImg{
+            width: 100%;
+            height: 400px;
+        }
+        /* 에코다이어리 */
+        #diaryArea{
+            margin-top: 50px;
+        }
+        #diaryBox{
+            display: grid;
+            grid-template-columns: 25% 75%;
+        }
+        #diaryText{
+            margin-left: 20px;
+        }
+        #diaryImg{
+            width: 100%;
+            height: 400px;
+        }
+        /* 에코다이어리-슬라이드 */
+        .diarySlide { 
+            position: relative;
+            margin-top: 60px;
+        }
+        .diarySlide img { 
+            width: 200px;
+            height: 300px;
+        }
+        .diarySlide button { 
+            position: absolute;
+            z-index: 10;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 100px;
+            background: rgba(0,0,0,0.5);
+            border: none;
+        }
+        .diarySlide button::before{
+            font-family: 'xeicon'; 
+            color: #fff; 
+            font-size: 45px;
+        }
+        .diarySlide button.slick-prev {
+            left: 50px; 
+            font-size: 0; 
+            color: transparent;
+        }
+        .diarySlide button.slick-prev:before{
+            content:"\e93d";
+        }
+        .diarySlide button.slick-next {
+            right: 50px; 
+            font-size: 0; 
+            color: transparent;
+        }
+        .diarySlide button.slick-next::before{
+            content:"\e940";
+        }
+        .slick-dots{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* ---------------------------------- */
+        /* footer */
+        #footer{
+            width: 100%;
+            height: 220px;
+            margin: 0 auto;
+            background-color: #19A7CE;
+            display: flex;
+            justify-content: space-evenly;
+        }
+    </style>
+</head>
+<body>
+    <!-- 로그인 영역 -->
+    <div id="headers">
+        <div class="header">
+            <div style="width: 120px;"></div>
+            <div class="logo">
+                <a href=""><img src="../resources/img/logo.png" style="width: 250px;"></a>
+            </div>
+            <div class="login-area">
+                <div><a href="">로그인</a></div>&nbsp;|&nbsp;
+                <div><a href="">회원가입</a></div>
+            </div>
+        </div>
+        <!-- 매뉴바 -->
+        <div class="menu">
+            <div>
+                <div class="dropdown">
+                    <span class="dropbtn">장보기</span>
+                    <div class="dropdown-content">
+                        <a href="">선물꾸러미</a>
+                        <a href="">욕실</a>
+                        <a href="">식품</a>
+                        <a href="">주방</a>
+                        <a href="">생활</a>
+                        <a href="">취미</a>
+                        <a href="">음료용품</a>
+                        <a href="">여성용품</a>
+                        <a href="">반려동물</a>
+                        <a href="">화장품</a>
+                        <a href="">문구</a>
+                        <a href="">전체</a>
+                    </div>
+                </div> 
+                <div class="dropdown">
+                    <span class="dropbtn">지구소개</span>
+                    <div class="dropdown-content">
+                        <a href="">#</a>
+                    </div>
+                </div> 
+                <div class="dropdown">
+                    <span class="dropbtn">챌린지</span>
+                    <div class="dropdown-content">
+                        <a href="">#</a>
+                    </div>
+                </div> 
+                <div class="dropdown">
+                    <span class="dropbtn">환경일기</span>
+                    <div class="dropdown-content">
+                        <a href="">#</a>
+                    </div>
+                </div> 
+                <div class="dropdown">
+                    <span class="dropbtn">매장찾기</span>
+                    <div class="dropdown-content">
+                        <a href="">#</a>
+                    </div>
+                </div> 
+                <div class="dropdown">
+                    <span class="dropbtn">고객센터</span>
+                    <div class="dropdown-content">
+                        <a href="">#</a>
+                    </div>
+                </div> 
+            </div>
+            
+    
+            <div class="search">
+                <form action="">
+                    <input type="text" placeholder="검색어 입력">
+                    <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+                </form>
+            </div>
+    
+        </div>
+    </div>
+
+    <div id="container">
+        <!-- 배너 -->
+        <div class="mainSlide">
+            <div><img src="../resources/img/ad.jpg" alt=""></div>
+            <div><img src="../resources/img/bono.jpg" alt=""></div>
+            <div><img src="../resources/img/coffee.png" alt=""></div>
+        </div>
+        <!--  베스트 아이템 -->
+        <div id="bestArea">
+            <div id="bestBox">
+                <div id="bestText">
+                    <div style="display: flex;">
+                        <div style="width: 12px; height: 45px; background-color: #146C94;"></div>
+                        <h1 style="margin: 0;">BEST SELLER</h1>
+                    </div>
+                    <br>
+                    <p style="margin: 0;">
+                        제로웨이스트 입문자도 <br>
+                        어려움 없이 사용할 수 있는 <br>
+                        베스트 제품
+                    </p>
+                </div>
+                <div><img src="../resources/img/ad.jpg" id="bestImg"></div>
+            </div>
+            <div id="bestList">
+                <div><img src="../resources/img/bono.jpg"></div>
+                <div><img src="../resources/img/bono.jpg"></div>
+                <div><img src="../resources/img/bono.jpg"></div>
+                <div><img src="../resources/img/bono.jpg"></div>
+                <div><img src="../resources/img/bono.jpg"></div>
+                <div><img src="../resources/img/bono.jpg"></div>
+            </div>
+        </div>
+        <!-- 챌린지 -->
+        <div id="challengeArea">
+            <div id="challengeBox">
+                <div id="challengeText">
+                    <div style="display: flex;">
+                        <div style="width: 12px; height: 90px; background-color: #146C94;"></div>
+                        <h1 style="margin: 0;">NEW CHALLENGE</h1>
+                    </div>
+                    <br>
+                    <p style="margin: 0;">
+                        환경보호 챌린지는 환경 문제에 <br>
+                        대한 인식을 높이고, 사회적인 <br>
+                        변화를 이끌기 위해 개인 또는 <br>
+                        그룹이 참여하는 활동입니다. 이 <br>
+                        챌린지들은 사람들이 지구 환경 <br>
+                        에 대한 책임을 느끼고 행동을 <br>
+                        취하도록 독려하며, 지속 가능한 <br>
+                        방식으로 삶을 살도록 돕습니다.
+                    </p>
+                </div>
+                <div><img src="../resources/img/hyuksoo.png" id="challengeImg"></div>
+            </div>
+            <div id="challengeList">
+                <div><img src="../resources/img/bono.jpg"></div>
+                <div><img src="../resources/img/bono.jpg"></div>
+                <div><img src="../resources/img/bono.jpg"></div>
+            </div>
+        </div>
+        <!-- 에코 다이어리 -->
+        <div id="diaryArea">
+            <div id="diaryBox">
+                <div id="diaryText">
+                    <div style="display: flex;">
+                        <div style="width: 12px; height: 45px; background-color: #146C94;"></div>
+                        <h1 style="margin: 0;">ECO DIARY</h1>
+                    </div> 
+                    <br>
+                    <p style="margin: 0;">
+                        에코다이어리는 환경보호 및<br>
+                        지속 가능성을 촉진하기 위해 <br>
+                        개발된 다이어리입니다.
+                    </p>
+                </div>
+                <div><img src="../resources/img/hyuksoo.png" id="diaryImg"></div>
+            </div>
+            <div class="diarySlide">
+                <div><img src="../resources/img/ad.jpg" alt=""></div>
+                <div><img src="../resources/img/ad.jpg" alt=""></div>
+                <div><img src="../resources/img/ad.jpg" alt=""></div>
+                <div><img src="../resources/img/ad.jpg" alt=""></div>
+                <div><img src="../resources/img/ad.jpg" alt=""></div>
+                <div><img src="../resources/img/ad.jpg" alt=""></div>
+                <div><img src="../resources/img/ad.jpg" alt=""></div>
+                <div><img src="../resources/img/ad.jpg" alt=""></div>
+                <div><img src="../resources/img/ad.jpg" alt=""></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="footer">
+        <div style="width: 100px;"></div>
+        <div><img src="../resources/img/logo2.png" style="width: 400px; padding-top: 20px;"></div>
+        <div style="margin-top: 30px; color: white;">
+            <p style="font-weight: bold;">
+                이용약관  |  개인정보처리방침  |  도매 전용 B2B몰
+            </p>
+            <p>
+                회사명 : 주식회사 인수온송민근 | 대표자 : 양선주 <br>
+                주소 : 서울시 금천구 가산디지털2로 165, 1001호 | 이메일 : contact@jigugong.co.kr | 팩스 : 0303-3444-2050 <br>
+                사업자등록번호 : 689-86-00791 | 통신판매업신고 : 제2018-서울동작-02955 | 건강기능식품영업신고 : 제2022-0112707 <br>
+                개인정보보호책임자 : 양선주 | 고객센터 : 02-812-2050 | 호스팅 제공자 : (주)지구공 
+            </p>
+        </div>
+        <div style="width: 100px;"></div>
+    </div>
+
+</body>
+</html>
