@@ -304,6 +304,7 @@
         #content2_1, #content2_2 {
             width : 100%;
             height : 25%;
+            background-color : #e8faff;
             border : 1px solid red;
         }
 
@@ -315,7 +316,20 @@
 
         #content2_1_2 {
             width : 100%;
-            height : 30%;
+            height : 60%;
+            border : 1px solid red;
+        }
+
+        #content2_1_3 {
+            width : 100%;
+            height : 20%;
+            border : 1px solid red;
+        }
+
+        #content2_1_2>table {
+            width : 100%;
+            margin-top : 20px;
+            border : 1px solid red;
         }
 
         #bar_1 {
@@ -463,6 +477,34 @@
             padding : 0px;
         }
 
+        #orderSummaryName {
+            width : 50%;
+            height : 50px;
+            font-size : 18px;
+            font-weight : 600;
+            padding-left : 15px;
+            color : gray;
+        }
+
+        #orderSummaryContent {
+            width : 50%;
+            font-size : 18px;
+            font-weight : bold;
+            text-align: right;
+            padding-right : 20px;
+        }
+
+        #orderSummaryTotal-area {
+            height : 100px;
+            vertical-align : bottom;
+        }
+
+        #orderSummaryTotal {
+            font-size : 20px;
+            font-weight : bold;
+            padding-left : 15px;
+        }
+
 
         /* ---------------------------------- */
         /* footer */
@@ -569,7 +611,7 @@
                     </div>
                     <div id="content1_1_2">
                         <div id="img-area">
-                            <div id="product_img"><img src="image/peng.jpg" width="100%" height="100%"></div>
+                            <div id="product_img"><img src="../resources/img/peng.jpg" width="100%" height="100%"></div>
                         </div>
                         <div id="product_content">
                             <div id="product_name"><p>[지구공] 베스트셀러</p></div>
@@ -579,7 +621,7 @@
                     </div>
                     <div id="content1_1_2">
                         <div id="img-area">
-                            <div id="product_img"><img src="image/peng.jpg" width="100%" height="100%"></div>
+                            <div id="product_img"><img src="../resources/img/peng.jpg" width="100%" height="100%"></div>
                         </div>
                         <div id="product_content">
                             <div id="product_name"><p>[지구공] 베스트셀러</p></div>
@@ -589,7 +631,7 @@
                     </div>
                     <div id="content1_1_2">
                         <div id="img-area">
-                            <div id="product_img"><img src="image/peng.jpg" width="100%" height="100%"></div>
+                            <div id="product_img"><img src="../resources/img/peng.jpg" width="100%" height="100%"></div>
                         </div>
                         <div id="product_content">
                             <div id="product_name"><p>[지구공] 베스트셀러</p></div>
@@ -713,8 +755,22 @@
                         <div id="bar_2"></div>
                     </div>
                     <div id="content2_1_2">
-                        
+                        <table>
+                            <tr>
+                                <td id="orderSummaryName">상품가격</td>
+                                <td id="orderSummaryContent">33,000원</td>
+                            </tr>
+                            <tr>
+                                <td id="orderSummaryName">배송비</td>
+                                <td id="orderSummaryContent">무료</td>
+                            </tr>
+                            <tr id="orderSummaryTotal-area">
+                                <td id="orderSummaryTotal">총 주문금액</td>
+                                <td id="orderSummaryContent">33,000원</td>
+                            </tr>
+                        </table>
                     </div>
+                    <div id="content2_1_3"></div>
                 </div>
                 <div id="content2_2"></div>
             </div>
