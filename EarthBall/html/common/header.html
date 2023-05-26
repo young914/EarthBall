@@ -9,14 +9,13 @@
     <link rel="stylesheet" href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <title>Document</title>
     <style>
         html, body{
             margin: 0;
             padding: 0;
             min-width: 1500px;
         }
-        /* header */
+         /* header */
         #headers{
             position: fixed;
             left: 0;
@@ -27,14 +26,14 @@
             min-width: 1200px;
         }
         .header{
-            width: 1200px;
+            width: 1000px;
             height: 120px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
         }
         .menu{
-            width: 1200px;
+            width: 1000px;
             height: 50px;
             margin: 0 auto;
             display: flex;
@@ -99,18 +98,17 @@
         }
 
         .search>form>input {
-            width: 100%;
             border: 1px solid #bbb;
             border-radius: 8px;
             padding: 10px 12px;
             font-size: 14px;
         }
 
-        .search>form>img {
+        .search>form>i {
             position : absolute;
             width: 17px;
             top: 10px;
-            right: 1px;
+            right: 10px;
             margin: 0;
         }
 
@@ -123,7 +121,7 @@
         <div class="header">
             <div style="width: 120px;"></div>
             <div class="logo">
-                <a href=""><img src="../resources/img/logo.png" style="width: 250px;"></a>
+                <a href=""><img src="image/logo.png" style="width: 250px;"></a>
             </div>
             <div class="login-area">
                 <div><a href="">로그인</a></div>&nbsp;|&nbsp;
@@ -186,7 +184,7 @@
             <div class="search">
                 <form action="">
                     <input type="text" placeholder="검색어 입력">
-                    <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+                    <i class="xi-search"></i>
                 </form>
             </div>
     
