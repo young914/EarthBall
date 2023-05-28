@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.earthball.admin.categoryTemplate.mapper.CategoryTemplateMapper">
+
+    <select id="selectTemplateList" parameterType="Integer" resultType="com.earthball.admin.categoryTemplate.vo.CategoryTemplate">
+        SELECT CATEGORY_TEMPLATE_NO
+             , INPUT_TYPE
+             , SORT_NO
+             , CH_SUB_TITLE
+             , GRP_CODE
+             , CATEGORY_NO
+          FROM TB_CATEGORY_TEMPLATE
+         WHERE STATUS = 'Y'
+           AND CATEGORY_NO = #{categoryNo}
+         ORDER BY SORT_NO ASC
+
+    </select>
+
+    <insert id="insertTemplate" parameterType="com.earthball.admin.categoryTemplate.vo.CategoryTemplate">
+        INSERT INTO TB_CATEGORY_TEMPLATE ( CATEGORY_TEMPLATE_NO
+                                         , INPUT_TYPE
+                                         , SORT_NO
+                                         , CH_SUB_TITLE
+                                         , GRP_CODE
+                                         , CATEGORY_NO)
+                                  VALUES ( SEQ_CATE_NO.NEXTVAL
+                                         , #{inputType}
+                                         , #{sortNo}
+                                         , #{chSubTitle}
+                                         , #{grpCode}
+                                         , #{categoryNo})
+    </insert>
+</mapper>

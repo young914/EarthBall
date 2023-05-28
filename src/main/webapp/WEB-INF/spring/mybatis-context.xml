@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+						http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
+
+	<!-- 해당 BasicDataSource 객체가 필요할 때마다 내부적으로 이 코드가 실행됨 BasicDataSource dataSource
+		= new BasicDataSource(); dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+		=> setDriverClassName() 메소드는 위에 driverClassName 의 setter 메소드임! dataSource.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
+		=> setUrl() 메소드는 위에 url 의 setter 메소드임! dataSource.setUsername("SPRING");
+		=> setUsername() 메소드는 위에 username 의 setter 메소드임! dataSource.setPassword("SPRING");
+		=> setPassword() 메소드는 위에 password 의 setter 메소드임! => setter 주입!!! -->
+
+
+	<!-- [2단계] MyBatis Spring 에서 제공하는 SQL 명령어 실행을 위한 도구 등록 -->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+		<!-- MyBatis 의 설정파일의 위치를 지정해서 설정값들을 읽어들일 수 있도록 해줄 것 -->
+		<property name="configLocation" value="classpath:mybatis-config.xml" />			<!-- => classpath: 는 최상위 폴더인 resources 폴더를 의미함 -->
+		<!-- DB 연결을 위한 도구를 참조 설정 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 해당 SqlSessionFactoryBean 객체가 필요할 때마다 내부적으로 이 코드가 실행됨 SqlSessionFactoryBean
+			sqlSessionFactory = new SqlSessionFactoryBean(); sqlSessionFactory.setConfigLocation("classpath:mybatis-config.xml");
+			sqlSessionFactory.setDataSource(dataSource); // 1단계에서 만든 객체를 필드값으로 넣어버림 -->
+		<property name="mapperLocations" value="classpath:mappers/**/*.xml" />
+	</bean>
+
+
+	<!-- [3단계] SQL 구문 실행을 위한 템플릿을 제공하는 도구 등록 -->
+	<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
+		<!-- SQL 명령어 실행을 위한 도구를 참조 설정 -->
+		<constructor-arg ref="sqlSessionFactory" />		<!-- 2단계에서 만든 객체인 sqlSessionFactory 를 매개변수로써 생성자에 주입시키겠다 => "생성자 주입" 이라고
+			부름 -->
+		<!-- 해당 SqlSessionTemplate 객체가 필요할 때마다 내부적으로 이 코드가 실행됨 SqlSessionTemplate
+			sqlSession = new SqlSessionTemplate(sqlSessionFactory); -->
+		<!-- * property 로 셋팅하는 경우 : setter 주입 * constructor-arg로 셋팅하는 경우 : 생성자
+			주입 -->
+
+		<!-- * 순수 MyBatis 와의 차이점 - 순수 MyBatis : SqlSessionFactoryBuilder 객체 ->
+			SqlSessionFactory 객체 -> SqlSession 객체 insert update delete selectOne selectList
+			메소드 활용 가능 - MyBatis Spring : SqlSessionFactoryBean 객체 -> SqlSessionTemplate
+			객체 insert update delete selectOne selectList 메소드 활용 가능 -->
+	</bean>
+
+</beans>

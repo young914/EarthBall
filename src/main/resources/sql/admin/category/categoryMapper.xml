@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.earthball.admin.category.mapper.CategoryMapper">
+
+    <select id="selectCategoryList" resultType="com.earthball.admin.category.vo.Category" >
+        SELECT CATEGORY_NO
+             , CATEGORY_NAME
+             , STATUS
+          FROM TB_CATEGORY
+         WHERE STATUS = 'Y'
+    </select>
+
+    <insert id="insertCategory" parameterType="String">
+        INSERT INTO TB_CATEGORY (CATEGORY_NO
+                               , CATEGORY_NAME
+                               , STATUS)
+                         VALUES (SEQ_CATE_NO.NEXTVAL
+                               , #{categoryName}
+                               , 'Y')
+    </insert>
+
+
+    <select id="selectCategory" parameterType="java.lang.Integer" resultType="com.earthball.admin.category.vo.Category">
+        SELECT CATEGORY_NO
+             , CATEGORY_NAME
+             , STATUS
+        FROM TB_CATEGORY
+        WHERE STATUS = 'Y'
+          AND CATEGORY_NO = #{categoryNo}
+    </select>
+
+
+    <update id="updateCategory" parameterType="com.earthball.admin.category.vo.Category">
+        UPDATE TB_CATEGORY
+           SET CATEGORY_NAME = #{categoryName}
+         WHERE CATEGORY_NO = #{categoryNo}
+           AND STATUS = 'Y'
+    </update>
+
+    <update id="deleteCategory" parameterType="java.lang.Integer">
+        UPDATE TB_CATEGORY
+           SET STATUS = 'N'
+         WHERE CATEGORY_NO = #{categoryNo}
+    </update>
+
+</mapper>
