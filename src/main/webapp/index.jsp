@@ -6,7 +6,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	location.href = '/list.grp';
+	//location.href = '/list.grp';
+	<jsp:forward page="WEB-INF/main.jsp" />
 </script>
 </head>
 <body>
