@@ -1,153 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-    <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-    <link rel="stylesheet" href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script>
-        $(function(){
-            $('.mainSlide').slick({
-                dots: true,
-                autoplay : true,
-                autoplaySpeed : 1000,
-                speed : 2000,
-                infinite : true
-            });
-            // $('.mainSlide').slick({
-            //     dots: true,
-            //     infinite: true,
-            //     speed: 500,
-            //     fade: true,
-            //     cssEase: 'linear'
-            // });
-        })
-        $(function(){
-            $('.diarySlide').slick({
-                autoplay : true,
-                autoplaySpeed : 1000,
-                speed : 2000,
-                infinite: true,
-                slidesToShow: 3,
-                slidesToScroll: 3
-            })
-        })
-    </script>
-
-    <style>
-        html, body{
-            margin: 0;
-            padding: 0;
-            min-width: 1500px;
-        }
-
-        /* header */
-        #headers{
-            position: fixed;
-            left: 0;
-            right: 0;
-            top: 0;
-            z-index: 9999;
-            background-color: white;
-            min-width: 1200px;
-        }
-        .header{
-            width: 1200px;
-            height: 120px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-        }
-        .menu{
-            width: 1200px;
-            height: 50px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-        }
-        .login-area{
-            display: flex;
-            justify-content: space-between;
-            width: 130px;
-            margin-top: 30px;
-            color: #19A7CE;
-        }
-        .login-area a{
-            text-decoration: none;
-            color: #19A7CE;
-        }
-        .logo{
-            width: 250px;
-        }
-
-        /* 드롭다운 */
-        .dropdown{
-            position : relative;
-            display : inline-block;
-        }
-        .dropdown-content{
-            display : none;
-            position : absolute;
-            z-index : 1; /*다른 요소들보다 앞에 배치*/
-            background-color : white;
-            width : 100px;
-            border-radius : 8px;
-            box-shadow : 0 0 10px rgba(0,0,0,0.2);
-        }
-        .dropdown-content a{
-            display : block;
-            text-decoration : none;
-            color : black;
-            padding: 10px;
-        }
-        .dropdown-content a:hover{
-            background-color : #19A7CE;
-            color : white;
-            border-radius: 8px;
-        }
-        .dropdown:hover .dropdown-content{
-            display : block;
-        }
-        .dropdown>span{
-            display: block;
-            padding: 20px;
-            cursor: pointer;
-            color: #19A7CE;
-        }
-        .dropdown-content a{
-            color : #19A7CE;
-        }
-
-        .search>form {
-            position: relative;
-            width: 200px;
-        }
-
-        .search>form>input {
-            width: 100%;
-            border: 1px solid #bbb;
-            border-radius: 8px;
-            padding: 10px 12px;
-            font-size: 14px;
-        }
-
-        .search>form>img {
-            position : absolute;
-            width: 17px;
-            top: 10px;
-            right: 1px;
-            margin: 0;
-        }
-
-        /* ---------------------------------- */
-
-        /* 메인영역 */
-        #container{
+<meta charset="UTF-8">
+<title>EarthBall</title>
+<style>
+	#container{
             width: 1200px;
             height: 3000px;
             margin: 0 auto;
@@ -185,7 +44,7 @@
             display : flex;
             width : 100%;
             height : 80%;
-            
+
             box-sizing: border-box;
         }
 
@@ -228,6 +87,7 @@
         #content1_4 {
             width : 100%;
             height : 20%;
+            margin-top : 20px;
             /* border : 1px solid red; */
         }
 
@@ -306,7 +166,7 @@
             /* border : 1px solid red; */
             flex-direction: column;
             position : sticky;
-            top : 170px;
+            top : 200px;
         }
 
         #content2_1 {
@@ -396,7 +256,7 @@
             cursor : pointer;
             background-color : #146C94;
         }
-               
+
         #bar_1 {
             width : 12px;
             height : 70px;
@@ -502,7 +362,7 @@
             border-radius : 7px;
             margin : 10px 0px;
         }
-        
+
         #deliveryMemo {
             width : 100%;
             height : 50px;
@@ -580,96 +440,13 @@
             color : white;
             border : 0px;
         }
-
-        /* ---------------------------------- */
-        /* footer */
-        #footer{
-            width: 100%;
-            height: 220px;
-            margin: 0 auto;
-            background-color: #19A7CE;
-            display: flex;
-            justify-content: space-evenly;
-        }
-    </style>
+</style>
 </head>
 <body>
-    <!-- 로그인 영역 -->
-    <div id="headers">
-        <div class="header">
-            <div style="width: 120px;"></div>
-            <div class="logo">
-                <a href=""><img src="../../resources/img/logo.png" style="width: 250px;"></a>
-            </div>
-            <div class="login-area">
-                <div><a href="">로그인</a></div>&nbsp;|&nbsp;
-                <div><a href="">회원가입</a></div>
-            </div>
-        </div>
-        <!-- 매뉴바 -->
-        <div class="menu">
-            <div>
-                <div class="dropdown">
-                    <span class="dropbtn">장보기</span>
-                    <div class="dropdown-content">
-                        <a href="">선물꾸러미</a>
-                        <a href="">욕실</a>
-                        <a href="">식품</a>
-                        <a href="">주방</a>
-                        <a href="">생활</a>
-                        <a href="">취미</a>
-                        <a href="">음료용품</a>
-                        <a href="">여성용품</a>
-                        <a href="">반려동물</a>
-                        <a href="">화장품</a>
-                        <a href="">문구</a>
-                        <a href="">전체</a>
-                    </div>
-                </div> 
-                <div class="dropdown">
-                    <span class="dropbtn">지구소개</span>
-                    <div class="dropdown-content">
-                        <a href="">#</a>
-                    </div>
-                </div> 
-                <div class="dropdown">
-                    <span class="dropbtn">챌린지</span>
-                    <div class="dropdown-content">
-                        <a href="">#</a>
-                    </div>
-                </div> 
-                <div class="dropdown">
-                    <span class="dropbtn">환경일기</span>
-                    <div class="dropdown-content">
-                        <a href="">#</a>
-                    </div>
-                </div> 
-                <div class="dropdown">
-                    <span class="dropbtn">매장찾기</span>
-                    <div class="dropdown-content">
-                        <a href="">#</a>
-                    </div>
-                </div> 
-                <div class="dropdown">
-                    <span class="dropbtn">고객센터</span>
-                    <div class="dropdown-content">
-                        <a href="">#</a>
-                    </div>
-                </div> 
-            </div>
-            
-    
-            <div class="search">
-                <form action="">
-                    <input type="text" placeholder="검색어 입력">
-                    <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
-                </form>
-            </div>
-    
-        </div>
-    </div>
 
-    <div id="container">
+	<jsp:include page="/WEB-INF/jsp/common/header.jsp"></jsp:include>
+
+	<div id="container">
         <div id="title">
             <div id="title_1">
                 <div id="bar_1"></div>
@@ -686,7 +463,7 @@
                     </div>
                     <div id="content1_1_2">
                         <div id="img-area">
-                            <div id="product_img"><img src="../../resources/img/peng.jpg" width="100%" height="100%" alt="상품이미지"></div>
+                            <div id="product_img"><img src="/resources/peng.jpg" width="100%" height="100%" alt="상품이미지"></div>
                         </div>
                         <div id="product_content">
                             <div id="product_name"><p>[지구공] 베스트셀러</p></div>
@@ -696,7 +473,7 @@
                     </div>
                     <div id="content1_1_2">
                         <div id="img-area">
-                            <div id="product_img"><img src="../../resources/img/peng.jpg" width="100%" height="100%" alt="상품이미지"></div>
+                            <div id="product_img"><img src="/resources/peng.jpg" width="100%" height="100%" alt="상품이미지"></div>
                         </div>
                         <div id="product_content">
                             <div id="product_name"><p>[지구공] 베스트셀러</p></div>
@@ -706,7 +483,7 @@
                     </div>
                     <div id="content1_1_2">
                         <div id="img-area">
-                            <div id="product_img"><img src="../../resources/img/peng.jpg" width="100%" height="100%" alt="상품이미지"></div>
+                            <div id="product_img"><img src="/resources/peng.jpg" width="100%" height="100%" alt="상품이미지"></div>
                         </div>
                         <div id="product_content">
                             <div id="product_name"><p>[지구공] 베스트셀러</p></div>
@@ -716,7 +493,7 @@
                     </div>
                     <div id="content1_1_2">
                         <div id="img-area">
-                            <div id="product_img"><img src="../../resources/img/peng.jpg" width="100%" height="100%" alt="상품이미지"></div>
+                            <div id="product_img"><img src="/resources/peng.jpg" width="100%" height="100%" alt="상품이미지"></div>
                         </div>
                         <div id="product_content">
                             <div id="product_name"><p>[지구공] 베스트셀러</p></div>
@@ -726,7 +503,7 @@
                     </div>
                     <div id="content1_1_2">
                         <div id="img-area">
-                            <div id="product_img"><img src="../../resources/img/peng.jpg" width="100%" height="100%" alt="상품이미지"></div>
+                            <div id="product_img"><img src="/resources/peng.jpg" width="100%" height="100%" alt="상품이미지"></div>
                         </div>
                         <div id="product_content">
                             <div id="product_name"><p>[지구공] 베스트셀러</p></div>
@@ -782,7 +559,7 @@
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <input type="text" id="address" placeholder="주소" required>
+                                    <input type="text" id="address" placeholder="주소" maxlength="1" required>
                                 </td>
                             </tr>
                             <tr>
@@ -899,22 +676,13 @@
         </div>
     </div>
 
-    <div id="footer">
-        <div style="width: 100px;"></div>
-        <div><img src="../../resources/img/logo2.png" style="width: 400px; padding-top: 20px;"></div>
-        <div style="margin-top: 30px; color: white;">
-            <p style="font-weight: bold;">
-                이용약관  |  개인정보처리방침  |  도매 전용 B2B몰
-            </p>
-            <p>
-                회사명 : 주식회사 인수온송민근 | 대표자 : 양선주 <br>
-                주소 : 서울시 금천구 가산디지털2로 165, 1001호 | 이메일 : contact@jigugong.co.kr | 팩스 : 0303-3444-2050 <br>
-                사업자등록번호 : 689-86-00791 | 통신판매업신고 : 제2018-서울동작-02955 | 건강기능식품영업신고 : 제2022-0112707 <br>
-                개인정보보호책임자 : 양선주 | 고객센터 : 02-812-2050 | 호스팅 제공자 : (주)지구공 
-            </p>
-        </div>
-        <div style="width: 100px;"></div>
-    </div>
+    <jsp:include page="/WEB-INF/jsp/common/footer.jsp"></jsp:include>
+
+    <script>
+    	$(function() {
+    		$("#")
+    	});
+    </script>
 
 </body>
 </html>
