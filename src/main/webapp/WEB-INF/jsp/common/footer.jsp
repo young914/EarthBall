@@ -46,10 +46,12 @@
 <body>
 	<div id="footer">
         <div style="width: 100px;"></div>
+
         <div class="logoArea">
             <img src="../resources/logo.png">
             <div>지구공</div>
         </div>
+
         <div style="margin-top: 30px; color: white;">
             <p style="font-weight: bold;">
                 이용약관  |  개인정보처리방침  |  도매 전용 B2B몰
@@ -61,7 +63,9 @@
                 개인정보보호책임자 : 양선주 | 고객센터 : 02-812-2050 | 호스팅 제공자 : (주)지구공
             </p>
         </div>
+
         <div style="width: 100px;"></div>
+
     </div>
 </body>
 </html>

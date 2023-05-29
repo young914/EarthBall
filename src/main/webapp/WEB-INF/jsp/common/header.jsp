@@ -228,7 +228,6 @@
                 </div>
             </div>
 
-
             <div class="search">
                 <form action="">
                     <input type="text" placeholder="검색어 입력">

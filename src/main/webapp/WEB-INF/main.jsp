@@ -469,6 +469,7 @@
 
     <jsp:include page="jsp/common/footer.jsp"/>
 
+
     <script>
         $(function(){
             $('.mainSlide').slick({
