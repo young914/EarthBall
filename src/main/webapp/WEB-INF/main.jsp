@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
 	.mainSlide {
@@ -52,7 +52,7 @@
          text-align: center;
      }
 
-     /* º£½ºÆ®¾ÆÀÌÅÛ */
+     /* ë² ìŠ¤íŠ¸ì•„ì´í…œ */
      #bestArea{
          width: 100%;
          height: 700px;
@@ -74,7 +74,7 @@
          /* border: 1px solid #19a7ce; */
          margin: 10px;
      }
-     /* ¸¶¿ì½º ¿Ã¶ó°¡¸é Ä¿Áö´Â È¿°ú */
+     /* ë§ˆìš°ìŠ¤ ì˜¬ë¼ê°€ë©´ ì»¤ì§€ëŠ” íš¨ê³¼ */
      #bestList>div:hover{
          transform: scale(1.05);
          transition: 0.5s;
@@ -101,7 +101,7 @@
      .product-icon i, .product-name, .product-price{
          margin-left: 10px;
      }
-     /* Ã§¸°Áö */
+     /* ì±Œë¦°ì§€ */
      #challengeArea{
          margin-top: 50px;
      }
@@ -118,11 +118,11 @@
      }
      #challengeList>div{
          /* border: 1px solid black; */
-         /* ±×¸²ÀÚÈ¿°ú */
+         /* ê·¸ë¦¼ìžíš¨ê³¼ */
          box-shadow: 0 0 10px rgba(0,0,0,0.2);
          width: 300px;
      }
-     /* ¸¶¿ì½º ¿Ã¶ó°¡¸é Ä¿Áö´Â È¿°ú */
+     /* ë§ˆìš°ìŠ¤ ì˜¬ë¼ê°€ë©´ ì»¤ì§€ëŠ” íš¨ê³¼ */
      #challengeList>div:hover{
          transform: scale(1.05);
          transition: 0.5s;
@@ -178,7 +178,7 @@
          color: white;
          padding: 5px;
      }
-     /* ¿¡ÄÚ´ÙÀÌ¾î¸® */
+     /* ì—ì½”ë‹¤ì´ì–´ë¦¬ */
      #diaryArea{
          margin-top: 50px;
      }
@@ -193,7 +193,7 @@
          width: 100%;
          height: 400px;
      }
-     /* ¿¡ÄÚ´ÙÀÌ¾î¸®-½½¶óÀÌµå */
+     /* ì—ì½”ë‹¤ì´ì–´ë¦¬-ìŠ¬ë¼ì´ë“œ */
      .diarySlide {
          position: relative;
          margin-top: 60px;
@@ -246,13 +246,13 @@
 	<jsp:include page="jsp/common/header.jsp"/>
 
 	<div id="container">
-        <!-- ¹è³Ê -->
+        <!-- ë°°ë„ˆ -->
         <div class="mainSlide">
             <div><img src="../resources/banner1.png" alt=""></div>
             <div><img src="../resources/banner2.png" alt=""></div>
             <div><img src="../resources/banner3.png" alt=""></div>
         </div>
-        <!--  º£½ºÆ® ¾ÆÀÌÅÛ -->
+        <!--  ë² ìŠ¤íŠ¸ ì•„ì´í…œ -->
         <div id="bestArea">
             <div id="bestBox">
                 <div id="bestText">
@@ -262,9 +262,9 @@
                     </div>
                     <br>
                     <p style="margin: 0;">
-                        Á¦·Î¿þÀÌ½ºÆ® ÀÔ¹®ÀÚµµ <br>
-                        ¾î·Á¿ò ¾øÀÌ »ç¿ëÇÒ ¼ö ÀÖ´Â <br>
-                        º£½ºÆ® Á¦Ç°
+                        ì œë¡œì›¨ì´ìŠ¤íŠ¸ ìž…ë¬¸ìžë„ <br>
+                        ì–´ë ¤ì›€ ì—†ì´ ì‚¬ìš©í•  ìˆ˜ ìžˆëŠ” <br>
+                        ë² ìŠ¤íŠ¸ ì œí’ˆ
                     </p>
                 </div>
                 <div><img src="../resources/best1.png" id="bestImg"></div>
@@ -277,10 +277,10 @@
                         </div>
                         <div class="product-info">
                             <div class="product-name">
-                                <p>[Áö±¸°ø] º£½ºÆ®¼¿·¯</p>
+                                <p>[ì§€êµ¬ê³µ] ë² ìŠ¤íŠ¸ì…€ëŸ¬</p>
                             </div>
                             <div class="product-price">
-                                <p>25,000¿ø</p>
+                                <p>25,000ì›</p>
                             </div>
                         </div>
                     </div>
@@ -292,10 +292,10 @@
                         </div>
                         <div class="product-info">
                             <div class="product-name">
-                                <p>[Áö±¸°ø] º£½ºÆ®¼¿·¯</p>
+                                <p>[ì§€êµ¬ê³µ] ë² ìŠ¤íŠ¸ì…€ëŸ¬</p>
                             </div>
                             <div class="product-price">
-                                <p>25,000¿ø</p>
+                                <p>25,000ì›</p>
                             </div>
                         </div>
                     </div>
@@ -307,10 +307,10 @@
                         </div>
                         <div class="product-info">
                             <div class="product-name">
-                                <p>[Áö±¸°ø] º£½ºÆ®¼¿·¯</p>
+                                <p>[ì§€êµ¬ê³µ] ë² ìŠ¤íŠ¸ì…€ëŸ¬</p>
                             </div>
                             <div class="product-price">
-                                <p>25,000¿ø</p>
+                                <p>25,000ì›</p>
                             </div>
                         </div>
                     </div>
@@ -322,10 +322,10 @@
                         </div>
                         <div class="product-info">
                             <div class="product-name">
-                                <p>[Áö±¸°ø] º£½ºÆ®¼¿·¯</p>
+                                <p>[ì§€êµ¬ê³µ] ë² ìŠ¤íŠ¸ì…€ëŸ¬</p>
                             </div>
                             <div class="product-price">
-                                <p>25,000¿ø</p>
+                                <p>25,000ì›</p>
                             </div>
                         </div>
                     </div>
@@ -337,10 +337,10 @@
                         </div>
                         <div class="product-info">
                             <div class="product-name">
-                                <p>[Áö±¸°ø] º£½ºÆ®¼¿·¯</p>
+                                <p>[ì§€êµ¬ê³µ] ë² ìŠ¤íŠ¸ì…€ëŸ¬</p>
                             </div>
                             <div class="product-price">
-                                <p>25,000¿ø</p>
+                                <p>25,000ì›</p>
                             </div>
                         </div>
                     </div>
@@ -352,17 +352,17 @@
                         </div>
                         <div class="product-info">
                             <div class="product-name">
-                                <p>[Áö±¸°ø] º£½ºÆ®¼¿·¯</p>
+                                <p>[ì§€êµ¬ê³µ] ë² ìŠ¤íŠ¸ì…€ëŸ¬</p>
                             </div>
                             <div class="product-price">
-                                <p>25,000¿ø</p>
+                                <p>25,000ì›</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Ã§¸°Áö -->
+        <!-- ì±Œë¦°ì§€ -->
         <div id="challengeArea">
             <div id="challengeBox">
                 <div id="challengeText">
@@ -372,14 +372,14 @@
                     </div>
                     <br>
                     <p style="margin: 0;">
-                        È¯°æº¸È£ Ã§¸°Áö´Â È¯°æ ¹®Á¦¿¡ <br>
-                        ´ëÇÑ ÀÎ½ÄÀ» ³ôÀÌ°í, »çÈ¸ÀûÀÎ <br>
-                        º¯È­¸¦ ÀÌ²ø±â À§ÇØ °³ÀÎ ¶Ç´Â <br>
-                        ±×·ìÀÌ Âü¿©ÇÏ´Â È°µ¿ÀÔ´Ï´Ù. ÀÌ <br>
-                        Ã§¸°ÁöµéÀº »ç¶÷µéÀÌ Áö±¸ È¯°æ <br>
-                        ¿¡ ´ëÇÑ Ã¥ÀÓÀ» ´À³¢°í Çàµ¿À» <br>
-                        ÃëÇÏµµ·Ï µ¶·ÁÇÏ¸ç, Áö¼Ó °¡´ÉÇÑ <br>
-                        ¹æ½ÄÀ¸·Î »îÀ» »ìµµ·Ï µ½½À´Ï´Ù.
+                        í™˜ê²½ë³´í˜¸ ì±Œë¦°ì§€ëŠ” í™˜ê²½ ë¬¸ì œì— <br>
+                        ëŒ€í•œ ì¸ì‹ì„ ë†’ì´ê³ , ì‚¬íšŒì ì¸ <br>
+                        ë³€í™”ë¥¼ ì´ëŒê¸° ìœ„í•´ ê°œì¸ ë˜ëŠ” <br>
+                        ê·¸ë£¹ì´ ì°¸ì—¬í•˜ëŠ” í™œë™ìž…ë‹ˆë‹¤. ì´ <br>
+                        ì±Œë¦°ì§€ë“¤ì€ ì‚¬ëžŒë“¤ì´ ì§€êµ¬ í™˜ê²½ <br>
+                        ì— ëŒ€í•œ ì±…ìž„ì„ ëŠë¼ê³  í–‰ë™ì„ <br>
+                        ì·¨í•˜ë„ë¡ ë…ë ¤í•˜ë©°, ì§€ì† ê°€ëŠ¥í•œ <br>
+                        ë°©ì‹ìœ¼ë¡œ ì‚¶ì„ ì‚´ë„ë¡ ë•ìŠµë‹ˆë‹¤.
                     </p>
                 </div>
                 <div><img src="../resources/banner4.png" id="challengeImg"></div>
@@ -389,53 +389,53 @@
                     <div class="challenge1">
                         <div><img src="../resources/bono.jpg"></div>
                         <div>
-                            <div>Ã§¸°Áö ÀÌ¸§</div>
-                            <div>È¸¿ø ID</div>
+                            <div>ì±Œë¦°ì§€ ì´ë¦„</div>
+                            <div>íšŒì› ID</div>
                         </div>
                     </div>
                     <div class="challenge2"><img src="../resources/best1.png"></div>
                     <div class="challenge3">2023-05-15 ~ 23-05-22</div>
                     <div class="challenge4">
-                        <div>Ä£È¯°æ ¼Òºñ</div>
-                        <div>1ÁÖ</div>
-                        <div>ÁøÇàÁß</div>
+                        <div>ì¹œí™˜ê²½ ì†Œë¹„</div>
+                        <div>1ì£¼</div>
+                        <div>ì§„í–‰ì¤‘</div>
                     </div>
                 </div>
                 <div>
                     <div class="challenge1">
                         <div><img src="../resources/bono.jpg"></div>
                         <div>
-                            <div>Ã§¸°Áö ÀÌ¸§</div>
-                            <div>È¸¿ø ID</div>
+                            <div>ì±Œë¦°ì§€ ì´ë¦„</div>
+                            <div>íšŒì› ID</div>
                         </div>
                     </div>
                     <div class="challenge2"><img src="../resources/best1.png"></div>
                     <div class="challenge3">2023-05-15 ~ 23-05-22</div>
                     <div class="challenge4">
-                        <div>Ä£È¯°æ ¼Òºñ</div>
-                        <div>1ÁÖ</div>
-                        <div>ÁøÇàÁß</div>
+                        <div>ì¹œí™˜ê²½ ì†Œë¹„</div>
+                        <div>1ì£¼</div>
+                        <div>ì§„í–‰ì¤‘</div>
                     </div>
                 </div>
                 <div>
                     <div class="challenge1">
                         <div><img src="../resources/bono.jpg"></div>
                         <div>
-                            <div>Ã§¸°Áö ÀÌ¸§</div>
-                            <div>È¸¿ø ID</div>
+                            <div>ì±Œë¦°ì§€ ì´ë¦„</div>
+                            <div>íšŒì› ID</div>
                         </div>
                     </div>
                     <div class="challenge2"><img src="../resources/best1.png"></div>
                     <div class="challenge3">2023-05-15 ~ 23-05-22</div>
                     <div class="challenge4">
-                        <div>Ä£È¯°æ ¼Òºñ</div>
-                        <div>1ÁÖ</div>
-                        <div>ÁøÇàÁß</div>
+                        <div>ì¹œí™˜ê²½ ì†Œë¹„</div>
+                        <div>1ì£¼</div>
+                        <div>ì§„í–‰ì¤‘</div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- ¿¡ÄÚ ´ÙÀÌ¾î¸® -->
+        <!-- ì—ì½” ë‹¤ì´ì–´ë¦¬ -->
         <div id="diaryArea">
             <div id="diaryBox">
                 <div id="diaryText">
@@ -445,9 +445,9 @@
                     </div>
                     <br>
                     <p style="margin: 0;">
-                        ¿¡ÄÚ´ÙÀÌ¾î¸®´Â È¯°æº¸È£ ¹×<br>
-                        Áö¼Ó °¡´É¼ºÀ» ÃËÁøÇÏ±â À§ÇØ <br>
-                        °³¹ßµÈ ´ÙÀÌ¾î¸®ÀÔ´Ï´Ù.
+                        ì—ì½”ë‹¤ì´ì–´ë¦¬ëŠ” í™˜ê²½ë³´í˜¸ ë°<br>
+                        ì§€ì† ê°€ëŠ¥ì„±ì„ ì´‰ì§„í•˜ê¸° ìœ„í•´ <br>
+                        ê°œë°œëœ ë‹¤ì´ì–´ë¦¬ìž…ë‹ˆë‹¤.
                     </p>
                 </div>
                 <div><img src="../resources/hyuksoo.png" id="diaryImg"></div>

@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
@@ -29,7 +29,7 @@
         top: 0;
         z-index: 9999;
         background-color: white;
-        /* bottom ±×¸²ÀÚ È¿°ú */
+        /* bottom ê·¸ë¦¼ì íš¨ê³¼ */
         box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
     }
     .header{
@@ -77,7 +77,7 @@
         padding: 5px;
     }
 
-    /* µå·Ó´Ù¿î */
+    /* ë“œë¡­ë‹¤ìš´ */
     .dropdown{
         position : relative;
         display : inline-block;
@@ -85,7 +85,7 @@
     .dropdown-content{
         /* display : none; */
         position : absolute;
-        z-index : -99; /*´Ù¸¥ ¿ä¼Òµéº¸´Ù ¾Õ¿¡ ¹èÄ¡*/
+        z-index : -99; /*ë‹¤ë¥¸ ìš”ì†Œë“¤ë³´ë‹¤ ì•ì— ë°°ì¹˜*/
         background-color : white;
         width : 100px;
         border-radius : 8px;
@@ -139,7 +139,7 @@
         right: 30px;
         margin: 0;
     }
-    /* °øÅë¿µ¿ª½ºÅ¸ÀÏ */
+    /* ê³µí†µì˜ì—­ìŠ¤íƒ€ì¼ */
     #container{
         width: 1200px;
         height: 100%;
@@ -152,76 +152,76 @@
 </head>
 <body>
 
-	<!-- ·Î±×ÀÎ ¿µ¿ª -->
+	<!-- ë¡œê·¸ì¸ ì˜ì—­ -->
     <header>
 
-    	<!-- ·Î°í+·Î±×ÀÎ -->
+    	<!-- ë¡œê³ +ë¡œê·¸ì¸ -->
         <div class="header">
             <div style="width: 200px;"></div>
             <div class="logo">
                 <a href="">
                     <img src="../resources/logo.png">
-                    <div>Áö±¸°ø</div>
+                    <div>ì§€êµ¬ê³µ</div>
                 </a>
             </div>
             <div class="login-area">
                 <div></div>
-                <div><a href="">·Î±×ÀÎ</a></div>
+                <div><a href="">ë¡œê·¸ì¸</a></div>
                 |
-                <div><a href="">È¸¿ø°¡ÀÔ</a></div>
+                <div><a href="">íšŒì›ê°€ì…</a></div>
                 <div></div>
-                <!-- <div><a href="">·Î±×¾Æ¿ô</a></div>|
+                <!-- <div><a href="">ë¡œê·¸ì•„ì›ƒ</a></div>|
                 <div><a href=""><i class="xi-user"></i></a></div>|
                 <div><a href=""><i class="xi-market"></i></a></div> -->
             </div>
         </div>
 
-        <!-- ¸Å´º¹Ù -->
+        <!-- ë§¤ë‰´ë°” -->
         <div class="menu">
             <div>
                 <div class="dropdown">
-                    <span class="dropbtn">Àåº¸±â</span>
+                    <span class="dropbtn">ì¥ë³´ê¸°</span>
                     <div class="dropdown-content">
-                        <a href="">¼±¹°²Ù·¯¹Ì</a>
-                        <a href="">¿å½Ç</a>
-                        <a href="">½ÄÇ°</a>
-                        <a href="">ÁÖ¹æ</a>
-                        <a href="">»ıÈ°</a>
-                        <a href="">Ãë¹Ì</a>
-                        <a href="">À½·á¿ëÇ°</a>
-                        <a href="">¿©¼º¿ëÇ°</a>
-                        <a href="">¹İ·Áµ¿¹°</a>
-                        <a href="">È­ÀåÇ°</a>
-                        <a href="">¹®±¸</a>
-                        <a href="">ÀüÃ¼</a>
+                        <a href="">ì„ ë¬¼ê¾¸ëŸ¬ë¯¸</a>
+                        <a href="">ìš•ì‹¤</a>
+                        <a href="">ì‹í’ˆ</a>
+                        <a href="">ì£¼ë°©</a>
+                        <a href="">ìƒí™œ</a>
+                        <a href="">ì·¨ë¯¸</a>
+                        <a href="">ìŒë£Œìš©í’ˆ</a>
+                        <a href="">ì—¬ì„±ìš©í’ˆ</a>
+                        <a href="">ë°˜ë ¤ë™ë¬¼</a>
+                        <a href="">í™”ì¥í’ˆ</a>
+                        <a href="">ë¬¸êµ¬</a>
+                        <a href="">ì „ì²´</a>
                     </div>
                 </div>
                 <div class="dropdown">
-                    <span class="dropbtn">Áö±¸¼Ò°³</span>
-                    <div class="dropdown-content">
-                        <a href="">#</a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <span class="dropbtn">Ã§¸°Áö</span>
+                    <span class="dropbtn">ì§€êµ¬ì†Œê°œ</span>
                     <div class="dropdown-content">
                         <a href="">#</a>
                     </div>
                 </div>
                 <div class="dropdown">
-                    <span class="dropbtn">È¯°æÀÏ±â</span>
+                    <span class="dropbtn">ì±Œë¦°ì§€</span>
                     <div class="dropdown-content">
                         <a href="">#</a>
                     </div>
                 </div>
                 <div class="dropdown">
-                    <span class="dropbtn">¸ÅÀåÃ£±â</span>
+                    <span class="dropbtn">í™˜ê²½ì¼ê¸°</span>
                     <div class="dropdown-content">
                         <a href="">#</a>
                     </div>
                 </div>
                 <div class="dropdown">
-                    <span class="dropbtn">°í°´¼¾ÅÍ</span>
+                    <span class="dropbtn">ë§¤ì¥ì°¾ê¸°</span>
+                    <div class="dropdown-content">
+                        <a href="">#</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <span class="dropbtn">ê³ ê°ì„¼í„°</span>
                     <div class="dropdown-content">
                         <a href="">#</a>
                     </div>
@@ -230,7 +230,7 @@
 
             <div class="search">
                 <form action="">
-                    <input type="text" placeholder="°Ë»ö¾î ÀÔ·Â">
+                    <input type="text" placeholder="ê²€ìƒ‰ì–´ ì…ë ¥">
                     <i class="xi-search"></i>
                 </form>
             </div>

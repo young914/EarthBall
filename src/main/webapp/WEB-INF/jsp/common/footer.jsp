@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
 	html, body{
@@ -38,7 +38,7 @@
     .logoArea div{
         margin-left: 10px;
         padding: 5px;
-        /* ±×¸²ÀÚÈ¿°ú */
+        /* ê·¸ë¦¼ìžíš¨ê³¼ */
         text-shadow: 2px 2px 10px gray;
     }
 </style>
@@ -49,18 +49,18 @@
 
         <div class="logoArea">
             <img src="../resources/logo.png">
-            <div>Áö±¸°ø</div>
+            <div>ì§€êµ¬ê³µ</div>
         </div>
 
         <div style="margin-top: 30px; color: white;">
             <p style="font-weight: bold;">
-                ÀÌ¿ë¾à°ü  |  °³ÀÎÁ¤º¸Ã³¸®¹æÄ§  |  µµ¸Å Àü¿ë B2B¸ô
+                ì´ìš©ì•½ê´€  |  ê°œì¸ì •ë³´ì²˜ë¦¬ë°©ì¹¨  |  ë„ë§¤ ì „ìš© B2Bëª°
             </p>
             <p>
-                È¸»ç¸í : ÁÖ½ÄÈ¸»ç ÀÎ¼ö¿Â¼Û¹Î±Ù | ´ëÇ¥ÀÚ : ¾ç¼±ÁÖ <br>
-                ÁÖ¼Ò : ¼­¿ï½Ã ±ÝÃµ±¸ °¡»êµðÁöÅÐ2·Î 165, 1001È£ | ÀÌ¸ÞÀÏ : contact@jigugong.co.kr | ÆÑ½º : 0303-3444-2050 <br>
-                »ç¾÷ÀÚµî·Ï¹øÈ£ : 689-86-00791 | Åë½ÅÆÇ¸Å¾÷½Å°í : Á¦2018-¼­¿ïµ¿ÀÛ-02955 | °Ç°­±â´É½ÄÇ°¿µ¾÷½Å°í : Á¦2022-0112707 <br>
-                °³ÀÎÁ¤º¸º¸È£Ã¥ÀÓÀÚ : ¾ç¼±ÁÖ | °í°´¼¾ÅÍ : 02-812-2050 | È£½ºÆÃ Á¦°øÀÚ : (ÁÖ)Áö±¸°ø
+                íšŒì‚¬ëª… : ì£¼ì‹íšŒì‚¬ ì¸ìˆ˜ì˜¨ì†¡ë¯¼ê·¼ | ëŒ€í‘œìž : ì–‘ì„ ì£¼ <br>
+                ì£¼ì†Œ : ì„œìš¸ì‹œ ê¸ˆì²œêµ¬ ê°€ì‚°ë””ì§€í„¸2ë¡œ 165, 1001í˜¸ | ì´ë©”ì¼ : contact@jigugong.co.kr | íŒ©ìŠ¤ : 0303-3444-2050 <br>
+                ì‚¬ì—…ìžë“±ë¡ë²ˆí˜¸ : 689-86-00791 | í†µì‹ íŒë§¤ì—…ì‹ ê³  : ì œ2018-ì„œìš¸ë™ìž‘-02955 | ê±´ê°•ê¸°ëŠ¥ì‹í’ˆì˜ì—…ì‹ ê³  : ì œ2022-0112707 <br>
+                ê°œì¸ì •ë³´ë³´í˜¸ì±…ìž„ìž : ì–‘ì„ ì£¼ | ê³ ê°ì„¼í„° : 02-812-2050 | í˜¸ìŠ¤íŒ… ì œê³µìž : (ì£¼)ì§€êµ¬ê³µ
             </p>
         </div>
 
