@@ -164,8 +164,9 @@
     
     <div class="member">
         <!-- 1. 로고 -->
-        <img class="logo" src="/git/EarthBall/EarthBall/html/resources/img/logo.png" alt="지구공 로고">
+        <img class="logo" src="/EarthBall/html/resources/img/logo.png" alt="지구공 로고">
 
+    <form action="mem.me" method="post">
         <!-- 2. 필드 -->
         <div class="field">
             <b>아이디</b>
@@ -238,6 +239,8 @@
 
         <!-- 6. 가입하기 버튼 -->
         <input type="submit" value="가입하기">
+
+        </form>
 
         <!-- 7. 푸터 -->
         <div class="member-footer">
