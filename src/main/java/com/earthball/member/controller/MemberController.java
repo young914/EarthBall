@@ -4,5 +4,10 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class MemberController {
+<<<<<<< Updated upstream
+=======
+  
+    
+>>>>>>> Stashed changes
 
 }
