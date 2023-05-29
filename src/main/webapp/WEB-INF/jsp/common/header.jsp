@@ -116,6 +116,10 @@
         cursor: pointer;
         color: #19A7CE;
     }
+    .dropdown>span>a{
+        text-decoration: none;
+        color: #19A7CE;
+    }
     .dropdown-content a{
         color : #19A7CE;
     }
@@ -215,15 +219,12 @@
                     </div>
                 </div>
                 <div class="dropdown">
-                    <span class="dropbtn">매장찾기</span>
-                    <div class="dropdown-content">
-                        <a href="">#</a>
-                    </div>
+                    <span class="dropbtn"><a href="storeListView.st">매장찾기</a></span>
                 </div>
                 <div class="dropdown">
                     <span class="dropbtn">고객센터</span>
                     <div class="dropdown-content">
-                        <a href="">#</a>
+                        <a href=""></a>
                     </div>
                 </div>
             </div>
