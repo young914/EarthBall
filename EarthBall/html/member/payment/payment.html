@@ -195,14 +195,16 @@
         #content1 {
             width : 50%;
             height : 80%;
-            border : 1px solid red;
+            /* border : 1px solid red; */
             flex-direction: column;
             box-sizing : border-box;
         }
 
+        #content1 div, #content2 div { box-sizing : border-box; }
+
         #content1_1 {
             overflow : auto;
-            border : 1px solid red;
+            /* border : 1px solid red; */
             flex-direction: column;
             box-sizing : border-box;
         }
@@ -211,25 +213,25 @@
             width : 100%;
             height : 15%;
             margin-top : 15px;
-            border : 1px solid red;
+            /* border : 1px solid red; */
         }
 
         #content1_3 {
             width : 100%;
             height : 30%;
-            border : 1px solid red;
+            /* border : 1px solid red; */
         }
 
         #content1_4 {
             width : 100%;
             height : 25%;
-            border : 1px solid red;
+            /* border : 1px solid red; */
         }
 
         #content1_1_1, #content1_3_1, #content1_4_1 {
             width : 100%;
             height : 10%;
-            border : 1px solid red;
+            /* border : 1px solid red; */
         }
 
         #content1_1_2 {
@@ -247,13 +249,13 @@
             width : 100%;
             height : 20%;
             margin-top : 20px;
-            border : 1px solid red;
+            /* border : 1px solid red; */
         }
 
         #content1_2_2 {
             width : 100%;
             height : 70%;
-            border : 1px solid red;
+            /* border : 1px solid red; */
         }
 
         #content1_2_2>table {
@@ -281,7 +283,7 @@
         #content1_4_2 {
             width : 100%;
             height : 80%;
-            border : 1px solid red;
+            /* border : 1px solid red; */
         }
 
         #content1_4_2>table {
@@ -296,42 +298,99 @@
 
         #content2 {
             width : 50%;
-            height : 80%;
-            border : 1px solid red;
+            height : 40%;
+            /* border : 1px solid red; */
             flex-direction: column;
+            position : sticky;
+            top : 200px;
         }
 
-        #content2_1, #content2_2 {
+        #content2_1 {
             width : 100%;
-            height : 25%;
-            background-color : #e8faff;
-            border : 1px solid red;
+            height : 40%;
+            background-color : #f1fcff;
+            /* border : 1px solid red; */
         }
 
-        #content2_1_1 {
+        #content2_1_1,#content2_2_1 {
             width : 100%;
-            height : 10%;
-            border : 1px solid red;
+            height : 20%;
+            /* border : 1px solid red; */
         }
 
         #content2_1_2 {
             width : 100%;
-            height : 60%;
-            border : 1px solid red;
-        }
-
-        #content2_1_3 {
-            width : 100%;
-            height : 20%;
-            border : 1px solid red;
+            height : 50%;
+            /* border : 1px solid red; */
         }
 
         #content2_1_2>table {
             width : 100%;
-            margin-top : 20px;
-            border : 1px solid red;
+            margin-top : 10px;
+            /* border : 1px solid red; */
         }
 
+        #content2_1_3 {
+            width : 100%;
+            height : 15%;
+            background-color : rgb(235, 235, 235);
+            /* border : 1px solid red; */
+        }
+
+        #content2_1_3>div {
+            margin : 45px 0px 0px 20px;
+        }
+
+        #content2_1_3 span {
+            font-size : 18px;
+            font-weight : 600;
+            line-height : 60px;
+        }
+
+        #content2_2 {
+            width : 100%;
+            height : 40%;
+            background-color : #f1fcff;
+            margin-top : 40px;
+            /* border : 1px solid red; */
+        }
+
+        #content2_2_2 {
+            width : 100%;
+            height : 65%;
+            /* border : 1px solid red; */
+        }
+
+        #content2_2_2>div {
+            width : 100%;
+            height : 25%;
+            margin : 20px 0px;
+            /* border : 1px solid red; */
+        }
+
+        #content2_2_2 input {
+            width : 16px;
+            height : 16px;
+            margin : 20px 0px 0px 20px;
+        }
+
+        #content2_2_2 label {
+            font-size : 20px;
+            font-weight : 550;
+            margin-left : 10px;
+        }
+
+        #content2_2_3 {
+            width : 100%;
+            height : 20%;
+            /* border : 1px solid red; */
+        }
+
+        #content2_2 input:hover {
+            cursor : pointer;
+            background-color : #146C94;
+        }
+               
         #bar_1 {
             width : 12px;
             height : 70px;
@@ -380,7 +439,7 @@
             
         }
 
-        #product_count {
+        #product_amount {
             font-size : 16px;
             font-weight : 550;
             color : gray;
@@ -505,6 +564,14 @@
             padding-left : 15px;
         }
 
+        #payComplete {
+            width : 100%;
+            height : 100%;
+            background-color : #19A7CE;
+            font-size : 35px;
+            color : white;
+            border : 0px;
+        }
 
         /* ---------------------------------- */
         /* footer */
@@ -524,7 +591,7 @@
         <div class="header">
             <div style="width: 120px;"></div>
             <div class="logo">
-                <a href=""><img src="image/logo.png" style="width: 250px;"></a>
+                <a href=""><img src="../../resources/img/logo.png" style="width: 250px;"></a>
             </div>
             <div class="login-area">
                 <div><a href="">로그인</a></div>&nbsp;|&nbsp;
@@ -611,31 +678,31 @@
                     </div>
                     <div id="content1_1_2">
                         <div id="img-area">
-                            <div id="product_img"><img src="../resources/img/peng.jpg" width="100%" height="100%"></div>
+                            <div id="product_img"><img src="../../resources/img/peng.jpg" width="100%" height="100%" alt="상품이미지"></div>
                         </div>
                         <div id="product_content">
                             <div id="product_name"><p>[지구공] 베스트셀러</p></div>
-                            <div id="product_count"><p>수량 : 2개</p></div>
+                            <div id="product_amount"><p>수량 : 2개</p></div>
                             <div id="product_price"><p>11,000원</p></div>
                         </div>
                     </div>
                     <div id="content1_1_2">
                         <div id="img-area">
-                            <div id="product_img"><img src="../resources/img/peng.jpg" width="100%" height="100%"></div>
+                            <div id="product_img"><img src="../../resources/img/peng.jpg" width="100%" height="100%" alt="상품이미지"></div>
                         </div>
                         <div id="product_content">
                             <div id="product_name"><p>[지구공] 베스트셀러</p></div>
-                            <div id="product_count"><p>수량 : 2개</p></div>
+                            <div id="product_amount"><p>수량 : 2개</p></div>
                             <div id="product_price"><p>11,000원</p></div>
                         </div>
                     </div>
                     <div id="content1_1_2">
                         <div id="img-area">
-                            <div id="product_img"><img src="../resources/img/peng.jpg" width="100%" height="100%"></div>
+                            <div id="product_img"><img src="../../resources/img/peng.jpg" width="100%" height="100%" alt="상품이미지"></div>
                         </div>
                         <div id="product_content">
                             <div id="product_name"><p>[지구공] 베스트셀러</p></div>
-                            <div id="product_count"><p>수량 : 2개</p></div>
+                            <div id="product_amount"><p>수량 : 2개</p></div>
                             <div id="product_price"><p>11,000원</p></div>
                         </div>
                     </div>
@@ -770,16 +837,43 @@
                             </tr>
                         </table>
                     </div>
-                    <div id="content2_1_3"></div>
+                    <div id="content2_1_3">
+                        <div>
+                            <span id="rewardPoint" style="color : #19A7CE">2,220</span>
+                            <span> 포인트 적립 예정</span>
+                        </div>
+                    </div>
                 </div>
-                <div id="content2_2"></div>
+                <div id="content2_2">
+                    <div id="content2_2_1">
+                        <h1 style="margin : 0px 0px 0px 20px;">결제 수단</h1>
+                        <div id="bar_2"></div>
+                    </div>
+                    <div id="content2_2_2">
+                        <div>
+                            <input type="radio" id="credit" name="pay" value="credit">
+                            <label for="credit">신용카드</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="kakao" name="pay" value="kakao">
+                            <label for="kakao">카카오페이</label>
+                        </div>
+                        <div>
+                            <input type="radio"  id="naver" name="pay" value="naver">
+                            <label for="naver">네이버페이</label>
+                        </div>
+                    </div>
+                    <div id="content2_2_3">
+                        <input type="button" id="payComplete" value="결제하기">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <div id="footer">
         <div style="width: 100px;"></div>
-        <div><img src="image/logo2.png" style="width: 400px; padding-top: 20px;"></div>
+        <div><img src="../../resources/img/logo2.png" style="width: 400px; padding-top: 20px;"></div>
         <div style="margin-top: 30px; color: white;">
             <p style="font-weight: bold;">
                 이용약관  |  개인정보처리방침  |  도매 전용 B2B몰
