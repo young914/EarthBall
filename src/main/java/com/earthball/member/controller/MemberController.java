@@ -4,10 +4,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class MemberController {
-<<<<<<< Updated upstream
-=======
-  
-    
->>>>>>> Stashed changes
+
+  // 주석1 멤버 컨트롤
 
 }
