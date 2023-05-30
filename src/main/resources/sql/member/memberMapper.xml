@@ -29,19 +29,19 @@
   						
   						<insert id="insertMember" parameterType="member">
   														INSERT INTO MEMBER(MEMBER_ID
-  																																																					 , MEMBER_PWD
-  																																																					 , MEMBER_NAME
-  																																																					 , BIRTH_DATE
-  																																																					 , GENDER
-  																																																					 , EMAIL
-  																																																					 , PHONE)
-  																																							 VALUES(#{memberId}
-  																																																				  , #{memberPwd}
-  																																																				  , #{memberName}
-  																																																				  , #{birthDate}
-  																																																				  , #{gender}
-  																																																				  , #{email}
-  																																																				  , #{phone})
+																								  , MEMBER_PWD
+																								  , MEMBER_NAME
+																								  , BIRTH_DATE
+																								  , GENDER
+																								  , EMAIL
+																								  , PHONE)
+																			     VALUES(#{memberId}
+																						 	   , #{memberPwd}
+																						 	   , #{memberName}
+																						 	   , #{birthDate}
+																						 	   , #{gender}
+																						 	   , #{email}
+																						 	   , #{phone})
   						</insert>
   		
   </mapper>
