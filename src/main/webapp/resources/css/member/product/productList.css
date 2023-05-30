@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+/* 버튼영역 */
+#buttonArea{
+    width: 60%;
+    height: 200px;
+    margin: 0 auto;
+    margin-top: 50px;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-content: space-evenly;
+    /* background-color: #bbb; */
+}
+#buttonArea button{
+    width: 80%;
+    height: 50px;
+    margin: 0 auto;
+    margin-top: 25px;
+    border-radius: 8px;
+    border: 2px solid #19A7CE;
+    background-color: white;
+    color: #19A7CE;
+    font-size: 15px;
+    font-weight: bold;
+}
+#buttonArea button:hover{
+    background-color: #19A7CE;
+    color: white;
+}
+
+/* 상품리스트 */
+#productArea{
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 20px;
+}
+.product{
+    margin-top: 10px;
+}
+.product-img{
+    text-align: center;
+}
+.product-img>img{
+    width: 275px;
+    height: 275px;
+
+}
+.product-icon{
+    display: flex;
+}
+.product-icon i, .product-name, .product-price{
+    margin-left: 10px;
+}
+#dropBox{text-align: right;}
+#dropBox>select{
+    width:100px;
+    height: 30px;
+    margin-top: 30px;
+    margin-right: 10px;
+    border-radius: 8px;
+    border: none;
+    color: gray;
+    font-size: 15px;
+    font-weight: bold;
+}
