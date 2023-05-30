@@ -479,7 +479,7 @@
                 <div class="wrapper">
                     <span class="form_title" align="right;">썸네일 <span class="star">*</span></span>
                     <img src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"
-                         class="image-box" />
+                         class="image-box"/>
                     <input type="file" accept="image/*" name="fileNo" id="fileNo" onchange="uploadImage();"/>
                 </div>
             </div>
@@ -599,10 +599,9 @@
                                 <div class="wrapper">
                                     <img src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"
                                          class="image-box"/>
-                                    <label for="file" class="upload-btn">
-                                        <input class="file" type="file"
-                                               name=“${temp.categoryTemplateNo}_${temp.inputType}”
-                                               accept="image/*"/>
+                                    <input class="file" type="file"
+                                           name=“${temp.categoryTemplateNo}_${temp.inputType}”
+                                           accept="image/*"/>
                                     </label>
                                 </div>
                             </div>
@@ -613,10 +612,9 @@
                                 <div class="wrapper">
                                     <img src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"
                                          class="image-box"/>
-                                    <label for="file" class="upload-btn">
-                                        <input class="file" type="file"
-                                               name=“${temp.categoryTemplateNo}_${temp.inputType}”
-                                               accept="image/*"/>
+                                    <input class="file" type="file"
+                                           name=“${temp.categoryTemplateNo}_${temp.inputType}”
+                                           accept="image/*"/>
                                     </label>
                                 </div>
                             </div>
@@ -627,10 +625,9 @@
                                 <div class="wrapper">
                                     <img src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"
                                          class="image-box"/>
-                                    <label for="file" class="upload-btn">
-                                        <input class="file" type="file"
-                                               name=“${temp.categoryTemplateNo}_${temp.inputType}”
-                                               accept="image/*"/>
+                                    <input class="file" type="file"
+                                           name=“${temp.categoryTemplateNo}_${temp.inputType}”
+                                           accept="image/*"/>
                                     </label>
                                 </div>
                             </div>
