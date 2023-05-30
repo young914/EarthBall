@@ -90,7 +90,7 @@ public class MemberController {
      @RequestMapping("loginForm.me")
      public String loginFrom() {
        
-       return "member/loginForm";
+       return "member/member/loginForm";
      }
      
      // 회원가입 기능
@@ -98,7 +98,7 @@ public class MemberController {
      @RequestMapping("mem.me")
      public String enrollForm() {
          
-       return "member/memberEnrollForm";
+       return "member/member/memberEnrollForm";
      }
      
      
