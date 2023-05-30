@@ -164,20 +164,21 @@
     
     <div class="member">
         <!-- 1. 로고 -->
-        <img class="logo" src="/EarthBall/html/resources/img/logo.png" alt="지구공 로고">
-
-    <form action="mem.me" method="post">
+         
+        <img class="logo" src="/resources/logo2.png" alt="지구공 로고">
+				
+    <form action="insert.me" method="post">
         <!-- 2. 필드 -->
         <div class="field">
-            <b>아이디</b>
+            <b>아이디 *</b>
             <span class="placehold-text"><input type="text" placeholder="아이디를 입력해주세요"></span>
         </div>
         <div class="field">
-            <b>비밀번호</b>
+            <b>비밀번호 *</b>
             <input class="userpw" type="password" placeholder="8자 이상 - 대문자 특수문자 포함 비밀번호를 입력해주세요">
         </div>
         <div class="field">
-            <b>비밀번호 재확인</b>
+            <b>비밀번호 재확인 *</b>
             <input class="userpw-confirm" type="password" placeholder="다시한번 입력해주세요">
         </div>
         <div class="field">
@@ -213,8 +214,8 @@
         <div class="field gender">
             <b>성별</b>
             <div>
-                <label><input type="radio" name="gender">남자</label>
-                <label><input type="radio" name="gender">여자</label>
+                <label><input type="radio" id="Male"  value="M" name="gender">남자</label>
+                <label><input type="radio" id="Female"  value="F" name="gender">여자</label>
                 <label><input type="radio" name="gender">선택안함</label>
             </div>
         </div>

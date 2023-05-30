@@ -1,7 +1,14 @@
 package com.earthball.member.model.service;
 
+import com.earthball.member.model.vo.Member;
+
+
+
 public interface MemberService {
   
-           //   서비스 인터페이스 입니다.
+          Member loginMember(Member m);
+          
+          int insertMember(Member m);
+          
   
 }

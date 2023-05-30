@@ -166,9 +166,14 @@
             </div>
             <div class="login-area">
                 <div></div>
+                
+                
                 <div><a href="">로그인</a></div>
                 |
-                <div><a href="">회원가입</a></div>
+                <div><a href="mem.me">회원가입</a></div>
+                
+                
+                
                 <div></div>
                 <!-- <div><a href="">로그아웃</a></div>|
                 <div><a href=""><i class="xi-user"></i></a></div>|
