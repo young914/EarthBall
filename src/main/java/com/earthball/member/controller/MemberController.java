@@ -1,6 +1,5 @@
 package com.earthball.member.controller;
 
-<<<<<<< Updated upstream
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,18 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-=======
-import javax.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
->>>>>>> Stashed changes
 import com.earthball.member.model.service.MemberService;
 import com.earthball.member.model.vo.Member;
 import lombok.extern.slf4j.Slf4j;
 
-<<<<<<< Updated upstream
 @Slf4j
 @Controller
 public class MemberController {
@@ -125,68 +116,3 @@ public class MemberController {
      
 
 }
-=======
-  @Slf4j
-  @Controller
-  public class MemberController {
-    
-    @Autowired
-      private MemberService memberService;
-      
-  
-     @RequestMapping("mem.me")
-      public String MemberEnrollerForm() {
-            
-           return "/member/MemberEnrollForm";
-      }
-     
-     /*
-     public ModelAndView loginMember(Member m,
-                                                                       HttpSession session,
-                                                                       ModelAndView mv,
-                                                                       String saveId,
-                                                                       HttpSevletResponse response) {
-       
-       if(saveId != null && saveId.equals("y")) {
-             
-             Cookie cookie = new Cookie("saveId", m.getMemberId());
-             cookie.setMaxAge(24 * 60 * 1); // 1일 저장
-             
-             response.addCookie(cookie);
-             
-       } else {
-         
-         Cookie cookie = new Cookie ("saveId", m.getMemberId());
-         cookie.setMaxAge(0);
-         
-         response.addCookie(cookie);
-         
-         Member loginMember = MemberService.loginMember(m);
-       }
-       */
-     
-     @RequestMapping("login.me")
-     public String loginMember(Member m,
-                 Model model,
-                 HttpSession session) {
-       
-       Member loginMember = memberService.loginMember(m);
-       
-           if(loginMember == null) {
-               
-             model.addAttribute("");
-             
-             return "";
-             
-           } else { 
-             
-             session.setAttribute("loginMember", loginMember);
-             
-             return "redirect:/";
-           }
-     }
-     
-     
-     }
-  
->>>>>>> Stashed changes

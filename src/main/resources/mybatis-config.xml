@@ -17,11 +17,7 @@
 			영역 => 실제 해당 클래스가 존재하지 않는 상황에서 미리 별칭을 부여하면 ClassNotFoundException 발생!! -->
 		<!-- 주의사항 : 별칭을 미리 등록해두려면 해당 클래스가 진짜 존재하고 있는 상태여야 함! 또한, 해당 클래스명 기술 시,
 			오타 있어도 안 됨! (ClassNotFoundException 발생) -->
-<<<<<<< Updated upstream
 			<typeAlias type="com.earthball.member.model.vo.Member" alias="member"/>
-=======
-								<typeAlias type="com.earthball.member.model.vo.Member"/>
->>>>>>> Stashed changes
 			
 	</typeAliases>
 
@@ -32,12 +28,5 @@
 		servlet-context.xml 순서로 읽혀짐> -->
 	<!-- 주의사항 : 매퍼파일을 미리 등록해두려면 해당 매퍼파일이 진짜 존재하고 있는 상태여야 함! 뿐만 아니라, mapper 파일
 		내부의 namespace 도 등록 되어 있어야만 함! 파일명도 오타가 있으면 안 됨! (FileNotFoundException 발생) -->
-		
-		<mappers>
-							<mapper resource="sql/member/memberMapper.xml" />
-		
-		</mappers>
-		
-		
 
 </configuration>

@@ -164,16 +164,10 @@
     
     <div class="member">
         <!-- 1. 로고 -->
-<<<<<<< Updated upstream:src/main/webapp/WEB-INF/jsp/member/memberEnrollForm.jsp
          
         <img class="logo" src="/resources/logo2.png" alt="지구공 로고">
-				
+							
     <form action="insert.me" method="post">
-=======
-        <img class="logo" src="/resources/logo2.png" alt="지구공 로고">
-
-    <form action="mem.me" method="post">
->>>>>>> Stashed changes:src/main/webapp/WEB-INF/jsp/member/MemberEnrollForm.jsp
         <!-- 2. 필드 -->
         <div class="field">
             <b>아이디 *</b>
