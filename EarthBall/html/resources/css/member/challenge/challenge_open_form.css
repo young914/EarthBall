@@ -1,5 +1,5 @@
 .wrap div {
-  /* border: 1px solid red;*/
+  /*border: 1px solid red;*/
   /* 지금부터 지정하는 가로세로길이는 테두리까지 포함한 사이즈임 */
   box-sizing: border-box;
 }
@@ -7,7 +7,7 @@
 /* 전체를 감싸는 wrap*/
 .wrap {
   width: 1200px;
-  height: 2700px;
+  height: 2200px;
   margin: auto; /* 좌우로 항상 정정가운데에 위치시켜주는 속성 */
   padding-top: 170px;
   /* position : relative; */
@@ -26,19 +26,19 @@
 
 /* 영역별 높이 */
 #title {
-  height: 10%;
+  height: 5%;
 }
 
 .basic_info {
-  height: 25%;
+  height: 20%;
 }
 
 .template {
-  height: 60%;
+  height: 68%;
 }
 
 .btn_div {
-  height: 5%;
+  height: 8%;
 }
 
 
@@ -182,6 +182,8 @@
   left: 400px;
   justify-content: center;
   margin-left: 40px;
+  width: 500px;
+  text-align: center;
 }
 
 
@@ -238,7 +240,6 @@
 
 .textarea_class {
   margin-left: 46px;
-
 }
 
 .textarea_font {
@@ -247,10 +248,63 @@
 
 
 /* 파일 */
-.file_class {
-
+.file {
+  display: flex;
 }
 
+.file_class {
+  margin-left: 40px;
+  font-size: 20px;
+  
+}
+
+
+
+/* number 문 */
+.number {
+  display: flex;
+}
+
+.number_class {
+  margin-left: 40px;
+}
+
+.number_size {
+  font-size: 20px;
+  font-weight: normal;
+  border: solid 1px rgb(173, 172, 172);
+  height: 35px;
+  text-align: center;
+}
+
+
+/* range 문 */
+.range {
+  display: flex;
+}
+
+.range_size {
+  height: 35px;
+  margin-left: 40px;
+}
+
+
+/* datetime 문 */
+.datetime {
+  display: flex;
+}
+
+.datetime_class {
+  margin-left: 40px;
+}
+
+.datetime_size {
+  font-size: 20px;
+  font-weight: normal;
+  border: solid 1px rgb(173, 172, 172);
+  height: 35px;
+  text-align: center;
+}
 
 /* 화면에 선택적으로 뿌려지는 템플릿 폼들*/
 
