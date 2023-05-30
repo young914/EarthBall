@@ -8,7 +8,7 @@
         <div class="header">
             <div style="width: 200px;"></div>
             <div class="logo">
-                <a href="">
+                <a href="home">
                     <img src="../resources/logo.png">
                     <div>지구공</div>
                 </a>
@@ -42,7 +42,7 @@
                         <a href="">반려동물</a>
                         <a href="">화장품</a>
                         <a href="">문구</a>
-                        <a href="">전체</a>
+                        <a href="list.pro">전체</a>
                     </div>
                 </div>
                 <div class="dropdown">
