@@ -1,49 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-	html, body{
-        margin: 0;
-        padding: 0;
-    }
-    *{font-family: 'Jua', sans-serif;}
-    /* footer */
-    #footer{
-        width: 100%;
-        height: 220px;
-        margin: 0 auto;
-        background-color: #19A7CE;
-        display: flex;
-        justify-content: space-evenly;
-    }
-    .logoArea{
-        width: 250px;
-        height: 100px;
-        margin-top: 60px;
-        color: white;
-        display: flex;
-        align-items: center;
-        font-size: 50px;
-    }
-    .logoArea img{
-        width: 100px;
-        height: 100px;
-        padding: 5px;
-        border-radius: 50%;
-    }
-    .logoArea div{
-        margin-left: 10px;
-        padding: 5px;
-        /* 그림자효과 */
-        text-shadow: 2px 2px 10px gray;
-    }
-</style>
-</head>
-<body>
+
+
 	<div id="footer">
         <div style="width: 100px;"></div>
 
@@ -67,5 +25,3 @@
         <div style="width: 100px;"></div>
 
     </div>
-</body>
-</html>
