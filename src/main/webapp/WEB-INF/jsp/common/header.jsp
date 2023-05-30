@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
@@ -29,7 +29,7 @@
         top: 0;
         z-index: 9999;
         background-color: white;
-        /* bottom �׸��� ȿ�� */
+        /* bottom 그림자 효과 */
         box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
     }
     .header{
@@ -77,7 +77,7 @@
         padding: 5px;
     }
 
-    /* ��Ӵٿ� */
+    /* 드롭다운 */
     .dropdown{
         position : relative;
         display : inline-block;
@@ -85,7 +85,7 @@
     .dropdown-content{
         /* display : none; */
         position : absolute;
-        z-index : -99; /*�ٸ� ��ҵ麸�� �տ� ��ġ*/
+        z-index : -99; /*다른 요소들보다 앞에 배치*/
         background-color : white;
         width : 100px;
         border-radius : 8px;
@@ -116,6 +116,10 @@
         cursor: pointer;
         color: #19A7CE;
     }
+    .dropdown>span>a{
+        text-decoration: none;
+        color: #19A7CE;
+    }
     .dropdown-content a{
         color : #19A7CE;
     }
@@ -139,7 +143,7 @@
         right: 30px;
         margin: 0;
     }
-    /* ���뿵����Ÿ�� */
+    /* 공통영역스타일 */
     #container{
         width: 1200px;
         height: 100%;
@@ -152,89 +156,82 @@
 </head>
 <body>
 
-	<!-- �α��� ���� -->
+	<!-- 로그인 영역 -->
     <header>
 
-    	<!-- �ΰ�+�α��� -->
+    	<!-- 로고+로그인 -->
         <div class="header">
             <div style="width: 200px;"></div>
             <div class="logo">
                 <a href="">
                     <img src="../resources/logo.png">
-                    <div>������</div>
+                    <div>지구공</div>
                 </a>
             </div>
             <div class="login-area">
                 <div></div>
-                <div><a href="">�α���</a></div>
+                <div><a href="">로그인</a></div>
                 |
-                <div><a href="">ȸ������</a></div>
-                
-                
-                
+                <div><a href="">회원가입</a></div>
                 <div></div>
-                <!-- <div><a href="">�α׾ƿ�</a></div>|
+                <!-- <div><a href="">로그아웃</a></div>|
                 <div><a href=""><i class="xi-user"></i></a></div>|
                 <div><a href=""><i class="xi-market"></i></a></div> -->
             </div>
         </div>
 
-        <!-- �Ŵ��� -->
+        <!-- 매뉴바 -->
         <div class="menu">
             <div>
                 <div class="dropdown">
-                    <span class="dropbtn">�庸��</span>
+                    <span class="dropbtn">장보기</span>
                     <div class="dropdown-content">
-                        <a href="">�����ٷ���</a>
-                        <a href="">���</a>
-                        <a href="">��ǰ</a>
-                        <a href="">�ֹ�</a>
-                        <a href="">��Ȱ</a>
-                        <a href="">���</a>
-                        <a href="">�����ǰ</a>
-                        <a href="">������ǰ</a>
-                        <a href="">�ݷ�����</a>
-                        <a href="">ȭ��ǰ</a>
-                        <a href="">����</a>
-                        <a href="">��ü</a>
+                        <a href="">선물꾸러미</a>
+                        <a href="">욕실</a>
+                        <a href="">식품</a>
+                        <a href="">주방</a>
+                        <a href="">생활</a>
+                        <a href="">취미</a>
+                        <a href="">음료용품</a>
+                        <a href="">여성용품</a>
+                        <a href="">반려동물</a>
+                        <a href="">화장품</a>
+                        <a href="">문구</a>
+                        <a href="">전체</a>
                     </div>
                 </div>
                 <div class="dropdown">
-                    <span class="dropbtn">�����Ұ�</span>
+                    <span class="dropbtn">지구소개</span>
                     <div class="dropdown-content">
                         <a href="">#</a>
                     </div>
                 </div>
                 <div class="dropdown">
-                    <span class="dropbtn">ç����</span>
+                    <span class="dropbtn">챌린지</span>
                     <div class="dropdown-content">
                         <a href="">#</a>
                     </div>
                 </div>
                 <div class="dropdown">
-                    <span class="dropbtn">ȯ���ϱ�</span>
+                    <span class="dropbtn">환경일기</span>
                     <div class="dropdown-content">
                         <a href="">#</a>
                     </div>
                 </div>
                 <div class="dropdown">
-                    <span class="dropbtn">����ã��</span>
-                    <div class="dropdown-content">
-                        <a href="">#</a>
-                    </div>
+                    <span class="dropbtn"><a href="storeListView.st">매장찾기</a></span>
                 </div>
                 <div class="dropdown">
-                    <span class="dropbtn">��������</span>
+                    <span class="dropbtn">고객센터</span>
                     <div class="dropdown-content">
-                        <a href="">#</a>
+                        <a href=""></a>
                     </div>
                 </div>
             </div>
 
-
             <div class="search">
                 <form action="">
-                    <input type="text" placeholder="�˻��� �Է�">
+                    <input type="text" placeholder="검색어 입력">
                     <i class="xi-search"></i>
                 </form>
             </div>
