@@ -26,12 +26,14 @@ public class MemberController {
      
      
      // 로그인 기능
-     
+     @RequestMapping("login.me")
      public ModelAndView loginMember(Member m,
                                                                      HttpSession session,
                                                                      ModelAndView mv,
                                                                      String saveId,
                                                                      HttpServletResponse response) {
+       
+       
        
        if(saveId != null && saveId.equals("y")) {
          
@@ -50,17 +52,24 @@ public class MemberController {
        
        Member loginUser = memberService.loginMember(m);
        
+       System.out.println(m);
+       
        if(loginUser != null && bcryptPasswordEncoder.matches(m.getMemberPwd(), loginUser.getMemberPwd())) {
          
             session.setAttribute("loginUser", loginUser);
             session.setAttribute("alertMsg", "로그인에 성공했습니다.");
             
+            System.out.println("연결성공");
+            
             mv.setViewName("redirect:/");
          
        } else {
+           
+         System.out.println("연결 실패");
          
              mv.addObject("alertMsg", "아이디 혹은 비밀번호를 다시 확인해주세요");
              
+             mv.setViewName("member/loginForm");
        }
            
            return mv;
@@ -72,9 +81,16 @@ public class MemberController {
      @RequestMapping("logout.me")
      public String logoutMember(HttpSession session) {
        
-       session.invalidate(); // 새션 자체를 무효
+       session.invalidate(); // 세션 자체를 무효
        
        return "redirect:/";
+     }
+     
+     // 로그인 기능
+     @RequestMapping("loginForm.me")
+     public String loginFrom() {
+       
+       return "member/loginForm";
      }
      
      // 회원가입 기능
@@ -96,6 +112,8 @@ public class MemberController {
            m.setMemberPwd(encPwd);
            
            int result = memberService.insertMember(m);
+           
+          //  System.out.println("회원가입 정보 : " + result);
            
            if(result > 0 ) {
              

@@ -164,18 +164,18 @@
     
     <div class="member">
         <!-- 1. 로고 -->
-         
+        <a href="/">
         <img class="logo" src="/resources/logo2.png" alt="지구공 로고">
-							
+							 </a>
     <form action="insert.me" method="post">
         <!-- 2. 필드 -->
         <div class="field">
             <b>아이디 *</b>
-            <span class="placehold-text"><input type="text" placeholder="아이디를 입력해주세요"></span>
+            <span class="placehold-text"><input type="text" placeholder="아이디를 입력해주세요" name="memberId"></span>
         </div>
         <div class="field">
             <b>비밀번호 *</b>
-            <input class="userpw" type="password" placeholder="8자 이상 - 대문자 특수문자 포함 비밀번호를 입력해주세요">
+            <input class="userpw" type="password" placeholder="8자 이상 - 대문자 특수문자 포함 비밀번호를 입력해주세요" name="memberPwd">
         </div>
         <div class="field">
             <b>비밀번호 재확인 *</b>
@@ -183,11 +183,11 @@
         </div>
         <div class="field">
             <b>이름 *</b>
-            <input type="text">
+            <input type="text" name="memberName">
         </div>
 
         <!-- 3. 필드(생년월일) -->
-        <div class="field birth">
+        <div class="field birth" >
             <b>생년월일 *</b>
             <div>
                 <input type="number" placeholder="년(4자)">                
@@ -206,7 +206,7 @@
                     <option value="">11월</option>
                     <option value="">12월</option>
                 </select>
-                <input type="number" placeholder="일">
+                <input type="number" placeholder="일" >
             </div>
         </div>
 
@@ -223,16 +223,16 @@
         <!-- 5. 이메일_전화번호 -->
         <div class="field">
             <b>본인 확인 이메일<small> *</small></b>
-            <input type="email" placeholder="선택입력">
+            <input type="email" placeholder="선택입력" name="email">
         </div>
         
         <div class="field tel-number">
             <b>휴대전화</b>
             <select>
-                <option value="">대한민국 +82</option>
+                <option value="" >대한민국 +82</option>
             </select>
             <div>
-                <input type="tel" placeholder="전화번호 입력">
+                <input type="tel" placeholder="전화번호 입력" name="phone">
                 <input type="button" value="인증번호 받기">
             </div>
             <input type="number" placeholder="인증번호를 입력하세요">

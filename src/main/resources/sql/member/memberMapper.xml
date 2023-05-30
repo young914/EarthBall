@@ -12,7 +12,7 @@
   															<result column="BIRTH_DATE" property="birthDate" />
   															<result column="PHONE" property="phone" />
   															<result column="GENDER" property="gender" />
-  															<result column="CREATE_DATE" property="createDate" />
+  															<result column="CREATED_DATE" property="createdDate" />
   															<result column="STATUS" property="status" />
   															<result column="TOTAL_PAY" property="userId" />
   															<result column="ADDRESS1" property="address1" />
@@ -39,6 +39,7 @@
   																																																				  , #{memberPwd}
   																																																				  , #{memberName}
   																																																				  , #{birthDate}
+  																																																				  , #{gender}
   																																																				  , #{email}
   																																																				  , #{phone})
   						</insert>
