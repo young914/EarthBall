@@ -55,11 +55,13 @@ public class FileUploadServiceImpl implements FileUploadService {
         .fileName(multipartFile.getOriginalFilename())
         .filePath(filePath)
         .build();
-    int reulst = fileUpladMapper.insertChaFile(chaFileDto);
+    int result = fileUpladMapper.insertChaFile(chaFileDto);
 
-    if (reulst == 0) {
+    if (result == 0) {
       throw new RuntimeException();
     }
     return chaFileDto;
   }
+
+
 }

@@ -18,7 +18,7 @@
                           , #{chEndDay}
                           , 'user02'
                           , #{categoryNo}
-                          , '1'
+                          , #{fileNo}
                           , '111')
   </insert>
 

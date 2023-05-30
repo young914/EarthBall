@@ -11,11 +11,16 @@ import com.earthball.member.challenge.service.ChallengeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.core.util.datetime.DatePrinter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import java.util.List;
 
@@ -37,7 +42,7 @@ public class ChallengeController {
 
   @GetMapping("/categoryList.chall")
   public String categoryChoice_chall() {
-    return "/member/challenge/challeng/challengeCategoryChoice";
+    return "/member/challenge/challenge/challengeCategoryChoice";
   }
 
 
@@ -64,11 +69,25 @@ public class ChallengeController {
     log.info("templateList : " + templateList);
     log.info("templateList 0번째 코드리스트: " + templateList.get(0).getCodeDtoList());
 
-    return "member/challenge/challeng/challengeInsertForm";
+    return "member/challenge/challenge/challengeInsertForm";
   }
 
+  @ResponseBody
   @PostMapping("/openRequest.chall")
   public int requestChallenge(ChallengeDto challengeDto) {
+
+    String inputDate_1 = challengeDto.getChStartDay();  //"2023-05-30"
+    String inputDate_2 = challengeDto.getChEndDay();
+
+    LocalDate date = LocalDate.parse(inputDate_1);
+    String chStarDay = date.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+    String chEndDay = date.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+
+    log.info("시작 날짜 : " + chStarDay);
+    log.info("종료 날짜 : " + chEndDay);
+
+    challengeDto.setChStartDay(chStarDay);
+    challengeDto.setChEndDay(chEndDay);
 
     int result = challengeService.requestChallenge(challengeDto);
 
