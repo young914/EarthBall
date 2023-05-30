@@ -5,8 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>EarthBall</title>
-<!-- 카카오페이 script -->
-<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <style>
 	#container{
             width: 1200px;
@@ -523,15 +521,15 @@
                         <table>
                             <tr>
                                 <th>이름</th>
-                                <td id="user_id">홍길동</td>
+                                <td>홍길동</td>
                             </tr>
                             <tr>
                                 <th>전화번호</th>
-                                <td id="phone">01012345678</td>
+                                <td>01012345678</td>
                             </tr>
                             <tr>
                                 <th>E-mail</th>
-                                <td id="email">honggildong@gmail.com</td>
+                                <td>honggildong@gmail.com</td>
                             </tr>
                         </table>
                     </div>
@@ -545,7 +543,7 @@
                         <table>
                             <tr>
                                 <td colspan="2">
-                                    <input type="checkbox" id="sameOrderUser" onclick="sameOrderUser();">
+                                    <input type="checkbox" id="sameOrderUser">
                                     <label for="sameOrderUser" style="font-size : 14px; font-weight : 600;"> 주문자 정보와 동일</label>
                                 </td>
                             </tr>
@@ -561,12 +559,12 @@
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <input type="text" id="address1" placeholder="주소" required>
+                                    <input type="text" id="address" placeholder="주소" maxlength="1" required>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <input type="text" id="address2" placeholder="상세주소" required>
+                                    <input type="text" id="detailAddress" placeholder="상세주소" required>
                                 </td>
                             </tr>
                         </table>
@@ -586,7 +584,7 @@
                 </div>
                 <div id="content1_4">
                     <div id="content1_4_1">
-                        <h2 style="margin : 0px 0px 0px 20px;">쿠폰 / 포인트</h2>
+                        <h2 style="margin : 0px 0px 0px 20px;">쿠폰 / 포인트</h1>
                         <div id="bar_2"></div>
                     </div>
                     <div id="content1_4_2">
@@ -671,7 +669,7 @@
                         </div>
                     </div>
                     <div id="content2_2_3">
-                        <input type="button" id="payComplete" value="결제하기" >
+                        <input type="button" id="payComplete" value="결제하기">
                     </div>
                 </div>
             </div>
@@ -680,30 +678,11 @@
 
     <jsp:include page="/WEB-INF/jsp/common/footer.jsp"></jsp:include>
 
-	<!-- 카카오페이 결제요청  -->
     <script>
     	$(function() {
-    		$("#payComplete").click(function() {
-    			$.ajax({
-    				url : "kakaopay",
-    				dataType : "json",
-    				success : function(rsp) {
-    					// alert(rsp.tid); //결제 고유 번호
-    					// console.log(rsp);
-
-    					var box = rsp.next_redirect_pc_url;
-    					// window.open(box); // 새창 열기
-    					location.href = box;
-    				},
-    				error : function(error) {
-    					alert(error);
-    				}
-    			});
-    		});
+    		$("#")
     	});
     </script>
-
-
 
 </body>
 </html>
