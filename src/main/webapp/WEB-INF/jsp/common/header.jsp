@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
 	<!-- 로그인 영역 -->
     <header>
@@ -9,19 +10,32 @@
             <div style="width: 200px;"></div>
             <div class="logo">
                 <a href="home">
-                    <img src="../resources/logo.png">
+                    <img src="../resources/img/logo.png">
                     <div>지구공</div>
                 </a>
             </div>
             <div class="login-area">
                 <div></div>
-                <div><a href="">로그인</a></div>
+                
+                <c:choose>
+            <c:when test="${empty loginUser}">
+                <!-- 로그인 전 링크 -->
+                <div><a href="loginForm.me">로그인</a></div>
                 |
-                <div><a href="">회원가입</a></div>
+                <div><a href="mem.me">회원가입</a></div>
+            </c:when>
+            <c:otherwise>
+                <!-- 로그인 후 링크 -->
+                <div><a href="logout.me">로그아웃</a></div>
+                |
+                <div><a href=""><i class="xi-user"></i></a></div>
+                |
+                <div><a href=""><i class="xi-market"></i></a></div>
+            </c:otherwise>
+        </c:choose>
+                
                 <div></div>
-                <!-- <div><a href="">로그아웃</a></div>|
-                <div><a href=""><i class="xi-user"></i></a></div>|
-                <div><a href=""><i class="xi-market"></i></a></div> -->
+                
             </div>
         </div>
 
