@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="memberMapper">
+  						
+  						<resultMap  id="memberResultSet" type="member">
+  															<result column="MEMBER_ID" property="memberId" />
+  															<result column="MEMBER_PWD" property="memberPwd" />
+  															<result column="MEMBER_NAME" property="memberName" />
+  															<result column="EMAIL" property="email" />
+  															<result column="BIRTH_DATE" property="birthDate" />
+  															<result column="PHONE" property="phone" />
+  															<result column="GENDER" property="gender" />
+  															<result column="CREATED_DATE" property="createdDate" />
+  															<result column="STATUS" property="status" />
+  															<result column="TOTAL_PAY" property="userId" />
+  															<result column="ADDRESS1" property="address1" />
+  															<result column="ADDRESS2" property="address2" />
+  						</resultMap>
+  						
+  						
+  						<select id="loginMember"  parameterType="member" resultMap="memberResultSet">
+  														SELECT *
+  														   FROM MEMBER
+  														 WHERE MEMBER_ID = #{memberId}
+  														       AND STATUS = 'Y'
+  						</select>
+  						
+  						<insert id="insertMember" parameterType="member">
+  														INSERT INTO MEMBER(MEMBER_ID
+  																																																					 , MEMBER_PWD
+  																																																					 , MEMBER_NAME
+  																																																					 , BIRTH_DATE
+  																																																					 , GENDER
+  																																																					 , EMAIL
+  																																																					 , PHONE)
+  																																							 VALUES(#{memberId}
+  																																																				  , #{memberPwd}
+  																																																				  , #{memberName}
+  																																																				  , #{birthDate}
+  																																																				  , #{gender}
+  																																																				  , #{email}
+  																																																				  , #{phone})
+  						</insert>
+  		
+  </mapper>
