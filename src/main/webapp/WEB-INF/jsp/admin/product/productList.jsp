@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자페이지</title>
-<jsp:include page="../common/adminPageCommon.jsp"/>
+<title>관리자페이지>상품</title>
+<jsp:include page="/WEB-INF/jsp/common/adminPageCommon.jsp"/>
 </head>
 <body>
 	<!-- 사이드바 -->
@@ -34,7 +34,7 @@
 	           </a>
 	         </li>
 	         <li class="nav-item">
-	           <a class="nav-link " href="adminProductListView">
+	           <a class="nav-link " href="">
 	             <i class="xi-shopping-bag"></i> 상품
 	           </a>
 	         </li>
