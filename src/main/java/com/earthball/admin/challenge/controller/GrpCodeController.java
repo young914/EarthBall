@@ -60,7 +60,7 @@ public class GrpCodeController {
     model.addAttribute("pi", pi);
     model.addAttribute("grpCodeList", grpCodeDtoList);
 
-    return "admin/challenge/grpCode/grpCodeListView";
+    return "admin/challenge/grpCode/grpCodeListView_1";
   }
 
   @GetMapping("updateForm.grp")
