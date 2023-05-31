@@ -16,7 +16,7 @@
 	       <span class="navbar-toggler-icon"></span>
 	     </button>
 	     <!-- 메인로고 -->
-	     <a class="navbar-brand pt-0" href="">
+	     <a class="navbar-brand pt-0" href="home">
 	       <img src="/resources/img/logo.png" class="navbar-brand-img" alt="...">
 	     </a>
 	     <!-- Collapse -->

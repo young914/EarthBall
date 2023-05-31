@@ -16,33 +16,31 @@
             </div>
             <div class="login-area">
                 <div></div>
-
                 <c:choose>
-            <c:when test="${empty loginUser}">
-                <!-- 로그인 전 링크 -->
-                <div><a href="loginForm.me">로그인</a></div>
-                |
-                <div><a href="mem.me">회원가입</a></div>
-            </c:when>
-            <c:otherwise>
-                <!-- 로그인 후 링크 -->
-                <div>
-                		<b><a href="myPage.me">${loginUser.memberName}님</a></b>
-                </div> <br>
-                <div><a href="logout.me">로그아웃</a></div>
-                |
-                <c:choose>
-	                <c:when test="${loginUser.memberId eq 'admin'}">
-	                	<div><a href="admin"><i class="xi-user"></i></a></div>
-	                </c:when>
-	                <c:otherwise>
-	                	<div><a href="myPage.me"><i class="xi-user"></i></a></div>
-	                </c:otherwise>
-                </c:choose>
-                <div><a href=""><i class="xi-market"></i></a></div>
-            </c:otherwise>
-        </c:choose>
-
+	            	<c:when test="${empty loginUser}">
+		                <!-- 로그인 전 링크 -->
+		                <div><a href="loginForm.me">로그인</a></div>
+		                |
+		                <div><a href="mem.me">회원가입</a></div>
+	            	</c:when>
+	            	<c:otherwise>
+		                <!-- 로그인 후 링크 -->
+		                <div><a href="myPage.me">${loginUser.memberName}님</a></div>
+		                |
+		                <div><a href="logout.me"><i class="xi-power-off"></i></a></div>
+		                |
+	                	<c:choose>
+			                <c:when test="${loginUser.memberId eq 'admin'}">
+			                	<div><a href="admin"><i class="xi-user"></i></a></div>
+			                </c:when>
+			                <c:otherwise>
+			                	<div><a href="myPage.me"><i class="xi-user"></i></a></div>
+			                </c:otherwise>
+	                	</c:choose>
+	                	|
+	                	<div><a href=""><i class="xi-market"></i></a></div>
+	            	</c:otherwise>
+        		</c:choose>
                 <div></div>
 
             </div>
