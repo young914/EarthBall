@@ -15584,6 +15584,11 @@ a.btn-icon-only {
   padding-right: 0 !important;
 }
 
+.main-content .content{
+  padding-top: 5rem;
+  
+}
+
 @media (min-width: 768px) {
   .main-content .container-fluid {
     padding-left: 39px !important;
