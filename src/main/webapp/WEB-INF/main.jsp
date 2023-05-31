@@ -18,9 +18,9 @@
 	<div id="container">
         <!-- 배너 -->
         <div class="mainSlide">
-            <div><img src="../resources/banner1.png" alt=""></div>
-            <div><img src="../resources/banner2.png" alt=""></div>
-            <div><img src="../resources/banner3.png" alt=""></div>
+            <div><img src="/resources/img/banner1.png" alt=""></div>
+            <div><img src="/resources/img/banner2.png" alt=""></div>
+            <div><img src="/resources/img/banner3.png" alt=""></div>
         </div>
         <!--  베스트 아이템 -->
         <div id="bestArea">
@@ -37,13 +37,13 @@
                         베스트 제품
                     </p>
                 </div>
-                <div><img src="../resources/best1.png" id="bestImg"></div>
+                <div><img src="/resources/img/best1.png" id="bestImg"></div>
             </div>
             <div id="bestList">
                 <div>
                     <div class="product">
                         <div class="product-img">
-                            <img src="../resources/best2.png">
+                            <img src="/resources/img/best2.png">
                         </div>
                         <div class="product-info">
                             <div class="product-name">
@@ -58,7 +58,7 @@
                 <div>
                     <div class="product">
                         <div class="product-img">
-                            <img src="../resources/best3.png">
+                            <img src="/resources/img/best3.png">
                         </div>
                         <div class="product-info">
                             <div class="product-name">
@@ -73,7 +73,7 @@
                 <div>
                     <div class="product">
                         <div class="product-img">
-                            <img src="../resources/best4.png">
+                            <img src="/resources/img/best4.png">
                         </div>
                         <div class="product-info">
                             <div class="product-name">
@@ -88,7 +88,7 @@
                 <div>
                     <div class="product">
                         <div class="product-img">
-                            <img src="../resources/best5.png">
+                            <img src="/resources/img/best5.png">
                         </div>
                         <div class="product-info">
                             <div class="product-name">
@@ -103,7 +103,7 @@
                 <div>
                     <div class="product">
                         <div class="product-img">
-                            <img src="../resources/best6.png">
+                            <img src="/resources/img/best6.png">
                         </div>
                         <div class="product-info">
                             <div class="product-name">
@@ -118,7 +118,7 @@
                 <div>
                     <div class="product">
                         <div class="product-img">
-                            <img src="../resources/best7.png">
+                            <img src="/resources/img/best7.png">
                         </div>
                         <div class="product-info">
                             <div class="product-name">
@@ -152,18 +152,18 @@
                         방식으로 삶을 살도록 돕습니다.
                     </p>
                 </div>
-                <div><img src="../resources/banner4.png" id="challengeImg"></div>
+                <div><img src="/resources/img/banner4.png" id="challengeImg"></div>
             </div>
             <div id="challengeList">
                 <div>
                     <div class="challenge1">
-                        <div><img src="../resources/bono.jpg"></div>
+                        <div><img src="/resources/img/logo.png"></div>
                         <div>
                             <div>챌린지 이름</div>
                             <div>회원 ID</div>
                         </div>
                     </div>
-                    <div class="challenge2"><img src="../resources/best1.png"></div>
+                    <div class="challenge2"><img src="/resources/img/logo.png"></div>
                     <div class="challenge3">2023-05-15 ~ 23-05-22</div>
                     <div class="challenge4">
                         <div>친환경 소비</div>
@@ -173,13 +173,13 @@
                 </div>
                 <div>
                     <div class="challenge1">
-                        <div><img src="../resources/bono.jpg"></div>
+                        <div><img src="/resources/img/logo.png"></div>
                         <div>
                             <div>챌린지 이름</div>
                             <div>회원 ID</div>
                         </div>
                     </div>
-                    <div class="challenge2"><img src="../resources/best1.png"></div>
+                    <div class="challenge2"><img src="/resources/img/logo.png"></div>
                     <div class="challenge3">2023-05-15 ~ 23-05-22</div>
                     <div class="challenge4">
                         <div>친환경 소비</div>
@@ -189,13 +189,13 @@
                 </div>
                 <div>
                     <div class="challenge1">
-                        <div><img src="../resources/bono.jpg"></div>
+                        <div><img src="/resources/img/logo.png"></div>
                         <div>
                             <div>챌린지 이름</div>
                             <div>회원 ID</div>
                         </div>
                     </div>
-                    <div class="challenge2"><img src="../resources/best1.png"></div>
+                    <div class="challenge2"><img src="/resources/img/logo.png"></div>
                     <div class="challenge3">2023-05-15 ~ 23-05-22</div>
                     <div class="challenge4">
                         <div>친환경 소비</div>
@@ -220,18 +220,18 @@
                         개발된 다이어리입니다.
                     </p>
                 </div>
-                <div><img src="../resources/hyuksoo.png" id="diaryImg"></div>
+                <div><img src="/resources/img/banner4.png" id="diaryImg"></div>
             </div>
             <div class="diarySlide">
-                <div align="center"><img src="../resources/bono.jpg" alt=""></div>
-                <div align="center"><img src="../resources/bono.jpg" alt=""></div>
-                <div align="center"><img src="../resources/bono.jpg" alt=""></div>
-                <div align="center"><img src="../resources/bono.jpg" alt=""></div>
-                <div align="center"><img src="../resources/bono.jpg" alt=""></div>
-                <div align="center"><img src="../resources/bono.jpg" alt=""></div>
-                <div align="center"><img src="../resources/bono.jpg" alt=""></div>
-                <div align="center"><img src="../resources/bono.jpg" alt=""></div>
-                <div align="center"><img src="../resources/bono.jpg" alt=""></div>
+                <div align="center"><img src="/resources/img/logo.png" alt=""></div>
+                <div align="center"><img src="/resources/img/logo.png" alt=""></div>
+                <div align="center"><img src="/resources/img/logo.png" alt=""></div>
+                <div align="center"><img src="/resources/img/logo.png" alt=""></div>
+                <div align="center"><img src="/resources/img/logo.png" alt=""></div>
+                <div align="center"><img src="/resources/img/logo.png" alt=""></div>
+                <div align="center"><img src="/resources/img/logo.png" alt=""></div>
+                <div align="center"><img src="/resources/img/logo.png" alt=""></div>
+                <div align="center"><img src="/resources/img/logo.png" alt=""></div>
             </div>
         </div>
 
