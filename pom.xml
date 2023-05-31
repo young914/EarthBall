@@ -249,7 +249,13 @@
 			<artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
 			<version>1.16</version>
 		</dependency>
-
+		
+		<!-- 주소를 위도,경도로 받기 위한 라이브러리 -->
+		<dependency>
+		  <groupId>com.google.code.geocoder-java</groupId>
+		  <artifactId>geocoder-java</artifactId>
+		  <version>0.16</version>
+		</dependency>
 	</dependencies>
 
 
