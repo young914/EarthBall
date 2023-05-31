@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.earthball.member.member.model.service.MemberService;
 import com.earthball.member.member.model.vo.Member;
@@ -52,7 +53,7 @@ public class MemberController {
        
        Member loginUser = memberService.loginMember(m);
        
-       System.out.println(m);
+       // System.out.println(m);
        
        if(loginUser != null && bcryptPasswordEncoder.matches(m.getMemberPwd(), loginUser.getMemberPwd())) {
          
@@ -132,6 +133,8 @@ public class MemberController {
      
      @RequestMapping("myPage.me")
      public String myPage() {
+         
+       log.debug("마이페이지 요청됨");
        
        return "member/mypage/myPage";
      }
@@ -146,12 +149,40 @@ public class MemberController {
      public String updateMember(Member m,
                                                           HttpSession session,
                                                           Model model) {
+      
+      System.out.println(m); // m 에 내가 필요한 정보가 다 담겨왔는가? 아이디 누락됨 => ????
        
+         String encPwd = bcryptPasswordEncoder.encode(m.getMemberPwd());
+       
+         m.setMemberPwd(encPwd);
        
          int result = memberService.updateMember(m);
          
-         return null;
-     }
-     
+        System.out.println("controller : " + m);
+        
+        System.out.println("controller : " + result);
+        
+         
+         if(result > 0) {
+           
+           Member updateMem = memberService.loginMember(m);
+           
+           session.setAttribute("loginUser", updateMem);
+           
+           session.setAttribute("alertMsg", "변경이 완료되었습니다!!");
+           
+           System.out.println("변경성공");
+           
+           return "redirect:/myPage.me";
+           
+         } else {
+             
+          model.addAttribute("alertMsg", "정보변경실패!!");
+          
+          System.out.println("변경실패");
+          
+          return "member/mypage/memberEnrollReset";
+         }
+     }     
 
 }

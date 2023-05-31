@@ -17,6 +17,7 @@ public class MemberServiceImpl implements MemberService {
     
   @Override
   public Member loginMember(Member m) {
+    
           Member loginUser = memberDao.loginMember(sqlSession, m);
           
           return loginUser;
@@ -24,12 +25,22 @@ public class MemberServiceImpl implements MemberService {
 
   @Override
   public int insertMember(Member m) {
-           return memberDao.insertMember(sqlSession, m);
+               
+               int result = memberDao.insertMember(sqlSession, m);
+               
+               return result;
   }
 
   @Override
   public int updateMember(Member m) {
-           return memberDao.updateMember(sqlSession, m);
+    
+            System.out.println("m1 : " + m);
+            
+            int result = memberDao.updateMember(sqlSession, m);
+            
+            System.out.println("m2 : " + m);
+            
+           return result;
   }
 
   
