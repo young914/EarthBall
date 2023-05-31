@@ -167,11 +167,12 @@
         <a href="/">
         <img class="logo" src="/resources/img/logo2.png" alt="지구공 로고">
 							 </a>
-    <form action="insert.me" method="post">
+    <form action="update.me" method="post">
         <!-- 2. 필드 -->
         <div class="field">
             <b>아이디 *</b>
-            <span class="placehold-text"><input type="text" placeholder="아이디를 입력해주세요" name="memberId"></span>
+            <span class="placehold-text">
+            <input type="text" name="memberId" value="${loginUser.memberId }" readonly></span>
         </div>
         <div class="field">
             <b>비밀번호 *</b>
@@ -183,31 +184,30 @@
         </div>
         <div class="field">
             <b>닉네임 *</b>
-            <input type="text" name="memberName">
+            <input type="text" name="memberName" value="${loginUser.memberName}">
         </div>
 
         <!-- 3. 필드(생년월일) -->
         <div class="field birth" >
             <b>생년월일 *</b>
             <div>
-                <input type="date"  name="birthDate" id="birthDate">                
+                <input type="date"  name="birthDate" id="birthDate" value="${loginUser.birthDate}">                
     	   </div>
     	 </div>
-        
-       
+
         <!-- 4. 필드(성별) -->
         <div class="field gender">
-            <b>성별</b>
-            <div>
-                <label><input type="radio" id="Male"  value="M" name="gender">남자</label>
-                <label><input type="radio" id="Female"  value="F" name="gender">여자</label>
-            </div>
-        </div>
+		    <b>성별</b>
+		    <div>
+		        <label><input type="radio" id="Male" value="M" name="gender" {{(gender === 'M') ? 'checked' : ''}}>남자</label>
+		        <label><input type="radio" id="Female" value="F" name="gender" {{(gender === 'F') ? 'checked' : ''}}>여자</label>
+		    </div>
+		</div>
 
         <!-- 5. 이메일_전화번호 -->
         <div class="field">
             <b>본인 확인 이메일<small> *</small></b>
-            <input type="email" placeholder="선택입력" name="email">
+            <input type="email" placeholder="선택입력" name="email" value="${loginUser.email}">
         </div>
         
         <div class="field tel-number">
@@ -216,14 +216,14 @@
                 <option value="" >대한민국 +82</option>
             </select>
             <div>
-                <input type="tel" placeholder="전화번호 입력" name="phone">
+                <input type="tel" placeholder="전화번호 입력" name="phone" value="${loginUser.phone}">
                 <input type="button" value="인증번호 받기">
             </div>
             <input type="number" placeholder="인증번호를 입력하세요" disabled>
         </div>
 
         <!-- 6. 가입하기 버튼 -->
-        <input type="submit" value="가입하기" id="submit-button">
+        <input type="submit" value="가입하기">
 
         </form>
 

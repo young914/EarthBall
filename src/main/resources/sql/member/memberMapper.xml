@@ -46,10 +46,13 @@
   						
   						<update id="updateMember" parameterType="member">
   								UPDATE MEMBER
-  								        SET MEMBER_NAME = #{memberName}
-  								              , EMAIL
-  								              , BIRTH_DATE
-  								              , PHONE
+  								        SET MEMBER_NAME = #{memberName} 
+  								        	  , MEMBER_PWD = #{memberPwd}
+  								              , BIRTH_DATE = #{birthDate}
+  								              , GENDER = #{gender}
+  								              , EMAIL = #{email}
+  								              , PHONE = #{phone}
+  								              , CREATED_DATE = SYSDATE
   								 WHERE MEMBER_ID = #{memberId}
   						</update>
   		
