@@ -226,7 +226,7 @@
               </div>
               <!-- Hoverable Table rows -->
               <div class="card mb-2">
-                <div class="table-responsive text-nowrap">
+                <div class="table-responsive text-nowrap" id="grpCodeList">
                   <table class="table table-hover">
                     <thead>
                       <tr>
@@ -239,8 +239,8 @@
                     <tbody class="table-border-bottom-0">
                     <c:forEach var="item" items="${ grpCodeList }">
                       <tr>
-                        <td><strong>${item.grpCode}</strong></td>
-                        <td><strong>${item.grpCodeName}</strong></td>
+                        <td class="grpCode" data-grp-code="${item.grpCode}"><strong>${item.grpCode}</strong></td>
+                        <td class="grpCode" data-grp-code="${item.grpCode}"><strong>${item.grpCodeName}</strong></td>
                         <td>
                           <button type="button" class="btn btn-primary">수정</button>
                         </td>
@@ -308,10 +308,11 @@
               </div>
               <!-- HTML5 Inputs -->
               <div class="card">
-                <div class="table-responsive text-nowrap">
+                <div class="table-responsive text-nowrap" id="codeList">
                   <table class="table table-hover">
                     <thead>
                     <tr>
+                      <th>그룹코드</th>
                       <th>공통코드</th>
                       <th>공통코드명</th>
                       <th>수정</th>
@@ -320,7 +321,7 @@
                     </thead>
                     <tbody class="table-border-bottom-0">
                     <tr>
-                      <td colspan="4">
+                      <td colspan="5">
                         <strong>등록된 데이터가 없습니다.</strong>
                       </td>
                     </tr>
@@ -373,5 +374,23 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script type="text/javascript">
+      $(document).on('click', '#grpCodeList .grpCode', function(){
+        let grpCode = $(this).data('grpCode');
+        $.ajax({
+          url : "list.code",
+          type : "get",
+          data : {
+            grpCode : grpCode
+          },
+          success : function(result) {				// jsp 파일을 result로 받을 수 있음!!! ***  => return "admin/codeListView";
+            $("#codeList").html(result);
+          },
+          error : function() {
+            console.log("공통코드 생성 ajax 통신 실패");
+          }
+        });
+      });
+    </script>
   </body>
 </html>

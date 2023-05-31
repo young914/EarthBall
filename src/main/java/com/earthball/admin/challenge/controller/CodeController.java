@@ -119,7 +119,7 @@ public class CodeController {
 
     model.addAttribute("codeList", codeDtoList);
 
-    return "admin/challenge/code/codeListView";
+    return "admin/challenge/code/codeListView_1";
   }
 
   @GetMapping("updateForm.code")
