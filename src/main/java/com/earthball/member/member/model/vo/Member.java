@@ -1,4 +1,4 @@
-package com.earthball.member.model.vo;
+package com.earthball.member.member.model.vo;
 
 import java.sql.Date;
 import lombok.AllArgsConstructor;

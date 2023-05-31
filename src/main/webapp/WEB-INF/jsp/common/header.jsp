@@ -26,9 +26,12 @@
             </c:when>
             <c:otherwise>
                 <!-- 로그인 후 링크 -->
+                <div>
+                		<b><a href="myPage.me">${loginUser.memberName}님</a></b>
+                </div> <br>
                 <div><a href="logout.me">로그아웃</a></div>
                 |
-                <div><a href=""><i class="xi-user"></i></a></div>
+                <div><a href="myPage.me"><i class="xi-user"></i></a></div>
                 |
                 <div><a href=""><i class="xi-market"></i></a></div>
             </c:otherwise>
