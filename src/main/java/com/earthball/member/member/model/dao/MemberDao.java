@@ -1,8 +1,8 @@
-package com.earthball.member.model.dao;
+package com.earthball.member.member.model.dao;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
-import com.earthball.member.model.vo.Member;
+import com.earthball.member.member.model.vo.Member;
 
 @Repository
 public class MemberDao {
@@ -13,6 +13,10 @@ public class MemberDao {
   
   public int insertMember(SqlSessionTemplate sqlSession, Member m) {
         return sqlSession.insert("memberMapper.insertMember", m);
+  }
+  
+  public int updateMember(SqlSessionTemplate sqlSession, Member m) {
+        return sqlSession.update("memberMapper.updateMember, m");
   }
 
 }
