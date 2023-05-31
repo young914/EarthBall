@@ -11,4 +11,9 @@ public class ProductController {
     return "admin/product/productList";
   }
 
+  @RequestMapping("enrollForm.pro")
+  public String enrollForm() {
+    return "admin/product/productEnrollForm";
+  }
+
 }
