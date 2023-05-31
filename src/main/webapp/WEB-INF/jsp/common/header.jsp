@@ -28,7 +28,14 @@
                 <!-- 로그인 후 링크 -->
                 <div><a href="logout.me">로그아웃</a></div>
                 |
-                <div><a href=""><i class="xi-user"></i></a></div>
+                <c:choose>
+	                <c:when test="${loginUser.memberId eq 'admin'}">
+	                	<div><a href="admin"><i class="xi-user"></i></a></div>
+	                </c:when>
+	                <c:otherwise>
+	                	<div><a href=""><i class="xi-user"></i></a></div>
+	                </c:otherwise>
+                </c:choose>
                 |
                 <div><a href=""><i class="xi-market"></i></a></div>
             </c:otherwise>
