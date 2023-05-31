@@ -77,7 +77,7 @@
         gap:10px; /*간격 벌려줄때 공식처럼 사용핟나 */
     }
 
-    /* .field.birth div > * {  gap 사용한거랑 같은 효과를 줌 
+    /* .field.birth div > * {  gap 사용한거랑 같은 효과를 줌
         flex:1;
     } */
 
@@ -105,7 +105,7 @@
         /* border: 1px solid #000; */
     }
 
-    .placehold-text:before{ 
+    .placehold-text:before{
         position:absolute; /*before은 inline 요소이기 때문에 span으로 감싸줌 */
         right : 1px;
         top:13px;
@@ -161,7 +161,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-    
+
     <div class="member">
         <!-- 1. 로고 -->
         <a href="/">
@@ -190,7 +190,7 @@
         <div class="field birth" >
             <b>생년월일 *</b>
             <div>
-                <input type="number" placeholder="년(4자)">                
+                <input type="number" placeholder="년(4자)">
                 <select>
                     <option value="">월</option>
                     <option value="">1월</option>
@@ -225,7 +225,7 @@
             <b>본인 확인 이메일<small> *</small></b>
             <input type="email" placeholder="선택입력" name="email">
         </div>
-        
+
         <div class="field tel-number">
             <b>휴대전화</b>
             <select>
@@ -252,7 +252,7 @@
             </div>
             <span><a href="#none">Gigu0.</a></span>
         </div>
-    </div>    
+    </div>
 
 </body>
 </html>
