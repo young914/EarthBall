@@ -17,5 +17,4 @@ public class ChallengeDto {
   private String memberId;           // 회원아이디
   private Integer categoryNo;        // 카테고리일련번호
   private Integer fileNo;            // 파일일련번호
-  private String code;               // 코드
 }

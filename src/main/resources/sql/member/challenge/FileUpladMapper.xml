@@ -21,5 +21,10 @@
       FROM DUAL
   </select>
 
+  <select id="selectFileNo" resultType="java.lang.Integer">
+    SELECT FILE_NO
+      FROM TB_CHA_FILE
+     WHERE FILE_NAME = #{fileName}
+  </select>
 
 </mapper>

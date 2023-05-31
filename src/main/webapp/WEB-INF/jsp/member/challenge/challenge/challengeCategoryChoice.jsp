@@ -9,233 +9,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>챌린지 요청 전_카테고리 선정</title>
 
-    <!-- icon 관련 -->
-    <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-
+    <jsp:include page="../../../common/common.jsp"/>
 
     <!-- CSS 영역-->
-    <link rel="stylesheet" href="/resources/css/common/header.css">
-    <link rel="stylesheet" href="/resources/css/common/footer.css">
-    <link rel="stylesheet" href="/resources/css/member/challenge/challenge_category_choice.css">
-
-
-    <style>
-      .wrap div {
-        /* border: 1px solid red; */
-        /* 지금부터 지정하는 가로세로길이는 테두리까지 포함한 사이즈임 */
-        box-sizing: border-box;
-      }
-
-      /* 전체를 감싸는 wrap*/
-      .wrap {
-        width: 1200px;
-        height: 1400px;
-        margin: auto; /* 좌우로 항상 정정가운데에 위치시켜주는 속성 */
-        padding-top: 170px;
-        /* position : relative; */
-      }
-
-      /* 크게 세가지 영역 */
-      /* header, content, footer */
-      /* #header, #content, #footer {
-          width: 100%;
-      } */
-
-      .wrap>div { width: 100%; }
-
-
-
-      /* 영역별 높이 */
-      #title { height: 10%; }
-      .describe { height: 20% ;}
-      .choice {
-        height: 70% ;
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-      }
-
-
-      /* 영역별 너비 */
-      #title>div, #content>div {
-        float: left;
-      }
-
-      .choice_one {
-        width: 30%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 10px;
-      }
-
-
-
-
-      /* 타이틀 */
-      #title {
-        box-sizing : border-box;
-        align-items : center;
-        display : flex;
-      }
-
-      #title_text {
-        width : 1000px;
-        height : 50px;
-        font-size : 40px;
-        font-weight : bold;
-        padding : 0px 0px 7px 10px;
-        /* border : 1px solid red; */
-      }
-
-      #bar_1 {
-        width : 12px;
-        height : 70px;
-        background-color : #146C94;
-      }
-
-      .btn_1 {
-        background-color: #69abce;
-        border: solid 1px #69abce;
-        border-radius: 7px;
-        width: 200px;
-        height: 50px;
-        color: white;
-        font-weight: 700px;
-        font-size: 20px;
-      }
-
-
-      #bar_2 {
-        width : 95%;
-        height : 4px;
-        background-color : #b9b9b9;
-        margin : 0px 0px 0px 20px;
-      }
-
-      .describe {
-        float: inline-start;
-      }
-
-      #describe_1 {
-        font-size: 25px;
-        font-weight: 400px;
-        color: rgb(123, 123, 123);
-        padding: 20px;
-      }
-
-      .accent {
-        font-size: 35px;
-        color: #146C94;
-        font-weight: 900px;
-      }
-
-      .btn_2 {
-        background-color: #69abce;
-        border: solid 1px #69abce;
-        border-radius: 7px;
-        width: 300px;
-        height: 80px;
-        color: white;
-        font-weight: 700px;
-        font-size: 30px;
-        margin: 20px;
-        cursor: pointer;
-      }
-
-
-      .btn_2:hover {
-        background-color: white;
-        color: #69abce;
-      }
-
-
-      .choice_one_list li, .choice_one_list {
-        text-align:left;
-        font-size: 20px;
-      }
-
-    </style>
+    <link rel="stylesheet" href="/resources/css/member/challenge/challengeCategoryChoice.css">
 
 </head>
 <body>
 
-<!-- 헤더 시작 -->
-<div id="headers">
-    <div class="header">
-        <div style="width: 120px;"></div>
-        <div class="logo">
-            <a href=""><img src="/resources/img/logo.png" style="width: 250px;"></a>
-        </div>
-        <div class="login-area">
-            <div><a href="">로그인</a></div>&nbsp;|&nbsp;
-            <div><a href="">회원가입</a></div>
-        </div>
-    </div>
-    <!-- 매뉴바 -->
-    <div class="menu">
-        <div>
-            <div class="dropdown">
-                <span class="dropbtn">장보기</span>
-                <div class="dropdown-content">
-                    <a href="">선물꾸러미</a>
-                    <a href="">욕실</a>
-                    <a href="">식품</a>
-                    <a href="">주방</a>
-                    <a href="">생활</a>
-                    <a href="">취미</a>
-                    <a href="">음료용품</a>
-                    <a href="">여성용품</a>
-                    <a href="">반려동물</a>
-                    <a href="">화장품</a>
-                    <a href="">문구</a>
-                    <a href="">전체</a>
-                </div>
-            </div>
-            <div class="dropdown">
-                <span class="dropbtn">지구소개</span>
-                <div class="dropdown-content">
-                    <a href="">#</a>
-                </div>
-            </div>
-            <div class="dropdown">
-                <span class="dropbtn">챌린지</span>
-                <div class="dropdown-content">
-                    <a href="">#</a>
-                </div>
-            </div>
-            <div class="dropdown">
-                <span class="dropbtn">환경일기</span>
-                <div class="dropdown-content">
-                    <a href="">#</a>
-                </div>
-            </div>
-            <div class="dropdown">
-                <span class="dropbtn">매장찾기</span>
-                <div class="dropdown-content">
-                    <a href="">#</a>
-                </div>
-            </div>
-            <div class="dropdown">
-                <span class="dropbtn">고객센터</span>
-                <div class="dropdown-content">
-                    <a href="">#</a>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="search">
-            <form action="">
-                <input type="text" placeholder="검색어 입력">
-                <i class="xi-search"></i>
-            </form>
-        </div>
-
-    </div>
-</div>
-<!-- 헤더 끝 -->
-
+<jsp:include page="../../../common/header.jsp"/>
 
 <!-- 내용 영역 시작 -->
 <div class="wrap">
@@ -250,12 +32,12 @@
 
     <!-- 설명 부분 시작 -->
     <div class="describe">
-        <div id="bar_2" style="margin-top: 30px;"></div>
+        <div class="bar_2" style="margin-top: 30px;"></div>
         <p id="describe_1" align="center">
             각 카테고리 별로 생성할 수 있는 챌린지의 다양한 예시 입니다. <br>
             예시를 참고하여 <span class="accent">챌린지의 카테고리</span>를 <span class="accent">선택</span>해 주시기 바랍니다. <br>
         </p>
-        <div id="bar_2"></div>
+        <div class="bar_2"></div>
     </div>
     <!-- 설명 부분 끝 -->
 
@@ -336,25 +118,7 @@
 </div>
 <!-- 내용 영역 끝 -->
 
-
-<!-- 푸터 시작 -->
-<div id="footer">
-    <div style="width: 100px;"></div>
-    <div><img src="/resources/img/logo2.png" style="width: 400px; padding-top: 20px;"></div>
-    <div style="margin-top: 30px; color: white;">
-        <p style="font-weight: bold;">
-            이용약관  |  개인정보처리방침  |  도매 전용 B2B몰
-        </p>
-        <p>
-            회사명 : 주식회사 인수온송민근 | 대표자 : 양선주 <br>
-            주소 : 서울시 금천구 가산디지털2로 165, 1001호 | 이메일 : contact@jigugong.co.kr | 팩스 : 0303-3444-2050 <br>
-            사업자등록번호 : 689-86-00791 | 통신판매업신고 : 제2018-서울동작-02955 | 건강기능식품영업신고 : 제2022-0112707 <br>
-            개인정보보호책임자 : 양선주 | 고객센터 : 02-812-2050 | 호스팅 제공자 : (주)지구공
-        </p>
-    </div>
-    <div style="width: 100px;"></div>
-</div>
-<!-- 푸터 끝 -->
+<jsp:include page="../../../common/footer.jsp"/>
 
 
 <script>

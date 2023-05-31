@@ -65,12 +65,15 @@
                         <a href="">#</a>
                     </div>
                 </div>
+
                 <div class="dropdown">
                     <span class="dropbtn">챌린지</span>
                     <div class="dropdown-content">
-                        <a href="">#</a>
+                        <a href="/main.chall">참여 게시판</a>
+                        <a href="#">인증 게시판</a>
                     </div>
                 </div>
+
                 <div class="dropdown">
                     <span class="dropbtn">환경일기</span>
                     <div class="dropdown-content">

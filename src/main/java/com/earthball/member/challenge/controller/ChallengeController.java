@@ -85,13 +85,14 @@ public class ChallengeController {
 
     log.info("시작 날짜 : " + chStarDay);
     log.info("종료 날짜 : " + chEndDay);
+    log.info("파일넘버 : " + challengeDto.getFileNo());
 
     challengeDto.setChStartDay(chStarDay);
     challengeDto.setChEndDay(chEndDay);
 
-    int result = challengeService.requestChallenge(challengeDto);
+     int result = challengeService.requestChallenge(challengeDto);
 
-    return result;
+     return result;
   }
 
 
