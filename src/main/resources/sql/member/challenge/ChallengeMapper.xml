@@ -10,16 +10,14 @@
                             , CH_END_DAY
                             , MEMBER_ID
                             , CATEGORY_NO
-                            , FILE_NO
-                            , CODE)
+                            , FILE_NO)
                     VALUES (SEQ_TB_CHALLENGE.NEXTVAL
                           , #{chTitle}
                           , #{chStartDay}
                           , #{chEndDay}
-                          , 'user02'
+                          , #{memberId}
                           , #{categoryNo}
-                          , #{fileNo}
-                          , '111')
+                          , #{fileNo})
   </insert>
 
 

@@ -31,10 +31,9 @@ public class FileUploadController {
     }
   }
 
-
   @ResponseBody
   @PostMapping("/select/fileNo")
-  public int selectFileNo() {
+  public int getFileNo() {
     int fileNo = fileUpladMapper.getFileNo();
     return fileNo;
   }

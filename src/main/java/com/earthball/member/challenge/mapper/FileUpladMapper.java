@@ -10,5 +10,4 @@ public interface FileUpladMapper {
 
   Integer getFileNo();
 
-
 }

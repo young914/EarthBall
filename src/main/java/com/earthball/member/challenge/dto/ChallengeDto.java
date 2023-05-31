@@ -2,6 +2,8 @@ package com.earthball.member.challenge.dto;
 
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -17,5 +19,6 @@ public class ChallengeDto {
   private String memberId;           // 회원아이디
   private Integer categoryNo;        // 카테고리일련번호
   private Integer fileNo;            // 파일일련번호
-  private String code;               // 코드
+
+  List<ChDetailInfoDto> list; //챌린저 상세 정보
 }
