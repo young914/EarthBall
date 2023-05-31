@@ -1,5 +1,6 @@
 package com.earthball.member.store.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,14 @@ import com.earthball.common.template.Pagination;
 import com.earthball.common.vo.PageInfo;
 import com.earthball.member.store.model.service.StoreService;
 import com.earthball.member.store.model.vo.Store;
+import com.earthball.member.store.template.GeocodingApi;
+import com.google.code.geocoder.Geocoder;
+import com.google.code.geocoder.GeocoderRequestBuilder;
+import com.google.code.geocoder.model.GeocodeResponse;
+import com.google.code.geocoder.model.GeocoderRequest;
+import com.google.code.geocoder.model.GeocoderResult;
+import com.google.code.geocoder.model.GeocoderStatus;
+import com.google.code.geocoder.model.LatLng;
 
 
 @Controller
@@ -23,18 +32,31 @@ public class StoreController{
   
   
   @RequestMapping("storeListView.st")
-  public String selectList(@RequestParam(value="cPage", defaultValue="1") int currentPage, ModelAndView mv) {
-    
-    int listCount = storeService.selectStoreListCount();
-    
-    int pageLimit = 20;
-    int boardLimit = 5;
+  public ModelAndView selectList(@RequestParam(value="cPage", defaultValue="1") int currentPage, ModelAndView mv) {
+      int listCount = storeService.selectStoreListCount();
+      int pageLimit = 20;
+      int boardLimit = 5;
 
-    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+      PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 
-    ArrayList<Store> list = storeService.selectStoreList(pi);
+      ArrayList<Store> list = storeService.selectStoreList(pi);
 
-    mv.addObject("pi", pi).addObject("list", list).setViewName("member/store/storeListView");
-    return "member/store/storeListView";
+      for (int i = 0; i < list.size(); i++) {
+          
+          GeocodingApi geocodingApi = new GeocodingApi();
+          double[] coordinates = geocodingApi.getGeocode(list.get(i).getStoreAddress());
+          double latitude = coordinates[0];
+          double longitude = coordinates[1];
+          list.get(i).setStoreLat(latitude); // Store 객체에 위도 값 설정
+          list.get(i).setStoreLon(longitude); // Store 객체에 경도 값 설정
+          
+      }
+
+      mv.addObject("pi", pi).addObject("list", list).setViewName("member/store/storeListView");
+      return mv;
   }
+  
+  
+  
+  
 }

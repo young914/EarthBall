@@ -23,10 +23,27 @@
     <result column="PROVINCES" property="provinces" />
   </resultMap>  
 
+  <!-- 매장 수 가져오기 -->
   <select id="selectStoreListCount"  resultType="_int">
     SELECT COUNT(*)
     FROM STORE
     WHERE STATUS = 'Y'
   </select>
+
+  <!-- 매장 리트 구해주는 쿼리문  -->
+  <select id="selectStoreList" resultMap="storeResultSet">
+    SELECT STORE_NO
+        , STORE_NAME
+        , STORE_ADDRESS
+        , STORE_PHONE
+        , BUSINESS_HOURS
+        , STORE_RC
+        , STORE_REGION_NO
+        , STORE_INFO
+        , STATUS
+    FROM STORE
+    WHERE STATUS = 'Y'
+    ORDER BY STORE_NO DESC 
+ 	</select>
 
 </mapper>

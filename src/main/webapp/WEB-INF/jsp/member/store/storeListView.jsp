@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+
+
 <style>
 html, body{
     height: 100%;
@@ -38,10 +42,6 @@ form>div{
     margin-bottom: 20px;
 }
 
-.searchSelect{
-    width: 100%;
-}
-
 .dropdown button {
     height: 50px;
     border-radius: 30px;
@@ -68,8 +68,17 @@ hr{
 }
 
 .searchList{
-    padding: 32px;
+    padding: 17px 32px;
     border-bottom: 1px solid #ddd;
+}
+
+.storeTitle{
+    font-size: 25px;
+    font-weight: bold;
+}
+.storeInfo{
+    font-size: 15px;
+    color: #888;
 }
 .searchList:hover{
     cursor: pointer;
@@ -120,17 +129,57 @@ hr{
     <div id="map"></div>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d4ce7a8706f16f48bba913a5def2af6a"></script>
     <script>
-        var container = document.getElementById('map');
-        var options = {
-            center: new kakao.maps.LatLng(37.533951, 126.896989),
-            level: 4
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+            mapOption = { 
+            center: new kakao.maps.LatLng(33.450701, 126.570667),
+            level: 11
         };
-        var map = new kakao.maps.Map(container, options);
-        var markerPosition  = new kakao.maps.LatLng(37.533951, 126.896989); 
-        var marker = new kakao.maps.Marker({
-            position: markerPosition
-        });
-        marker.setMap(map);
+        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+ 
+// 마커를 표시할 위치와 title 객체 배열입니다 
+var positions = [
+    
+
+        <c:forEach var="s" items="${ list }">
+        {
+            title: '${s.storeName}',
+            latlng: new kakao.maps.LatLng(${s.storeLat}, ${s.storeLon})
+        },
+        </c:forEach>
+    
+    {
+        title: '생태연못', 
+        latlng: new kakao.maps.LatLng(33.450936, 126.569477)
+    },
+    {
+        title: '텃밭', 
+        latlng: new kakao.maps.LatLng(33.450879, 126.569940)
+    },
+    {
+        title: '근린공원',
+        latlng: new kakao.maps.LatLng(33.451393, 126.570738)
+    }
+];
+
+// 마커 이미지의 이미지 주소입니다
+var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+    
+for (var i = 0; i < positions.length; i ++) {
+    
+    // 마커 이미지의 이미지 크기 입니다
+    var imageSize = new kakao.maps.Size(24, 35); 
+    
+    // 마커 이미지를 생성합니다    
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+    
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        map: map, // 마커를 표시할 지도
+        position: positions[i].latlng, // 마커를 표시할 위치
+        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+        image : markerImage // 마커 이미지 
+    });
+}
 
     </script>
     <!-- 사이드바 -->
@@ -141,7 +190,7 @@ hr{
             </div>
             <div>
                 <div class="dropdown dropdownCate">
-                    <button class="btn btn-secondary searchSelect" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         지역 검색
                     </button>
                     <ul class="dropdown-menu" style="width: 100%;">
@@ -184,82 +233,19 @@ hr{
             <hr>
             <div id="searchResult">
                 <span>총 </span>
-                <span> 1,677개의 결과</span>
+                <span> ${ pi.listCount }개의 결과</span>
             </div>
             <hr>
-            <div class="searchList">
-                <h3>(주)봉구통상</h3>
-                <h4>서울특별시 마포구 큰우물로 10(대흥동)</h4>
-                <h5>02-3317-2240</h5>
-            </div>
-            <div class="searchList">
-                <h3>(주)봉구통상</h3>
-                <h4>서울특별시 마포구 큰우물로 10(대흥동)</h4>
-                <h5>02-3317-2240</h5>
-            </div>
-            <div class="searchList">
-                <h3>(주)봉구통상</h3>
-                <h4>서울특별시 마포구 큰우물로 10(대흥동)</h4>
-                <h5>02-3317-2240</h5>
-            </div>
-            <div class="searchList">
-                <h3>(주)봉구통상</h3>
-                <h4>서울특별시 마포구 큰우물로 10(대흥동)</h4>
-                <h5>02-3317-2240</h5>
-            </div>
-            <div class="searchList">
-                <h3>(주)봉구통상</h3>
-                <h4>서울특별시 마포구 큰우물로 10(대흥동)</h4>
-                <h5>02-3317-2240</h5>
-            </div>
-            <div class="searchList">
-                <h3>(주)봉구통상</h3>
-                <h4>서울특별시 마포구 큰우물로 10(대흥동)</h4>
-                <h5>02-3317-2240</h5>
-            </div>
-            <div class="searchList">
-                <h3>(주)봉구통상</h3>
-                <h4>서울특별시 마포구 큰우물로 10(대흥동)</h4>
-                <h5>02-3317-2240</h5>
-            </div>
-            <div class="searchList">
-                <h3>(주)봉구통상</h3>
-                <h4>서울특별시 마포구 큰우물로 10(대흥동)</h4>
-                <h5>02-3317-2240</h5>
-            </div>
-            <div class="searchList">
-                <h3>(주)봉구통상</h3>
-                <h4>서울특별시 마포구 큰우물로 10(대흥동)</h4>
-                <h5>02-3317-2240</h5>
-            </div>
-            <div class="searchList">
-                <h3>(주)봉구통상</h3>
-                <h4>서울특별시 마포구 큰우물로 10(대흥동)</h4>
-                <h5>02-3317-2240</h5>
-            </div>
-            <div class="searchList">
-                <h3>(주)봉구통상</h3>
-                <h4>서울특별시 마포구 큰우물로 10(대흥동)</h4>
-                <h5>02-3317-2240</h5>
-            </div>
-            <div class="searchList">
-                <h3>(주)봉구통상</h3>
-                <h4>서울특별시 마포구 큰우물로 10(대흥동)</h4>
-                <h5>02-3317-2240</h5>
-            </div>
-            <div class="searchList">
-                <h3>(주)봉구통상</h3>
-                <h4>서울특별시 마포구 큰우물로 10(대흥동)</h4>
-                <h5>02-3317-2240</h5>
-            </div>
-            <div class="searchList">
-                <h3>(주)봉구통상</h3>
-                <h4>서울특별시 마포구 큰우물로 10(대흥동) 마지막이요</h4>
-                <h5>02-3317-2240</h5>
-                <div>
-                    
+            <c:forEach var="s" items="${ list }">
+                <div class="searchList">
+                    <span class="storeTitle">${ s.storeName }</span> <br>
+                    <span class="storeInfo">${ s.storeAddress }</span> <br>
+                    <span class="storeInfo">${ s.storePhone }</span> <br>
+                    <span class="storeInfo">영업시간 ${ s.businessHours }</span>
+                    <i class="xi-heart xi-2x" style="width: 20px;"></i>
                 </div>
-            </div>
+            </c:forEach>
+            
             
         </div>
     </div>

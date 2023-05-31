@@ -24,7 +24,8 @@ public int selectStoreListCount() {
 
 @Override
 public ArrayList<Store> selectStoreList(PageInfo pi) {
-return null;
+	
+	return storeDao.selectStoreList(sqlSession, pi);
 }
 
 @Override
