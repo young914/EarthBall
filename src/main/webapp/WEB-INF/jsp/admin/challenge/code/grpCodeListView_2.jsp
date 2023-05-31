@@ -312,11 +312,11 @@
                   <table class="table table-hover">
                     <thead>
                     <tr>
-                      <th>그룹코드</th>
-                      <th>공통코드</th>
-                      <th>공통코드명</th>
-                      <th>수정</th>
-                      <th>삭제</th>
+                      <th width="15%">그룹코드</th>
+                      <th width="15%">공통코드</th>
+                      <th width="30%">공통코드명</th>
+                      <th width="10%">수정</th>
+                      <th width="10%">삭제</th>
                     </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
