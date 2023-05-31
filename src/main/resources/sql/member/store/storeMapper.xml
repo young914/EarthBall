@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+
+<mapper namespace="storeMapper">
+
+  <!--  Store테이블로부터 가져온  ResultSet 을 Store 객체로 가공해주는 resultMap-->
+  <resultMap id="storeResultSet" type="store">
+    <result column="STORE_NO" property="storeNo" />
+    <result column="STORE_NAME" property="storeName" />
+    <result column="STORE_ADDRESS" property="storeAddress" />
+    <result column="STORE_PHONE" property="storePhone" />
+    <result column="BUSINESS_HOURS" property="businessHours" />
+    <result column="STORE_RC" property="storeRc" />
+    <result column="STORE_REGION_NO" property="storeRegionNo" />
+    <result column="STORE_INFO" property="storeInfo" />
+    <result column="STATUS" property="status" />
+  </resultMap>
+
+  <!--  Region테이블로부터 가져온  ResultSet 을 Region 객체로 가공해주는 resultMap-->
+  <resultMap id="regionResultSet" type="region">
+    <result column="STORE_REGION_NO" property="storeRegionNo" />
+    <result column="CITY" property="city" />
+    <result column="PROVINCES" property="provinces" />
+  </resultMap>  
+
+  <select id="selectStoreListCount"  resultType="_int">
+    SELECT COUNT(*)
+    FROM STORE
+    WHERE STATUS = 'Y'
+  </select>
+
+</mapper>
