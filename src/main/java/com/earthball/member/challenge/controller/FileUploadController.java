@@ -35,16 +35,7 @@ public class FileUploadController {
   @PostMapping("/select/fileNo")
   public int getFileNo() {
     int fileNo = fileUpladMapper.getFileNo();
-    log.info("nextval 넘어오라고 : ");
     return fileNo;
   }
 
-/*
-  @ResponseBody
-  @PostMapping("/select/fileNo")
-  public int selectFileNo(String fileName) {
-    int fileNo = fileUploadService.selectFileNo(fileName);
-    return fileNo;
-  }
-*/
 }

@@ -10,7 +10,4 @@ public interface FileUpladMapper {
 
   Integer getFileNo();
 
-  int selectFileNo(String fileName);
-
-
 }

@@ -40,6 +40,8 @@
                 <span>[ 기본 정보 ] 사항은 필수 입력 사항입니다. *</span>
             </div>
 
+            <input type="hidden" name="memberId" value="${loginUser.memberId}">
+
             <div class="basic_form_1">
                 <span class="form_title">챌린지명 <span class="star">*</span></span>
                 <input type="text" class="form_text" placeholder="챌린지명을 입력해주세요." name="chTitle" required> <br><br>
@@ -59,7 +61,8 @@
                         <span class="form_title" align="right;">썸네일 <span class="star">*</span></span>
                         <img src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"
                              class="image-box"/>
-                        <input type="file" accept="image/*" name="fileNo" id="fileNo" onchange="uploadImage();"/>
+                        <input type="file" accept="image/*" name="fileName" id="fileName" onchange="uploadImage();"/>
+                        <input type="hidden" name="fileNo" id="fileNo">
                     </div>
                 </div>
             </div>

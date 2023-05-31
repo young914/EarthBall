@@ -7,5 +7,4 @@ public interface FileUploadService {
 
   ChaFileDto setFileUpload(MultipartFile multipartFile);
 
-  int selectFileNo(String fileName);
 }

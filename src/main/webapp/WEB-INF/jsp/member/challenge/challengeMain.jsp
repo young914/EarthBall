@@ -39,9 +39,12 @@
                 <div id="title_text">에코 챌린지</div>
             </div>
 
-            <div id="title_2">
-                <button class="btn_1" onclick="chall_open();">챌린지 오픈</button>
-            </div>
+            <!-- 로그인 한 사람에게만 보이는 챌린지 오픈 버튼 -->
+            <c:if test="${ not empty loginUser }">
+                <div id="title_2">
+                    <button class="btn_1" onclick="chall_open();">챌린지 오픈</button>
+                </div>
+            </c:if>
         </div>
 
 

@@ -63,10 +63,7 @@ public class FileUploadServiceImpl implements FileUploadService {
     return chaFileDto;
   }
 
-  @Override
-  public int selectFileNo(String fileName) {
-    return fileUpladMapper.selectFileNo(fileName);
-  }
+
 
 
 }
