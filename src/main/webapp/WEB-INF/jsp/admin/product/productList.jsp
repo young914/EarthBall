@@ -28,6 +28,20 @@
 	}
 	.listTable{
 		width: 100%;
+		margin-top: 20px;
+	}
+	.listTable>thead>tr>th{
+		text-align: center;
+	}
+	.listTable>tbody>tr>td:first-child, .listTable>tbody>tr>td:nth-child(2), .listTable>tbody>tr>td:nth-child(2),
+	.listTable>tbody>tr>td:nth-child(4), .listTable>tbody>tr>td:nth-child(5), .listTable>tbody>tr>td:nth-child(6),
+	.listTable>tbody>tr>td:nth-child(7), .listTable>tbody>tr>td:nth-child(8), .listTable>tbody>tr>td:nth-child(9),
+	.listTable>tbody>tr>td:nth-child(10){
+		text-align: center;
+	}
+	.listTable>thead>tr>th{
+		background-color: #19a7ce;
+		color: white;
 	}
 </style>
 </head>
@@ -118,7 +132,7 @@
 		<div class="listArea">
 			<div class="title">
 				<h1>상품리스트</h1>
-				<button class="insertBtn">상품추가</button>
+				<button class="insertBtn" onclick="location.href = 'enrollForm.pro'">상품추가</button>
 			</div>
 			<div>
 				카테고리 :
@@ -139,28 +153,41 @@
 				<input type="text" placeholder="상품명을 입력하세요">
 			</div>
 			<div>
-				<table class="listTable">
+				<table class="listTable" border="1">
 					<thead>
-						<th>
-							<td>상품번호</td>
-							<td>상품명</td>
-							<td>카테고리</td>
-							<td>가격</td>
-							<td>할인률</td>
-							<td>재고</td>
-							<td>등록일</td>
-							<td>표시여부</td>
-							<td>수정</td>
-						</th>
+						<tr>
+							<th><input type="checkbox"></th>
+							<th width="70">상품번호</th>
+							<th width="400">상품명</th>
+							<th width="100">카테고리</th>
+							<th>가격</th>
+							<th width="70">할인률</th>
+							<th width="70">재고</th>
+							<th width="100">등록일</th>
+							<th width="80">표시여부</th>
+							<th width="50">수정</th>
+						</tr>
 					</thead>
 					<tbody>
-
+						<tr>
+							<td><input type="checkbox"></td>
+							<td>1</td>
+							<td>상품1</td>
+							<td>카테고리1</td>
+							<td>1000</td>
+							<td>10%</td>
+							<td>100</td>
+							<td>2020-01-01</td>
+							<td>표시</td>
+							<td><button>수정</button></td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
 	   </div>
 	 </div>
+
 
 </body>
 </html>
