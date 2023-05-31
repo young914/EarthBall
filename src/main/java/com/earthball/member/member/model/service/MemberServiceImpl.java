@@ -1,10 +1,10 @@
-package com.earthball.member.model.service;
+package com.earthball.member.member.model.service;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.earthball.member.model.dao.MemberDao;
-import com.earthball.member.model.vo.Member;
+import com.earthball.member.member.model.dao.MemberDao;
+import com.earthball.member.member.model.vo.Member;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -25,6 +25,11 @@ public class MemberServiceImpl implements MemberService {
   @Override
   public int insertMember(Member m) {
            return memberDao.insertMember(sqlSession, m);
+  }
+
+  @Override
+  public int updateMember(Member m) {
+           return memberDao.updateMember(sqlSession, m);
   }
 
   

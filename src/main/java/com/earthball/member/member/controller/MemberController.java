@@ -1,4 +1,4 @@
-package com.earthball.member.controller;
+package com.earthball.member.member.controller;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -9,8 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import com.earthball.member.model.service.MemberService;
-import com.earthball.member.model.vo.Member;
+import com.earthball.member.member.model.service.MemberService;
+import com.earthball.member.member.model.vo.Member;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -130,7 +130,28 @@ public class MemberController {
            
      }
      
+     @RequestMapping("myPage.me")
+     public String myPage() {
+       
+       return "member/mypage/myPage";
+     }
      
+     @RequestMapping("updateInfo.me")
+     public String insertInfo() {
+       
+       return "member/mypage/memberEnrollReset";
+     }
+     
+     @RequestMapping("update.me")
+     public String updateMember(Member m,
+                                                          HttpSession session,
+                                                          Model model) {
+       
+       
+         int result = memberService.updateMember(m);
+         
+         return null;
+     }
      
 
 }
