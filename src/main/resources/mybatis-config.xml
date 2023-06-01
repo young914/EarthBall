@@ -17,7 +17,6 @@
 			영역 => 실제 해당 클래스가 존재하지 않는 상황에서 미리 별칭을 부여하면 ClassNotFoundException 발생!! -->
 		<!-- 주의사항 : 별칭을 미리 등록해두려면 해당 클래스가 진짜 존재하고 있는 상태여야 함! 또한, 해당 클래스명 기술 시,
 			오타 있어도 안 됨! (ClassNotFoundException 발생) -->
-			<typeAlias type="com.earthball.member.member.model.vo.Member" alias="member"/>
 			<typeAlias type="com.earthball.member.store.model.vo.Store" alias="store"/>
 			<typeAlias type="com.earthball.member.store.model.vo.Region" alias="region"/>
 	</typeAliases>
