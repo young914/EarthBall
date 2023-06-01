@@ -19,6 +19,8 @@
 			오타 있어도 안 됨! (ClassNotFoundException 발생) -->
 			<typeAlias type="com.earthball.member.store.model.vo.Store" alias="store"/>
 			<typeAlias type="com.earthball.member.store.model.vo.Region" alias="region"/>
+			<typeAlias type="com.earthball.member.board.model.vo.Board" alias="board"/>
+
 	</typeAliases>
 
 	<!-- environments 영역에 기술했었던 environment, dataSource 등 DB 연결 정보 관련은 mybatis-config.xml
