@@ -23,4 +23,5 @@ public class Store {
   private int storeRegionNo;
   private String storeInfo;
   private String status;
+  private String jibunAddress;
 }

@@ -21,7 +21,6 @@
 			<typeAlias type="com.earthball.member.store.model.vo.Region" alias="region"/>
 	</typeAliases>
 
-
 	<!-- environments 영역에 기술했었던 environment, dataSource 등 DB 연결 정보 관련은 mybatis-config.xml
 		파일에서 작성하지 않을 것! => DB 등록은 서버 연동과 동시에 이루어져야 하는 아주 중요한 구문이기 때문에 서버 스타트와 동시에
 		두번째로 읽혀지는 파일 (root-context.xml) 에 기술할 예정 <web.xml => root-context.xml =>
