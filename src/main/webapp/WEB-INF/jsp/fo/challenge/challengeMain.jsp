@@ -9,19 +9,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>챌린지 메인화면</title>
 
-    <jsp:include page="../../common/common.jsp"/>
+    <jsp:include page="/WEB-INF/jsp/fo/common/common.jsp"/>
 
 
     <!-- CSS 영역-->
-    <link rel="stylesheet" href="/resources/css/member/challenge/challengeMain.css">
+    <link rel="stylesheet" href="/resources/fo/css/challenge/challengeMain.css">
 
     <!-- js 영역-->
-    <script src="/resources/js/member/challenge/challengeMain.js"></script>
+    <script src="/resources/fo/js/challenge/challengeMain.js"></script>
 
 </head>
 <body>
 
-<jsp:include page="../../common/header.jsp"/>
+<jsp:include page="/WEB-INF/jsp/fo/common/header.jsp"/>
 
     <div id="banner">
         <div><img src="/resources/fo/img/challBanner_1.png" alt="" style="width:100%; height: 430px; align-items: center"></div>
@@ -640,7 +640,7 @@
     </div>
     <!-- 내용 영역 끝 -->
 
-    <jsp:include page="../../common/footer.jsp"/>
+    <jsp:include page="/WEB-INF/jsp/fo/common/footer.jsp"/>
 
     <script>
         function chall_open(){

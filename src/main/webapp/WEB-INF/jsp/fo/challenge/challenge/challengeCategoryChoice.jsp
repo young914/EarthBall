@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,15 +9,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>챌린지 요청 전_카테고리 선정</title>
 
-    <jsp:include page="../../../common/common.jsp"/>
+    <jsp:include page="/WEB-INF/jsp/fo/common/common.jsp"/>
 
     <!-- CSS 영역-->
-    <link rel="stylesheet" href="/resources/css/member/challenge/challengeCategoryChoice.css">
+    <link rel="stylesheet" href="/resources/fo/css/challenge/challengeCategoryChoice.css">
 
 </head>
 <body>
 
-<jsp:include page="../../../common/header.jsp"/>
+<jsp:include page="/WEB-INF/jsp/fo/common/header.jsp"/>
 
 <!-- 내용 영역 시작 -->
 <div class="wrap">
@@ -27,7 +27,6 @@
         <div id="title_text">챌린지 오픈 - 카테고리 선택</div>
     </div>
     <!-- 타이틀 끝-->
-
 
 
     <!-- 설명 부분 시작 -->
@@ -91,7 +90,6 @@
         </div>
 
 
-
         <div class="choice_one">
             <button class="btn_2" onclick="challengeForm_energy();">에너지 절약</button>
             <ul class="choice_one_list">
@@ -118,35 +116,34 @@
 </div>
 <!-- 내용 영역 끝 -->
 
-<jsp:include page="../../../common/footer.jsp"/>
+<jsp:include page="/WEB-INF/jsp/fo/common/footer.jsp"/>
 
 
 <script>
-    function challengeForm_consume(){   // 친환경 소비
-        location.href="openForm.chall?categoryNo=1";
+    function challengeForm_consume() {   // 친환경 소비
+        location.href = "openForm.chall?categoryNo=1";
     }
 
     function challengeForm_vehicle() {  // 친환경 이동
-        location.href="openForm.chall?categoryNo=2";
+        location.href = "openForm.chall?categoryNo=2";
     }
 
     function challengeForm_resource() {     // 자원 순환
-        location.href="openForm.chall?categoryNo=3";
+        location.href = "openForm.chall?categoryNo=3";
     }
 
     function challengeForm_nature() {   // 자연보호
-        location.href="openForm.chall?categoryNo=4";
+        location.href = "openForm.chall?categoryNo=4";
     }
 
     function challengeForm_energy() {   // 에너지 절약
-        location.href="openForm.chall?categoryNo=5";
+        location.href = "openForm.chall?categoryNo=5";
     }
 
     function challengeForm_etc() {   // 기타
-        location.href="openForm.chall?categoryNo=6";
+        location.href = "openForm.chall?categoryNo=6";
     }
 </script>
-
 
 
 </body>

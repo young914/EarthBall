@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 
 <jsp:include page="jsp/fo/common/common.jsp"/>
-<link rel="stylesheet" href="resources/css/common/main.css">
-<script type="text/javascript" src="resources/js/common/main.js"></script>
+<link rel="stylesheet" href="/resources/fo/css/common/main.css">
+<script type="text/javascript" src="/resources/fo/js/common/main.js"></script>
 
 </head>
 <body>

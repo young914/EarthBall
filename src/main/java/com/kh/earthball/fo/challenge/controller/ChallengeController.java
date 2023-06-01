@@ -34,13 +34,13 @@ public class ChallengeController {
 
   @GetMapping("/main.chall")
   public String challengeMain() {
-    return "/member/challenge/challengeMain";
+    return "fo/challenge/challengeMain";
   }
 
 
   @GetMapping("/categoryList.chall")
   public String categoryChoice_chall() {
-    return "/member/challenge/challenge/challengeCategoryChoice";
+    return "fo/challenge/challenge/challengeCategoryChoice";
   }
 
 
@@ -67,7 +67,7 @@ public class ChallengeController {
     log.info("templateList : " + templateList);
     log.info("templateList 0번째 코드리스트: " + templateList.get(0).getCodeList());
 
-    return "member/challenge/challenge/challengeInsertForm";
+    return "fo/challenge/challenge/challengeInsertForm";
   }
 
   @ResponseBody
