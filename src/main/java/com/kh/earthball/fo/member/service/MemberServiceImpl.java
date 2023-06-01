@@ -15,7 +15,6 @@ public class MemberServiceImpl implements MemberService {
 
   @Override
   public Member loginMember(Member m) {
-
     return memberMapper.loginMember(m);
   }
 
@@ -27,6 +26,16 @@ public class MemberServiceImpl implements MemberService {
   @Override
   public int updateMember(Member m) {
     return memberMapper.updateMember(m);
+  }
+
+  @Override
+  public int deleteMember(String memberId) {
+    return 0;
+  }
+
+  @Override
+  public int idCheck(String checkId) {
+    return memberMapper.idCheck(checkId);
   }
 
 

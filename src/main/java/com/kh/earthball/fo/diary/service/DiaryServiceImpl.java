@@ -19,48 +19,53 @@ public class DiaryServiceImpl implements DiaryService {
 
   @Override
   public int selectListCount() {
-    return diaryMapper.selectListCount();
+    // return diaryMapper.selectListCount();
+    return 0;
   }
 
   @Override
   public ArrayList<Diary> selectList(PageInfo pi) {
-    return diaryMapper.selectList(pi);
+    // return diaryMapper.selectList(pi);
+    return null;
   }
 
   @Override
   public int insertDiary(Diary d) {
-    return diaryMapper.insertDiary(d);
+    // return diaryMapper.insertDiary(d);
+    return 0;
   }
 
   @Override
   public int increaseCount(int dyBoardNo) {
-    return diaryMapper.increaseCount(dyBoardNo);
+    // return diaryMapper.increaseCount(dyBoardNo);
+    return 0;
   }
 
   @Override
   public Diary selectDiary(int dyBoardNo) {
-    return diaryMapper.selectDiary(dyBoardNo);
+    // return diaryMapper.selectDiary(dyBoardNo);
+    return null;
   }
 
   @Override
   public int deleteDiary(int dyBoardNo) {
-    return diaryMapper.deleteDiary(dyBoardNo);
+    // return diaryMapper.deleteDiary(dyBoardNo);
+    return 0;
   }
 
   @Override
   public int updateDiary(Diary d) {
-    return diaryMapper.deleteDiary(d);
+    // return diaryMapper.deleteDiary(d);
+    return 0;
   }
 
   @Override
   public ArrayList<DyReply> selectDyReplyList(int dyBoardNo) {
-    // TODO Auto-generated method stub
     return null;
   }
 
   @Override
   public int insertDyReply(DyReply r) {
-    // TODO Auto-generated method stub
     return 0;
   }
 

@@ -1,4 +1,4 @@
-package com.kh.earthball.fo.challenge.vo.;
+package com.kh.earthball.fo.challenge.vo;
 
 import lombok.*;
 
