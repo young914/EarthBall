@@ -6,14 +6,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<jsp:include page="jsp/common/common.jsp"/>
+<jsp:include page="jsp/fo/common/common.jsp"/>
 <link rel="stylesheet" href="resources/css/common/main.css">
 <script type="text/javascript" src="resources/js/common/main.js"></script>
 
 </head>
 <body>
 
-	<jsp:include page="jsp/common/header.jsp"/>
+	<jsp:include page="jsp/fo/common/header.jsp"/>
 
 	<div id="container">
         <!-- 배너 -->
@@ -237,7 +237,7 @@
 
     </div>
 
-    <jsp:include page="jsp/common/footer.jsp"/>
+    <jsp:include page="jsp/fo/common/footer.jsp"/>
 
 </body>
 </html>
