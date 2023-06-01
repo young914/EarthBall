@@ -14,7 +14,7 @@
   															<result column="GENDER" property="gender" />
   															<result column="CREATED_DATE" property="createdDate" />
   															<result column="STATUS" property="status" />
-  															<result column="TOTAL_PAY" property="userId" />
+  															<result column="TOTAL_PAY" property="totalPay" />
   															<result column="ADDRESS1" property="address1" />
   															<result column="ADDRESS2" property="address2" />
   						</resultMap>
@@ -28,20 +28,20 @@
   						</select>
   						
   						<insert id="insertMember" parameterType="member">
-  														INSERT INTO MEMBER(MEMBER_ID
-																								  , MEMBER_PWD
-																								  , MEMBER_NAME
-																								  , BIRTH_DATE
-																								  , GENDER
-																								  , EMAIL
-																								  , PHONE)
-																			     VALUES(#{memberId}
-																						 	   , #{memberPwd}
-																						 	   , #{memberName}
-																						 	   , #{birthDate}
-																						 	   , #{gender}
-																						 	   , #{email}
-																						 	   , #{phone})
+									INSERT INTO MEMBER(MEMBER_ID
+																	  , MEMBER_PWD
+																	  , MEMBER_NAME
+																	  , BIRTH_DATE
+																	  , GENDER
+																	  , EMAIL
+																	  , PHONE)
+												     VALUES(#{memberId}
+															 	   , #{memberPwd}
+															 	   , #{memberName}
+															 	   , #{birthDate}
+															 	   , #{gender}
+															 	   , #{email}
+															 	   , #{phone})
   						</insert>
   						
   						<update id="updateMember" parameterType="member">
