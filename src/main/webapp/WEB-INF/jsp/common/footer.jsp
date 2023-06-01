@@ -6,7 +6,7 @@
         <div style="width: 100px;"></div>
 
         <div class="logoArea">
-            <img src="../resources/logo.png">
+            <img src="/resources/img/logo.png">
             <div>지구공</div>
         </div>
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,14 +10,15 @@
 <!-- <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script> -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 
+<!-- 공통코드 -->
+<jsp:include page="../../common/common.jsp"/>
+
 <!-- css -->
 <link rel="stylesheet" href="/resources/css/member/payment/paymentPageForm.css">
-
 </head>
 <body>
 
-	<!-- 공통코드 -->
-	<jsp:include page="../../common/common.jsp"/>
+
 
 	<!-- js -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/member/payment/paymentPageForm.js"></script>
@@ -46,7 +48,7 @@
                         <div id="product_content">
                             <div id="product_name"><p class="product_name">[지구공] 베스트셀러</p></div>
                             <div id="product_amount"><p>수량 : 2개</p></div>
-                            <div id="product_price"><p>11,000원</p></div>
+                            <div id="product_price"><p><fmt:formatNumber value="11000" pattern="###,###"/>원</p></div>
                         </div>
                     </div>
                     <div id="content1_1_2">
@@ -207,16 +209,16 @@
                     <div id="content2_1_2">
                         <table>
                             <tr>
-                                <td id="orderSummaryName">상품가격</td>
-                                <td id="orderSummaryContent">33,000원</td>
+                                <td class="orderSummaryName">상품가격</td>
+                                <td class="orderSummaryContent"><fmt:formatNumber value="33000" pattern="###,###"/>원</td>
                             </tr>
                             <tr>
-                                <td id="orderSummaryName">배송비</td>
-                                <td id="orderSummaryContent">무료</td>
+                                <td class="orderSummaryName">배송비</td>
+                                <td class="orderSummaryContent">무료</td>
                             </tr>
                             <tr id="orderSummaryTotal-area">
-                                <td id="orderSummaryTotal">총 주문금액</td>
-                                <td style="display : flex; justify-content : flex-end;"><p class="totalAmount">33000</p>원</td>
+                                <td class="orderSummaryTotal">총 주문금액</td>
+                                <td style="padding-right : 20px;"><p class="totalAmount"><fmt:formatNumber value="55000" pattern="###,###"/>원</p></td>
                             </tr>
                         </table>
                     </div>

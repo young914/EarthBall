@@ -50,16 +50,34 @@ function orderPay() {
 		if(rsp.success) {
 
 			var msg = "결제 완료";
-            msg += '고유ID : ' + data.imp_uid;                //아임포트 uid는 실제 결제 시 결제 고유번호를 서버와 비교해서 결제처리하는데 필요없긴함.
-            msg += '// 상점 거래ID : ' + data.merchant_uid;
-            msg += '// 결제 금액 : ' + data.paid_amount;
-            msg += '// 카드 승인번호 : ' + data.apply_num;
+            msg += '고유ID : ' + rsp.imp_uid;                //아임포트 uid는 실제 결제 시 결제 고유번호를 서버와 비교해서 결제처리하는데 필요없긴함.
+            msg += '// 상점 거래ID : ' + rsp.merchant_uid;
+            msg += '// 결제 금액 : ' + rsp.paid_amount;
+            msg += '// 카드 승인번호 : ' + rsp.apply_num;
 
-//            $.ajax({
-//            	type : 'post',
-//            	url : '/paySuccess',
-//            	data : {"ID" : data.buyer_email, "amount" : data.paid_amount},
-//            });
+            // $.ajax({
+            // 	url : "/paySuccess",
+            // 	type : "post",
+            // 	data : {
+			// 		paymentNo : rsp.merchant_uid,
+			// 		memberId : ${ loginUser.memberId },
+			// 		paymentType : rsp.pg_provider,
+			// 		paymentTotal : rsp.paid_amount,
+			// 		receiveName : rsp.buyer_name,
+			// 		receivePhone : rsp.buyer_tel,
+			// 		postCode : rsp.buyer_postcode,
+			// 		receiveAddress1 : $("#address1").val(),
+			// 		receiveAddress2 : $("#address2").val(),
+			// 		paymentToken : rsp.pg_tid
+			// 		},
+			// 		success : function() {
+
+			// 			var msg = "결제가 완료되었습니다.";
+			// 		},
+			// 		error : function() {
+
+			// 		}
+            // });
 
 		} else {
 			console.log($(".name").html());
