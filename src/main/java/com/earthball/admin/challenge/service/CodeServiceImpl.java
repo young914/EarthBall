@@ -1,14 +1,16 @@
 package com.earthball.admin.challenge.service;
 
-import java.util.List;
-
 import com.earthball.admin.challenge.dto.CodeDto;
+import com.earthball.admin.challenge.dto.GrpCodeDto;
 import com.earthball.admin.challenge.mapper.CodeMapper;
+import com.earthball.common.vo.PageInfo;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -16,6 +18,42 @@ import lombok.extern.slf4j.Slf4j;
 public class CodeServiceImpl implements CodeService {
 
   private final CodeMapper codeMapper;
+
+  @Override
+  public int insertGrp(GrpCodeDto grpCodeDto) {
+    return codeMapper.insertGrp(grpCodeDto);
+  }
+
+  @Override
+  public int selectListCount() {
+    return codeMapper.selectListCount();
+  }
+
+  @Override
+  public List<GrpCodeDto> selectList(PageInfo pi) {
+
+    int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+    int limit = pi.getBoardLimit();
+
+    RowBounds rowBounds = new RowBounds(offset, limit);
+
+    return codeMapper.selectList(pi, rowBounds);
+  }
+
+  @Override
+  public GrpCodeDto selectGrp(String grpCode) {
+    return codeMapper.selectGrp(grpCode);
+  }
+
+  @Override
+  public int updateGrp(GrpCodeDto grpCodeDto) {
+    return codeMapper.updateGrp(grpCodeDto);
+  }
+
+  @Override
+  public int deleteGrp(String grpCode) {
+    return codeMapper.deleteGrp(grpCode);
+  }
 
   @Override
   public int insertCode(CodeDto codeDto) {
