@@ -84,7 +84,8 @@
                 <div class="dropdown">
                     <span class="dropbtn">환경일기</span>
                     <div class="dropdown-content">
-                        <a href="">#</a>
+                     	<a href="">환경일기란?</a>
+                        <a href="diary.bo">일기 보기</a>
                     </div>
                 </div>
                 <div class="dropdown">
