@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.earthball.member.member.model.service.MemberService;
 import com.earthball.member.member.model.vo.Member;
@@ -183,5 +184,13 @@ public class MemberController {
           return "member/mypage/memberEnrollReset";
          }
      }     
-
+     
+     @ResponseBody
+     @RequestMapping(value = "idCheck.me", produces = "text/html; charset=UTF-8")
+     public String idCheck(String checkId) {
+       
+         int count = memberService.idCheck(checkId);
+         
+         return (count > 0 ) ? "NNNNN" : "NNNNY";
+     }
 }

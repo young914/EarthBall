@@ -167,11 +167,12 @@
         <a href="/">
         <img class="logo" src="/resources/img/logo2.png" alt="지구공 로고">
 							 </a>
-    <form action="insert.me" method="post">
+    <form action="insert.me" method="post" id="enrollForm">
         <!-- 2. 필드 -->
         <div class="field">
             <b>아이디 *</b>
             <span class="placehold-text"><input type="text" placeholder="아이디를 입력해주세요" name="memberId"></span>
+            <div id="checkResult" style="font-size : 0.8em; display : none"></div>
         </div>
         <div class="field">
             <b>비밀번호 *</b>
@@ -179,7 +180,8 @@
         </div>
         <div class="field">
             <b>비밀번호 재확인 *</b>
-            <input class="userpw-confirm" type="password" placeholder="다시한번 입력해주세요">
+            <input class="userpw-confirm" type="password" placeholder="다시한번 입력해주세요" id="checkPwd">
+            
         </div>
         <div class="field">
             <b>닉네임 *</b>
@@ -226,6 +228,70 @@
         <input type="submit" value="가입하기" id="submit-button">
 
         </form>
+        
+        <!-- 중요 칸이 비어있을 때 버튼 비활성화 되는 자바스크립트 -->
+        <script>
+        
+        		const form = document.getElementById("enrollForm");
+        		
+        		const memberId = document.getElementById("memberId");
+        		
+        		const memberPwd = document.getElementById("memberPwd");
+        		
+        		const memberName = document.getElementById("memberName");
+        		
+        		const email = document.getElementById("email");
+        		
+        		const phone = document.getElementById("phone");
+        			
+        		const submit-button = document.getElementById("submit-button");
+        		
+        			function validateForm() {
+        				
+        				if(memberId.value && memberPwd.value && memberName.value && email.value && phone.value ) {
+        					
+        					submit-button.disabled = false;
+        				} else {
+        					submit-button.disabled = true;
+        				}
+        			}
+        		
+        		form.addEventListener('input', validateForm);
+        </script>
+        
+        <!-- id중복체크 스크립트 (ajax 방식) -->
+        <script>
+		        $(function() {
+		            const $idInput = $("#memberId");
+		
+		            $idInput.keyup(function() {
+		                if($idInput.val().length >= 5) {
+		                    $.ajax({
+		                        url : "idCheck.me",
+		                        data : {checkId : $idInput.val()},
+		                        type : "get",
+		                        success : function(result) {
+		                            if(result == "NNNNN") {
+		                                $("#checkResult").show();
+		                                $("#checkResult").css("color", "red").text("중복된 아이디가 존재합니다.");
+		                                $("#submitButton").attr("disabled", true);
+		                            } else {
+		                                $("#checkResult").show();
+		                                $("#checkResult").css("color", "green").text("어울리는 아이디에요!");
+		                                $("#submitButton").attr("disabled", false);
+		                            }
+		                        },
+		                        error : function() {
+		                            console.log("ajax 통신 실패!");
+		                        }
+		                    });
+		                } else {
+		                    $("#checkResult").hide();
+		                    $("#submitButton").attr("disabled", true);
+		                }
+		            });
+		        });
+        </script>
 
         <!-- 7. 푸터 -->
         <div class="member-footer">
