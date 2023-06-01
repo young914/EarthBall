@@ -47,9 +47,12 @@ public class StoreController{
           double[] coordinates = geocodingApi.getGeocode(list.get(i).getStoreAddress());
           double latitude = coordinates[0];
           double longitude = coordinates[1];
+          String jibunAddress = geocodingApi.getJibunAddress(latitude, longitude);
+          System.out.println(jibunAddress);
+          
           list.get(i).setStoreLat(latitude); // Store 객체에 위도 값 설정
           list.get(i).setStoreLon(longitude); // Store 객체에 경도 값 설정
-          
+          list.get(i).setJibunAddress(jibunAddress); // Store 객체에 지번 주소 값 설정
       }
 
       mv.addObject("pi", pi).addObject("list", list).setViewName("member/store/storeListView");

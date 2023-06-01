@@ -132,7 +132,7 @@ hr{
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
             mapOption = { 
                 center: new kakao.maps.LatLng(37.7640377730442, 126.771117387211),
-                level: 4
+                level: 3
             };
         var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
         
@@ -143,7 +143,8 @@ hr{
                     title: '${s.storeName}',
                     latlng: new kakao.maps.LatLng(${s.storeLat}, ${s.storeLon}),
                     address : '${s.storeAddress}',
-                    businessHours : '${s.businessHours}'
+                    businessHours : '${s.businessHours}',
+                    jibunAddress : '${s.jibunAddress}'
                 },
             </c:forEach>
         ];
@@ -151,6 +152,11 @@ hr{
     // 마커 이미지의 이미지 주소입니다
     var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
     
+    var markers = []; // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
+    var contents = [];
+    var overlays = [];
+
+
     for (var i = 0; i < positions.length; i ++) {
         // 마커 이미지의 이미지 크기 입니다
         var imageSize = new kakao.maps.Size(24, 35); 
@@ -178,7 +184,7 @@ hr{
         '           </div>' + 
         '            <div class="desc">' + 
         '                <div class="ellipsis">'+ positions[i].address + '</div>' + 
-        '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' + 
+        '                <div class="jibun ellipsis"> (지번) ' + positions[i].jibunAddress +'</div>' + 
         '                <div class="businessHourss">'+ positions[i].businessHours + ' </div>' + 
         '                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
         '            </div>' + 
@@ -318,52 +324,5 @@ hr{
     <div id="sideBtn" >
         <button id="sidebarButton" class="openbtn" onclick="toggleNav()">&gt;</button>  
     </div>
-    
-    <script>
-    
-    window.onload = function() {
-        // 'searchList' 클래스를 가진 모든 div 요소를 가져옵니다.
-        var divs = document.querySelectorAll('.searchList');
-
-        // 각 div 요소에 대하여
-        for (var i = 0; i < divs.length; i++) {
-            var div = divs[i];
-
-            // 클릭 이벤트 리스너를 설정합니다.
-            div.addEventListener('click', function(event) {
-                // 클릭된 div 요소의 'StoreLat' 및 'StoreLon' 값을 가져옵니다.
-                var lat = parseFloat(event.target.getAttribute('data-storelat'));
-                var lon = parseFloat(event.target.getAttribute('data-storelon'));
-
-                // 지도의 중심을 해당 위도, 경도로 변경합니다.
-                var coords = new kakao.maps.LatLng(lat, lon);
-                map.setCenter(coords);
-            });
-        }
-    };
-
-    function openNav() {
-    document.getElementById("mySidebar").style.left = "0";
-    document.getElementById("sideBtn").style.marginLeft = "450px";
-    document.getElementById("sidebarButton").style.left = "450px";
-    document.getElementById("sidebarButton").innerHTML = "&lt;";
-    }
-
-    function closeNav() {
-    document.getElementById("mySidebar").style.left = "-450px";
-    document.getElementById("sideBtn").style.marginLeft= "0";
-    document.getElementById("sidebarButton").style.left = "0";
-    document.getElementById("sidebarButton").innerHTML = "&gt;";
-    }
-
-    function toggleNav() {
-    if (document.getElementById("mySidebar").style.left == "0px") {
-        closeNav();
-    } else {
-        openNav();
-    }
-    }
-    
-    </script>
 </body>
 </html>
