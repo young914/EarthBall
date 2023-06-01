@@ -146,7 +146,14 @@
         transform: translateY(-1px);
 
     }
-
+    
+    #submit1:hover {
+    	cursor: pointer;
+	}
+	
+	#button1:hover {
+		cursor:pointer;
+	}
     .member-footer div a:last-child:after{
         display: none;
     }
@@ -217,13 +224,13 @@
             </select>
             <div>
                 <input type="tel" placeholder="전화번호 입력" name="phone" value="${loginUser.phone}">
-                <input type="button" value="인증번호 받기">
+                <input type="button" value="인증번호 받기" id="button1">
             </div>
             <input type="number" placeholder="인증번호를 입력하세요" disabled>
         </div>
 
         <!-- 6. 가입하기 버튼 -->
-        <input type="submit" value="가입하기">
+        <input type="submit" value="수정하기" id="submit1">
 
         </form>
 

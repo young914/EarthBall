@@ -28,6 +28,6 @@ public class Member {
     private String address2; // 상세주소
     private String changeName; // 바뀐파일이름
     private int postCode; // 우편번호
-    private int userId;
+    // private int userId;
 
 }

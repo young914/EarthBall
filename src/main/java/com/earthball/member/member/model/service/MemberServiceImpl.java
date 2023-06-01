@@ -25,22 +25,12 @@ public class MemberServiceImpl implements MemberService {
 
   @Override
   public int insertMember(Member m) {
-               
-               int result = memberDao.insertMember(sqlSession, m);
-               
-               return result;
+            return memberDao.insertMember(sqlSession, m);
   }
 
   @Override
   public int updateMember(Member m) {
-    
-            System.out.println("m1 : " + m);
-            
-            int result = memberDao.updateMember(sqlSession, m);
-            
-            System.out.println("m2 : " + m);
-            
-           return result;
+            return memberDao.updateMember(sqlSession, m);
   }
 
   
