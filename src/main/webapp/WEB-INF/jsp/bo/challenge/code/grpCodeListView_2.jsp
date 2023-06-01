@@ -19,7 +19,7 @@
   class="light-style layout-menu-fixed"
   dir="ltr"
   data-theme="theme-default"
-  data-assets-path="/resources/admin/assets/"
+  data-assets-path="/resources/bo/assets/"
   data-template="vertical-menu-template-free"
 >
   <head>
@@ -43,24 +43,24 @@
     />
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="/resources/admin/assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="/resources/bo/assets/vendor/fonts/boxicons.css" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="/resources/admin/assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="/resources/admin/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="/resources/admin/assets/css/demo.css" />
+    <link rel="stylesheet" href="/resources/bo/assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="/resources/bo/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="/resources/bo/assets/css/demo.css" />
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="/resources/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="/resources/bo/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
     <!-- Page CSS -->
 
     <!-- Helpers -->
-    <script src="/resources/admin/assets/vendor/js/helpers.js"></script>
+    <script src="/resources/bo/assets/vendor/js/helpers.js"></script>
 
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="/resources/admin/assets/js/config.js"></script>
+    <script src="/resources/bo/assets/js/config.js"></script>
   </head>
 
   <body>
@@ -72,7 +72,7 @@
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
             <a href="index.html" class="app-brand-link">
-              <img src="/resources/img/logo.png" class="navbar-brand-img" alt="...">
+              <img src="/resources/fo/img/logo.png" class="navbar-brand-img" alt="...">
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -168,7 +168,7 @@
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="/resources/img/logo.png" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src="/resources/fo/img/logo.png" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -357,18 +357,18 @@
       <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- build:js assets/vendor/js/core.js -->
-    <script src="/resources/admin/assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="/resources/admin/assets/vendor/libs/popper/popper.js"></script>
-    <script src="/resources/admin/assets/vendor/js/bootstrap.js"></script>
-    <script src="/resources/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="/resources/bo/assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="/resources/bo/assets/vendor/libs/popper/popper.js"></script>
+    <script src="/resources/bo/assets/vendor/js/bootstrap.js"></script>
+    <script src="/resources/bo/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-    <script src="/resources/admin/assets/vendor/js/menu.js"></script>
+    <script src="/resources/bo/assets/vendor/js/menu.js"></script>
     <!-- endbuild -->
 
     <!-- Vendors JS -->
 
     <!-- Main JS -->
-    <script src="/resources/admin/assets/js/main.js"></script>
+    <script src="/resources/bo/assets/js/main.js"></script>
 
     <!-- Page JS -->
 

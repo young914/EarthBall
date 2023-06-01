@@ -165,7 +165,7 @@
     <div class="member">
         <!-- 1. 로고 -->
         <a href="/">
-        <img class="logo" src="/resources/img/logo2.png" alt="지구공 로고">
+        <img class="logo" src="/resources/fo/img/logo2.png" alt="지구공 로고">
 							 </a>
     <form action="insert.me" method="post" id="enrollForm">
         <!-- 2. 필드 -->

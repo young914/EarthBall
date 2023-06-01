@@ -3,7 +3,7 @@ package com.kh.earthball.bo.challenge.controller;
 import com.kh.earthball.bo.challenge.service.CodeService;
 import com.kh.earthball.bo.challenge.vo.Code;
 import com.kh.earthball.bo.challenge.vo.GrpCode;
-import com.kh.earthball.common.vo.PageInfo;
+import com.kh.earthball.fo.common.vo.PageInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -25,7 +25,7 @@ public class CodeController {
 
   @GetMapping("grpCodeForm")
   public String insertGrpForm() {
-    return "admin/challenge/code/grpCodeEnrollForm";
+    return "bo/challenge/code/grpCodeEnrollForm";
   }
 
   @ResponseBody
@@ -58,7 +58,7 @@ public class CodeController {
     model.addAttribute("pi", pi);
     model.addAttribute("grpCodeList", grpCodeList);
 
-    return "admin/challenge/code/grpCodeListView_2";
+    return "bo/challenge/code/grpCodeListView_2";
   }
 
   @GetMapping("updateForm.grp")
@@ -68,7 +68,7 @@ public class CodeController {
 
     model.addAttribute("grp", grp);
 
-    return "admin/challenge/code/grpCodeUpdateForm";
+    return "bo/challenge/code/grpCodeUpdateForm";
   }
 
   @ResponseBody
@@ -84,7 +84,7 @@ public class CodeController {
 
     if (result > 0) {  // 성공
       this.grpList(model, 1);
-      return "admin/challenge/code/grpCodeListView";
+      return "bo/challenge/code/grpCodeListView";
     } else {  // 실패
       String referer = request.getHeader("Referer");
       return "redirect:" + referer;
@@ -99,7 +99,7 @@ public class CodeController {
 
     model.addAttribute("grp", grp);
 
-    return "admin/challenge/code/codeEnrollForm";
+    return "bo/challenge/code/codeEnrollForm";
   }
 
   @ResponseBody
@@ -118,7 +118,7 @@ public class CodeController {
 
     model.addAttribute("codeList", codeList);
 
-    return "admin/challenge/code/codeListView_1";
+    return "bo/challenge/code/codeListView_1";
   }
 
   @GetMapping("updateForm.code")
@@ -133,7 +133,7 @@ public class CodeController {
     model.addAttribute("code", selectCode);
     model.addAttribute("grp", selectGrp);
 
-    return "admin/challenge/code/codeUpdateForm";
+    return "bo/challenge/code/codeUpdateForm";
   }
 
   @ResponseBody

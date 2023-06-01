@@ -22,7 +22,7 @@ public class DiaryController {
 
 
     // 포워딩 테스트
-    return "member/diary/diaryListView";
+    return "fo/diary/diaryListView";
 
   }
 
@@ -33,9 +33,9 @@ public class DiaryController {
   }
 
 
-  @RequestMapping("")
+  @RequestMapping("diaryEnroll.bo")
   public String diaryEnrollForm() {
-    return "member/diary/diaryEnrollForm";
+    return "fo/diary/diaryEnrollForm";
   }
 
 

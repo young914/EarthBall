@@ -8,7 +8,7 @@ public class ProductController {
 
   @RequestMapping("list.pro")
   public String productList() {
-    return "/member/product/productList";
+    return "/fo/product/productList";
   }
 
 }

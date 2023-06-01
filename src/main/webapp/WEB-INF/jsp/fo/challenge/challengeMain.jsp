@@ -24,9 +24,9 @@
 <jsp:include page="../../common/header.jsp"/>
 
     <div id="banner">
-        <div><img src="/resources/img/challBanner_1.png" alt="" style="width:100%; height: 430px; align-items: center"></div>
-        <div><img src="/resources/img/challBanner_2.png" alt="" style="width:100%; height: 430px; align-items: center"></div>
-        <div><img src="/resources/img/challBanner_3.png" alt="" style="width:100%; height: 430px; align-items: center"></div>
+        <div><img src="/resources/fo/img/challBanner_1.png" alt="" style="width:100%; height: 430px; align-items: center"></div>
+        <div><img src="/resources/fo/img/challBanner_2.png" alt="" style="width:100%; height: 430px; align-items: center"></div>
+        <div><img src="/resources/fo/img/challBanner_3.png" alt="" style="width:100%; height: 430px; align-items: center"></div>
     </div>
 
 
@@ -101,7 +101,7 @@
                     <div class="chall_Title">
                         <table>
                             <tr>
-                                <td rowspan="2"><img src="/resources/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
+                                <td rowspan="2"><img src="/resources/fo/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
                                 <td><h3 style="margin: 5px;">여기는 제목임</h3></td>
                             </tr>
                             <tr>
@@ -110,7 +110,7 @@
                         </table>
                     </div>
 
-                    <img src="/resources/img/flower.jpg" alt="">
+                    <img src="/resources/fo/img/flower.jpg" alt="">
 
                     <div class="chall_Date" align="center">
                         <span>2023-05-27 ~ 2023-05-28</span>
@@ -131,7 +131,7 @@
                     <div class="chall_Title">
                         <table>
                             <tr>
-                                <td rowspan="2"><img src="/resources/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
+                                <td rowspan="2"><img src="/resources/fo/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
                                 <td><h3 style="margin: 5px;">여기는 제목임</h3></td>
                             </tr>
                             <tr>
@@ -140,7 +140,7 @@
                         </table>
                     </div>
 
-                    <img src="/resources/img/flower.jpg" alt="">
+                    <img src="/resources/fo/img/flower.jpg" alt="">
 
                     <div class="chall_Date" align="center">
                         <span>2023-05-27 ~ 2023-05-28</span>
@@ -158,7 +158,7 @@
                     <div class="chall_Title">
                         <table>
                             <tr>
-                                <td rowspan="2"><img src="/resources/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
+                                <td rowspan="2"><img src="/resources/fo/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
                                 <td><h3 style="margin: 5px;">여기는 제목임</h3></td>
                             </tr>
                             <tr>
@@ -167,7 +167,7 @@
                         </table>
                     </div>
 
-                    <img src="/resources/img/flower.jpg" alt="">
+                    <img src="/resources/fo/img/flower.jpg" alt="">
 
                     <div class="chall_Date" align="center">
                         <span>2023-05-27 ~ 2023-05-28</span>
@@ -185,7 +185,7 @@
                     <div class="chall_Title">
                         <table>
                             <tr>
-                                <td rowspan="2"><img src="/resources/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
+                                <td rowspan="2"><img src="/resources/fo/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
                                 <td><h3 style="margin: 5px;">여기는 제목임</h3></td>
                             </tr>
                             <tr>
@@ -194,7 +194,7 @@
                         </table>
                     </div>
 
-                    <img src="/resources/img/flower.jpg" alt="">
+                    <img src="/resources/fo/img/flower.jpg" alt="">
 
                     <div class="chall_Date" align="center">
                         <span>2023-05-27 ~ 2023-05-28</span>
@@ -212,7 +212,7 @@
                     <div class="chall_Title">
                         <table>
                             <tr>
-                                <td rowspan="2"><img src="/resources/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
+                                <td rowspan="2"><img src="/resources/fo/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
                                 <td><h3 style="margin: 5px;">여기는 제목임</h3></td>
                             </tr>
                             <tr>
@@ -221,7 +221,7 @@
                         </table>
                     </div>
 
-                    <img src="/resources/img/flower.jpg" alt="">
+                    <img src="/resources/fo/img/flower.jpg" alt="">
 
                     <div class="chall_Date" align="center">
                         <span>2023-05-27 ~ 2023-05-28</span>
@@ -239,7 +239,7 @@
                     <div class="chall_Title">
                         <table>
                             <tr>
-                                <td rowspan="2"><img src="/resources/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
+                                <td rowspan="2"><img src="/resources/fo/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
                                 <td><h3 style="margin: 5px;">여기는 제목임</h3></td>
                             </tr>
                             <tr>
@@ -248,7 +248,7 @@
                         </table>
                     </div>
 
-                    <img src="/resources/img/flower.jpg" alt="">
+                    <img src="/resources/fo/img/flower.jpg" alt="">
 
                     <div class="chall_Date" align="center">
                         <span>2023-05-27 ~ 2023-05-28</span>
@@ -266,7 +266,7 @@
                     <div class="chall_Title">
                         <table>
                             <tr>
-                                <td rowspan="2"><img src="/resources/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
+                                <td rowspan="2"><img src="/resources/fo/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
                                 <td><h3 style="margin: 5px;">여기는 제목임</h3></td>
                             </tr>
                             <tr>
@@ -275,7 +275,7 @@
                         </table>
                     </div>
 
-                    <img src="/resources/img/flower.jpg" alt="">
+                    <img src="/resources/fo/img/flower.jpg" alt="">
 
                     <div class="chall_Date" align="center">
                         <span>2023-05-27 ~ 2023-05-28</span>
@@ -293,7 +293,7 @@
                     <div class="chall_Title">
                         <table>
                             <tr>
-                                <td rowspan="2"><img src="/resources/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
+                                <td rowspan="2"><img src="/resources/fo/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
                                 <td><h3 style="margin: 5px;">여기는 제목임</h3></td>
                             </tr>
                             <tr>
@@ -302,7 +302,7 @@
                         </table>
                     </div>
 
-                    <img src="/resources/img/flower.jpg" alt="">
+                    <img src="/resources/fo/img/flower.jpg" alt="">
 
                     <div class="chall_Date" align="center">
                         <span>2023-05-27 ~ 2023-05-28</span>
@@ -320,7 +320,7 @@
                     <div class="chall_Title">
                         <table>
                             <tr>
-                                <td rowspan="2"><img src="/resources/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
+                                <td rowspan="2"><img src="/resources/fo/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
                                 <td><h3 style="margin: 5px;">여기는 제목임</h3></td>
                             </tr>
                             <tr>
@@ -329,7 +329,7 @@
                         </table>
                     </div>
 
-                    <img src="/resources/img/flower.jpg" alt="">
+                    <img src="/resources/fo/img/flower.jpg" alt="">
 
                     <div class="chall_Date" align="center">
                         <span>2023-05-27 ~ 2023-05-28</span>
@@ -347,7 +347,7 @@
                     <div class="chall_Title">
                         <table>
                             <tr>
-                                <td rowspan="2"><img src="/resources/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
+                                <td rowspan="2"><img src="/resources/fo/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
                                 <td><h3 style="margin: 5px;">여기는 제목임</h3></td>
                             </tr>
                             <tr>
@@ -356,7 +356,7 @@
                         </table>
                     </div>
 
-                    <img src="/resources/img/flower.jpg" alt="">
+                    <img src="/resources/fo/img/flower.jpg" alt="">
 
                     <div class="chall_Date" align="center">
                         <span>2023-05-27 ~ 2023-05-28</span>
@@ -374,7 +374,7 @@
                     <div class="chall_Title">
                         <table>
                             <tr>
-                                <td rowspan="2"><img src="/resources/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
+                                <td rowspan="2"><img src="/resources/fo/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
                                 <td><h3 style="margin: 5px;">여기는 제목임</h3></td>
                             </tr>
                             <tr>
@@ -383,7 +383,7 @@
                         </table>
                     </div>
 
-                    <img src="/resources/img/flower.jpg" alt="">
+                    <img src="/resources/fo/img/flower.jpg" alt="">
 
                     <div class="chall_Date" align="center">
                         <span>2023-05-27 ~ 2023-05-28</span>
@@ -401,7 +401,7 @@
                     <div class="chall_Title">
                         <table>
                             <tr>
-                                <td rowspan="2"><img src="/resources/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
+                                <td rowspan="2"><img src="/resources/fo/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
                                 <td><h3 style="margin: 5px;">여기는 제목임</h3></td>
                             </tr>
                             <tr>
@@ -410,7 +410,7 @@
                         </table>
                     </div>
 
-                    <img src="/resources/img/flower.jpg" alt="">
+                    <img src="/resources/fo/img/flower.jpg" alt="">
 
                     <div class="chall_Date" align="center">
                         <span>2023-05-27 ~ 2023-05-28</span>
@@ -443,7 +443,7 @@
                     <table class="hot_one">
                         <tr>
                             <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/img/bono.jpg" alt="">
+                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/bono.jpg" alt="">
                             </td>
                             <td><span class="hot_title">제목이 들어갈 것임</span></td>
                         </tr>
@@ -463,7 +463,7 @@
                     <table class="hot_one">
                         <tr>
                             <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/img/bono.jpg" alt="">
+                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/bono.jpg" alt="">
                             </td>
                             <td><span class="hot_title">제목이 들어갈 것임</span></td>
                         </tr>
@@ -480,7 +480,7 @@
                     <table class="hot_one">
                         <tr>
                             <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/img/bono.jpg" alt="">
+                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/bono.jpg" alt="">
                             </td>
                             <td><span class="hot_title">제목이 들어갈 것임</span></td>
                         </tr>
@@ -497,7 +497,7 @@
                     <table class="hot_one">
                         <tr>
                             <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/img/bono.jpg" alt="">
+                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/bono.jpg" alt="">
                             </td>
                             <td><span class="hot_title">제목이 들어갈 것임</span></td>
                         </tr>
@@ -514,7 +514,7 @@
                     <table class="hot_one">
                         <tr>
                             <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/img/bono.jpg" alt="">
+                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/bono.jpg" alt="">
                             </td>
                             <td><span class="hot_title">제목이 들어갈 것임</span></td>
                         </tr>
@@ -531,7 +531,7 @@
                     <table class="hot_one">
                         <tr>
                             <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/img/bono.jpg" alt="">
+                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/bono.jpg" alt="">
                             </td>
                             <td><span class="hot_title">제목이 들어갈 것임</span></td>
                         </tr>
@@ -548,7 +548,7 @@
                     <table class="hot_one">
                         <tr>
                             <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/img/bono.jpg" alt="">
+                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/bono.jpg" alt="">
                             </td>
                             <td><span class="hot_title">제목이 들어갈 것임</span></td>
                         </tr>
@@ -565,7 +565,7 @@
                     <table class="hot_one">
                         <tr>
                             <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/img/bono.jpg" alt="">
+                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/bono.jpg" alt="">
                             </td>
                             <td><span class="hot_title">제목이 들어갈 것임</span></td>
                         </tr>
@@ -582,7 +582,7 @@
                     <table class="hot_one">
                         <tr>
                             <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/img/bono.jpg" alt="">
+                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/bono.jpg" alt="">
                             </td>
                             <td><span class="hot_title">제목이 들어갈 것임</span></td>
                         </tr>
@@ -599,7 +599,7 @@
                     <table class="hot_one">
                         <tr>
                             <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/img/bono.jpg" alt="">
+                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/bono.jpg" alt="">
                             </td>
                             <td><span class="hot_title">제목이 들어갈 것임</span></td>
                         </tr>

@@ -370,7 +370,7 @@
     <div class="header">
         <div style="width: 120px;"></div>
         <div class="logo">
-            <a href=""><img src="/resources/img/logo.png" style="width: 250px;"></a>
+            <a href=""><img src="/resources/fo/img/logo.png" style="width: 250px;"></a>
         </div>
         <div class="login-area">
             <div><a href="">로그인</a></div>&nbsp;|&nbsp;
@@ -714,7 +714,7 @@
 
 <!-- 푸터 시작 -->
 <div id="footer">
-    <div><img src="/resources/img/logo2.png" style="width: 400px; padding-top: 20px;"></div>
+    <div><img src="/resources/fo/img/logo2.png" style="width: 400px; padding-top: 20px;"></div>
     <div style="margin-top: 30px; color: white;">
         <p style="font-weight: bold;">
             이용약관 | 개인정보처리방침 | 도매 전용 B2B몰

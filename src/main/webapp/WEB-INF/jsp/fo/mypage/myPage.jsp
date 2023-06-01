@@ -115,7 +115,7 @@
 </head>
 <body>
 
-		<jsp:include page="/WEB-INF/jsp/common/header.jsp" />
+		<jsp:include page="/WEB-INF/jsp/fo/common/header.jsp" />
 		
 		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
@@ -151,9 +151,9 @@
         
     </div>
     
-    <jsp:include page="/WEB-INF/jsp/common/common.jsp"/>
+    <jsp:include page="/WEB-INF/jsp/fo/common/common.jsp"/>
     
-    <jsp:include page="/WEB-INF/jsp/common/footer.jsp" />
+    <jsp:include page="/WEB-INF/jsp/fo/common/footer.jsp" />
 
  
 

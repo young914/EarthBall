@@ -3,7 +3,7 @@ package com.kh.earthball.bo.challenge.service;
 import com.kh.earthball.bo.challenge.mapper.CodeMapper;
 import com.kh.earthball.bo.challenge.vo.Code;
 import com.kh.earthball.bo.challenge.vo.GrpCode;
-import com.kh.earthball.common.vo.PageInfo;
+import com.kh.earthball.fo.common.vo.PageInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.RowBounds;

@@ -12,12 +12,12 @@ public class ProductController {
 
   @RequestMapping("adminProductListView")
   public String adminProductList() {
-    return "admin/product/productList";
+    return "bo/product/productList";
   }
 
   @RequestMapping("enrollForm.pro")
   public String enrollForm() {
-    return "admin/product/productEnrollForm";
+    return "bo/product/productEnrollForm";
   }
 
   @RequestMapping("insert.pro")

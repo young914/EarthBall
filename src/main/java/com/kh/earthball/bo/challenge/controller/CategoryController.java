@@ -31,13 +31,13 @@ public class CategoryController {
 
     model.addAttribute("categoryList", categoryList);
 
-    return "admin/challenge/category/categoryListView";
+    return "bo/challenge/category/categoryListView";
   }
 
 
   @GetMapping("EnrollForm.ca")
   public String insertCategoryForm() {
-    return "admin/challenge/category/categoryEnrollForm";
+    return "bo/challenge/category/categoryEnrollForm";
   }
 
 
@@ -55,7 +55,7 @@ public class CategoryController {
     log.info("수정할 카테고리 : " + category);
 
     model.addAttribute("category", category);
-    return "admin/challenge/category/categoryUpdateForm";
+    return "bo/challenge/category/categoryUpdateForm";
   }
 
   @ResponseBody
@@ -83,6 +83,6 @@ public class CategoryController {
     model.addAttribute("templateList", templateList);
     model.addAttribute("category", category);
 
-    return "admin/challenge/category/categoryDetailView";
+    return "bo/challenge/category/categoryDetailView";
   }
 }

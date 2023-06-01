@@ -1,7 +1,7 @@
 package com.kh.earthball.fo.board.controller;
 
-import com.kh.earthball.common.template.Pagination;
-import com.kh.earthball.common.vo.PageInfo;
+import com.kh.earthball.fo.common.template.Pagination;
+import com.kh.earthball.fo.common.vo.PageInfo;
 import com.kh.earthball.fo.board.service.BoardService;
 import com.kh.earthball.fo.board.vo.Board;
 import org.springframework.beans.factory.annotation.Autowired;

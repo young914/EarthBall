@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자페이지>상품</title>
-<jsp:include page="/WEB-INF/jsp/common/adminPageCommon.jsp"/>
 <style>
 	#navbar-main{
 		background-color: #19a7ce;
@@ -51,7 +50,7 @@
 	     </button>
 	     <!-- 메인로고 -->
 	     <a class="navbar-brand pt-0" href="home">
-	       <img src="/resources/img/logo.png" class="navbar-brand-img" alt="...">
+	       <img src="/resources/fo/img/logo.png" class="navbar-brand-img" alt="...">
 	     </a>
 	     <!-- Collapse -->
 	     <div class="collapse navbar-collapse" id="sidenav-collapse-main">
@@ -111,7 +110,7 @@
 	             <div class="media align-items-center">
 	               <span class="avatar avatar-sm rounded-circle">
 	                 <!-- 프로필사진 -->
-	                 <img alt="Image placeholder" src="/resources/img/logo.png">
+	                 <img alt="Image placeholder" src="/resources/fo/img/logo.png">
 	               </span>
 	               <div class="media-body ml-2 d-none d-lg-block">
 	                 <span class="mb-0 text-sm  font-weight-bold">admin</span>

@@ -1,6 +1,6 @@
               package com.kh.earthball.fo.board.dao;
 
-import com.kh.earthball.common.vo.PageInfo;
+import com.kh.earthball.fo.common.vo.PageInfo;
 import com.kh.earthball.fo.board.vo.Board;
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;

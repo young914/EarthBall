@@ -1,6 +1,6 @@
 package com.kh.earthball.fo.board.service;
 
-import com.kh.earthball.common.vo.PageInfo;
+import com.kh.earthball.fo.common.vo.PageInfo;
 import com.kh.earthball.fo.board.vo.Board;
 
 import java.util.ArrayList;

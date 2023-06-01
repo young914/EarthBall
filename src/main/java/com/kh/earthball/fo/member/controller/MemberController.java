@@ -69,7 +69,7 @@ public class MemberController {
 
       mv.addObject("alertMsg", "아이디 혹은 비밀번호를 다시 확인해주세요");
 
-      mv.setViewName("member/loginForm");
+      mv.setViewName("fo/member/loginForm");
     }
 
     return mv;
@@ -90,7 +90,7 @@ public class MemberController {
   @RequestMapping("loginForm.me")
   public String loginFrom() {
 
-    return "member/member/loginForm";
+    return "fo/member/loginForm";
   }
 
   // 회원가입 기능
@@ -98,7 +98,7 @@ public class MemberController {
   @RequestMapping("mem.me")
   public String enrollForm() {
 
-    return "member/member/memberEnrollForm";
+    return "fo/member/memberEnrollForm";
   }
 
 
@@ -125,7 +125,7 @@ public class MemberController {
 
       session.setAttribute("alertMsg", "회원가입에 실패하였습니다!");
 
-      return "member/memberEnrollForm";
+      return "fo/member/memberEnrollForm";
     }
 
   }
@@ -135,13 +135,13 @@ public class MemberController {
 
     log.debug("마이페이지 요청됨");
 
-    return "member/mypage/myPage";
+    return "fo/mypage/myPage";
   }
 
   @RequestMapping("updateInfo.me")
   public String insertInfo() {
 
-    return "member/mypage/memberEnrollReset";
+    return "fo/mypage/memberEnrollReset";
   }
 
   @RequestMapping("update.me")
@@ -180,7 +180,7 @@ public class MemberController {
 
       System.out.println("변경실패");
 
-      return "member/mypage/memberEnrollReset";
+      return "fo/mypage/memberEnrollReset";
     }
   }
 

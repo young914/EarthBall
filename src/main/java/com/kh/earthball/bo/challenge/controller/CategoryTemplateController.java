@@ -34,7 +34,7 @@ public class CategoryTemplateController {
 
     model.addAttribute("category", category);
 
-    return "admin/challenge/categoryTemplate/templateEnrollForm";
+    return "bo/challenge/categoryTemplate/templateEnrollForm";
   }
 
   @ResponseBody
@@ -66,6 +66,6 @@ public class CategoryTemplateController {
     log.info("templateList : " + templateList);
     log.info("templateList 0번째 코드리스트: " + templateList.get(0).getCodeList());
 
-    return "admin/challenge/categoryTemplate/challengeInsertForm";
+    return "bo/challenge/categoryTemplate/challengeInsertForm";
   }
 }

@@ -1,6 +1,6 @@
 package com.kh.earthball.fo.store.service;
 
-import com.kh.earthball.common.vo.PageInfo;
+import com.kh.earthball.fo.common.vo.PageInfo;
 import com.kh.earthball.fo.store.dao.StoreDao;
 import com.kh.earthball.fo.store.vo.Store;
 import org.mybatis.spring.SqlSessionTemplate;

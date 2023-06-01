@@ -13,12 +13,12 @@ public class PaymentController {
 
   @RequestMapping("payment.pa")
   public String paymentPageForm() {
-    return "member/payment/paymentPageForm";
+    return "fo/payment/paymentPageForm";
   }
 
   @RequestMapping("payComplete.pa")
   public String paymentCompleteView() {
-    return "member/payment/paymentCompleteView";
+    return "fo/payment/paymentCompleteView";
   }
 
 //  @ResponseBody

@@ -1,6 +1,6 @@
 package com.kh.earthball.fo.diary.service;
 
-import com.kh.earthball.common.vo.PageInfo;
+import com.kh.earthball.fo.common.vo.PageInfo;
 import com.kh.earthball.fo.diary.vo.Diary;
 import com.kh.earthball.fo.diary.vo.DyReply;
 

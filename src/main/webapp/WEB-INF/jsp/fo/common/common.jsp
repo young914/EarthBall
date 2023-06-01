@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 
     <!-- 공통css -->
-    <link rel="stylesheet" href="resources/css/common/header.css">
-    <link rel="stylesheet" href="resources/css/common/footer.css">
+    <link rel="stylesheet" href="/resources/fo/css/common/header.css">
+    <link rel="stylesheet" href="/resources/fo/css/common/footer.css">
 
     <!-- CDN 연동구문 -->
     <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>

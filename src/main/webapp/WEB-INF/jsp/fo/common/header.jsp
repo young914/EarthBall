@@ -10,7 +10,7 @@
             <div style="width: 200px;"></div>
             <div class="logo">
                 <a href="home">
-                    <img src="/resources/img/logo.png">
+                    <img src="/resources/fo/img/logo.png">
                     <div>지구공</div>
                 </a>
             </div>

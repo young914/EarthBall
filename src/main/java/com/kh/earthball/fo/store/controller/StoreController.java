@@ -1,7 +1,7 @@
 package com.kh.earthball.fo.store.controller;
 
-import com.kh.earthball.common.template.Pagination;
-import com.kh.earthball.common.vo.PageInfo;
+import com.kh.earthball.fo.common.template.Pagination;
+import com.kh.earthball.fo.common.vo.PageInfo;
 import com.kh.earthball.fo.store.service.StoreService;
 import com.kh.earthball.fo.store.template.GeocodingApi;
 import com.kh.earthball.fo.store.vo.Store;
@@ -45,7 +45,7 @@ public class StoreController {
       list.get(i).setJibunAddress(jibunAddress); // Store 객체에 지번 주소 값 설정
     }
 
-    mv.addObject("pi", pi).addObject("list", list).setViewName("member/store/storeListView");
+    mv.addObject("pi", pi).addObject("list", list).setViewName("fo/store/storeListView");
     return mv;
   }
 
