@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link rel="stylesheet" href="/resources/css/member/diary/diary.css">
+<link rel="stylesheet" href="/resources/css/member/diary/diaryEnrollForm.css">
 
 </head>
 <body>
