@@ -83,7 +83,8 @@
                 <div class="dropdown">
                     <span class="dropbtn">고객센터</span>
                     <div class="dropdown-content">
-                        <a href=""></a>
+                    <a href="list.bo">1:1문의</a>
+
                     </div>
                 </div>
             </div>

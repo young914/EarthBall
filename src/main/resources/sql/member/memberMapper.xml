@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="memberMapper">
-  						
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.earthball.member.model.dao.MemberMapper">
+  						<!--
   						<resultMap  id="memberResultSet" type="member">
   															<result column="MEMBER_ID" property="memberId" />
   															<result column="MEMBER_PWD" property="memberPwd" />
@@ -18,16 +16,16 @@
   															<result column="ADDRESS1" property="address1" />
   															<result column="ADDRESS2" property="address2" />
   						</resultMap>
-  						
-  						
-  						<select id="loginMember"  parameterType="member" resultMap="memberResultSet">
+  						 -->
+
+  						<select id="loginMember"  parameterType="com.earthball.member.model.vo.Member" resultType="com.earthball.member.model.vo.Member">
   														SELECT *
   														   FROM MEMBER
   														 WHERE MEMBER_ID = #{memberId}
   														       AND STATUS = 'Y'
   						</select>
-  						
-  						<insert id="insertMember" parameterType="member">
+
+  						<insert id="insertMember" parameterType="com.earthball.member.model.vo.Member">
   														INSERT INTO MEMBER(MEMBER_ID
 																								  , MEMBER_PWD
 																								  , MEMBER_NAME
@@ -43,5 +41,5 @@
 																						 	   , #{email}
 																						 	   , #{phone})
   						</insert>
-  		
+
   </mapper>

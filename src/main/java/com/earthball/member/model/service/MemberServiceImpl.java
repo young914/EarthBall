@@ -1,36 +1,33 @@
 package com.earthball.member.model.service;
 
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.earthball.member.model.dao.MemberDao;
+import com.earthball.member.model.dao.MemberMapper;
 import com.earthball.member.model.vo.Member;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
+@RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
-      @Autowired
-      private SqlSessionTemplate sqlSession;
-      
-      @Autowired
-      private MemberDao memberDao;
-    
+
+   private final MemberMapper memberMapper;
+
   @Override
   public Member loginMember(Member m) {
-          Member loginUser = memberDao.loginMember(sqlSession, m);
-          
-          return loginUser;
+    return memberMapper.loginMember(m);
   }
 
   @Override
   public int insertMember(Member m) {
-           return memberDao.insertMember(sqlSession, m);
+           return memberMapper.insertMember(m);
   }
 
-  
-    
-      
-    
+
+
+
+
   }
-  
+
 
