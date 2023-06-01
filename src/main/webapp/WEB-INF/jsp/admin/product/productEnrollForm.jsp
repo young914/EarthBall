@@ -134,45 +134,45 @@
                     <table>
                         <tr>
                             <td width="100">상품명</td>
-                            <td><input type="text"></td>
+                            <td><input type="text" name="productName" required></td>
                         </tr>
                         <tr>
                             <td>카테고리</td>
                             <td>
-                                <select>
-                                    <option>전체</option>
-                                    <option>욕실</option>
-                                    <option>식품</option>
-                                    <option>주방</option>
-                                    <option>생활</option>
-                                    <option>취미</option>
-                                    <option>음료용품</option>
-                                    <option>여성용품</option>
-                                    <option>반려동물</option>
-                                    <option>화장품</option>
-                                    <option>문구</option>
+                                <select name="category" required>
+                                    <option value="전체">전체</option>
+                                    <option value="욕실">욕실</option>
+                                    <option value="식품">식품</option>
+                                    <option value="주방">주방</option>
+                                    <option value="생활">생활</option>
+                                    <option value="취미">취미</option>
+                                    <option value="음료용품">음료용품</option>
+                                    <option value="여성용품">여성용품</option>
+                                    <option value="반려동물">반려동물</option>
+                                    <option value="화장품">화장품</option>
+                                    <option value="문구">문구</option>
                                 </select>
                             </td>
                         </tr>
                         <tr>
                             <td>가격</td>
-                            <td><input type="number"></td>
+                            <td><input type="number" name="price" required></td>
                         </tr>
                         <tr>
                             <td>할인률</td>
-                            <td><input type="number"></td>
+                            <td><input type="number" name="discount" required></td>
                         </tr>
                         <tr>
                             <td>재고</td>
-                            <td><input type="number"></td>
+                            <td><input type="number" name="stock" required></td>
                         </tr>
                         <tr>
                             <td>사진</td>
                             <td>
-                                <input type="file" onchange="readURL(this);"> <img id="preview1"><br>
-                                <input type="file" onchange="readURL(this);"> <img id="preview2"><br>
-                                <input type="file" onchange="readURL(this);"> <img id="preview3"><br>
-                                <input type="file" onchange="readURL(this);"> <img id="preview4">
+                                <input type="file" name="upfile1" onchange="readURL(this);" required> <img id="preview1"><br>
+                                <input type="file" name="upfile2" onchange="readURL(this);"> <img id="preview2"><br>
+                                <input type="file" name="upfile3" onchange="readURL(this);"> <img id="preview3"><br>
+                                <input type="file" name="upfile4" onchange="readURL(this);"> <img id="preview4">
                             </td>
                         </tr>
                     </table>
