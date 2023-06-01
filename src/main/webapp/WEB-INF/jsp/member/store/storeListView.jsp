@@ -140,25 +140,13 @@ hr{
 var positions = [
     
 
-        <c:forEach var="s" items="${ list }">
-        {
-            title: '${s.storeName}',
-            latlng: new kakao.maps.LatLng(${s.storeLat}, ${s.storeLon})
-        },
-        </c:forEach>
-    
+    <c:forEach var="s" items="${ list }">
     {
-        title: '생태연못', 
-        latlng: new kakao.maps.LatLng(33.450936, 126.569477)
+        title: '${s.storeName}',
+        latlng: new kakao.maps.LatLng(${s.storeLat}, ${s.storeLon})
     },
-    {
-        title: '텃밭', 
-        latlng: new kakao.maps.LatLng(33.450879, 126.569940)
-    },
-    {
-        title: '근린공원',
-        latlng: new kakao.maps.LatLng(33.451393, 126.570738)
-    }
+    </c:forEach>
+
 ];
 
 // 마커 이미지의 이미지 주소입니다
@@ -277,7 +265,8 @@ for (var i = 0; i < positions.length; i ++) {
         openNav();
     }
     }
-    var content = '<div class="wrap">' + 
+    var content = 
+    '<div class="wrap">' + 
     '    <div class="info">' + 
     '        <div class="title">' + 
     '            카카오 스페이스닷원' + 

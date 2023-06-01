@@ -45,10 +45,10 @@ public class GeocodingApi {
                 double latitude = Double.parseDouble(latitudeStr);
                 String longitudeStr = (String) addressInfo.get("x");
                 double longitude = Double.parseDouble(longitudeStr);
-                System.out.println("위도: " + latitude);
-                System.out.println("경도: " + longitude);
+                
                 return new double[]{latitude, longitude};
             } else {
+            	System.out.println(address);
                 System.out.println("검색 결과가 없습니다.");
                 return new double[] {0.0, 0.0};
             }

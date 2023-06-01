@@ -35,12 +35,12 @@ public class StoreController{
   public ModelAndView selectList(@RequestParam(value="cPage", defaultValue="1") int currentPage, ModelAndView mv) {
       int listCount = storeService.selectStoreListCount();
       int pageLimit = 20;
-      int boardLimit = 5;
-
+      int boardLimit = 10;
+      System.out.println("잘되나?");
       PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 
       ArrayList<Store> list = storeService.selectStoreList(pi);
-
+      System.out.println(list);
       for (int i = 0; i < list.size(); i++) {
           
           GeocodingApi geocodingApi = new GeocodingApi();
