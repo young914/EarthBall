@@ -131,82 +131,122 @@ hr{
     <script>
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
             mapOption = { 
-            center: new kakao.maps.LatLng(37.7640377730442, 126.771117387211),
-            level: 4
-        };
+                center: new kakao.maps.LatLng(37.7640377730442, 126.771117387211),
+                level: 4
+            };
         var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
         
         // 마커를 표시할 위치와 title 객체 배열입니다 
         var positions = [
             <c:forEach var="s" items="${ list }">
-            {
-                title: '${s.storeName}',
-                latlng: new kakao.maps.LatLng(${s.storeLat}, ${s.storeLon}),
-                address : '${s.storeAddress}',
-                businessHours : '${s.businessHours}'
-
-            },
+                {
+                    title: '${s.storeName}',
+                    latlng: new kakao.maps.LatLng(${s.storeLat}, ${s.storeLon}),
+                    address : '${s.storeAddress}',
+                    businessHours : '${s.businessHours}'
+                },
             </c:forEach>
         ];
 
-        // 마커 이미지의 이미지 주소입니다
-        var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-            
-        for (var i = 0; i < positions.length; i ++) {
-            // 마커 이미지의 이미지 크기 입니다
-            var imageSize = new kakao.maps.Size(24, 35); 
-            
-            // 마커 이미지를 생성합니다    
-            var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-            
-            // 마커를 생성합니다
-            var marker = new kakao.maps.Marker({
-                map: map, // 마커를 표시할 지도
-                position: positions[i].latlng, // 마커를 표시할 위치
-                title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-                image : markerImage // 마커 이미지 
-            });
-            var content = 
-            '<div class="wrap">' + 
-            '    <div class="info">' + 
-            '        <div class="title">' + 
-                positions[i].title + 
-            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
-            '        </div>' + 
-            '        <div class="body">' + 
-            '            <div class="img">' +
-            '                <img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
-            '           </div>' + 
-            '            <div class="desc">' + 
-            '                <div class="ellipsis">'+ positions[i].address + '</div>' + 
-            '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' + 
-            '                <div class="businessHourss">'+ positions[i].businessHours + ' </div>' + 
-            '                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
-            '            </div>' + 
-            '        </div>' + 
-            '    </div>' +    
-            '</div>';
-
-            //마커 위에 커스텀오버레이를 표시합니다
-            //마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
-            var overlay = new kakao.maps.CustomOverlay({
-                content: content,
-                map: map,
-                position: marker.getPosition()       
-            });
-
-            //마커를 클릭했을 때 커스텀 오버레이를 표시합니다
-            kakao.maps.event.addListener(marker, 'click', function() {
-            overlay.setMap(map);
-            });
-
-            //커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
-            function closeOverlay() {
-                overlay.setMap(null);     
-            }
-        }
-
+    // 마커 이미지의 이미지 주소입니다
+    var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+    
+    for (var i = 0; i < positions.length; i ++) {
+        // 마커 이미지의 이미지 크기 입니다
+        var imageSize = new kakao.maps.Size(24, 35); 
         
+        // 마커 이미지를 생성합니다    
+        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+        
+        // 마커를 생성합니다
+        var marker = new kakao.maps.Marker({
+            map: map, // 마커를 표시할 지도
+            position: positions[i].latlng, // 마커를 표시할 위치
+            title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+            image : markerImage // 마커 이미지 
+        });
+        var content = 
+        '<div class="wrap">' + 
+        '    <div class="info">' + 
+        '        <div class="title">' + 
+            positions[i].title + 
+        '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+        '        </div>' + 
+        '        <div class="body">' + 
+        '            <div class="img">' +
+        '                <img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
+        '           </div>' + 
+        '            <div class="desc">' + 
+        '                <div class="ellipsis">'+ positions[i].address + '</div>' + 
+        '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' + 
+        '                <div class="businessHourss">'+ positions[i].businessHours + ' </div>' + 
+        '                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
+        '            </div>' + 
+        '        </div>' + 
+        '    </div>' +    
+        '</div>';
+
+        //마커 위에 커스텀오버레이를 표시합니다
+        //마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+        var overlay = new kakao.maps.CustomOverlay({
+            content: content,
+            map: map,
+            position: marker.getPosition()       
+        });
+
+        //마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+        kakao.maps.event.addListener(marker, 'click', function() {
+            overlay.setMap(map);
+        });
+
+        //커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+        function closeOverlay() {
+            overlay.setMap(null);     
+        }
+    }
+
+    window.onload = function() {
+        // 'searchList' 클래스를 가진 모든 div 요소를 가져옵니다.
+        var divs = document.querySelectorAll('.searchList');
+
+        // 각 div 요소에 대하여
+        for (var i = 0; i < divs.length; i++) {
+            var div = divs[i];
+
+            // 클릭 이벤트 리스너를 설정합니다.
+            div.addEventListener('click', function(event) {
+                // 클릭된 div 요소의 'StoreLat' 및 'StoreLon' 값을 가져옵니다.
+                var lat = parseFloat(event.target.getAttribute('data-storelat'));
+                var lon = parseFloat(event.target.getAttribute('data-storelon'));
+
+                // 지도의 중심을 해당 위도, 경도로 변경합니다.
+                var coords = new kakao.maps.LatLng(lat, lon);
+                map.setCenter(coords);
+            });
+        }
+    };
+
+    function openNav() {
+    document.getElementById("mySidebar").style.left = "0";
+    document.getElementById("sideBtn").style.marginLeft = "450px";
+    document.getElementById("sidebarButton").style.left = "450px";
+    document.getElementById("sidebarButton").innerHTML = "&lt;";
+    }
+
+    function closeNav() {
+    document.getElementById("mySidebar").style.left = "-450px";
+    document.getElementById("sideBtn").style.marginLeft= "0";
+    document.getElementById("sidebarButton").style.left = "0";
+    document.getElementById("sidebarButton").innerHTML = "&gt;";
+    }
+
+    function toggleNav() {
+        if (document.getElementById("mySidebar").style.left == "0px") {
+            closeNav();
+        } else {
+            openNav();
+        }
+    }
     </script>
     <!-- 사이드바 -->
     <div id="mySidebar" class="sidebar">
