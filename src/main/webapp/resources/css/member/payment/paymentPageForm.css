@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 #container{
     width: 1200px;
     height: 3000px;
@@ -348,7 +347,7 @@ input[type="number"]::-webkit-inner-spin-button{-webkit-appearance: none; margin
     cursor : pointer;
 }
 
-#address, #detailAddress {
+#address1, #address2 {
     width : 455px;
     height : 26px;
     font-size : 16px;
@@ -397,7 +396,7 @@ input[type="number"]::-webkit-inner-spin-button{-webkit-appearance: none; margin
     padding : 0px;
 }
 
-#orderSummaryName {
+.orderSummaryName {
     width : 50%;
     height : 30px;
     font-size : 18px;
@@ -406,7 +405,7 @@ input[type="number"]::-webkit-inner-spin-button{-webkit-appearance: none; margin
     color : gray;
 }
 
-#orderSummaryContent {
+.orderSummaryContent, .totalAmount {
     width : 50%;
     font-size : 18px;
     font-weight : bold;
@@ -414,12 +413,17 @@ input[type="number"]::-webkit-inner-spin-button{-webkit-appearance: none; margin
     padding-right : 20px;
 }
 
+.totalAmount {
+	margin-bottom : 0px;
+	width : 100%;
+}
+
 #orderSummaryTotal-area {
     height : 60px;
     vertical-align : bottom;
 }
 
-#orderSummaryTotal {
+.orderSummaryTotal {
     font-size : 18px;
     font-weight : bold;
     padding-left : 15px;
