@@ -38,5 +38,11 @@
   								              , CREATED_DATE = SYSDATE
   								 WHERE MEMBER_ID = #{memberId}
   						</update>
+  						
+  						<select id="idCheck" parameterType="string" resultType="_int">
+  								SELECT COUNT(*)
+  								   FROM MEMBER
+  								WHERE MEMBER_ID = #{checkId}
+  						</select>
   		
   </mapper>

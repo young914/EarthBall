@@ -11,4 +11,6 @@ public interface MemberMapper {
    int insertMember(Member m);
 
    int updateMember(Member m);
+   
+   int idCheck(String checkId);
 }
