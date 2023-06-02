@@ -180,15 +180,19 @@
             <span class="placehold-text"><input type="text" placeholder="아이디를 입력해주세요" name="memberId" id="memberId"></span>
             <div id="checkResult" style="font-size : 0.8em; display : none">jjjj</div>
         </div>
+        
         <div class="field">
             <b>비밀번호 *</b>
             <input class="userpw" type="password" placeholder="8자 이상 - 대문자 특수문자 포함 비밀번호를 입력해주세요" name="memberPwd" id="memberPwd">
+            <div id="checkPwdResult1" style="font-size : 0.8em; display : none">jjjj</div>
         </div>
+        
         <div class="field">
             <b>비밀번호 재확인 *</b>
             <input class="userpw-confirm" type="password" placeholder="다시한번 입력해주세요" id="checkPwd">
-            
+            <div id="checkPwdResult2" style="font-size : 0.8em; display : none">jjjj</div>
         </div>
+        
         <div class="field">
             <b>닉네임 *</b>
             <input type="text" name="memberName" id="memberName">
@@ -201,7 +205,6 @@
                 <input type="date"  name="birthDate" id="birthDate">                
     	   </div>
     	 </div>
-        
        
         <!-- 4. 필드(성별) -->
         <div class="field gender">
@@ -236,37 +239,89 @@
         </form>
         
         <!-- id중복체크 스크립트 (ajax 방식) -->
-        <script>
-		        $(function() {
-		            const $idInput = $("#memberId");
+		<script>
+		    $(function() {
+		        const $idInput = $("#memberId");
+		        let idCheck = /^[a-zA-Z0-9]{5,20}$/;
 		
-		            $idInput.keyup(function() {
-		                if($idInput.val().length >= 5) {
-		                    $.ajax({
-		                        url : "idCheck.me",
-		                        data : {checkId : $idInput.val()},
-		                        type : "get",
-		                        success : function(result) {
-		                            if(result == "NNNNN") {
-		                                $("#checkResult").show();
-		                                $("#checkResult").css("color", "red").text("중복된 아이디가 존재합니다.");
-		                                $("#submitButton").attr("disabled", true);
-		                            } else {
-		                                $("#checkResult").show();
-		                                $("#checkResult").css("color", "green").text("어울리는 아이디에요!");
-		                                $("#submitButton").attr("disabled", false);
-		                            }
-		                        },
-		                        error : function() {
-		                            console.log("ajax 통신 실패!");
-		                        }
-		                    });
-		                } else {
-		                    $("#checkResult").hide();
+		        $idInput.keyup(function() {
+		            if($idInput.val().length >= 5) {
+		                if(!idCheck.test($idInput.val())) {
+		                    $("#checkResult").show();
+		                    $("#checkResult").css("color", "red").text("영문과 숫자를 조합하여 5-20 자만 입력할 수 있습니다.");
 		                    $("#submitButton").attr("disabled", true);
+		                    return;
 		                }
-		            });
+		
+		                $.ajax({
+		                    url : "idCheck.me",
+		                    data : {checkId : $idInput.val()},
+		                    type : "get",
+		                    success : function(result) {
+		                        if(result == "NNNNN") {
+		                            $("#checkResult").show();
+		                            $("#checkResult").css("color", "red").text("중복된 아이디가 존재합니다.");
+		                            $("#submitButton").attr("disabled", true);
+		                        } else {
+		                            $("#checkResult").show();
+		                            $("#checkResult").css("color", "green").text("어울리는 아이디에요!");
+		                            $("#submitButton").attr("disabled", false);
+		                        }
+		                    },
+		                    error : function() {
+		                        console.log("ajax 통신 실패!");
+		                    }
+		                });
+		            } else {
+		                $("#checkResult").hide();
+		                $("#submitButton").attr("disabled", true);
+		            }
 		        });
+		    });
+		</script>
+
+        
+        <!-- 비밀번호 일치 여부 -->
+        <script>
+        
+		     var memberPwd = document.getElementById("memberPwd");
+		     var checkPwd = document.getElementById("checkPwd");
+		     var checkPwdResult1 = document.getElementById("checkPwdResult1");
+		     var checkPwdResult2 = document.getElementById("checkPwdResult2");
+				
+		     function validatePassword() {
+		    	
+		    	if(memberPwd.value === checkPwd.value) {
+			    	 
+		    		// checkPwdResult1.style.color = 'green';
+			    	 // checkPwdResult1.style.display = 'block';
+			    	 // checkPwdResult1.innerHTML = '일치합니다.';
+			    	 
+			    	 checkPwdResult2.style.color = 'green';
+			    	 checkPwdResult2.style.display = 'block';
+			    	 checkPwdResult2.innerHTML = '두 비밀번호가 일치합니다.';
+		    	 
+		     } else {
+		    	 
+			    	 // checkPwdResult1.style.color = 'red';
+			    	 // checkPwdResult1.style.display = 'block';
+			    	 // checkPwdResult1.innerHTML = '일치하지 않습니다.';
+			    	 
+			    	 checkPwdResult2.style.color = 'red';
+			    	 checkPwdResult2.style.display = 'block';
+			    	 checkPwdResult2.innerHTML = '두 비밀번호가 일치하지 않습니다.';
+		    	 }
+		    }
+		    
+		    memberPwd.onchange = validatePassword;
+		    checkPwd.onkeyup = validatePassword;
+		     
+        </script>
+        
+			        
+        <!-- 비밀번호 제약조건 (정규화) -->
+        <script>
+        
         </script>
 
         <!-- 7. 푸터 -->
