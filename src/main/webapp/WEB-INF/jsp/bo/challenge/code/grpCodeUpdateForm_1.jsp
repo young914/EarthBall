@@ -55,15 +55,16 @@
               <div class="card-body">
                 <form>
                   <div class="mb-3">
-                    <label class="form-label" for="grpCode">그룹코드</label>
-                    <input type="text" class="form-control" name="grpCode" id="grpCode"
-                           placeholder="8글자의 코드를 입력해주세요.(영어, 숫자 입력가능)">
+                    <label class="form-label">그룹코드</label>
+                    <input type="hidden" name="grpCode" value="${grpCode.grpCode}">
+                    ${grpCode.grpCode}
                   </div>
                   <div class="mb-3">
                     <label class="form-label" for="grpCodeName">그룹코드명</label>
-                    <input type="text" class="form-control" name="grpCodeName" id="grpCodeName" placeholder="그룹코드명">
+                    <input type="text" class="form-control" name="grpCodeName" id="grpCodeName" placeholder="그룹코드명"
+                           value="${grpCode.grpCodeName}">
                   </div>
-                  <button type="button" class="btn btn-primary" onclick="grpCodeValidate();">생성하기</button>
+                  <button type="button" class="btn btn-primary" onclick="grpCodeValidate();">수정하기</button>
                   <button type="button" class="btn btn-danger" onclick="javascript:history.go(-1);">생성취소</button>
                 </form>
               </div>
@@ -99,17 +100,8 @@
 <jsp:include page="/WEB-INF/jsp/bo/common/commonScript.jsp"/>
 <script type="text/javascript">
     function grpCodeValidate() {
-        let grpCode = $("input[type=text][name=grpCode]").val();
+        let grpCode = $("input[name=grpCode]").val();
         let grpCodeName = $("input[type=text][name=grpCodeName]").val();
-
-        //let regExp = /^\d{8}$/;
-        let regExp = /^(?=.*[a-zA-Z0-9]).{8}$/;
-
-        if (!regExp.test(grpCode)) {
-            alert("8글자의 코드를 입력해주세요.(영어, 숫자 입력가능)");
-            $("input[type=text][name=grpCode]").focus();
-            return false;
-        }
 
         regExp = /^[가-힣]{2,}$/;
         if (!regExp.test(grpCodeName)) {
@@ -126,21 +118,19 @@
         console.log("그룹코드 잘 들어감? : " + data);
 
         $.ajax({
-            url: "insert.grp"
+            url: "update.grp"
             , type: "post"
             , data: data
             , success: function (result) {
                 if (result > 0) {
-                    alert("그룹코드가 생성되었습니다.");
-                    console.log("그룹코드 생성 성공");
+                    alert("그룹코드가 수정되었습니다.");
                     location.href = "/list.grp";
                 } else {
-                    alert("그룹코드가 생성되지 않았습니다.");
-                    console.log("그룹코드 생성 실패");
+                    alert("그룹코드가 수정되지 않았습니다.");
                 }
             }
             , error: function () {
-                console.log("그룹코드 생성 ajax 통신 실패");
+                console.log("그룹코드 수정 ajax 통신 실패");
             }
         });
     }

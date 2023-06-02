@@ -25,7 +25,7 @@ public class CodeController {
 
   @GetMapping("grpCodeForm")
   public String insertGrpForm() {
-    return "bo/challenge/code/grpCodeEnrollForm";
+    return "bo/challenge/code/grpCodeEnrollForm_1";
   }
 
   @ResponseBody
@@ -62,13 +62,13 @@ public class CodeController {
   }
 
   @GetMapping("updateForm.grp")
-  public String updateGrpForm(@RequestParam(value = "code") String code, Model model) {
+  public String updateGrpForm(@RequestParam(value = "grpCode") String grpCode, Model model) {
 
-    GrpCode grp = codeService.selectGrp(code);
+    GrpCode grpCodeInfo = codeService.selectGrp(grpCode);
 
-    model.addAttribute("grp", grp);
+    model.addAttribute("grpCode", grpCodeInfo);
 
-    return "bo/challenge/code/grpCodeUpdateForm";
+    return "bo/challenge/code/grpCodeUpdateForm_1";
   }
 
   @ResponseBody
