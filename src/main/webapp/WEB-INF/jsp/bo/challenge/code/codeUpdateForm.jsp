@@ -1,151 +1,163 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
+
+<!-- =========================================================
+* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
+==============================================================
+
+* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
+* Created by: ThemeSelection
+* License: You must have a valid license purchased in order to legally use the theme for your project.
+* Copyright ThemeSelection (https://themeselection.com)
+
+=========================================================
+-->
+<!-- beautify ignore:start -->
+<html
+    lang="kr"
+    class="light-style layout-menu-fixed"
+    dir="ltr"
+    data-theme="theme-default"
+    data-assets-path="/resources/admin/assets/"
+    data-template="vertical-menu-template-free"
+>
 <head>
-    <meta charset="UTF-8">
-    <title>그룹코드 수정하기</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <style>
-        .content {
-            background-color:rgb(247, 245, 245);
-            width:80%;
-            margin:auto;
-        }
-        .innerOuter {
-            border:1px solid lightgray;
-            width:80%;
-            margin:auto;
-            padding:5% 10%;
-            background-color:white;
-        }
-
-        #enrollForm>table {width:100%;}
-        #enrollForm>table * {margin:5px;}
-    </style>
+    <jsp:include page="/WEB-INF/jsp/bo/common/commonHead.jsp"/>
 </head>
+
 <body>
+<!-- Layout wrapper -->
+<div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+        <!-- Menu -->
 
-    <jsp:include page="" />
+        <jsp:include page="/WEB-INF/jsp/bo/common/commonLayoutMenu.jsp">
+            <jsp:param name="menuId" value="51"/>
+        </jsp:include>
+        <!-- / Menu -->
 
-    <div class="content">
-        <br><br>
-        <div class="innerOuter">
-            <h2>공통코드 수정</h2>
-            <br>
+        <!-- Layout container -->
+        <div class="layout-page">
+            <!-- Navbar -->
+            <jsp:include page="/WEB-INF/jsp/bo/common/commonLayoutNavbar.jsp"/>
+            <!-- / Navbar -->
 
-            <form id="enrollForm" method="post" action="">
-                <table algin="center">
-                    <tr>
-                        <th><label for="title">그룹코드</label></th>
-                        <td><input type="text" class="form-control" name="grpCode" value="${ grp.grpCode }" readonly></td>
-                    </tr>
-                    <tr>
-                        <th><label for="writer">그룹코드명</label></th>
-                        <td><input type="text" class="form-control" name="grpCodeName" value="${ grp.grpCodeName }" readonly></td>
-                    </tr>
-                    <tr>
-                        <th>공통코드</th>
-                        <td>
-                            <input type="text" class="form-control" name="code"  value="${ code.code }" readonly>
-                            <input type="hidden" name="beforeCode" value="${ code.code }">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>공통코드명</th>
-                        <td>
-                            <input type="text" class="form-control" name="codeName" value="${ code.codeName }" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>우선순위 번호</th>
-                        <td>
-                            <input type="text" class="form-control" name="sortNo" value="${ code.sortNo }" required>
-                        </td>
-                    </tr>
+            <!-- Content wrapper -->
+            <div class="content-wrapper">
+                <!-- Content -->
+                <div class="container-xxl flex-grow-1 container-p-y">
+                    <h4 class="fw-bold">공통 코드 등록</h4>
 
-
-
-                </table>
-                <br>
-
-                <div align="center">
-                    <button type="button" class="btn btn-primary" onclick="codeValidate();">수정하기</button>
-                    <button type="reset" class="btn btn-danger" onclick="javascript:history.go(-1);">생성취소</button>
+                    <!-- Basic Layout -->
+                    <div class="col-xl">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label class="form-label">그룹코드</label>
+                                    <input type="text" class="form-control" value="${grp.grpCode}" readonly="readonly">
+                                    <input type="hidden" name="grpCode" value="${grp.grpCode}">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">그룹코드명</label>
+                                    <input type="text" class="form-control" value="${grp.grpCodeName}" readonly="readonly">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">공통코드</label>
+                                    <input type="text" class="form-control" value="${code.code}" readonly="readonly">
+                                    <input type="hidden" name="code" value="${code.code}">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="codeName">공통코드명</label>
+                                    <input type="text" class="form-control" name="codeName" id="codeName" placeholder="공통코드명" value="${code.codeName}">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="sortNo">우선순위 번호</label>
+                                    <input type="text" class="form-control" name="sortNo" id="sortNo" placeholder="sortNo"
+                                           value="${code.sortNo}">
+                                </div>
+                                <button type="button" class="btn btn-primary" onclick="codeValidate();">생성하기</button>
+                                <button type="button" class="btn btn-danger" onclick="javascript:history.go(-1);">생성취소</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </form>
-        </div>
-        <br><br>
+                <!-- / Content -->
 
+
+                <!-- Footer -->
+                <footer class="content-footer footer bg-footer-theme">
+                    <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                        <div class="mb-2 mb-md-0">
+                            ©
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script>
+                        </div>
+                    </div>
+                </footer>
+                <!-- / Footer -->
+
+                <div class="content-backdrop fade"></div>
+            </div>
+            <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
     </div>
 
-    <jsp:include page="" />
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
+</div>
+<jsp:include page="/WEB-INF/jsp/bo/common/commonScript.jsp"/>
+<script type="text/javascript">
+    function codeValidate() {
+        let grpCode = $("input[name=grpCode]").val();
+        let code = $("input[name=code]").val();
+        let codeName = $("input[name=codeName]").val();
+        let sortNo = $("input[name=sortNo]").val();
 
-    <script>
-	    function codeValidate() {
-			let grpCode = $("input[type=text][name=grpCode]").val();
-			let code = $("input[type=text][name=code]").val();
-			let codeName = $("input[type=text][name=codeName]").val();
-			let sortNo = $("input[type=text][name=sortNo]").val();
+        let regExp = /^[가-힣]{2,}$/;
 
-			let regExp = /^(?=.*[a-zA-Z])(?=.*[0-9]).{1,8}$/;
+        if (!regExp.test(codeName)) {
+            alert("코드는 2글자 이상의 한글로 입력해주세요.");
+            $("input[name=codeName]").focus();
+            return;
+        }
 
-			if(!regExp.test(code)) {
-				alert("영어, 숫자를 조합한 8글자 이하의 코드를 입력해주세요.");
-				$("input[type=text][name=code]").focus();
-				return false;
-			}
+        regExp = /^[0-9]+$/;
 
-			regExp = /^[가-힣]{2,}$/;
+        if (!regExp.test(sortNo)) {
+            alert("우선순위는 숫자로만 입력해주세요.");
+            $("input[name=sortNo]").focus();
+            return;
+        }
 
-			if(!regExp.test(codeName)) {
-				alert("코드는 2글자 이상의 한글로 입력해주세요.");
-				$("input[type=text][name=codeName]").focus();
-				return false;
-			}
+        let data = {
+            code: code
+            , codeName: codeName
+            , sortNo: sortNo
+            , grpCode: grpCode
+        };
 
-			regExp = /^[0-9]+$/;
+        console.log("그룹코드 잘 들어감? : " + data);
 
-			if(!regExp.test(sortNo)){
-				alert("우선순위는 숫자로만 입력해주세요.");
-				$("input[type=text][name=sortNo]").focus();
-				return false;
-			}
-
-			let data = { code : code
-					   , codeName : codeName
-					   , sortNo : sortNo
-					   , grpCode : grpCode};
-
-			console.log("코드 잘 들어감? : " , data);
-
-			$.ajax({
-				  url : "update.code"
-				, type : "post"
-				, data : data
-				, success : function(result) {
-
-					if(result > 0) {
-						alert("공통코드가 수정되었습니다.");
-						console.log("공통코드 수정 성공");
-						location.href ="list.code";
-					} else {
-						alert("공통코드가 수정되지 않았습니다.");
-						console.log("공통코드 수정 실패");
-					}
-				}
-				, error : function() {
-					console.log("공통코드 수정 ajax 통신 실패");
-				}
-			});
-
-			return true;
-	    }
-
-    </script>
-
+        $.ajax({
+            url: "update.code"
+            , type: "post"
+            , data: data
+            , success: function (result) {
+                if (result > 0) {
+                    alert("공통코드가 수정되었습니다.");
+                    location.href = 'list.grp';
+                } else {
+                    alert("공통코드가 수정되지 않았습니다.");
+                }
+            }
+            , error: function () {
+                console.log("공통코드 수정 ajax 통신 실패");
+            }
+        });
+    }
+</script>
 </body>
 </html>

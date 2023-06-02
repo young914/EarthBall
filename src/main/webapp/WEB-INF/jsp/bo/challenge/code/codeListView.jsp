@@ -1,27 +1,40 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-                        <!-- grpCode 한줄 클릭했을 때 둘다 열려야 -->
-                        <tr class="codeHead">
-                            <th>공통코드</th>
-                            <th>공통코드명</th>
-                            <th colspan="2">
-                                <a class="btn btn-info" onclick="codeEnrollForm(this);">공통코드 생성 </a>
-                            </th>
-                        </tr>
-                    	<c:forEach var="code" items="${ codeList }">
-                        	<tr class="codeContents ${code.grpCode}">
-
-	                            <td>${ code.code }</td>
-	                            <td>${ code.codeName }</td>
-	                            <td>
-	                                <a class="btn btn-info" onclick="updateCodeForm('${code.grpCode}', '${code.code}');">수정</a>
-	                            </td>
-	                            <td>
-	                                <input type="button" value="삭제" class="btn btn-info" onclick="deleteCode('${code.grpCode}', '${code.code}');">
-	                            </td>
-                        	</tr>
-                        </c:forEach>
-
-
+<input type="hidden" name="grpCode" id="grpCode" value="${param.grpCode}"/>
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th width="15%">그룹코드</th>
+    <th width="15%">공통코드</th>
+    <th width="20%">공통코드명</th>
+    <th width="10%">우선순위</th>
+    <th width="10%">수정</th>
+    <th width="10%">삭제</th>
+  </tr>
+  </thead>
+  <tbody class="table-border-bottom-0">
+  <c:if test="${empty codeList}">
+    <tr>
+      <td colspan="6">
+        <strong>등록된 데이터가 없습니다.</strong>
+      </td>
+    </tr>
+  </c:if>
+  <c:if test="${not empty codeList}">
+    <c:forEach var="item" items="${codeList}">
+      <tr>
+        <td><strong>${item.grpCode}</strong></td>
+        <td><strong>${item.code}</strong></td>
+        <td><strong>${item.codeName}</strong></td>
+        <td><strong>${item.sortNo}</strong></td>
+        <td>
+          <button type="button" class="btn btn-primary" onclick="updateCode('${item.grpCode}', '${item.code}')">수정</button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-primary" onclick="deleteCode('${item.grpCode}', '${item.code}')">삭제</button>
+        </td>
+      </tr>
+    </c:forEach>
+  </c:if>
+  </tbody>
+</table>

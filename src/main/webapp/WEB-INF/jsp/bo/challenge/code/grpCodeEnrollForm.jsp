@@ -1,118 +1,149 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
+
+<!-- =========================================================
+* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
+==============================================================
+
+* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
+* Created by: ThemeSelection
+* License: You must have a valid license purchased in order to legally use the theme for your project.
+* Copyright ThemeSelection (https://themeselection.com)
+
+=========================================================
+-->
+<!-- beautify ignore:start -->
+<html
+    lang="kr"
+    class="light-style layout-menu-fixed"
+    dir="ltr"
+    data-theme="theme-default"
+    data-assets-path="/resources/admin/assets/"
+    data-template="vertical-menu-template-free"
+>
 <head>
-    <meta charset="UTF-8">
-    <title>그룹코드 생성하기</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <style>
-        .content {
-            background-color:rgb(247, 245, 245);
-            width:80%;
-            margin:auto;
-        }
-        .innerOuter {
-            border:1px solid lightgray;
-            width:80%;
-            margin:auto;
-            padding:5% 10%;
-            background-color:white;
-        }
-
-        #enrollForm>table {width:100%;}
-        #enrollForm>table * {margin:5px;}
-    </style>
+  <jsp:include page="/WEB-INF/jsp/bo/common/commonHead.jsp"/>
 </head>
+
 <body>
+<!-- Layout wrapper -->
+<div class="layout-wrapper layout-content-navbar">
+  <div class="layout-container">
+    <!-- Menu -->
 
-    <jsp:include page="" />
+    <jsp:include page="/WEB-INF/jsp/bo/common/commonLayoutMenu.jsp">
+      <jsp:param name="menuId" value="51"/>
+    </jsp:include>
+    <!-- / Menu -->
 
-    <div class="content">
-        <br><br>
-        <div class="innerOuter">
-            <h2>그룹코드 생성</h2>
-            <br>
+    <!-- Layout container -->
+    <div class="layout-page">
+      <!-- Navbar -->
+      <jsp:include page="/WEB-INF/jsp/bo/common/commonLayoutNavbar.jsp"/>
+      <!-- / Navbar -->
 
-            <form id="enrollForm" method="post" action="">
-                <table algin="center">
-                    <tr>
-                        <th>그룹코드</th>
-                        <td><input type="text" class="form-control" name="grpCode" placeholder="8글자의 코드를 입력해주세요.(영어, 숫자 입력가능)" required></td>
-                    </tr>
-                    <tr>
-                        <th>그룹코드명</th>
-                        <td><input type="text" class="form-control" name="grpCodeName" required></td>
-                    </tr>
-                </table>
-                <br>
+      <!-- Content wrapper -->
+      <div class="content-wrapper">
+        <!-- Content -->
+        <div class="container-xxl flex-grow-1 container-p-y">
+          <h4 class="fw-bold">공통 코드 등록</h4>
 
-                <div align="center">
-                    <button type="button" class="btn btn-primary" onclick="grpCodeValidate();">생성하기</button>
-                    <button type="reset" class="btn btn-danger" onclick="javascript:history.go(-1);">생성취소</button>
-                </div>
-            </form>
+          <!-- Basic Layout -->
+          <div class="col-xl">
+            <div class="card mb-4">
+              <div class="card-body">
+                <form>
+                  <div class="mb-3">
+                    <label class="form-label" for="grpCode">그룹코드</label>
+                    <input type="text" class="form-control" name="grpCode" id="grpCode"
+                           placeholder="8글자의 코드를 입력해주세요.(영어, 숫자 입력가능)">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label" for="grpCodeName">그룹코드명</label>
+                    <input type="text" class="form-control" name="grpCodeName" id="grpCodeName" placeholder="그룹코드명">
+                  </div>
+                  <button type="button" class="btn btn-primary" onclick="grpCodeValidate();">생성하기</button>
+                  <button type="button" class="btn btn-danger" onclick="javascript:history.go(-1);">생성취소</button>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
-        <br><br>
+        <!-- / Content -->
 
+
+        <!-- Footer -->
+        <footer class="content-footer footer bg-footer-theme">
+          <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+            <div class="mb-2 mb-md-0">
+              ©
+              <script>
+                  document.write(new Date().getFullYear());
+              </script>
+            </div>
+          </div>
+        </footer>
+        <!-- / Footer -->
+
+        <div class="content-backdrop fade"></div>
+      </div>
+      <!-- Content wrapper -->
     </div>
+    <!-- / Layout page -->
+  </div>
 
+  <!-- Overlay -->
+  <div class="layout-overlay layout-menu-toggle"></div>
+</div>
+<jsp:include page="/WEB-INF/jsp/bo/common/commonScript.jsp"/>
+<script type="text/javascript">
+    function grpCodeValidate() {
+        let grpCode = $("input[type=text][name=grpCode]").val();
+        let grpCodeName = $("input[type=text][name=grpCodeName]").val();
 
-    <script>
-    	function grpCodeValidate() {
+        //let regExp = /^\d{8}$/;
+        let regExp = /^(?=.*[a-zA-Z0-9]).{8}$/;
 
-    		let grpCode = $("input[type=text][name=grpCode]").val();
-    		let grpCodeName = $("input[type=text][name=grpCodeName]").val();
+        if (!regExp.test(grpCode)) {
+            alert("8글자의 코드를 입력해주세요.(영어, 숫자 입력가능)");
+            $("input[type=text][name=grpCode]").focus();
+            return false;
+        }
 
-    		//let regExp = /^\d{8}$/;
-    		let regExp = /^(?=.*[a-zA-Z0-9]).{8}$/;
+        regExp = /^[가-힣]{2,}$/;
+        if (!regExp.test(grpCodeName)) {
+            alert("그룹코드는 2글자 이상의 한글로 입력해주세요.");
+            $("input[type=text][name=grpCodeName]").focus();
+            return false;
+        }
 
+        let data = {
+            grpCode: grpCode
+            , grpCodeName: grpCodeName
+        };
 
-    		if(!regExp.test(grpCode)) {
-    			alert("8글자의 코드를 입력해주세요.(영어, 숫자 입력가능)");
-    			$("input[type=text][name=grpCode]").focus();
-    			return false;
-    		}
+        console.log("그룹코드 잘 들어감? : " + data);
 
-    		regExp = /^[가-힣]{2,}$/;
-
-    		if(!regExp.test(grpCodeName)) {
-    			alert("그룹코드는 2글자 이상의 한글로 입력해주세요.");
-    			$("input[type=text][name=grpCodeName]").focus();
-    			return false;
-    		}
-
-    		let data = { grpCode : grpCode
-    				   , grpCodeName : grpCodeName };
-
-    		console.log("그룹코드 잘 들어감? : " + data);
-
-    		$.ajax({
-    			  url : "insert.grp"
-    			, type : "post"
-    			, data : data
-    			, success : function(result) {
-
-    				if(result > 0) {
-    					alert("그룹코드가 생성되었습니다.");
-    					console.log("그룹코드 생성 성공");
-    					location.href="/list.grp";
-    				} else {
-    					alert("그룹코드가 생성되지 않았습니다.");
-    					console.log("그룹코드 생성 실패");
-    				}
-    			}
-    			, error : function() {
-    				console.log("그룹코드 생성 ajax 통신 실패");
-    			}
-    		});
-
-    		return true;
-
-    	}
-    </script>
-
+        $.ajax({
+            url: "insert.grp"
+            , type: "post"
+            , data: data
+            , success: function (result) {
+                if (result > 0) {
+                    alert("그룹코드가 생성되었습니다.");
+                    console.log("그룹코드 생성 성공");
+                    location.href = "/list.grp";
+                } else {
+                    alert("그룹코드가 생성되지 않았습니다.");
+                    console.log("그룹코드 생성 실패");
+                }
+            }
+            , error: function () {
+                console.log("그룹코드 생성 ajax 통신 실패");
+            }
+        });
+    }
+</script>
 </body>
 </html>

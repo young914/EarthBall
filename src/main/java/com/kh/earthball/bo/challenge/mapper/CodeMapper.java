@@ -4,6 +4,7 @@ import com.kh.earthball.bo.challenge.vo.Code;
 import com.kh.earthball.bo.challenge.vo.GrpCode;
 import com.kh.earthball.fo.common.vo.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface CodeMapper {
 
   int selectListCount();
 
-  List<GrpCode> selectList(PageInfo pi, RowBounds rowBounds);
+  List<GrpCode> selectList(@Param("offset") int offset,@Param("limit") int limit);
 
   GrpCode selectGrp(String grpCode);
 
@@ -27,10 +28,10 @@ public interface CodeMapper {
 
   List<Code> selectCodeList(String grpCode);
 
-  Code selectCode(String grpCode, String code);
+  Code selectCode(@Param("grpCode") String grpCode, @Param("code") String code);
 
   int updateCode(Code code);
 
-  int deleteCode(String grpCode, String code);
+  int deleteCode(@Param("grpCode") String grpCode, @Param("code") String code);
 
 }
