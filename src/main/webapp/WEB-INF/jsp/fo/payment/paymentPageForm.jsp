@@ -103,6 +103,7 @@
                     <div id="bar_2"></div>
                 </div>
                 <div id="content1_2_2">
+                <input class="sessionMemberId" type="hidden" value="${sessionScope.loginUser.memberId}">
                     <table>
                         <tr>
                             <th>이름</th>
@@ -135,7 +136,7 @@
                         </tr>
                         <tr>
                             <td width="240"><input type="text" id="receiveName" placeholder="수령인" required></td>
-                            <td><input type="number" id="receivePhone" placeholder="연락처 (- 제외)" required></td>
+                            <td><input type="number" id="receivePhone" placeholder="연락처 (- 제외)" value="01011112222" required></td>
                         </tr>
                         <tr>
                             <td colspan="2">

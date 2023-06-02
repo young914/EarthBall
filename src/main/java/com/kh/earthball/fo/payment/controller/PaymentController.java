@@ -1,22 +1,27 @@
 package com.kh.earthball.fo.payment.controller;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.kh.earthball.fo.payment.service.PaymentService;
+import com.kh.earthball.fo.payment.vo.PayInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @RequiredArgsConstructor
 @Controller
 @Slf4j
 public class PaymentController {
 
-  @RequestMapping("payment.pa")
+  private final PaymentService paymentService;
+
+  @GetMapping("payment.pa")
   public String paymentPageForm() {
     return "fo/payment/paymentPageForm";
   }
 
-  @RequestMapping("payComplete.pa")
+  @GetMapping("payComplete.pa")
   public String paymentCompleteView() {
     return "fo/payment/paymentCompleteView";
   }
@@ -71,11 +76,26 @@ public class PaymentController {
 //  }
 
   @ResponseBody
-  @RequestMapping("paySuccess")
-  public String paySuccess() {
+  @PostMapping(value = "/paySuccess", produces = "text/html; charset=UTF-8")
+  public String paySuccess(PayInfo pi) {
 
+    System.out.println("여기는 성공컨트롤러");
+//    System.out.println(paymentNo);
+//    System.out.println(memberId);
+//    System.out.println(paymentType);
+//    System.out.println(paymentTotal);
+//    System.out.println(receiveName);
+//    System.out.println(receivePhone);
+//    System.out.println(postCode);
+//    System.out.println(receiveAddress1);
+//    System.out.println(receiveAddress2);
+//    System.out.println(paymentToken);
 
-    return "";
+    int result = paymentService.payComplete(pi);
+
+    System.out.println(result);
+
+    return "잘 넘어가나?";
   }
 
 }
