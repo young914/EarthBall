@@ -48,6 +48,9 @@ form>div{
     margin-right: 20px;
 }
 
+.dropdown-menu{
+    border-radius: 10px;
+}
 .dropdownCate input{
     margin: 5px;
     height: 50px;
@@ -120,6 +123,37 @@ hr{
     .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
     .info .link {color: #5085BB;}
 
+    .pagination {
+        display: flex;
+        list-style-type: none;
+        padding-top: 7px;
+    }
+
+    .pagination li {
+        margin-right: 5px;
+    }
+
+    .pagination li a {
+        display: inline-block;
+        padding: 5px 10px;
+        background-color: #f1f1f1;
+        color: #333;
+        text-decoration: none;
+    }
+
+    .pagination li a.active {
+        background-color: #333;
+        color: #fff;
+    }
+    .pagination li a:hover {
+        background-color: #333;
+        color: #fff;
+    }
+
+    .pageN {
+        display: grid;
+        justify-content: center;
+    }
 </style>
 </head>
 <body>
@@ -147,127 +181,118 @@ hr{
             </c:forEach>
         ];
 
-    // 마커 이미지의 이미지 주소입니다
-    var imageSrc = "/resources/fo/img/shop.png"; 
-    
-    var markers = []; // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
-    var contents = [];
-    var overlays = [];
-    for (var i = 0; i < positions.length; i++) {
-    var imageSize = new kakao.maps.Size(40, 40);
-    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-    var marker = new kakao.maps.Marker({
-        position: positions[i].latlng,
-        title: positions[i].title,
-        image: markerImage
-    });
-    marker.setMap(map);
-    markers.push(marker);
+        // 마커 이미지의 이미지 주소입니다
+        var imageSrc = "/resources/fo/img/shop.png"; 
+        
+        var markers = []; // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
+        var overlays = [];
+        for (var i = 0; i < positions.length; i++) {
+            var imageSize = new kakao.maps.Size(40, 40);
+            var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+            var marker = new kakao.maps.Marker({
+                position: positions[i].latlng,
+                title: positions[i].title,
+                image: markerImage
+            });
+            marker.setMap(map);
+            markers.push(marker);
 
-    var content = 
-        '<div class="wrap">' + 
-        '    <div class="info">' + 
-        '        <div class="title">' + 
-        positions[i].title + 
-        '            <div class="close" onclick="closeOverlay(' + i + ')" title="닫기"></div>' + 
-        '        </div>' + 
-        '        <div class="body">' + 
-        '            <div class="img">' +
-        '                <img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
-        '           </div>' + 
-        '            <div class="desc">' + 
-        '                <div class="ellipsis">'+ positions[i].address + '</div>' + 
-        '                <div class="jibun ellipsis"> (지번) ' + positions[i].jibunAddress +'</div>' + 
-        '                <div class="businessHours">'+ positions[i].businessHours + ' </div>' + 
-        '                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
-        '            </div>' + 
-        '        </div>' + 
-        '    </div>' +    
-        '</div>';
+            var content = 
+                '<div class="wrap">' + 
+                '    <div class="info">' + 
+                '        <div class="title">' + 
+                positions[i].title + 
+                '            <div class="close" onclick="closeOverlay(' + i + ')" title="닫기"></div>' + 
+                '        </div>' + 
+                '        <div class="body">' + 
+                '            <div class="img">' +
+                '                <img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
+                '           </div>' + 
+                '            <div class="desc">' + 
+                '                <div class="ellipsis">'+ positions[i].address + '</div>' + 
+                '                <div class="jibun ellipsis"> (지번) ' + positions[i].jibunAddress +'</div>' + 
+                '                <div class="businessHours">'+ positions[i].businessHours + ' </div>' + 
+                '                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
+                '            </div>' + 
+                '        </div>' + 
+                '    </div>' +    
+                '</div>';
 
-    var overlay = new kakao.maps.CustomOverlay({
-        position: marker.getPosition(),
-        content: content
-    });
-    overlays.push(overlay);
+            var overlay = new kakao.maps.CustomOverlay({
+                position: marker.getPosition(),
+                content: content
+            });
+            overlays.push(overlay);
 
-    kakao.maps.event.addListener(marker, 'click', makeOverListener(map, marker, overlay));
-}
-
-function makeOverListener(map, marker, overlay) {
-    return function() {
-        closeOverlays();
-        overlay.setMap(map);
-        console.log("되냐?");
-    };
-}
-
-function closeOverlay(index) {
-    if (overlays[index]) {
-        overlays[index].setMap(null);
-    }
-}
-
-function closeOverlays() {
-    for (var i = 0; i < overlays.length; i++) {
-        if (overlays[i]) {
-            overlays[i].setMap(null);
+            kakao.maps.event.addListener(marker, 'click', makeOverListener(map, marker, overlay));
         }
-    }
-}
 
-window.onload = function() {
-    var divs = document.querySelectorAll('.searchList');
+        function makeOverListener(map, marker, overlay) {
+            return function() {
+                closeOverlays();
+                overlay.setMap(map);
+                console.log("되냐?");
+            };
+        }
 
-    for (var i = 0; i < divs.length; i++) {
-    var div = divs[i];
-    div.addEventListener('click', (function (lat, lon, idx) {
-        return function () {
-            var coords = new kakao.maps.LatLng(lat, lon);
-            map.setCenter(coords);
-            closeOverlays();
-            if (overlays[idx]) {
-                overlays[idx].setMap(map);
+        function closeOverlay(index) {
+            if (overlays[index]) {
+                overlays[index].setMap(null);
             }
-            makeOverListener(map, markers[idx], overlays[idx]);
+        }
+
+        function closeOverlays() {
+            for (var i = 0; i < overlays.length; i++) {
+                if (overlays[i]) {
+                    overlays[i].setMap(null);
+                }
+            }
+        }
+
+        window.onload = function() {
+            var divs = document.querySelectorAll('.searchList');
+
+            for (var i = 0; i < divs.length; i++) {
+                var div = divs[i];
+                div.addEventListener('click', (function (lat, lon, idx) {
+                    return function () {
+                        var coords = new kakao.maps.LatLng(lat, lon);
+                        map.setCenter(coords);
+                        closeOverlays();
+                        if (overlays[idx]) {
+                            overlays[idx].setMap(map);
+                        }
+                        makeOverListener(map, markers[idx], overlays[idx]);
+                    };
+                })(parseFloat(div.getAttribute('data-storelat')), parseFloat(div.getAttribute('data-storelon')), parseInt(div.getAttribute('data-idx'))));
+            }
         };
-    })(parseFloat(div.getAttribute('data-storelat')), parseFloat(div.getAttribute('data-storelon')), parseInt(div.getAttribute('data-idx'))));
-}
-};
 
-kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-  var latlng = mouseEvent.latLng; // 클릭한 위치의 좌표(LatLng 객체)
-  var lat = latlng.getLat(); // 위도
-  var lng = latlng.getLng(); // 경도
-  console.log('클릭한 위치의 위도: ' + lat);
-  console.log('클릭한 위치의 경도: ' + lng);
-});
+        function openNav() {
+        document.getElementById("mySidebar").style.left = "0";
+        document.getElementById("sideBtn").style.marginLeft = "450px";
+        document.getElementById("sidebarButton").style.left = "450px";
+        document.getElementById("sidebarButton").innerHTML = "&lt;";
+        }
 
-function openNav() {
-document.getElementById("mySidebar").style.left = "0";
-document.getElementById("sideBtn").style.marginLeft = "450px";
-document.getElementById("sidebarButton").style.left = "450px";
-document.getElementById("sidebarButton").innerHTML = "&lt;";
-}
+        function closeNav() {
+        document.getElementById("mySidebar").style.left = "-450px";
+        document.getElementById("sideBtn").style.marginLeft= "0";
+        document.getElementById("sidebarButton").style.left = "0";
+        document.getElementById("sidebarButton").innerHTML = "&gt;";
+        }
 
-function closeNav() {
-document.getElementById("mySidebar").style.left = "-450px";
-document.getElementById("sideBtn").style.marginLeft= "0";
-document.getElementById("sidebarButton").style.left = "0";
-document.getElementById("sidebarButton").innerHTML = "&gt;";
-}
-
-function toggleNav() {
-    if (document.getElementById("mySidebar").style.left == "0px") {
-        closeNav();
-    } else {
-        openNav();
-    }
-}
+        function toggleNav() {
+            if (document.getElementById("mySidebar").style.left == "0px") {
+                closeNav();
+            } else {
+                openNav();
+            }
+        }
     </script>
     <!-- 사이드바 -->
     <div id="mySidebar" class="sidebar">
-        <form action="" >
+        <form action="">
             <div class="header">
                 <span>친환경 매장찾기</span>
             </div>
@@ -276,7 +301,7 @@ function toggleNav() {
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         지역 검색
                     </button>
-                    <ul class="dropdown-menu" style="width: 100%;">
+                    <ul class="dropdown-menu" style="width: 100%; border-radius: 10px;">
                         <li><a class="dropdown-item" href="#">지역 검색</a></li>
                         <li><a class="dropdown-item" href="#">주소/매장명 검색</a></li>
                     </ul>
@@ -284,7 +309,6 @@ function toggleNav() {
             </div>
 
             <div style="display: flex;">
-
                 <div class="dropdown citySearch">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         시/도 선택
@@ -308,26 +332,38 @@ function toggleNav() {
                 <div class="dropdown dropdownCate">
                     <input class="btn btn-primary" type="submit" value="검색">
                 </div>
-
             </div>
         </form>
 
-        <div style="overflow-y: scroll; position:relative; height: 70%;">
+        <div style="overflow-y: scroll; position:relative; height: 65%;">
             <hr>
             <div id="searchResult">
                 <span>총 </span>
-                <span> ${ pi.listCount }개의 결과</span>
+                <span>${pi.listCount}개의 결과</span>
             </div>
             <hr>
-            <c:forEach var="s" items="${ list }">
-                <div class="searchList" data-storelat="${ s.storeLat }" data-storelon="${ s.storeLon }">
-                    <span class="storeTitle">${ s.storeName }</span> <br>
-                    <span class="storeInfo">${ s.storeAddress }</span> <br>
-                    <span class="storeInfo">${ s.storePhone }</span> <br>
-                    <span class="storeInfo">영업시간 ${ s.businessHours }</span>
+            <c:forEach var="s" items="${list}">
+                <div class="searchList" data-storelat="${s.storeLat}" data-storelon="${s.storeLon}">
+                    <span class="storeTitle">${s.storeName}</span> <br>
+                    <span class="storeInfo">${s.storeAddress}</span> <br>
+                    <span class="storeInfo">${s.storePhone}</span> <br>
+                    <span class="storeInfo">영업시간 ${s.businessHours}</span>
                     <i class="xi-heart xi-2x" style="width: 20px;"></i>
                 </div>
             </c:forEach>
+        </div>
+        <div class="pageN">
+            <ul class="pagination">
+                <li><a href="#" onclick="goToPage(1)">&lt;&lt;</a></li>
+                <li><a href="#" onclick="goToPage(currentPage - 1)">&lt;</a></li>
+                <li><a href="#" onclick="goToPage(1)">1</a></li>
+                <li><a href="#" onclick="goToPage(2)">2</a></li>
+                <li><a href="#" onclick="goToPage(3)">3</a></li>
+                <li><a href="#" onclick="goToPage(4)">4</a></li>
+                <li><a href="#" onclick="goToPage(5)">5</a></li>
+                <li><a href="#" onclick="goToPage(currentPage + 1)">&gt;</a></li>
+                <li><a href="#" onclick="goToPage(totalPages)">&gt;&gt;</a></li>
+            </ul>
         </div>
     </div>
 
@@ -335,5 +371,23 @@ function toggleNav() {
     <div id="sideBtn" >
         <button id="sidebarButton" class="openbtn" onclick="toggleNav()">&gt;</button>  
     </div>
+
+    <script>
+        var currentPage = 1; // 현재 페이지 번호
+        var totalPages = 5; // 전체 페이지 수
+
+        function goToPage(page) {
+            if (page < 1) {
+                page = 1;
+            } else if (page > totalPages) {
+                page = totalPages;
+            }
+
+            currentPage = page;
+            console.log('선택한 페이지:', currentPage);
+            // 페이지 이동 또는 다른 동작 수행
+            // ...
+        }
+    </script>
 </body>
 </html>
