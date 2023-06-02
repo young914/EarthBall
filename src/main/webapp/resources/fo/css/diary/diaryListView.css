@@ -71,3 +71,35 @@
         .icon1{
             margin-left: 195px;
         }
+
+        .submit_btn1 {
+            width: 660px;
+            margin: 0 auto;
+            text-align: right;
+            height: 33px;
+            margin-top: 10px;
+        }
+        
+        .submit_btn1>button{
+            font-size : 18px;
+            width: 100px;
+            height : 100%;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            background-color : #19A7CE;
+            cursor: pointer;
+        
+        }
+        
+        .submit_btn>button{
+            font-size : 18px;
+            width: 100px;
+            height : 100%;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            background-color : #19A7CE;
+            cursor: pointer;
+        
+        }

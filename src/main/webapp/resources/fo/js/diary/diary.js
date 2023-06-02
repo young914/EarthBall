@@ -126,40 +126,55 @@ function WriteBtn() {
   }
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // 날씨 아이콘 버튼 이벤트
-//  var icon = document.querySelectorAll('#k');
-//  const CLICKED_CLASS = "clicked_1"
+ document.querySelector('#c_1').addEventListener('click', function(event) {
+  event.preventDefault();
+  var target = document.querySelector('#c_1');
+  if (target.classList.contains('active1')) {
+    target.classList.remove('active1');
+  } else {
+    target.classList.add('active1');
+	document.querySelector('#c_2').classList.remove('active2');
+	document.querySelector('#c_3').classList.remove('active3');
+	document.querySelector('#c_4').classList.remove('active4');
+  }
+});
 
-//  function handleClick() {
-//     icon.classList.toggle(CLICKED_CLASS);
-//  }
+ document.querySelector('#c_2').addEventListener('click', function(event) {
+  event.preventDefault();
+  var target = document.querySelector('#c_2');
+  if (target.classList.contains('active2')) {
+    target.classList.remove('active2');
+  } else {
+    target.classList.add('active2');
+    document.querySelector('#c_1').classList.remove('active1');
+    document.querySelector('#c_3').classList.remove('active3');
+	document.querySelector('#c_4').classList.remove('active4');
+  }
+});
 
-//  icon.addEventListener("click", handleClick);
+ document.querySelector('#c_3').addEventListener('click', function(event) {
+  event.preventDefault();
+  var target = document.querySelector('#c_3');
+  if (target.classList.contains('active3')) {
+    target.classList.remove('active3');
+  } else {
+    target.classList.add('active3');
+    document.querySelector('#c_1').classList.remove('active1');
+    document.querySelector('#c_2').classList.remove('active2');
+	document.querySelector('#c_4').classList.remove('active4');
+  }
+});
 
-
-
-//  var icon1 = document.querySelectorAll('#f');
-//  const CLICKED_CLASS1 = "clicked_2"
-
-//  function handleClick() {
-//     icon1.classList.toggle(CLICKED_CLASS1);
-//  }
-
-//  icon1.addEventListener("click", handleClick);
-
+ document.querySelector('#c_4').addEventListener('click', function(event) {
+  event.preventDefault();
+  var target = document.querySelector('#c_4');
+  if (target.classList.contains('active4')) {
+    target.classList.remove('active4');
+  } else {
+    target.classList.add('active4');
+    document.querySelector('#c_1').classList.remove('active1');
+    document.querySelector('#c_2').classList.remove('active2');
+	document.querySelector('#c_3').classList.remove('active3');
+  }
+});

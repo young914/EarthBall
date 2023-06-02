@@ -13,6 +13,9 @@
 
 <jsp:include page="/WEB-INF/jsp/fo/common/header.jsp"/>
 
+	<!-- 현재 로그인한 사용자 (작성자) 의 회원아이디를 hidden 으로 넘기기 -->
+	<input type="hidden" name="memberId"
+
 <div id="container">
     <!-- 여기다가 화면 넣자  -->
     <div class="outer">
@@ -240,7 +243,11 @@
                             <div><span id="icon2">20</span></div>
                         </div>
                     </div>
+                    </div>
                 </div>
+            </div>
+            <div class="submit_btn1">
+                <button onclick="location.href='diaryEnrollForm.bo'">글작성</button>
             </div>
         </div>
 
