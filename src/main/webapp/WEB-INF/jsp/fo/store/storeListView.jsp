@@ -157,58 +157,94 @@ hr{
     var overlays = [];
 
 
-    for (var i = 0; i < positions.length; i ++) {
-        // 마커 이미지의 이미지 크기 입니다
-        var imageSize = new kakao.maps.Size(24, 35); 
-        
-        // 마커 이미지를 생성합니다    
-        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-        
-        // 마커를 생성합니다
+    
+    for(let i=0; i < positions.length; i++){
+        var data = positions[i];
+        displayMarker(data);
+    }
+
+    // 지도에 마커를 표시하는 함수입니다    
+    function displayMarker(data) { 
         var marker = new kakao.maps.Marker({
-            map: map, // 마커를 표시할 지도
-            position: positions[i].latlng, // 마커를 표시할 위치
-            title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-            image : markerImage // 마커 이미지 
-        });
-        var content = 
-        '<div class="wrap">' + 
-        '    <div class="info">' + 
-        '        <div class="title">' + 
-            positions[i].title + 
-        '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
-        '        </div>' + 
-        '        <div class="body">' + 
-        '            <div class="img">' +
-        '                <img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
-        '           </div>' + 
-        '            <div class="desc">' + 
-        '                <div class="ellipsis">'+ positions[i].address + '</div>' + 
-        '                <div class="jibun ellipsis"> (지번) ' + positions[i].jibunAddress +'</div>' + 
-        '                <div class="businessHourss">'+ positions[i].businessHours + ' </div>' + 
-        '                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
-        '            </div>' + 
-        '        </div>' + 
-        '    </div>' +    
-        '</div>';
-
-        //마커 위에 커스텀오버레이를 표시합니다
-        //마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
-        var overlay = new kakao.maps.CustomOverlay({
-            content: content,
             map: map,
-            position: marker.getPosition()       
+            position: data.latlng
         });
+        var overlay = new kakao.maps.CustomOverlay({
+            yAnchor: 3,
+            position: marker.getPosition()
+        });
+        
+        var contentDiv = document.createElement('div');
+        contentDiv.className = 'wrap';
 
-        //마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+        var infoDiv = document.createElement('div');
+        infoDiv.className = 'info';
+
+        var titleDiv = document.createElement('div');
+        titleDiv.className = 'title';
+        titleDiv.innerHTML = data.title;
+
+        var closeBtn = document.createElement('div');
+        closeBtn.innerHTML = '닫기';
+        closeBtn.style.position = 'absolute';  // 닫기 버튼 위치 설정
+        closeBtn.style.top = '5px';           // 상단으로부터 10px 떨어뜨림
+        closeBtn.style.right = '10px';  
+        closeBtn.style.border = '1px solid #999';
+        closeBtn.style.backgroundColor = '#fff';
+        closeBtn.style.cursor = 'pointer';
+        closeBtn.style.fontSize = '15px';
+        closeBtn.style.color = '#888';
+        closeBtn.style.height = '19px';
+        
+
+        closeBtn.onclick = function () {
+            overlay.setMap(null);
+        };
+        titleDiv.appendChild(closeBtn);
+
+        var bodyDiv = document.createElement('div');
+        bodyDiv.className = 'body';
+
+        var imgDiv = document.createElement('div');
+        imgDiv.className = 'img';
+        imgDiv.innerHTML = '<img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">';
+        bodyDiv.appendChild(imgDiv);
+
+        var descDiv = document.createElement('div');
+        descDiv.className = 'desc';
+
+        var ellipsisDiv = document.createElement('div');
+        ellipsisDiv.className = 'ellipsis';
+        ellipsisDiv.innerHTML = data.address;
+        descDiv.appendChild(ellipsisDiv);
+
+        var jibunDiv = document.createElement('div');
+        jibunDiv.className = 'jibun ellipsis';
+        jibunDiv.innerHTML = '(지번) ' + data.jibunAddress;
+        descDiv.appendChild(jibunDiv);
+
+        var businessHoursDiv = document.createElement('div');
+        businessHoursDiv.className = 'businessHours';
+        businessHoursDiv.innerHTML = data.businessHours;
+        descDiv.appendChild(businessHoursDiv);
+
+        var linkDiv = document.createElement('div');
+        linkDiv.innerHTML = '<a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a>';
+        descDiv.appendChild(linkDiv);
+
+        bodyDiv.appendChild(descDiv);
+
+        infoDiv.appendChild(titleDiv);
+        infoDiv.appendChild(closeBtn);
+        infoDiv.appendChild(bodyDiv);
+
+        contentDiv.appendChild(infoDiv);
+
+        overlay.setContent(contentDiv);
+
         kakao.maps.event.addListener(marker, 'click', function() {
             overlay.setMap(map);
         });
-
-        //커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
-        function closeOverlay() {
-            overlay.setMap(null);     
-        }
     }
 
     window.onload = function() {
