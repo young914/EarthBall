@@ -34,7 +34,7 @@ public class BoardController {
 
     mv.addObject("pi", pi)
         .addObject("list", list)
-        .setViewName("board/boardListView");
+        .setViewName("fo/board/boardListView");
 
     return mv;
   }
