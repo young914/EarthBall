@@ -1,28 +1,27 @@
 package com.kh.earthball.fo.store.controller;
 
+import java.util.ArrayList;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.earthball.fo.common.template.Pagination;
 import com.kh.earthball.fo.common.vo.PageInfo;
 import com.kh.earthball.fo.store.service.StoreService;
 import com.kh.earthball.fo.store.template.GeocodingApi;
 import com.kh.earthball.fo.store.vo.Store;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-
-
+@RequiredArgsConstructor
 @Controller
+@Slf4j
 public class StoreController {
 
-  @Autowired
-  private StoreService storeService;
-
-
-  @RequestMapping("storeListView.st")
-  public ModelAndView selectList(@RequestParam(value = "cPage", defaultValue = "1") int currentPage, ModelAndView mv) {
+  private final StoreService storeService;
+  
+  @GetMapping("storeListView.st")
+  public String selectList(@RequestParam(value = "cPage", defaultValue = "1") int currentPage, Model model) {
     int listCount = storeService.selectStoreListCount();
     int pageLimit = 20;
     int boardLimit = 10;
@@ -45,9 +44,9 @@ public class StoreController {
       list.get(i).setJibunAddress(jibunAddress); // Store 객체에 지번 주소 값 설정
     }
 
-    mv.addObject("pi", pi).addObject("list", list).setViewName("fo/store/storeListView");
-    return mv;
+    model.addAttribute("pi", pi);
+    model.addAttribute("list", list);
+    return "fo/store/storeListView";
   }
-
 
 }
