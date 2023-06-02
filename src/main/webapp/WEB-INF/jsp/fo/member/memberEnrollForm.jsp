@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
 <style>
  *  {
         box-sizing: border-box; /*전체에 박스사이징*/
@@ -156,9 +158,13 @@
             width: 100%;
         }
     }
-
+    
+	#submit_button:hover {
+	    cursor: pointer;
+	}
+	
 </style>
-<title>Insert title here</title>
+<title>회원 가입</title>
 </head>
 <body>
     
@@ -171,12 +177,12 @@
         <!-- 2. 필드 -->
         <div class="field">
             <b>아이디 *</b>
-            <span class="placehold-text"><input type="text" placeholder="아이디를 입력해주세요" name="memberId"></span>
-            <div id="checkResult" style="font-size : 0.8em; display : none"></div>
+            <span class="placehold-text"><input type="text" placeholder="아이디를 입력해주세요" name="memberId" id="memberId"></span>
+            <div id="checkResult" style="font-size : 0.8em; display : none">jjjj</div>
         </div>
         <div class="field">
             <b>비밀번호 *</b>
-            <input class="userpw" type="password" placeholder="8자 이상 - 대문자 특수문자 포함 비밀번호를 입력해주세요" name="memberPwd">
+            <input class="userpw" type="password" placeholder="8자 이상 - 대문자 특수문자 포함 비밀번호를 입력해주세요" name="memberPwd" id="memberPwd">
         </div>
         <div class="field">
             <b>비밀번호 재확인 *</b>
@@ -185,7 +191,7 @@
         </div>
         <div class="field">
             <b>닉네임 *</b>
-            <input type="text" name="memberName">
+            <input type="text" name="memberName" id="memberName">
         </div>
 
         <!-- 3. 필드(생년월일) -->
@@ -209,7 +215,7 @@
         <!-- 5. 이메일_전화번호 -->
         <div class="field">
             <b>본인 확인 이메일<small> *</small></b>
-            <input type="email" placeholder="선택입력" name="email">
+            <input type="email" placeholder="선택입력" name="email" id="email">
         </div>
         
         <div class="field tel-number">
@@ -225,39 +231,9 @@
         </div>
 
         <!-- 6. 가입하기 버튼 -->
-        <input type="submit" value="가입하기" id="submit-button">
+        <input type="submit" value="가입하기" id="submit_button">
 
         </form>
-        
-        <!-- 중요 칸이 비어있을 때 버튼 비활성화 되는 자바스크립트 -->
-        <script>
-        
-        		const form = document.getElementById("enrollForm");
-        		
-        		const memberId = document.getElementById("memberId");
-        		
-        		const memberPwd = document.getElementById("memberPwd");
-        		
-        		const memberName = document.getElementById("memberName");
-        		
-        		const email = document.getElementById("email");
-        		
-        		const phone = document.getElementById("phone");
-        			
-        		const submit-button = document.getElementById("submit-button");
-        		
-        			function validateForm() {
-        				
-        				if(memberId.value && memberPwd.value && memberName.value && email.value && phone.value ) {
-        					
-        					submit-button.disabled = false;
-        				} else {
-        					submit-button.disabled = true;
-        				}
-        			}
-        		
-        		form.addEventListener('input', validateForm);
-        </script>
         
         <!-- id중복체크 스크립트 (ajax 방식) -->
         <script>
