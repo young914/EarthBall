@@ -80,7 +80,7 @@
                       </button>
                     </td>
                     <td>
-                      <button type="button" class="btn btn-primary">삭제</button>
+                      <button type="button" class="btn btn-primary" onclick="deleteGrpCode('${item.grpCode}');">삭제</button>
                     </td>
                   </tr>
                 </c:forEach>
@@ -186,6 +186,27 @@
         location.href = "/updateForm.grp?grpCode=" + grpCode;
     }
 
+    function deleteGrpCode(grpCode) {
+        $.ajax({
+            url: "deleteForm.grp",
+            type: "post",
+            data: {
+                grpCode: grpCode
+            },
+            success: function (result) {				// jsp 파일을 result로 받을 수 있음!!! ***  => return "admin/codeListView";
+                if (result > 0) {
+                    alert("그룹코드가 삭제되었습니다.");
+                    location.href = "/list.grp";
+                } else {
+                    alert("그룹코드가 삭제되지 않았습니다.");
+                }
+            },
+            error: function () {
+                console.log("공통코드 생성 ajax 통신 실패");
+            }
+        });
+    }
+
     function insertCode() {
         let grpCode = $("#grpCode").val();
         if (grpCode == null || grpCode == undefined) {
@@ -199,6 +220,27 @@
         location.href = "/updateForm.code?grpCode=" + grpCode + "&code=" + code;
     }
 
+    function deleteCode(grpCode, code) {
+        $.ajax({
+            url: "delete.code",
+            type: "post",
+            data: {
+                grpCode: grpCode
+                , code: code
+            },
+            success: function (result) {				// jsp 파일을 result로 받을 수 있음!!! ***  => return "admin/codeListView";
+                if (result > 0) {
+                    alert("공통코드가 삭제되었습니다.");
+                    location.href = "/list.grp";
+                } else {
+                    alert("공통코드가 삭제되지 않았습니다.");
+                }
+            },
+            error: function () {
+                console.log("공통코드 생성 ajax 통신 실패");
+            }
+        });
+    }
 
     $(document).on('click', '#grpCodeList .grpCode', function () {
         let grpCode = $(this).data('grpCode');

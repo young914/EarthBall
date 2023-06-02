@@ -31,7 +31,7 @@
           <button type="button" class="btn btn-primary" onclick="updateCode('${item.grpCode}', '${item.code}')">수정</button>
         </td>
         <td>
-          <button type="button" class="btn btn-primary">삭제</button>
+          <button type="button" class="btn btn-primary" onclick="deleteCode('${item.grpCode}', '${item.code}')">삭제</button>
         </td>
       </tr>
     </c:forEach>

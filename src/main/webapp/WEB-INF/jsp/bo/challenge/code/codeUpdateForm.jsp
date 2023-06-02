@@ -148,11 +148,9 @@
             , success: function (result) {
                 if (result > 0) {
                     alert("공통코드가 수정되었습니다.");
-                    console.log("공통코드 수정 성공");
-                    location.href = "list.code";
+                    location.href = 'list.grp';
                 } else {
                     alert("공통코드가 수정되지 않았습니다.");
-                    console.log("공통코드 수정 실패");
                 }
             }
             , error: function () {

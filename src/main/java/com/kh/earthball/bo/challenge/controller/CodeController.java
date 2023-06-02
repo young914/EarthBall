@@ -80,8 +80,8 @@ public class CodeController {
 
   @ResponseBody
   @PostMapping("deleteForm.grp")
-  public int deleteGrp(@RequestParam(value = "code") String code) {
-    return codeService.deleteGrp(code);
+  public int deleteGrp(@RequestParam(value = "grpCode") String grpCode) {
+    return codeService.deleteGrp(grpCode);
   }
 
   @GetMapping("codeEnrollForm")
@@ -135,7 +135,7 @@ public class CodeController {
 
   @ResponseBody
   @PostMapping("delete.code")
-  public int deleteCode(String grpCode, String code) {
+  public int deleteCode(@RequestParam(value = "grpCode") String grpCode, @RequestParam(value = "code") String code) {
     return codeService.deleteCode(grpCode, code);
   }
 

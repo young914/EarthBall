@@ -32,6 +32,6 @@ public interface CodeMapper {
 
   int updateCode(Code code);
 
-  int deleteCode(String grpCode, String code);
+  int deleteCode(@Param("grpCode") String grpCode, @Param("code") String code);
 
 }
