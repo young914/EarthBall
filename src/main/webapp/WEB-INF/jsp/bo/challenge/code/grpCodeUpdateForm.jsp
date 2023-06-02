@@ -61,8 +61,7 @@
                   </div>
                   <div class="mb-3">
                     <label class="form-label" for="grpCodeName">그룹코드명</label>
-                    <input type="text" class="form-control" name="grpCodeName" id="grpCodeName" placeholder="그룹코드명"
-                           value="${grpCode.grpCodeName}">
+                    <input type="text" class="form-control" name="grpCodeName" id="grpCodeName" placeholder="그룹코드명" value="${grpCode.grpCodeName}">
                   </div>
                   <button type="button" class="btn btn-primary" onclick="grpCodeValidate();">수정하기</button>
                   <button type="button" class="btn btn-danger" onclick="javascript:history.go(-1);">생성취소</button>
