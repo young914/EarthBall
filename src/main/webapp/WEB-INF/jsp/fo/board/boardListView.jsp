@@ -47,115 +47,137 @@
     </script>
 
     <style>
-        html, body{
-            margin: 0;
-            padding: 0;
-            min-width: 1500px;
-        }
+      html, body{
+    margin: 0;
+    padding: 0;
+}
 
-        /* header */
-        #headers{
-            position: fixed;
-            left: 0;
-            right: 0;
-            top: 0;
-            z-index: 9999;
-            background-color: white;
-            min-width: 1200px;
-        }
-        .header{
-            width: 70%;
-            height: 120px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-        }
-        .menu{
-            width: 70%;
-            height: 50px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-        }
-        .login-area{
-            display: flex;
-            justify-content: space-between;
-            width: 130px;
-            margin-top: 30px;
-            color: #19A7CE;
-        }
-        .login-area a{
-            text-decoration: none;
-            color: #19A7CE;
-        }
-        .logo{
-            width: 250px;
-        }
+/* 폰트 */
+*{font-family: 'Jua', sans-serif;}
 
-        /* 드롭다운 */
-        .dropdown{
-            position : relative;
-            display : inline-block;
-        }
-        .dropdown-content{
-            display : none;
-            position : absolute;
-            z-index : 1; /*다른 요소들보다 앞에 배치*/
-            background-color : white;
-            width : 100px;
-            border-radius : 8px;
-            box-shadow : 0 0 10px rgba(0,0,0,0.2);
-        }
-        .dropdown-content a{
-            display : block;
-            text-decoration : none;
-            color : black;
-            padding: 10px;
-        }
-        .dropdown-content a:hover{
-            background-color : #19A7CE;
-            color : white;
-            border-radius: 8px;
-        }
-        .dropdown:hover .dropdown-content{
-            display : block;
-        }
-        .dropdown>span{
-            display: block;
-            padding: 20px;
-            cursor: pointer;
-            color: #19A7CE;
-        }
-        .dropdown-content a{
-            color : #19A7CE;
-        }
+ /* header */
+header{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 9999;
+    background-color: white;
+    /* bottom 그림자 효과 */
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
+}
+.header{
+    width: 1200px;
+    height: 110px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+.menu{
+    width: 1200px;
+    height: 38px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+.login-area{
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    margin-top: 30px;
+    color: #19A7CE;
+}
+.login-area a{
+    text-decoration: none;
+    color: #19A7CE;
+}
+.logo{width: 250px;}
+.logo a{
+    text-decoration: none;
+    color: #19A7CE;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+.logo img{
+    width: 80px;
+    height: 80px;
+    padding: 5px;
+}
+.logo div{
+    font-size: 40px;
+    padding: 5px;
+}
 
-        .search>form {
-            position: relative;
-            width: 200px;
-        }
 
-        .search>form>input {
-            width: 100%;
-            border: 1px solid #bbb;
-            border-radius: 8px;
-            padding: 10px 12px;
-            font-size: 14px;
-        }
+/* 드롭다운 */
+.dropdown{
+    position : relative;
+    display : inline-block;
+}
+.dropdown-content{
+    /* display : none; */
+    position : absolute;
+    z-index : -99; /*다른 요소들보다 앞에 배치*/
+    background-color : white;
+    width : 100px;
+    border-radius : 8px;
+    box-shadow : 0 0 10px rgba(0,0,0,0.2);
+    opacity: 0;
+    transition: 0.3s;
+}
+.dropdown-content a{
+    display : block;
+    text-decoration : none;
+    color : black;
+    padding: 10px;
+    transition: 0.3s;
+}
+.dropdown-content a:hover{
+    background-color : #19A7CE;
+    color : white;
+    border-radius: 8px;
+}
+.dropdown:hover .dropdown-content{
+    display : block;
+    z-index: 1;
+    opacity: 1;
+}
+.dropdown>span{
+    display: block;
+    margin: 10px;
+    cursor: pointer;
+    color: #19A7CE;
+}
+.dropdown>span>a{
+    text-decoration: none;
+    color: #19A7CE;
+}
+.dropdown-content a{
+    color : #19A7CE;
+}
 
-        .search>form>img {
-            position : absolute;
-            width: 17px;
-            top: 10px;
-            right: 1px;
-            margin: 0;
-        }
+.search>form {
+    position: relative;
+    width: 200px;
+}
+.search>form>input {
+    border: 1px solid #bbb;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+}
+.search>form>i {
+    position : absolute;
+    width: 17px;
+    top: 10px;
+    right: 30px;
+    margin: 0;
+}
 
         /* ---------------------------------- */
-
-        .search2 {
-            padding-left: 39%;
-        }
 
         .search2>form {
             position: relative;
@@ -165,18 +187,17 @@
 
         .search2>form>img {
             position : absolute;
-            width: 17px;
-            top: 10px;
-            right: 0%;
-            margin: 0;
+    width: 17px;
+    top: 10px;
+    right: 30px;
+    margin: 0;
         }
 
         .search2>form>input {
-            width: 100%;
-            border: 1px solid #bbb;
-            border-radius: 8px;
-            padding: 10px 12px;
-            font-size: 14px;
+           border: 1px solid #bbb;
+		    border-radius: 8px;
+		    padding: 10px 12px;
+		    font-size: 14px;
         }
 
         /* ---------------------------------- */
@@ -252,34 +273,169 @@
         }
 
 
+        /* ------------- 푸터 --------------------- */
+       #footer{
+    width: 100%;
+    height: 220px;
+    margin: 0 auto;
+    background-color: #19A7CE;
+    display: flex;
+    justify-content: space-evenly;
+	}
+	.logoArea{
+	    width: 250px;
+	    height: 100px;
+	    margin-top: 60px;
+	    color: white;
+	    display: flex;
+	    align-items: center;
+	    font-size: 50px;
+	}
+	.logoArea img{
+	    width: 100px;
+	    height: 100px;
+	    padding: 5px;
+	    border-radius: 50%;
+	}
+	.logoArea div{
+	    margin-left: 10px;
+	    padding: 5px;
+	    /* 그림자효과 */
+	    text-shadow: 2px 2px 10px gray;
+	}
 
+	/*-------------  버튼 스타일 ---------------*/
 
-        /* ---------------------------------- */
-        /* footer */
-        #footer{
-            width: 100%;
-            height: 220px;
-            margin: 0 auto;
-            background-color: #19A7CE;
-            display: flex;
-            justify-content: space-evenly;
+		#page {
+		  text-align: center;
+		  display: inline-flex;
+		  align-items: center;
+		  justify-content: space-around
+		}
+		.page_btn {
+		  align-items: center;
+		}
+		.pagination {
+		  list-style: none;
+		  padding: 0;
+		  margin-top: 20px;
+		}
+		.pagination li {
+		  display: inline;
+		  text-align: center;
+		}
+		/* 숫자들에 대한 스타일 지정 */
+		.pagination a {
+		  float: left;
+		  display: block;
+		  font-size: 14px;
+		  text-decoration: none;
+		  padding: 5px 12px;
+		  color: #797979;
+		  line-height: 1.5;
+		}
+		.first { margin-right: 15px; }
+		.last { margin-left: 15px; }
+		.first:hover, .last:hover, .arrow_left:hover, .arrow_right:hover {
+		  color: #146C94;
+		}
+		.pagination a:active {
+		  cursor: default;
+		  color: #69ABCE;
+		}
+		.pagination a:active {
+		  outline: none;
+		}
+		.num {
+		  margin-left: 3px;
+		  padding: 0;
+		  width: 30px;
+		  -moz-border-radius: 100%;
+		  -webkit-border-radius: 100%;
+		  border-radius: 100%;
+		}
+		.num:hover {
+		  background-color: #146C94;
+		  color: #FFFFFF;
+		}
+		.num:active, .modal .num:active {
+		  background-color: #69ABCE;
+		  cursor: pointer;
+		}
+
+		.title{
+            width : 250px;
+            height : 70px;
+            margin : 30px 0px 0px 15px;
+            box-sizing : border-box;
+            align-items : center;
+            display : flex;
         }
+
+           .bar {
+            width : 12px;
+            height : 70px;
+            background-color : #146C94;
+        }
+
+         .title_text{
+            width : 200px;
+            height : 50px;
+            font-size : 40px;
+            font-weight : bold;
+            padding : 0px 0px 7px 10px;
+        }
+
+
+
+
     </style>
 </head>
 <body>
     <!-- 로그인 영역 -->
-    <div id="headers">
+    	<!-- 로그인 영역 -->
+    <header>
+
+    	<!-- 로고+로그인 -->
         <div class="header">
-            <div style="width: 120px;"></div>
+            <div style="width: 200px;"></div>
             <div class="logo">
-                <a href=""><img src="image/logo.png" style="width: 250px;"></a>
+                <a href="home">
+                    <img src="/resources/fo/img/logo.png">
+                    <div>지구공</div>
+                </a>
             </div>
             <div class="login-area">
-                <div><a href="">로그인</a></div>&nbsp;|&nbsp;
-                <div><a href="">회원가입</a></div>
+                <div></div>
+                <c:choose>
+	            	<c:when test="${empty loginUser}">
+		                <!-- 로그인 전 링크 -->
+		                <div><a href="loginForm.me">로그인</a></div>
+		                |
+		                <div><a href="mem.me">회원가입</a></div>
+	            	</c:when>
+	            	<c:otherwise>
+		                <!-- 로그인 후 링크 -->
+		                <div><a href="myPage.me">${loginUser.memberName}님</a></div>
+		                |
+		                <div><a href="logout.me"><i class="xi-power-off"></i></a></div>
+		                |
+	                	<c:choose>
+			                <c:when test="${loginUser.memberId eq 'admin'}">
+			                	<div><a href="admin"><i class="xi-user"></i></a></div>
+			                </c:when>
+			                <c:otherwise>
+			                	<div><a href="myPage.me"><i class="xi-user"></i></a></div>
+			                </c:otherwise>
+	                	</c:choose>
+	                	|
+	                	<div><a href=""><i class="xi-market"></i></a></div>
+	            	</c:otherwise>
+        		</c:choose>
+                <div></div>
+
             </div>
         </div>
-
 
         <!-- 매뉴바 -->
         <div class="menu">
@@ -298,34 +454,33 @@
                         <a href="">반려동물</a>
                         <a href="">화장품</a>
                         <a href="">문구</a>
-                        <a href="">전체</a>
+                        <a href="list.pro">전체</a>
                     </div>
                 </div>
-
-
                 <div class="dropdown">
                     <span class="dropbtn">지구소개</span>
                     <div class="dropdown-content">
                         <a href="">#</a>
                     </div>
                 </div>
+
                 <div class="dropdown">
                     <span class="dropbtn">챌린지</span>
                     <div class="dropdown-content">
-                        <a href="">#</a>
+                        <a href="/main.chall">참여 게시판</a>
+                        <a href="#">인증 게시판</a>
                     </div>
                 </div>
+
                 <div class="dropdown">
                     <span class="dropbtn">환경일기</span>
                     <div class="dropdown-content">
-                        <a href="">#</a>
+                     	<a href="">환경일기란?</a>
+                        <a href="diary.bo">일기 보기</a>
                     </div>
                 </div>
                 <div class="dropdown">
-                    <span class="dropbtn">매장찾기</span>
-                    <div class="dropdown-content">
-                        <a href="">#</a>
-                    </div>
+                    <span class="dropbtn"><a href="storeListView.st">매장찾기</a></span>
                 </div>
                 <div class="dropdown">
                     <span class="dropbtn">고객센터</span>
@@ -335,27 +490,32 @@
                 </div>
             </div>
 
-
-
-
-            <div class="search" style="text-align: center;">
+            <div class="search">
                 <form action="">
                     <input type="text" placeholder="검색어 입력">
-                    <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+                    <i class="xi-search"></i>
                 </form>
             </div>
 
         </div>
-    </div>
+    </header>
+
+
 
 
 
     <div id="container">
-        <!-- 배너 -->
+
+        		<!-- 배너 -->
+				<div class="title">
+                <div class="bar"></div>
+                <div class="title_text">고객센터</div>
+				</div>
+
 
 
         <!-- 공지사항 -->
-        <div class="board">
+        <div class="board" style="padding-top: 10px">
 
 
 
@@ -390,89 +550,82 @@
                           </div>
                         </div>
                       </nav>
+
+
                     <tr>
                         <th>No</th>
-                        <th>카테고리</th>
                         <th>제목</th>
-                        <th>조회수</th>
+                        <th>글쓴이</th>
                         <th>작성시간</th>
                     </tr>
                 </thead>
+
                 <tbody>
+                	<c:forEach var="b" items="${ list }">
+
                     <tr>
-                        <td>1</td>
-                        <td>첫 번째 글</td>
-                        <td>작성자1</td>
-                        <td>10</td>
-                        <td>2023-04-04</td>
+                        <td class="bno">${ b.boardNo }</td>
+                        <td>${ b.boardTitle }</td>
+                        <td>${ b.memberId }</td>
+                        <td>${b.boardDate }</td>
                     </tr>
+                   </c:forEach>
                     <tr>
-                        <td>2</td>
-                        <td>두 번째 글</td>
-                        <td>작성자2</td>
-                        <td>10</td>
-                        <td>2023-04-04</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>세 번째 글</td>
-                        <td>작성자3</td>
-                        <td>10</td>
-                        <td>2023-04-04</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>네 번째 글</td>
-                        <td>작성자3</td>
-                        <td>10</td>
-                        <td>2023-04-04</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>다섯 번째 글</td>
-                        <td>작성자3</td>
-                        <td>10</td>
-                        <td>2023-04-04</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>여섯 번째 글</td>
-                        <td>작성자3</td>
-                        <td>10</td>
-                        <td>2023-04-04</td>
-                    </tr>
 
                 </tbody>
             </table>
 
             <br>
 
-                <div>
+               <!--  <div>
                 <div id="page-numbers" style="text-align: center;">
-                </div>
+                </div> -->
 
-            <br>
+				<div id="page_search" align="center">
+                <div id="page">
+			    <div class="page_btn">
+			        <ul class="pagination">
+			            <li> <a href="#" class="first">처음 페이지</a> </li>
+			            <li> <a href="#" class="arrow_left"> << </a>  </li>
+			            <li> <a href="#" class="active num"> 1 </a>  </li>
+			            <li> <a href="#" class="num"> 2 </a>  </li>
+			            <li> <a href="#" class="num"> 3 </a>  </li>
+			            <li> <a href="#" class="num"> 4 </a>  </li>
+			            <li> <a href="#" class="num"> 5 </a>  </li>
+			            <li> <a href="#" class="arrow_right"> >> </a> </li>
+			            <li> <a href="#" class="last">끝 페이지</a> </li>
+			        </ul>
+			    </div>
+			</div>
 
-            <div class="search2"style="left: 50% right: 50%;">
+            <br><br>
+
+			<div id="search2-1"align="center">
+            <div class="search2">
                 <form action="">
                     <input type="text" placeholder="검색어 입력">
                     <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
                 </form>
             </div>
+            </div>
+
+         </div>
+         <!-- page_search div -->
 
             <br>
             <br>
 
     </div>
+   </div>
 
 
 
 
 
-    <script>
+   <!--  <script>
         var totalPages = 5;
         var currentPage = 1;
-        var pageNumbers = document.getElementById("page-numbers");
+        var pageNumbers = document.getElementById("page");
 
     // 페이지 버튼 생성
         for (var i = 1; i <= totalPages; i++) {
@@ -485,26 +638,32 @@
             pageNumbers.appendChild(button);
         }
 
-</script>
+</script> -->
+
+<div id="footer">
+        <div style="width: 100px;"></div>
+
+        <div class="logoArea">
+            <img src="/resources/fo/img/logo.png">
+            <div>지구공</div>
+        </div>
+
+        <div style="margin-top: 30px; color: white;">
+            <p style="font-weight: bold;">
+                이용약관  |  개인정보처리방침  |  도매 전용 B2B몰
+            </p>
+            <p>
+                회사명 : 주식회사 인수온송민근 | 대표자 : 양선주 <br>
+                주소 : 서울시 금천구 가산디지털2로 165, 1001호 | 이메일 : contact@jigugong.co.kr | 팩스 : 0303-3444-2050 <br>
+                사업자등록번호 : 689-86-00791 | 통신판매업신고 : 제2018-서울동작-02955 | 건강기능식품영업신고 : 제2022-0112707 <br>
+                개인정보보호책임자 : 양선주 | 고객센터 : 02-812-2050 | 호스팅 제공자 : (주)지구공
+            </p>
+        </div>
+
+        <div style="width: 100px;"></div>
+
+    </div>
 
 
 </body>
-
-<div id="footer">
-    <div style="width: 100px;"></div>
-    <div><img src="image/logo2.png" style="width: 400px; padding-top: 20px;"></div>
-    <div style="margin-top: 30px; color: white;">
-        <p style="font-weight: bold;">
-            이용약관  |  개인정보처리방침  |  도매 전용 B2B몰
-        </p>
-        <p>
-            회사명 : 주식회사 인수온송민근 | 대표자 : 양선주 <br>
-            주소 : 서울시 금천구 가산디지털2로 165, 1001호 | 이메일 : contact@jigugong.co.kr | 팩스 : 0303-3444-2050 <br>
-            사업자등록번호 : 689-86-00791 | 통신판매업신고 : 제2018-서울동작-02955 | 건강기능식품영업신고 : 제2022-0112707 <br>
-            개인정보보호책임자 : 양선주 | 고객센터 : 02-812-2050 | 호스팅 제공자 : (주)지구공
-        </p>
-    </div>
-    <div style="width: 100px;"></div>
-</div>
-
 </html>
