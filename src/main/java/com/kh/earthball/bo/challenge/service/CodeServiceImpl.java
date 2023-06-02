@@ -33,11 +33,9 @@ public class CodeServiceImpl implements CodeService {
   public List<GrpCode> selectList(PageInfo pi) {
 
     int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-    int limit = pi.getBoardLimit();
+    int limit = offset + pi.getBoardLimit();
 
-    RowBounds rowBounds = new RowBounds(offset, limit);
-
-    return codeMapper.selectList(pi, rowBounds);
+    return codeMapper.selectList(offset, limit);
   }
 
   @Override

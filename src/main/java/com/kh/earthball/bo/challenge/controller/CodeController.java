@@ -25,7 +25,7 @@ public class CodeController {
 
   @GetMapping("grpCodeForm")
   public String insertGrpForm() {
-    return "bo/challenge/code/grpCodeEnrollForm_1";
+    return "bo/challenge/code/grpCodeEnrollForm";
   }
 
   @ResponseBody
@@ -58,7 +58,7 @@ public class CodeController {
     model.addAttribute("pi", pi);
     model.addAttribute("grpCodeList", grpCodeList);
 
-    return "bo/challenge/code/grpCodeListView_2";
+    return "bo/challenge/code/grpCodeListView";
   }
 
   @GetMapping("updateForm.grp")
@@ -68,7 +68,7 @@ public class CodeController {
 
     model.addAttribute("grpCode", grpCodeInfo);
 
-    return "bo/challenge/code/grpCodeUpdateForm_1";
+    return "bo/challenge/code/grpCodeUpdateForm";
   }
 
   @ResponseBody
@@ -78,17 +78,10 @@ public class CodeController {
   }
 
 
-  @GetMapping("deleteForm.grp")
-  public String deleteGrp(Model model, @RequestParam(value = "code") String code, HttpServletRequest request) {
-    int result = codeService.deleteGrp(code);
-
-    if (result > 0) {  // 성공
-      this.grpList(model, 1);
-      return "bo/challenge/code/grpCodeListView";
-    } else {  // 실패
-      String referer = request.getHeader("Referer");
-      return "redirect:" + referer;
-    }
+  @ResponseBody
+  @PostMapping("deleteForm.grp")
+  public int deleteGrp(@RequestParam(value = "code") String code) {
+    return codeService.deleteGrp(code);
   }
 
   @GetMapping("codeEnrollForm")
@@ -105,10 +98,7 @@ public class CodeController {
   @ResponseBody
   @PostMapping("insert.code")
   public int insertCode(Code code) {
-//		log.info("Code : " + code);
-    int result = codeService.insertCode(code);
-//		log.info("result : " + result);
-    return result;
+    return codeService.insertCode(code);
   }
 
   @GetMapping("list.code")
@@ -118,7 +108,7 @@ public class CodeController {
 
     model.addAttribute("codeList", codeList);
 
-    return "bo/challenge/code/codeListView_1";
+    return "bo/challenge/code/codeListView";
   }
 
   @GetMapping("updateForm.code")
@@ -139,25 +129,14 @@ public class CodeController {
   @ResponseBody
   @PostMapping("update.code")
   public int updateCode(Code code) {
-
-    log.info("업데이트 코드 들어와라 : " + code);
-
-    int result = codeService.updateCode(code);
-
-    log.info("업데이트 결과 : " + result);
-
-    return result;
+    return codeService.updateCode(code);
   }
 
 
   @ResponseBody
   @PostMapping("delete.code")
   public int deleteCode(String grpCode, String code) {
-    int result = codeService.deleteCode(grpCode, code);
-
-    log.info("삭제 result 값 : " + result);
-
-    return result;
+    return codeService.deleteCode(grpCode, code);
   }
 
 }
