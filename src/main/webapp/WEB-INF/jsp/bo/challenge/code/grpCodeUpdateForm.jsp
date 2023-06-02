@@ -57,7 +57,7 @@
                   <div class="mb-3">
                     <label class="form-label">그룹코드</label>
                     <input type="hidden" name="grpCode" value="${grpCode.grpCode}">
-                    ${grpCode.grpCode}
+                    <input type="text" class="form-control" value="${grpCode.grpCode}" readonly="readonly">
                   </div>
                   <div class="mb-3">
                     <label class="form-label" for="grpCodeName">그룹코드명</label>
