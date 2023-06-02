@@ -219,3 +219,13 @@
     border-radius: 100%;
 }
 
+#c_1{
+	border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.active1 { color: red;}
+.active2 { color: blue;}
+.active3 { color: deeppink;}
+.active4 { color: skyblue;}

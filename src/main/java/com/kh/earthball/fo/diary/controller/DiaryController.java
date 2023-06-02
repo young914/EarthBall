@@ -1,18 +1,21 @@
 package com.kh.earthball.fo.diary.controller;
 
-import com.kh.earthball.fo.diary.service.DiaryService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.kh.earthball.fo.diary.service.DiaryService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@RequiredArgsConstructor
+@Slf4j
 @Controller
 public class DiaryController {
 
-  @Autowired
-  private DiaryService diaryService;
 
-  @RequestMapping("diary.bo")
+  private final DiaryService diaryService;
+
+  @RequestMapping("diaryListView.bo")
   public String selectList(@RequestParam(value = "cPage", defaultValue = "1") int currentPage) {
 
     // System.out.println("cPage : " + currentPage);
@@ -33,7 +36,7 @@ public class DiaryController {
   }
 
 
-  @RequestMapping("diaryEnroll.bo")
+  @RequestMapping("diaryEnrollForm.bo")
   public String diaryEnrollForm() {
     return "fo/diary/diaryEnrollForm";
   }

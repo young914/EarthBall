@@ -19,7 +19,7 @@ public class DiaryServiceImpl implements DiaryService {
 
   @Override
   public int selectListCount() {
-    // return diaryMapper.selectListCount();
+//      return diaryMapper.selectListCount();
     return 0;
   }
 

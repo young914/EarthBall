@@ -3,4 +3,9 @@
 
 <mapper namespace="com.kh.earthball.fo.diary.mapper.DiaryMapper">
 
+		<select id="selectListCount">
+				SELECT COUNT(*)
+				  FROM DY_BOARD
+				WHERE STATUS = 'Y'
+		</select>
 </mapper>
