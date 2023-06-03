@@ -5,6 +5,14 @@
 	<!-- 로그인 영역 -->
     <header>
 
+    	<c:if test="${ not empty alertMsg }">
+    		<script>
+    			alert("${alertMsg}");
+    		</script>
+    		<c:remove var="alertMsg" scope="session"/>
+    	</c:if>
+
+
     	<!-- 로고+로그인 -->
         <div class="header">
             <div style="width: 200px;"></div>
@@ -31,7 +39,7 @@
 		                |
 	                	<c:choose>
 			                <c:when test="${loginUser.memberId eq 'admin'}">
-			                	<div><a href="admin"><i class="xi-user"></i></a></div>
+			                	<div><a href="sample"><i class="xi-user"></i></a></div>
 			                </c:when>
 			                <c:otherwise>
 			                	<div><a href="myPage.me"><i class="xi-user"></i></a></div>
