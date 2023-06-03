@@ -18,6 +18,8 @@ public interface CodeMapper {
 
   List<GrpCode> selectList(@Param("offset") int offset,@Param("limit") int limit);
 
+  List<GrpCode> selectListAll();
+
   GrpCode selectGrp(String grpCode);
 
   int updateGrp(GrpCode grpCode);

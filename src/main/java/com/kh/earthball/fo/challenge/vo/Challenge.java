@@ -12,7 +12,7 @@ import java.util.List;
 @ToString
 public class Challenge {
 
-  List<ChDetailInfo> list; //챌린저 상세 정보
+  private List<ChDetailInfo> list; //챌린저 상세 정보
   private Integer chNo;              // 챌린지일련번호
   private String chTitle;            // 챌린지명
   private String chStartDay;         // 챌린지시작일

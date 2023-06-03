@@ -39,6 +39,11 @@ public class CodeServiceImpl implements CodeService {
   }
 
   @Override
+  public List<GrpCode> selectListAll() {
+    return codeMapper.selectListAll();
+  }
+
+  @Override
   public GrpCode selectGrp(String grpCode) {
     return codeMapper.selectGrp(grpCode);
   }

@@ -1,169 +1,131 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
+
+<!-- =========================================================
+* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
+==============================================================
+
+* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
+* Created by: ThemeSelection
+* License: You must have a valid license purchased in order to legally use the theme for your project.
+* Copyright ThemeSelection (https://themeselection.com)
+
+=========================================================
+-->
+<!-- beautify ignore:start -->
+<html
+    lang="kr"
+    class="light-style layout-menu-fixed"
+    dir="ltr"
+    data-theme="theme-default"
+    data-assets-path="/resources/admin/assets/"
+    data-template="vertical-menu-template-free"
+>
 <head>
-    <meta charset="UTF-8">
-    <title>Insert title here</title>
-
-    <script
-            src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <style>
-        .content {
-            background-color: rgb(247, 245, 245);
-            width: 80%;
-            margin: auto;
-        }
-
-        .innerOuter {
-            border: 1px solid lightgray;
-            width: 80%;
-            margin: auto;
-            padding: 5% 10%;
-            background-color: white;
-        }
-
-        #categoryList {
-            text-align: center;
-        }
-
-        #categoryList > tbody > tr:hover {
-            cursor: pointer;
-        }
-
-        #pagingArea {
-            width: fit-content;
-            margin: auto;
-        }
-
-        #searchForm {
-            width: 80%;
-            margin: auto;
-        }
-
-        #searchForm > * {
-            float: left;
-            margin: 5px;
-        }
-
-        .select {
-            width: 20%;
-        }
-
-        .text {
-            width: 53%;
-        }
-
-        .searchBtn {
-            width: 20%;
-        }
-
-        .codeHead {
-            display: none; /* 초기에 숨김으로 설정 */
-        }
-
-        .codeContents {
-            display: none;
-        }
-
-        #categoryList > tbody > .codeHead {
-            background-color: rgb(208, 208, 208);
-            color: rgb(18, 119, 181);
-        }
-
-        #categoryList > tbody > .codeContents {
-            background-color: rgb(208, 208, 208);
-            color: rgb(18, 119, 181);
-        }
-    </style>
-
+  <jsp:include page="/WEB-INF/jsp/bo/common/commonHead.jsp"/>
 </head>
+
 <body>
+<!-- Layout wrapper -->
+<div class="layout-wrapper layout-content-navbar">
+  <div class="layout-container">
+    <!-- Menu -->
 
-<jsp:include page=""/>
+    <jsp:include page="/WEB-INF/jsp/bo/common/commonLayoutMenu.jsp">
+      <jsp:param name="menuId" value="52"/>
+    </jsp:include>
+    <!-- / Menu -->
 
-<div class="content">
-    <br><br>
-    <div class="innerOuter" style="padding: 5% 10%;">
-        <h2>카테고리 리스트</h2>
-        <br> <br>
-        <div align="right">
-            <a class="btn btn-secondary" href="/EnrollForm.ca">카테고리 생성</a>
-        </div>
-        <br>
+    <!-- Layout container -->
+    <div class="layout-page">
+      <!-- Navbar -->
+      <jsp:include page="/WEB-INF/jsp/bo/common/commonLayoutNavbar.jsp"/>
+      <!-- / Navbar -->
 
-        <table id="categoryList" class="table table-hover" align="center">
-            <thead>
-            <tr>
-                <th>카테고리 번호</th>
-                <th>카테고리명</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="category" items="${categoryList}">
-                <tr class="category">
-                    <td class="categoryNo" data-category="${ category.categoryNo }">${ category.categoryNo }</td>
-                    <td>${ category.categoryName }</td>
+      <!-- Content wrapper -->
+      <div class="content-wrapper">
+        <!-- Content -->
+        <div class="container-xxl flex-grow-1 container-p-y">
+          <h4 class="fw-bold">카테고리 리스트</h4>
+          <!-- HTML5 Inputs -->
+          <div class="card mb-2">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-10">
+                  <button type="button" class="btn btn-primary" onclick="insertCategory();">카테고리 생성
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Hoverable Table rows -->
+          <div class="card mb-2">
+            <div class="table-responsive text-nowrap" id="categoryList">
+              <table class="table table-hover">
+                <thead>
+                <tr>
+                  <th width="40%" class="text-center">카테고리 번호</th>
+                  <th width="60%" class="text-center">카테고리 명</th>
                 </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-        <br>
-        <br clear="both">
-        <br>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                <c:if test="${empty categoryList}">
+                  <tr>
+                    <td colspan="2">
+                      <strong>데이터가 없습니다.</strong>
+                    </td>
+                  </tr>
+                </c:if>
+                <c:forEach var="item" items="${categoryList}">
+                  <tr>
+                    <td class="text-center categoryNo" data-category-no="${item.categoryNo}">
+                      <strong>${item.categoryNo}</strong></td>
+                    <td class="text-center categoryNo" data-category-no="${item.categoryNo}">
+                      <strong>${item.categoryName}</strong></td>
+                  </tr>
+                </c:forEach>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!--/ Hoverable Table rows -->
+        </div>
+        <!-- / Content -->
 
-        <form id="searchForm" action="" method="get" align="center">
-            <div class="select">
-                <select class="custom-select" name="condition">
-                    <option value="grpCode" class="">그룹코드</option>
-                    <option value="grpCodeName">그룹코드명</option>
-                </select>
+        <!-- Footer -->
+        <footer class="content-footer footer bg-footer-theme">
+          <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+            <div class="mb-2 mb-md-0">
+              ©
+              <script>
+                  document.write(new Date().getFullYear());
+              </script>
             </div>
-            <div class="text">
-                <input type="text" class="form-control" name="keyword">
-            </div>
-            <button type="submit" class="searchBtn btn btn-secondary">검색</button>
-        </form>
-        <br>
-        <br>
+          </div>
+        </footer>
+        <!-- / Footer -->
+
+        <div class="content-backdrop fade"></div>
+      </div>
+      <!-- Content wrapper -->
     </div>
-    <br>
-    <br>
+    <!-- / Layout page -->
+  </div>
 
+  <!-- Overlay -->
+  <div class="layout-overlay layout-menu-toggle"></div>
 </div>
-
-<script>
-
-    // ROW 클릭 시, 상세페이지로~
-    $(function () {
-        $(".category").click(function () {
-            let categoryNo = $(this).children(".categoryNo").text();
-            /*
-                        $.ajax({
-                              url : "detail.ca"
-                            , type : "get"
-                            , data : {categoryNo : categoryNo}
-                            , success : function(result) {
-
-                            }
-                            , error : function() {
-
-                            }
-                        })
-            */
-            console.log("categoryNo : ", categoryNo);
-
-            location.href = "detail.ca?categoryNo=" + categoryNo;
-        })
+<jsp:include page="/WEB-INF/jsp/bo/common/commonScript.jsp"/>
+<script type="text/javascript">
+    $(document).on('click', '#categoryList .categoryNo', function () {
+        let categoryNo = $(this).data('categoryNo');
+        location.href = "/detail.ca?categoryNo=" + categoryNo;
     });
 
+    function insertCategory() {
+        location.href = "/EnrollForm.ca";
+    }
 </script>
-
-
 </body>
 </html>

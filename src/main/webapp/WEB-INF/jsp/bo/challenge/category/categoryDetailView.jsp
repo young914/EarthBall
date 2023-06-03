@@ -1,160 +1,182 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
+
+<!-- =========================================================
+* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
+==============================================================
+
+* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
+* Created by: ThemeSelection
+* License: You must have a valid license purchased in order to legally use the theme for your project.
+* Copyright ThemeSelection (https://themeselection.com)
+
+=========================================================
+-->
+<!-- beautify ignore:start -->
+<html
+    lang="kr"
+    class="light-style layout-menu-fixed"
+    dir="ltr"
+    data-theme="theme-default"
+    data-assets-path="/resources/admin/assets/"
+    data-template="vertical-menu-template-free"
+>
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <style>
-        .content {
-            background-color:rgb(247, 245, 245);
-            width:80%;
-            margin:auto;
-        }
-        .innerOuter {
-            border:1px solid lightgray;
-            width:80%;
-            margin:auto;
-            padding:5% 10%;
-            background-color:white;
-        }
-
-        #templateList {text-align:center;}
-        #templateList>tbody>tr:hover {cursor:pointer;}
-
-        #pagingArea {width:fit-content; margin:auto;}
-        
-        #searchForm {
-            width:80%;
-            margin:auto;
-        }
-        #searchForm>* {
-            float:left;
-            margin:5px;
-        }
-        .select {width:20%;}
-        .text {width:53%;}
-        .searchBtn {width:20%;}
-
-        .innerOuter .btn-secondary {
-            margin-inline: 5px;
-        }
-    </style>
+  <jsp:include page="/WEB-INF/jsp/bo/common/commonHead.jsp"/>
 </head>
+
 <body>
-    
+<!-- Layout wrapper -->
+<div class="layout-wrapper layout-content-navbar">
+  <div class="layout-container">
+    <!-- Menu -->
 
-    <div class="content">
-        <br><br>
-        <div class="innerOuter" style="padding:5% 10%;">
-            <h2>카테고리명 - <span id="categoryName" style="color : #2984d4" >${category.categoryName}</span></h2>
-            <input type="hidden" id="categoryNo" value="${category.categoryNo}">
-            <br>
-            
-            <input type="button" value="카테고리 삭제" style="float:right;" class="btn btn-secondary" onclick="deleteButton(this);">
-            <input type="button" value="카테고리 수정" style="float:right;" class="btn btn-secondary" onclick="editButton(this);">
+    <jsp:include page="/WEB-INF/jsp/bo/common/commonLayoutMenu.jsp">
+      <jsp:param name="menuId" value="52"/>
+    </jsp:include>
+    <!-- / Menu -->
 
-            <br>
-            <br>
-            <hr>
+    <!-- Layout container -->
+    <div class="layout-page">
+      <!-- Navbar -->
+      <jsp:include page="/WEB-INF/jsp/bo/common/commonLayoutNavbar.jsp"/>
+      <!-- / Navbar -->
 
-            <h5>탬플릿 리스트</h5>
+      <!-- Content wrapper -->
+      <div class="content-wrapper">
+        <!-- Content -->
+        <div class="container-xxl flex-grow-1 container-p-y">
+          <h4 class="fw-bold">카테고리명 - ${category.categoryName}</h4>
+          <input type="hidden" id="categoryNo" value="${category.categoryNo}">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-10">
+                  <button type="button" class="btn btn-primary" onclick="updateCategory('${category.categoryNo}');">카테고리
+                    수정
+                  </button>
+                  <button type="button" class="btn btn-primary" onclick="deleteCategory('${category.categoryNo}');">카테고리 삭제
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
 
-            <input type="button" value="탬플릿 등록" style="float:right;" class="btn btn-secondary" onclick="insertTemp(this);">
-            <input type="button" value="탬플릿 확인" style="float:right;" class="btn btn-secondary" onclick="confirmTemp(this);"> <br><br>
-
-
-            <table id="templateList" class="table table-hover" align="center">
+          <h4 class="fw-bold">탬플릿 리스트</h4>
+          <div class="card mb-2">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-10">
+                  <button type="button" class="btn btn-primary" onclick="insertCategoryTemplate('${category.categoryNo}');">탬플릿 등록
+                  </button>
+                  <button type="button" class="btn btn-primary" onclick="viewCategoryTemplate('${category.categoryNo}');">탬플릿 확인
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Basic Layout -->
+          <div class="card mb-2">
+            <div class="table-responsive text-nowrap" id="categoryList">
+              <table class="table table-hover">
                 <thead>
-                    <tr>
-                        <th>탬플릿 번호 </th>
-                        <th>입력타입</th>
-                        <th>챌린지 소제목</th>
-                        <th>그룹코드</th>
-                        <th>우선순위</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
+                <tr>
+                  <th class="text-center">탬플릿 번호</th>
+                  <th class="text-center">입력타입</th>
+                  <th class="text-center">챌린지 소제목</th>
+                  <th class="text-center">그룹코드</th>
+                  <th class="text-center">우선순위</th>
+                  <th></th>
+                  <th></th>
+                </tr>
                 </thead>
-                <tbody>
-                    <c:forEach var="temp" items="${templateList}">
-                        <tr>
-                            <td>${temp.categoryTemplateNo}</td>
-                            <td>${temp.inputType}</td>
-                            <td>${temp.chSubTitle}</td>
-                            <td>${temp.grpCode}</td>
-                            <td>${temp.sortNo}</td>
-                            <td>
-                                <button type="button" class="btn btn-secondary">수정</button>
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-secondary">삭제</button>
-                            </td>
-                        </tr>
-                    </c:forEach>
+                <tbody class="table-border-bottom-0">
+                <c:if test="${empty templateList}">
+                  <tr>
+                    <td colspan="5" class="text-center">
+                      <strong>데이터가 없습니다.</strong>
+                    </td>
+                  </tr>
+                </c:if>
+                <c:forEach var="item" items="${templateList}">
+                  <tr>
+                    <td class="text-center"><strong>${item.categoryTemplateNo}</strong></td>
+                    <td class="text-center"><strong>${item.inputType}</strong></td>
+                    <td class="text-center"><strong>${item.chSubTitle}</strong></td>
+                    <td class="text-center"><strong>${item.grpCode}</strong></td>
+                    <td class="text-center"><strong>${item.sortNo}</strong></td>
+                    <td>
+                      <button type="button" class="btn btn-primary">수정</button>
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-primary">삭제</button>
+                    </td>
+                  </tr>
+                </c:forEach>
                 </tbody>
-            </table>
-            <br>
-
-            <br clear="both"><br>
-
-
+              </table>
+            </div>
+          </div>
+          <!--/ Hoverable Table rows -->
         </div>
-        <br><br>
+        <!-- / Content -->
 
+
+        <!-- Footer -->
+        <footer class="content-footer footer bg-footer-theme">
+          <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+            <div class="mb-2 mb-md-0">
+              ©
+              <script>
+                  document.write(new Date().getFullYear());
+              </script>
+            </div>
+          </div>
+        </footer>
+        <!-- / Footer -->
+
+        <div class="content-backdrop fade"></div>
+      </div>
+      <!-- Content wrapper -->
     </div>
+    <!-- / Layout page -->
+  </div>
 
-    
-    <script>
-        function editButton(button){
-            let categoryNo = $("#categoryNo").val();
-    
-            console.log("categoryNo : ", categoryNo);
-    
-            location.href = "updateForm.ca?categoryNo=" + categoryNo;
-        }
-    
-    
-        function deleteButton(button) {
-            let categoryNo = $("#categoryNo").val();
-            console.log("categoryNo : ", categoryNo);
-            $.ajax({
-                  url : "delete.ca"
-                , type : "post"
-                , data : { categoryNo : categoryNo}
-                , success : function (result) {
-                      if(result > 0) {
-                          alert("카테고리가 삭제되었습니다.");
-                          console.log("카테고리 삭제 성공");
-                          location.href = "/list.ca";
-                      } else {
-                          alert("카테고리가 삭제되지 않았습니다.");
-                          console.log("카테고리 삭제 실패");
-                      }
+  <!-- Overlay -->
+  <div class="layout-overlay layout-menu-toggle"></div>
+</div>
+<jsp:include page="/WEB-INF/jsp/bo/common/commonScript.jsp"/>
+<script type="text/javascript">
+    function updateCategory(categoryNo) {
+        location.href = "/updateForm.ca?categoryNo=" + categoryNo;
+    }
+    function deleteCategory(categoryNo) {
+        $.ajax({
+            url: "delete.ca"
+            , type: "post"
+            , data: {
+                categoryNo : categoryNo
+            }
+            , success: function (result) {
+                if (result > 0) {
+                    alert("카테고리가 삭제되었습니다.");
+                    location.href = "/list.ca";
+                } else {
+                    alert("카테고리가 수정되지 않았습니다.");
                 }
-                , error : function () {
-                      console.log("카테고리 삭제 ajax 통신 실패");
-                }
-            });
-        }
-
-        function insertTemp(button) {
-            let categoryNo = $("#categoryNo").val();
-            location.href="insertForm.te?categoryNo=" + categoryNo;
-        }
-
-
-        function confirmTemp(button) {
-            // 여기다가 이 카테고리의 모든 템플릿을 뿌리를 화면연결지을 것임
-            let categoryNo = $("#categoryNo").val();
-            location.href="insertForm.ch?categoryNo=" + categoryNo;
-        }
-    </script>
-
-    
+            }
+            , error: function () {
+                console.log("카테고리 삭제 ajax 통신 실패");
+            }
+        });
+    }
+    function insertCategoryTemplate(categoryNo) {
+        location.href = "/insertForm.te?categoryNo=" + categoryNo;
+    }
+    function viewCategoryTemplate(categoryNo) {
+        location.href = "/insertForm.te?categoryNo=" + categoryNo;
+    }
+</script>
 </body>
 </html>

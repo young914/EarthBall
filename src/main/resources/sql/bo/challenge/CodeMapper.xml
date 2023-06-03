@@ -30,6 +30,14 @@
         WHERE ROW_NUM BETWEEN #{offset} AND #{limit}
     </select>
 
+  <select id="selectListAll" resultType="com.kh.earthball.bo.challenge.vo.GrpCode">
+    SELECT GRP_CODE
+         , GRP_CODE_NAME
+         , ROW_NUMBER() OVER (ORDER BY GRP_CODE) AS ROW_NUM
+    FROM TB_GRP_CODE
+    WHERE STATUS = 'Y'
+  </select>
+
 
     <select id="selectGrp" parameterType="String" resultType="com.kh.earthball.bo.challenge.vo.GrpCode">
         SELECT GRP_CODE

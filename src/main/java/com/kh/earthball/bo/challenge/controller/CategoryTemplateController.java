@@ -33,6 +33,7 @@ public class CategoryTemplateController {
     Category category = categoryService.selectCategory(categoryNo);
 
     model.addAttribute("category", category);
+    model.addAttribute("grpCodeList", codeService.selectListAll());
 
     return "bo/challenge/categoryTemplate/templateEnrollForm";
   }

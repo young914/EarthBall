@@ -19,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileUploadController {
 
   private final FileUploadService fileUploadService;
-  private final FileUpladMapper fileUpladMapper;
 
   @ResponseBody
   @PostMapping("/challenge/file-upload")
@@ -29,13 +28,6 @@ public class FileUploadController {
     } else {
       return ResponseEntity.badRequest().build();
     }
-  }
-
-  @ResponseBody
-  @PostMapping("/select/fileNo")
-  public int getFileNo() {
-    int fileNo = fileUpladMapper.getFileNo();
-    return fileNo;
   }
 
 }
