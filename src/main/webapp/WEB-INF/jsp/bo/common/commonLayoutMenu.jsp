@@ -2,10 +2,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+<c:if test="${ not empty alertMsg }">
+ 	<script>
+ 		alert("${alertMsg}");
+ 	</script>
+ 	<c:remove var="alertMsg" scope="session"/>
+</c:if>
+
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
   <div class="app-brand demo">
-    <a href="index.html" class="app-brand-link">
-      <img src="/resources/bo/img/logo.png" class="navbar-brand-img" alt="...">
+    <a href="home" class="app-brand-link">
+      <img src="/resources/fo/img/logo.png" class="navbar-brand-img" alt="..." style="width: 50px;">
+      <h2 style="margin-left: 5px; margin: 0 auto; color: #19a7ce; font-weight: bold;">지구공</h2>
     </a>
 
     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -18,7 +26,7 @@
   <ul class="menu-inner py-1">
     <!-- Dashboard -->
     <li class="menu-item ${param.menuId eq '00' ? 'active' : ''}">
-      <a href="/" class="menu-link">
+      <a href="sample" class="menu-link">
         <i class="menu-icon tf-icons bx bx-home-circle"></i>
         <div data-i18n="Analytics">Dashboard</div>
       </a>
@@ -30,10 +38,22 @@
       </a>
     </li>
     <li class="menu-item ${param.menuId eq '20' ? 'active' : ''}">
-      <a href="/" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-table"></i>
-        <div data-i18n="Tables">상품</div>
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-dock-top"></i>
+        <div data-i18n="Account Settings">상품</div>
       </a>
+      <ul class="menu-sub">
+        <li class="menu-item ${param.menuId eq '51' ? 'active' : ''}">
+          <a href="adminlist.pro" class="menu-link">
+            <div data-i18n="Account">상품리스트</div>
+          </a>
+        </li>
+        <li class="menu-item ${param.menuId eq '52' ? 'active' : ''}">
+          <a href="adminEnrollForm.pro" class="menu-link">
+            <div data-i18n="Notifications">상품 추가</div>
+          </a>
+        </li>
+      </ul>
     </li>
     <li class="menu-item ${param.menuId eq '30' ? 'active' : ''}">
       <a href="/" class="menu-link">
@@ -53,7 +73,7 @@
         <div data-i18n="Tables">신고</div>
       </a>
     </li>
-    <li class="menu-item ${param.menuId > '50' && param.menuId < '60' ? 'active open' : ''}">
+    <li class="menu-item ${param.menuId > '50' && param.menuId < '60' ? 'active' : ''}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-dock-top"></i>
         <div data-i18n="Account Settings">챌린지</div>
