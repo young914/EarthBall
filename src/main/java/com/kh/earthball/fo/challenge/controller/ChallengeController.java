@@ -13,10 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -72,20 +69,7 @@ public class ChallengeController {
 
   @ResponseBody
   @PostMapping("/openRequest.chall")
-  public int requestChallenge(Challenge challenge) {
-
-    String inputDate_1 = challenge.getChStartDay();  //"2023-05-30"
-    String inputDate_2 = challenge.getChEndDay();
-
-    LocalDate date = LocalDate.parse(inputDate_1);
-    String chStarDay = date.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-    String chEndDay = date.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-
-    log.info("시작 날짜 : " + chStarDay);
-    log.info("종료 날짜 : " + chEndDay);
-
-    challenge.setChStartDay(chStarDay);
-    challenge.setChEndDay(chEndDay);
+  public int requestChallenge(@RequestBody Challenge challenge) {
 
     int result = challengeService.requestChallenge(challenge);
 

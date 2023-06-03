@@ -1,62 +1,99 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
+
+<!-- =========================================================
+* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
+==============================================================
+
+* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
+* Created by: ThemeSelection
+* License: You must have a valid license purchased in order to legally use the theme for your project.
+* Copyright ThemeSelection (https://themeselection.com)
+
+=========================================================
+-->
+<!-- beautify ignore:start -->
+<html
+    lang="kr"
+    class="light-style layout-menu-fixed"
+    dir="ltr"
+    data-theme="theme-default"
+    data-assets-path="/resources/admin/assets/"
+    data-template="vertical-menu-template-free"
+>
 <head>
-    <meta charset="UTF-8">
-    <title>카테고리 수정하기</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <style>
-        .content {
-            background-color:rgb(247, 245, 245);
-            width:80%;
-            margin:auto;
-        }
-        .innerOuter {
-            border:1px solid lightgray;
-            width:80%;
-            margin:auto;
-            padding:5% 10%;
-            background-color:white;
-        }
-
-        #enrollForm>table {width:100%;}
-        #enrollForm>table * {margin:5px;}
-    </style>
+  <jsp:include page="/WEB-INF/jsp/bo/common/commonHead.jsp"/>
 </head>
+
 <body>
+<!-- Layout wrapper -->
+<div class="layout-wrapper layout-content-navbar">
+  <div class="layout-container">
+    <!-- Menu -->
 
+    <jsp:include page="/WEB-INF/jsp/bo/common/commonLayoutMenu.jsp">
+      <jsp:param name="menuId" value="52"/>
+    </jsp:include>
+    <!-- / Menu -->
 
-<div class="content">
-    <br><br>
-    <div class="innerOuter">
-        <h2>카테고리 수정</h2>
-        <br>
+    <!-- Layout container -->
+    <div class="layout-page">
+      <!-- Navbar -->
+      <jsp:include page="/WEB-INF/jsp/bo/common/commonLayoutNavbar.jsp"/>
+      <!-- / Navbar -->
 
-        <input type="hidden" name="categoryNo" value="${category.categoryNo}">
-        <form id="enrollForm" method="post" action="">
-            <table algin="center">
-                <tr>
-                    <th>카테고리명</th>
-                    <td><input type="text" class="form-control" name="categoryName" value="${category.categoryName}" required></td>
+      <!-- Content wrapper -->
+      <div class="content-wrapper">
+        <!-- Content -->
+        <div class="container-xxl flex-grow-1 container-p-y">
+          <h4 class="fw-bold">카테고리 수정</h4>
 
-                </tr>
-            </table>
-            <br>
-
-            <div align="center">
-                <button type="button" class="btn btn-primary" onclick="categoryNameValidate();">수정하기</button>
-                <button type="reset" class="btn btn-danger" onclick="javascript:history.go(-1);">생성취소</button>
+          <!-- Basic Layout -->
+          <div class="col-xl">
+            <div class="card mb-4">
+              <div class="card-body">
+                <form>
+                  <div class="mb-3">
+                    <label class="form-label" for="categoryName">카테고리명</label>
+                    <input type="hidden" name="categoryNo" value="${category.categoryNo}">
+                    <input type="text" class="form-control" name="categoryName" id="categoryName"
+                           placeholder="카테고리명을 입력하세요." value="${category.categoryName}">
+                  </div>
+                  <button type="button" class="btn btn-primary" onclick="categoryNameValidate();">생성하기</button>
+                  <button type="button" class="btn btn-danger" onclick="javascript:history.go(-1);">생성취소</button>
+                </form>
+              </div>
             </div>
-        </form>
+          </div>
+        </div>
+        <!-- / Content -->
+
+        <!-- Footer -->
+        <footer class="content-footer footer bg-footer-theme">
+          <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+            <div class="mb-2 mb-md-0">
+              ©
+              <script>
+                  document.write(new Date().getFullYear());
+              </script>
+            </div>
+          </div>
+        </footer>
+        <!-- / Footer -->
+
+        <div class="content-backdrop fade"></div>
+      </div>
+      <!-- Content wrapper -->
     </div>
-    <br><br>
+    <!-- / Layout page -->
+  </div>
 
+  <!-- Overlay -->
+  <div class="layout-overlay layout-menu-toggle"></div>
 </div>
-
-<script>
+<jsp:include page="/WEB-INF/jsp/bo/common/commonScript.jsp"/>
+<script type="text/javascript">
     function categoryNameValidate() {
 
         let categoryName = $("input[type=text][name=categoryName]").val();
@@ -64,41 +101,38 @@
 
         let regExp = /^[가-힣]{2,}$/;
 
-        if(!regExp.test(categoryName)) {
+        if (!regExp.test(categoryName)) {
             alert("카테고리명은 2글자 이상의 한글로 입력해주세요.");
             $("input[type=text][name=categoryName]").focus();
             return false;
         }
 
-        let data = { categoryName : categoryName
-                    , categoryNo : categoryNo};
+        let data = {
+            categoryName: categoryName
+            , categoryNo: categoryNo
+        };
 
         console.log("카테고리명 잘 들어감? : ", data);
 
         $.ajax({
-            url : "update.ca"
-            , type : "post"
-            , data : data
-            , success : function(result) {
-
-                if(result > 0) {
+            url: "update.ca"
+            , type: "post"
+            , data: data
+            , success: function (result) {
+                if (result > 0) {
                     alert("카테고리가 수정되었습니다.");
                     console.log("카테고리 수정 성공");
-                    location.href="/list.ca";
+                    location.href = "/detail.ca?categoryNo=" + categoryNo;
                 } else {
                     alert("카테고리가 수정되지 않았습니다.");
                     console.log("카테고리 수정 실패");
                 }
             }
-            , error : function() {
+            , error: function () {
                 console.log("카테고리 수정 ajax 통신 실패");
             }
         });
-
-        return true;
-
     }
 </script>
-
 </body>
 </html>

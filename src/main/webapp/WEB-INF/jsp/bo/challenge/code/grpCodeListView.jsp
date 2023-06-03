@@ -64,17 +64,17 @@
               <table class="table table-hover">
                 <thead>
                 <tr>
-                  <th width="20%">그룹코드</th>
-                  <th width="60%">그룹코드명</th>
-                  <th width="10%">수정</th>
-                  <th width="10%">삭제</th>
+                  <th class="text-center" width="20%">그룹코드</th>
+                  <th class="text-center" width="60%">그룹코드명</th>
+                  <th class="text-center" width="10%">수정</th>
+                  <th class="text-center" width="10%">삭제</th>
                 </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
                 <c:forEach var="item" items="${ grpCodeList }">
                   <tr>
-                    <td class="grpCode" data-grp-code="${item.grpCode}"><strong>${item.grpCode}</strong></td>
-                    <td class="grpCode" data-grp-code="${item.grpCode}"><strong>${item.grpCodeName}</strong></td>
+                    <td class="text-center grpCode" data-grp-code="${item.grpCode}"><strong>${item.grpCode}</strong></td>
+                    <td class="text-center grpCode" data-grp-code="${item.grpCode}"><strong>${item.grpCodeName}</strong></td>
                     <td>
                       <button type="button" class="btn btn-primary" onclick="updateGrpCode('${item.grpCode}');">수정
                       </button>

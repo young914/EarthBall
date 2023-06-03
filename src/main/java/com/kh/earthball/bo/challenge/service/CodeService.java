@@ -14,6 +14,8 @@ public interface CodeService {
 
   List<GrpCode> selectList(PageInfo pi);
 
+  List<GrpCode> selectListAll();
+
   GrpCode selectGrp(String grpCode);
 
   int updateGrp(GrpCode grpCode);

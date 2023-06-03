@@ -3,7 +3,11 @@
 
 <mapper namespace="com.kh.earthball.fo.challenge.mapper.ChallengeMapper">
 
-  <insert id="requestChallenge"  parameterType="com.kh.earthball.fo.challenge.vo.Challenge">
+  <insert id="requestChallenge" parameterType="com.kh.earthball.fo.challenge.vo.Challenge">
+    <selectKey keyProperty="chNo" resultType="java.lang.Integer" order="BEFORE">
+      SELECT SEQ_TB_CHALLENGE.NEXTVAL
+        FROM DUAL
+    </selectKey>
     INSERT INTO TB_CHALLENGE (CH_NO
                             , CH_TITLE
                             , CH_START_DAY
@@ -11,7 +15,7 @@
                             , MEMBER_ID
                             , CATEGORY_NO
                             , FILE_NO)
-                    VALUES (SEQ_TB_CHALLENGE.NEXTVAL
+                    VALUES (#{chNo}
                           , #{chTitle}
                           , #{chStartDay}
                           , #{chEndDay}
@@ -20,5 +24,19 @@
                           , #{fileNo})
   </insert>
 
+  <insert id="insertChDetailInfo"  parameterType="com.kh.earthball.fo.challenge.vo.ChDetailInfo">
+    INSERT INTO TB_CH_DETAIL_INFO ( CH_DETAIL_INFO_NO
+                                  , CH_NO
+                                  , CATEGORY_TEMPLATE_NO
+                                  , CH_DETAIL_INFO_DATA
+                                  , CODE
+                                  , FILE_NO)
+    VALUES ( SEQ_TB_CH_DETAIL_INFO.NEXTVAL
+           , #{chNo}
+           , #{categoryTemplateNo}
+           , #{chDetailInfoData}
+           , #{code}
+           , #{fileNo})
+  </insert>
 
 </mapper>

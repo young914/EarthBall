@@ -60,12 +60,12 @@
       </a>
       <ul class="menu-sub">
         <li class="menu-item ${param.menuId eq '51' ? 'active' : ''}">
-          <a href="pages-account-settings-account.html" class="menu-link">
+          <a href="/list.grp" class="menu-link">
             <div data-i18n="Account">그룹코드/공통코드 관리</div>
           </a>
         </li>
         <li class="menu-item ${param.menuId eq '52' ? 'active' : ''}">
-          <a href="pages-account-settings-notifications.html" class="menu-link">
+          <a href="/list.ca" class="menu-link">
             <div data-i18n="Notifications">카테고리 관리</div>
           </a>
         </li>
