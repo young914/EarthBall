@@ -1188,7 +1188,7 @@ VALUES (SEQ_STORE.NEXTVAL, '지구별가게', '제주 제주시 월랑로 58 1�
 제로웨이스트를 위한 다회용 생활용품과 유기농 원단으로 직접 제작하는 소락 브랜드 제품을 만나볼 수 있습니다.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '톤28 라이브러리 성수', '서울특별시 성동구 성수이로12길 2', '서울 성동구 성수이로12길 2', '11:30 - 20:30', 58, 4,
+VALUES (SEQ_STORE.NEXTVAL, '톤28 라이브러리 성수', '서울특별시 성동구 성수이로12길 2', '0507-1414-0198', '11:30 - 20:30', 58, 4,
         '의식 있는 아름다움, 톤28 라이브러리, 성수입니다.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
