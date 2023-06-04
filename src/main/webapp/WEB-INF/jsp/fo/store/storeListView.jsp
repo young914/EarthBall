@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -7,8 +6,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d4ce7a8706f16f48bba913a5def2af6a"></script>
 
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <style>
 html, body{
     height: 100%;
@@ -50,6 +50,9 @@ form>div{
     margin-right: 20px;
 }
 
+.dropdown-menu{
+    border-radius: 10px;
+}
 .dropdownCate input{
     margin: 5px;
     height: 50px;
@@ -122,141 +125,46 @@ hr{
     .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
     .info .link {color: #5085BB;}
 
+    .pagination {
+        display: flex;
+        list-style-type: none;
+        padding-top: 7px;
+    }
+
+    .pagination li {
+        margin-right: 5px;
+    }
+
+    .pagination li a {
+        display: inline-block;
+        padding: 5px 10px;
+        background-color: #f1f1f1;
+        color: #333;
+        text-decoration: none;
+    }
+
+    .pagination li a.active {
+        background-color: #333;
+        color: #fff;
+    }
+    .pagination li a:hover {
+        background-color: #333;
+        color: #fff;
+    }
+
+    .pageN {
+        display: grid;
+        justify-content: center;
+    }
 </style>
 </head>
 <body>
     <!-- 지도부분 -->
     <div id="map"></div>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d4ce7a8706f16f48bba913a5def2af6a"></script>
-    <script>
-        var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-            mapOption = { 
-                center: new kakao.maps.LatLng(37.7640377730442, 126.771117387211),
-                level: 3
-            };
-        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-        
-        // 마커를 표시할 위치와 title 객체 배열입니다 
-        var positions = [
-            <c:forEach var="s" items="${ list }">
-                {
-                    title: '${s.storeName}',
-                    latlng: new kakao.maps.LatLng(${s.storeLat}, ${s.storeLon}),
-                    address : '${s.storeAddress}',
-                    businessHours : '${s.businessHours}',
-                    jibunAddress : '${s.jibunAddress}'
-                },
-            </c:forEach>
-        ];
-
-    // 마커 이미지의 이미지 주소입니다
-    var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-    
-    var markers = []; // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
-    var contents = [];
-    var overlays = [];
-
-
-    for (var i = 0; i < positions.length; i ++) {
-        // 마커 이미지의 이미지 크기 입니다
-        var imageSize = new kakao.maps.Size(24, 35); 
-        
-        // 마커 이미지를 생성합니다    
-        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-        
-        // 마커를 생성합니다
-        var marker = new kakao.maps.Marker({
-            map: map, // 마커를 표시할 지도
-            position: positions[i].latlng, // 마커를 표시할 위치
-            title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-            image : markerImage // 마커 이미지 
-        });
-        var content = 
-        '<div class="wrap">' + 
-        '    <div class="info">' + 
-        '        <div class="title">' + 
-            positions[i].title + 
-        '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
-        '        </div>' + 
-        '        <div class="body">' + 
-        '            <div class="img">' +
-        '                <img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
-        '           </div>' + 
-        '            <div class="desc">' + 
-        '                <div class="ellipsis">'+ positions[i].address + '</div>' + 
-        '                <div class="jibun ellipsis"> (지번) ' + positions[i].jibunAddress +'</div>' + 
-        '                <div class="businessHourss">'+ positions[i].businessHours + ' </div>' + 
-        '                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
-        '            </div>' + 
-        '        </div>' + 
-        '    </div>' +    
-        '</div>';
-
-        //마커 위에 커스텀오버레이를 표시합니다
-        //마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
-        var overlay = new kakao.maps.CustomOverlay({
-            content: content,
-            map: map,
-            position: marker.getPosition()       
-        });
-
-        //마커를 클릭했을 때 커스텀 오버레이를 표시합니다
-        kakao.maps.event.addListener(marker, 'click', function() {
-            overlay.setMap(map);
-        });
-
-        //커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
-        function closeOverlay() {
-            overlay.setMap(null);     
-        }
-    }
-
-    window.onload = function() {
-        // 'searchList' 클래스를 가진 모든 div 요소를 가져옵니다.
-        var divs = document.querySelectorAll('.searchList');
-
-        // 각 div 요소에 대하여
-        for (var i = 0; i < divs.length; i++) {
-            var div = divs[i];
-
-            // 클릭 이벤트 리스너를 설정합니다.
-            div.addEventListener('click', function(event) {
-                // 클릭된 div 요소의 'StoreLat' 및 'StoreLon' 값을 가져옵니다.
-                var lat = parseFloat(event.target.getAttribute('data-storelat'));
-                var lon = parseFloat(event.target.getAttribute('data-storelon'));
-
-                // 지도의 중심을 해당 위도, 경도로 변경합니다.
-                var coords = new kakao.maps.LatLng(lat, lon);
-                map.setCenter(coords);
-            });
-        }
-    };
-
-    function openNav() {
-    document.getElementById("mySidebar").style.left = "0";
-    document.getElementById("sideBtn").style.marginLeft = "450px";
-    document.getElementById("sidebarButton").style.left = "450px";
-    document.getElementById("sidebarButton").innerHTML = "&lt;";
-    }
-
-    function closeNav() {
-    document.getElementById("mySidebar").style.left = "-450px";
-    document.getElementById("sideBtn").style.marginLeft= "0";
-    document.getElementById("sidebarButton").style.left = "0";
-    document.getElementById("sidebarButton").innerHTML = "&gt;";
-    }
-
-    function toggleNav() {
-        if (document.getElementById("mySidebar").style.left == "0px") {
-            closeNav();
-        } else {
-            openNav();
-        }
-    }
-    </script>
+ 
     <!-- 사이드바 -->
     <div id="mySidebar" class="sidebar">
-        <form action="" >
+        <form action="">
             <div class="header">
                 <span>친환경 매장찾기</span>
             </div>
@@ -265,7 +173,7 @@ hr{
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         지역 검색
                     </button>
-                    <ul class="dropdown-menu" style="width: 100%;">
+                    <ul class="dropdown-menu" style="width: 100%; border-radius: 10px;">
                         <li><a class="dropdown-item" href="#">지역 검색</a></li>
                         <li><a class="dropdown-item" href="#">주소/매장명 검색</a></li>
                     </ul>
@@ -273,7 +181,6 @@ hr{
             </div>
 
             <div style="display: flex;">
-
                 <div class="dropdown citySearch">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         시/도 선택
@@ -297,32 +204,244 @@ hr{
                 <div class="dropdown dropdownCate">
                     <input class="btn btn-primary" type="submit" value="검색">
                 </div>
-
             </div>
         </form>
 
-        <div style="overflow-y: scroll; position:relative; height: 70%;">
+        <div style="overflow-y: scroll; position:relative; height: 65%;">
             <hr>
             <div id="searchResult">
                 <span>총 </span>
-                <span> ${ pi.listCount }개의 결과</span>
+                <span>${pi.listCount}개의 결과</span>
             </div>
             <hr>
-            <c:forEach var="s" items="${ list }">
-                <div class="searchList" data-storelat="${ s.storeLat }" data-storelon="${ s.storeLon }">
-                    <span class="storeTitle">${ s.storeName }</span> <br>
-                    <span class="storeInfo">${ s.storeAddress }</span> <br>
-                    <span class="storeInfo">${ s.storePhone }</span> <br>
-                    <span class="storeInfo">영업시간 ${ s.businessHours }</span>
-                    <i class="xi-heart xi-2x" style="width: 20px;"></i>
-                </div>
-            </c:forEach>
+            <div id="store-list-area">
+            </div>
+        </div>
+        <div class="pageN">
+            <ul class="pagination">
+                <li><a href="#" onclick="goToPage(1)">&lt;&lt;</a></li>
+                <li><a href="#" onclick="goToPage(currentPage - 1)">&lt;</a></li>
+                <li><a href="#" onclick="goToPage(1)">1</a></li>
+                <li><a href="#" onclick="goToPage(2)">2</a></li>
+                <li><a href="#" onclick="goToPage(3)">3</a></li>
+                <li><a href="#" onclick="goToPage(4)">4</a></li>
+                <li><a href="#" onclick="goToPage(5)">5</a></li>
+                <li><a href="#" onclick="goToPage(currentPage + 1)">&gt;</a></li>
+                <li><a href="#" onclick="goToPage(totalPages)">&gt;&gt;</a></li>
+            </ul>
         </div>
     </div>
 
     <!-- 사이드바 버튼 -->
     <div id="sideBtn" >
-        <button id="sidebarButton" class="openbtn" onclick="toggleNav()">&gt;</button>  
+        <button id="sidebarButton" class="openbtn" onclick="toggleNav();">&gt;</button>  
     </div>
+
+    <script>
+
+        let storeList = []; // [{}, {}, ..]
+        let markerList = []; // 각 매장에 대한 마커들 담기
+        let overlayList = []; // 각 매장에 대한 오버레이들 담기
+
+        // 1. 모든 요소들이 화면에 다 로딩된 후 로직 시작
+        $(function() {
+
+            console.log("qqqq")
+
+            // 2. 지도 셋팅하기 & 데이터 불러오기
+            settingMap();
+        });
+
+        function settingMap() {
+            
+            // 2_1. 지도 셋팅 완료
+            var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+                mapOption = { 
+                    center: new kakao.maps.LatLng(37.516232759035965, 126.97701521248901),
+                    level: 8
+                };
+            var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+            // 2_2. ajax 로 전체 매장 조회해오기
+            $.ajax({
+                url : "getStores.st",
+                type : "get",
+                success : function(result) {
+
+                    storeList = result;
+
+                    let resultStr = "";
+                    for(let i = 0; i < storeList.length; i++) {
+
+                        // 동적으로 리스트 요소 생성
+                        resultStr += "<div class='searchList " + i + "' data-storelat='" + storeList[i].storeLat + "' data-storelon='" + storeList[i].storeLon + "'>"
+                                  +    "<span class='storeTitle'>" + storeList[i].storeName + "</span> <br>"
+                                  +    "<span class='storeInfo'>" + storeList[i].storeAddress + "</span> <br>"
+                                  +    "<span class='storeInfo'>" + storeList[i].storePhone + "</span> <br>"
+                                  +    "<span class='storeInfo'>영업시간 " + storeList[i].businessHours + "</span>"
+                                  +    "<i class='xi-heart xi-2x' style='width: 20px;'></i>"
+                                  + "</div>";
+                        
+                        // 각 매장에 대한 마커 생성
+                        
+                        var imageSrc = '/resources/fo/img/shop.png', // 마커이미지의 주소입니다    
+                            imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+                            imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+                            
+                        // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+                        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+                            markerPosition = new kakao.maps.LatLng(storeList[i].storeLat, storeList[i].storeLon); // 마커가 표시될 위치입니다
+
+                        // 마커를 생성합니다
+                        var marker = new kakao.maps.Marker({
+                            position: markerPosition, 
+                            image: markerImage // 마커이미지 설정 
+                        });
+
+                        // 마커가 지도 위에 표시되도록 설정합니다
+                        marker.setMap(map);  
+
+                        markerList.push(marker);
+
+                        // 각 매장에 대한 오버레이 생성
+                        var content = 
+                            '<div class="wrap">' + 
+                            '    <div class="info">' + 
+                            '        <div class="title">' + storeList[i].storeName + 
+                            '            <div class="close" onclick="closeOverlay(' + i + ')" title="닫기"></div>' + 
+                            '        </div>' + 
+                            '        <div class="body">' + 
+                            '            <div class="img">' +
+                            '                <img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
+                            '           </div>' + 
+                            '            <div class="desc">' + 
+                            '                <div class="ellipsis">'+ storeList[i].storeAddress + '</div>' + 
+                            '                <div class="jibun ellipsis"> (지번) ' + storeList[i].jibunAddress +'</div>' + 
+                            '                <div class="businessHours">'+ storeList[i].businessHours + ' </div>' + 
+                            '                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
+                            '            </div>' + 
+                            '        </div>' + 
+                            '    </div>' +    
+                            '</div>';
+                            
+
+                        var overlay = new kakao.maps.CustomOverlay({
+                            position: marker.getPosition(),
+                            content: content
+                        });
+
+                        overlayList.push(overlay);
+
+                        // 마커에 클릭이벤트 걸기
+                        // 마커에 클릭이벤트를 등록합니다
+                        kakao.maps.event.addListener(marker, 'click', clickListener(map, marker, overlay));
+                        
+                    }
+
+                    $("#store-list-area").html(resultStr);
+
+                    // 오버레이가 닫혔는지 열렸는지 검사하는 배열
+                    let isClosed = [];
+                    for(let i = 0; i < storeList.length; i++) {
+                        isClosed.push(true);
+                    }
+
+                    // 리스트에 클릭 걸기
+                    $("#store-list-area").on("click", ".searchList", function() {
+
+                        // console.log($(this));
+
+                        let index = $(this).attr("class").split(" ")[1];
+
+                        if(isClosed[index]) { // 닫혀있음
+
+                            // 다른 창 다 닫기
+                            overlayList.forEach(function(item, i) {
+                                item.setMap(null);
+                                isClosed[i] = true;
+                            });
+                            
+                            overlayList[index].setMap(map);
+                        } else { // 열려있음
+
+                            overlayList[index].setMap(null);
+                        }
+                        
+                        isClosed[index] = !isClosed[index];
+                    });
+
+
+                }, 
+                error : function() {
+                    console.log("ajax 통신 실패!");
+                }
+
+            });
+        }
+
+        // 마커 클릭이벤트에 대한 이벤트핸들러함수
+        function clickListener(map, marker, overlay) {
+            return function() {
+                overlay.setMap(map);
+            };
+        }
+
+        // 오버레이 닫는 함수
+        function closeOverlay(index) {
+
+            console.log("zzzz")
+            if (overlayList[index]) {
+                overlayList[index].setMap(null);
+            }
+        }
+
+        // 리스트 클릭 시 해당 오버레이 띄우기
+
+        function openNav() {
+            document.getElementById("mySidebar").style.left = "0";
+            document.getElementById("sideBtn").style.marginLeft = "450px";
+            document.getElementById("sidebarButton").style.left = "450px";
+            document.getElementById("sidebarButton").innerHTML = "&lt;";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.left = "-450px";
+            document.getElementById("sideBtn").style.marginLeft= "0";
+            document.getElementById("sidebarButton").style.left = "0";
+            document.getElementById("sidebarButton").innerHTML = "&gt;";
+        }
+
+        function toggleNav() {
+
+            console.log("클릭");
+            if (document.getElementById("mySidebar").style.left == "0px") {
+                closeNav();
+            } else {
+                openNav();
+            }
+        }
+
+
+
+
+    </script>
+
+    <script>
+        var currentPage = 1; // 현재 페이지 번호
+        var totalPages = 5; // 전체 페이지 수
+
+        function goToPage(page) {
+            if (page < 1) {
+                page = 1;
+            } else if (page > totalPages) {
+                page = totalPages;
+            }
+
+            currentPage = page;
+            console.log('선택한 페이지:', currentPage);
+            // 페이지 이동 또는 다른 동작 수행
+            // ...
+        }
+    </script>
 </body>
 </html>
