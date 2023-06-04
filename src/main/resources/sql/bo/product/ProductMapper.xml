@@ -13,9 +13,10 @@
 		VALUES(SEQ_PRODUCT_ATTA.NEXTVAL, #{changerName}, #{fileLevel}, SEQ_PRODUCT.CURRVAL)
 	</insert>
 
-	<select id="adminAllProductList">
+	<select id="adminAllProductList" resultType="com.kh.earthball.bo.product.vo.Product">
 		SELECT *
 		FROM PRODUCT
+		ORDER BY CREATE_DATE
 	</select>
 
 	<select id="selectListCount" resultType="_int">
