@@ -9,4 +9,10 @@ public interface CategoryTemplateService {
   List<CategoryTemplate> selectTemplateList(int categoryNo);
 
   int insertTemplate(CategoryTemplate template);
+
+  CategoryTemplate selectTemplateForm(int categoryTemplateNo);
+
+  int updateTemplate(CategoryTemplate categoryTemplate);
+
+  int deleteTemplate(int categoryTemplateNo);
 }

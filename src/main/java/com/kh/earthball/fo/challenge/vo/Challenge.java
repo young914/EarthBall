@@ -1,6 +1,7 @@
 package com.kh.earthball.fo.challenge.vo;
 
 import lombok.*;
+import oracle.sql.CLOB;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
 @ToString
 public class Challenge {
 
-  private List<ChDetailInfo> list; //챌린저 상세 정보
+
   private Integer chNo;              // 챌린지일련번호
   private String chTitle;            // 챌린지명
   private String chStartDay;         // 챌린지시작일
@@ -20,4 +21,8 @@ public class Challenge {
   private String memberId;           // 회원아이디
   private Integer categoryNo;        // 카테고리일련번호
   private Integer fileNo;            // 파일일련번호
+  private String chContent;          // 챌린지 내용
+
+  private String filePath;
+  private String categoryName;
 }

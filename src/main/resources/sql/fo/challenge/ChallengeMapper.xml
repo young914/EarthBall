@@ -3,6 +3,27 @@
 
 <mapper namespace="com.kh.earthball.fo.challenge.mapper.ChallengeMapper">
 
+  <select id="selectListCount" resultType="java.lang.Integer">
+    SELECT COUNT(*)
+      FROM TB_CHALLENGE
+  </select>
+
+  <select id="selectList"  resultType="com.kh.earthball.fo.challenge.vo.Challenge">
+    SELECT CH_NO
+         , CH_TITLE
+         , TO_CHAR(TO_DATE(CH_START_DAY, 'YYYY-MM-DD')) AS CH_START_DAY
+         , TO_CHAR(TO_DATE(CH_END_DAY, 'YYYY-MM-DD')) AS CH_END_DAY
+         , MEMBER_ID
+         , (SELECT CATEGORY_NAME
+            FROM TB_CATEGORY CA
+            WHERE CA.CATEGORY_NO = C.CATEGORY_NO) CATEGORY_NAME
+         , (SELECT FILE_PATH
+            FROM TB_CHA_FILE F
+            WHERE F.FILE_NO = C.FILE_NO) FILE_PATH
+    FROM TB_CHALLENGE C
+    ORDER BY CH_NO DESC
+  </select>
+
   <insert id="requestChallenge" parameterType="com.kh.earthball.fo.challenge.vo.Challenge">
     <selectKey keyProperty="chNo" resultType="java.lang.Integer" order="BEFORE">
       SELECT SEQ_TB_CHALLENGE.NEXTVAL
@@ -14,14 +35,16 @@
                             , CH_END_DAY
                             , MEMBER_ID
                             , CATEGORY_NO
-                            , FILE_NO)
+                            , FILE_NO
+                            , CH_CONTENT)
                     VALUES (#{chNo}
                           , #{chTitle}
                           , #{chStartDay}
                           , #{chEndDay}
                           , #{memberId}
                           , #{categoryNo}
-                          , #{fileNo})
+                          , #{fileNo}
+                          , #{chContent})
   </insert>
 
   <insert id="insertChDetailInfo"  parameterType="com.kh.earthball.fo.challenge.vo.ChDetailInfo">
@@ -38,5 +61,22 @@
            , #{code}
            , #{fileNo})
   </insert>
+
+  <select id="selectChallenge" parameterType="java.lang.Integer" resultType="com.kh.earthball.fo.challenge.vo.Challenge">
+    SELECT CH_NO
+         , CH_TITLE
+         , TO_CHAR(TO_DATE(CH_START_DAY, 'YYYY-MM-DD')) AS CH_START_DAY
+         , TO_CHAR(TO_DATE(CH_END_DAY, 'YYYY-MM-DD')) AS CH_END_DAY
+         , MEMBER_ID
+         , (SELECT CATEGORY_NAME
+            FROM TB_CATEGORY CA
+            WHERE CA.CATEGORY_NO = C.CATEGORY_NO) CATEGORY_NAME
+         , (SELECT FILE_PATH
+            FROM TB_CHA_FILE F
+            WHERE F.FILE_NO = C.FILE_NO) FILE_PATH
+         , CH_CONTENT
+      FROM TB_CHALLENGE C
+     WHERE CH_NO = #{chNo}
+  </select>
 
 </mapper>

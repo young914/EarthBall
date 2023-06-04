@@ -43,12 +43,12 @@
         <div data-i18n="Account Settings">상품</div>
       </a>
       <ul class="menu-sub">
-        <li class="menu-item ${param.menuId eq '51' ? 'active' : ''}">
+        <li class="menu-item ${param.menuId eq '21' ? 'active' : ''}">
           <a href="adminlist.pro" class="menu-link">
             <div data-i18n="Account">상품리스트</div>
           </a>
         </li>
-        <li class="menu-item ${param.menuId eq '52' ? 'active' : ''}">
+        <li class="menu-item ${param.menuId eq '22' ? 'active' : ''}">
           <a href="adminEnrollForm.pro" class="menu-link">
             <div data-i18n="Notifications">상품 추가</div>
           </a>
@@ -91,7 +91,12 @@
         </li>
         <li class="menu-item ${param.menuId eq '53' ? 'active' : ''}">
           <a href="pages-account-settings-connections.html" class="menu-link">
-            <div data-i18n="Connections">챌린지 오픈 관리</div>
+            <div data-i18n="Connections">참여 게시판 관리</div>
+          </a>
+        </li>
+        <li class="menu-item ${param.menuId eq '54' ? 'active' : ''}">
+          <a href="pages-account-settings-connections.html" class="menu-link">
+            <div data-i18n="Connections">인증 게시판 관리</div>
           </a>
         </li>
       </ul>

@@ -107,10 +107,10 @@
                     <td class="text-center"><strong>${item.grpCode}</strong></td>
                     <td class="text-center"><strong>${item.sortNo}</strong></td>
                     <td>
-                      <button type="button" class="btn btn-primary">수정</button>
+                      <button type="button" class="btn btn-primary" onclick="updateTemplate(this);">수정</button>
                     </td>
                     <td>
-                      <button type="button" class="btn btn-primary">삭제</button>
+                      <button type="button" class="btn btn-primary" onclick="deleteTemplate(this, ${category.categoryNo});">삭제</button>
                     </td>
                   </tr>
                 </c:forEach>
@@ -176,6 +176,40 @@
     }
     function viewCategoryTemplate(categoryNo) {
         location.href = "/insertForm.te?categoryNo=" + categoryNo;
+    }
+
+    function updateTemplate(button) {
+        let categoryTemplateNo = button.closest("tr").querySelector("td:first-child strong").textContent;
+        // 첫 번째 <td>의 텍스트 내용 가져오기
+
+        console.log("categoryTemplateNo : 들어오나?", categoryTemplateNo);
+        location.href="/updateForm.te?categoryTemplateNo=" + categoryTemplateNo;
+
+    }
+    function deleteTemplate(button, categoryNo) {
+        let categoryTemplateNo = button.closest("tr").querySelector("td:first-child strong").textContent;
+
+        console.log("categoryTemplateNo : 들어오나?", categoryTemplateNo);
+        console.log("categoryNo : 들어오나?", categoryNo);
+
+        $.ajax({
+              url : "delete.te"
+            , type : "post"
+            , data : {
+                categoryTemplateNo : categoryTemplateNo
+            }
+            , success : function (result) {
+                if(result > 0) {
+                    alert("탬플릿이 삭제되었습니다.");
+                    location.href="/detail.ca?categoryNo=" + categoryNo;
+                } else {
+                    alert("탬플릿이 삭제되지 않았습니다.");
+                }
+            }
+            , error : function () {
+                  console.log("탬플릿 삭제 ajax 통신 실패");
+            }
+        });
     }
 </script>
 </body>
