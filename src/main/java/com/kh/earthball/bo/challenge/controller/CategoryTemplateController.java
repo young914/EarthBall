@@ -11,10 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -68,5 +65,28 @@ public class CategoryTemplateController {
     log.info("templateList 0번째 코드리스트: " + templateList.get(0).getCodeList());
 
     return "bo/challenge/categoryTemplate/challengeInsertForm";
+  }
+
+  @GetMapping("updateForm.te")
+  public String updateTemplateForm(@RequestParam(value = "categoryTemplateNo") int categoryTemplateNo, Model model) {
+
+    // 조회해오기
+    CategoryTemplate categoryTemplate = templateService.selectTemplateForm(categoryTemplateNo);
+
+    model.addAttribute("categoryTemplate", categoryTemplate);
+    model.addAttribute("grpCodeList", codeService.selectListAll());
+
+    return "bo/challenge/categoryTemplate/templateUpdateForm";
+  }
+  @ResponseBody
+  @PostMapping("update.te")
+  public int updateTemplate(CategoryTemplate categoryTemplate) {
+    return templateService.updateTemplate(categoryTemplate);
+  }
+
+  @ResponseBody
+  @PostMapping("delete.te")
+  public int deleteTemplate(int categoryTemplateNo) {
+    return templateService.deleteTemplate(categoryTemplateNo);
   }
 }

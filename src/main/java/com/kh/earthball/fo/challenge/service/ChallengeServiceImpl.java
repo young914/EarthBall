@@ -3,10 +3,14 @@ package com.kh.earthball.fo.challenge.service;
 import com.kh.earthball.fo.challenge.mapper.ChallengeMapper;
 import com.kh.earthball.fo.challenge.vo.ChDetailInfo;
 import com.kh.earthball.fo.challenge.vo.Challenge;
+import com.kh.earthball.fo.common.vo.PageInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
 
 @Service
 @Slf4j
@@ -16,20 +20,43 @@ public class ChallengeServiceImpl implements ChallengeService {
   private final ChallengeMapper challengeMapper;
 
   @Override
+  public int selectListCount() {
+    return challengeMapper.selectListCount();
+  }
+
+  @Override
+  public ArrayList<Challenge> selectList(PageInfo pageInfo) {
+
+    int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getBoardLimit();
+    int limit = pageInfo.getBoardLimit();
+
+    RowBounds rowBounds = new RowBounds(offset, limit);
+
+    return challengeMapper.selectList(rowBounds);
+  }
+
+  @Override
   @Transactional  // 모든 값들이 다 적용 된 후에 커밋 처리 될 수 있도록 묶어두는 개념
   public int requestChallenge(Challenge challenge) {
     challenge.setChStartDay(challenge.getChStartDay().replaceAll("-", ""));
     challenge.setChEndDay(challenge.getChEndDay().replaceAll("-", ""));
     challenge.setMemberId("user02");
-    int reulst = challengeMapper.requestChallenge(challenge);
-    if (reulst == 0) {
+    int result = challengeMapper.requestChallenge(challenge);
+    if (result == 0) {
       throw new RuntimeException();
     }
-
+/*
     for (ChDetailInfo chDetailInfo : challenge.getList()) {
       chDetailInfo.setChNo(challenge.getChNo());
       challengeMapper.insertChDetailInfo(chDetailInfo);
     }
-    return reulst;
+
+ */
+    return result;
+  }
+
+  @Override
+  public Challenge selectChallenge(int chNo) {
+    return challengeMapper.selectChallenge(chNo);
   }
 }

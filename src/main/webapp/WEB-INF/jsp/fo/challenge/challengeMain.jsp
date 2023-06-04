@@ -54,32 +54,15 @@
                 <h3>카테고리</h3>
                 <div id="filter_1_1">
                     <ul>
-                        <li><a class="btn_2" href="">친환경 소비</a></li>
-                        <li><a class="btn_2" href="">친환경 이동</a></li>
-                        <li><a class="btn_2" href="">자원순환</a></li>
-                        <li><a class="btn_2" href="">자연보호</a></li>
-                        <li><a class="btn_2" href="">에너지 절약</a></li>
-                        <li><a class="btn_2" href="">기타</a></li>
+                      <c:forEach var="category" items="${categoryList}">
+                        <li><a class="btn_2" href="javascript:categoryFilter();">${category.categoryName}</a></li>
+                      </c:forEach>
                     </ul>
                 </div>
             </div>
             <div></div>
 
             <div id="filter_2">
-                <h3>도전기간</h3>
-                <div id="filter_2_1">
-                    <ul>
-                        <li><a class="btn_2" href="">당일</a></li>
-                        <li><a class="btn_2" href="">1주</a></li>
-                        <li><a class="btn_2" href="">2주</a></li>
-                        <li><a class="btn_2" href="">3주</a></li>
-                        <li><a class="btn_2" href="">4주 이상</a></li>
-                    </ul>
-                </div>
-
-            </div>
-
-            <div id="filter_3">
                 <h3>진행상태</h3>
                 <div id="filter_3_1">
                     <ul>
@@ -95,340 +78,47 @@
 
             <!-- content_1 시작 -->
             <div id="content_1">
-
+              <c:forEach var="chall" items="${challengeList}">
                 <!-- 카드 한 장 시작 -->
-                <div class="chall_Card">
+                <div class="chall_Card" onclick="challengeDetailView('${chall.chNo}');">
                     <div class="chall_Title">
                         <table>
+                            <input type="hidden" name="chNo" value="${chall.chNo}">
                             <tr>
                                 <td rowspan="2"><img src="/resources/fo/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
-                                <td><h3 style="margin: 5px;">여기는 제목임</h3></td>
+                                <td><h3 style="margin: 5px;">${chall.chTitle}</h3></td>
                             </tr>
                             <tr>
-                                <td><span class="userId">회원ID</span></td>
+                                <td><span class="userId">${chall.memberId}</span></td>
                             </tr>
                         </table>
                     </div>
 
-                    <img src="/resources/fo/img/flower.jpg" alt="">
+                    <img src="${chall.filePath}" alt="">
 
                     <div class="chall_Date" align="center">
-                        <span>2023-05-27 ~ 2023-05-28</span>
+                        <span>${chall.chStartDay} ~ ${chall.chEndDay}</span>
                     </div>
 
                     <div class="chall_Tag">
                         <ul>
-                            <li><span class="tag">친환경 소비</span></li>
-                            <li><span class="tag">1주</span></li>
+                            <li><span class="tag">${chall.categoryName}</span></li>
+
+                            <c:choose>
+                              <c:when test="${chall.chStartDay eq chall.chEndDay} ">
+                                <li><span class="tag">당일</span></li>
+                              </c:when>
+                              <c:otherwise>
+                                <li><span class="tag">몰라</span></li>
+                              </c:otherwise>
+
+                            </c:choose>
                             <li><span class="tag">진행 중</span></li>
                         </ul>
                     </div>
                 </div>
+              </c:forEach>
                 <!-- 카드 한 장 끝 -->
-
-
-                <div class="chall_Card">
-                    <div class="chall_Title">
-                        <table>
-                            <tr>
-                                <td rowspan="2"><img src="/resources/fo/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
-                                <td><h3 style="margin: 5px;">여기는 제목임</h3></td>
-                            </tr>
-                            <tr>
-                                <td><span class="userId">회원ID</span></td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <img src="/resources/fo/img/flower.jpg" alt="">
-
-                    <div class="chall_Date" align="center">
-                        <span>2023-05-27 ~ 2023-05-28</span>
-                    </div>
-
-                    <div class="chall_Tag">
-                        <ul align="center">
-                            <li><span class="tag">친환경 소비</span></li>
-                            <li><span class="tag">1주</span></li>
-                            <li><span class="tag">진행 중</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="chall_Card">
-                    <div class="chall_Title">
-                        <table>
-                            <tr>
-                                <td rowspan="2"><img src="/resources/fo/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
-                                <td><h3 style="margin: 5px;">여기는 제목임</h3></td>
-                            </tr>
-                            <tr>
-                                <td><span class="userId">회원ID</span></td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <img src="/resources/fo/img/flower.jpg" alt="">
-
-                    <div class="chall_Date" align="center">
-                        <span>2023-05-27 ~ 2023-05-28</span>
-                    </div>
-
-                    <div class="chall_Tag">
-                        <ul>
-                            <li><span class="tag">친환경 소비</span></li>
-                            <li><span class="tag">1주</span></li>
-                            <li><span class="tag">진행 중</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="chall_Card">
-                    <div class="chall_Title">
-                        <table>
-                            <tr>
-                                <td rowspan="2"><img src="/resources/fo/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
-                                <td><h3 style="margin: 5px;">여기는 제목임</h3></td>
-                            </tr>
-                            <tr>
-                                <td><span class="userId">회원ID</span></td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <img src="/resources/fo/img/flower.jpg" alt="">
-
-                    <div class="chall_Date" align="center">
-                        <span>2023-05-27 ~ 2023-05-28</span>
-                    </div>
-
-                    <div class="chall_Tag">
-                        <ul>
-                            <li><span class="tag">친환경 소비</span></li>
-                            <li><span class="tag">1주</span></li>
-                            <li><span class="tag">진행 중</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="chall_Card">
-                    <div class="chall_Title">
-                        <table>
-                            <tr>
-                                <td rowspan="2"><img src="/resources/fo/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
-                                <td><h3 style="margin: 5px;">여기는 제목임</h3></td>
-                            </tr>
-                            <tr>
-                                <td><span class="userId">회원ID</span></td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <img src="/resources/fo/img/flower.jpg" alt="">
-
-                    <div class="chall_Date" align="center">
-                        <span>2023-05-27 ~ 2023-05-28</span>
-                    </div>
-
-                    <div class="chall_Tag">
-                        <ul>
-                            <li><span class="tag">친환경 소비</span></li>
-                            <li><span class="tag">1주</span></li>
-                            <li><span class="tag">진행 중</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="chall_Card">
-                    <div class="chall_Title">
-                        <table>
-                            <tr>
-                                <td rowspan="2"><img src="/resources/fo/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
-                                <td><h3 style="margin: 5px;">여기는 제목임</h3></td>
-                            </tr>
-                            <tr>
-                                <td><span class="userId">회원ID</span></td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <img src="/resources/fo/img/flower.jpg" alt="">
-
-                    <div class="chall_Date" align="center">
-                        <span>2023-05-27 ~ 2023-05-28</span>
-                    </div>
-
-                    <div class="chall_Tag">
-                        <ul>
-                            <li><span class="tag">친환경 소비</span></li>
-                            <li><span class="tag">1주</span></li>
-                            <li><span class="tag">진행 중</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="chall_Card">
-                    <div class="chall_Title">
-                        <table>
-                            <tr>
-                                <td rowspan="2"><img src="/resources/fo/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
-                                <td><h3 style="margin: 5px;">여기는 제목임</h3></td>
-                            </tr>
-                            <tr>
-                                <td><span class="userId">회원ID</span></td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <img src="/resources/fo/img/flower.jpg" alt="">
-
-                    <div class="chall_Date" align="center">
-                        <span>2023-05-27 ~ 2023-05-28</span>
-                    </div>
-
-                    <div class="chall_Tag">
-                        <ul>
-                            <li><span class="tag">친환경 소비</span></li>
-                            <li><span class="tag">1주</span></li>
-                            <li><span class="tag">진행 중</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="chall_Card">
-                    <div class="chall_Title">
-                        <table>
-                            <tr>
-                                <td rowspan="2"><img src="/resources/fo/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
-                                <td><h3 style="margin: 5px;">여기는 제목임</h3></td>
-                            </tr>
-                            <tr>
-                                <td><span class="userId">회원ID</span></td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <img src="/resources/fo/img/flower.jpg" alt="">
-
-                    <div class="chall_Date" align="center">
-                        <span>2023-05-27 ~ 2023-05-28</span>
-                    </div>
-
-                    <div class="chall_Tag">
-                        <ul>
-                            <li><span class="tag">친환경 소비</span></li>
-                            <li><span class="tag">1주</span></li>
-                            <li><span class="tag">진행 중</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="chall_Card">
-                    <div class="chall_Title">
-                        <table>
-                            <tr>
-                                <td rowspan="2"><img src="/resources/fo/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
-                                <td><h3 style="margin: 5px;">여기는 제목임</h3></td>
-                            </tr>
-                            <tr>
-                                <td><span class="userId">회원ID</span></td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <img src="/resources/fo/img/flower.jpg" alt="">
-
-                    <div class="chall_Date" align="center">
-                        <span>2023-05-27 ~ 2023-05-28</span>
-                    </div>
-
-                    <div class="chall_Tag">
-                        <ul>
-                            <li><span class="tag">친환경 소비</span></li>
-                            <li><span class="tag">1주</span></li>
-                            <li><span class="tag">진행 중</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="chall_Card">
-                    <div class="chall_Title">
-                        <table>
-                            <tr>
-                                <td rowspan="2"><img src="/resources/fo/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
-                                <td><h3 style="margin: 5px;">여기는 제목임</h3></td>
-                            </tr>
-                            <tr>
-                                <td><span class="userId">회원ID</span></td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <img src="/resources/fo/img/flower.jpg" alt="">
-
-                    <div class="chall_Date" align="center">
-                        <span>2023-05-27 ~ 2023-05-28</span>
-                    </div>
-
-                    <div class="chall_Tag">
-                        <ul>
-                            <li><span class="tag">친환경 소비</span></li>
-                            <li><span class="tag">1주</span></li>
-                            <li><span class="tag">진행 중</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="chall_Card">
-                    <div class="chall_Title">
-                        <table>
-                            <tr>
-                                <td rowspan="2"><img src="/resources/fo/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
-                                <td><h3 style="margin: 5px;">여기는 제목임</h3></td>
-                            </tr>
-                            <tr>
-                                <td><span class="userId">회원ID</span></td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <img src="/resources/fo/img/flower.jpg" alt="">
-
-                    <div class="chall_Date" align="center">
-                        <span>2023-05-27 ~ 2023-05-28</span>
-                    </div>
-
-                    <div class="chall_Tag">
-                        <ul>
-                            <li><span class="tag">친환경 소비</span></li>
-                            <li><span class="tag">1주</span></li>
-                            <li><span class="tag">진행 중</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="chall_Card">
-                    <div class="chall_Title">
-                        <table>
-                            <tr>
-                                <td rowspan="2"><img src="/resources/fo/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
-                                <td><h3 style="margin: 5px;">여기는 제목임</h3></td>
-                            </tr>
-                            <tr>
-                                <td><span class="userId">회원ID</span></td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <img src="/resources/fo/img/flower.jpg" alt="">
-
-                    <div class="chall_Date" align="center">
-                        <span>2023-05-27 ~ 2023-05-28</span>
-                    </div>
-
-                    <div class="chall_Tag">
-                        <ul>
-                            <li><span class="tag">친환경 소비</span></li>
-                            <li><span class="tag">1주</span></li>
-                            <li><span class="tag">진행 중</span></li>
-                        </ul>
-                    </div>
-                </div>
-
-
-
-
-
 
             </div>
             <!-- content_1 끝-->
@@ -617,12 +307,24 @@
             </div>
             <!-- Hot 챌린지 영역 끝 -->
         </div> <br><br>
+
         <!-- 페이징바 넣을 자리 시작 -->
         <div id="page">
             <div class="page_btn" align="center">
+
+
                 <ul class="pagination">
                     <li> <a href="#" class="first">처음 페이지</a> </li>
-                    <li> <a href="#" class="arrow_left"> << </a>  </li>
+
+                  <c:choose>
+                    <c:when test="${ pageInfo.currentPage eq 1}">
+                      <li> <a href="#" class="arrow_left" disabled> << </a>  </li>
+                    </c:when>
+                    <c:otherwise>
+                      <li> <a href="/main.chall?currentPage=${pageInfo.currentPage - 1}" class="arrow_left" disabled> << </a>  </li>
+                    </c:otherwise>
+                  </c:choose>
+
 
                     <li> <a href="#" class="active num"> 1 </a>  </li>
                     <li> <a href="#" class="num"> 2 </a>  </li>
@@ -631,6 +333,8 @@
                     <li> <a href="#" class="num"> 5 </a>  </li>
 
                     <li> <a href="#" class="arrow_right"> >> </a> </li>
+
+
                     <li> <a href="#" class="last">끝 페이지</a> </li>
                 </ul>
             </div>
@@ -645,6 +349,11 @@
     <script>
         function chall_open(){
             location.href = "/categoryList.chall";
+        }
+
+        // 챌린지 상세조회로 넘기기
+        function challengeDetailView(chNo) {
+            location.href="/detailView.chall?chNo=" + chNo;
         }
     </script>
 

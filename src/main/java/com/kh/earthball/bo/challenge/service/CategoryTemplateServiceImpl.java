@@ -24,4 +24,19 @@ public class CategoryTemplateServiceImpl implements CategoryTemplateService {
   public int insertTemplate(CategoryTemplate template) {
     return templateMapper.insertTemplate(template);
   }
+
+  @Override
+  public CategoryTemplate selectTemplateForm(int categoryTemplateNo) {
+    return templateMapper.selectTemplateForm(categoryTemplateNo);
+  }
+
+  @Override
+  public int updateTemplate(CategoryTemplate categoryTemplate) {
+    return templateMapper.updateTemplate(categoryTemplate);
+  }
+
+  @Override
+  public int deleteTemplate(int categoryTemplateNo) {
+    return templateMapper.deleteTemplate(categoryTemplateNo);
+  }
 }

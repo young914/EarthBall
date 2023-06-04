@@ -60,8 +60,8 @@
                     <input type="text" class="form-control" name="categoryName" id="categoryName"
                            placeholder="카테고리명을 입력하세요." value="${category.categoryName}">
                   </div>
-                  <button type="button" class="btn btn-primary" onclick="categoryNameValidate();">생성하기</button>
-                  <button type="button" class="btn btn-danger" onclick="javascript:history.go(-1);">생성취소</button>
+                  <button type="button" class="btn btn-primary" onclick="categoryNameValidate();">수정하기</button>
+                  <button type="button" class="btn btn-danger" onclick="javascript:history.go(-1);">수정취소</button>
                 </form>
               </div>
             </div>
@@ -99,10 +99,10 @@
         let categoryName = $("input[type=text][name=categoryName]").val();
         let categoryNo = $("input[type=hidden][name=categoryNo]").val();
 
-        let regExp = /^[가-힣]{2,}$/;
+        let regExp = /^[가-힣,a-z,A-Z,0-9]{2,}$/;
 
         if (!regExp.test(categoryName)) {
-            alert("카테고리명은 2글자 이상의 한글로 입력해주세요.");
+            alert("카테고리명은 2글자 이상의 한글 및 영어, 숫자로 입력해주세요.");
             $("input[type=text][name=categoryName]").focus();
             return false;
         }

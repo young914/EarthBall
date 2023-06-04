@@ -31,4 +31,35 @@
                                          , #{grpCode}
                                          , #{categoryNo})
     </insert>
+
+    <select id="selectTemplateForm" parameterType="java.lang.Integer" resultType="com.kh.earthball.bo.challenge.vo.CategoryTemplate">
+        SELECT CATEGORY_TEMPLATE_NO
+             , INPUT_TYPE
+             , STATUS
+             , SORT_NO
+             , CH_SUB_TITLE
+             , GRP_CODE
+             , CATEGORY_NO
+          FROM TB_CATEGORY_TEMPLATE
+         WHERE CATEGORY_TEMPLATE_NO = #{categoryTemplateNo}
+           AND STATUS = 'Y'
+    </select>
+
+    <update id="updateTemplate" parameterType="com.kh.earthball.bo.challenge.vo.CategoryTemplate">
+        UPDATE TB_CATEGORY_TEMPLATE
+           SET INPUT_TYPE = #{inputType}
+             , CH_SUB_TITLE = #{chSubTitle}
+             , GRP_CODE = #{grpCode}
+             , SORT_NO = #{sortNo}
+         WHERE CATEGORY_TEMPLATE_NO = #{categoryTemplateNo}
+           AND CATEGORY_NO = #{categoryNo}
+           AND STATUS = 'Y'
+    </update>
+
+    <update id="deleteTemplate" parameterType="java.lang.Integer">
+        UPDATE TB_CATEGORY_TEMPLATE
+           SET STATUS = 'N'
+         WHERE CATEGORY_TEMPLATE_NO = #{categoryTemplateNo}
+    </update>
+
 </mapper>
