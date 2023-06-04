@@ -1,5 +1,4 @@
 DROP TABLE STORE;
-DROP TABLE STORE_REGION;
 DROP TABLE PRODUCT;
 DROP TABLE PAYMENT;
 DROP TABLE TB_CATEGORY;
@@ -97,6 +96,7 @@ CREATE TABLE STORE
     STORE_LON       NUMBER NULL,
     STORE_REGION_NO NUMBER NULL,
     STORE_INFO      VARCHAR2(500),
+    STATUS       CHAR(1) DEFAULT 'Y'     NOT NULL,
     FOREIGN KEY (STORE_REGION_NO) REFERENCES STORE_REGION (STORE_REGION_NO)
 );
 
@@ -1131,25 +1131,83 @@ INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (209, '대전광역시', '유성구');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (210, '대전광역시', '중구');
+INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
+VALUES (211, '울산광역시', '중구');
+INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
+VALUES (212, '울산광역시', '남구');
+INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
+VALUES (213, '울산광역시', '동구');
+INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
+VALUES (214, '울산광역시', '북구');
+INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
+VALUES (215, '울산광역시', '울주군');
+INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
+VALUES (216, '광주광역시', '서구');
+INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
+VALUES (217, '광주광역시', '남구');
+INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
+VALUES (218, '광주광역시', '동구');
+INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
+VALUES (219, '광주광역시', '북구');
+INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
+VALUES (220, '광주광역시', '광산구');
 
 -- STORE 매장 더미
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
-                   STORE_INFO)
-VALUES (SEQ_STORE.NEXTVAL, '지구샵 제로웨이스트홈', '서울 마포구 성미산로 155 1층, 지구샵', '0507-1372-2052', '11:00 - 21:30', 25, 14,
-        '지구를 위한 첫걸음, 지구샵입니다.');
+                   STORE_INFO, STATUS)
+VALUES (SEQ_STORE.NEXTVAL, '지구샵 제로웨이스트홈', '서울특별시 마포구 성미산로 155 1층, 지구샵', '0507-1372-2052', '11:00 - 21:30', 25, 14,
+        '지구를 위한 첫걸음, 지구샵입니다.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
-                   STORE_INFO)
-VALUES (SEQ_STORE.NEXTVAL, '알맹상점', '서울 마포구 월드컵로25길 47 3층, 알맹상점', '0507-1386-1064', '1112:00 - 20:00', 3, 14, '"쓰레기를 줄이는 작은 마음들의 플랫폼
-제로 웨이스트 가게이자 리필 스테이션입니다."');
+                   STORE_INFO, STATUS)
+VALUES (SEQ_STORE.NEXTVAL, '알맹상점', '서울특별시 마포구 월드컵로25길 47 3층, 알맹상점', '0507-1386-1064', '1112:00 - 20:00', 3, 14, '쓰레기를 줄이는 작은 마음들의 플랫폼
+제로 웨이스트 가게이자 리필 스테이션입니다.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
-                   STORE_INFO)
-VALUES (SEQ_STORE.NEXTVAL, '더피커', '서울 성동구 왕십리w2더피커', '070-4118-0710', '12:00 - 20:00', 6, 4,
-        '더피커(thepicker)는, 건강한 자연의 소산을 환경에 유해한 포장 없이 순환 가능하도록 세심하게 고르는 사람을 의미합니다.');
+                   STORE_INFO, STATUS)
+VALUES (SEQ_STORE.NEXTVAL, '더피커', '서울특별시 성동구 왕십리로14길 9 1층, 더피커', '070-4118-0710', '12:00 - 20:00', 6, 4,
+        '더피커(thepicker)는, 건강한 자연의 소산을 환경에 유해한 포장 없이 순환 가능하도록 세심하게 고르는 사람을 의미합니다.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
-                   STORE_INFO)
-VALUES (SEQ_STORE.NEXTVAL, '디어얼스', '서울 은평구 녹번로6길 21 1층, 디어얼스', '0507-1300-3388', '12:30 - 19:00', 3, 12,
-        '디어얼스는 우리가 일상을 살아가면서 지구를 아끼고 사랑하는 라이프 스타일을 지향합니다.');
+                   STORE_INFO, STATUS)
+VALUES (SEQ_STORE.NEXTVAL, '디어얼스', '서울특별시 은평구 녹번로6길 2 1층, 디어얼스', '0507-1300-3388', '12:30 - 19:00', 3, 12,
+        '디어얼스는 우리가 일상을 살아가면서 지구를 아끼고 사랑하는 라이프 스타일을 지향합니다.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
-                   STORE_INFO)
-VALUES (SEQ_STORE.NEXTVAL, '송포어', '서울 강동구 풍성로35길 34 1층, 송포어스', '0507-1395-3534', '10:30 - 19:00', 12, 25,
-        '송포어스는 우리가 일상을 살아가면서 지구를 아끼고 사랑하는 라이프 스타일을 지향합니다.');
+                   STORE_INFO, STATUS)
+VALUES (SEQ_STORE.NEXTVAL, '송포어스', '서울특별시 강동구 풍성로35길 34 1층, 송포어스', '0507-1395-3534', '10:30 - 19:00', 12, 25,
+        '송포어스는 우리가 일상을 살아가면서 지구를 아끼고 사랑하는 라이프 스타일을 지향합니다.', 'Y');
+INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
+                   STORE_INFO, STATUS)
+VALUES (SEQ_STORE.NEXTVAL, '동구밭', '경기 하남시 미사강변서로 25 FB329호, FB330호, FB33', '0507-1306-9626', '10:30 - 19:00', 27, 68,
+        '동구밭은 비장애인과 장애인이 함께 지속가능한 일상을 위해 고체 화장품 및 생활용품을 생산하는 브랜드이자 제조사 입니다.', 'Y');
+INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
+                   STORE_INFO, STATUS)
+VALUES (SEQ_STORE.NEXTVAL, '소화아람일터', '광주 남구 용대로74번길 27 소화아람일터', '0507-1483-4030', '09:00 - 18:00', 37, 217,
+        '자연친화적 제품(비누, 주방세제 등)을 생산, 판매하며 입지 않는 옷을 기증받아 판매하여 중증장애인을 고용합니다.', 'Y');
+INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
+                   STORE_INFO, STATUS)
+VALUES (SEQ_STORE.NEXTVAL, '지구별가게', '제주 제주시 월랑로 58 1층', '064-711-8291', '10:00 - 19:00', 102, 203,
+        '제로웨이스트 리빙랩, 지구별가게 내 몸과 지구를 살리는 소소한 즐거움, 소락
+제로웨이스트를 위한 다회용 생활용품과 유기농 원단으로 직접 제작하는 소락 브랜드 제품을 만나볼 수 있습니다.', 'Y');
+INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
+                   STORE_INFO, STATUS)
+VALUES (SEQ_STORE.NEXTVAL, '톤28 라이브러리 성수', '서울특별시 성동구 성수이로12길 2', '0507-1414-0198', '11:30 - 20:30', 58, 4,
+        '의식 있는 아름다움, 톤28 라이브러리, 성수입니다.', 'Y');
+INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
+                   STORE_INFO, STATUS)
+VALUES (SEQ_STORE.NEXTVAL, '달팽이가게', '전라남도 담양군 수북면 한수동로 548 1층 달팽이가게', '0507-1337-1858', '11:00 - 18:00', 137, 145,
+        '제로웨이스트 리필샵& 살림 가게. 나와 아이, 지구에게 더 나은 살림살이. 따뜻한 놀잇감들을 만들고 판매하는 달팽이가게입니다.', 'Y');
+INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
+                   STORE_INFO, STATUS)
+VALUES (SEQ_STORE.NEXTVAL, '아이엠그리너', '서울특별시 마포구 잔다리로 44 5층 리와인드', '1522-5710', '10:00 - 16:00', 51, 14,
+        '자연에서 얻은 사용소중한 자원을 다시 자연으로 되돌리고자 시작된 소셜벤처로 아이엠그리너 라는 자체 브랜드로 생분해 가능한 일회용품을 제작, 판매 하고 이를 수거하여 테이크아웃 용품의 지속 가능한 순환 플랫폼을 만들어 갑니다.', 'Y');
+INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
+                   STORE_INFO, STATUS)
+VALUES (SEQ_STORE.NEXTVAL, '천연제작소 부산점', '부산광역시 북구 덕천1길 93 2층', '051-338-9619', '10:30 - 19:00', 93, 33,
+        '환경오염을 줄이는 제품, 세제소분, 부산 최초 제로웨이스트샵', 'Y');
+INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
+                   STORE_INFO, STATUS)
+VALUES (SEQ_STORE.NEXTVAL, '임팩토리얼 모레상점', '서울 성동구 뚝섬로1나길 5 헤이그라운드 7층', '070-8633-1333', '09:00 - 19:00', 37, 4,
+        '내일 그 다음을 생각하는 지속가능한 책임소비, 모레상점.', 'Y');
+INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
+                   STORE_INFO, STATUS)
+VALUES (SEQ_STORE.NEXTVAL, '비누잎', '경기도 군포시 농심로 2 LT삼보 스카이비즈 1412호, 1413호', '0507-1387-0513', '10:00 - 18:00', 62, 66,
+        '자연환경과 건강을 생각한 비누를 만듭니다.', 'Y');
+COMMIT;
