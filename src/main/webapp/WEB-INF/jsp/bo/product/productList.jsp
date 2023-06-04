@@ -208,38 +208,38 @@
             </table>
           </div>
           <!-- 페이징바 넣을 자리 시작 -->
-			<div id="page">
-			    <div class="page_btn" align="center">
-			        <ul class="pagination">
-			        	<c:choose>
-			        		<c:when test="${ pi.currentPage eq 1 }">
-			        			<li style="display: none"> <a href="#" class="first">처음 페이지</a> </li>
-			        		</c:when>
-			        		<c:otherwise>
-			        			<li> <a href="adminlist.pro" class="first">처음 페이지</a> </li>
-			        		</c:otherwise>
-			        	</c:choose>
+          <div id="page">
+              <div class="page_btn" align="center">
+                  <ul class="pagination">
+                    <c:choose>
+                      <c:when test="${ pi.currentPage eq 1 }">
+                        <li style="display: none"> <a href="#" class="first">처음 페이지</a> </li>
+                      </c:when>
+                      <c:otherwise>
+                        <li> <a href="adminlist.pro" class="first">처음 페이지</a> </li>
+                      </c:otherwise>
+                    </c:choose>
 
-			            <li> <a href="#" class="arrow_left"> << </a>  </li>
+                      <li> <a href="#" class="arrow_left"> << </a>  </li>
 
-			            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-			            	<li> <a href="adminlist.pro?cPage=${ p }" class="active num"> ${ p } </a>  </li>
-			            </c:forEach>
+                      <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                        <li> <a href="adminlist.pro?cPage=${ p }" class="active num"> ${ p } </a>  </li>
+                      </c:forEach>
 
-			            <li> <a href="#" class="arrow_right"> >> </a> </li>
+                      <li> <a href="#" class="arrow_right"> >> </a> </li>
 
-			            <c:choose>
-			            	<c:when test="${ pi.currentPage eq pi.maxPage }">
-			            		<li style="display: none"> <a href="#" class="last">끝 페이지</a> </li>
-			            	</c:when>
-			            	<c:otherwise>
-			            		<li> <a href="adminlist.pro?cPage=${ pi.maxPage }" class="last">끝 페이지</a> </li>
-			            	</c:otherwise>
-			            </c:choose>
-			        </ul>
-			    </div>
-			</div>
-			<!-- 페이징바 넣을 자리 끝 -->
+                      <c:choose>
+                        <c:when test="${ pi.currentPage eq pi.maxPage }">
+                          <li style="display: none"> <a href="#" class="last">끝 페이지</a> </li>
+                        </c:when>
+                        <c:otherwise>
+                          <li> <a href="adminlist.pro?cPage=${ pi.maxPage }" class="last">끝 페이지</a> </li>
+                        </c:otherwise>
+                      </c:choose>
+                  </ul>
+              </div>
+          </div>
+          <!-- 페이징바 넣을 자리 끝 -->
         </div>
         <!-- / Content -->
 

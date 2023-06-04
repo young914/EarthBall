@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org// Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kh.earthball.fo.product.mapper.ProductMapper">
+
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM PRODUCT
+		WHERE STATUS = 'Y'
+	</select>
+
+	<select id="selectAllProduct" resultType="com.kh.earthball.fo.product.vo.Product">
+		SELECT ROWNUM, P.*
+		FROM(SELECT PRODUCT_NO, PRODUCT_NAME, CATEGORY, PRICE, DISCOUNT, STOCK, CREATE_DATE, STATUS, CHANGER_NAME
+			 FROM PRODUCT
+			 JOIN PRODUCT_ATTA USING (PRODUCT_NO)
+			 WHERE STATUS = 'Y'
+			 AND FILE_LEVEL = 0
+			 ORDER BY CREATE_DATE DESC)P
+		WHERE ROWNUM BETWEEN #{offset} AND #{limit}
+	</select>
+
+	<select id="selectCategoryListCount" parameterType="String" resultType="_int">
+		SELECT COUNT(*)
+		FROM PRODUCT
+		WHERE CATEGORY = #{category}
+		AND STATUS = 'Y'
+	</select>
+
+	<select id="selectCategoryProduct" resultType="com.kh.earthball.fo.product.vo.Product">
+		SELECT ROWNUM, B.*
+		FROM (SELECT PRODUCT_NO, PRODUCT_NAME, CATEGORY, PRICE, DISCOUNT, STOCK, CREATE_DATE, STATUS, CHANGER_NAME
+			  FROM PRODUCT
+			  JOIN PRODUCT_ATTA USING(PRODUCT_NO)
+			  WHERE STATUS = 'Y'
+			  AND FILE_LEVEL = 0
+			  AND CATEGORY = #{category}
+			  ORDER BY CREATE_DATE DESC)B
+		WHERE ROWNUM BETWEEN #{offset} and #{limit}
+	</select>
+
+</mapper>

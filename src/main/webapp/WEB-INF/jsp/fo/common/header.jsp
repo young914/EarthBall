@@ -60,17 +60,17 @@
                 <div class="dropdown">
                     <span class="dropbtn">장보기</span>
                     <div class="dropdown-content">
-                        <a href="">선물꾸러미</a>
-                        <a href="">욕실</a>
-                        <a href="">식품</a>
-                        <a href="">주방</a>
-                        <a href="">생활</a>
-                        <a href="">취미</a>
-                        <a href="">음료용품</a>
-                        <a href="">여성용품</a>
-                        <a href="">반려동물</a>
-                        <a href="">화장품</a>
-                        <a href="">문구</a>
+                        <a href="categoryList.pro?category=선물꾸러미">선물꾸러미</a>
+                        <a href="categoryList.pro?category=욕실">욕실</a>
+                        <a href="categoryList.pro?category=식품">식품</a>
+                        <a href="categoryList.pro?category=주방">주방</a>
+                        <a href="categoryList.pro?category=생활">생활</a>
+                        <a href="categoryList.pro?category=취미">취미</a>
+                        <a href="categoryList.pro?category=음료용품">음료용품</a>
+                        <a href="categoryList.pro?category=여성용품">여성용품</a>
+                        <a href="categoryList.pro?category=반려동물">반려동물</a>
+                        <a href="categoryList.pro?category=화장품">화장품</a>
+                        <a href="categoryList.pro?category=문구">문구</a>
                         <a href="list.pro">전체</a>
                     </div>
                 </div>
