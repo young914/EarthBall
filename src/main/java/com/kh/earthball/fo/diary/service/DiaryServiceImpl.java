@@ -17,10 +17,10 @@ public class DiaryServiceImpl implements DiaryService {
 
   public final DiaryMapper diaryMapper;
 
-  @Override
-  public int selectListCount() {
-//      return diaryMapper.selectListCount();
-    return 0;
+@Override
+   public int selectListCount() {
+     //  return diaryMapper.selectListCount();
+  return 0;
   }
 
   @Override

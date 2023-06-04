@@ -97,15 +97,14 @@ function clearAll(){
 
 
 // 이미지 전송
-function WriteBtn() {
-  // const canvas = document.getElementById('myCanvas');
+ function drawingBtn() {
   const imgBase64 = canvas.toDataURL('image/jpeg', 'image/octet-stream');
   const decodImg = atob(imgBase64.split(',')[1]);
-
   let array = [];
+
   for (let i = 0; i < decodImg .length; i++) {
     array.push(decodImg .charCodeAt(i));
-
+  }
 
   const file = new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
   const fileName = 'canvas_img_' + new Date().getMilliseconds() + '.jpg';
@@ -114,17 +113,17 @@ function WriteBtn() {
 
   $.ajax({
     type: 'post',
-    url: 'upload',
+    url: '/upload',
     cache: false,
     data: formData,
     processData: false,
     contentType: false,
     success: function (data) {
       alert('Uploaded !!')
-     	}
-       });
-  }
-};
+    	}
+  	})
+  };
+
 
 // 날씨 아이콘 버튼 이벤트
  document.querySelector('#c_1').addEventListener('click', function(event) {
