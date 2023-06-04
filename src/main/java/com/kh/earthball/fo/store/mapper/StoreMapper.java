@@ -13,5 +13,7 @@ public interface StoreMapper {
     int selectStoreListCount();
 
     ArrayList<Store> selectStoreList(@Param("pi") PageInfo pi);
+    
+    ArrayList<Store> selectAllStoreList();
 
 }

@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.google.gson.Gson;
 import com.kh.earthball.fo.common.template.Pagination;
 import com.kh.earthball.fo.common.vo.PageInfo;
 import com.kh.earthball.fo.store.service.StoreService;
@@ -20,6 +23,7 @@ public class StoreController {
 
   private final StoreService storeService;
   
+  /*
   @GetMapping("storeListView.st")
   public String selectList(@RequestParam(value = "cPage", defaultValue = "1") int currentPage, Model model) {
     int listCount = storeService.selectStoreListCount();
@@ -48,5 +52,39 @@ public class StoreController {
     model.addAttribute("list", list);
     return "fo/store/storeListView";
   }
+  */
+  
+  @GetMapping("storeListView.st")
+  public String selectList() {
+    
+   System.out.println("잘되?");
+    
+    return "fo/store/storeListView";
+  }
+  
+  @ResponseBody
+  @RequestMapping(value = "getStores.st", produces = "application/json; charset=UTF-8")
+  public String getStoreList() {
+    
+    ArrayList<Store> list = storeService.selectAllStoreList();
+    
+    for (int i = 0; i < list.size(); i++) {
+
+      GeocodingApi geocodingApi = new GeocodingApi();
+      double[] coordinates = geocodingApi.getGeocode(list.get(i).getStoreAddress());
+      double latitude = coordinates[0];
+      double longitude = coordinates[1];
+      String jibunAddress = geocodingApi.getJibunAddress(latitude, longitude);
+      System.out.println(jibunAddress);
+
+      list.get(i).setStoreLat(latitude); // Store 객체에 위도 값 설정
+      list.get(i).setStoreLon(longitude); // Store 객체에 경도 값 설정
+      list.get(i).setJibunAddress(jibunAddress); // Store 객체에 지번 주소 값 설정
+    }
+    
+    return new Gson().toJson(list);
+  }
+  
+  
 
 }

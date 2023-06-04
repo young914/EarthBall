@@ -11,6 +11,9 @@ public interface StoreService {
 
   // 매장 리스트 조회
   ArrayList<Store> selectStoreList(PageInfo pi);
+  
+  // 매장 전체 리스트 조회
+  ArrayList<Store> selectAllStoreList();
 
 //  // 매장 상세 조회
 //  Store selectStoreDetail(int storeNo);

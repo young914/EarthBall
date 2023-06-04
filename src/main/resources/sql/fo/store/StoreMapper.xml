@@ -25,5 +25,21 @@
     WHERE STATUS = 'Y'
     ORDER BY STORE_NO DESC 
  	</select>
+ 	
+ 	<!--  매장 전체리스트 조회용 쿼리문   -->
+ 	<select id="selectAllStoreList" resultType="com.kh.earthball.fo.store.vo.Store">
+ 	    SELECT STORE_NO
+        , STORE_NAME
+        , STORE_ADDRESS
+        , STORE_PHONE
+        , BUSINESS_HOURS
+        , STORE_RC
+        , STORE_REGION_NO
+        , STORE_INFO
+        , STATUS
+    FROM STORE
+    WHERE STATUS = 'Y'
+    ORDER BY STORE_NO DESC 
+ 	</select>
 
 </mapper>
