@@ -57,7 +57,7 @@ public class StoreController {
   @GetMapping("storeListView.st")
   public String selectList() {
     
-   System.out.println("잘돼??");
+   
     
     return "fo/store/storeListView";
   }
@@ -65,9 +65,9 @@ public class StoreController {
   @ResponseBody
   @GetMapping(value = "getStores.st", produces = "application/json; charset=UTF-8")
   public String getStoreList() {
-     System.out.println("잘나오나?");
+     
     ArrayList<Store> list = storeService.selectAllStoreList();
-    System.out.println(list);
+    
     for (int i = 0; i < list.size(); i++) {
 
       GeocodingApi geocodingApi = new GeocodingApi();
