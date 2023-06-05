@@ -11,8 +11,8 @@
   <select id="selectList"  resultType="com.kh.earthball.fo.challenge.vo.Challenge">
     SELECT CH_NO
          , CH_TITLE
-         , TO_CHAR(TO_DATE(CH_START_DAY, 'YYYY-MM-DD')) AS CH_START_DAY
-         , TO_CHAR(TO_DATE(CH_END_DAY, 'YYYY-MM-DD')) AS CH_END_DAY
+         , TO_CHAR(TO_DATE(CH_START_DAY, 'YYYY-MM-DD'), 'YYYY-MM-DD') AS CH_START_DAY
+         , TO_CHAR(TO_DATE(CH_END_DAY, 'YYYY-MM-DD'), 'YYYY-MM-DD') AS CH_END_DAY
          , MEMBER_ID
          , (SELECT CATEGORY_NAME
             FROM TB_CATEGORY CA
@@ -66,8 +66,8 @@
   <select id="selectChallenge" parameterType="java.lang.Integer" resultType="com.kh.earthball.fo.challenge.vo.Challenge">
     SELECT CH_NO
          , CH_TITLE
-         , TO_CHAR(TO_DATE(CH_START_DAY, 'YYYY-MM-DD')) AS CH_START_DAY
-         , TO_CHAR(TO_DATE(CH_END_DAY, 'YYYY-MM-DD')) AS CH_END_DAY
+         , TO_CHAR(TO_DATE(CH_START_DAY, 'YYYY-MM-DD'), 'YYYY-MM-DD') AS CH_START_DAY
+         , TO_CHAR(TO_DATE(CH_END_DAY, 'YYYY-MM-DD'), 'YYYY-MM-DD') AS CH_END_DAY
          , MEMBER_ID
          , CATEGORY_NO
          , (SELECT CATEGORY_NAME
@@ -80,5 +80,18 @@
       FROM TB_CHALLENGE C
      WHERE CH_NO = #{chNo}
   </select>
+
+
+  <update id="challengeUpdate" parameterType="com.kh.earthball.fo.challenge.vo.Challenge">
+    UPDATE TB_CHALLENGE
+       SET CH_TITLE = #{chTitle}
+         , CH_START_DAY = #{chStartDay}
+         , CH_END_DAY = #{chEndDay}
+         , FILE_NO = #{fileNo}
+         , CH_CONTENT = #{chContent}
+     WHERE CH_NO = #{chNo}
+       AND MEMBER_ID = #{memberId}
+       AND CATEGORY_NO = #{categoryNo}
+  </update>
 
 </mapper>

@@ -107,9 +107,23 @@ public class ChallengeController {
     // 수정할 챌린지 조회 해오기
     Challenge challenge = challengeService.selectChallenge(chNo);
 
+    log.info("날짜형식 잘 나오니? : " + challenge.getChStartDay());
+
     model.addAttribute("challenge", challenge);
 
     return "fo/challenge/challenge/challengeUpdateForm";
   }
 
+  @ResponseBody
+  @PostMapping("/update.chall")
+  public int challengeUpdate(@RequestBody Challenge challenge) {
+    return challengeService.challengeUpdate(challenge);
+  }
+
+
+
+
+
 }
+
+

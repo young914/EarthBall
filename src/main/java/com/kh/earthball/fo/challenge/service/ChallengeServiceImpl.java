@@ -40,23 +40,27 @@ public class ChallengeServiceImpl implements ChallengeService {
   public int requestChallenge(Challenge challenge) {
     challenge.setChStartDay(challenge.getChStartDay().replaceAll("-", ""));
     challenge.setChEndDay(challenge.getChEndDay().replaceAll("-", ""));
-    challenge.setMemberId("user02");
     int result = challengeMapper.requestChallenge(challenge);
     if (result == 0) {
       throw new RuntimeException();
     }
-/*
-    for (ChDetailInfo chDetailInfo : challenge.getList()) {
-      chDetailInfo.setChNo(challenge.getChNo());
-      challengeMapper.insertChDetailInfo(chDetailInfo);
-    }
-
- */
     return result;
   }
 
   @Override
   public Challenge selectChallenge(int chNo) {
     return challengeMapper.selectChallenge(chNo);
+  }
+
+  @Override
+  public int challengeUpdate(Challenge challenge) {
+    challenge.setChStartDay(challenge.getChStartDay().replaceAll("-", ""));
+    challenge.setChEndDay(challenge.getChEndDay().replaceAll("-", ""));
+
+    int result = challengeMapper.challengeUpdate(challenge);
+    if (result == 0) {
+      throw new RuntimeException();
+    }
+    return result;
   }
 }

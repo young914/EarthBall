@@ -16,4 +16,5 @@ public interface ChallengeService {
 
   Challenge selectChallenge(int chNo);
 
+  int challengeUpdate(Challenge challenge);
 }

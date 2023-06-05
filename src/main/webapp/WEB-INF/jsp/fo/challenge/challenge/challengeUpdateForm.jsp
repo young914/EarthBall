@@ -58,6 +58,7 @@
 
       <span class="form_title">카테고리 <span class="star">&nbsp;</span></span>
       <input type="hidden" name="categoryNo" value="${challenge.categoryNo}">
+      <input type="hidden" name="chNo" value="${challenge.chNo}">
       <input type="text" class="form_text" value="${challenge.categoryName}" readonly> <br><br>
 
       <span class="form_title">도전기간 <span class="star">*</span></span>
@@ -69,7 +70,7 @@
       <div class="flex-container">
         <div class="wrapper">
           <span class="form_title" align="right;">썸네일 <span class="star">*</span></span>
-          <img src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"
+          <img src="${challenge.filePath}"
                class="image-box"/>
           <input type="file" accept="image/*" name="fileNo" id="fileNo" onchange="uploadImage();"/>
           <input type="hidden" name="resultFileNo" value="">
@@ -101,7 +102,7 @@
 
     <div class="btn_div">
       <button class="btn_1" id="openBtn" onclick="updateChallengeBtn();">챌린지 수정</button>
-      <button class="btn_1">챌린지 수정 취소</button>
+      <button class="btn_1"onclick="javascript:history.go(-1);">챌린지 수정 취소</button>
     </div>
 
 
@@ -195,10 +196,9 @@
             let chEndDay = $("input[name=chEndDay]");                   // 챌린지종료일
             let fileNo = $("input[name=resultFileNo][type=hidden]").val();  // 파일번호
             let markupStr = $("#chContent").summernote("code");         // 챌린지 내용
+            let chNo = $("input[type=hidden][name=chNo]").val();
 
-            let chNo = $("input[type=hidden][name=categoryNo]").val();
-
-            let challengeData = { // 기본 정보 데이터
+            let updateChallenge = { // 기본 정보 데이터
                 chTitle: chTitle.val()
                 , categoryNo: categoryNo
                 , chStartDay: chStartDay.val()
@@ -206,14 +206,15 @@
                 , memberId: "${loginUser.memberId}"
                 , fileNo: fileNo
                 , chContent : markupStr
+                , chNo : chNo
             }
 
-            console.log("챌린지 오픈 요청_기본정보용 data : ", challengeData);
+            console.log("챌린지 오픈 요청_기본정보용 data : ", updateChallenge);
 
             $.ajax({
                 url: "/update.chall"
                 , type: "post"
-                , data: JSON.stringify(challengeData)
+                , data: JSON.stringify(updateChallenge)
                 , contentType: 'application/json'
                 , success: function (result) {
                     if (result > 0) {
