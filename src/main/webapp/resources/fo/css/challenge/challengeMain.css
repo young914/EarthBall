@@ -107,7 +107,7 @@
 #filter_1, #filter_2 {
     height: 45%;
     text-align: center;
-    align-items: center;
+    display: flex;
 }
 
 

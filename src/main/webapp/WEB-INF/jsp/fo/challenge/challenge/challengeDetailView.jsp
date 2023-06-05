@@ -50,7 +50,7 @@
                   </div>
                   <div style="  text-align: right;">
                     <c:if test="${ not empty loginUser }">
-                      <button>수정</button>
+                      <button onclick="updateChallenge(${challenge.chNo});">수정</button>
                       <button>삭제</button>
                     </c:if>
                   </div>
@@ -120,6 +120,10 @@
 
   function confirmFormBtn(chNo) {
       location.href="/insertForm.con?chNo=" + chNo;
+  }
+
+  function updateChallenge(chNo) {
+      location.href="/updateForm.chall?chNo=" + chNo;
   }
 
 

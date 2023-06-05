@@ -44,21 +44,15 @@
     <!-- 선택 버튼 부분 시작 -->
     <div class="choice" align="center">
 
+      <c:forEach var="category" items="${categoryList}">
         <div class="choice_one">
-            <button class="btn_2" onclick="challengeForm_consume();">친환경 소비</button>
+            <button class="btn_2" onclick="challengeForm(${category.categoryNo});">${category.categoryName}</button>
             <ul class="choice_one_list">
                 <li>포장재 줄이기</li>
-                <li>텀블러 사용</li>
-                <li>냉장고 파먹기</li>
-                <li>채식밥상 챌린지</li>
-                <li>장바구니 사용하기</li>
-                <li>에코백 사용하기</li>
-                <li>텀블러 사용하기</li>
-                <li>지속가능한 패션 생활하기</li>
-                <li>가계부 쓰기 (불필요한 소비 줄이기)</li>
             </ul>
         </div>
-
+      </c:forEach>
+      <!--
         <div class="choice_one">
             <button class="btn_2" onclick="challengeForm_vehicle();">친환경 이동</button>
             <ul class="choice_one_list">
@@ -110,6 +104,8 @@
                 자신만의 에코챌린지를 자유롭게 작성해 보세요.
             </p>
         </div>
+
+        -->
     </div>
     <!-- 선택 버튼 부분 끝 -->
 
@@ -120,28 +116,8 @@
 
 
 <script>
-    function challengeForm_consume() {   // 친환경 소비
-        location.href = "openForm.chall?categoryNo=1";
-    }
-
-    function challengeForm_vehicle() {  // 친환경 이동
-        location.href = "openForm.chall?categoryNo=2";
-    }
-
-    function challengeForm_resource() {     // 자원 순환
-        location.href = "openForm.chall?categoryNo=3";
-    }
-
-    function challengeForm_nature() {   // 자연보호
-        location.href = "openForm.chall?categoryNo=4";
-    }
-
-    function challengeForm_energy() {   // 에너지 절약
-        location.href = "openForm.chall?categoryNo=5";
-    }
-
-    function challengeForm_etc() {   // 기타
-        location.href = "openForm.chall?categoryNo=6";
+    function challengeForm(categoryNo) {   // 해당하는 카테고리 번호의 오픈 폼으로 연결
+        location.href = "openForm.chall?categoryNo=" + categoryNo;
     }
 </script>
 

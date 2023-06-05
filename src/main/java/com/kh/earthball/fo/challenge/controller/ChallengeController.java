@@ -56,7 +56,11 @@ public class ChallengeController {
 
 
   @GetMapping("/categoryList.chall")
-  public String categoryChoice_chall() {
+  public String categoryChoice_chall(Model model) {
+    List<Category> categoryList = categoryService.selectCategoryList();
+
+    log.info("categoryList에 뭐 들음? : " +  categoryList);
+    model.addAttribute("categoryList", categoryList);
     return "fo/challenge/challenge/challengeCategoryChoice";
   }
 
@@ -64,25 +68,9 @@ public class ChallengeController {
   @GetMapping("/openForm.chall")
   public String openChallengeForm(@RequestParam(value = "categoryNo") int categoryNo, Model model) {
 
-    List<CategoryTemplate> templateList = templateService.selectTemplateList(categoryNo);
-
-    log.info("서비스다 다녀온 templateList : " + templateList);
-
-    for (int i = 0; i < templateList.size(); i++) {
-      log.info("grp넘어왔어? : " + templateList.get(i).getGrpCode());
-      if (StringUtils.isNotEmpty(templateList.get(i).getGrpCode())) {
-        List<Code> codeList = codeService.selectCodeList(templateList.get(i).getGrpCode());
-        templateList.get(i).setCodeList(codeList);
-      }
-    }
-
     Category category = categoryService.selectCategory(categoryNo);
 
     model.addAttribute("category", category);
-    model.addAttribute("templateList", templateList);
-
-    log.info("templateList : " + templateList);
-    log.info("templateList 0번째 코드리스트: " + templateList.get(0).getCodeList());
 
     return "fo/challenge/challenge/challengeInsertForm";
   }
@@ -112,4 +100,16 @@ public class ChallengeController {
 
     return "fo/challenge/challenge/challengeDetailView";
   }
+
+  @GetMapping("/updateForm.chall")
+  public String challengeUpdateForm(int chNo, Model model) {
+
+    // 수정할 챌린지 조회 해오기
+    Challenge challenge = challengeService.selectChallenge(chNo);
+
+    model.addAttribute("challenge", challenge);
+
+    return "fo/challenge/challenge/challengeUpdateForm";
+  }
+
 }
