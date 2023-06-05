@@ -3,9 +3,10 @@ package com.kh.earthball.fo.product.service;
 import java.util.ArrayList;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
-import com.kh.earthball.bo.product.vo.Product;
 import com.kh.earthball.fo.common.vo.PageInfo;
 import com.kh.earthball.fo.product.mapper.ProductMapper;
+import com.kh.earthball.fo.product.vo.Atta;
+import com.kh.earthball.fo.product.vo.Product;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -43,6 +44,16 @@ public class ProductServiceImpl implements ProductService {
     RowBounds rowBounds = new RowBounds(offset, limit);
 
     return productMapper.selectCategoryProduct(offset, limit, category);
+  }
+
+  @Override
+  public Product selectProduct(int productNo) {
+    return productMapper.selectProduct(productNo);
+  }
+
+  @Override
+  public ArrayList<Atta> selectAtta(int productNo) {
+    return productMapper.selectAtta(productNo);
   }
 
 }

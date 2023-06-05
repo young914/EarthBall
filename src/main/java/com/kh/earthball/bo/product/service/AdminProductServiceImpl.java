@@ -5,8 +5,8 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.kh.earthball.bo.product.mapper.AdminProductMapper;
-import com.kh.earthball.bo.product.vo.Atta;
-import com.kh.earthball.bo.product.vo.Product;
+import com.kh.earthball.bo.product.vo.AdminAtta;
+import com.kh.earthball.bo.product.vo.AdminProduct;
 import com.kh.earthball.fo.common.vo.PageInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,12 +20,12 @@ public class AdminProductServiceImpl implements AdminProductService {
 
   @Transactional
   @Override
-  public int insertProduct(Product p, ArrayList<Atta> list) {
+  public int insertProduct(AdminProduct p, ArrayList<AdminAtta> list) {
     int result1 = productMapper.insertProduct(p);
 
     int result2 = 0;
 
-    for(Atta at : list) {
+    for(AdminAtta at : list) {
       result2 = productMapper.insertProductAtta(at);
     }
 
@@ -33,7 +33,7 @@ public class AdminProductServiceImpl implements AdminProductService {
   }
 
   @Override
-  public ArrayList<Product> adminAllProductList(PageInfo pi) {
+  public ArrayList<AdminProduct> adminAllProductList(PageInfo pi) {
 
     int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
     int limit = pi.getBoardLimit();

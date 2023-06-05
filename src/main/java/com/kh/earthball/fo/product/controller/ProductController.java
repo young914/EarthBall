@@ -5,10 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.kh.earthball.bo.product.vo.Product;
 import com.kh.earthball.fo.common.template.Pagination;
 import com.kh.earthball.fo.common.vo.PageInfo;
 import com.kh.earthball.fo.product.service.ProductService;
+import com.kh.earthball.fo.product.vo.Atta;
+import com.kh.earthball.fo.product.vo.Product;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -46,6 +47,17 @@ public class ProductController {
     model.addAttribute("list", list);
     model.addAttribute("pi", pi);
     return "/fo/product/productList";
+  }
+
+  @RequestMapping("detailView.pro")
+  public String productDetailView(int productNo, Model model) {
+
+    Product p = productService.selectProduct(productNo);
+    ArrayList<Atta> list = productService.selectAtta(productNo);
+
+    model.addAttribute("p", p);
+    model.addAttribute("list", list);
+    return "/fo/product/productDetailView";
   }
 
 }

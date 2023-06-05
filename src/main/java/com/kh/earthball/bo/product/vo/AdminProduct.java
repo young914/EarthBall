@@ -10,7 +10,7 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Product {
+public class AdminProduct {
 
   private int productNo;
   private String productName;

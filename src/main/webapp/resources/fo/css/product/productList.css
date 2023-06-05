@@ -46,13 +46,14 @@
 .product-img>img{
     width: 275px;
     height: 275px;
-
+}
+.product-name>a{
+    text-decoration: none;
+    color: #19A7CE;
+    font-size: 17px;
 }
 .product-icon{
     display: flex;
-}
-.product-icon i, .product-name, .product-price{
-    margin-left: 10px;
 }
 #dropBox{text-align: right;}
 #dropBox>select{

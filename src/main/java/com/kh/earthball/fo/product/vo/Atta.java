@@ -1,6 +1,10 @@
-package com.kh.earthball.bo.product.vo;
+package com.kh.earthball.fo.product.vo;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
