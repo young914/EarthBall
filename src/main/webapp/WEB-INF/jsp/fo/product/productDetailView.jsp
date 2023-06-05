@@ -56,9 +56,9 @@
                     <div>
                         <table>
                             <tr>
-                                <td><button class="down">-</button></td>
+                                <td><button class="down" onclick="down();">-</button></td>
                                 <td><input type="text" value="1" class="quantity"></td>
-                                <td><button class="up">+</button></td>
+                                <td><button class="up" onclick="up();">+</button></td>
                             </tr>
                         </table>
                     </div>
@@ -256,9 +256,9 @@
 
         <!-- 탭영역 -->
         <div id="navArea">
-            <div><button style="border-right: none;" id="detail">상세정보</button></div>
-            <div><button style="border-right: none;" id="review">구매평</button></div>
-            <div><button id="qna">Q&A</button></div>
+            <div><button style="border-right: none;" id="detail" onclick="detail();">상세정보</button></div>
+            <div><button style="border-right: none;" id="review" onclick="review();">구매평</button></div>
+            <div><button id="qna" onclick="qna();">Q&A</button></div>
         </div>
 
         <!-- 메인영역 -->
@@ -279,8 +279,8 @@
                 <div><button class="insertReview">구매평 작성</button></div>
                 <div><button class="onlyPhoto"><i class="xi-library-image-o"></i>포토 구매평만 보기</button></div>
 
-                <div class="review2">
-                    <div class="reviewArea">
+                <div class="review2" onclick="reviewToggle();">
+                    <div class="reviewArea" >
                         <div class="star2">
                             <span class="starR1">★</span>
                             <span class="starR2">★</span>
@@ -326,8 +326,8 @@
                     </div>
                 </div>
 
-                <div class="review2">
-                    <div class="reviewArea">
+                <div class="review2" onclick="reviewToggle();">
+                    <div class="reviewArea" >
                         <div class="star2">
                             <span class="starR1">★</span>
                             <span class="starR2">★</span>
@@ -373,8 +373,8 @@
                     </div>
                 </div>
 
-                <div class="review2">
-                    <div class="reviewArea">
+                <div class="review2" onclick="reviewToggle();">
+                    <div class="reviewArea" >
                         <div class="star2">
                             <span class="starR1">★</span>
                             <span class="starR2">★</span>
@@ -420,8 +420,8 @@
                     </div>
                 </div>
 
-                <div class="review2">
-                    <div class="reviewArea">
+                <div class="review2" onclick="reviewToggle();">
+                    <div class="reviewArea" >
                         <div class="star2">
                             <span class="starR1">★</span>
                             <span class="starR2">★</span>
@@ -467,8 +467,8 @@
                     </div>
                 </div>
 
-                <div class="review2">
-                    <div class="reviewArea">
+                <div class="review2" onclick="reviewToggle();">
+                    <div class="reviewArea" >
                         <div class="star2">
                             <span class="starR1">★</span>
                             <span class="starR2">★</span>
@@ -513,66 +513,21 @@
                         </div>
                     </div>
                 </div>
+                
 
-                <div class="review2">
-                    <div class="reviewArea">
-                        <div class="star2">
-                            <span class="starR1">★</span>
-                            <span class="starR2">★</span>
-                            <span class="starR3">★</span>
-                            <span class="starR4">★</span>
-                            <span class="starR5">★</span>
-                        </div>
-                        <div>
-                            <p>
-                                고체치약 사용하고붜 이제품만 사용하고 있어요. 추가주문 했는데 친환경을 생각하는 브랜드 제품이라 박스도 조립식이고 <br>
-                                종이테이프 사용 및 제품포장도 친환경적이라 매우 좋습니다. 많은 사람들이 이 제품과 브랜드를 알아줬으면 좋겠습니다.
-                            </p>
-                        </div>
-                        <div>
-                            <img src="#">
-                        </div>
-                        <div class="replyCount">댓글 <span>1</span></div>
+                <!-- 문의 -->
+                <div id="productQna">
+                    <div>
+                        궁금하신 점이 있으신가요? <br>
+                        지구샵에 문의해주세요.
                     </div>
-                    <div class="replyArea">
-                        <div class="area1">
-                            <div><img src="#"></div>
-                            <div>
-                                <div>
-                                    <span>관리자</span> <span>2022-01-07</span>
-                                </div>
-                                <div>
-                                    <p>
-                                        안녕하세요. 지구샵입니다. <br>
-                                        댓글을 달아주셔서 감사합니다. <br>
-                                        앞으로도 좋은 제품들 많이 만들어드리겠습니다. <br>
-                                        감사합니다.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="area2">
-                            <div><textarea name="" id="" cols="30" rows="10" placeholder="댓글"></textarea></div>
-                            <div>
-                                <i class="xi-library-image-o"></i>
-                                <button>작성</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 문의 -->
-                    <div id="productQna">
-                        <div>
-                            궁금하신 점이 있으신가요? <br>
-                            지구샵에 문의해주세요.
-                        </div>
-                        <button class="insertQna">문의하기</button>
-                    </div>
-
+                    <button class="insertQna">문의하기</button>
                 </div>
 
             </div>
+
         </div>
+    </div>
 
 
     </div>
