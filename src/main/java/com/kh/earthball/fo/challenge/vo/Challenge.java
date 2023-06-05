@@ -23,6 +23,8 @@ public class Challenge {
   private Integer fileNo;            // 파일일련번호
   private String chContent;          // 챌린지 내용
 
-  private String filePath;
-  private String categoryName;
+  
+  // 추가사항
+  private String filePath;            // 파일경로        
+  private String categoryName;        // 카테고리명  
 }

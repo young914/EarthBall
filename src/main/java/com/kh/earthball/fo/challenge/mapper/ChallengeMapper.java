@@ -21,4 +21,8 @@ public interface ChallengeMapper {
   ArrayList<Challenge> selectList(RowBounds rowBounds);
 
   Challenge selectChallenge(int chNo);
+
+  int challengeUpdate(Challenge challenge);
+
+  int challengeDelete(int chNo);
 }

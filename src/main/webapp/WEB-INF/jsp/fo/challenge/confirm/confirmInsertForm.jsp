@@ -31,26 +31,53 @@
   <!-- 타이틀 끝-->
 
 
-  <div class="template">
+  <div class="basic_info">
     <div class="info_title">
-      <h2>탬플릿 폼</h2>
+      <h2>기본 정보</h2>
       <div class="bar_2"></div>
       <br>
     </div>
+
+    <div class="basic_form_1">
+      <span class="form_title">챌린지명</span>
+      <span class="form_content">${challenge.chTitle}</span> <br><br>
+
+      <span class="form_title">카테고리 </span>
+      <span class="form_content">${challenge.categoryName}</span> <br><br>
+
+      <span class="form_title">도전기간 </span>
+      <span class="form_content">${challenge.chStartDay}</span> ~ <span class="form_content">${challenge.chEndDay}</span> <br><br>
+
+      <span class="form_title">진행상태 </span>
+      <span class="form_content">진행중</span> <br><br>
+
+      <input type="hidden" name="chNo" value="${challenge.chNo}">
+      <input type="hidden" name="memberId" value="${loginUser.memberId}">
+
+    </div>
+
+  </div>
+
+
+  <div class="template">
+    <div class="info_title">
+      <h2>인증 정보</h2>
+      <div class="bar_2"></div>
+      <br>
+    </div>
+
+    <div class="text">
+      <span class="sub_title">인증 제목</span>
+      <div class="text_class">
+        <input type="text" class="text_size" name="chConTitle">
+      </div>
+    </div> <br> <hr><br>
 
     <!-- for문 -->
     <c:forEach var="temp" items="${templateList}">
 
     <!-- 탬플릿 폼 안 영역 시작-->
     <div class="temp_content">
-
-      <div class="textarea">
-        <span class="sub_title">내용</span> <br>
-
-        <div class="textarea_class">
-          <textarea name="test01" id="test01"></textarea>
-        </div>
-      </div>
 
       <!-- select 문 일 경우-->
       <c:if test="${temp.inputType eq 'select'}">
@@ -204,6 +231,7 @@
       </c:if>
       </c:forEach>
 
+
     </div>
     <!-- 탬플릿 폼 안 영역 끝-->
   </div>
@@ -211,99 +239,16 @@
 
   <div class="btn_div">
     <button class="btn_1" onclick="confirm_challenge();">챌린지 인증</button>
-    <button class="btn_1">인증 취소</button>
+    <button class="btn_1" onclick="javascript:history.go(-1);">인증 취소</button>
   </div>
 
 
-  <script type="text/javascript">
-      $(document).on("change", ".fileUpload", function () {
-          let $this = $(this);
-          let fileInput = $(this)[0].files[0];
-          let categoryTemplateNo = $(this).data('categoryTemplateNo');
-          let inputType = $(this).data('inputType');
-
-          if (fileInput) {
-              let imageType = /^image\//;
-
-              if (!imageType.test(fileInput.type)) {
-                  // 이미지 파일이 아닐 경우 처리
-                  console.error('Selected file is not an image.');
-                  return;
-              }
-
-              let formData = new FormData();
-              formData.append('file', fileInput);
-
-              $.ajax({
-                  url: '/challenge/file-upload',
-                  type: 'POST',
-                  data: formData,
-                  processData: false,
-                  contentType: false,
-                  success: function (response) {
-                      // 업로드 성공 시 처리
-                      console.log('Image uploaded successfully.');
-                      $this.siblings(".image-box").attr("src", response.filePath);
-                      $("input[name=" + categoryTemplateNo + "_" + inputType + "]").val(response.fileNo);
-
-                  },
-                  error: function () {
-                      // 업로드 실패 시 처리
-                      console.error('Image upload failed.');
-                  }
-              });
-          } else {
-              // 파일이 선택되지 않았을 경우 처리
-              console.error('No file selected.');
-          }
-      });
-
-      function uploadImage() {
-          let fileInput = $('#fileNo')[0].files[0];
-          if (fileInput) {
-              let imageType = /^image\//;
-
-              if (!imageType.test(fileInput.type)) {
-                  // 이미지 파일이 아닐 경우 처리
-                  console.error('Selected file is not an image.');
-                  return;
-              }
-
-              let formData = new FormData();
-              formData.append('file', fileInput);
-
-              $.ajax({
-                  url: '/challenge/file-upload',
-                  type: 'POST',
-                  data: formData,
-                  processData: false,
-                  contentType: false,
-                  success: function (response) {
-                      // 업로드 성공 시 처리
-                      console.log('Image uploaded successfully.');
-                      $("#fileNo").siblings(".image-box").attr("src", response.filePath);
-                      $("input[name=resultFileNo][type=hidden]").val(response.fileNo);
-                      console.log("fileNo : ", $("input[name=resultFileNo][type=hidden]").val(response.fileNo));
-                  },
-                  error: function () {
-                      // 업로드 실패 시 처리
-                      console.error('Image upload failed.');
-                  }
-              });
-          } else {
-              // 파일이 선택되지 않았을 경우 처리
-              console.error('No file selected.');
-          }
-
-      }
-
-
+  <script>
       function confirm_challenge() {
-          let chTitle = $("input[name=chTitle]");                     //챌린지명
-          let categoryNo = $("input[name=categoryNo]").val();         // 카테고리일련번호   값!!!
-          let chStartDay = $("input[name=chStartDay]");               // 챌린지시작일
-          let chEndDay = $("input[name=chEndDay]");                   // 챌린지종료일
-          let fileNo = $("input[name=resultFileNo][type=hidden]").val();  // 파일번호
+          // TB_CH_CONFIRM 챌린지 인증 정보 넘기기
+          let chNo = $("input[type=hidden][name=chNo]").val();            // 챌린지 일련번호
+          let chConTitle = $("input[type=text][name=chConTitle]").val();      // 챌린지 인증 제목
+          let memberId = $("input[type=hidden][name=memberId]").val();       // 회원아이디
 
           // 자 그럼 이제부터 여기에 챌린지 상세 정보 데이터 담기.....
           let templateList = []
@@ -313,7 +258,6 @@
               , inputType: '${temp.inputType}'
           });
           </c:forEach>
-
 
           let list = []       // 이게 TB_CH_DETAIL_INFO
           for (let i = 0; templateList.length > i; i++) {
@@ -377,23 +321,22 @@
               }
           }
           //console.log("templateList : " , templateList);
-          let challengeData = { // 기본 정보 데이터
-              chTitle: chTitle.val()
-              , categoryNo: categoryNo
-              , chStartDay: chStartDay.val()
-              , chEndDay: chEndDay.val()
-              , memberId: "${loginUser.memberId}"
-              , fileNo: fileNo
-              , list: list
+
+
+          let confirmInfo = { // 인증 기본 정보
+              chNo : chNo
+              , chConTitle : chConTitle
+              , memberId : memberId
+              , chDetailInfoList : list
           }
 
-          console.log("챌린지 오픈 요청_기본정보용 data : ", challengeData);
+          console.log("인증 기본 정보 : ", confirmInfo);
           console.log("디테일 정보 list : ", list);
 
           $.ajax({
-              url: "/openRequest.chall"
+              url: "/insert.con"
               , type: "post"
-              , data: JSON.stringify(challengeData)
+              , data: JSON.stringify(confirmInfo)
               , contentType: 'application/json'
               , success: function (result) {
                   if (result > 0) {
@@ -410,87 +353,6 @@
 
 </div>
 <!-- 내용 영역 끝 -->
-
-<script>
-
-
-    // 자 그럼 이제부터 여기에 챌린지 상세 정보 데이터 담기.....
-    let templateList = []
-    <c:forEach var="temp" items="${templateList}">
-    templateList.push({
-        categoryTemplateNo: '${temp.categoryTemplateNo}'
-        , inputType: '${temp.inputType}'
-    });
-    </c:forEach>
-
-
-    let list = []       // 이게 TB_CH_DETAIL_INFO
-    for (let i = 0; templateList.length > i; i++) {
-        // 만약 code랑 fileNo이 없을 경우
-        if (templateList[i].inputType == 'text' || templateList[i].inputType == 'number'
-            || templateList[i].inputType == 'range' || templateList[i].inputType == 'datetime-local') {
-
-            list.push({
-                categoryTemplateNo: templateList[i].categoryTemplateNo,
-                chDetailInfoData: $('input[name=' + templateList[i].categoryTemplateNo + "_" + templateList[i].inputType + ']').val(),
-                code: null,
-                fileNo: null
-            });
-        }
-
-        if (templateList[i].inputType == 'textarea') {
-            list.push({
-                categoryTemplateNo: templateList[i].categoryTemplateNo,
-                chDetailInfoData: $('textarea[name=' + templateList[i].categoryTemplateNo + "_" + templateList[i].inputType + ']').val(),
-                code: null,
-                fileNo: null
-            });
-        }
-
-        if (templateList[i].inputType == 'file') {
-            list.push({
-                categoryTemplateNo: templateList[i].categoryTemplateNo,
-                chDetailInfoData: null,
-                code: null,
-                fileNo: $('input[name=' + templateList[i].categoryTemplateNo + "_" + templateList[i].inputType + ']').val()
-            });
-        }
-
-        if (templateList[i].inputType == 'select') {
-            list.push({
-                categoryTemplateNo: templateList[i].categoryTemplateNo,
-                chDetailInfoData: null,
-                code: $('select[name=' + templateList[i].categoryTemplateNo + "_" + templateList[i].inputType + ']').val(),
-                fileNo: null
-            });
-        }
-        if (templateList[i].inputType == 'radio') {
-            list.push({
-                categoryTemplateNo: templateList[i].categoryTemplateNo,
-                chDetailInfoData: null,
-                code: $('input[name=' + templateList[i].categoryTemplateNo + "_" + templateList[i].inputType + ']:checked').val(),
-                fileNo: null
-            });
-        }
-        if (templateList[i].inputType == 'checkbox') {
-            $('input[type="checkbox"][name=' + templateList[i].categoryTemplateNo + "_" + templateList[i].inputType + ']').each(function () {
-                if ($(this).is(':checked')) {
-                    list.push({
-                        categoryTemplateNo: templateList[i].categoryTemplateNo,
-                        chDetailInfoData: null,
-                        code: $(this).val(),
-                        fileNo: null
-                    });
-                }
-            });
-        }
-    }
-    //console.log("templateList : " , templateList);
-    console.log("디테일 정보 list : ", list);
-
-
-</script>
-
 
 <jsp:include page="/WEB-INF/jsp/fo/common/footer.jsp"/>
 
