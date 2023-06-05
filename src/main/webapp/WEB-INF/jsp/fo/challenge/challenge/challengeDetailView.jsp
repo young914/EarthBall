@@ -50,11 +50,12 @@
                   </div>
                   <div style="  text-align: right;">
                     <c:if test="${ not empty loginUser }">
-                      <button>작성자에게만보이는 수정버튼</button>
+                      <button>수정</button>
+                      <button>삭제</button>
                     </c:if>
                   </div>
                   <div>
-                    <button class="btn_3">챌린지 참여</button>
+                    <button class="btn_3" onclick="confirmFormBtn(${challenge.chNo});">챌린지 참여(인증하기)</button>
                   </div>
                   <div>
                     <button class="btn_3">챌린지 채팅 참여</button>
@@ -115,6 +116,15 @@
   </div>
 
   <!-- 내용 영역 끝 -->
+<script>
+
+  function confirmFormBtn(chNo) {
+      location.href="/insertForm.con?chNo=" + chNo;
+  }
+
+
+</script>
+
 
 
 <jsp:include page="/WEB-INF/jsp/fo/common/footer.jsp"/>

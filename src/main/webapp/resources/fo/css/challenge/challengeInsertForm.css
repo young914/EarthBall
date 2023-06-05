@@ -124,24 +124,13 @@
 
 }
 
-.form_text {
-  width: 500px;
-  height: 40px;
-  border-radius: 5px;
-  border: solid lightgray 1px;
-  font-size: 18px;
-  margin-left: 20px;
+
+.form_content {
+  font-size: 20px;
+  margin-left: 30px;
+  font-weight: 800;
 }
 
-
-.form_date {
-  height: 40px;
-  border-radius: 5px;
-  border: solid lightgray 1px;
-  font-size: 18px;
-  margin-left: 20px;
-  width: 200px;
-}
 
 
 .basic_form_1 {

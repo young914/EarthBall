@@ -29,6 +29,7 @@
       SELECT SEQ_TB_CHALLENGE.NEXTVAL
         FROM DUAL
     </selectKey>
+    <!--BEFORE로 설정하면 키를 먼저 조회하고 그 값을 keyProperty 에 셋팅한 뒤 insert 구문을 실행한다.-->
     INSERT INTO TB_CHALLENGE (CH_NO
                             , CH_TITLE
                             , CH_START_DAY
@@ -68,6 +69,7 @@
          , TO_CHAR(TO_DATE(CH_START_DAY, 'YYYY-MM-DD')) AS CH_START_DAY
          , TO_CHAR(TO_DATE(CH_END_DAY, 'YYYY-MM-DD')) AS CH_END_DAY
          , MEMBER_ID
+         , CATEGORY_NO
          , (SELECT CATEGORY_NAME
             FROM TB_CATEGORY CA
             WHERE CA.CATEGORY_NO = C.CATEGORY_NO) CATEGORY_NAME

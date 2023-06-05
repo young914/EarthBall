@@ -3,6 +3,7 @@ package com.kh.earthball.fo.challenge.vo;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,4 +21,7 @@ public class ChConfirm {
   private String status;               // 사용여부
   private Date chConCreateDate;        // 작성일
 
+  
+  // 추가사항
+  private List<ChDetailInfo> chDetailInfoList;      // 인증 디테일 정보 리스트
 }
