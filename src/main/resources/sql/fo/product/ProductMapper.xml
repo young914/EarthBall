@@ -39,4 +39,16 @@
 		WHERE ROWNUM BETWEEN #{offset} and #{limit}
 	</select>
 
+	<select id="selectProduct" parameterType="int" resultType="com.kh.earthball.fo.product.vo.Product">
+		SELECT PRODUCT_NO, PRODUCT_NAME, CATEGORY, PRICE, DISCOUNT
+		FROM PRODUCT
+		WHERE PRODUCT_NO = #{productNo}
+	</select>
+
+	<select id="selectAtta" parameterType="int" resultType="com.kh.earthball.fo.product.vo.Atta">
+		SELECT CHANGER_NAME, FILE_LEVEL
+		FROM PRODUCT_ATTA
+		WHERE PRODUCT_NO = #{productNo}
+	</select>
+
 </mapper>

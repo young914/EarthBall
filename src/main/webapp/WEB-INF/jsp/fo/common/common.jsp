@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
     <!-- 공통css -->
-    <link rel="stylesheet" href="/resources/fo/css/common/header.css">
+    <link rel="stylesheet" href="/resources/fo/css/common/header.css?after">
     <link rel="stylesheet" href="/resources/fo/css/common/footer.css">
 
     <!-- CDN 연동구문 -->
