@@ -107,15 +107,15 @@
                     <table>
                         <tr>
                             <th>이름</th>
-                            <td id="name">홍길동</td>
+                            <td id="name">${ loginUser.memberName }</td>
                         </tr>
                         <tr>
                             <th>전화번호</th>
-                            <td id="phone">01012345678</td>
+                            <td id="phone">${ loginUser.phone }</td>
                         </tr>
                         <tr>
                             <th>E-mail</th>
-                            <td id="email">honggildong@gmail.com</td>
+                            <td id="email">${ loginUser.email }</td>
                         </tr>
                     </table>
                 </div>
@@ -136,30 +136,29 @@
                         </tr>
                         <tr>
                             <td width="240"><input type="text" id="receiveName" placeholder="수령인" required></td>
-                            <td><input type="number" id="receivePhone" placeholder="연락처 (- 제외)" value="01011112222" required></td>
+                            <td><input type="number" id="receivePhone" placeholder="연락처 (- 제외)" required></td>
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <input type="number" id="postCode" placeholder="우편번호" value="01716" width="50%"
-                                       required>
+                                <input type="number" id="postCode" placeholder="우편번호" width="50%" required>
                                 <input type="button" id="selectAddress" value="주소찾기">
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <input type="text" id="address1" placeholder="주소" value="서울특별시 강남구 도산대로1" required>
+                                <input type="text" id="address1" placeholder="주소" required>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <input type="text" id="address2" placeholder="상세주소" value="1층" required>
+                                <input type="text" id="address2" placeholder="상세주소" required>
                             </td>
                         </tr>
                     </table>
                     <div id="content1_3_3">
                         <span style="font-size : 20px; font-weight : bold; margin : 30px 0px 20px 25px;">배송메모</span>
                         <div id="deliveryMemo">
-                            <select>
+                            <select id="deliveryComent">
                                 <option value="없음">배송메모를 선택해주세요.</option>
                                 <option>배송 전에 미리 연락 바랍니다.</option>
                                 <option>부재 시 경비실에 맡겨 주세요.</option>
@@ -226,8 +225,9 @@
                         </tr>
                         <tr id="orderSummaryTotal-area">
                             <td class="orderSummaryTotal">총 주문금액</td>
-                            <td style="padding-right : 20px;"><p class="totalAmount"><fmt:formatNumber value="55000"
-                                                                                                       pattern="###,###"/>원</p>
+                            <td style="padding-right : 20px;">
+                            	<p class="totalAmount"><fmt:formatNumber pattern="###,###원">100</fmt:formatNumber></p>
+                            	<input type="hidden" id="realTotalAmount" value="100">
                             </td>
                         </tr>
                     </table>
@@ -246,16 +246,16 @@
                 </div>
                 <div id="content2_2_2">
                     <div>
-                        <input type="radio" id="credit" name="pay" value="credit">
+                        <input type="radio" id="credit" name="pay" value="KGinisis" checked>
                         <label for="credit">신용카드</label>
                     </div>
                     <div>
-                        <input type="radio" id="kakao" name="pay" value="kakao">
+                        <input type="radio" id="kakao" name="pay" value="kakaopay">
                         <label for="kakao">카카오페이</label>
                     </div>
                     <div>
-                        <input type="radio" id="naver" name="pay" value="naver">
-                        <label for="naver">네이버페이</label>
+                        <input type="radio" id="naver" name="pay" value="naverpay" disabled>
+                        <label for="naver">네이버페이 (연동중)</label>
                     </div>
                 </div>
                 <div id="content2_2_3">
@@ -265,6 +265,38 @@
         </div>
     </div>
 </div>
+
+<script>
+
+	$(function() {
+
+		$("#sameOrderUser").click(function() {
+			var same = this.checked;
+			$("#receiveName").val(same ? "${ loginUser.memberName }" : "");
+			$("#receivePhone").val(same ? "${ loginUser.phone }" : "");
+			$("#postCode").val(same ? "${ loginUser.postCode }" : "");
+			$("#address1").val(same ? "${ loginUser.address1 }" : "");
+			$("#address2").val(same ? "${ loginUser.address2 }" : "");
+
+			if(same == true){
+          		$('#content1_3_2 input').filter('input:text')
+    	  		.attr('readonly',true)
+     	 		.css('opacity', 0.5);
+          		$('#content1_3_2 input').filter('input[type="number"]')
+    	  		.attr('readonly',true)
+     	 		.css('opacity', 0.5);
+          		$('#content1_3_2 input').filter('input:button')
+    	  		.attr('disabled',true).css('opacity', 0.5);
+     		 }else{
+     		   $('#content1_3_2 input').filter('input:text').attr('readonly',false)
+     	 		.css('opacity', 1);
+     		  $('#content1_3_2 input').filter('input[type="number"]').attr('readonly',false)
+   	 		.css('opacity', 1);
+     		 $('#content1_3_2 input').filter('input:button').attr('disabled',false).css('opacity', 1);
+     		 }
+		});
+	});
+</script>
 
 <jsp:include page="/WEB-INF/jsp/fo/common/footer.jsp"/>
 

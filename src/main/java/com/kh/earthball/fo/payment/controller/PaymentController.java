@@ -1,5 +1,7 @@
 package com.kh.earthball.fo.payment.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -79,23 +81,16 @@ public class PaymentController {
   @PostMapping(value = "/paySuccess", produces = "text/html; charset=UTF-8")
   public String paySuccess(PayInfo pi) {
 
-    System.out.println("여기는 성공컨트롤러");
-//    System.out.println(paymentNo);
-//    System.out.println(memberId);
-//    System.out.println(paymentType);
-//    System.out.println(paymentTotal);
-//    System.out.println(receiveName);
-//    System.out.println(receivePhone);
-//    System.out.println(postCode);
-//    System.out.println(receiveAddress1);
-//    System.out.println(receiveAddress2);
-//    System.out.println(paymentToken);
-
     int result = paymentService.payComplete(pi);
 
-    System.out.println(result);
-
-    return "잘 넘어가나?";
+    return String.valueOf(result); // 1 -> "1"
   }
+
+//  @PostMapping("payCancel.pa")
+//  public String paymentCancel() {
+
+
+
+//  }
 
 }

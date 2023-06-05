@@ -15,6 +15,9 @@ public class PaymentSerciveImpl implements PaymentService {
 
   @Override
   public int payComplete(PayInfo pi) {
+
+    System.out.println(pi);
+
     return paymentMapper.payComplete(pi);
   }
 
