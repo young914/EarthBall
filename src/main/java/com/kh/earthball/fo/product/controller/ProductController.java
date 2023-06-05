@@ -54,6 +54,8 @@ public class ProductController {
 
     Product p = productService.selectProduct(productNo);
     ArrayList<Atta> list = productService.selectAtta(productNo);
+    
+    System.out.println(list);
 
     model.addAttribute("p", p);
     model.addAttribute("list", list);

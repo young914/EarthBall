@@ -47,6 +47,10 @@
     color: white;
     font-size: 20px;
 }
+#priceArea button:hover{
+    cursor: pointer;
+    background-color: #1ab2d9;
+}
 #priceArea input{
     width: 50px;
     height: 50px;
@@ -186,6 +190,11 @@
 }
 #productReview{display: none;}
 #productQna{display: none;}
+
+/* 상세정보 */
+#productDetail>img{
+    width: 100%;
+}
 
 /* 상세정보 */
 /* 리뷰 */

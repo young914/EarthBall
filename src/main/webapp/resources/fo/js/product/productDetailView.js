@@ -2,6 +2,7 @@ let quantity = $(".quantity").val();
 let price = parseInt($("#productPrice").children().text());
 
 $(".up").click(function(){
+    console.log("up");
     quantity++;
     var total = price * quantity
     $(".quantity").val(quantity);
