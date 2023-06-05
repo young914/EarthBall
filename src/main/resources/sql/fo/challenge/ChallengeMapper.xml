@@ -21,6 +21,7 @@
             FROM TB_CHA_FILE F
             WHERE F.FILE_NO = C.FILE_NO) FILE_PATH
     FROM TB_CHALLENGE C
+    WHERE STATUS = 'Y'
     ORDER BY CH_NO DESC
   </select>
 
@@ -37,7 +38,8 @@
                             , MEMBER_ID
                             , CATEGORY_NO
                             , FILE_NO
-                            , CH_CONTENT)
+                            , CH_CONTENT
+                            , STATUS)
                     VALUES (#{chNo}
                           , #{chTitle}
                           , #{chStartDay}
@@ -45,7 +47,8 @@
                           , #{memberId}
                           , #{categoryNo}
                           , #{fileNo}
-                          , #{chContent})
+                          , #{chContent}
+                          , 'Y')
   </insert>
 
   <insert id="insertChDetailInfo"  parameterType="com.kh.earthball.fo.challenge.vo.ChDetailInfo">
@@ -79,6 +82,7 @@
          , CH_CONTENT
       FROM TB_CHALLENGE C
      WHERE CH_NO = #{chNo}
+       AND STATUS = 'Y'
   </select>
 
 
@@ -92,6 +96,12 @@
      WHERE CH_NO = #{chNo}
        AND MEMBER_ID = #{memberId}
        AND CATEGORY_NO = #{categoryNo}
+       AND STATUS = 'Y'
   </update>
 
+  <update id="challengeDelete">
+    UPDATE TB_CHALLENGE
+       SET STATUS = 'N'
+     WHERE CH_NO = #{chNo}
+  </update>
 </mapper>

@@ -51,7 +51,7 @@
                   <div style="  text-align: right;">
                     <c:if test="${ not empty loginUser }">
                       <button onclick="updateChallenge(${challenge.chNo});">수정</button>
-                      <button>삭제</button>
+                      <button onclick="deleteChallenge(${challenge.chNo})">삭제</button>
                     </c:if>
                   </div>
                   <div>
@@ -126,6 +126,28 @@
       location.href="/updateForm.chall?chNo=" + chNo;
   }
 
+  function deleteChallenge(chNo) {
+
+      $.ajax({
+          url : "delete.chall"
+          , type : "get"
+          , data : {
+              chNo : chNo
+          }
+          , success : function (result) {
+              if(result > 0) {
+                  alert("챌린지가 삭제되었습니다.");
+                  location.href="/main.chall";
+              } else {
+                  alert("챌린지가 삭제되지 않았습니다.");
+              }
+          }
+          , error : function () {
+              console.log("챌린지 삭제용 ajax 통신 실패")
+          }
+      });
+
+  }
 
 </script>
 

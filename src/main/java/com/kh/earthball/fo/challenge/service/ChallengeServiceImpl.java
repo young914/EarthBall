@@ -63,4 +63,9 @@ public class ChallengeServiceImpl implements ChallengeService {
     }
     return result;
   }
+
+  @Override
+  public int challengeDelete(int chNo) {
+    return challengeMapper.challengeDelete(chNo);
+  }
 }

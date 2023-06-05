@@ -119,9 +119,11 @@ public class ChallengeController {
   public int challengeUpdate(@RequestBody Challenge challenge) {
     return challengeService.challengeUpdate(challenge);
   }
-
-
-
+@ResponseBody
+@GetMapping("delete.chall")
+public int challengeDelete(int chNo) {
+    return challengeService.challengeDelete(chNo);
+}
 
 
 }

@@ -23,4 +23,6 @@ public interface ChallengeMapper {
   Challenge selectChallenge(int chNo);
 
   int challengeUpdate(Challenge challenge);
+
+  int challengeDelete(int chNo);
 }
