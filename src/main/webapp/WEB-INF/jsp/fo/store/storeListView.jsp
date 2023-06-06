@@ -210,8 +210,7 @@ hr{
         <div style="overflow-y: scroll; position:relative; height: 65%;">
             <hr>
             <div id="searchResult">
-                <span>총 </span>
-                <span>${pi.listCount}개의 결과</span>
+                
             </div>
             <hr>
             <div id="store-list-area">
@@ -246,8 +245,6 @@ hr{
         // 1. 모든 요소들이 화면에 다 로딩된 후 로직 시작
         $(function() {
 
-            console.log("qqqq")
-
             // 2. 지도 셋팅하기 & 데이터 불러오기
             settingMap();
         });
@@ -268,8 +265,14 @@ hr{
                 type : "get",
                 success : function(result) {
 
+                    // return 값 다 담기
                     storeList = result;
-
+                    
+                    // 2_3. 조회해온 매장 수를 storeCount에 담기
+                    storeCount = storeList.length;
+                    let storeCountStr = "<span>총 </span>" + storeCount + "<span>개의 결과</span>";
+                    $("#searchResult").html(storeCountStr);
+                    // 2_3_2. 조회해온 매장 데이터를 storeList에 담기
                     let resultStr = "";
                     for(let i = 0; i < storeList.length; i++) {
 
@@ -335,8 +338,34 @@ hr{
                         // 마커에 클릭이벤트 걸기
                         // 마커에 클릭이벤트를 등록합니다
                         kakao.maps.event.addListener(marker, 'click', clickListener(map, marker, overlay));
-                        
+
                     }
+
+                    markerList.forEach(function(marker, index) {
+                        kakao.maps.event.addListener(marker, 'click', function() {
+                            // 다른 오버레이 닫기
+                            overlayList.forEach(function(item, idx) {
+                                if (idx !== index) {
+                                    item.setMap(null);
+                                    isClosed[idx] = true;
+                                }
+                            });
+
+                            if (isClosed[index]) { // 닫혀있음
+                                overlayList[index].setMap(map);
+
+                            } else { // 열려있음
+                                overlayList[index].setMap(null);
+                            }
+
+                            // 오버레이가 열려있는 경우에만 closeOverlay 함수 호출
+                            if (!isClosed[index]) {
+                                closeOverlay(index);
+                            }
+
+                            isClosed[index] = !isClosed[index];
+                        });
+                    });
 
                     $("#store-list-area").html(resultStr);
 
@@ -347,29 +376,28 @@ hr{
                     }
 
                     // 리스트에 클릭 걸기
+                    // 리스트에 클릭 걸기
                     $("#store-list-area").on("click", ".searchList", function() {
-
-                        // console.log($(this));
-
                         let index = $(this).attr("class").split(" ")[1];
 
-                        if(isClosed[index]) { // 닫혀있음
-
+                        if (isClosed[index]) { // 닫혀있음
                             // 다른 창 다 닫기
-                            overlayList.forEach(function(item, i) {
+                            overlayList.forEach(function(item, idx) {
                                 item.setMap(null);
-                                isClosed[i] = true;
+                                isClosed[idx] = true;
                             });
-                            
-                            overlayList[index].setMap(map);
-                        } else { // 열려있음
 
+                            overlayList[index].setMap(map);
+
+                            var moveLatLon = new kakao.maps.LatLng(storeList[index].storeLat, storeList[index].storeLon);
+                            console.log(moveLatLon);
+                            map.panTo(moveLatLon);
+                        } else { // 열려있음
                             overlayList[index].setMap(null);
                         }
-                        
+
                         isClosed[index] = !isClosed[index];
                     });
-
 
                 }, 
                 error : function() {
@@ -388,14 +416,13 @@ hr{
 
         // 오버레이 닫는 함수
         function closeOverlay(index) {
-
-            console.log("zzzz")
+            
             if (overlayList[index]) {
                 overlayList[index].setMap(null);
             }
         }
 
-        // 리스트 클릭 시 해당 오버레이 띄우기
+        
 
         function openNav() {
             document.getElementById("mySidebar").style.left = "0";
@@ -413,7 +440,6 @@ hr{
 
         function toggleNav() {
 
-            console.log("클릭");
             if (document.getElementById("mySidebar").style.left == "0px") {
                 closeNav();
             } else {
@@ -421,12 +447,6 @@ hr{
             }
         }
 
-
-
-
-    </script>
-
-    <script>
         var currentPage = 1; // 현재 페이지 번호
         var totalPages = 5; // 전체 페이지 수
 
