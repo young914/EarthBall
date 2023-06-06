@@ -155,7 +155,38 @@
 
 <!-- 내용 영역 끝 -->
 <script>
-  function detailViewChallenge(chNo) {
+    function confirmFormBtn(chNo) {
+        location.href="/insertForm.con?chNo=" + chNo;
+    }
+
+    function updateChallenge(chNo) {
+        location.href="/updateForm.chall?chNo=" + chNo;
+    }
+
+
+    function deleteChallenge(chNo) {
+
+        $.ajax({
+            url : "delete.chall"
+            , type : "get"
+            , data : {
+                chNo : chNo
+            }
+            , success : function (result) {
+                if(result > 0) {
+                    alert("챌린지가 삭제되었습니다.");
+                    location.href="/main.chall";
+                } else {
+                    alert("챌린지가 삭제되지 않았습니다.");
+                }
+            }
+            , error : function () {
+                console.log("챌린지 삭제용 ajax 통신 실패")
+            }
+        });
+    }
+
+    function detailViewChallenge(chNo) {
       location.href="/detailView.chall?chNo=" + chNo;
   }
 

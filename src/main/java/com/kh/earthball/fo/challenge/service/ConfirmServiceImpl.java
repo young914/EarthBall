@@ -3,6 +3,7 @@ package com.kh.earthball.fo.challenge.service;
 import com.kh.earthball.fo.challenge.mapper.ConfirmMapper;
 import com.kh.earthball.fo.challenge.vo.ChConfirm;
 import com.kh.earthball.fo.challenge.vo.ChDetailInfo;
+import com.kh.earthball.fo.challenge.vo.ChDetailInfoParam;
 import com.kh.earthball.fo.common.vo.PageInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +38,17 @@ public class ConfirmServiceImpl implements ConfirmService {
     int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getBoardLimit();
     int limit = offset + pageInfo.getBoardLimit();
     return confirmMapper.selectConfirmList(offset, limit, chNo);
+  }
+
+  @Override
+  public ChConfirm selectConfirm(int chConNo) {
+    return confirmMapper.selectConfirm(chConNo);
+  }
+
+
+  @Override
+  public List<ChDetailInfo> selectDetailInfoList(ChDetailInfoParam detailInfoParam) {
+    return confirmMapper.selectDetailInfoList(detailInfoParam);
   }
 
 }

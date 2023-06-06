@@ -2,6 +2,7 @@ package com.kh.earthball.fo.challenge.mapper;
 
 import com.kh.earthball.fo.challenge.vo.ChConfirm;
 import com.kh.earthball.fo.challenge.vo.ChDetailInfo;
+import com.kh.earthball.fo.challenge.vo.ChDetailInfoParam;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,4 +18,13 @@ public interface ConfirmMapper {
   int selectListCount(int chNo);
 
   List<ChConfirm> selectConfirmList(@Param("offset") int offset, @Param("limit") int limit, @Param("chNo") int chNo);
+
+  ChConfirm selectConfirm(int chConNo);
+
+  List<ChDetailInfo> selectDetailInfo(int chNo, int chConNo);
+
+
+  List<ChDetailInfo> selectDetailInfoList(ChDetailInfoParam detailInfoParam);
 }
+
+

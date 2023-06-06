@@ -1,5 +1,6 @@
 package com.kh.earthball.bo.challenge.vo;
 
+import com.kh.earthball.fo.challenge.vo.ChDetailInfo;
 import lombok.*;
 
 import java.util.List;
@@ -18,6 +19,8 @@ public class CategoryTemplate {
   private String chSubTitle;
   private String grpCode;
   private int categoryNo;
+
   private List<Code> codeList;
+  private List<ChDetailInfo> chDetailInfoList;
 
 }
