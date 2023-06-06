@@ -216,7 +216,8 @@ hr{
             <div id="store-list-area">
             </div>
         </div>
-        <div class="pageN">
+        <div id="paging-area"></div>
+        <!-- <div class="pageN">
             <ul class="pagination">
                 <li><a href="#" onclick="goToPage(1)">&lt;&lt;</a></li>
                 <li><a href="#" onclick="goToPage(currentPage - 1)">&lt;</a></li>
@@ -228,7 +229,7 @@ hr{
                 <li><a href="#" onclick="goToPage(currentPage + 1)">&gt;</a></li>
                 <li><a href="#" onclick="goToPage(totalPages)">&gt;&gt;</a></li>
             </ul>
-        </div>
+        </div> -->
     </div>
 
     <!-- 사이드바 버튼 -->
@@ -258,7 +259,9 @@ hr{
                     level: 8
                 };
             var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
+            var zoomControl = new kakao.maps.ZoomControl();
+            map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+            
             // 2_2. ajax 로 전체 매장 조회해오기
             $.ajax({
                 url : "getStores.st",
@@ -268,12 +271,26 @@ hr{
                     // return 값 다 담기
                     storeList = result;
                     
+                    let currentPage = showList(storeList, 1); // 1페이지에 대한 리스트 보여주기'
+
+                    $("#paging-area").on("click", ".paging-btn", function() {
+        				currentPage = showList(storeList, Number($(this).text()));
+        			});
+        			$("#paging-area").on("click", ".paging-prev", function() {
+        				currentPage = showList(storeList, Number(currentPage) - 1);
+        			});
+        			$("#paging-area").on("click", ".paging-next", function() {
+        				currentPage = showList(storeList, Number(currentPage) + 1);
+        			});
+
+
                     // 2_3. 조회해온 매장 수를 storeCount에 담기
-                    storeCount = storeList.length;
+                    let storeCount = storeList.length;
                     let storeCountStr = "<span>총 </span>" + storeCount + "<span>개의 결과</span>";
                     $("#searchResult").html(storeCountStr);
                     // 2_3_2. 조회해온 매장 데이터를 storeList에 담기
                     let resultStr = "";
+                    
                     for(let i = 0; i < storeList.length; i++) {
 
                         // 동적으로 리스트 요소 생성
@@ -376,7 +393,6 @@ hr{
                     }
 
                     // 리스트에 클릭 걸기
-                    // 리스트에 클릭 걸기
                     $("#store-list-area").on("click", ".searchList", function() {
                         let index = $(this).attr("class").split(" ")[1];
 
@@ -390,7 +406,6 @@ hr{
                             overlayList[index].setMap(map);
 
                             var moveLatLon = new kakao.maps.LatLng(storeList[index].storeLat, storeList[index].storeLon);
-                            console.log(moveLatLon);
                             map.panTo(moveLatLon);
                         } else { // 열려있음
                             overlayList[index].setMap(null);
@@ -422,6 +437,58 @@ hr{
             }
         }
 
+        function showList(storeList , cPage) {
+        	
+			// 페이징처리 (목록보기)
+			let listCount = storeList.length;
+            console.log(listCount);
+			let currentPage = cPage;
+            console.log(currentPage);
+        	let pageLimit = 5;
+
+        	let boardLimit = 5;
+        	
+    		let maxPage = parseInt(Math.ceil(listCount / boardLimit));
+    		let startPage = parseInt((currentPage - 1) / pageLimit) * pageLimit + 1;
+    		let endPage = startPage + pageLimit - 1;
+    		
+    		if(endPage > maxPage) {
+    			endPage = maxPage;
+    		}
+    		
+    		let offset = (currentPage - 1) * boardLimit;
+    		let limit = boardLimit;
+    	
+			
+			
+			// 페이징처리 (페이징바보기)
+			let pagingStr = "";
+			
+			if(currentPage != 1) {
+				pagingStr += "<button class='paging-prev'>&lt;</button>";
+			}
+			
+			for(let p = startPage; p <= endPage; p++) {
+				
+				if(currentPage == p) {
+					pagingStr += "<button class='paging-btn' disabled>"
+                                + 	p
+                                + "</button>";
+                } else {
+                    pagingStr += "<button class='paging-btn'>"
+                                + 	p
+                                + "</button>";
+				}
+			} 
+			
+			if(currentPage != maxPage) {
+				pagingStr += "<button class='paging-next'>&gt;</button>";
+			}
+			
+			$("#paging-area").html(pagingStr);
+			
+			return currentPage;
+        }
         
 
         function openNav() {
@@ -447,21 +514,6 @@ hr{
             }
         }
 
-        var currentPage = 1; // 현재 페이지 번호
-        var totalPages = 5; // 전체 페이지 수
-
-        function goToPage(page) {
-            if (page < 1) {
-                page = 1;
-            } else if (page > totalPages) {
-                page = totalPages;
-            }
-
-            currentPage = page;
-            console.log('선택한 페이지:', currentPage);
-            // 페이지 이동 또는 다른 동작 수행
-            // ...
-        }
     </script>
 </body>
 </html>
