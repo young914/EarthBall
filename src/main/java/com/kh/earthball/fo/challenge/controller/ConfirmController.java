@@ -12,6 +12,8 @@ import com.kh.earthball.fo.challenge.service.ConfirmService;
 import com.kh.earthball.fo.challenge.vo.ChConfirm;
 import com.kh.earthball.fo.challenge.vo.ChDetailInfo;
 import com.kh.earthball.fo.challenge.vo.Challenge;
+import com.kh.earthball.fo.common.template.Pagination;
+import com.kh.earthball.fo.common.vo.PageInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -93,4 +95,25 @@ public class ConfirmController {
     }
   }
 
+  @GetMapping("listView.con")
+  public String confirmListView(int chNo, @RequestParam(value="currentPage", defaultValue = "1") int currentPage, Model model) {
+
+    // 해당 챌린지의 인증 게시글 수 조회
+    int listCount = confirmService.selectListCount(chNo);
+
+    int pageLimit = 5;
+    int boardLimit = 10;
+
+    PageInfo pageInfo = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+
+    List<ChConfirm> chConfirms = confirmService.selectConfirmList(pageInfo, chNo);
+
+    Challenge challenge = challengeService.selectChallenge(chNo);
+
+    model.addAttribute("pageInfo", pageInfo);
+    model.addAttribute("chConfirms", chConfirms);
+    model.addAttribute("challenge", challenge);
+
+    return "fo/challenge/confirm/confirmListView";
+  }
 }

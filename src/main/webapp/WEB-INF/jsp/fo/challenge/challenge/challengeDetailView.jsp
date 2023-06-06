@@ -49,7 +49,7 @@
                     ${challenge.memberId}
                   </div>
                   <div style="  text-align: right;">
-                    <c:if test="${ not empty loginUser }">
+                    <c:if test="${ not empty loginUser && loginUser.memberId eq challenge.memberId}">
                       <button onclick="updateChallenge(${challenge.chNo});">수정</button>
                       <button onclick="deleteChallenge(${challenge.chNo})">삭제</button>
                     </c:if>
@@ -69,8 +69,8 @@
     <!-- 타이틀 끝-->
 
     <div class="btn_div">
-      <button class="btn_1">챌린지 소개</button>
-      <button class="btn_2">인증목록</button>
+      <button class="btn_1" onclick="detailView(${challenge.chNo});">챌린지 소개</button>
+      <button class="btn_2" onclick="confirmList(${challenge.chNo});">인증목록</button>
     </div>
 
 
@@ -146,9 +146,16 @@
               console.log("챌린지 삭제용 ajax 통신 실패")
           }
       });
-
   }
 
+
+  function confirmList(chNo) {
+    location.href="/listView.con?chNo=" + chNo;
+  }
+
+  function detailView(chNo) {
+      location.href="/detailView.chall?chNo=" + chNo;
+  }
 </script>
 
 
