@@ -24,6 +24,5 @@ public class PayInfo {
   private int postCode;
   private String receiveAddress1;
   private String receiveAddress2;
-  private String deliveryComent;
   private String paymentToken;
 }
