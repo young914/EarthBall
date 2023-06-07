@@ -54,9 +54,13 @@ public class StoreServiceImpl implements StoreService {
   }
 
   @Override
-  public ArrayList<Store> selectFilterList(int regionNo) {
-    return storeMapper.selectFilterList(regionNo);
+  public ArrayList<Store> selectFilterListC(String city) {
+    return storeMapper.selectFilterListC(city);
   }
 
+  @Override
+  public ArrayList<Store> selectFilterListR(int regionNo) {
+    return storeMapper.selectFilterListR(regionNo);
+  }
 
 }

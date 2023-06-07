@@ -69,6 +69,9 @@ hr{
 #searchResult{
     padding: 15px 32px;
 }
+.btn{
+    width: 100%;
+}
 
 .searchList{
     padding: 17px 32px;
@@ -166,6 +169,7 @@ hr{
     }
 
 
+
 </style>
 </head>
 <body>
@@ -174,8 +178,7 @@ hr{
  
     <!-- 사이드바 -->
     <div id="mySidebar" class="sidebar">
-        <div id="filterStore">
-        <!--<form action="" id="filterStore"> -->
+        <div id="filterStore" style="z-index: 1000;">
             <div class="header">
                 <span>친환경 매장찾기</span>
             </div>
@@ -192,7 +195,7 @@ hr{
             </div>
 
             <div style="display: flex;">
-                <div class="dropdown citySearch">
+                <div class="dropdown citySearch" style="width: 129px;">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropCityFilter">
                         시/도 선택
                     </button>
@@ -205,11 +208,9 @@ hr{
                     </ul>
                 </div>
 
-                <div class="dropdown regionSearch">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropProvinceFilter">
-                        구/군 선택
-                    </button>
-                    <ul class="dropdown-menu" id="provinceFilter">
+                <div class="dropdown regionSearch" style="width: 129px;">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropProvinceFilter">구/군 선택</button>
+                    <ul class="dropdown-menu" id="provinceFilter" style=" max-height: 530px; overflow-y: auto;">
                         
                     </ul>
                 </div>
@@ -218,7 +219,6 @@ hr{
                     <input class="btn btn-primary" type="submit" onclick="settingFilterMap();" value="검색">
                 </div>
             </div>
-        <!--</form> -->
         </div>
 
         <div style="overflow-y: scroll; position:relative; height: 65%;">
@@ -257,7 +257,8 @@ hr{
 
             var city = $(event.target).text();
             $("#dropCityFilter").text(city);
-
+            
+            
             $.ajax({
                 url : "getCities.st",
                 type : "get",
@@ -289,63 +290,7 @@ hr{
 
         }
 
-        /*
-        $("#filterStore").submit(function(event) {
-            event.preventDefault(); // 기본 폼 제출 동작 막기
 
-            // 폼 데이터 가져오기
-            var formData = new FormData(this);
-            var city = $("#dropCityFilter").text();
-            var provinces = $("#dropProvinceFilter").text();
-            
-
-            // AJAX 요청 보내기
-            $.ajax({
-                url: "getFilter.st", // 요청을 보낼 URL 설정
-                type: "get", // 요청 방식 설정 (post 또는 get)
-                data: {
-                    city : city,
-                    provinces : provinces
-                },
-
-                success: function(result) {
-                    
-                    storeList = result;
-                    
-                    // 1. 기존에 있던 마커들 모두 지우기
-                    for (let i = 0; i < markerList.length; i++) {
-                        markerList[i].setMap(null);
-                    }
-                    markerList = [];
-
-                    // 2. 기존에 있던 오버레이들 모두 지우기
-                    for (let i = 0; i < overlayList.length; i++) {
-                        overlayList[i].setMap(null);
-                    }
-                    overlayList = [];
-
-                    // 3. 검색 결과 목록 지우기
-                    $("#searchResult").html("");
-
-                    // 4. 검색 결과 목록에 검색 결과 추가하기
-                    for (let i = 0; i < storeList.length; i++) {
-                        $("#searchResult").append(
-                            '<div class="searchResultItem" onclick="showOverlay(' + i + ');">' +
-                                '<div class="searchResultItemTitle">' + storeList[i].storeName + '</div>' +
-                                '<div class="searchResultItemAddress">' + storeList[i].address + '</div>' +
-                            '</div>'
-                        );
-                    }
-                    
-
-                },
-                error: function() {
-                    // 요청이 실패했을 때 실행되는 코드
-                    
-                }
-            });
-        });
-        */
 
         function settingFilterMap() {
 
@@ -369,7 +314,9 @@ hr{
             // 폼 데이터 가져오기
             var city = $("#dropCityFilter").text();
             var provinces = $("#dropProvinceFilter").text();
-            
+            if(provinces == "구/군 선택"){
+                provinces = "";
+            }
             console.log(city);
             console.log(provinces);
 
@@ -385,9 +332,8 @@ hr{
 
                     // return 값 다 담기
                     storeList = result;
-                    
+                    console.log(storeList);
                     let currentPage= showList(storeList, 1);
-                    
                     let listCount = storeList.length;
             
                     $("#paging-area").on("click", ".paging-btn", function() {

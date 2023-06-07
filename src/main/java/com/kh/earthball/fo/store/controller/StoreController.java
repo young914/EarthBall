@@ -84,31 +84,36 @@ public class StoreController {
     System.out.println(city);
     System.out.println(provinces);
     
-    int regionNo = storeService.selectRegionNo(city, provinces);
-    System.out.println(regionNo);
-    
-    ArrayList<Store> selectFilterList = storeService.selectFilterList(regionNo);
-    
-    
-
-    for (int i = 0; i < selectFilterList.size(); i++) {
-
-      GeocodingApi geocodingApi = new GeocodingApi();
-      double[] coordinates = geocodingApi.getGeocode(selectFilterList.get(i).getStoreAddress());
-      double latitude = coordinates[0];
-      double longitude = coordinates[1];
-      String jibunAddress = geocodingApi.getJibunAddress(latitude, longitude);
-
-      selectFilterList.get(i).setStoreLat(latitude); // Store 객체에 위도 값 설정
-      selectFilterList.get(i).setStoreLon(longitude); // Store 객체에 경도 값 설정
-      selectFilterList.get(i).setJibunAddress(jibunAddress); // Store 객체에 지번 주소 값 설정
+    if(provinces.equals("")) {
+      ArrayList<Store> selectFilterList = storeService.selectFilterListC(city);
+      
+      return new Gson().toJson(selectFilterList);
+      
     }
+    
+    else {
+      int regionNo = storeService.selectRegionNo(city, provinces);
+      System.out.println(regionNo);
+      ArrayList<Store> selectFilterList = storeService.selectFilterListR(regionNo);
+      
+      for (int i = 0; i < selectFilterList.size(); i++) {
 
+        GeocodingApi geocodingApi = new GeocodingApi();
+        double[] coordinates = geocodingApi.getGeocode(selectFilterList.get(i).getStoreAddress());
+        double latitude = coordinates[0];
+        double longitude = coordinates[1];
+        String jibunAddress = geocodingApi.getJibunAddress(latitude, longitude);
+
+        selectFilterList.get(i).setStoreLat(latitude); // Store 객체에 위도 값 설정
+        selectFilterList.get(i).setStoreLon(longitude); // Store 객체에 경도 값 설정
+        selectFilterList.get(i).setJibunAddress(jibunAddress); // Store 객체에 지번 주소 값 설정
+        
+        
+      }
+      return new Gson().toJson(selectFilterList);
+    }
     
-    
-    System.out.println(selectFilterList);
-    return new Gson().toJson(selectFilterList);
- 
+
   }
   
   @ResponseBody
