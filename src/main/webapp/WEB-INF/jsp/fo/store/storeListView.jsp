@@ -7,7 +7,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d4ce7a8706f16f48bba913a5def2af6a"></script>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <style>
 html, body{
@@ -184,12 +183,12 @@ hr{
             </div>
             <div>
                 <div class="dropdown dropdownCate">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropClasificarFilter">
                         지역 검색
                     </button>
                     <ul class="dropdown-menu" style="width: 100%; border-radius: 10px;">
-                        <li><a class="dropdown-item" href="#">지역 검색</a></li>
-                        <li><a class="dropdown-item" href="#">주소/매장명 검색</a></li>
+                        <li><a class="dropdown-item" onclick="regionSearch(event)">지역 검색</a></li>
+                        <li><a class="dropdown-item" onclick="nameSearch(event);">주소/매장명 검색</a></li>
                     </ul>
                 </div>
             </div>
@@ -290,8 +289,6 @@ hr{
 
         }
 
-
-
         function settingFilterMap() {
 
             document.getElementById('map').innerHTML = ""; // 맵 초기화
@@ -317,8 +314,6 @@ hr{
             if(provinces == "구/군 선택"){
                 provinces = "";
             }
-            console.log(city);
-            console.log(provinces);
 
             // 2_2. ajax 로 전체 매장 조회해오기
             $.ajax({
@@ -337,14 +332,14 @@ hr{
                     let listCount = storeList.length;
             
                     $("#paging-area").on("click", ".paging-btn", function() {
-        				currentPage = showList(storeList, Number($(this).text()));
-        			});
-        			$("#paging-area").on("click", ".paging-prev", function() {
-        				currentPage = showList(storeList, Number(currentPage) - 1);
-        			});
-        			$("#paging-area").on("click", ".paging-next", function() {
-        				currentPage = showList(storeList, Number(currentPage) + 1);
-        			});
+                        currentPage = showList(storeList, Number($(this).text()));
+                    });
+                    $("#paging-area").on("click", ".paging-prev", function() {
+                        currentPage = showList(storeList, Number(currentPage) - 1);
+                    });
+                    $("#paging-area").on("click", ".paging-next", function() {
+                        currentPage = showList(storeList, Number(currentPage) + 1);
+                    });
 
 
                     // 2_3. 조회해온 매장 수를 storeCount에 담기
@@ -471,6 +466,17 @@ hr{
             });
         }
 
+        function regionSearch(event) {
+            var region = $(event.target).text();
+            $("#dropClasificarFilter").text(region);
+        }
+
+        function nameSearch(event){
+            var name = $(event.target).text();
+            $("#dropClasificarFilter").text(name);
+        }
+
+
         function settingMap() {
             
             // 2_1. 지도 셋팅 완료
@@ -497,14 +503,14 @@ hr{
                     let listCount = storeList.length;
             
                     $("#paging-area").on("click", ".paging-btn", function() {
-        				currentPage = showList(storeList, Number($(this).text()));
-        			});
-        			$("#paging-area").on("click", ".paging-prev", function() {
-        				currentPage = showList(storeList, Number(currentPage) - 1);
-        			});
-        			$("#paging-area").on("click", ".paging-next", function() {
-        				currentPage = showList(storeList, Number(currentPage) + 1);
-        			});
+                        currentPage = showList(storeList, Number($(this).text()));
+                    });
+                    $("#paging-area").on("click", ".paging-prev", function() {
+                        currentPage = showList(storeList, Number(currentPage) - 1);
+                    });
+                    $("#paging-area").on("click", ".paging-next", function() {
+                        currentPage = showList(storeList, Number(currentPage) + 1);
+                    });
 
 
                     // 2_3. 조회해온 매장 수를 storeCount에 담기
@@ -650,20 +656,20 @@ hr{
 			// 페이징처리 (목록보기)
 			let listCount = storeList.length;
 			let currentPage = cPage;
-        	let pageLimit = 5;
-        	let boardLimit = 10;
-        	
-    		let maxPage = parseInt(Math.ceil(listCount / boardLimit));
-    		let startPage = parseInt((currentPage - 1) / pageLimit) * pageLimit + 1;
-    		let endPage = startPage + pageLimit - 1;
-    		
-    		if(endPage > maxPage) {
-    			endPage = maxPage;
-    		}
-    		
-    		let offset = (currentPage - 1) * boardLimit;
-    		let limit = boardLimit;
-    		
+            let pageLimit = 5;
+            let boardLimit = 10;
+            
+            let maxPage = parseInt(Math.ceil(listCount / boardLimit));
+            let startPage = parseInt((currentPage - 1) / pageLimit) * pageLimit + 1;
+            let endPage = startPage + pageLimit - 1;
+            
+            if(endPage > maxPage) {
+                endPage = maxPage;
+            }
+            
+            let offset = (currentPage - 1) * boardLimit;
+            let limit = boardLimit;
+            
 			let resultStr = "";
 			for(let i = offset; i < (offset + limit); i++) {
 
