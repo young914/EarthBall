@@ -25,4 +25,22 @@ public class BoardDao {
     return (ArrayList) sqlSession.selectList("boardMapper.selectList", null, rowBounds);
   }
 
+  public Board selectBoard(SqlSessionTemplate sqlSession, int boardNo) {
+    return sqlSession.selectOne("boardMapper.selectBoard", boardNo);
+}
+
+  public Board selectPrevBoard(SqlSessionTemplate sqlSession, int boardNo) {
+    return sqlSession.selectOne("boardMapper.selectPrevBoard", boardNo) ;
+  }
+
+public Board selectNextBoard(SqlSessionTemplate sqlSession, int boardNo) {
+  return sqlSession.selectOne("boardMapper.selectNextBoard", boardNo);
+  }
+
+public int insertBoard(SqlSessionTemplate sqlSession, Board b) {
+  return sqlSession.insert("boardMapper.insertBoard", b);
+}
+
+
+
 }

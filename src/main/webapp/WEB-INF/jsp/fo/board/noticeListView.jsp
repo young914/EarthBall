@@ -530,26 +530,23 @@ header{
                      <table>
                 <thead>
                     <tr>
-                        <th colspan="8"><h1 id="boardtext">1:1문의하기</h1>
-                            <h4 style="text-align: center;">고객센터 운영시간 | 평일 10:00 ~ 17:00</h4>
-                            <c:if test="${ not empty loginUser }">
-            	 			<span class="btn-group"> <!-- 버튼 관련 class -->
-                                <button id="insertList"><a href="enrollForm.bo">작성</a></button></th>
+                        <th colspan="8"><h1 id="boardtext">공지사항</h1>
+                            <h4 style="text-align: center;">배송 및 운영관련 공지사항 게시판입니다.</h4>
+                            <span class="btn-group"> <!-- 버튼 관련 class -->
+                                <button id="insertList">작성</button></th>
                             </span>
-         					 </c:if>
-
                     </tr>
 
                     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
                         <div class="container-fluid">
-                          <a class="navbar-brand" href="list.bo">1:1문의하기</a>
+                          <a class="navbar-brand" href="list.no">공지사항</a>
                           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                           </button>
                           <div class="collapse navbar-collapse" id="navbarColor01">
                             <ul class="navbar-nav me-auto">
                               <li class="nav-item">
-                                <a class="nav-link" href="list.no">공지사항</a>
+                                <a class="nav-link" href="list.bo">1:1문의</a>
                               </li>
                               <li class="nav-item">
                                 <a class="nav-link" href="list.faq">FAQ</a>
