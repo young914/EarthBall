@@ -270,22 +270,12 @@ hr{
 
                     // return 값 다 담기
                     storeList = result;
+
+                    console.log(storeList);
+                    
+                    let currentPage= showList(storeList, 1);
                    
                     let listCount = storeList.length;
-                    let currentPage = 1;
-                    let pageLimit = 5;
-                    let boardLimit = 5;
-                    
-                    let maxPage = parseInt(Math.ceil(listCount / boardLimit));
-                    let startPage = parseInt((currentPage - 1) / pageLimit) * pageLimit + 1;
-                    let endPage = startPage + pageLimit - 1;
-                    
-                    if(endPage > maxPage) {
-                        endPage = maxPage;
-                    }
-                    
-                    let offset = (currentPage - 1) * boardLimit;
-                    let limit = boardLimit;
             
                     $("#paging-area").on("click", ".paging-btn", function() {
         				currentPage = showList(storeList, Number($(this).text()));
@@ -303,24 +293,14 @@ hr{
                     let storeCountStr = "<span>총 </span>" + storeCount + "<span>개의 결과</span>";
                     $("#searchResult").html(storeCountStr);
                     // 2_3_2. 조회해온 매장 데이터를 storeList에 담기
-                    let resultStr = "";
-                    
-                    for(let i = offset; i < (offset + limit); i++) {
+                    for (let i = 0; i < storeList.length; i ++) {
 
-                        // 동적으로 리스트 요소 생성
-                        resultStr += "<div class='searchList " + i + "' data-storelat='" + storeList[i].storeLat + "' data-storelon='" + storeList[i].storeLon + "'>"
-                                    +    "<span class='storeTitle'>" + storeList[i].storeName + "</span> <br>"
-                                    +    "<span class='storeInfo'>" + storeList[i].storeAddress + "</span> <br>"
-                                    +    "<span class='storeInfo'>" + storeList[i].storePhone + "</span> <br>"
-                                    +    "<span class='storeInfo'>영업시간 " + storeList[i].businessHours + "</span>"
-                                    +    "<i class='xi-heart xi-2x' style='width: 20px;'></i>"
-                                    + "</div>";
-                        
+                       
                         // 각 매장에 대한 마커 생성
                         
                         var imageSrc = '/resources/fo/img/shop.png', // 마커이미지의 주소입니다    
                             imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
-                            imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+                            imageOption = {offset: new kakao.maps.Point(34, 60)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
                             
                         // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
                         var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
@@ -398,8 +378,6 @@ hr{
                         });
                     });
 
-                    $("#store-list-area").html(resultStr);
-
                     // 오버레이가 닫혔는지 열렸는지 검사하는 배열
                     let isClosed = [];
                     for(let i = 0; i < storeList.length; i++) {
@@ -428,32 +406,6 @@ hr{
                         isClosed[index] = !isClosed[index];
                     });
 
-                    // 페이징처리 (페이징바보기)
-                    let pagingStr = "";
-                    
-                    if(currentPage != 1) {
-                        pagingStr += "<button class='paging-prev'>&lt;</button>";
-                    }
-                    
-                    for(let p = startPage; p <= endPage; p++) {
-                        
-                        if(currentPage == p) {
-                            pagingStr += "<button class='paging-btn' disabled>"
-                                        + 	p
-                                        + "</button>";
-                        } else {
-                            pagingStr += "<button class='paging-btn'>"
-                                        + 	p
-                                        + "</button>";
-                        }
-                    } 
-                    
-                    if(currentPage != maxPage) {
-                        pagingStr += "<button class='paging-next'>&gt;</button>";
-                    }
-                    
-                    $("#paging-area").html(pagingStr);
-
                 }, 
                 error : function() {
                     console.log("ajax 통신 실패!");
@@ -477,6 +429,76 @@ hr{
             }
         }
         
+        function showList(storeList, cPage) {
+			// 페이징처리 (목록보기)
+			let listCount = storeList.length;
+			let currentPage = cPage;
+        	let pageLimit = 5;
+        	let boardLimit = 5;
+        	
+    		let maxPage = parseInt(Math.ceil(listCount / boardLimit));
+    		let startPage = parseInt((currentPage - 1) / pageLimit) * pageLimit + 1;
+    		let endPage = startPage + pageLimit - 1;
+    		
+    		if(endPage > maxPage) {
+    			endPage = maxPage;
+    		}
+    		
+    		let offset = (currentPage - 1) * boardLimit;
+    		let limit = boardLimit;
+    		
+			let resultStr = "";
+			for(let i = offset; i < (offset + limit); i++) {
+
+                if(i >= listCount) {
+                    break;
+                }
+                
+                console.log(i + " : " + storeList[i]);
+				
+				 // 동적으로 리스트 요소 생성
+                resultStr += "<div class='searchList " + i + "' data-storelat='" + storeList[i].storeLat + "' data-storelon='" + storeList[i].storeLon + "'>"
+                                    +    "<span class='storeTitle'>" + storeList[i].storeName + "</span> <br>"
+                                    +    "<span class='storeInfo'>" + storeList[i].storeAddress + "</span> <br>"
+                                    +    "<span class='storeInfo'>" + storeList[i].storePhone + "</span> <br>"
+                                    +    "<span class='storeInfo'>영업시간 " + storeList[i].businessHours + "</span>"
+                                    +    "<i class='xi-heart xi-2x' style='width: 20px;'></i>"
+                                    + "</div>";
+                        
+			}
+			
+			$("#store-list-area").html(resultStr);
+			
+			// 페이징처리 (페이징바보기)
+			let pagingStr = "";
+			
+			if(currentPage != 1) {
+				pagingStr += "<button class='paging-prev'>&lt;</button>";
+			}
+			
+			for(let p = startPage; p <= endPage; p++) {
+				
+				if(currentPage == p) {
+					pagingStr += "<button class='paging-btn' disabled>"
+							   + 	p
+							   + "</button>";
+				} else {
+					pagingStr += "<button class='paging-btn'>"
+							   + 	p
+							   + "</button>";
+				}
+			} 
+			
+			if(currentPage != maxPage) {
+				pagingStr += "<button class='paging-next'>&gt;</button>";
+			}
+			
+			$("#paging-area").html(pagingStr);
+			
+			return currentPage;
+        }
+
+
         function openNav() {
             document.getElementById("mySidebar").style.left = "0";
             document.getElementById("sideBtn").style.marginLeft = "450px";
@@ -499,7 +521,7 @@ hr{
                 openNav();
             }
         }
-
+        
     </script>
 </body>
 </html>
