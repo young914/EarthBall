@@ -138,10 +138,10 @@ public class ConfirmController {
     // 해당 챌린지의 카테고리번호를 가지고 인증 폼 가져오기
     List<CategoryTemplate> templateList = templateService.selectTemplateList(categoryNo);
 
-    for (int i = 0; i < templateList.size(); i++) {
-      log.info("CategoryTemplateNo 넘어왔어? : " + templateList.get(i).getCategoryTemplateNo());
-      if (templateList.get(i).getCategoryTemplateNo() != 0) {
-        int categoryTemplateNo = templateList.get(i).getCategoryTemplateNo();
+    for (CategoryTemplate categoryTemplate : templateList) {
+      log.info("CategoryTemplateNo 넘어왔어? : " + categoryTemplate.getCategoryTemplateNo());
+      if (categoryTemplate.getCategoryTemplateNo() != 0) {
+        int categoryTemplateNo = categoryTemplate.getCategoryTemplateNo();
 
         ChDetailInfoParam detailInfoParam = ChDetailInfoParam.builder()
             .chNo(chNo)
@@ -150,18 +150,38 @@ public class ConfirmController {
             .build();
 
         List<ChDetailInfo> chDetailInfoList = confirmService.selectDetailInfoList(detailInfoParam);
+        categoryTemplate.setChDetailInfoList(chDetailInfoList);
+      }
 
-        templateList.get(i).setChDetailInfoList(chDetailInfoList);
+      log.info("grp 넘어왔어? : " + categoryTemplate.getGrpCode());
+      if (StringUtils.isNotEmpty(categoryTemplate.getGrpCode())) {
+        List<Code> codeList = codeService.selectCodeList(categoryTemplate.getGrpCode());
+        categoryTemplate.setCodeList(codeList);
+      }
+
+      log.info("templateList에 들어있는 값 1 : " + templateList);   // 아직 code에 checked => true 부여 못한 상태!!!!!!
+
+      if(!categoryTemplate.getCodeList().isEmpty()) { // 코드 리스트가 있다면 => select / checkbox / radio 라면
+
+        List<Code> codeList = categoryTemplate.getCodeList();
+        List<ChDetailInfo> chDetailInfoList = categoryTemplate.getChDetailInfoList();
+
+        for(Code code : codeList) {
+          String codeOne = code.getCode();
+
+          for(ChDetailInfo chDetailInfo : chDetailInfoList) {
+            if(codeOne.equals(chDetailInfo.getCode())) {
+              code.setChecked("true");
+            }
+          }
+        }
       }
     }
 
-    /*-------------------*/
+    log.info("templateList에 들어있는 값 2 : " + templateList);   // code에 checked => true 부여 된 상태!!!!!!
 
-    Category category = categoryService.selectCategory(challenge.getCategoryNo());
 
-    log.info("templateList에 들어있는 값 : " + templateList);
 
-    model.addAttribute("category", category);
     model.addAttribute("templateList", templateList);
     model.addAttribute("chConfirm", chConfirm);
     model.addAttribute("challenge", challenge);

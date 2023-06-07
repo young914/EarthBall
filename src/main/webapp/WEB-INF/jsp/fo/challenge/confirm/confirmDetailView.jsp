@@ -46,7 +46,8 @@
       <span class="form_content">${challenge.categoryName}</span> <br><br>
 
       <span class="form_title">도전기간 </span>
-      <span class="form_content">${challenge.chStartDay}</span> ~ <span class="form_content">${challenge.chEndDay}</span> <br><br>
+      <span class="form_content">${challenge.chStartDay}</span> ~ <span
+        class="form_content">${challenge.chEndDay}</span> <br><br>
 
       <span class="form_title">진행상태 </span>
       <span class="form_content">진행중</span> <br><br>
@@ -70,9 +71,12 @@
       <!-- <span class="sub_title">인증 제목</span> -->
       <div class="text_class">
         <h1 style="color: #146C94; font-weight: 800">${chConfirm.chConTitle}</h1>
-       <!-- <input type="text" class="text_size" name="chConTitle"> -->
+        <!-- <input type="text" class="text_size" name="chConTitle"> -->
       </div>
-    </div> <br> <hr><br>
+    </div>
+    <br>
+    <hr>
+    <br>
 
     <!-- for문 -->
     <c:forEach var="temp" items="${templateList}">
@@ -85,11 +89,13 @@
         <div class="select">
           <span class="sub_title">${temp.chSubTitle}</span>
 
-          <select class="select_class" name="${temp.categoryTemplateNo}_${temp.inputType}">
             <c:forEach var="code" items="${temp.codeList}">
-              <option value="${code.code}">${code.codeName}</option>
+              <c:if test="${code.checked eq 'true'}">
+                <span class="values">${code.codeName}</span>
+              </c:if>
             </c:forEach>
           </select>
+
         </div>
         <br>
       </c:if>
@@ -121,17 +127,12 @@
         <div class="radio">
           <span class="sub_title">${temp.chSubTitle}</span>
 
-          <div class="radio_class">
-
             <c:forEach var="code" items="${temp.codeList}">
-              <input type="radio" id=“${temp.categoryTemplateNo}_${code.code}”
-                     name=“${temp.categoryTemplateNo}_${temp.inputType}” value="${code.code}">
-              <label for=“${temp.categoryTemplateNo}_${code.code}”>
-                <span class="radio_font">${code.codeName}</span>
-              </label>
+              <c:if test="${code.checked eq 'true'}">
+                <span class="values">${code.codeName}</span>
+              </c:if>
             </c:forEach>
 
-          </div>
         </div>
         <br>
       </c:if>
@@ -325,10 +326,10 @@
 
 
           let confirmInfo = { // 인증 기본 정보
-              chNo : chNo
-              , chConTitle : chConTitle
-              , memberId : memberId
-              , chDetailInfoList : list
+              chNo: chNo
+              , chConTitle: chConTitle
+              , memberId: memberId
+              , chDetailInfoList: list
           }
 
           console.log("인증 기본 정보 : ", confirmInfo);

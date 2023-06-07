@@ -19,6 +19,7 @@ public class CategoryTemplate {
   private String chSubTitle;
   private String grpCode;
   private int categoryNo;
+  private String chDetailInfoData;
 
   private List<Code> codeList;
   private List<ChDetailInfo> chDetailInfoList;

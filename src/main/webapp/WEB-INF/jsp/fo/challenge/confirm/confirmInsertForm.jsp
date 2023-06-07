@@ -102,9 +102,9 @@
           <div class="checkbox_class">
 
             <c:forEach var="code" items="${temp.codeList}">
-              <input type="checkbox" id=“${temp.categoryTemplateNo}_${code.code}”
+              <input type="checkbox" id="${temp.categoryTemplateNo}_${code.code}"
                      name="${temp.categoryTemplateNo}_${temp.inputType}" value="${code.code}">
-              <label for=“${temp.categoryTemplateNo}_${code.code}”
+              <label for="${temp.categoryTemplateNo}_${code.code}"
                      class="check_font"><span> ${code.codeName}</span> </label>
             </c:forEach>
 
@@ -123,9 +123,9 @@
           <div class="radio_class">
 
             <c:forEach var="code" items="${temp.codeList}">
-              <input type="radio" id=“${temp.categoryTemplateNo}_${code.code}”
-                     name=“${temp.categoryTemplateNo}_${temp.inputType}” value="${code.code}">
-              <label for=“${temp.categoryTemplateNo}_${code.code}”>
+              <input type="radio" id="${temp.categoryTemplateNo}_${code.code}"
+                     name="${temp.categoryTemplateNo}_${temp.inputType}" value="${code.code}">
+              <label for="${temp.categoryTemplateNo}_${code.code}">
                 <span class="radio_font">${code.codeName}</span>
               </label>
             </c:forEach>
@@ -142,7 +142,7 @@
           <span class="sub_title">${temp.chSubTitle}</span>
 
           <div class="text_class">
-            <input type="text" class="text_size" name=“${temp.categoryTemplateNo}_${temp.inputType}”>
+            <input type="text" class="text_size" name="${temp.categoryTemplateNo}_${temp.inputType}">
           </div>
 
         </div>
