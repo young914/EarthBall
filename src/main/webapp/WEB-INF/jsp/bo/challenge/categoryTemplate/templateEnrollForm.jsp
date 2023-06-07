@@ -66,6 +66,7 @@
                       <option value="select">select</option>
                       <option value="checkbox">checkbox</option>
                       <option value="radio">radio</option>
+                      <option value="text">text</option>
                       <option value="textarea">textarea</option>
                       <option value="file">file</option>
                       <option value="number">number</option>

@@ -7,15 +7,15 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>챌린지 인증 작성</title>
+  <title>챌린지 인증 수정</title>
 
   <jsp:include page="/WEB-INF/jsp/fo/common/common.jsp"/>
 
   <!-- CSS 영역-->
-  <link rel="stylesheet" href="/resources/fo/css/challenge/challengeInsertForm.css">
+  <link rel="stylesheet" href="/resources/fo/css/challenge/confirmUpdateForm.css">
 
   <!-- js 영역-->
-  
+
 </head>
 <body>
 
@@ -26,7 +26,7 @@
   <!-- 타이틀 시작-->
   <div id="title">
     <div id="bar_1"></div>
-    <div id="title_text">챌린지 인증</div>
+    <div id="title_text">챌린지 인증 수정</div>
   </div>
   <!-- 타이틀 끝-->
 
@@ -58,7 +58,6 @@
 
   </div>
 
-
   <div class="template">
     <div class="info_title">
       <h2>인증 정보</h2>
@@ -69,7 +68,7 @@
     <div class="text">
       <span class="sub_title">인증 제목</span>
       <div class="text_class">
-        <input type="text" class="text_size" name="chConTitle">
+        <input type="text" class="text_size" name="chConTitle" value="${chConfirm.chConTitle}" required>
       </div>
     </div> <br> <hr><br>
 
@@ -79,6 +78,7 @@
     <!-- 탬플릿 폼 안 영역 시작-->
     <div class="temp_content">
 
+
       <!-- select 문 일 경우-->
       <c:if test="${temp.inputType eq 'select'}">
         <div class="select">
@@ -86,9 +86,12 @@
 
           <select class="select_class" name="${temp.categoryTemplateNo}_${temp.inputType}">
             <c:forEach var="code" items="${temp.codeList}">
-              <option value="${code.code}">${code.codeName}</option>
+              <c:if test="${code.checked eq 'true'}">
+                <option value="${code.code}">${code.codeName}</option>
+              </c:if>
             </c:forEach>
           </select>
+
         </div>
         <br>
       </c:if>
@@ -103,9 +106,13 @@
 
             <c:forEach var="code" items="${temp.codeList}">
               <input type="checkbox" id="${temp.categoryTemplateNo}_${code.code}"
-                     name="${temp.categoryTemplateNo}_${temp.inputType}" value="${code.code}">
-              <label for="${temp.categoryTemplateNo}_${code.code}"
-                     class="check_font"><span> ${code.codeName}</span> </label>
+                         name="${temp.categoryTemplateNo}_${temp.inputType}" value="${code.code}"
+                          <c:forEach var="detail" items="${temp.chDetailInfoList}">
+                            <c:if test="${code.code eq detail.code}">checked</c:if>
+                          </c:forEach>> <!-- 디테일인포에 코드가 있고, 코드의 코드랑 일치한다면 체크드 -->
+                  <label for="${temp.categoryTemplateNo}_${code.code}" class="check_font">
+                    <span>${code.codeName}</span>
+                  </label>
             </c:forEach>
 
           </div>
@@ -124,7 +131,10 @@
 
             <c:forEach var="code" items="${temp.codeList}">
               <input type="radio" id="${temp.categoryTemplateNo}_${code.code}"
-                     name="${temp.categoryTemplateNo}_${temp.inputType}" value="${code.code}">
+                     name="${temp.categoryTemplateNo}_${temp.inputType}" value="${code.code}"
+                    <c:forEach var="detail" items="${temp.chDetailInfoList}">
+                           <c:if test="${code.code eq detail.code}">checked</c:if>
+                    </c:forEach>>
               <label for="${temp.categoryTemplateNo}_${code.code}">
                 <span class="radio_font">${code.codeName}</span>
               </label>
@@ -142,7 +152,7 @@
           <span class="sub_title">${temp.chSubTitle}</span>
 
           <div class="text_class">
-            <input type="text" class="text_size" name="${temp.categoryTemplateNo}_${temp.inputType}">
+            <input type="text" class="text_size" name="${temp.categoryTemplateNo}_${temp.inputType}" value="${temp.chDetailInfoList[0].chDetailInfoData}">
           </div>
 
         </div>
@@ -157,7 +167,7 @@
 
           <div class="textarea_class">
                     <textarea name="${temp.categoryTemplateNo}_${temp.inputType}" id="" cols="95" rows="10"
-                              class="textarea_font" style="resize:none;">나는 textarea다!!!</textarea>
+                              class="textarea_font" style="resize:none;">${temp.chDetailInfoList[0].chDetailInfoData}</textarea>
           </div>
         </div>
         <br>
@@ -196,7 +206,8 @@
           <div class="number_class">
             <input type="number" name="${temp.categoryTemplateNo}_${temp.inputType}" min="0" max="100"
                    step="1"
-                   class="number_size">
+                   class="number_size"
+                   value="${temp.chDetailInfoList[0].chDetailInfoData}">
           </div>
         </div>
         <br>
@@ -211,7 +222,8 @@
           <div class="ranger_class">
             <input type="range" name="${temp.categoryTemplateNo}_${temp.inputType}" min="0" max="100"
                    step="20"
-                   class="range_size">
+                   class="range_size"
+                   value="${temp.chDetailInfoList[0].chDetailInfoData}">
           </div>
         </div>
         <br>
@@ -225,7 +237,8 @@
 
           <div class="datetime_class">
             <input type="datetime-local" name="${temp.categoryTemplateNo}_${temp.inputType}"
-                   class="datetime_size">
+                   class="datetime_size"
+                   value="${temp.chDetailInfoList[0].chDetailInfoData}">
           </div>
         </div>
       </c:if>
