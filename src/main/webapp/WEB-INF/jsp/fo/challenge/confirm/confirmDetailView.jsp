@@ -7,7 +7,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>챌린지 인증 작성</title>
+  <title>챌린지 인증 상세</title>
 
   <jsp:include page="/WEB-INF/jsp/fo/common/common.jsp"/>
 
@@ -145,12 +145,6 @@
 
           <span class="values">${temp.chDetailInfoList[0].chDetailInfoData}</span>
 
-          <!--
-          <c:forEach var="detail" items="${temp.chDetailInfoList}">
-            <span class="values">${detail.chDetailInfoData}</span>
-          </c:forEach>
-          -->
-
         </div>
         <br>
       </c:if>
@@ -162,10 +156,8 @@
         <div class="textarea">
           <span class="sub_title">${temp.chSubTitle}</span> <br>
 
-          <div class="textarea_class">
-                    <textarea name="${temp.categoryTemplateNo}_${temp.inputType}" id="" cols="95" rows="10"
-                              class="textarea_font" style="resize:none;">나는 textarea다!!!</textarea>
-          </div>
+          <span class="valuesTextarea">${temp.chDetailInfoList[0].chDetailInfoData}</span>
+
         </div>
         <br>
       </c:if>
@@ -180,7 +172,7 @@
             <div class="basic_form_2">
               <div class="flex-container">
                 <div class="wrapper">
-                  <img src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"
+                  <img src="/resources"
                        class="image-box"/>
                   <input type="file" class="fileUpload" accept="image/*"
                          data-category-template-no="${temp.categoryTemplateNo}" data-input-type="${temp.inputType}">
@@ -200,11 +192,8 @@
         <div class="number">
           <span class="sub_title">${temp.chSubTitle}</span> <br>
 
-          <div class="number_class">
-            <input type="number" name="${temp.categoryTemplateNo}_${temp.inputType}" min="0" max="100"
-                   step="1"
-                   class="number_size">
-          </div>
+          <span class="values">${temp.chDetailInfoList[0].chDetailInfoData}</span>
+
         </div>
         <br>
       </c:if>
@@ -218,7 +207,8 @@
           <div class="ranger_class">
             <input type="range" name="${temp.categoryTemplateNo}_${temp.inputType}" min="0" max="100"
                    step="20"
-                   class="range_size">
+                   class="range_size"
+                   value="${temp.chDetailInfoList[0].chDetailInfoData}">
           </div>
         </div>
         <br>
@@ -232,9 +222,11 @@
 
           <div class="datetime_class">
             <input type="datetime-local" name="${temp.categoryTemplateNo}_${temp.inputType}"
-                   class="datetime_size">
+                   class="datetime_size"
+                   value="${temp.chDetailInfoList[0].chDetailInfoData}"
+                   readonly>
           </div>
-        </div>
+        </div> <br>
       </c:if>
       </c:forEach>
 

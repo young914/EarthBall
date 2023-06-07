@@ -19,4 +19,7 @@ public class ChDetailInfo {
   private String code;
   private String fileNo;
 
+  private String filePath;
+  private String fileName;
+
 }

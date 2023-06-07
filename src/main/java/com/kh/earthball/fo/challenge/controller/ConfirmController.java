@@ -162,7 +162,7 @@ public class ConfirmController {
       log.info("templateList에 들어있는 값 1 : " + templateList);   // 아직 code에 checked => true 부여 못한 상태!!!!!!
 
 
-      if(!categoryTemplate.getCodeList().isEmpty()) { // 코드 리스트가 있다면 => select / checkbox / radio 라면
+      if(categoryTemplate.getCodeList() != null && categoryTemplate.getCodeList().isEmpty()) { // 코드 리스트가 있다면 => select / checkbox / radio 라면
 
         List<Code> codeList = categoryTemplate.getCodeList();
         List<ChDetailInfo> chDetailInfoList = categoryTemplate.getChDetailInfoList();

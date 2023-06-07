@@ -171,6 +171,13 @@
   font-size: 18px;
 }
 
+.valuesTextarea {
+  margin-left: 60px;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
 /* select 문 */
 .select {
   display: flex;
