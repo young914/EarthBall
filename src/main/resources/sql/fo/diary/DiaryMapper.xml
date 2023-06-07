@@ -3,12 +3,41 @@
 
 <mapper namespace="com.kh.earthball.fo.diary.mapper.DiaryMapper">
 
-		<!--
 		<select id="selectListCount" resultType="_int">
 				SELECT COUNT(*)
 				  FROM DY_BOARD
-				WHERE STATUS = 'Y'
+				WHERE DY_STATUS = 'Y'
 		</select>
-		 -->
+
+		<select id="selectList" >
+				SELECT  DY_BOARD_NO
+				          ,  DY_BOARD_TITLE
+				          ,  DY_BOARD_CONTENT
+				          , To_CHAR(DY_CREATE_DATE, 'YYYY-MM-DD') AS "DY_CREATE_DATE"
+				          , DY_COUNT
+				          , ORIGIN_NAME
+				          , DY_BOARD_WRITER
+				 FROM   DY_BOARD
+				 JOIN MEMBER  ON (DY_BOARD_WRITER = MEMBER_ID)
+				 WHERE DY_STATUS = 'Y'
+				ORDER BY DY_BOARD_NO DESC
+		</select>
+
+		<insert id="insertDiary" parameterType="com.kh.earthball.fo.diary.vo.Diary" >
+				INSERT INTO DY_BOARD (DY_BOARD_NO
+                    							 , DY_BOARD_TITLE
+                                                 , DY_BOARD_CONTENT
+                                                 , ORIGIN_NAME
+                                                 , CHANGE_NAME
+                                                 , DY_BOARD_WRITER)
+            	                         VALUES (SEQ_DY_BOARD.NEXTVAL
+									              , #{dyBoardTitle}
+									              , #{dyBoardContent}
+									              , #{originName}
+									              , #{changeName}
+									              , #{dyBoardWriter })
+
+		</insert>
+
 
 </mapper>

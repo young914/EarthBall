@@ -98,30 +98,42 @@ function clearAll(){
 
 // 이미지 전송
  function drawingBtn() {
-  const imgBase64 = canvas.toDataURL('image/jpeg', 'image/octet-stream');
-  const decodImg = atob(imgBase64.split(',')[1]);
-  let array = [];
 
-  for (let i = 0; i < decodImg .length; i++) {
-    array.push(decodImg .charCodeAt(i));
-  }
+	 console.log("호출되나?");
 
-  const file = new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
-  const fileName = 'canvas_img_' + new Date().getMilliseconds() + '.jpg';
-  let formData = new FormData();
-  formData.append('file', file, fileName);
+    var imgDataUrl = canvas.toDataURL('image/png');
 
-  $.ajax({
-    type: 'post',
-    url: '/upload',
-    cache: false,
-    data: formData,
-    processData: false,
-    contentType: false,
-    success: function (data) {
-      alert('Uploaded !!')
-    	}
-  	})
+    var blobBin = atob(imgDataUrl.split(',')[1]);	// base64 데이터 디코딩
+    var array = [];
+    for (var i = 0; i < blobBin.length; i++) {
+        array.push(blobBin.charCodeAt(i));
+    }
+    var file = new Blob([new Uint8Array(array)], {type: 'image/png'});	// Blob 생성
+    var formdata = new FormData();	// formData 생성
+    formdata.append("file", file, "image.png");	// file data 추가
+
+    let dyBoardTitle = document.getElementById('dyBoardTitle').value;
+    let dyBoardContent = document.getElementById('dyBoardContent').value;
+
+    formdata.append('dyBoardTitle', dyBoardTitle);
+    formdata.append('dyBoardContent', dyBoardContent);
+
+    console.log(formdata.get("file"));
+    console.log(formdata.get("dyBoardTitle"));
+    console.log(formdata.get("dyBoardContent"));
+
+    $.ajax({
+        type : 'post',
+        url : '/diaryInsert.bo',
+        data : formdata,
+        processData : false,	// data 파라미터 강제 string 변환 방지!!
+        contentType : false,	// application/x-www-form-urlencoded; 방지!!
+        success : function (data) {
+            console.log(data);
+        }, error : function() {
+			console.log("실패");
+		}
+    });
   };
 
 
@@ -177,3 +189,45 @@ function clearAll(){
 	document.querySelector('#c_3').classList.remove('active3');
   }
 });
+
+const todayTime = () => {
+
+var now = new Date();
+var year = now.getFullYear();
+var month = now.getMonth() + 1;
+var date = now.getDate();
+var day = now.getDay();
+
+ var days = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+ var dayName = days[day];
+
+	return {
+        year: year,
+        month: month,
+        date: date,
+        day: dayName
+    };
+};
+
+const updateYear = () => {
+    document.getElementById("year").textContent = todayTime().year;
+};
+updateYear();
+
+const updateMonth = () => {
+    document.getElementById("month").textContent = todayTime().month;
+};
+updateMonth();
+
+const updateDate = () => {
+    document.getElementById("date").textContent = todayTime().date;
+};
+updateDate();
+
+
+const updateDay = () => {
+    document.getElementById("day").textContent = todayTime().day;
+};
+updateDay();
+
+

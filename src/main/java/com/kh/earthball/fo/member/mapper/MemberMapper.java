@@ -13,4 +13,10 @@ public interface MemberMapper {
   int updateMember(Member m);
 
   int idCheck(String checkId);
+  
+  int updateMailKey(Member m);
+  
+  int updateMailAuth(Member m);
+  
+  int emailAuthFail(String memberId);
 }

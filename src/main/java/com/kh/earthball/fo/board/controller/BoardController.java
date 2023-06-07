@@ -1,16 +1,19 @@
 package com.kh.earthball.fo.board.controller;
 
-import com.kh.earthball.fo.common.template.Pagination;
-import com.kh.earthball.fo.common.vo.PageInfo;
-import com.kh.earthball.fo.board.service.BoardService;
-import com.kh.earthball.fo.board.vo.Board;
+import java.util.ArrayList;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.ArrayList;
+import com.kh.earthball.fo.board.service.BoardService;
+import com.kh.earthball.fo.board.vo.Board;
+import com.kh.earthball.fo.common.template.Pagination;
+import com.kh.earthball.fo.common.vo.PageInfo;
 
 @Controller
 public class BoardController {
@@ -38,5 +41,74 @@ public class BoardController {
 
     return mv;
   }
+
+  @RequestMapping("enrollForm.bo")
+  public String enrollForm() {
+   return  "fo/board/boardEnrollForm";
+  }
+
+  @RequestMapping(value = "/insert.bo", method = RequestMethod.POST)
+  public String insertBoard(@ModelAttribute Board b, HttpSession session, Model model) {
+
+      int result = boardService.insertBoard(b);
+
+      if(result > 0) {
+
+        return "redirect:/list.bo";
+    } else {
+        // Error handling or return an error page
+        return "redirect:/error";
+    }
+  }
+
+  @RequestMapping("detail.bo")
+  public ModelAndView selectBoard(ModelAndView mv, int bno) {
+
+    Board b = boardService.selectBoard(bno);
+    if (b != null) {
+      // 이전글과 다음글의 존재 여부 확인
+      Board hasPrev = boardService.selectPrevBoard(bno);
+      Board hasNext = boardService.selectNextBoard(bno);
+
+      mv.addObject("b", b);
+      mv.addObject("hasPrev", hasPrev);
+      mv.addObject("hasNext", hasNext);
+      mv.setViewName("fo/board/boardDetailView");
+    } else {
+      mv.addObject("errorMsg", "게시글 상세조회 실패");
+    }
+
+    return mv;
+  }
+
+  @RequestMapping("list.faq")
+  public ModelAndView selectfaq(ModelAndView mv) {
+
+    mv.setViewName("fo/board/faq");
+
+    return mv;
+
+  }
+
+  @RequestMapping("list.no")
+  public ModelAndView selectNoList(ModelAndView mv) {
+
+    mv.setViewName("fo/board/noticeListView");
+
+    return mv;
+
+}
+
+  @RequestMapping("detail.no")
+
+  public ModelAndView selectNotice(ModelAndView mv) {
+
+    mv.setViewName("fo/board/noticeDetailView");
+
+    return mv;
+
+}
+
+
 
 }

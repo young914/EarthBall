@@ -102,6 +102,8 @@
                 <div class="dropdown">
                     <span class="dropbtn">고객센터</span>
                     <div class="dropdown-content">
+                        <a href="list.no">공지사항</a>
+                    	<a href="list.faq">FAQ</a>
                         <a href="list.bo">1:1문의</a>
                     </div>
                 </div>
