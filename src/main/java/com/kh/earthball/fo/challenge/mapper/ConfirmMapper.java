@@ -21,9 +21,6 @@ public interface ConfirmMapper {
 
   ChConfirm selectConfirm(int chConNo);
 
-  List<ChDetailInfo> selectDetailInfo(int chNo, int chConNo);
-
-
   List<ChDetailInfo> selectDetailInfoList(ChDetailInfoParam detailInfoParam);
 }
 

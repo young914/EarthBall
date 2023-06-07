@@ -175,22 +175,82 @@ public class ConfirmController {
               code.setChecked("true");
             }
           }
+          categoryTemplate.setCodeList(codeList);
         }
       }
-
-
     }
 
     log.info("templateList에 들어있는 값 2 : " + templateList);   // code에 checked => true 부여 된 상태!!!!!!
-
-
 
     model.addAttribute("templateList", templateList);
     model.addAttribute("chConfirm", chConfirm);
     model.addAttribute("challenge", challenge);
 
-
     return "fo/challenge/confirm/confirmDetailView";
+  }
+
+  @GetMapping("updateForm.con")
+  public String confirmUpdateForm(int chConNo, Model model) {
+    // 해당하는 챌린지 인증 게시글 조회 해오기
+    ChConfirm chConfirm = confirmService.selectConfirm(chConNo);
+
+    // 챌린지 인증의 해당하는 챌린지 정보 조회해오기
+    int chNo = chConfirm.getChNo();
+
+    Challenge challenge = challengeService.selectChallenge(chNo);
+
+    /*-------------------*/
+
+    int categoryNo = challenge.getCategoryNo();
+
+
+    // 해당 챌린지의 카테고리번호를 가지고 인증 폼 가져오기
+    List<CategoryTemplate> templateList = templateService.selectTemplateList(categoryNo);
+
+    for (CategoryTemplate categoryTemplate : templateList) {
+      if (categoryTemplate.getCategoryTemplateNo() != 0) {
+        int categoryTemplateNo = categoryTemplate.getCategoryTemplateNo();
+
+        ChDetailInfoParam detailInfoParam = ChDetailInfoParam.builder()
+            .chNo(chNo)
+            .chConNo(chConNo)
+            .categoryTemplateNo(categoryTemplateNo)
+            .build();
+
+        List<ChDetailInfo> chDetailInfoList = confirmService.selectDetailInfoList(detailInfoParam);
+        categoryTemplate.setChDetailInfoList(chDetailInfoList);
+      }
+
+      if (StringUtils.isNotEmpty(categoryTemplate.getGrpCode())) {
+        List<Code> codeList = codeService.selectCodeList(categoryTemplate.getGrpCode());
+        categoryTemplate.setCodeList(codeList);
+      }
+
+      if(categoryTemplate.getCodeList() != null && categoryTemplate.getCodeList().isEmpty()) { // 코드 리스트가 있다면 => select / checkbox / radio 라면
+
+        List<Code> codeList = categoryTemplate.getCodeList();
+        List<ChDetailInfo> chDetailInfoList = categoryTemplate.getChDetailInfoList();
+
+        for(Code code : codeList) {
+          String codeOne = code.getCode();
+
+          for(ChDetailInfo chDetailInfo : chDetailInfoList) {
+            if(codeOne.equals(chDetailInfo.getCode())) {
+              code.setChecked("true");
+            }
+          }
+          categoryTemplate.setCodeList(codeList);
+        }
+      }
+    }
+
+    log.info("체크드 부여된 templateList : " + templateList);   // code에 checked => true 부여 된 상태!!!!!!
+
+    model.addAttribute("templateList", templateList);
+    model.addAttribute("chConfirm", chConfirm);
+    model.addAttribute("challenge", challenge);
+
+    return "fo/challenge/confirm/confirmUpdateForm";
   }
 
 }
