@@ -106,6 +106,16 @@
         <div class="checkbox">
           <span class="sub_title">${temp.chSubTitle}</span>
 
+          <c:forEach var="detail" items="${temp.chDetailInfoList}">
+            <c:forEach var="code" items="${temp.codeList}">
+              <c:if test="${code.code eq detail.code}">
+                <span class="values">${code.codeName} </span>
+              </c:if>
+            </c:forEach>
+          </c:forEach>
+
+
+          <!--
           <div class="checkbox_class">
 
             <c:forEach var="code" items="${temp.codeList}">
@@ -116,6 +126,8 @@
             </c:forEach>
 
           </div>
+          -->
+
         </div>
         <br>
       </c:if>
