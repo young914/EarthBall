@@ -42,4 +42,49 @@
     ORDER BY STORE_NO DESC 
  	</select>
 
+	<!-- 매장 지역 전체 선택조회용 쿼리문  -->
+		<select id="selectRegion" resultType="com.kh.earthball.fo.store.vo.Region">
+			SELECT DISTINCT CITY
+			FROM STORE_REGION
+            ORDER BY CITY
+		</select>
+		
+		<!-- 시/도 만 가져오는 쿼리문  -->
+		<select id="selectCityList" resultType="com.kh.earthball.fo.store.vo.Region">
+			SELECT DISTINCT CITY
+			FROM STORE_REGION
+            ORDER BY CITY
+		</select>
+		
+		<!-- 시/도에 맞는 구/군 가져오는 쿼리문  -->
+		<select id="selectProvincesList" parameterType="String" resultType="com.kh.earthball.fo.store.vo.Region">
+			SELECT PROVINCES
+			FROM STORE_REGION
+			WHERE CITY = #{city}
+            ORDER BY PROVINCES
+		</select>
+		<!-- regionNo 받는 쿼리문  -->
+		<select id="selectRegionNo" parameterType="String" resultType="int">
+			SELECT STORE_REGION_NO
+			FROM STORE_REGION
+			WHERE CITY = #{city}
+				 AND PROVINCES = #{provinces}
+		</select>
+		
+		<!-- 필터링 쿼리문  -->
+		<select id="selectFilterList" resultType="com.kh.earthball.fo.store.vo.Store">
+ 	    SELECT STORE_NO
+        , STORE_NAME
+        , STORE_ADDRESS
+        , STORE_PHONE
+        , BUSINESS_HOURS
+        , STORE_RC
+        , STORE_REGION_NO
+        , STORE_INFO
+        , STATUS
+	    FROM STORE
+	    WHERE STATUS = 'Y'
+	    AND STORE_REGION_NO = #{regionNo}
+	    ORDER BY STORE_NO DESC 
+	 	</select>
 </mapper>

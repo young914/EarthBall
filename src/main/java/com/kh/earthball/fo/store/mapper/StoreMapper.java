@@ -1,11 +1,11 @@
 package com.kh.earthball.fo.store.mapper;
 
-import com.kh.earthball.fo.common.vo.PageInfo;
-import com.kh.earthball.fo.store.vo.Store;
+import java.util.ArrayList;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
-import java.util.ArrayList;
+import com.kh.earthball.fo.common.vo.PageInfo;
+import com.kh.earthball.fo.store.vo.Region;
+import com.kh.earthball.fo.store.vo.Store;
 
 @Mapper
 public interface StoreMapper {
@@ -15,5 +15,16 @@ public interface StoreMapper {
     ArrayList<Store> selectStoreList(@Param("pi") PageInfo pi);
     
     ArrayList<Store> selectAllStoreList();
+
+    ArrayList<Region> selectRegion();
+
+    ArrayList<Region> selectCityList();
+
+    ArrayList<Region> selectProvincesList(@Param("city") String city);
+
+    int selectRegionNo(@Param("city") String city, @Param("provinces") String province);
+
+    ArrayList<Store> selectFilterList(@Param("regionNo") int regionNo);
+    
 
 }
