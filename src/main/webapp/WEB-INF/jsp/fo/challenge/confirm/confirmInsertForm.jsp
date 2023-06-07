@@ -348,6 +348,51 @@
               }
           });
       }
+
+      $(document).on("change", ".fileUpload", function () {
+          let $this = $(this);
+          let fileInput = $(this)[0].files[0];
+          let categoryTemplateNo = $(this).data('categoryTemplateNo');
+          let inputType = $(this).data('inputType');
+
+          if (fileInput) {
+              let imageType = /^image\//;
+
+              if (!imageType.test(fileInput.type)) {
+                  // 이미지 파일이 아닐 경우 처리
+                  console.error('Selected file is not an image.');
+                  return;
+              }
+
+              let formData = new FormData();
+              formData.append('file', fileInput);
+
+              $.ajax({
+                  url: '/challenge/file-upload',
+                  type: 'POST',
+                  data: formData,
+                  processData: false,
+                  contentType: false,
+                  success: function (response) {
+                      // 업로드 성공 시 처리
+                      console.log('Image uploaded successfully.');
+                      $this.siblings(".image-box").attr("src", response.filePath);
+                      $("input[name=" + categoryTemplateNo + "_" + inputType + "]").val(response.fileNo);
+
+                  },
+                  error: function () {
+                      // 업로드 실패 시 처리
+                      console.error('Image upload failed.');
+                  }
+              });
+          } else {
+              // 파일이 선택되지 않았을 경우 처리
+              console.error('No file selected.');
+          }
+      });
+
+
+
   </script>
 
 

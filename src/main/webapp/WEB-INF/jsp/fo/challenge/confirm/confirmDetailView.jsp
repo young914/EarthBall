@@ -143,13 +143,18 @@
         <div class="text">
           <span class="sub_title">${temp.chSubTitle}</span>
 
-          <div class="text_class">
-            <input type="text" class="text_size" name=“${temp.categoryTemplateNo}_${temp.inputType}”>
-          </div>
+          <span class="values">${temp.chDetailInfoList[0].chDetailInfoData}</span>
+
+          <!--
+          <c:forEach var="detail" items="${temp.chDetailInfoList}">
+            <span class="values">${detail.chDetailInfoData}</span>
+          </c:forEach>
+          -->
 
         </div>
         <br>
       </c:if>
+
 
 
       <!-- textarea 일 경우 -->
