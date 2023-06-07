@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.sql.Date;
+import org.springframework.web.multipart.MultipartFile;
 
 @NoArgsConstructor
 @Setter
@@ -23,4 +24,8 @@ public class Diary {
   private String changeName;     // CHANGE_NAME VARCHAR2(100) NOT NULL,
   private String dyBoardWriter;   // DY_BOARD_WRITER
 
+  // private MultipartFile file;
+
 }
+
+
