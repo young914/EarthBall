@@ -72,7 +72,7 @@
 		</select>
 		
 		<!-- 필터링 쿼리문  -->
-		<select id="selectFilterList" resultType="com.kh.earthball.fo.store.vo.Store">
+		<select id="selectFilterListR" resultType="com.kh.earthball.fo.store.vo.Store">
  	    SELECT STORE_NO
         , STORE_NAME
         , STORE_ADDRESS
@@ -87,4 +87,39 @@
 	    AND STORE_REGION_NO = #{regionNo}
 	    ORDER BY STORE_NO DESC 
 	 	</select>
+	 	
+	 	<select id="selectFilterListC" resultType="com.kh.earthball.fo.store.vo.Store">
+ 	    SELECT S.STORE_NO
+    , S.STORE_NAME
+    , S.STORE_ADDRESS
+    , S.STORE_PHONE
+    , S.BUSINESS_HOURS
+    , S.STORE_RC
+    , S.STORE_REGION_NO
+    , S.STORE_INFO
+    , S.STATUS
+	FROM STORE S
+	JOIN STORE_REGION SR ON S.STORE_REGION_NO = SR.STORE_REGION_NO
+	WHERE S.STATUS = 'Y'
+	    AND SR.CITY = #{city}
+	ORDER BY S.STORE_NO DESC
+	 	</select>
+	 	
+	 	<select id="selectNameSearch"  resultType="com.kh.earthball.fo.store.vo.Store">
+ 	  SELECT STORE_NO
+        , STORE_NAME
+        , STORE_ADDRESS
+        , STORE_PHONE
+        , BUSINESS_HOURS
+        , STORE_RC
+        , STORE_REGION_NO
+        , STORE_INFO
+        , STATUS
+	FROM STORE 
+	WHERE STORE_ADDRESS LIKE '%' || #{searchValue} || '%'
+	OR STORE_NAME LIKE '%'  || #{searchValue} || '%'
+	ORDER BY STORE_NO DESC
+	 	</select>
+	 	
+	 	
 </mapper>

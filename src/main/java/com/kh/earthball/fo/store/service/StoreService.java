@@ -23,8 +23,12 @@ public interface StoreService {
   ArrayList<Region> selectProvincesList(String city);
 
   int selectRegionNo(String city, String provinces);
+  
+  ArrayList<Store> selectFilterListC(String city);
+  
+  ArrayList<Store> selectFilterListR(int regionNo);
 
-  ArrayList<Store> selectFilterList(int regionNo);
+  ArrayList<Store> selectNameSearch(String searchValue);
 
 //  // 매장 상세 조회
 //  Store selectStoreDetail(int storeNo);

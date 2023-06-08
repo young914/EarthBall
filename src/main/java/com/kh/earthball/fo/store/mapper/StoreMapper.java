@@ -24,7 +24,11 @@ public interface StoreMapper {
 
     int selectRegionNo(@Param("city") String city, @Param("provinces") String province);
 
-    ArrayList<Store> selectFilterList(@Param("regionNo") int regionNo);
+    ArrayList<Store> selectFilterListR(@Param("regionNo") int regionNo);
+
+    ArrayList<Store> selectFilterListC(@Param("city") String city);
+
+    ArrayList<Store> selectNameSearch(@Param("searchValue") String searchValue);
     
 
 }
