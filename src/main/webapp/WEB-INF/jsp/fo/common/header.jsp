@@ -82,11 +82,7 @@
                 </div>
 
                 <div class="dropdown">
-                    <span class="dropbtn">챌린지</span>
-                    <div class="dropdown-content">
-                        <a href="/main.chall">참여 게시판</a>
-                        <a href="#">인증 게시판</a>
-                    </div>
+                    <span class="dropbtn"> <a href="/main.chall">챌린지</a></span>
                 </div>
 
                 <div class="dropdown">
