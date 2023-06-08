@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.kh.earthball.fo.board.service.BoardService;
 import com.kh.earthball.fo.board.vo.Board;
@@ -60,6 +63,42 @@ public class BoardController {
         return "redirect:/error";
     }
   }
+
+  @RequestMapping("delete.bo")
+  public String deleteBoard(int bno, Model model, HttpSession session) {
+
+    int result = boardService.deleteBoard(bno);
+
+    if (result > 0) {
+
+      session.setAttribute("alertMsg", "게시글 삭제 성공");
+
+      return "redirect:/list.bo";
+    } else {
+
+      return "redirect:/error";
+    }
+
+  }
+
+  @RequestMapping("updateForm.bo")
+  public ModelAndView updateForm( ModelAndView mv,int bno) {
+
+    Board b = boardService.selectBoard(bno);
+
+    mv.addObject("b",b);
+    mv.setViewName("fo/board/boardUpdateForm");
+
+    return mv;
+  }
+
+  @ResponseBody
+  @PostMapping("update.bo")
+  public int updateBoard(@RequestBody Board b, HttpSession session) {
+    return boardService.updateBoard(b);
+  }
+
+
 
   @RequestMapping("detail.bo")
   public ModelAndView selectBoard(ModelAndView mv, int bno) {
