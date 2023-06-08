@@ -19,6 +19,12 @@ public interface BoardService {
   // 게시글 작성
   int insertBoard(Board b);
 
+  // 게시글 삭제
+  int deleteBoard(int boardNo);
+
+  // 게시글 수정
+  int updateBoard(Board b);
+
   // 이전글 조회
   Board selectPrevBoard(int boardNo);
 

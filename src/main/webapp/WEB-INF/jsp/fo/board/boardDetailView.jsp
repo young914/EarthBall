@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <link rel="stylesheet" href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -245,11 +247,6 @@ header{
         }
 
         .btn-group { float: right; }
-
-        #list, #insertList { /* 버튼크기를 지정 */
-            height : 40px;
-            width : 90px;
-        }
 
         #QZWUheUHEXEqWaaaEWt8BP {
         background-color: #19a7ce;
@@ -579,17 +576,34 @@ header{
                               </div>
 
 							<div class="boDetailBtn">
-
+							<c:if test="${ (not empty loginUser) and (loginUser.memberId eq b.memberId) }">
 							<div class="deletBtn">
                             <span class="btn-group"> <!-- 버튼 관련 class -->
                                 <p class="lead" >
-                                    <button class="btn btn-danger" id="insertList">삭제</button>
+                                <button class="btn btn-success" id="btn_modify"  onclick="postFormSubmit(1)">수정</button>
+                                    <button class="btn btn-danger" id="btn_delete" onclick="postFormSubmit(2)">삭제</button>
                                 </p>
                             </div>
 
+                            <form id="postForm" action="" method="post">
+                            	<input type="hidden" name="bno" value="${b. boardNo}">
+                            </form>
+                            <script>
+                            	function postFormSubmit(num) {
+
+                            		if(num == 1) {
+            	            			$("#postForm").attr("action", "updateForm.bo").submit();
+            	            		} else {
+            	            			$("#postForm").attr("action", "delete.bo").submit();
+            	            		}
+            	            	}
+                            </script>
+                              </c:if>
+
+
                             <div class="listBtn">
                                 <p class="lead">
-                                <a class="btn btn-primary" href="list.bo" role="button" >목록</a><!-- 관리자 히든 속성 버튼-->
+                                <a class="btn btn-primary" href="list.bo" role="button"  id="btn_previous">목록</a><!-- 관리자 히든 속성 버튼-->
                                 </p>
                             </span>
                             </div>
@@ -606,17 +620,8 @@ header{
 
             <br>
 
-               <!--  <div>
-                <div id="page-numbers" style="text-align: center;">
-                </div> -->
 
 
-
-            <br><br>
-         <!-- page_search div -->
-
-            <br>
-            <br>
 
 
 
