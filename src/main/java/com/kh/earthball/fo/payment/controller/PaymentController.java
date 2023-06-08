@@ -1,6 +1,7 @@
 package com.kh.earthball.fo.payment.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,8 +22,12 @@ public class PaymentController {
     return "fo/payment/paymentPageForm";
   }
 
-  @GetMapping("payComplete.pa")
-  public String paymentCompleteView() {
+  @PostMapping("payComplete.pa")
+  public String paymentCompleteView(String paymentNo, Model m) {
+
+    // System.out.println(paymentNo);
+
+    m.addAttribute("paymentNo", paymentNo);
     return "fo/payment/paymentCompleteView";
   }
 
@@ -79,23 +84,16 @@ public class PaymentController {
   @PostMapping(value = "/paySuccess", produces = "text/html; charset=UTF-8")
   public String paySuccess(PayInfo pi) {
 
-    System.out.println("여기는 성공컨트롤러");
-//    System.out.println(paymentNo);
-//    System.out.println(memberId);
-//    System.out.println(paymentType);
-//    System.out.println(paymentTotal);
-//    System.out.println(receiveName);
-//    System.out.println(receivePhone);
-//    System.out.println(postCode);
-//    System.out.println(receiveAddress1);
-//    System.out.println(receiveAddress2);
-//    System.out.println(paymentToken);
-
     int result = paymentService.payComplete(pi);
 
-    System.out.println(result);
-
-    return "잘 넘어가나?";
+    return String.valueOf(result); // 1 -> "1"
   }
+
+//  @PostMapping("payCancel.pa")
+//  public String paymentCancel() {
+
+
+
+//  }
 
 }

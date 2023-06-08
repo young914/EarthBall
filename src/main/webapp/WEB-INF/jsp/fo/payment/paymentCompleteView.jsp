@@ -28,7 +28,7 @@
                 <tr>
                     <td colspan="2" width="50%" height="40" style="padding-left : 40px;">
                         <span>주문번호</span>
-                        <span>2023050000001</span>
+                        <span id="orderNumber">${ paymentNo }</span>
                     </td>
                     <th style="width : 20%; border-left : none;">주문수량</th>
                     <th style="width : 28%; border-left : none;">결제금액</th>
