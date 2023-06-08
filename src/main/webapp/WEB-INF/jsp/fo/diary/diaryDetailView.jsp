@@ -18,12 +18,12 @@
       <!-- 여기다가 화면 넣자  -->
       <div class="outer1_1">
             <div class="detail_header">
-            <input type="hidden"  class="bno" value="${ d.dyBoardNo }">
-                <div class="photo"><img src="image/bono.jpg"></div>
-                <div class="content">
+            	<input type="hidden"  class="bno" value="${ d.dyBoardNo }">
+                	<div class="photo"><img src="image/bono.jpg"></div>
+                	<div class="content">
                     <div>${ d.dyBoardWriter }</div>
-                </div>
-                <div class="submit_btn">
+                	</div>
+                	<div class="submit_btn">
                     <button type="submit">목록</button>
                 </div>
             </div>
