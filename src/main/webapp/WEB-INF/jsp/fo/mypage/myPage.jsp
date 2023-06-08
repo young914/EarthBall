@@ -118,9 +118,36 @@
 		<jsp:include page="/WEB-INF/jsp/fo/common/header.jsp" />
 		
 		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-		 <!-- 메인 컨텐츠 -->
-    <div class="flex-container">
+		
+	
+		<% Boolean isEmailVerified = (Boolean)session.getAttribute("isEmailVerified"); %>
+        
+		<c:if test="${isEmailVerified == null || !isEmailVerified}">
+		
+            <div class="flex-container">
+        <!-- Sidebar Menu -->
+        <div class="sidebar">
+            <h2 class="divider"></h2>
+            <ul class="menu1">
+                <li><a href="#">이메일 인증 확인</a></li>
+                <li><a href="updateInfo.me">내 정보 수정</a></li>
+                <li><a href="delete.me">회원탈퇴</a></li>
+            </ul>
+        </div>
+            		<div class="main-content">
+                <img class="profile-picture" src="your-image-source.jpg" alt="Profile Picture" style="width: 50px; height: 50px; float: left; margin-right: 20px;">
+            <div class="text-content">
+                <h1>${loginUser.memberName}님 환영합니다!</h1>
+                <p>이메일 인증을 완료해주세요!</p>
+            </div>
+        </div>
+        </div>
+            
+            </c:if>
+            
+            <c:if test="${isEmailVerified != null && isEmailVerified}">
+            
+            <div class="flex-container">
         <!-- Sidebar Menu -->
         <div class="sidebar">
             <h2 class="divider"></h2>
@@ -134,7 +161,7 @@
                 <li><a href="delete.me">회원탈퇴</a></li>
             </ul>
         </div>
-        <!-- Main Content -->
+            
         <div class="main-content">
                 <img class="profile-picture" src="your-image-source.jpg" alt="Profile Picture" style="width: 50px; height: 50px; float: left; margin-right: 20px;">
             <div class="text-content">
@@ -143,13 +170,15 @@
             </div>
 
             <!-- 참여 현황 등 / 누르면 뜨게끔 하고 싶음 -->
+            
             <div class="main-content2" style="padding: 20px; margin-top: 20px;">
                 <h2>참여 현황</h2>
                 <p>아직 참여하신 챌린지, 일기가 없어요~!</p>
             </div>
         </div>
-        
-    </div>
+        </div>
+        </c:if>
+       
     
     <jsp:include page="/WEB-INF/jsp/fo/common/common.jsp"/>
     

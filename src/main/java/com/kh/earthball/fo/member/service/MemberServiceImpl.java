@@ -50,6 +50,11 @@ public class MemberServiceImpl implements MemberService {
     return memberMapper.emailAuthFail(memberId);
   }
 
+  @Override
+  public int mailAuthStatus(String memberId) {
+    return memberMapper.mailAuthStatus(memberId);
+  }
+
 
 }
   

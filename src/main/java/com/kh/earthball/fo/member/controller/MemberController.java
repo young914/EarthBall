@@ -31,12 +31,32 @@ public class MemberController {
 
 
   // 로그인 기능
+  
+//  @RequestMapping("login.me")
+//  public String login(String memberId, Member m, Model model) throws Exception {
+//    
+//    if(memberService.loginMember(m) != 1) {
+//        model.addAttribute("loginFailMsg", "아이디 또는 비밀번호가 올바르지 않아요!");
+//      
+//        return "fo/member/loginForm.me";
+//    }
+//    
+//    if(memberService.emailAuthFail(memberId) != 1) {
+//      
+//      
+//    }
+//    
+//    return "redirect:/";
+//  }
+  
   @RequestMapping("login.me")
   public ModelAndView loginMember(Member m,
                                   HttpSession session,
                                   ModelAndView mv,
                                   String saveId,
                                   HttpServletResponse response) {
+    
+    // if(memberService.loginUser.(m))
 
 
     if (saveId != null && saveId.equals("y")) {
@@ -150,7 +170,7 @@ public class MemberController {
 
     if (result > 0) {
 
-      session.setAttribute("alertMsg", "회원가입이 완료되었습니다");
+      session.setAttribute("alertMsg", "회원가입 이후 이메일인증을 완료해주세요!");
 
       return "redirect:/";
 
@@ -164,11 +184,19 @@ public class MemberController {
   }
 
   @RequestMapping("myPage.me")
-  public String myPage() {
+  public ModelAndView myPage(HttpSession session, ModelAndView mv) {
 
     log.debug("마이페이지 요청됨");
+    
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    
+    if (loginUser != null) {
+        int mailAuthStatus = memberService.mailAuthStatus(loginUser.getMemberId());
+        mv.addObject("isEmailVerified", mailAuthStatus == 1);
+    }
 
-    return "fo/mypage/myPage";
+    mv.setViewName("fo/mypage/myPage");
+    return mv;
   }
 
   @RequestMapping("updateInfo.me")

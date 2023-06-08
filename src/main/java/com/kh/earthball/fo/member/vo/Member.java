@@ -27,6 +27,7 @@ public class Member {
   private int postCode; // 우편번호
   private int mailAuth; // 메일 인증
   private String mailKey; // 메일 인증키
+  private String gradeName;
 
 
 }
