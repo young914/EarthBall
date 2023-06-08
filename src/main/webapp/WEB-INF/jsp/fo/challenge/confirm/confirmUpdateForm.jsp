@@ -84,11 +84,15 @@
         <div class="select">
           <span class="sub_title">${temp.chSubTitle}</span>
 
+
           <select class="select_class" name="${temp.categoryTemplateNo}_${temp.inputType}">
             <c:forEach var="code" items="${temp.codeList}">
-              <c:if test="${code.checked eq 'true'}">
-                <option value="${code.code}">${code.codeName}</option>
-              </c:if>
+
+              <option value="${code.code}"
+                <c:forEach var="detail" items="${temp.chDetailInfoList}">
+                  <c:if test="${code.code eq detail.code}">selected</c:if>> ${code.codeName}</option>
+
+                </c:forEach>>
             </c:forEach>
           </select>
 

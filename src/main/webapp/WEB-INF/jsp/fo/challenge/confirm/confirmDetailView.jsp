@@ -91,11 +91,13 @@
         <div class="select">
           <span class="sub_title">${temp.chSubTitle}</span>
 
+          <c:forEach var="detail" items="${temp.chDetailInfoList}">
             <c:forEach var="code" items="${temp.codeList}">
-              <c:if test="${code.checked eq 'true'}">
+              <c:if test="${code.code eq detail.code}">
                 <span class="values">${code.codeName}</span>
               </c:if>
             </c:forEach>
+          </c:forEach>
           </select>
 
         </div>
@@ -127,11 +129,13 @@
         <div class="radio">
           <span class="sub_title">${temp.chSubTitle}</span>
 
+          <c:forEach var="detail" items="${temp.chDetailInfoList}">
             <c:forEach var="code" items="${temp.codeList}">
-              <c:if test="${code.checked eq 'true'}">
+              <c:if test="${code.code eq detail.code}">
                 <span class="values">${code.codeName}</span>
               </c:if>
             </c:forEach>
+          </c:forEach>
 
         </div>
         <br>
