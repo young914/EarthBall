@@ -135,7 +135,8 @@
             </ul>
         </div>
             		<div class="main-content">
-                <img class="profile-picture" src="your-image-source.jpg" alt="Profile Picture" style="width: 50px; height: 50px; float: left; margin-right: 20px;">
+                <img class="profile-picture" src="/resources/fo/profile/dafaultProfile.png" alt="Profile Picture" style="width: 50px; height: 50px; float: left; margin-right: 20px;">
+                <input  type="file" align="left">
             <div class="text-content">
                 <h1>${loginUser.memberName}님 환영합니다!</h1>
                 <p>이메일 인증을 완료해주세요!</p>
@@ -177,6 +178,7 @@
             </div>
         </div>
         </div>
+        
         </c:if>
        
     

@@ -72,10 +72,22 @@
 			            
 			            <input type="password" id="memberPwd" name="memberPwd" placeholder="비밀번호를 입력해주세요">
 			            
-			            <label for="remember-check">
-			                <input type="checkbox" id="remember-check">아이디 저장하기
-			                <input type="checkbox" id="request-id">로그인 유지
-			            </label>
+			            
+			            <c:choose>
+			            		<c:when test="${not empty cookie.saveId }">
+			            		<div>
+					                <input type="checkbox" id="saveId" name="saveId" value="y" checked>
+					                <label for="saveId">아이디 저장하기</label>
+					              </div>
+					            </c:when>
+					            <c:otherwise>
+					            <div>	
+					            	<input type="checkbox" id="saveId" name="saveId" value="y">
+					            	<label for="saveId">아이디 저장하기</label>
+					            </div>
+					            </c:otherwise>
+			            </c:choose>
+			           
 			            
 			            <input type="submit" value="Login">
         

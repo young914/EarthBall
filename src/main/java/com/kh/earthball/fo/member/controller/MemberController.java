@@ -157,7 +157,7 @@ public class MemberController {
     sendMail.setSubject("[(web) 지구공 인증메일입니다.]");
     sendMail.setText(
                                   "<h1>지구공 메일인증</h1>" +
-                                   "<br>[지구공] 에 오신것을 황영합니다!" +
+                                   "<br>[지구공] 에 오신것을 환영합니다!" +
                                    "<br>아래 [이메일 인증 확인] 을 눌러주세요." +
                                    "<br><a href='http://localhost:8007/registerEmail.me?email=" + 
                                    m.getEmail() + "&mailKey=" + mailKey + 
