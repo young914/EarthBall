@@ -76,8 +76,8 @@
                         <p>${ p.price }원</p>
                     </div>
                     <div class="product-icon">
-                        <div><i class="xi-speech-o"></i></div>
-                        <div><i class="xi-heart-o"></i></div>
+                        <div><i class="xi-speech-o"></i>50</div>
+                        <div><i class="xi-heart-o"></i>50</div>
                         <div><i class="xi-cart-o"></i></div>
                     </div>
                 </div>

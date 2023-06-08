@@ -58,7 +58,7 @@
         <div class="menu">
             <div>
                 <div class="dropdown">
-                    <span class="dropbtn">장보기</span>
+                    <span class="dropbtn"> <a href="list.pro">장보기</a> </span>
                     <div class="dropdown-content">
                         <a href="categoryList.pro?category=선물꾸러미">선물꾸러미</a>
                         <a href="categoryList.pro?category=욕실">욕실</a>
@@ -86,7 +86,7 @@
                 </div>
 
                 <div class="dropdown">
-                    <span class="dropbtn">환경일기</span>
+                    <span class="dropbtn"> <a href="#">환경일기</a> </span>
                     <div class="dropdown-content">
                      	<a href="">환경일기란?</a>
                         <a href="diaryListView.bo">일기 보기</a>
@@ -96,7 +96,7 @@
                     <span class="dropbtn"><a href="storeListView.st">매장찾기</a></span>
                 </div>
                 <div class="dropdown">
-                    <span class="dropbtn">고객센터</span>
+                    <span class="dropbtn"> <a href="#">고객센터</a> </span>
                     <div class="dropdown-content">
                         <a href="list.no">공지사항</a>
                     	<a href="list.faq">FAQ</a>
