@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import com.kh.earthball.fo.common.template.Pagination;
 import com.kh.earthball.fo.common.vo.PageInfo;
 import com.kh.earthball.fo.diary.service.DiaryService;
@@ -43,12 +45,13 @@ public class DiaryController {
 
       // Pagination 에 작성한 getPageInfo 메소드 호출
       PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+
       // System.out.println(pi);
 
       // 목록을 조회하는 요청
       ArrayList<Diary> list = diaryService.selectList(pi);
 
-      // System.out.println(list);
+       System.out.println(list);
 
       // 응답데이터를 model 에 담기
       model.addAttribute("pi", pi);
@@ -63,71 +66,14 @@ public class DiaryController {
     return "fo/diary/diaryEnrollForm";
   }
 
-  /*
-  @PostMapping("/diaryInsert.bo")
-  public String insertDiary(@ModelAttribute Diary d,
-                                  @RequestParam("file")  MultipartFile file,
-                                  HttpSession session,
-                                  Model model) {
-
-    System.out.println(d);
-    System.out.println(file);
-    System.out.println("dyBoardTitle: " + d.getDyBoardTitle());
-
-    // 전달된 파일이 있을 경우 그 경우에만 파일명 수정 작업 후 서버로 업로드 할 수 있게 로직 짜기
-    if(file.getOriginalFilename().equals("")) { // 넘어온 첨부파일이 있을 경우
-
-        String changeName = saveFile(file, session);
-
-      // 원본파일명, 서버에 업로드된경로 + 수정파일명을 Diary d 에 담기
-      d.setOriginName(file.getOriginalFilename());
-      d.setChangeName("resources/fo/upfiles/" + changeName);
-      }
-
-    int result = diaryService.insertDiary(d);
-
-    if(result > 0) { // 성공
-        session.setAttribute("alertMsg", "게시글 등록 완료");
-
-        return "redirect:/diaryListView.bo"; // 내부적으로 1번 페이지로 향함
-
-    } else { // 실패
-        model.addAttribute("errorMsg", "게시글 등록 실패");
-
-        return "redirect:/diaryEnrollForm.bo";
-    }
-   }
-
-      // 현재 넘어온 첨부파일 그 자체를 파일명 수정 후 서버의 폴더에 저장시키는 일반 메소드 작성
-      public String saveFile(MultipartFile file, HttpSession session) {
-
-        String originName = file.getOriginalFilename();
-        String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-
-        int ranNum = (int)(Math.random() * 90000 + 100000);
-
-        String ext = originName.substring(originName.lastIndexOf("."));
-
-        String changeName = currentTime + ranNum + ext;
-
-        String savePath = session.getServletContext().getRealPath("/resources/fo/upfiles/");
-
-        try {
-              file.transferTo(new File(savePath + changeName));
-        } catch (IOException e) {
-              e.printStackTrace();
-        }
-
-        return changeName;
-      }
-  */
-
-  @PostMapping("/diaryInsert.bo")
-  public String insertDiary(@ModelAttribute Diary diary, HttpSession session, Model model, @RequestParam(value="file", required=true) MultipartFile file) {
+  @ResponseBody
+  @RequestMapping(value="/diaryInsert.bo", produces="text/html; charset=UTF-8")
+  public String insertDiary(String weather, @ModelAttribute Diary diary, HttpSession session, Model model, @RequestParam(value="file", required=true) MultipartFile file) {
 
     System.out.println("잘호출되나?");
 
-    System.out.println(diary);
+    System.out.println(weather); // "1", "2", "3", "4",  ""
+    System.out.println(diary); // 여긴 changeName 이 null 인게 마즘
     System.out.println(file);
 
       String title = diary.getDyBoardTitle();
@@ -137,16 +83,14 @@ public class DiaryController {
         String changeName = saveFile(file, session);
         diary.setOriginName(file.getOriginalFilename());
         diary.setChangeName("resources/fo/upfiles/" + changeName);
-        System.out.println(diary.getChangeName());
+        System.out.println(diary.getChangeName()); // 잘찍힘
 
         int result = diaryService.insertDiary(diary);
 
         if(result > 0) {
-            session.setAttribute("alertMsg", "게시글 등록 완료");
-            return "redirect:/diaryListView.bo";
+            return "게시글 등록 완료";
         } else {
-            model.addAttribute("errorMsg", "게시글 등록 실패");
-            return "redirect:/diaryEnrollForm.bo";
+            return "게시글 등록 실패";
         }
     }
 
@@ -176,6 +120,30 @@ public class DiaryController {
 
       return changeName;
     }
+
+  @RequestMapping("diaryDetailView.bo")
+  public ModelAndView selectDiary(ModelAndView mv,
+                                                    int bno) {
+          // System.out.println(bno);
+
+          int result = diaryService.increaseCount(bno);
+
+          if(result > 0) {
+
+                Diary d = diaryService.selectDiary(bno);
+
+                System.out.println(d);
+
+                mv.addObject("d", d) .setViewName("fo/diary/diaryDetailView");
+
+          } else {
+
+            mv.addObject("errorMsg", "게시글 상세조회 실패") .setViewName("common/errorPage");
+          }
+
+          return mv;
+
+  }
 
 
 }
