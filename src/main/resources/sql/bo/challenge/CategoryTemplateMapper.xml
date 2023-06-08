@@ -23,13 +23,15 @@
                                          , SORT_NO
                                          , CH_SUB_TITLE
                                          , GRP_CODE
-                                         , CATEGORY_NO)
+                                         , CATEGORY_NO
+                                         , STATUS)
                                   VALUES ( SEQ_TB_CATEGORY_TEMPLATE.NEXTVAL
                                          , #{inputType}
                                          , #{sortNo}
                                          , #{chSubTitle}
                                          , #{grpCode}
-                                         , #{categoryNo})
+                                         , #{categoryNo}
+                                         , 'Y')
     </insert>
 
     <select id="selectTemplateForm" parameterType="java.lang.Integer" resultType="com.kh.earthball.bo.challenge.vo.CategoryTemplate">

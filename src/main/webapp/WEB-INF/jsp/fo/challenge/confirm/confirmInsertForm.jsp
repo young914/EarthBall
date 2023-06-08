@@ -44,6 +44,7 @@
 
       <span class="form_title">카테고리 </span>
       <span class="form_content">${challenge.categoryName}</span> <br><br>
+      <input type="hidden" name="categoryNo" value="${challenge.categoryNo}">
 
       <span class="form_title">도전기간 </span>
       <span class="form_content">${challenge.chStartDay}</span> ~ <span class="form_content">${challenge.chEndDay}</span> <br><br>
@@ -329,6 +330,8 @@
               , memberId : memberId
               , chDetailInfoList : list
           }
+
+          let categoryNo = $("input[type=hidden][name=categoryNo]").val();
 
           console.log("인증 기본 정보 : ", confirmInfo);
           console.log("디테일 정보 list : ", list);
