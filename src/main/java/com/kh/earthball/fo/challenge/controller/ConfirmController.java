@@ -52,7 +52,8 @@ public class ConfirmController {
 
     for (int i = 0; i < templateList.size(); i++) {
       log.info("grp넘어왔어? : " + templateList.get(i).getGrpCode());
-      if (StringUtils.isNotEmpty(templateList.get(i).getGrpCode())) { // grp코드가 있으면 select/radio/checkbox니까 => 코드리스트가 있어
+      if (StringUtils.isNotEmpty(
+          templateList.get(i).getGrpCode())) { // grp코드가 있으면 select/radio/checkbox니까 => 코드리스트가 있어
         List<Code> codeList = codeService.selectCodeList(templateList.get(i).getGrpCode());
         templateList.get(i).setCodeList(codeList);
       }
@@ -70,71 +71,20 @@ public class ConfirmController {
   @ResponseBody
   @PostMapping("insert.con")
   public int confirmInsert(@RequestBody ChConfirm chConfirm) {
+    confirmService.insertConfirm(chConfirm);
+    return 1;
+  }
 
-    int result1 = confirmService.insertConfirm(chConfirm);
-    log.info("챌린지 인증 일련번호 : " + chConfirm.getChConNo());
-    int chConNo = chConfirm.getChConNo();
-    int chNo = chConfirm.getChNo();
-
-    List<ChDetailInfo> chDetailInfoList = chConfirm.getChDetailInfoList();
-    if (result1 > 0) { // 기본정보 등록 성공이면 디테일 내용 등록하기
-
-      int result2 = 0;
-
-      for (ChDetailInfo chDetailInfo : chDetailInfoList) {
-        chDetailInfo.setChConNo(chConNo);
-        chDetailInfo.setChNo(chNo);
-
-        log.info("디테일 객체 하나 : " + chDetailInfo);
-        result2 = confirmService.insertDetailInfo(chDetailInfo);
-
-
-
-        /*여기에다가 디테일객체 안에 코드랑  카테고리탬플릿 안에 코드리스트의 코드랑 같을 때 코드리스트의 체크드에 true 값 주기
-        // 해당 챌린지의 카테고리번호를 가지고 인증 폼 가져오기
-        List<CategoryTemplate> templateList = templateService.selectTemplateList(categoryNo);
-
-        for (CategoryTemplate categoryTemplate : templateList) {
-          log.info("CategoryTemplateNo 넘어왔어? : " + categoryTemplate.getCategoryTemplateNo());
-
-          if (StringUtils.isNotEmpty(categoryTemplate.getGrpCode())) {
-            List<Code> codeList = codeService.selectCodeList(categoryTemplate.getGrpCode());
-            categoryTemplate.setCodeList(codeList);
-          }
-
-          log.info("templateList에 (true 이전 1) : " + templateList);   // 아직 code에 checked => true 부여 못한 상태!!!!!!
-
-          if(categoryTemplate.getCodeList() != null && categoryTemplate.getCodeList().isEmpty()) { // 코드 리스트가 있다면 => select / checkbox / radio 라면
-
-            List<Code> codeList = categoryTemplate.getCodeList();
-            //chDetailInfoList = categoryTemplate.getChDetailInfoList();
-
-            for(Code code : codeList) {
-              String codeOne = code.getCode();
-
-              for(ChDetailInfo chDetailInfo2 : chDetailInfoList) {
-                if(codeOne.equals(chDetailInfo2.getCode())) {
-                  code.setChecked("true");
-                }
-                categoryTemplate.setCodeList(codeList);
-              }
-            }
-          }
-        }
-
-        log.info("templateList에 (true 이후 2) : " + templateList);   // code에 checked => true 부여 된 상태!!!!!!
-
-*/
-
-      }
-      return result2;
-    } else {
-      return result1;
-    }
+  @ResponseBody
+  @PostMapping("update.con")
+  public int updateConfirm(@RequestBody ChConfirm chConfirm) {
+    confirmService.updateConfirm(chConfirm);
+    return 1;
   }
 
   @GetMapping("listView.con")
-  public String confirmListView(int chNo, @RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model) {
+  public String confirmListView(int chNo,
+      @RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model) {
 
     // 해당 챌린지의 인증 게시글 수 조회
     int listCount = confirmService.selectListCount(chNo);
@@ -182,11 +132,8 @@ public class ConfirmController {
       if (categoryTemplate.getCategoryTemplateNo() != 0) {
         int categoryTemplateNo = categoryTemplate.getCategoryTemplateNo();
 
-        ChDetailInfoParam detailInfoParam = ChDetailInfoParam.builder()
-            .chNo(chNo)
-            .chConNo(chConNo)
-            .categoryTemplateNo(categoryTemplateNo)
-            .build();
+        ChDetailInfoParam detailInfoParam = ChDetailInfoParam.builder().chNo(chNo).chConNo(chConNo)
+            .categoryTemplateNo(categoryTemplateNo).build();
 
         List<ChDetailInfo> chDetailInfoList = confirmService.selectDetailInfoList(detailInfoParam);
         categoryTemplate.setChDetailInfoList(chDetailInfoList);
@@ -198,19 +145,21 @@ public class ConfirmController {
         categoryTemplate.setCodeList(codeList);
       }
 
-      log.info("templateList에 들어있는 값 1 : " + templateList);   // 아직 code에 checked => true 부여 못한 상태!!!!!!
+      log.info(
+          "templateList에 들어있는 값 1 : " + templateList);   // 아직 code에 checked => true 부여 못한 상태!!!!!!
 
 
-      if(categoryTemplate.getCodeList() != null && categoryTemplate.getCodeList().isEmpty()) { // 코드 리스트가 있다면 => select / checkbox / radio 라면
+      if (categoryTemplate.getCodeList() != null && categoryTemplate.getCodeList()
+          .isEmpty()) { // 코드 리스트가 있다면 => select / checkbox / radio 라면
 
         List<Code> codeList = categoryTemplate.getCodeList();
         List<ChDetailInfo> chDetailInfoList = categoryTemplate.getChDetailInfoList();
 
-        for(Code code : codeList) {
+        for (Code code : codeList) {
           String codeOne = code.getCode();
 
-          for(ChDetailInfo chDetailInfo : chDetailInfoList) {
-            if(codeOne.equals(chDetailInfo.getCode())) {
+          for (ChDetailInfo chDetailInfo : chDetailInfoList) {
+            if (codeOne.equals(chDetailInfo.getCode())) {
               code.setChecked("true");
             }
             categoryTemplate.setCodeList(codeList);
@@ -250,11 +199,8 @@ public class ConfirmController {
       if (categoryTemplate.getCategoryTemplateNo() != 0) {
         int categoryTemplateNo = categoryTemplate.getCategoryTemplateNo();
 
-        ChDetailInfoParam detailInfoParam = ChDetailInfoParam.builder()
-            .chNo(chNo)
-            .chConNo(chConNo)
-            .categoryTemplateNo(categoryTemplateNo)
-            .build();
+        ChDetailInfoParam detailInfoParam = ChDetailInfoParam.builder().chNo(chNo).chConNo(chConNo)
+            .categoryTemplateNo(categoryTemplateNo).build();
 
         List<ChDetailInfo> chDetailInfoList = confirmService.selectDetailInfoList(detailInfoParam);
         categoryTemplate.setChDetailInfoList(chDetailInfoList);
@@ -265,16 +211,17 @@ public class ConfirmController {
         categoryTemplate.setCodeList(codeList);
       }
 
-      if(categoryTemplate.getCodeList() != null && categoryTemplate.getCodeList().isEmpty()) { // 코드 리스트가 있다면 => select / checkbox / radio 라면
+      if (categoryTemplate.getCodeList() != null && categoryTemplate.getCodeList()
+          .isEmpty()) { // 코드 리스트가 있다면 => select / checkbox / radio 라면
 
         List<Code> codeList = categoryTemplate.getCodeList();
         List<ChDetailInfo> chDetailInfoList = categoryTemplate.getChDetailInfoList();
 
-        for(Code code : codeList) {
+        for (Code code : codeList) {
           String codeOne = code.getCode();
 
-          for(ChDetailInfo chDetailInfo : chDetailInfoList) {
-            if(codeOne.equals(chDetailInfo.getCode())) {
+          for (ChDetailInfo chDetailInfo : chDetailInfoList) {
+            if (codeOne.equals(chDetailInfo.getCode())) {
               code.setChecked("true");
             }
           }
