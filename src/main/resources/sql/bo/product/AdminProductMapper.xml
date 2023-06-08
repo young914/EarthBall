@@ -3,17 +3,17 @@
 
 <mapper namespace="com.kh.earthball.bo.product.mapper.AdminProductMapper">
 
-	<insert id="insertProduct" parameterType="com.kh.earthball.bo.product.vo.Product">
+	<insert id="insertProduct" parameterType="com.kh.earthball.bo.product.vo.AdminProduct">
 		INSERT INTO PRODUCT(PRODUCT_NO, PRODUCT_NAME, CATEGORY, PRICE, DISCOUNT, STOCK)
 		VALUES(SEQ_PRODUCT.NEXTVAL, #{productName}, #{category}, #{price}, #{discount}, #{stock})
 	</insert>
 
-	<insert id="insertProductAtta" parameterType="com.kh.earthball.bo.product.vo.Atta">
+	<insert id="insertProductAtta" parameterType="com.kh.earthball.bo.product.vo.AdminAtta">
 		INSERT INTO PRODUCT_ATTA(ATTACHMENT_NO, CHANGER_NAME, FILE_LEVEL, PRODUCT_NO)
 		VALUES(SEQ_PRODUCT_ATTA.NEXTVAL, #{changerName}, #{fileLevel}, SEQ_PRODUCT.CURRVAL)
 	</insert>
 
-	<select id="adminAllProductList" resultType="com.kh.earthball.bo.product.vo.Product">
+	<select id="adminAllProductList" resultType="com.kh.earthball.bo.product.vo.AdminProduct">
 		SELECT *
 		FROM PRODUCT
 		ORDER BY CREATE_DATE

@@ -1,17 +1,18 @@
 package com.kh.earthball.bo.product.service;
 
 import java.util.ArrayList;
-import com.kh.earthball.bo.product.vo.Atta;
-import com.kh.earthball.bo.product.vo.Product;
+import com.kh.earthball.bo.product.vo.AdminAtta;
+import com.kh.earthball.bo.product.vo.AdminProduct;
 import com.kh.earthball.fo.common.vo.PageInfo;
+import com.kh.earthball.fo.product.vo.Product;
 
 public interface AdminProductService {
 
   int selectListCount();
 
-  int insertProduct(Product p, ArrayList<Atta> list);
+  int insertProduct(AdminProduct p, ArrayList<AdminAtta> list);
 
-  ArrayList<Product> adminAllProductList(PageInfo pi);
+  ArrayList<AdminProduct> adminAllProductList(PageInfo pi);
 
 
 

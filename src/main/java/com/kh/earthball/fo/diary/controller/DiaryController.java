@@ -1,20 +1,27 @@
 package com.kh.earthball.fo.diary.controller;
 
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import org.apache.taglibs.standard.extra.spath.Path;
-import org.springframework.http.ResponseEntity;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import com.kh.earthball.fo.common.template.Pagination;
 import com.kh.earthball.fo.common.vo.PageInfo;
 import com.kh.earthball.fo.diary.service.DiaryService;
 import com.kh.earthball.fo.diary.vo.Diary;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 
 @RequiredArgsConstructor
 @Slf4j
@@ -25,7 +32,8 @@ public class DiaryController {
   private final DiaryService diaryService;
 
   @RequestMapping("diaryListView.bo")
-  public String selectList(@RequestParam(value = "cPage", defaultValue = "1") int currentPage) {
+  public String selectList(@RequestParam(value = "cPage", defaultValue = "1") int currentPage,
+                                   Model model) {
 
     // System.out.println("cPage : " + currentPage);
 
@@ -33,14 +41,23 @@ public class DiaryController {
      int listCount = diaryService.selectListCount();
 
       int pageLimit = 5;
-      int dyBoardLimit = 6;
+      int boardLimit = 6;
 
       // Pagination 에 작성한 getPageInfo 메소드 호출
-      PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, dyBoardLimit);
+      PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 
-      System.out.println(pi);
+      // System.out.println(pi);
 
-      // 포워딩 테스트
+      // 목록을 조회하는 요청
+      ArrayList<Diary> list = diaryService.selectList(pi);
+
+       System.out.println(list);
+
+      // 응답데이터를 model 에 담기
+      model.addAttribute("pi", pi);
+      model.addAttribute("list", list);
+
+      // 포워딩
       return "fo/diary/diaryListView";
   }
 
@@ -49,59 +66,87 @@ public class DiaryController {
     return "fo/diary/diaryEnrollForm";
   }
 
-  // @PostMapping("/upload")
-  // public String upload(@RequestParam("file") MultipartFile file) {
+  @ResponseBody
+  @RequestMapping(value="/diaryInsert.bo", produces="text/html; charset=UTF-8")
+  public String insertDiary(String weather, @ModelAttribute Diary diary, HttpSession session, Model model, @RequestParam(value="file", required=true) MultipartFile file) {
 
-      // System.out.println("파일 이름 : " + file.getOriginalFilename());
-      // System.out.println("파일 크기 : " + file.getSize());
+    System.out.println("잘호출되나?");
 
-   //  try (
-      //FileOutputStream fos = new FileOutputStream("/resources/fo/diaryUploadFiles" + file.getOriginalFilename());
-        // 파일 저장할 경로 + 파일명을 파라미터로 넣고 fileOutputStream 객체 생성하고
-       // InputStream is = file.getInputStream();) {
-       // file로 부터 inputStream을 가져온다.
+    System.out.println(weather); // "1", "2", "3", "4",  ""
+    System.out.println(diary); // 여긴 changeName 이 null 인게 마즘
+    System.out.println(file);
 
-    //int readCount = 0;
-   // byte[] buffer = new byte[1024];
-    // 파일을 읽을 크기 만큼의 buffer를 생성하고
-    // ( 보통 1024, 2048, 4096, 8192 와 같이 배수 형식으로 버퍼의 크기를 잡는 것이 일반적이다.)
+      String title = diary.getDyBoardTitle();
+      String content = diary.getDyBoardContent();
 
-    //while ((readCount = is.read(buffer)) != -1) {
-        //  파일에서 가져온 fileInputStream을 설정한 크기 (1024byte) 만큼 읽고
+      if(!file.getOriginalFilename().isEmpty() && !title.isEmpty() && !content.isEmpty()) {
+        String changeName = saveFile(file, session);
+        diary.setOriginName(file.getOriginalFilename());
+        diary.setChangeName("resources/fo/upfiles/" + changeName);
+        System.out.println(diary.getChangeName()); // 잘찍힘
 
-        // fos.write(buffer, 0, readCount);
-        // 위에서 생성한 fileOutputStream 객체에 출력하기를 반복한다
-    //}
-// } catch (Exception ex) {
-   // throw new RuntimeException("file Save Error");
-//}
+        int result = diaryService.insertDiary(diary);
 
-//return "uploadok";
-//};
+        if(result > 0) {
+            return "게시글 등록 완료";
+        } else {
+            return "게시글 등록 실패";
+        }
+    }
 
+    // 필요한 데이터가 누락된 경우
+    model.addAttribute("errorMsg", "누락된 데이터가 있습니다");
+    return "redirect:/diaryEnrollForm.bo";
+}
 
+  private String saveFile(MultipartFile file, HttpSession session) {
 
+      String originName = file.getOriginalFilename();
+      String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 
+      int ranNum = (int)(Math.random() * 90000 + 10000);
 
+      String ext = originName.substring(originName.lastIndexOf("."));
 
+      String changeName = currentTime + ranNum + ext;
 
+      String savePath = session.getServletContext().getRealPath("/resources/fo/upfiles/");
 
+      try {
+            file.transferTo(new File(savePath + changeName));
+      } catch (IOException e) {
+            e.printStackTrace();
+      }
 
+      return changeName;
+    }
 
+  @RequestMapping("diaryDetailView.bo")
+  public ModelAndView selectDiary(ModelAndView mv,
+                                                    int bno) {
+          // System.out.println(bno);
 
+          int result = diaryService.increaseCount(bno);
 
+          if(result > 0) {
 
+                Diary d = diaryService.selectDiary(bno);
 
+                System.out.println(d);
 
+                mv.addObject("d", d) .setViewName("fo/diary/diaryDetailView");
 
+          } else {
 
-  @RequestMapping("diaryInsert.bo")
-  public void dyInsertBoard(Diary d,
-                                        MultipartFile upfile) {
+            mv.addObject("errorMsg", "게시글 상세조회 실패") .setViewName("common/errorPage");
+          }
 
-        System.out.println(d);
-        System.out.println(upfile);
+          return mv;
+
   }
 
 
 }
+
+
+

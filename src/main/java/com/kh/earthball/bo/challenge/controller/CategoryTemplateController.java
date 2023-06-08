@@ -41,6 +41,7 @@ public class CategoryTemplateController {
     return templateService.insertTemplate(template);
   }
 
+
   @GetMapping("insertForm.ch")
   public String insertChallengeForm(@RequestParam(value = "categoryNo") int categoryNo, Model model) {
 

@@ -124,24 +124,13 @@
 
 }
 
-.form_text {
-  width: 500px;
-  height: 40px;
-  border-radius: 5px;
-  border: solid lightgray 1px;
-  font-size: 18px;
-  margin-left: 20px;
+
+.form_content {
+  font-size: 20px;
+  margin-left: 30px;
+  font-weight: 800;
 }
 
-
-.form_date {
-  height: 40px;
-  border-radius: 5px;
-  border: solid lightgray 1px;
-  font-size: 18px;
-  margin-left: 20px;
-  width: 200px;
-}
 
 
 .basic_form_1 {
@@ -173,6 +162,20 @@
 .sub_title {
   display: flex;
   width: 15%;
+}
+
+.values {
+  margin-left: 40px;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+.valuesTextarea {
+  margin-left: 60px;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
 }
 
 /* select 문 */

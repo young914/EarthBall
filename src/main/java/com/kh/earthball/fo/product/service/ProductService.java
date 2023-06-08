@@ -1,9 +1,9 @@
 package com.kh.earthball.fo.product.service;
 
 import java.util.ArrayList;
-import com.kh.earthball.bo.product.vo.Atta;
-import com.kh.earthball.bo.product.vo.Product;
 import com.kh.earthball.fo.common.vo.PageInfo;
+import com.kh.earthball.fo.product.vo.Atta;
+import com.kh.earthball.fo.product.vo.Product;
 
 public interface ProductService {
 
@@ -14,5 +14,9 @@ public interface ProductService {
   int selectCategoryListCount(String category);
 
   ArrayList<Product> selectCategoryProduct(PageInfo pi, String category);
+
+  Product selectProduct(int productNo);
+
+  ArrayList<Atta> selectAtta(int productNo);
 
 }

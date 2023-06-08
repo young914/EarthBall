@@ -27,7 +27,11 @@
   margin-top: 200px;
 }
 
-#filter { height: 10% ;}
+#filter {
+  height: 10% ;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
 #title { height: 5% ;}
 #content { height: 65%; }
 #page {
@@ -100,14 +104,14 @@
     justify-content: center;
 }
 
-#filter_1, #filter_2, #filter_3 { 
-    height: 28%;
+#filter_1, #filter_2 {
+    height: 45%;
     text-align: center;
-    align-items: center;
+    display: flex;
 }
 
 
-#filter_1>h3, #filter_1>div>ul>li, #filter_2>h3, #filter_2>div>ul>li, #filter_3>h3, #filter_3>div>ul>li { 
+#filter_1>h3, #filter_1>div>ul>li, #filter_2>h3, #filter_2>div>ul>li {
     padding:  0px 20px;
     display: grid;
     float: left;
@@ -249,16 +253,19 @@
 
 .hot_one {
     padding: 7px;
+    margin: 8px;
 }
 
 .hot_title {
    font-size: 18px;
    font-weight: 900;
    color: #146C94;
+   padding-left: 10px;
 }
 
 .tags {
     color: rgb(169, 169, 169);
+    padding-left: 10px;
 }
 
 .hot_chall:hover {
