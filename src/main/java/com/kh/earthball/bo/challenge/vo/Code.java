@@ -14,5 +14,6 @@ public class Code {
   private String codeName;
   private String status;
   private int sortNo;
+  private String checked;   // true , false
 
 }

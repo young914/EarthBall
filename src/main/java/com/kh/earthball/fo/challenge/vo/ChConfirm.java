@@ -19,7 +19,7 @@ public class ChConfirm {
   private String chConContent;         // 챌린지 인증 내용
   private String memberId;             // 회원아이디
   private String status;               // 사용여부
-  private Date chConCreateDate;        // 작성일
+  private String chConCreateDate;        // 작성일
 
   
   // 추가사항
