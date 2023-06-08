@@ -11,8 +11,8 @@
   <select id="selectList"  resultType="com.kh.earthball.fo.challenge.vo.Challenge">
     SELECT CH_NO
          , CH_TITLE
-         , TO_CHAR(TO_DATE(CH_START_DAY, 'YYYY-MM-DD')) AS CH_START_DAY
-         , TO_CHAR(TO_DATE(CH_END_DAY, 'YYYY-MM-DD')) AS CH_END_DAY
+         , TO_CHAR(TO_DATE(CH_START_DAY, 'YYYY-MM-DD'), 'YYYY-MM-DD') AS CH_START_DAY
+         , TO_CHAR(TO_DATE(CH_END_DAY, 'YYYY-MM-DD'), 'YYYY-MM-DD') AS CH_END_DAY
          , MEMBER_ID
          , (SELECT CATEGORY_NAME
             FROM TB_CATEGORY CA
@@ -21,6 +21,7 @@
             FROM TB_CHA_FILE F
             WHERE F.FILE_NO = C.FILE_NO) FILE_PATH
     FROM TB_CHALLENGE C
+    WHERE STATUS = 'Y'
     ORDER BY CH_NO DESC
   </select>
 
@@ -29,6 +30,7 @@
       SELECT SEQ_TB_CHALLENGE.NEXTVAL
         FROM DUAL
     </selectKey>
+    <!--BEFORE로 설정하면 키를 먼저 조회하고 그 값을 keyProperty 에 셋팅한 뒤 insert 구문을 실행한다.-->
     INSERT INTO TB_CHALLENGE (CH_NO
                             , CH_TITLE
                             , CH_START_DAY
@@ -36,7 +38,8 @@
                             , MEMBER_ID
                             , CATEGORY_NO
                             , FILE_NO
-                            , CH_CONTENT)
+                            , CH_CONTENT
+                            , STATUS)
                     VALUES (#{chNo}
                           , #{chTitle}
                           , #{chStartDay}
@@ -44,7 +47,8 @@
                           , #{memberId}
                           , #{categoryNo}
                           , #{fileNo}
-                          , #{chContent})
+                          , #{chContent}
+                          , 'Y')
   </insert>
 
   <insert id="insertChDetailInfo"  parameterType="com.kh.earthball.fo.challenge.vo.ChDetailInfo">
@@ -65,9 +69,10 @@
   <select id="selectChallenge" parameterType="java.lang.Integer" resultType="com.kh.earthball.fo.challenge.vo.Challenge">
     SELECT CH_NO
          , CH_TITLE
-         , TO_CHAR(TO_DATE(CH_START_DAY, 'YYYY-MM-DD')) AS CH_START_DAY
-         , TO_CHAR(TO_DATE(CH_END_DAY, 'YYYY-MM-DD')) AS CH_END_DAY
+         , TO_CHAR(TO_DATE(CH_START_DAY, 'YYYY-MM-DD'), 'YYYY-MM-DD') AS CH_START_DAY
+         , TO_CHAR(TO_DATE(CH_END_DAY, 'YYYY-MM-DD'), 'YYYY-MM-DD') AS CH_END_DAY
          , MEMBER_ID
+         , CATEGORY_NO
          , (SELECT CATEGORY_NAME
             FROM TB_CATEGORY CA
             WHERE CA.CATEGORY_NO = C.CATEGORY_NO) CATEGORY_NAME
@@ -77,6 +82,26 @@
          , CH_CONTENT
       FROM TB_CHALLENGE C
      WHERE CH_NO = #{chNo}
+       AND STATUS = 'Y'
   </select>
 
+
+  <update id="challengeUpdate" parameterType="com.kh.earthball.fo.challenge.vo.Challenge">
+    UPDATE TB_CHALLENGE
+       SET CH_TITLE = #{chTitle}
+         , CH_START_DAY = #{chStartDay}
+         , CH_END_DAY = #{chEndDay}
+         , FILE_NO = #{fileNo}
+         , CH_CONTENT = #{chContent}
+     WHERE CH_NO = #{chNo}
+       AND MEMBER_ID = #{memberId}
+       AND CATEGORY_NO = #{categoryNo}
+       AND STATUS = 'Y'
+  </update>
+
+  <update id="challengeDelete">
+    UPDATE TB_CHALLENGE
+       SET STATUS = 'N'
+     WHERE CH_NO = #{chNo}
+  </update>
 </mapper>

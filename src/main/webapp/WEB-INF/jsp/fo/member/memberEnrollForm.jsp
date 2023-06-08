@@ -217,8 +217,10 @@
 
         <!-- 5. 이메일_전화번호 -->
         <div class="field">
-            <b>본인 확인 이메일<small> *</small></b>
-            <input type="email" placeholder="선택입력" name="email" id="email">
+            <b>본인 확인 이메일 *</b>
+            <div>
+            	<input type="email" placeholder="이메일을 입력해주세요" name="email" id="email">
+            </div>
         </div>
         
         <div class="field tel-number">

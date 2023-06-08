@@ -1,6 +1,7 @@
 package com.kh.earthball.fo.challenge.service;
 
 
+import com.kh.earthball.fo.challenge.vo.ChConfirm;
 import com.kh.earthball.fo.challenge.vo.Challenge;
 import com.kh.earthball.fo.common.vo.PageInfo;
 
@@ -15,5 +16,10 @@ public interface ChallengeService {
   int requestChallenge(Challenge challenge);
 
   Challenge selectChallenge(int chNo);
+
+  int challengeUpdate(Challenge challenge);
+
+  int challengeDelete(int chNo);
+
 
 }

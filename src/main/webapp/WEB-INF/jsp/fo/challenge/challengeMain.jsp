@@ -104,15 +104,6 @@
                         <ul>
                             <li><span class="tag">${chall.categoryName}</span></li>
 
-                            <c:choose>
-                              <c:when test="${chall.chStartDay eq chall.chEndDay} ">
-                                <li><span class="tag">당일</span></li>
-                              </c:when>
-                              <c:otherwise>
-                                <li><span class="tag">몰라</span></li>
-                              </c:otherwise>
-
-                            </c:choose>
                             <li><span class="tag">진행 중</span></li>
                         </ul>
                     </div>
@@ -141,7 +132,6 @@
                             <td>
                                 <span class="tags">#태그자리1</span>
                                 <span class="tags">#태그자리2</span> <br>
-                                <span class="tags">#태그자리3</span>
                             </td>
                         </tr>
                     </table>
@@ -161,7 +151,6 @@
                             <td>
                                 <span class="tags">#태그자리1</span>
                                 <span class="tags">#태그자리2</span> <br>
-                                <span class="tags">#태그자리3</span>
                             </td>
                         </tr>
                     </table>
@@ -178,7 +167,6 @@
                             <td>
                                 <span class="tags">#태그자리1</span>
                                 <span class="tags">#태그자리2</span> <br>
-                                <span class="tags">#태그자리3</span>
                             </td>
                         </tr>
                     </table>
@@ -195,7 +183,6 @@
                             <td>
                                 <span class="tags">#태그자리1</span>
                                 <span class="tags">#태그자리2</span> <br>
-                                <span class="tags">#태그자리3</span>
                             </td>
                         </tr>
                     </table>
@@ -212,7 +199,6 @@
                             <td>
                                 <span class="tags">#태그자리1</span>
                                 <span class="tags">#태그자리2</span> <br>
-                                <span class="tags">#태그자리3</span>
                             </td>
                         </tr>
                     </table>
@@ -229,7 +215,6 @@
                             <td>
                                 <span class="tags">#태그자리1</span>
                                 <span class="tags">#태그자리2</span> <br>
-                                <span class="tags">#태그자리3</span>
                             </td>
                         </tr>
                     </table>
@@ -246,7 +231,6 @@
                             <td>
                                 <span class="tags">#태그자리1</span>
                                 <span class="tags">#태그자리2</span> <br>
-                                <span class="tags">#태그자리3</span>
                             </td>
                         </tr>
                     </table>
@@ -263,7 +247,6 @@
                             <td>
                                 <span class="tags">#태그자리1</span>
                                 <span class="tags">#태그자리2</span> <br>
-                                <span class="tags">#태그자리3</span>
                             </td>
                         </tr>
                     </table>
@@ -280,7 +263,6 @@
                             <td>
                                 <span class="tags">#태그자리1</span>
                                 <span class="tags">#태그자리2</span> <br>
-                                <span class="tags">#태그자리3</span>
                             </td>
                         </tr>
                     </table>
@@ -297,7 +279,6 @@
                             <td>
                                 <span class="tags">#태그자리1</span>
                                 <span class="tags">#태그자리2</span> <br>
-                                <span class="tags">#태그자리3</span>
                             </td>
                         </tr>
                     </table>
@@ -314,7 +295,7 @@
 
 
                 <ul class="pagination">
-                    <li> <a href="#" class="first">처음 페이지</a> </li>
+                    <li> <a href="/main.chall?currentPage=1" class="first">처음 페이지</a> </li>
 
                   <c:choose>
                     <c:when test="${ pageInfo.currentPage eq 1}">
@@ -326,16 +307,26 @@
                   </c:choose>
 
 
-                    <li> <a href="#" class="active num"> 1 </a>  </li>
+                  <c:forEach var="page" begin="${pageInfo.startPage}" end="${pageInfo.endPage}" step="1">
+                    <li> <a href="/main.chall?currentPage=${page}" class="active num"> ${page} </a>  </li>
+                  </c:forEach>
+                  <!--
                     <li> <a href="#" class="num"> 2 </a>  </li>
                     <li> <a href="#" class="num"> 3 </a>  </li>
                     <li> <a href="#" class="num"> 4 </a>  </li>
                     <li> <a href="#" class="num"> 5 </a>  </li>
+                  -->
 
-                    <li> <a href="#" class="arrow_right"> >> </a> </li>
+                  <c:choose>
+                    <c:when test="${pageInfo.currentPage eq pageInfo.maxPage}">
+                      <li> <a href="#" class="arrow_right" disabled> >> </a> </li>
+                    </c:when>
+                    <c:otherwise>
+                      <li> <a href="/main.chall?currentPage=${[pageInfo.currentPage + 1]}" class="arrow_right" disabled> >> </a> </li>
+                    </c:otherwise>
+                  </c:choose>
 
-
-                    <li> <a href="#" class="last">끝 페이지</a> </li>
+                    <li> <a href="/main.chall?currentPage=${pageInfo.maxPage}" class="last">끝 페이지</a> </li>
                 </ul>
             </div>
         </div>

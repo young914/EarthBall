@@ -1,10 +1,11 @@
 package com.kh.earthball.fo.member.service;
 
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Service;
 import com.kh.earthball.fo.member.mapper.MemberMapper;
 import com.kh.earthball.fo.member.vo.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
@@ -28,14 +29,30 @@ public class MemberServiceImpl implements MemberService {
     return memberMapper.updateMember(m);
   }
 
-  @Override
-  public int deleteMember(String memberId) {
-    return 0;
-  }
 
   @Override
   public int idCheck(String checkId) {
     return memberMapper.idCheck(checkId);
+  }
+
+  @Override
+  public int updateMailKey(Member m) throws Exception {
+    return memberMapper.updateMailKey(m);
+  }
+
+  @Override
+  public int updateMailAuth(Member m) throws Exception {
+    return memberMapper.updateMailAuth(m);
+  }
+
+  @Override
+  public int emailAuthFail(String memberId) throws Exception {
+    return memberMapper.emailAuthFail(memberId);
+  }
+
+  @Override
+  public int mailAuthStatus(String memberId) {
+    return memberMapper.mailAuthStatus(memberId);
   }
 
 

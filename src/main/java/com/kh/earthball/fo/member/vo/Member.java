@@ -25,6 +25,9 @@ public class Member {
   private String address2; // 상세주소
   private String changeName; // 바뀐파일이름
   private int postCode; // 우편번호
+  private int mailAuth; // 메일 인증
+  private String mailKey; // 메일 인증키
+  private String gradeName;
 
 
 }

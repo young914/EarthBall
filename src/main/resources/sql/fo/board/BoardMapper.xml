@@ -27,8 +27,63 @@
 	INNER JOIN MEMBER ON QNA.MEMBER_ID = MEMBER.MEMBER_ID
 	WHERE QNA.STATUS = 'Y'
 	ORDER BY QNA.BOARD_NO DESC
-
   </select>
+
+  <!--  게시글 작성용 쿼리문 -->
+  <insert id="insertBoard" parameterType="board">
+	  INSERT INTO QNA(BOARD_NO
+	  , BOARD_TITLE
+	  , BOARD_CONTENT
+	  , MEMBER_ID)
+	  VALUES(SEQ_BNO.NEXTVAL
+	  , #{boardTitle}
+	  , #{boardContent}
+	  , NVL(#{memberId}, 0))
+</insert>
+
+
+  <!-- 게시글 상세 조회용 쿼리문 -->
+<select id="selectBoard" parameterType="_int" resultMap="boardResultSet">
+    SELECT QNA.BOARD_NO
+         , QNA.BOARD_TITLE
+         , MEMBER.MEMBER_ID
+         , TO_CHAR(QNA.BOARD_DATE, 'YYYY-MM-DD') AS "BOARD_DATE"
+         , QNA.BOARD_CONTENT
+      FROM QNA
+      INNER JOIN MEMBER ON QNA.MEMBER_ID = MEMBER.MEMBER_ID
+     WHERE QNA.BOARD_NO = #{boardNo} AND QNA.STATUS = 'Y'
+</select>
+<!-- 이전글 조회용 쿼리문 -->
+<select id="selectPrevBoard" parameterType="_int" resultType="board">
+    SELECT *
+    FROM (
+        SELECT QNA.BOARD_NO
+             , QNA.BOARD_TITLE
+             , MEMBER.MEMBER_ID
+             , TO_CHAR(QNA.BOARD_DATE, 'YYYY-MM-DD') AS "BOARD_DATE"
+             , QNA.BOARD_CONTENT
+          FROM QNA
+          INNER JOIN MEMBER ON QNA.MEMBER_ID = MEMBER.MEMBER_ID
+         WHERE <![CDATA[ QNA.BOARD_NO < #{boardNo} ]]> AND QNA.STATUS = 'Y'
+         ORDER BY QNA.BOARD_NO DESC
+    ) WHERE ROWNUM = 1
+</select>
+
+<!-- 다음글 조회용 쿼리문 -->
+<select id="selectNextBoard" parameterType="_int" resultType="board">
+    SELECT *
+    FROM (
+        SELECT QNA.BOARD_NO
+             , QNA.BOARD_TITLE
+             , MEMBER.MEMBER_ID
+             , TO_CHAR(QNA.BOARD_DATE, 'YYYY-MM-DD') AS "BOARD_DATE"
+             , QNA.BOARD_CONTENT
+          FROM QNA
+          INNER JOIN MEMBER ON QNA.MEMBER_ID = MEMBER.MEMBER_ID
+         WHERE QNA.BOARD_NO > #{boardNo} AND QNA.STATUS = 'Y'
+         ORDER BY QNA.BOARD_NO ASC
+    ) WHERE ROWNUM = 1
+</select>
 
 
 </mapper>

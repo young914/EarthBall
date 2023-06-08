@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 목록</title>
+<title>1:1 게시판</title>
  <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <link rel="stylesheet" href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
@@ -16,6 +16,8 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+
 
     <script>
         $(function(){
@@ -485,6 +487,8 @@ header{
                 <div class="dropdown">
                     <span class="dropbtn">고객센터</span>
                     <div class="dropdown-content">
+                        <a href="list.no">공지사항</a>
+                        <a href="list.faq">FAQ</a>
                         <a href="list.bo">1:1문의</a>
                     </div>
                 </div>
@@ -522,29 +526,33 @@ header{
                 <br/>
 
 
-            <table>
+
+                     <table>
                 <thead>
                     <tr>
-                        <th colspan="8"><h1 id="boardtext">공지사항</h1>
-                            <h4 style="text-align: center;">배송 및 운영관련 공지사항 게시판입니다.</h4>
-                            <span class="btn-group"> <!-- 버튼 관련 class -->
-                                <button id="insertList">삭제</button></th> <!-- 관리자 히든 속성 버튼-->
+                        <th colspan="8"><h1 id="boardtext">1:1문의하기</h1>
+                            <h4 style="text-align: center;">고객센터 운영시간 | 평일 10:00 ~ 17:00</h4>
+                            <c:if test="${ not empty loginUser }">
+            	 			<span class="btn-group"> <!-- 버튼 관련 class -->
+                                <button id="insertList"><a href="enrollForm.bo">작성</a></button></th>
                             </span>
+         					 </c:if>
+
                     </tr>
 
                     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
                         <div class="container-fluid">
-                          <a class="navbar-brand">공지사항</a>
+                          <a class="navbar-brand" href="list.bo">1:1문의하기</a>
                           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                           </button>
                           <div class="collapse navbar-collapse" id="navbarColor01">
                             <ul class="navbar-nav me-auto">
                               <li class="nav-item">
-                                <a class="nav-link" href="#">자주묻는질문</a>
+                                <a class="nav-link" href="list.no">공지사항</a>
                               </li>
                               <li class="nav-item">
-                                <a class="nav-link" href="#">1:1문의</a>
+                                <a class="nav-link" href="list.faq">FAQ</a>
                               </li>
                             </ul>
                           </div>
@@ -556,7 +564,7 @@ header{
                         <th>No</th>
                         <th>제목</th>
                         <th>글쓴이</th>
-                        <th>작성시간</th>
+                        <th>작성일자</th>
                     </tr>
                 </thead>
 
@@ -565,7 +573,7 @@ header{
 
                     <tr>
                         <td class="bno">${ b.boardNo }</td>
-                        <td>${ b.boardTitle }</td>
+                        <td><a href="${pageContext.request.contextPath}/detail.bo?bno=${b.boardNo}">${ b.boardTitle }</a></td>
                         <td>${ b.memberId }</td>
                         <td>${b.boardDate }</td>
                     </tr>

@@ -11,9 +11,15 @@ public interface MemberService {
 
   int updateMember(Member m);
 
-  int deleteMember(String memberId);
-
   int idCheck(String checkId);
+  
+  int updateMailKey(Member m) throws Exception;
+  
+  int updateMailAuth(Member m) throws Exception;
+  
+  int emailAuthFail(String memberId) throws Exception;
+  
+  int mailAuthStatus(String memberId);
 
 
 }

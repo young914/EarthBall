@@ -29,7 +29,7 @@
                 <li><a href="delete.me">회원탈퇴</a></li>
             </ul>
         </div>
-        <!-- Main Content -->
+            
         <div class="main-content">
             <div class="profile">
 
@@ -53,7 +53,6 @@
                 <p>아직 참여하신 챌린지, 일기가 없어요~!</p>
             </div>
         </div>
-
     </div>
 
     <jsp:include page="/WEB-INF/jsp/fo/common/footer.jsp" />
