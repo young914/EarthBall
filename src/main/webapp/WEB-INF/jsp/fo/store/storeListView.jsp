@@ -279,64 +279,8 @@ hr{
             settingMap();
         });
 
-        function cityFilter(event){
-
-            var city = $(event.target).text();
-            $("#dropCityFilter").text(city);
-              // 시/도 선택 시 검색 버튼 활성화
-
-            enableSearchButton();
+        function settingMap() {
             
-            $.ajax({
-                url : "getCities.st",
-                type : "get",
-                data : {
-                    city : city
-                },
-                success : function(result) {
-                    // return 값 다 담기
-                    province = result;
-                    
-                    let provinceFilterHtml = "";
-                    for (let i = 0; i < province.length; i++) {
-                        provinceFilterHtml += '<li><a class="dropdown-item" onclick="provinceFilter(event);">' + province[i].provinces + '</a></li>';
-                    }
-                    
-                    // 생성된 HTML을 도시 드롭다운 메뉴에 적용
-                    $("#provinceFilter").html(provinceFilterHtml);
-                },
-                error : function() {
-                    console.log("ajax 통신 실패");
-                }
-            })
-        }
-        function provinceFilter(event){
-            var province = $(event.target).text();
-            
-            $("#dropProvinceFilter").text(province);
-            enableSearchButton();
-        }
-        function enableSearchButton() {
-            var city = $("#dropCityFilter").text();
-            var province = $("#dropProvinceFilter").text();
-            
-            // 시/도가 선택되었을 경우에만 검색 버튼 활성화
-            if (city !== "시/도 선택") {
-            $()
-                $(".dropdownCate input").prop("disabled", false);
-                $(".dropRegion").prop("disabled", false);
-            }
-        }
-
-        function settingFilterMap() {
-
-            document.getElementById('map').innerHTML = ""; // 맵 초기화
-
-            storeList = [];
-            markerList = []; // 각 매장에 대한 마커들 담기
-            overlayList = []; // 각 매장에 대한 오버레이들 담기
-
-
             // 2_1. 지도 셋팅 완료
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
                 mapOption = { 
@@ -347,27 +291,17 @@ hr{
             var zoomControl = new kakao.maps.ZoomControl();
             map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
             
-            // 폼 데이터 가져오기
-            var city = $("#dropCityFilter").text();
-            var provinces = $("#dropProvinceFilter").text();
-            if(provinces == "구/군 선택"){
-                provinces = "";
-            }
-
             // 2_2. ajax 로 전체 매장 조회해오기
             $.ajax({
-                url : "getFilter.st",
+                url : "getStores.st",
                 type : "get",
-                data: {
-                    city : city,
-                    provinces : provinces
-                },
                 success : function(result) {
 
                     // return 값 다 담기
                     storeList = result;
-                    console.log(storeList);
+                    
                     let currentPage= showList(storeList, 1);
+                    
                     let listCount = storeList.length;
             
                     $("#paging-area").on("click", ".paging-btn", function() {
@@ -584,8 +518,64 @@ hr{
             }
         });
 
-        function settingMap() {
+        function cityFilter(event){
+            var city = $(event.target).text();
+            $("#dropCityFilter").text(city);
+              // 시/도 선택 시 검색 버튼 활성화
+
+            enableSearchButton();
             
+            $.ajax({
+                url : "getCities.st",
+                type : "get",
+                data : {
+                    city : city
+                },
+                success : function(result) {
+                    // return 값 다 담기
+                    province = result;
+                    
+                    let provinceFilterHtml = "";
+                    for (let i = 0; i < province.length; i++) {
+                        provinceFilterHtml += '<li><a class="dropdown-item" onclick="provinceFilter(event);">' + province[i].provinces + '</a></li>';
+                    }
+                    
+                    // 생성된 HTML을 도시 드롭다운 메뉴에 적용
+                    $("#provinceFilter").html(provinceFilterHtml);
+                },
+                error : function() {
+                    console.log("ajax 통신 실패");
+                }
+            })
+        }
+
+        function provinceFilter(event){
+            var province = $(event.target).text();
+            
+            $("#dropProvinceFilter").text(province);
+            enableSearchButton();
+        }
+
+        function enableSearchButton() {
+            var city = $("#dropCityFilter").text();
+            var province = $("#dropProvinceFilter").text();
+            
+            // 시/도가 선택되었을 경우에만 검색 버튼 활성화
+            if (city !== "시/도 선택") {
+            $()
+                $(".dropdownCate input").prop("disabled", false);
+                $(".dropRegion").prop("disabled", false);
+            }
+        }
+
+        function settingFilterMap() {
+
+            document.getElementById('map').innerHTML = ""; // 맵 초기화
+
+            storeList = [];
+            markerList = []; // 각 매장에 대한 마커들 담기
+            overlayList = []; // 각 매장에 대한 오버레이들 담기
+
             // 2_1. 지도 셋팅 완료
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
                 mapOption = { 
@@ -596,17 +586,27 @@ hr{
             var zoomControl = new kakao.maps.ZoomControl();
             map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
             
+            // 폼 데이터 가져오기
+            var city = $("#dropCityFilter").text();
+            var provinces = $("#dropProvinceFilter").text();
+            if(provinces == "구/군 선택"){
+                provinces = "";
+            }
+
             // 2_2. ajax 로 전체 매장 조회해오기
             $.ajax({
-                url : "getStores.st",
+                url : "getFilter.st",
                 type : "get",
+                data: {
+                    city : city,
+                    provinces : provinces
+                },
                 success : function(result) {
 
                     // return 값 다 담기
                     storeList = result;
-                    
+                    console.log(storeList);
                     let currentPage= showList(storeList, 1);
-                    
                     let listCount = storeList.length;
             
                     $("#paging-area").on("click", ".paging-btn", function() {
@@ -808,12 +808,12 @@ hr{
 				
 				if(currentPage == p) {
 					pagingStr += "<button class='paging-btn-dis' disabled>"
-							   + 	p
-							   + "</button>";
-				} else {
-					pagingStr += "<button class='paging-btn'>"
-							   + 	p
-							   + "</button>";
+                                + 	p
+                                + "</button>";
+                } else {
+                    pagingStr += "<button class='paging-btn'>"
+                                + 	p
+                                + "</button>";
 				}
 			} 
 			
@@ -825,7 +825,6 @@ hr{
 			
 			return currentPage;
         }
-
 
         function openNav() {
             document.getElementById("mySidebar").style.left = "0";
