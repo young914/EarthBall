@@ -61,6 +61,33 @@ html, body{
     border: 1px solid black;
 }
 
+.input-container {
+    position: relative;
+}
+
+.form-control{
+    border-radius: 30px;
+    height: 50px;
+    margin: 5px;
+    width: 378px;
+
+}
+
+
+.search-icon {
+    font-size: 25px;
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+    color: #777;
+}
+
+.search-icon:hover{
+    cursor: pointer;
+    color: #5085BB;
+}
+
 hr{
     margin: 0px;
 }
@@ -193,7 +220,7 @@ hr{
                 </div>
             </div>
 
-            <div style="display: flex;">
+            <div id="regionSelect" style="display: flex;">
                 <div class="dropdown citySearch" style="width: 129px;">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropCityFilter">
                         시/도 선택
@@ -207,15 +234,15 @@ hr{
                     </ul>
                 </div>
 
-                <div class="dropdown regionSearch" style="width: 129px;">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropProvinceFilter">구/군 선택</button>
+                <div class="dropdown provincesSearch" style="width: 129px;" >
+                    <button class="btn btn-secondary dropdown-toggle dropRegion" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropProvinceFilter" disabled>구/군 선택</button>
                     <ul class="dropdown-menu" id="provinceFilter" style=" max-height: 530px; overflow-y: auto;">
                         
                     </ul>
                 </div>
 
                 <div class="dropdown dropdownCate">
-                    <input class="btn btn-primary" type="submit" onclick="settingFilterMap();" value="검색">
+                    <input class="btn btn-primary" type="submit" onclick="settingFilterMap();" value="검색" disabled>
                 </div>
             </div>
         </div>
@@ -256,7 +283,9 @@ hr{
 
             var city = $(event.target).text();
             $("#dropCityFilter").text(city);
-            
+              // 시/도 선택 시 검색 버튼 활성화
+
+            enableSearchButton();
             
             $.ajax({
                 url : "getCities.st",
@@ -281,12 +310,22 @@ hr{
                 }
             })
         }
-
         function provinceFilter(event){
             var province = $(event.target).text();
             
             $("#dropProvinceFilter").text(province);
-
+            enableSearchButton();
+        }
+        function enableSearchButton() {
+            var city = $("#dropCityFilter").text();
+            var province = $("#dropProvinceFilter").text();
+            
+            // 시/도가 선택되었을 경우에만 검색 버튼 활성화
+            if (city !== "시/도 선택") {
+            $()
+                $(".dropdownCate input").prop("disabled", false);
+                $(".dropRegion").prop("disabled", false);
+            }
         }
 
         function settingFilterMap() {
@@ -469,13 +508,81 @@ hr{
         function regionSearch(event) {
             var region = $(event.target).text();
             $("#dropClasificarFilter").text(region);
+
+            var regionSelectHtml = `
+            <div class="dropdown citySearch" style="width: 129px;">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropCityFilter">
+                    시/도 선택
+                </button>
+                <ul class="dropdown-menu">
+                    <c:forEach var="city" items="${cityList}">
+                        <li>
+                            <a class="dropdown-item" onclick="cityFilter(event);">${city.city}</a>
+                        </li>                        
+                    </c:forEach>
+                </ul>
+            </div>
+
+            <div class="dropdown provincesSearch" style="width: 129px;">
+                <button class="btn btn-secondary dropdown-toggle dropRegion" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropProvinceFilter" disabled>구/군 선택</button>
+                <ul class="dropdown-menu" id="provinceFilter" style="max-height: 530px; overflow-y: auto;"></ul>
+            </div>
+
+            <div class="dropdown dropdownCate">
+                <input class="btn btn-primary" type="submit" onclick="settingFilterMap();" value="검색" disabled>
+            </div>
+            `;
+
+        $("#regionSelect").html(regionSelectHtml);
         }
 
         function nameSearch(event){
             var name = $(event.target).text();
             $("#dropClasificarFilter").text(name);
-        }
 
+            $("#regionSelect").empty();
+
+            // input 태그와 아이콘을 포함하는 컨테이너 추가
+            var containerHtml = '<div class="input-container"><input type="text" class="form-control" placeholder="주소/매장명 검색" id="searchInput"><i class="xi-search xi-2x search-icon"></i></div>';
+            $("#regionSelect").append(containerHtml);
+
+            // 검색 입력란에 입력이 있을 때 검색 버튼 활성화
+            $("#searchInput").on("input", function() {
+                var searchInput = $(this).val();
+
+                // 검색 입력 값이 비어있지 않을 때 검색 버튼 활성화
+                if (searchInput.trim() !== "") {
+                    $(".dropdownCate input").prop("disabled", false);
+                } else {
+                    $(".dropdownCate input").prop("disabled", true);
+                }
+            });
+        }
+        
+        $(".search-icon").click(function() {
+            var searchInputValue = $("#searchInput").val();
+            
+            // 검색 입력 값이 비어있지 않을 때 ajax 요청 수행
+            if (searchInputValue.trim() !== "") {
+                // 여기에 ajax 요청 코드를 작성하세요
+                // 검색 입력 값을 서버로 전송하고 처리하는 로직을 구현해야 합니다
+                console.log(searchInputValue);
+                $.ajax({
+                    url: "your_ajax_url",
+                    type: "post",
+                    data: {
+                        searchInput: searchInputValue
+                    },
+                    success: function(response) {
+                        // 서버에서 받은 응답을 처리하는 로직을 작성하세요
+                        // 예를 들어, 검색 결과를 화면에 표시하거나 다른 동작을 수행할 수 있습니다
+                    },
+                    error: function() {
+                        console.log("ajax 통신 실패!");
+                    }
+                });
+            }
+        });
 
         function settingMap() {
             
