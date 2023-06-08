@@ -112,15 +112,21 @@ function clearAll(){
     var formdata = new FormData();	// formData 생성
     formdata.append("file", file, "image.png");	// file data 추가
 
+	let dyBoardWriter = document.getElementById('dyBoardWriter').innerText;
     let dyBoardTitle = document.getElementById('dyBoardTitle').value;
     let dyBoardContent = document.getElementById('dyBoardContent').value;
+	let weather = document.getElementById('weather').value;
 
+    formdata.append('dyBoardWriter', dyBoardWriter);
     formdata.append('dyBoardTitle', dyBoardTitle);
     formdata.append('dyBoardContent', dyBoardContent);
+    formdata.append('weather', weather);
 
     console.log(formdata.get("file"));
+    console.log(formdata.get("dyBoardWriter"));
     console.log(formdata.get("dyBoardTitle"));
     console.log(formdata.get("dyBoardContent"));
+    console.log(formdata.get("weather"));
 
     $.ajax({
         type : 'post',
@@ -129,7 +135,16 @@ function clearAll(){
         processData : false,	// data 파라미터 강제 string 변환 방지!!
         contentType : false,	// application/x-www-form-urlencoded; 방지!!
         success : function (data) {
-            console.log(data);
+
+           if(data === "게시글 등록 완료") {
+
+			   alert(data);
+			   location.href = "diaryListView.bo";
+		   } else {
+
+			   alert(data);
+		   }
+
         }, error : function() {
 			console.log("실패");
 		}
@@ -140,15 +155,23 @@ function clearAll(){
 // 날씨 아이콘 버튼 이벤트
  document.querySelector('#c_1').addEventListener('click', function(event) {
   event.preventDefault();
+
+  console.log("클릭 외않돼?")
   var target = document.querySelector('#c_1');
   if (target.classList.contains('active1')) {
     target.classList.remove('active1');
+	document.getElementById("weather").value = "";
   } else {
     target.classList.add('active1');
 	document.querySelector('#c_2').classList.remove('active2');
 	document.querySelector('#c_3').classList.remove('active3');
 	document.querySelector('#c_4').classList.remove('active4');
+
+	document.getElementById("weather").value = "1";
+  //console.log(document.getElementById("weather").value);
   }
+
+ // console.log(document.getElementById("weather").value);
 });
 
  document.querySelector('#c_2').addEventListener('click', function(event) {
@@ -156,12 +179,18 @@ function clearAll(){
   var target = document.querySelector('#c_2');
   if (target.classList.contains('active2')) {
     target.classList.remove('active2');
+	document.getElementById("weather").value = "";
   } else {
     target.classList.add('active2');
     document.querySelector('#c_1').classList.remove('active1');
     document.querySelector('#c_3').classList.remove('active3');
 	document.querySelector('#c_4').classList.remove('active4');
+
+	document.getElementById("weather").value = "2";
+  //console.log(document.getElementById("weather").value);
   }
+
+  //console.log(document.getElementById("weather").value);
 });
 
  document.querySelector('#c_3').addEventListener('click', function(event) {
@@ -169,12 +198,18 @@ function clearAll(){
   var target = document.querySelector('#c_3');
   if (target.classList.contains('active3')) {
     target.classList.remove('active3');
+	document.getElementById("weather").value = "";
   } else {
     target.classList.add('active3');
     document.querySelector('#c_1').classList.remove('active1');
     document.querySelector('#c_2').classList.remove('active2');
 	document.querySelector('#c_4').classList.remove('active4');
+
+	document.getElementById("weather").value = "3";
+  //console.log(document.getElementById("weather").value);
   }
+
+ // console.log(document.getElementById("weather").value);
 });
 
  document.querySelector('#c_4').addEventListener('click', function(event) {
@@ -182,12 +217,17 @@ function clearAll(){
   var target = document.querySelector('#c_4');
   if (target.classList.contains('active4')) {
     target.classList.remove('active4');
+	document.getElementById("weather").value = "";
   } else {
     target.classList.add('active4');
     document.querySelector('#c_1').classList.remove('active1');
     document.querySelector('#c_2').classList.remove('active2');
 	document.querySelector('#c_3').classList.remove('active3');
+
+	document.getElementById("weather").value = "4";
+ // console.log(document.getElementById("weather").value);
   }
+
 });
 
 const todayTime = () => {
@@ -198,7 +238,7 @@ var month = now.getMonth() + 1;
 var date = now.getDate();
 var day = now.getDay();
 
- var days = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+ var days = ['일', '월', '화', '수', '목', '금', '토'];
  var dayName = days[day];
 
 	return {
