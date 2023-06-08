@@ -24,7 +24,7 @@ public class Member {
   private String address1; // 메인주소
   private String address2; // 상세주소
   private String changeName; // 바뀐파일이름
-  private int postCode; // 우편번호
+  private String postCode; // 우편번호
 
 
 }

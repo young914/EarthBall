@@ -414,12 +414,12 @@ input[type="number"]::-webkit-inner-spin-button{-webkit-appearance: none; margin
 }
 
 .totalAmount {
-	margin-bottom : 0px;
+	margin : 0px;
 	width : 100%;
 }
 
 #orderSummaryTotal-area {
-    height : 60px;
+    height : 50px;
     vertical-align : bottom;
 }
 
