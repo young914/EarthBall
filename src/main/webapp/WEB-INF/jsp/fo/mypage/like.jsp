@@ -5,9 +5,10 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>마이페이지</title>
+    <title>찜 목록</title>
     <jsp:include page="/WEB-INF/jsp/fo/common/common.jsp"/>
     <link rel="stylesheet" href="/resources/fo/css/mypage/commonMyPage.css?after">
+    <link rel="stylesheet" href="/resources/fo/css/mypage/like.css?after">
 
 </head>
 <body>
@@ -22,7 +23,7 @@
             <ul class="menu1">
                 <li><a href="#">참여현황</a></li>
                 <li><a href="#">주문 관리</a></li>
-                <li><a href="list.like?memberId=${ loginUser.memberId }">찜 목록</a></li>
+                <li><a href="list.like">찜 목록</a></li>
                 <li><a href="#">1:1문의</a></li>
                 <li><a href="#">포인트 내역</a></li>
                 <li><a href="updateInfo.me">내 정보 수정</a></li>
@@ -49,8 +50,31 @@
 
             <!-- 참여 현황 등 / 누르면 뜨게끔 하고 싶음 -->
             <div class="main-content2">
-                <h2>참여 현황</h2>
-                <p>아직 참여하신 챌린지, 일기가 없어요~!</p>
+                <h2>찜 목록 <span>${ list.size() }</span></h2>
+                <div id="productArea">
+
+                	<c:forEach var="p" items="${ list }">
+	                	<div class="product">
+	                        <div>
+	                            <a href="#" class="product-img"><img src="/resources/fo/upfiles/${ p.changerName }"></a>
+	                        </div>
+	                        <div class="product-info">
+	                            <div class="product-name">
+	                                <a href=""><p>${ p.productName }</p></a>
+	                            </div>
+	                            <div class="product-price">
+	                                <p>${ p.price }원</p>
+	                            </div>
+	                            <div class="product-icon">
+	                                <div><i class="xi-speech-o"></i>50</div>
+	                                <div><i class="xi-heart-o"></i>50</div>
+	                                <div><i class="xi-cart-o"></i></div>
+	                            </div>
+	                        </div>
+	                    </div>
+                	</c:forEach>
+
+                </div>
             </div>
         </div>
 
