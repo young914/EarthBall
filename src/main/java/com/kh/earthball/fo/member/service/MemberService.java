@@ -18,6 +18,8 @@ public interface MemberService {
   int updateMailAuth(Member m) throws Exception;
   
   int emailAuthFail(String memberId) throws Exception;
+  
+  int mailAuthStatus(String memberId);
 
 
 }

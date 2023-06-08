@@ -62,10 +62,16 @@
     </update>
     
     <select id="emailAuthFail" parameterType="java.lang.String" resultType="java.lang.Integer">
-    	SELECT(*)
+    	SELECT *
     	    FROM MEMBER
     	 WHERE MEMBER_ID = #{memberId}
     	       AND MAIL_AUTH = 1  
+    </select>
+    
+    <select id="mailAuthStatus" parameterType="java.lang.String" resultType="java.lang.Integer">
+    	SELECT MAIL_AUTH
+    	   FROM MEMBER
+    	WHERE MEMBER_ID = #{memberId}
     </select>
 
 </mapper>
