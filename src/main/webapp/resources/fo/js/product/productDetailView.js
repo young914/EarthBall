@@ -58,7 +58,7 @@ function like(){
         url : "insert.like",
         type : "get",
         data : {productNo : productNo,
-        		memberId : memberId},
+                memberId : memberId},
         success : function(result){
 
             if(result == "success"){

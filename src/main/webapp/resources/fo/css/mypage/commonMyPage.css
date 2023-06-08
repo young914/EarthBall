@@ -8,6 +8,9 @@
     background: #146C94;
     margin: 0 auto;
 }
+.sidebar{
+    height: 450px;
+}
 .menu1{
     list-style: none;
     padding: 0;
