@@ -63,4 +63,9 @@ public class StoreServiceImpl implements StoreService {
     return storeMapper.selectFilterListR(regionNo);
   }
 
+  @Override
+  public ArrayList<Store> selectNameSearch(String searchValue) {
+    return storeMapper.selectNameSearch(searchValue);
+  }
+
 }

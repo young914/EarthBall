@@ -28,6 +28,8 @@ public interface StoreService {
   
   ArrayList<Store> selectFilterListR(int regionNo);
 
+  ArrayList<Store> selectNameSearch(String searchValue);
+
 //  // 매장 상세 조회
 //  Store selectStoreDetail(int storeNo);
 //
