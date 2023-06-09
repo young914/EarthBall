@@ -104,5 +104,12 @@
           AND CATEGORY_TEMPLATE_NO = #{categoryTemplateNo}
     </select>
 
+    <update id="deleteConfirm" parameterType="com.kh.earthball.fo.challenge.vo.ChConfirm">
+        UPDATE TB_CH_CONFIRM
+           SET STATUS = 'N'
+         WHERE CH_CON_NO = #{chConNo}
+           AND MEMBER_ID = #{memberId}
+    </update>
+
 
 </mapper>

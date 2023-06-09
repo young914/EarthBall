@@ -71,10 +71,13 @@
       <div class="text_class_1">
         <h1 style="color: #146C94; font-weight: 800">${chConfirm.chConTitle}</h1>
       </div>
-      <div class="text_class_2">
-        <button class="btn_3" onclick="confirm_update(${chConfirm.chConNo});">수정</button>
-        <button class="btn_3">삭제</button>
-      </div>
+
+      <c:if test="${loginUser.memberId eq chConfirm.memberId}"> <!-- 로그인한 유저와 인증 게시글 작성자 일치 할 때만 보이는 버튼 -->
+        <div class="text_class_2">
+          <button class="btn_3" onclick="confirm_update(${chConfirm.chConNo});">수정</button>
+          <button class="btn_3" onclick="confirm_delete(${chConfirm.chConNo});">삭제</button>
+        </div>
+      </c:if>
     </div>
     <br>
     <hr>
@@ -239,12 +242,12 @@
     <!-- 탬플릿 폼 안 영역 끝-->
   </div>
 
-
+<!--
   <div class="btn_div">
     <button class="btn_1" onclick="confirm_challenge();">챌린지 인증</button>
     <button class="btn_1" onclick="javascript:history.go(-1);">인증 취소</button>
   </div>
-
+-->
 
   <script>
 
@@ -355,6 +358,41 @@
               , error: function () {
               }
           });
+      }
+
+
+
+      function confirm_delete(chConNo) {
+
+        // TB_CH_CONFIRM 챌린지 인증 정보 넘기기
+        let chNo = $("input[type=hidden][name=chNo]").val();            // 챌린지 일련번호
+        let chConTitle = $("input[type=text][name=chConTitle]").val();      // 챌린지 인증 제목
+        let memberId = $("input[type=hidden][name=memberId]").val();       // 회원아이디
+
+        let deleteConfirmInfo = { // 인증 기본 정보
+          chNo: chNo
+          , chConNo : chConNo
+          , chConTitle: chConTitle
+          , memberId: memberId
+        }
+
+        $.ajax({
+           url : "/delete.con"
+          , type : "post"
+          , data: JSON.stringify(deleteConfirmInfo)
+          , contentType: 'application/json'
+          , success : function (result) {
+             if(result > 0) {
+               alert("챌린지 인증 게시글이 삭제되었습니다.");
+               location.href="/listView.con?chNo=" + chNo;
+             } else {
+               alert("챌린지 인증 게시글이 삭제되지 않았습니다.");
+             }
+          }
+          , error : function () {
+             console.log("챌린지 인증 게시글 삭제용 ajax 통신 실패");
+          }
+        });
       }
   </script>
 

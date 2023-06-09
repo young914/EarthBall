@@ -239,4 +239,14 @@ public class ConfirmController {
     return "fo/challenge/confirm/confirmUpdateForm";
   }
 
+  @ResponseBody
+  @PostMapping("/delete.con")
+  public int confirmDelete(@RequestBody ChConfirm chConfirm) {
+
+    log.info("chConfirm 들어옴? : " + chConfirm);
+    confirmService.deleteConfirm(chConfirm);
+
+    return 1;
+  }
+
 }

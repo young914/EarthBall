@@ -8,6 +8,7 @@ import com.kh.earthball.fo.common.vo.PageInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -75,6 +76,15 @@ public class ConfirmServiceImpl implements ConfirmService {
   @Override
   public List<ChDetailInfo> selectDetailInfoList(ChDetailInfoParam detailInfoParam) {
     return confirmMapper.selectDetailInfoList(detailInfoParam);
+  }
+
+  @Override
+  @Transactional
+  public void deleteConfirm(ChConfirm chConfirm) {
+    // 인증 기본 정보는 status 업데이트
+    confirmMapper.deleteConfirm(chConfirm);
+    // 인증 디테일 정보는 모두 딜리트
+    confirmMapper.deleteDetailInfo(chConfirm);
   }
 
 }
