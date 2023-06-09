@@ -84,7 +84,7 @@
 
 						// 날짜관련
 						let createDate = "${ d.dyCreateDate }"; // "2023-06-08"
-						console.log(createDate);
+						// console.log(createDate);
 
 						let year = createDate.split("-")[0]; // "2023"
 						let month = createDate.split("-")[1]; // "06"
@@ -110,7 +110,7 @@
 
                 <div class="outer2_1">
                     <div class="title">제목: <input type="text" value="${ d.dyBoardTitle }"></div>
-                    <div class="content"><textarea id="dyBoardContent" required readonly>${ d.dyBoardContent }</textarea></div>
+                    <div class="content"><textarea id="dyBoardContent"  readonly>${ d.dyBoardContent }</textarea></div>
                 </div>
 
             </div>
