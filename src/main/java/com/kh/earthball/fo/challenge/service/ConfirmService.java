@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface ConfirmService {
 
-  int insertConfirm(ChConfirm chConfirm);
-
+  void insertConfirm(ChConfirm chConfirm);
+  void updateConfirm(ChConfirm chConfirm);
   int insertDetailInfo(ChDetailInfo chDetailInfo);
 
   int selectListCount(int chNo);
