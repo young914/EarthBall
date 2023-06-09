@@ -54,8 +54,8 @@ public class MemberController {
                                   HttpSession session,
                                   ModelAndView mv,
                                   String saveId,
-                                  HttpServletResponse response) {
-    
+                                  HttpServletResponse response,
+                                  String store) {
     // if(memberService.loginUser.(m))
 
 
@@ -82,11 +82,14 @@ public class MemberController {
 
       session.setAttribute("loginUser", loginUser);
       session.setAttribute("alertMsg", "로그인에 성공했습니다.");
-
+      System.out.println(store);
       // System.out.println("연결성공");
-
+     if(store.equals("store")) {
+       mv.setViewName("fo/store/storeListView");
+     }
+     else {
       mv.setViewName("redirect:/");
-
+     }
     } else {
 
       // System.out.println("연결 실패");
@@ -112,8 +115,8 @@ public class MemberController {
 
   // 로그인 기능
   @RequestMapping("loginForm.me")
-  public String loginFrom() {
-
+  public String loginFrom(String store,Model model) {
+    model.addAttribute("store",store);
     return "fo/member/loginForm";
   }
 

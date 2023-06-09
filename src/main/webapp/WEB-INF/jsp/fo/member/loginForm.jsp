@@ -67,21 +67,20 @@
     <div class="login-wrapper">
         <h2>지구공</h2>
         <form  id="login-form"  action="login.me"  method="post">
-        
-			            <input type="text" id="memberId" name="memberId" placeholder="아이디를 입력해주세요">
-			            
-			            <input type="password" id="memberPwd" name="memberPwd" placeholder="비밀번호를 입력해주세요">
-			            
-			            <label for="remember-check">
-			                <input type="checkbox" id="remember-check">아이디 저장하기
-			                <input type="checkbox" id="request-id">로그인 유지
-			            </label>
-			            
-			            <input type="submit" value="Login">
-        
+			<input type="hidden" name="store" value="${store}">
+			<input type="text" id="memberId" name="memberId" placeholder="아이디를 입력해주세요">
+			
+			<input type="password" id="memberPwd" name="memberPwd" placeholder="비밀번호를 입력해주세요">
+			
+			<label for="remember-check">
+				<input type="checkbox" id="remember-check">아이디 저장하기
+				<input type="checkbox" id="request-id">로그인 유지
+			</label>
+			
+			<input type="submit" value="Login">
+
         </form>
     </div>
-    
 </body>
 </html>
 		

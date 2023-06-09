@@ -32,11 +32,15 @@ html, body{
 
 #filterStore{
     padding: 15px 32px; height: 30%;
+    z-index: 1000;
 }
-
+#backToMain{
+    display: grid; 
+    grid-template-columns: 30%;
+}
 #backIcon{
 
-    width: 30%;
+    width: 100%;
     margin: 0px;
     font-size: 10px;
     color: #5085BB;
@@ -48,6 +52,7 @@ html, body{
 #backIcon span{
     font-size: 20px;
 }
+
 .header {
     margin-bottom: 20px;
     font-size: 40px
@@ -59,6 +64,11 @@ html, body{
     margin: 5px;
     width: 98%;
     margin-right: 20px;
+}
+
+#dropClasificarFilters{
+    width: 100%; 
+    border-radius: 10px;
 }
 
 .dropdown-menu{
@@ -105,8 +115,27 @@ hr{
 }
 
 #searchResult{
-    padding: 15px 32px;
+    font-size: 19px;
 }
+
+#likeList{
+    justify-self: end;
+    font-size: 16px;
+    border-radius: 25px;
+    width: 100%;
+    height: 100%;
+    background-color: #6c757d;;
+    text-align: center;
+    color: white;
+    padding: 3px;
+}
+
+
+#likeList>i{
+    color:#ff0000;
+    font-size: 18px;
+}
+
 .btn{
     width: 100%;
 }
@@ -205,20 +234,47 @@ hr{
         background-color: #333;
         color: #fff;
     }
+    
+    .like-btn {
+        transition:  0.3s ease;
+    }
+
+    .like-btn:hover {
+        color: #e87272; /* 호버 시 배경색을 빨간색으로 변경 */
+        
+    }
+
+    .like-btn.clicked {
+        color: #ff0000; /* 클릭 시 배경색을 빨간색으로 유지 */
+        transform: translateY(-5px); /* 클릭 시 i 태그가 위로 5px 이동 */
+        
+    }
+    .like-btn.active-color {
+        color : #ff0000;
+    }
 
 
 
 </style>
 </head>
 <body>
+    <c:if test="${ not empty alertMsg }">
+        <script>
+            alert("${alertMsg}");
+        </script>
+        <c:remove var="alertMsg" scope="session"/>
+    </c:if>
+
     <!-- 지도부분 -->
     <div id="map"></div>
  
     <!-- 사이드바 -->
     <div id="mySidebar" class="sidebar">
-        <div id="filterStore" style="z-index: 1000;">
-            <div id="backIcon" onclick="backZigu()">
-                <i class="xi-backspace xi-2x" ></i> <span>지구샵가기</span>
+        <div id="filterStore">
+            <div id="backToMain">
+                <div id="backIcon" onclick="backZigu()">
+                    <i class="xi-backspace xi-2x" ></i> <span>지구샵가기</span>
+                </div>
             </div>
             <div class="header">
                 <span>친환경 매장찾기</span>
@@ -228,7 +284,7 @@ hr{
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropClasificarFilter">
                         지역 검색
                     </button>
-                    <ul class="dropdown-menu" style="width: 100%; border-radius: 10px;">
+                    <ul class="dropdown-menu" id="dropClasificarFilters">
                         <li><a class="dropdown-item" onclick="regionSearch(event)">지역 검색</a></li>
                         <li><a class="dropdown-item" onclick="nameSearch(event);">주소/매장명 검색</a></li>
                     </ul>
@@ -264,8 +320,22 @@ hr{
 
         <div style="overflow-y: scroll; position:relative; height: 65%;">
             <hr>
-            <div id="searchResult">
-                
+            <div style="display: grid; grid-template-columns: 70% 30%; padding: 15px 32px;">
+                <div id="searchResult">
+                    
+                </div>
+                <c:choose>
+                    <c:when test="${empty loginUser}">
+                        <div id="likeList" onclick="goLoginForm();">
+                            <i class="xi-heart xi-2x"></i><span>찜 매장보기</span>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div id="likeList" onclick="likeListView();">
+                            <i class="xi-heart xi-2x"></i><span>찜 매장보기</span>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
             </div>
             <hr>
             <div id="store-list-area">
@@ -562,13 +632,16 @@ hr{
 				
 				 // 동적으로 리스트 요소 생성
                 resultStr += "<div class='searchList " + i + "' data-storelat='" + storeList[i].storeLat + "' data-storelon='" + storeList[i].storeLon + "'>"
-                                    +    "<span class='storeTitle'>" + storeList[i].storeName + "</span> <br>"
-                                    +    "<span class='storeInfo'>" + storeList[i].storeAddress + "</span> <br>"
-                                    +    "<span class='storeInfo'>" + storeList[i].storePhone + "</span> <br>"
-                                    +    "<span class='storeInfo'>영업시간 " + storeList[i].businessHours + "</span>"
-                                    +    "<i class='xi-heart xi-2x' style='width: 20px;'></i>"
-                                    + "</div>";
-                        
+                            +    "<span class='storeTitle'>" + storeList[i].storeName + "</span> <br>"
+                            +    "<span class='storeInfo'>" +    "<i class='xi-location-arrow' style='width: 20px;'></i>" + storeList[i].storeAddress + "</span> <br>"
+                            +    "<span class='storeInfo'>" +    "<i class='xi-call ' style='width: 20px;'></i>" + storeList[i].storePhone + "</span> <br>"
+                            +    "<span class='storeInfo'> " +     "<i class='xi-time-o' style='width: 20px;'></i>영업시간 " + storeList[i].businessHours + "</span>"
+                            +    "<div class='detail-info' style='display: none;'>"
+                            +        "<p>" + "<i class='xi-comment-o' style='width: 20px;'></i>" + storeList[i].storeInfo + "</p>"
+                            +        "<img src='이미지 URL' alt='이미지'>"
+                            +        "<i class='xi-heart xi-2x like-btn' style='width: 20px;'></i>"
+                            +    "</div>"
+                            + "</div>";
 			}
 			
 			$("#store-list-area").html(resultStr);
@@ -611,7 +684,7 @@ hr{
             let currentPage= showList(storeList, 1);
             
             let listCount = storeList.length;
-    
+
             $("#paging-area").on("click", ".paging-btn", function() {
                 currentPage = showList(storeList, Number($(this).text()));
             });
@@ -721,6 +794,9 @@ hr{
             $("#store-list-area").on("click", ".searchList", function() {
                 let index = $(this).attr("class").split(" ")[1];
 
+                 // 다른 div 숨기기
+                $(".searchList").not(this).find(".detail-info").hide();
+
                 if (isClosed[index]) { // 닫혀있음
                     // 다른 창 다 닫기
                     overlayList.forEach(function(item, idx) {
@@ -732,11 +808,31 @@ hr{
 
                     var moveLatLon = new kakao.maps.LatLng(storeList[index].storeLat, storeList[index].storeLon);
                     map.panTo(moveLatLon);
+
+                     // 상세 정보, 이미지 및 좋아요 버튼을 보이도록 함
+                    $(this).find(".detail-info").show();
                 } else { // 열려있음
                     overlayList[index].setMap(null);
+
+                    // 상세 정보, 이미지 및 좋아요 버튼을 숨김
+                    $(this).find(".detail-info").hide();
                 }
 
                 isClosed[index] = !isClosed[index];
+            });
+            $("#store-list-area").on("click", ".like-btn", function(event) {
+                event.stopPropagation();
+
+                var $button = $(this);
+                
+                if ($button.hasClass("clicked")) {
+                    $button.removeClass("clicked");
+                } else {
+                    $button.addClass("clicked");
+                    setTimeout(function() {
+                    $button.removeClass("clicked");
+                    }, 200);
+                }
             });
         }
 
@@ -773,6 +869,14 @@ hr{
 
         function backZigu(){
             location.href = "home";
+        }
+
+        function goLoginForm(){
+            console.log("눌려");
+            location.href = "loginForm.me?store="+ "store";
+        }
+        function likeListView(){
+            location.href = "likeListView.me";
         }
     </script>
 </body>
