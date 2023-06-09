@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Insert title here</title>
+    <title>EcoDiary</title>
     <jsp:include page="/WEB-INF/jsp/fo/common/common.jsp"/>
     <link rel="stylesheet" href="/resources/fo/css/diary/diaryEnrollForm.css">
 
@@ -15,24 +15,21 @@
 
 		<div id="container">
 		    <!-- 화면  -->
-		    <!--
-		    <form id="enroll-form" action="diaryInsert.bo" method="post" enctype="multipart/form-data">
-		     -->
-.
 				<div class="outer1_1">
 					 <div class="detail_header">
 			               	<div class="photo"><img src="image/bono.jpg"></div>
-			               <div class="content" name="dyBoardWriter" readonly ><div>${ loginUser.memberId}</div></div>
+			               <div  class="content"  id="dyBoardWriter"  >${ loginUser.memberId} </div>
 			         </div>
+			   	</div>
+
 
 		    <div id="outer1">
 		        <div id="a">
 		            <div class="b" >
-		                <input type="text" id="" style="width : 35px"  maxlength="4" ><span id="year"></span>년
-		                <input type="text" id="" style="width : 10px;" maxlength="2"   ><span id="month"></span>월
-
-		                <input type="text" id="" style="width : 10px;" maxlength="2"  ><span id="date"></span>일
-		                <input type="text" id="" style="width : 10px;" maxlength="1"  ><span id="day"></span>
+		                <span id="year"></span>년
+		                <span id="month"></span>월
+		                <span id="date"></span>일
+		                <span id="day"></span>요일
 		            </div>
 
 		            <div id="c">
@@ -65,6 +62,9 @@
 		            </div>
 		        </div>
 
+
+		    <input type="hidden" id="weather" value=""> <!-- 날씨 상태값 -->
+
 		        <div id="draw1">
 		            <canvas id="jsCanvas" class="canvas" name="file" required></canvas>
 		        </div>
@@ -92,7 +92,6 @@
 		                <button type="button" id="jsMode">채우기</button>
 		                <button type="button" onclick="colorChange('white')">지우개</button>
 		                <button type="button" onclick="clearAll()">전체지우기</button>
-		                <button type="button" onclick="">그림완료</button>
 		            </div>
 
 		        </div>
@@ -100,15 +99,16 @@
 		    </div>
 
 		    <div class="outer2">
+		    <br>
 		        <div class="title">제목: <input type="text" id="dyBoardTitle" required></div>
 		        <div class="content"><textarea id="dyBoardContent" required ></textarea></div>
 		    </div>
+
 
 		    <div class="submit_btn1">
 		        <button type="button" onclick="drawingBtn()">글등록</button>
 		    </div>
 		   </div>
-		<!-- </form> -->
 	</div>
 
 		<script type="text/javascript" src="/resources/fo/js/diary/diary.js"></script>

@@ -3,6 +3,7 @@ package com.kh.earthball.fo.challenge.service;
 import com.kh.earthball.fo.challenge.mapper.FileUpladMapper;
 import com.kh.earthball.fo.challenge.vo.ChaFile;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 
   private final ServletContext servletContext;
   private final ResourceLoader resourceLoader;
-  private final String DEFAULT_FILE_PATH = "/resources/upload";
+  private final String DEFAULT_FILE_PATH = "/resources/fo/upload";
   private final FileUpladMapper fileUpladMapper;
 
   public FileUploadServiceImpl(
@@ -42,9 +43,12 @@ public class FileUploadServiceImpl implements FileUploadService {
     try {
       File file = new File(
           servletContext.getRealPath("/") + filePath);
+      File savefile = new File(
+          "C:/earthball/workspace/earthball/src/main/webapp" + filePath);
 
       Files.createDirectories(Paths.get(file.getParent()));
       multipartFile.transferTo(file);
+      FileUtils.copyFile(file, savefile);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

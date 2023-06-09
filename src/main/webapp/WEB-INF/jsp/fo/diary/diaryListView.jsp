@@ -16,7 +16,7 @@
 
 		<jsp:include page="/WEB-INF/jsp/fo/common/header.jsp"/>
 
-		<div id="container">
+		<div class="whole">
 		    <!-- 화면  -->
 		    <div class="outer">
 		        <div class="head">
@@ -35,7 +35,7 @@
 		        </div>
 
 		        <div class="list-area">
-
+					<c:forEach var="d" items="${ list }">
 		            <div class="thumbnail">
 		                <div class="thumbnail1">
 		                    <div class=a>
@@ -44,17 +44,24 @@
 		                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
 		                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
 		                        </svg>
-		                        <div>30</div>
+		                        <div>${ d.dyCount }</div>
 		                    </div>
-		                    <img src="./image/bono.jpg">
+
+		                    <div class="imgBorder">
+			                    <img src="${ d.changeName }">
+			                    <input type="hidden"  class="bno" value="${ d.dyBoardNo }">
+		                    </div>
 		                </div>
-		                <div class="title2">일기제목</div>
+		                <div class="title2">${ d.dyBoardTitle }
+		                 	 <input type="hidden"  class="bno" value="${ d.dyBoardNo }">
+		                </div>
+
 		                <div class="thumbnail2">
 		                    <div>
 		                        <div class="photo" style="margin-right: 10px;"><img src="image/bono.jpg"></div>
 		                        <div class="content">
-		                            <div>쥬쥬</div>
-		                            <div>2023-05-30</div>
+		                            <div>${ d.dyBoardWriter }</div>
+		                            <div>${ d.dyCreateDate }</div>
 		                        </div>
 		                        <div class="icon1">
 		                            <div style="padding: 0; height: 22px;">
@@ -70,7 +77,22 @@
 		                    </div>
 		                </div>
 		            </div>
+		          	</c:forEach>
 		          </div>
+
+
+		                <script>
+		                	$(function() {
+		                		 $('.imgBorder, .title2').click(function() {
+		                			 let bno = $(this).children(".bno").val();
+
+		                			 //console.log(bno);
+
+		                			location.href = "diaryDetailView.bo?bno=" +bno ;
+		                		 });
+		                	});
+
+		                </script>
 
 		            <!--  로그인한 사용자만 보이는 글작성 버튼 -->
 		            <c:if test="${ not empty loginUser }">
@@ -80,33 +102,33 @@
 		            </c:if>
 		        </div>
 
-		        <div id="page">
-		            <div class="page_btn" align="center">
+		        <div id="page1">
+		            <div class="page_btn1">
 		                <ul class="pagination">
 
 		                  <c:choose>
 		                		<c:when test="${ pi.currentPage eq 1 }">
-		                		<li> <a href="#" class="first disabled" >처음 페이지</a> </li>
-		                    	<li> <a href="#" class="arrow_left disabled" > << </a>  </li>
+		                		<li class="disabled"> <a href="#" class="first"  >처음 페이지</a> </li>
+		                    	<li class="disabled"> <a href="#" class="arrow_left " > << </a>  </li>
 		                		</c:when>
 		                		<c:otherwise>
-		                		<li> <a href="diaryInsert.bo?cPage=${ pi.startPage }" class="first" >처음 페이지</a> </li>
-		                    	<li> <a href="diaryInsert.bo?cPage=${ pi.currentPage - 1 }" class="arrow_left" > << </a>  </li>
+		                		<li> <a href="diaryListView.bo?cPage=${ pi.startPage }" class="first" >처음 페이지</a> </li>
+		                    	<li> <a href="diaryListView.bo?cPage=${ pi.currentPage - 1 }" class="arrow_left" > << </a>  </li>
 		                		</c:otherwise>
 		                   </c:choose>
 
 						   <c:forEach var="p" begin="${ pi.startPage}" end="${ pi.endPage}" step="1">
-		                    <li> <a href="diaryInsert.bo?cPage=${ p }" class="num"> ${ p }</a>  </li>
+		                    <li> <a href="diaryListView.bo?cPage=${ p }" class="num"> ${ p }</a>  </li>
 		                  	</c:forEach>
 
 		                  	<c:choose>
 		                		<c:when test="${ pi.currentPage eq pi.maxPage }">
-		                		 <li> <a href="#" class="arrow_right disabled"> >> </a> </li>
-		                    	 <li> <a href="#" class="last disabled">끝 페이지</a> </li>
+		                		 <li class="disabled"> <a href="#" class="arrow_right "> >> </a> </li>
+		                    	 <li class="disabled"> <a href="#" class="last ">끝 페이지</a> </li>
 		                		</c:when>
 		                		<c:otherwise>
-		                		 <li> <a href="diaryInsert.bo?cPage=${ pi.currentPage + 1 }" class="arrow_right"> >> </a> </li>
-		                    	 <li> <a href="diaryInsert.bo?cPage=${ pi.endPage }" class="last">끝 페이지</a> </li>
+		                		 <li> <a href="diaryListView.bo?cPage=${ pi.currentPage + 1 }" class="arrow_right"> >> </a> </li>
+		                    	 <li> <a href="diaryListView.bo?cPage=${ pi.endPage }" class="last">끝 페이지</a> </li>
 		                		</c:otherwise>
 		                   </c:choose>
 		                </ul>

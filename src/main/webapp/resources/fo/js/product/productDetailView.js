@@ -1,51 +1,110 @@
-let quantity = $(".quantity").val();
-let price = parseInt($("#productPrice").children().text());
+// 수량 증가, 감소 및 총 가격 계산
+function plus(){
+    let quantity = $(".quantity").val();
+    let price = parseInt($("#productPrice").children().text());
 
-$(".up").click(function(){
-    quantity++;
-    var total = price * quantity
-    $(".quantity").val(quantity);
-    // id="total"인 태그의 자식 태그 중에 첫번째 span 태그의 text를 total로 바꿔줌
-    $("#total").children().eq(0).text(total);
-});
-$(".down").click(function(){
-    if(quantity == 1){
-        return;
+    if(quantity  > 0){
+        quantity++;
+        var total = price * quantity
+        $(".quantity").val(quantity);
+        $("#total").children().eq(0).text(total);
     }
-    quantity--;
-    var total = price * quantity
-    $(".quantity").val(quantity);
-    $("#total").children().eq(0).text(total);
-});
+}
 
+function minus(){
+    let quantity = $(".quantity").val();
+    let price = parseInt($("#productPrice").children().text());
+
+    if(quantity > 1){
+        quantity--;
+        var total = price * quantity
+        $(".quantity").val(quantity);
+        $("#total").children().eq(0).text(total);
+    }
+}
+
+
+
+// 상품 상세보기, 리뷰, QnA 탭
 function detail(){
     $("#productDetail").show();
     $("#productReview").hide();
-    // $("#productQna").hide();
+    $("#productQna").hide();
 }
 function review(){
     $("#productDetail").hide();
     $("#productReview").show();
-    // $("#productQna").hide();
+    $("#productQna").hide();
 }
 function qna(){
     $("#productDetail").hide();
     $("#productReview").hide();
-    // $("#productQna").show();
+    $("#productQna").show();
 }
 
 // 리뷰 댓글
 function reviewToggle() {
     $(".reviewArea").click(function() {
         $(this).siblings(".replyArea").toggle();
-        // 만약 replyArea가 보이면 reviewArea의 후손중 img의 크기를 300px로 키우고 
-        // replyArea가 안보이면 reviewArea의 후손중 img의 크기를 원래대로 줄인다.
-        if($(this).siblings(".replyArea").css("display") == "block"){
-            $(this).children("img").css("width", "300px");
-        } else {
-            $(this).children("img").css("width", "100px");
+    });
+}
+
+// 찜하기
+function like(){
+	var productNo = $("#productNo").val();
+	var memberId = $("#memberId").val();
+	if(memberId != ""){
+		$.ajax({
+        url : "insert.like",
+        type : "get",
+        data : {productNo : productNo,
+                memberId : memberId},
+        success : function(result){
+
+            if(result == "success"){
+                $(".xi-heart-o").removeClass("xi-heart-o").addClass("xi-heart");
+                $(".unLikeBtn").removeAttr("onclick");
+                $(".unLikeBtn").attr("onclick", "unlike()");
+                $(".likeBtn").removeAttr("onclick");
+                $(".likeBtn").attr("onclick", "unlike()");
+            }
         }
     });
+	}else{
+        // 로그인 페이지로 이동
+        alert("로그인이 필요한 서비스입니다.");
+        location.href = "loginForm.me";
+	}
+}
+// 찜하기 취소
+function unlike(){
+    var productNo = $("#productNo").val();
+    var memberId = $("#memberId").val();
+    if(memberId != ""){
+        $.ajax({
+            url : "delete.like",
+            type : "get",
+            data : {productNo : productNo,
+                    memberId : memberId},
+            success : function(result){
+
+                if(result == "success"){
+                    $(".xi-heart").removeClass("xi-heart").addClass("xi-heart-o");
+                    $(".unLikeBtn").removeAttr("onclick");
+                    $(".unLikeBtn").attr("onclick", "like()");
+                    $(".likeBtn").removeAttr("onclick");
+                    $(".likeBtn").attr("onclick", "like()");
+                }
+            }
+        });
+    }
+}
+
+// 리뷰 별점
+function starRev(){
+    $(".starR").removeClass("on");
+    // 클릭당한 요소의 이전형제요소까지 포함해서 on클래스 추가
+    $(event.target).addClass("on").prevAll().addClass("on");
 }
 
 // 슬라이드

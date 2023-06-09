@@ -55,6 +55,9 @@
 .product-icon{
     display: flex;
 }
+.product-icon>div{
+    margin-right: 10px;
+}
 #dropBox{text-align: right;}
 #dropBox>select{
     width:100px;

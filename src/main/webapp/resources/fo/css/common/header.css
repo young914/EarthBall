@@ -28,7 +28,7 @@ header{
     width: 1200px;
     height: 38px;
     margin: 0 auto;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
 }
@@ -135,6 +135,5 @@ header{
     height: 100%;
     margin: 0 auto;
     margin-bottom: 100px;
-    margin-top: 170px;
-    padding-top: 70px;
+    margin-top: 190px;
 }

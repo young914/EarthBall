@@ -14,8 +14,9 @@
 									  , RECEIVE_NAME
 									  , RECEIVE_PHONE
 									  , POST_CODE
-									  , RECEIVE_ADDRESS
-									  , RECEIVE_DETAIL_ADDRESS
+									  , ADDRESS1
+									  , ADDRESS2
+									  , DELIVERY_COMENT
 									  , PAYMENT_TOKEN)
 								VALUES (#{paymentNo}
 									  , #{memberId}
@@ -28,6 +29,7 @@
 									  , #{postCode}
 									  , #{receiveAddress1}
 									  , #{receiveAddress2}
+									  , #{deliveryComent}
 									  , #{paymentToken})
 </insert>
 

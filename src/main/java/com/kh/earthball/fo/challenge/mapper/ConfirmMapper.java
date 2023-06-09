@@ -13,6 +13,10 @@ public interface ConfirmMapper {
 
   int insertConfirm(ChConfirm chConfirm);
 
+  int updateConfirm(ChConfirm chConfirm);
+
+  int deleteDetailInfo(ChConfirm chConfirm);
+
   int insertDetailInfo(ChDetailInfo chDetailInfo);
 
   int selectListCount(int chNo);

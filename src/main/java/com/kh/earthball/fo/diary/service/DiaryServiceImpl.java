@@ -25,13 +25,16 @@ public class DiaryServiceImpl  implements DiaryService {
   }
 
   @Override
-  public ArrayList<Diary> selectList(PageInfo pi) {
-    return diaryMapper.selectList( pi);
+  public ArrayList<Diary> selectList(PageInfo pi ) {
+
+    int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+    int limit = pi.getBoardLimit();
+
+    RowBounds rowBounds = new RowBounds(offset, limit);
+
+    return diaryMapper.selectList(rowBounds);
   }
 
-  public List<Diary> getDiarys(int offset, int limit) {
-    return diaryMapper.selectDiarys(new RowBounds(offset, limit));
-}
 
   @Override
   public int insertDiary(Diary d) {
@@ -41,14 +44,14 @@ public class DiaryServiceImpl  implements DiaryService {
 
   @Override
   public int increaseCount(int dyBoardNo) {
-    // return diaryMapper.increaseCount(dyBoardNo);
-    return 0;
+      return diaryMapper.increaseCount(dyBoardNo);
+
   }
 
   @Override
   public Diary selectDiary(int dyBoardNo) {
-    // return diaryMapper.selectDiary(dyBoardNo);
-    return null;
+    return diaryMapper.selectDiary(dyBoardNo);
+
   }
 
   @Override

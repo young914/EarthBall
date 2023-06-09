@@ -19,4 +19,6 @@ public interface MemberMapper {
   int updateMailAuth(Member m);
   
   int emailAuthFail(String memberId);
+  
+  int mailAuthStatus(String memberId);
 }
