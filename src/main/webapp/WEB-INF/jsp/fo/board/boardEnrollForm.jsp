@@ -21,7 +21,7 @@
             float: right;
         }
 
-        #post_subject {
+        #post_title, #id {
             font-size: 20px;
     border: none;
     border-bottom: 1px solid rgba(128, 128, 128, 0.3);
