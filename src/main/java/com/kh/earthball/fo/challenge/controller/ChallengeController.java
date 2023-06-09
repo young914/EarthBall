@@ -59,6 +59,19 @@ public class ChallengeController {
   public String categoryChoice_chall(Model model) {
     List<Category> categoryList = categoryService.selectCategoryList();
 
+    for(Category category : categoryList) {
+      // 카테고리 이름
+      String categoryName = category.getCategoryName();
+
+      // 카테고리 이름과 일치하는 그룹코드 가져오기
+      //String grpCode = categoryService.selectGrpCode(categoryName);
+
+      // 카테고리 이름에 해당하는 코드네임들 가져오기
+      List<Code> codeList = categoryService.selectCodeList(categoryName);
+      category.setCodeList(codeList);
+      log.info("codeList에 뭐 들음? : " + codeList);
+    }
+
     log.info("categoryList에 뭐 들음? : " +  categoryList);
     model.addAttribute("categoryList", categoryList);
     return "fo/challenge/challenge/challengeCategoryChoice";

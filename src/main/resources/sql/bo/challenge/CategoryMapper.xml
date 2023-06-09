@@ -44,4 +44,21 @@
          WHERE CATEGORY_NO = #{categoryNo}
     </update>
 
+    <select id="selectGrpCode" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT GRP_CODE
+        FROM TB_GRP_CODE
+        WHERE GRP_CODE_NAME = #{grpCodeName}
+    </select>
+
+    <select id="selectCodeList" parameterType="java.lang.String" resultType="com.kh.earthball.bo.challenge.vo.Code">
+        SELECT C.CODE_NAME
+             , C.CODE
+             , C.GRP_CODE
+        FROM TB_CODE C
+        WHERE GRP_CODE = (SELECT GRP_CODE
+                          FROM TB_GRP_CODE GC
+                          WHERE GC.GRP_CODE_NAME = #{categoryName})
+          AND STATUS ='Y'
+    </select>
+
 </mapper>

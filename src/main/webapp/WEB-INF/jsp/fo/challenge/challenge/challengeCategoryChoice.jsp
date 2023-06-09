@@ -48,7 +48,9 @@
         <div class="choice_one">
             <button class="btn_2" onclick="challengeForm(${category.categoryNo});">${category.categoryName}</button>
             <ul class="choice_one_list">
-                <li>포장재 줄이기</li>
+                <c:forEach var="code" items="${category.codeList}">
+                    <li>${code.codeName}</li>
+                </c:forEach>
             </ul>
         </div>
       </c:forEach>
