@@ -119,7 +119,11 @@
 <script>
 
   function confirmFormBtn(chNo) {
+    if(${ not empty loginUser}) {
       location.href="/insertForm.con?chNo=" + chNo;
+    } else {
+      alert("로그인 후, 이용할 수 있는 서비스입니다.");
+    }
   }
 
   function updateChallenge(chNo) {

@@ -116,7 +116,7 @@
         let codeName = $("input[name=codeName]").val();
         let sortNo = $("input[name=sortNo]").val();
 
-        let regExp = /^[가-힣]{2,}$/;
+        let regExp = /^[가-힣a-zA-Z\s]{2,}$/;
 
         if (!regExp.test(codeName)) {
             alert("코드는 2글자 이상의 한글로 입력해주세요.");

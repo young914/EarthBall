@@ -52,60 +52,7 @@
             </ul>
         </div>
       </c:forEach>
-      <!--
-        <div class="choice_one">
-            <button class="btn_2" onclick="challengeForm_vehicle();">친환경 이동</button>
-            <ul class="choice_one_list">
-                <li>대중교통 이용하기</li>
-                <li>자전거로 출,퇴근 하기</li>
-            </ul>
-        </div>
 
-
-        <div class="choice_one">
-            <button class="btn_2" onclick="challengeForm_resource();">자원 순환</button>
-            <ul class="choice_one_list">
-                <li>쓰레기 줄이기</li>
-                <li>재사용 / 재활용 하기</li>
-                <li>분리수거 하기</li>
-                <li>전자영수증 사용하기</li>
-            </ul>
-        </div>
-
-
-        <div class="choice_one">
-            <button class="btn_2" onclick="challengeForm_nature();">자연 보호</button>
-            <ul class="choice_one_list">
-                <li>나무 심기</li>
-                <li>텃밭 가꾸기</li>
-                <li>동물 보호</li>
-                <li>마스크 끈 잘라서 버리기</li>
-            </ul>
-        </div>
-
-
-        <div class="choice_one">
-            <button class="btn_2" onclick="challengeForm_energy();">에너지 절약</button>
-            <ul class="choice_one_list">
-                <li>엘리베이터나 에스컬레이터 사용 대신 계단 이용하기</li>
-                <li>대기 전력 줄이기</li>
-                <li>물 절약하기</li>
-                <li>디지털 디톡스</li>
-                <li>양치컵 사용하기</li>
-                <li>실내 적정온도 유지하기</li>
-                <li>어스아워</li>
-            </ul>
-        </div>
-
-
-        <div class="choice_one">
-            <button class="btn_2" onclick="challengeForm_etc();">기타</button>
-            <p class="choice_one_list">
-                자신만의 에코챌린지를 자유롭게 작성해 보세요.
-            </p>
-        </div>
-
-        -->
     </div>
     <!-- 선택 버튼 부분 끝 -->
 

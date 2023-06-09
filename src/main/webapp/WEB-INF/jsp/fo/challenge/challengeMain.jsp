@@ -39,8 +39,8 @@
                 <div id="title_text">에코 챌린지</div>
             </div>
 
-            <!-- 로그인 한 사람에게만 보이는 챌린지 오픈 버튼 -->
-            <c:if test="${ not empty loginUser }">
+            <!-- 로그인하고, 이메일 인증 받은 사람에게만 보이는 챌린지 오픈 버튼 -->
+            <c:if test="${ not empty loginUser && loginUser.mailAuth eq '1'}">
                 <div id="title_2">
                     <button class="btn_1" onclick="chall_open();">챌린지 오픈</button>
                 </div>

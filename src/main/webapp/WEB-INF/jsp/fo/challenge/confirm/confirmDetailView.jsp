@@ -72,7 +72,7 @@
         <h1 style="color: #146C94; font-weight: 800">${chConfirm.chConTitle}</h1>
       </div>
 
-      <c:if test="${loginUser.memberId eq chConfirm.memberId}"> <!-- 로그인한 유저와 인증 게시글 작성자 일치 할 때만 보이는 버튼 -->
+      <c:if test="${ not empty loginUser && loginUser.memberId eq chConfirm.memberId}"> <!-- 로그인한 유저와 인증 게시글 작성자 일치 할 때만 보이는 버튼 -->
         <div class="text_class_2">
           <button class="btn_3" onclick="confirm_update(${chConfirm.chConNo});">수정</button>
           <button class="btn_3" onclick="confirm_delete(${chConfirm.chConNo});">삭제</button>
