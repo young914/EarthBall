@@ -31,14 +31,26 @@ html, body{
 }
 
 #filterStore{
-    padding: 32px; height: 30%;
+    padding: 15px 32px; height: 30%;
 }
 
-#filterStore>div{
-    font-size: 40px
+#backIcon{
+
+    width: 30%;
+    margin: 0px;
+    font-size: 10px;
+    color: #5085BB;
+}
+#backIcon:hover{
+    cursor: pointer;
+    color: #5085BB;
+}
+#backIcon span{
+    font-size: 20px;
 }
 .header {
     margin-bottom: 20px;
+    font-size: 40px
 }
 
 .dropdown button {
@@ -205,6 +217,9 @@ hr{
     <!-- 사이드바 -->
     <div id="mySidebar" class="sidebar">
         <div id="filterStore" style="z-index: 1000;">
+            <div id="backIcon" onclick="backZigu()">
+                <i class="xi-backspace xi-2x" ></i> <span>지구샵가기</span>
+            </div>
             <div class="header">
                 <span>친환경 매장찾기</span>
             </div>
@@ -754,6 +769,10 @@ hr{
             $("#searchResult").html("<span>총 </span>" + 0 + "<span>개의 결과</span>");
             $("#paging-area").html("");
             return;
+        }
+
+        function backZigu(){
+            location.href = "home";
         }
     </script>
 </body>
