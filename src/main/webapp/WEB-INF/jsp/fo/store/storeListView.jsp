@@ -31,12 +31,11 @@ html, body{
 }
 
 #filterStore{
-    padding: 15px 32px; height: 30%;
-    z-index: 1000;
+    padding: 10px 32px; height: 30%;
 }
 #backToMain{
     display: grid; 
-    grid-template-columns: 40%;
+    grid-template-columns: 10%;
 }
 #backIcon{
 
@@ -54,7 +53,7 @@ html, body{
 }
 
 .header {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     font-size: 40px
 }
 
@@ -199,25 +198,33 @@ hr{
 .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
 .info .link {color: #5085BB;}
 
+
+.pageN {
+    height: 5%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
 .paging-area {
     display: flex;
     list-style-type: none;
     padding-top: 7px;
-}
-
-.pageN {
-    display: grid;
-    justify-content: center;
+    padding-bottom: 2px;
 }
 
 .paging-btn, .paging-next, .paging-prev{
     display: inline-block;
     margin: 5px;
-    padding: 5px 10px;
-    background-color: #f1f1f1;
+    padding: 5px 8px;
+    background-color: white;
     color: #333;
     text-decoration: none;
     border-radius: 10px;
+    width: 38px;
+    height: 36px;
+    font-size: 16px;
+    border: none;
 }
 .paging-btn-dis{
     display: inline-block;
@@ -225,6 +232,13 @@ hr{
     padding: 5px 10px;
     text-decoration: none;
     border-radius: 10px;
+    width: 38px;
+    height: 36px;
+    font-size: 16px;
+    border: none;
+    background-color: black;
+    color: white;
+    
 }
 .paging-prev:hover {
     background-color: #333;
@@ -275,7 +289,7 @@ hr{
 
     <!-- 사이드바 -->
     <div id="mySidebar" class="sidebar">
-        <div id="filterStore">
+        <div id="filterStore" style="height: 30%;">
             <div id="backToMain" style="padding-left: 10px;">
                 <div id="backIcon" onclick="backZigu()">
                     <img src="/resources/fo/img/logo.png" style="width: 30px; height: 30px;"><div>HOME</div>
@@ -325,7 +339,7 @@ hr{
 
         <div style="overflow-y: scroll; position:relative; height: 65%;">
             <hr>
-            <div style="display: grid; grid-template-columns: 70% 30%; padding: 15px 32px;">
+            <div style="display: grid; grid-template-columns: 70% 30%; padding: 10px 32px;">
                 <div id="searchResult" style="padding-top: 1px;">
                     
                 </div>
@@ -655,7 +669,7 @@ hr{
 			let pagingStr = "";
 			
 			if(currentPage != 1) {
-				pagingStr += "<button class='paging-prev'>&lt;</button>";
+				pagingStr += "<button class='paging-prev'><i class='xi-arrow-left'></i></button>";
 			}
 			
 			for(let p = startPage; p <= endPage; p++) {
@@ -672,7 +686,7 @@ hr{
 			} 
 			
 			if(currentPage != maxPage) {
-				pagingStr += "<button class='paging-next'>&gt;</button>";
+				pagingStr += "<button class='paging-next'><i class='xi-arrow-right'></i></button>";
 			}
 			
 			$("#paging-area").html(pagingStr);
@@ -798,6 +812,15 @@ hr{
             // 리스트에 클릭 걸기
             $("#store-list-area").on("click", ".searchList", function() {
                 let index = $(this).attr("class").split(" ")[1];
+                
+
+                // 상세 정보를 보여줄 요소 찾기
+                var detailInfo = $(this).find(".detail-info")[0];
+                
+                // 상세 정보를 보이도록 함
+                detailInfo.style.display = "block";
+
+                detailInfo.scrollIntoView({ behavior: 'smooth', block: 'end' });
 
                  // 다른 div 숨기기
                 $(".searchList").not(this).find(".detail-info").hide();
@@ -819,7 +842,10 @@ hr{
                 } else { // 열려있음
                     overlayList[index].setMap(null);
                     // 상세 정보, 이미지 및 좋아요 버튼을 숨김
+
                     $(this).find(".detail-info").hide();
+
+
                 }
                 isClosed[index] = !isClosed[index];
             });
