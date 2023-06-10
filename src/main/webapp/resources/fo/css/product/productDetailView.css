@@ -260,10 +260,6 @@
     box-sizing: border-box;
     cursor: pointer;
 }
-/* 별 이모지에 마우스 오버 시 */
-.starR:hover {
-    text-shadow: 0 0 0 #ccc;
-}
 /* 별 이모지를 클릭 후 class="on"이 되었을 경우 */
 .on{
     text-shadow: 0 0 0 red;
