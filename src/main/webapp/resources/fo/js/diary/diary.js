@@ -156,7 +156,6 @@ function clearAll(){
  document.querySelector('#c_1').addEventListener('click', function(event) {
   event.preventDefault();
 
-  console.log("클릭 외않돼?")
   var target = document.querySelector('#c_1');
   if (target.classList.contains('active1')) {
     target.classList.remove('active1');
@@ -250,17 +249,17 @@ var day = now.getDay();
 };
 
 const updateYear = () => {
-    document.getElementById("year").textContent = todayTime().year;
+    document.getElementById("year").textContent = todayTime().year.toString().padStart(4, "0");
 };
 updateYear();
 
 const updateMonth = () => {
-    document.getElementById("month").textContent = todayTime().month;
+    document.getElementById("month").textContent = todayTime().month.toString().padStart(2, "0");
 };
 updateMonth();
 
 const updateDate = () => {
-    document.getElementById("date").textContent = todayTime().date;
+    document.getElementById("date").textContent = todayTime().date.toString().padStart(2, "0");
 };
 updateDate();
 

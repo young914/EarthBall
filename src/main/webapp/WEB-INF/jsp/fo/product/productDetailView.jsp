@@ -18,8 +18,8 @@
 
         <div id="infomationArea">
             <div id="productPhoto">
-                <input type="hidden" id="memberId" value="${ loginUser.memberId }">
-                <input type="hidden" id="productNo" value="${ p.productNo }">
+                <input type="hidden" class="memberId" value="${ loginUser.memberId }">
+                <input type="hidden" class="productNo" value="${ p.productNo }">
             	<c:forEach var="a" items="${ list }">
             		<c:if test="${ a.fileLevel eq 0 }">
                         <img src="/resources/fo/upfiles/${a.changerName}" style="width: 500px; height: 600px;">
@@ -287,28 +287,30 @@
             <!-- 리뷰 -->
             <div id="productReview">
 
-                <div>
-                    <button type="button" class="btn btn-primary insertReview" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        구매평 작성
-                   </button>
-                </div>
+                <c:if test="${ not empty loginUser }">
+                    <div>
+                        <button type="button" class="btn btn-primary insertReview" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            구매평 작성
+                        </button>
+                    </div>
+                </c:if>
 
 
                 <!-- Button trigger modal -->
-                
-                
+
+
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="insert.review" method="post" enctype="multipart/form-data">
+                        <form id="insertReview" enctype="multipart/form-data">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">구매평 작성</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <div><textarea name="" id="reviewContent" maxlength="1000"></textarea></div>
-                                <div><input type="file"></div>
+                                <div><input type="file" name="upfile"></div>
                                 <div class="starRev">
                                     <span class="starR on" onclick="starRev();">★</span>
                                     <span class="starR" onclick="starRev();">★</span>
@@ -319,7 +321,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                                <button type="submit" class="btn btn-primary">작성</button>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="insertReview();">작성</button>
                             </div>
                         </form>
                     </div>
@@ -332,52 +334,51 @@
 
                 <div><button class="onlyPhoto"><i class="xi-library-image-o"></i>포토 구매평만 보기</button></div>
 
-                <div class="review2" onclick="reviewToggle();">
-                    <div class="reviewArea" >
-                        <div class="star2">
-                            <span class="starR1">★</span>
-                            <span class="starR2">★</span>
-                            <span class="starR3">★</span>
-                            <span class="starR4">★</span>
-                            <span class="starR5">★</span>
-                        </div>
-                        <div>
-                            <p>
-                                고체치약 사용하고붜 이제품만 사용하고 있어요. 추가주문 했는데 친환경을 생각하는 브랜드 제품이라 박스도 조립식이고 <br>
-                                종이테이프 사용 및 제품포장도 친환경적이라 매우 좋습니다. 많은 사람들이 이 제품과 브랜드를 알아줬으면 좋겠습니다.
-                            </p>
-                        </div>
-                        <div>
-                            <img src="#">
-                        </div>
-                        <div class="replyCount">댓글 <span>1</span></div>
-                    </div>
-                    <div class="replyArea">
-                        <div class="area1">
-                            <div><img src="#"></div>
-                            <div>
-                                <div>
-                                    <span>관리자</span> <span>2022-01-07</span>
-                                </div>
-                                <div>
-                                    <p>
-                                        안녕하세요. 지구샵입니다. <br>
-                                        댓글을 달아주셔서 감사합니다. <br>
-                                        앞으로도 좋은 제품들 많이 만들어드리겠습니다. <br>
-                                        감사합니다.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="area2">
-                            <div><textarea name="" id="" cols="30" rows="10" placeholder="댓글"></textarea></div>
-                            <div>
-                                <i class="xi-library-image-o"></i>
-                                <button>작성</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+				<c:forEach var="r" items="${ rlist }">
+					<div class="review2" onclick="reviewToggle();">
+	                    <div class="reviewArea" >
+	                        <div class="star2">
+	                        	<c:forEach var="i" begin="1" end="${ r.rating }">
+		                            <span class="starR1">★</span>
+	                            </c:forEach>
+	                        </div>
+	                        <div>
+	                            <p>
+	                                ${ r.reviewContent }
+	                            </p>
+	                        </div>
+	                        <div>
+	                            <img src="/resources/fo/upfiles/${ r.changeName }">
+	                        </div>
+	                        <div class="replyCount">댓글 <span>1</span></div>
+	                    </div>
+	                    <div class="replyArea">
+	                        <div class="area1">
+	                            <div><img src="#"></div>
+	                            <div>
+	                                <div>
+	                                    <span>관리자</span> <span>2022-01-07</span>
+	                                </div>
+	                                <div>
+	                                    <p>
+	                                        안녕하세요. 지구샵입니다. <br>
+	                                        댓글을 달아주셔서 감사합니다. <br>
+	                                        앞으로도 좋은 제품들 많이 만들어드리겠습니다. <br>
+	                                        감사합니다.
+	                                    </p>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <div class="area2">
+	                            <div><textarea name="" id="" cols="30" rows="10" placeholder="댓글"></textarea></div>
+	                            <div>
+	                                <i class="xi-library-image-o"></i>
+	                                <button>작성</button>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+				</c:forEach>
 
             </div>
 

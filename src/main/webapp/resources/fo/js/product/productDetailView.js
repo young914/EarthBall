@@ -51,8 +51,8 @@ function reviewToggle() {
 
 // 찜하기
 function like(){
-	var productNo = $("#productNo").val();
-	var memberId = $("#memberId").val();
+	var productNo = $(".productNo").val();
+	var memberId = $(".memberId").val();
 	if(memberId != ""){
 		$.ajax({
         url : "insert.like",
@@ -78,8 +78,8 @@ function like(){
 }
 // 찜하기 취소
 function unlike(){
-    var productNo = $("#productNo").val();
-    var memberId = $("#memberId").val();
+    var productNo = $(".productNo").val();
+    var memberId = $(".memberId").val();
     if(memberId != ""){
         $.ajax({
             url : "delete.like",
@@ -105,6 +105,45 @@ function starRev(){
     $(".starR").removeClass("on");
     // 클릭당한 요소의 이전형제요소까지 포함해서 on클래스 추가
     $(event.target).addClass("on").prevAll().addClass("on");
+}
+
+// 리뷰 작성
+function insertReview(){
+    var productNo = $(".productNo").val();
+    var memberId = $(".memberId").val();
+    var reviewContent = $("#reviewContent").val();
+    var reviewScore = $(".starR.on").length;
+    var upfile = $("input[name=upfile]")[0].files[0];
+
+
+    console.log(productNo);
+    console.log(memberId);
+    console.log(reviewContent);
+    console.log(reviewScore);
+    console.log(upfile);
+
+    var formData = new FormData();
+
+    formData.append("productNo", productNo);
+    formData.append("memberId", memberId);
+    formData.append("reviewContent", reviewContent);
+    formData.append("reviewScore", reviewScore);
+    formData.append("upfile", upfile);
+
+    $.ajax({
+        url : "insert.review",
+        type : "post",
+        data : formData,
+        processData : false,
+        contentType : false,
+        success : function(result){
+            if(result == "success"){
+                alert("리뷰가 등록되었습니다.");
+                location.reload();
+            }
+        }
+    });
+
 }
 
 // 슬라이드

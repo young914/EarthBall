@@ -67,6 +67,7 @@
       INNER JOIN MEMBER ON QNA.MEMBER_ID = MEMBER.MEMBER_ID
      WHERE QNA.BOARD_NO = #{boardNo} AND QNA.STATUS = 'Y'
 </select>
+
 <!-- 이전글 조회용 쿼리문 -->
 <select id="selectPrevBoard" parameterType="_int" resultType="board">
     SELECT *
@@ -98,7 +99,6 @@
          ORDER BY QNA.BOARD_NO ASC
     ) WHERE ROWNUM = 1
 </select>
-
 
 </mapper>
 
