@@ -69,6 +69,47 @@ public class StoreController {
   }
   
   @ResponseBody
+  @GetMapping(value = "getFilter.st", produces = "application/json; charset=UTF-8")
+  public String getFilterList(String city, String provinces, Model model) {
+    if(provinces.equals("")) {
+      ArrayList<Store> selectFilterList = storeService.selectFilterListC(city);
+      
+      for (int i = 0; i < selectFilterList.size(); i++) {
+        GeocodingApi geocodingApi = new GeocodingApi();
+        double[] coordinates = geocodingApi.getGeocode(selectFilterList.get(i).getStoreAddress());
+        double latitude = coordinates[0];
+        double longitude = coordinates[1];
+        String jibunAddress = geocodingApi.getJibunAddress(latitude, longitude);
+        selectFilterList.get(i).setStoreLat(latitude); // Store 객체에 위도 값 설정
+        selectFilterList.get(i).setStoreLon(longitude); // Store 객체에 경도 값 설정
+        selectFilterList.get(i).setJibunAddress(jibunAddress); // Store 객체에 지번 주소 값 설정
+      }
+      
+    return new Gson().toJson(selectFilterList);
+    }
+    
+    else {
+      int regionNo = storeService.selectRegionNo(city, provinces);
+      
+      ArrayList<Store> selectFilterList = storeService.selectFilterListR(regionNo);
+      
+      for (int i = 0; i < selectFilterList.size(); i++) {
+
+        GeocodingApi geocodingApi = new GeocodingApi();
+        double[] coordinates = geocodingApi.getGeocode(selectFilterList.get(i).getStoreAddress());
+        double latitude = coordinates[0];
+        double longitude = coordinates[1];
+        String jibunAddress = geocodingApi.getJibunAddress(latitude, longitude);
+
+        selectFilterList.get(i).setStoreLat(latitude); // Store 객체에 위도 값 설정
+        selectFilterList.get(i).setStoreLon(longitude); // Store 객체에 경도 값 설정
+        selectFilterList.get(i).setJibunAddress(jibunAddress); // Store 객체에 지번 주소 값 설정
+      }
+      return new Gson().toJson(selectFilterList);
+    }
+  }
+  
+  @ResponseBody
   @GetMapping(value = "getNameSearch.st" , produces = "application/json; charset=UTF-8")
   public String selectNameSearch(String searchValue, Model model ) {
     
@@ -91,55 +132,19 @@ public class StoreController {
     }
     
     return new Gson().toJson(nameSearchList);
-
   }
-  
-  
   
   @ResponseBody
-  @GetMapping(value = "getFilter.st", produces = "application/json; charset=UTF-8")
-  public String getFilterList(String city, String provinces, Model model) {
-    if(provinces.equals("")) {
-      ArrayList<Store> selectFilterList = storeService.selectFilterListC(city);
-      
-      for (int i = 0; i < selectFilterList.size(); i++) {
-
-        GeocodingApi geocodingApi = new GeocodingApi();
-        double[] coordinates = geocodingApi.getGeocode(selectFilterList.get(i).getStoreAddress());
-        double latitude = coordinates[0];
-        double longitude = coordinates[1];
-        String jibunAddress = geocodingApi.getJibunAddress(latitude, longitude);
-
-        selectFilterList.get(i).setStoreLat(latitude); // Store 객체에 위도 값 설정
-        selectFilterList.get(i).setStoreLon(longitude); // Store 객체에 경도 값 설정
-        selectFilterList.get(i).setJibunAddress(jibunAddress); // Store 객체에 지번 주소 값 설정
-        
-        
-      }
-      return new Gson().toJson(selectFilterList);
-      
-    }
-    
-    else {
-      int regionNo = storeService.selectRegionNo(city, provinces);
-      
-      ArrayList<Store> selectFilterList = storeService.selectFilterListR(regionNo);
-      
-      for (int i = 0; i < selectFilterList.size(); i++) {
-
-        GeocodingApi geocodingApi = new GeocodingApi();
-        double[] coordinates = geocodingApi.getGeocode(selectFilterList.get(i).getStoreAddress());
-        double latitude = coordinates[0];
-        double longitude = coordinates[1];
-        String jibunAddress = geocodingApi.getJibunAddress(latitude, longitude);
-
-        selectFilterList.get(i).setStoreLat(latitude); // Store 객체에 위도 값 설정
-        selectFilterList.get(i).setStoreLon(longitude); // Store 객체에 경도 값 설정
-        selectFilterList.get(i).setJibunAddress(jibunAddress); // Store 객체에 지번 주소 값 설정
-      }
-      return new Gson().toJson(selectFilterList);
-    }
-    
+  @PostMapping(value= "likeListView.st", produces = "application/json; charset=UTF-8")
+  public String selectLikeList(String memberId, Model model) {
+    ArrayList<Store> likeList = storeService.selectLikeList(memberId);
+    return "";
   }
   
+  @ResponseBody
+  @PostMapping(value= "storeLike.st", produces = "application/json; charset=UTF-8")
+  public String updateStoreLike(int storeNo, boolean isLiked,Model model) {
+     System.out.println("storeNo : " + storeNo + "isLiked :  " + isLiked);
+    return "";
+  }
 }

@@ -36,7 +36,7 @@ html, body{
 }
 #backToMain{
     display: grid; 
-    grid-template-columns: 30%;
+    grid-template-columns: 40%;
 }
 #backIcon{
 
@@ -127,9 +127,13 @@ hr{
     background-color: #6c757d;;
     text-align: center;
     color: white;
-    padding: 3px;
+    padding: 3px 3px 3px 0px;
 }
 
+#likeList:hover{
+    cursor: pointer;
+    background-color: #5c636d;
+}
 
 #likeList>i{
     color:#ff0000;
@@ -173,85 +177,85 @@ hr{
 }
 
 .openbtn:hover {
-  background-color: #444;
+    background-color: #444;
 }
 
 #sideBtn {
     transition: margin-left .5s;
     
 }
- .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
-    .wrap * {padding: 0;margin: 0;}
-    .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
-    .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
-    .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
-    .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
-    .info .close:hover {cursor: pointer;}
-    .info .body {position: relative;overflow: hidden;}
-    .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
-    .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
-    .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
-    .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
-    .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
-    .info .link {color: #5085BB;}
+.wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+.wrap * {padding: 0;margin: 0;}
+.wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+.wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+.info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+.info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+.info .close:hover {cursor: pointer;}
+.info .body {position: relative;overflow: hidden;}
+.info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+.desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
+.info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
+.info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+.info .link {color: #5085BB;}
 
-    .paging-area {
-        display: flex;
-        list-style-type: none;
-        padding-top: 7px;
-    }
+.paging-area {
+    display: flex;
+    list-style-type: none;
+    padding-top: 7px;
+}
 
-    .pageN {
-        display: grid;
-        justify-content: center;
-    }
+.pageN {
+    display: grid;
+    justify-content: center;
+}
+
+.paging-btn, .paging-next, .paging-prev{
+    display: inline-block;
+    margin: 5px;
+    padding: 5px 10px;
+    background-color: #f1f1f1;
+    color: #333;
+    text-decoration: none;
+    border-radius: 10px;
+}
+.paging-btn-dis{
+    display: inline-block;
+    margin-right: 5px;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 10px;
+}
+.paging-prev:hover {
+    background-color: #333;
+    color: #fff;
+}
+.paging-btn:hover{
+    background-color: #333;
+    color: #fff;
+}
+.paging-next:hover{
+    background-color: #333;
+    color: #fff;
+}
+
+.like-btn {
+    transition:  0.3s ease;
+}
+
+.like-btn:hover {
+    color: #e87272; /* 호버 시 배경색을 빨간색으로 변경 */
     
-    .paging-btn, .paging-next, .paging-prev{
-        display: inline-block;
-        margin: 5px;
-        padding: 5px 10px;
-        background-color: #f1f1f1;
-        color: #333;
-        text-decoration: none;
-        border-radius: 10px;
-    }
-    .paging-btn-dis{
-        display: inline-block;
-        margin-right: 5px;
-        padding: 5px 10px;
-        text-decoration: none;
-        border-radius: 10px;
-    }
-    .paging-prev:hover {
-        background-color: #333;
-        color: #fff;
-    }
-    .paging-btn:hover{
-        background-color: #333;
-        color: #fff;
-    }
-    .paging-next:hover{
-        background-color: #333;
-        color: #fff;
-    }
-    
-    .like-btn {
-        transition:  0.3s ease;
-    }
+}
 
-    .like-btn:hover {
-        color: #e87272; /* 호버 시 배경색을 빨간색으로 변경 */
-        
-    }
+.like-btn.clicked {
+    color: #ff0000; /* 클릭 시 배경색을 빨간색으로 유지 */
+}
 
-    .like-btn.clicked {
-        color: #ff0000; /* 클릭 시 배경색을 빨간색으로 유지 */
-        transform: translateY(-5px); /* 클릭 시 i 태그가 위로 5px 이동 */
-        
-    }
-    .like-btn.active-color {
-        color : #ff0000;
-    }
+.like-btn.clicked:hover{
+    color: #e87272; /* 호버 시 배경색을 빨간색으로 변경 */
+}
+
 
 
 
@@ -261,19 +265,20 @@ hr{
     <c:if test="${ not empty alertMsg }">
         <script>
             alert("${alertMsg}");
+            
         </script>
         <c:remove var="alertMsg" scope="session"/>
     </c:if>
 
     <!-- 지도부분 -->
     <div id="map"></div>
- 
+
     <!-- 사이드바 -->
     <div id="mySidebar" class="sidebar">
         <div id="filterStore">
-            <div id="backToMain">
+            <div id="backToMain" style="padding-left: 10px;">
                 <div id="backIcon" onclick="backZigu()">
-                    <i class="xi-backspace xi-2x" ></i> <span>지구샵가기</span>
+                    <img src="/resources/fo/img/logo.png" style="width: 30px; height: 30px;"><div>HOME</div>
                 </div>
             </div>
             <div class="header">
@@ -321,7 +326,7 @@ hr{
         <div style="overflow-y: scroll; position:relative; height: 65%;">
             <hr>
             <div style="display: grid; grid-template-columns: 70% 30%; padding: 15px 32px;">
-                <div id="searchResult">
+                <div id="searchResult" style="padding-top: 1px;">
                     
                 </div>
                 <c:choose>
@@ -353,7 +358,7 @@ hr{
     </div>
 
     <script>
-
+        console.log('${loginUser}');
         let storeList = []; // [{}, {}, ..]
         let markerList = []; // 각 매장에 대한 마커들 담기
         let overlayList = []; // 각 매장에 대한 오버레이들 담기
@@ -631,18 +636,18 @@ hr{
                 }
 				
 				 // 동적으로 리스트 요소 생성
-                resultStr += "<div class='searchList " + i + "' data-storelat='" + storeList[i].storeLat + "' data-storelon='" + storeList[i].storeLon + "'>"
+                resultStr += "<div class='searchList " + i + "' data-storelat='" + storeList[i].storeLat + "' data-storelon='" + storeList[i].storeLon + "' data-storeno='" + storeList[i].storeNo + "'>"
                             +    "<span class='storeTitle'>" + storeList[i].storeName + "</span> <br>"
                             +    "<span class='storeInfo'>" +    "<i class='xi-location-arrow' style='width: 20px;'></i>" + storeList[i].storeAddress + "</span> <br>"
                             +    "<span class='storeInfo'>" +    "<i class='xi-call ' style='width: 20px;'></i>" + storeList[i].storePhone + "</span> <br>"
                             +    "<span class='storeInfo'> " +     "<i class='xi-time-o' style='width: 20px;'></i>영업시간 " + storeList[i].businessHours + "</span>"
                             +    "<div class='detail-info' style='display: none;'>"
                             +        "<p>" + "<i class='xi-comment-o' style='width: 20px;'></i>" + storeList[i].storeInfo + "</p>"
-                            +        "<img src='이미지 URL' alt='이미지'>"
-                            +        "<i class='xi-heart xi-2x like-btn' style='width: 20px;'></i>"
+                            +        "<img src='이미지 URL'>"
+                            +        "<i class='xi-heart xi-2x like-btn' style='width: 20px; margin-right:10px;'></i>" + "<span id='likesCount'>" + storeList[i].storeLikes + "</span>"
                             +    "</div>"
                             + "</div>";
-			}
+		}
 			
 			$("#store-list-area").html(resultStr);
 			
@@ -796,7 +801,6 @@ hr{
 
                  // 다른 div 숨기기
                 $(".searchList").not(this).find(".detail-info").hide();
-
                 if (isClosed[index]) { // 닫혀있음
                     // 다른 창 다 닫기
                     overlayList.forEach(function(item, idx) {
@@ -811,28 +815,68 @@ hr{
 
                      // 상세 정보, 이미지 및 좋아요 버튼을 보이도록 함
                     $(this).find(".detail-info").show();
+
                 } else { // 열려있음
                     overlayList[index].setMap(null);
-
                     // 상세 정보, 이미지 및 좋아요 버튼을 숨김
                     $(this).find(".detail-info").hide();
                 }
-
                 isClosed[index] = !isClosed[index];
             });
             $("#store-list-area").on("click", ".like-btn", function(event) {
                 event.stopPropagation();
 
+                // button 의 정보들을 가져옴
                 var $button = $(this);
-                
                 if ($button.hasClass("clicked")) {
                     $button.removeClass("clicked");
                 } else {
                     $button.addClass("clicked");
-                    setTimeout(function() {
-                    $button.removeClass("clicked");
-                    }, 200);
                 }
+
+                // button 의 부모 div 의 정보들을 가져옴
+                var $searchList = $button.closest(".searchList");
+
+                // button 의 부모 div 의 정보들을 가져옴
+                var storeNo = $searchList.data("storeno");
+                
+                // 좋아요의 수 가져오기
+                var $likesCount = $searchList.find("#likesCount");
+                var likesCount = parseInt($likesCount.text());
+                
+                // 좋아요 여부 가져오기
+                var isLiked = $button.hasClass("clicked");
+                
+                $.ajax({
+                    url: "storeLike.st",
+                    method: "POST",
+                    data: {
+                        storeNo: storeNo,
+                        isLiked: isLiked
+                    },
+                    success: function(response) {
+                        // 서버로부터 응답을 받은 후 처리할 로직 작성
+                        if (response.success) {
+                            if (isLiked) {
+                                // 좋아요 취소 시
+                                likesCount--;
+                                $button.removeClass("clicked");
+                            } else {
+                                // 좋아요 추가 시
+                                likesCount++;
+                                $button.addClass("clicked");
+                            }
+
+                            // 좋아요 수 업데이트
+                            $storeInfo.find(".like-btn").text(storeLikes);
+                        } else {
+                            // 좋아요 업데이트 실패 시 처리할 로직 작성
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        // AJAX 요청 실패 시 처리할 로직 작성
+                    }
+                });
             });
         }
 
@@ -859,13 +903,13 @@ hr{
             }
         }
         
-        function storeZero(){
+        // function storeZero(){
 
-            $("#store-list-area").html("<div class='noResult'>검색 결과가 없습니다.</div>");
-            $("#searchResult").html("<span>총 </span>" + 0 + "<span>개의 결과</span>");
-            $("#paging-area").html("");
-            return;
-        }
+        //     $("#store-list-area").html("<div class='noResult'>검색 결과가 없습니다.</div>");
+        //     $("#searchResult").html("<span>총 </span>" + 0 + "<span>개의 결과</span>");
+        //     $("#paging-area").html("");
+        //     return;
+        // }
 
         function backZigu(){
             location.href = "home";
@@ -876,8 +920,61 @@ hr{
             location.href = "loginForm.me?store="+ "store";
         }
         function likeListView(){
-            location.href = "likeListView.me";
+            var memberId = `${loginUser.memberId}`;
+            console.log(memberId);
+            $.ajax({
+                url: "likeListView.st",
+                type: "post",
+                data: {
+                    memberId: memberId
+                },
+                success: function(data) {
+                    console.log(data);
+                    var likeList = data.likeList;
+                    var likeListLength = likeList.length;
+                    var html = "";
+                    if(likeListLength == 0){
+                        html += "<div class='noResult'>찜한 매장이 없습니다.</div>";
+                    }else{
+                        for(var i = 0; i < likeListLength; i++){
+                            html += "<div class='searchList " + i + "'>";
+                            html += "<div class='detail-info'>";
+                            html += "<div class='detail-info-img'>";
+                            html += "<img src='resources/images/store/" + likeList[i].storeImg + "' alt='매장 이미지'>";
+                            html += "</div>";
+                            html += "<div class='detail-info-text'>";
+                            html += "<div class='detail-info-title'>" + likeList[i].storeName + "</div>";
+                            html += "<div class='detail-info-address'>" + likeList[i].storeAddress + "</div>";
+                            html += "<div class='detail-info-businessHours'>" + likeList[i].businessHours + "</div>";
+                            html += "<div class='detail-info-like-btn'>";
+                            html += "<button class='like-btn' onclick='likeBtnClick(" + likeList[i].storeId + ")'>";
+                            html += "<i class='far fa-heart'></i>";
+                            html += "</button>";
+                            html += "</div>";
+                            html += "</div>";
+                            html += "</div>";
+                            html += "<div class='searchList-img'>";
+                            html += "<img src='resources/images/store/" + likeList[i].storeImg + "' alt='매장 이미지'>";
+                            html += "</div>";
+                            html += "<div class='searchList-text'>";
+                            html += "<div class='searchList-title'>" + likeList[i].storeName + "</div>";
+                            html += "<div class='searchList-address'>" + likeList[i].storeAddress + "</div>";
+                            html += "<div class='searchList-businessHours'>" + likeList[i].businessHours + "</div>";
+                            html += "</div>";
+                            html += "</div>";
+                        }
+                    }
+                    $("#store-list-area").html(html);
+                    $("#searchResult").html("<span>총 </span>" + likeListLength + "<span>개의 결과</span>");
+                    $("#paging-area").html("");
+                },
+                error: function() {
+                    console.log("에러");
+                }
+            });
+            
         }
+        
     </script>
 </body>
 </html>

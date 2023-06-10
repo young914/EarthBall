@@ -68,4 +68,9 @@ public class StoreServiceImpl implements StoreService {
     return storeMapper.selectNameSearch(searchValue);
   }
 
+  @Override
+  public ArrayList<Store> selectLikeList(String memberId) {
+    return storeMapper.selectLikeList(memberId);
+  }
+
 }

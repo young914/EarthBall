@@ -30,6 +30,8 @@ public interface StoreService {
 
   ArrayList<Store> selectNameSearch(String searchValue);
 
+  ArrayList<Store> selectLikeList(String memberId);
+
 //  // 매장 상세 조회
 //  Store selectStoreDetail(int storeNo);
 //

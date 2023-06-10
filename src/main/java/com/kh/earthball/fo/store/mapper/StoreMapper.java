@@ -30,4 +30,6 @@ public interface StoreMapper {
 
     ArrayList<Store> selectNameSearch(@Param("searchValue") String searchValue);
 
+    ArrayList<Store> selectLikeList(@Param("memberId") String memberId);
+
 }
