@@ -33,7 +33,7 @@
 	            	</c:when>
 	            	<c:otherwise>
 		                <!-- 로그인 후 링크 -->
-		                <div><a href="myPage.me">${loginUser.memberName}님</a></div>
+		                <div>${loginUser.memberName}님</div>
 		                |
 		                <div><a href="logout.me"><i class="xi-power-off"></i></a></div>
 		                |
@@ -46,7 +46,7 @@
 			                </c:otherwise>
 	                	</c:choose>
 	                	|
-	                	<div><a href=""><i class="xi-market"></i></a></div>
+	                	<div><a href="cart.me?memberId=${ loginUser.memberId }"><i class="xi-market"></i></a></div>
 	            	</c:otherwise>
         		</c:choose>
                 <div></div>

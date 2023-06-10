@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org// Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kh.earthball.fo.product.mapper.ReviewMapper">
+
+	<insert id="insertReview" parameterType="com.kh.earthball.fo.product.vo.Review">
+		INSERT INTO REVIEW
+		VALUES (SEQ_REVIEW.NEXTVAL, #{ reviewContent }, SYSDATE, #{ rating }, #{ changeName }, #{ productNo }, #{ memberId })
+	</insert>
+
+	<select id="selectList" parameterType="_int" resultType="com.kh.earthball.fo.product.vo.Review">
+		SELECT REVIEW_NO, REVIEW_CONTENT, CREATE_DATE, RATING, CHANGE_NAME, MEMBER_ID
+		FROM REVIEW
+		WHERE PRODUCT_NO = #{ productNo }
+	</select>
+
+</mapper>
