@@ -350,7 +350,7 @@ hr{
                         </div>
                     </c:when>
                     <c:otherwise>
-                        <div id="likeList" onclick="settingMap();">
+                        <div id="likeList" onclick="likeMap();">
                             <i class="xi-heart xi-2x"></i><span>찜 매장보기</span>
                         </div>
                     </c:otherwise>
@@ -384,8 +384,10 @@ hr{
         });
 
         function settingMap() {
-            console.log("이거는 ? : " + '${loginUser}');
-            console.log("이거는 ? : " + '${loginUser.memberId}');
+            
+            // 지도 지우기 
+            $('#map').empty();
+
             // 2_1. 지도 셋팅 완료
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
                 mapOption = { 
@@ -404,7 +406,7 @@ hr{
                     memberId : memberId
                 },
                 success : function(result) {
-
+                    
                     makeMarker(result, map);
 
                 }, 
@@ -530,14 +532,16 @@ hr{
             if(provinces == "구/군 선택"){
                 provinces = "";
             }
-
+            memberId = '${loginUser.memberId}';
             // 2_2. ajax 로 전체 매장 조회해오기
             $.ajax({
                 url : "getFilter.st",
                 type : "get",
                 data: {
                     city : city,
-                    provinces : provinces
+                    provinces : provinces,
+                    memberId : memberId
+
                 },
                 success : function(result) {
 
@@ -576,12 +580,13 @@ hr{
             storeList = [];
             markerList = []; // 각 매장에 대한 마커들 담기
             overlayList = []; // 각 매장에 대한 오버레이들 담기
-
+            memberId = '${loginUser.memberId}';
             $.ajax({
                 url : "getNameSearch.st",
                 type : "get",
                 data : {
-                    searchValue : searchValue
+                    searchValue : searchValue,
+                    memberId : memberId
                 },
                 success : function(result) {
 
@@ -595,7 +600,6 @@ hr{
                     }
 
                     document.getElementById('map').innerHTML = ""; // 맵 초기화
-
 
                     var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
                         mapOption = { 
@@ -706,7 +710,7 @@ hr{
 
         function makeMarker(storeList, map){
             // return 값 다 담기
-        
+            
             var zoomControl = new kakao.maps.ZoomControl();
             map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
@@ -714,24 +718,36 @@ hr{
             
             let listCount = storeList.length;
 
+            // 이벤트핸들러 중복 제거 해줘야함 아오 이거진짜 개빡치네
+            $("#paging-area").off("click", ".paging-btn");
+            $("#paging-area").off("click", ".paging-prev");
+            $("#paging-area").off("click", ".paging-next");
+            $("#store-list-area").off("click", ".searchList");
+            $("#store-list-area").off("click", ".like-btn");
+
             $("#paging-area").on("click", ".paging-btn", function() {
                 currentPage = showList(storeList, Number($(this).text()));
+                // 여기도 두번 찍힘 
+                console.log("몇번찍히냐");
             });
             $("#paging-area").on("click", ".paging-prev", function() {
                 currentPage = showList(storeList, Number(currentPage) - 1);
+                console.log("몇번찍히냐");
             });
             $("#paging-area").on("click", ".paging-next", function() {
                 currentPage = showList(storeList, Number(currentPage) + 1);
+                console.log("몇번찍히냐");
             });
 
 
             // 2_3. 조회해온 매장 수를 storeCount에 담기
             let storeCount = storeList.length;
+            
             let storeCountStr = "<span>총 </span>" + storeCount + "<span>개의 결과</span>";
             $("#searchResult").html(storeCountStr);
             // 2_3_2. 조회해온 매장 데이터를 storeList에 담기
             for (let i = 0; i < storeList.length; i ++) {
-
+                
                 // 각 매장에 대한 마커 생성                        
                 var imageSrc = '/resources/fo/img/shop.png', // 마커이미지의 주소입니다    
                     imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
@@ -751,7 +767,7 @@ hr{
                 marker.setMap(map);  
 
                 markerList.push(marker);
-
+                
                 // 각 매장에 대한 오버레이 생성
                 var content = 
                     '<div class="wrap">' + 
@@ -803,7 +819,7 @@ hr{
                     } else { // 열려있음
                         overlayList[index].setMap(null);
                     }
-
+                    
                     // 오버레이가 열려있는 경우에만 closeOverlay 함수 호출
                     if (!isClosed[index]) {
                         closeOverlay(index);
@@ -860,6 +876,7 @@ hr{
                 }
                 isClosed[index] = !isClosed[index];
             });
+
             $("#store-list-area").on("click", ".like-btn", function(event) {
                 event.stopPropagation();
 
@@ -895,7 +912,8 @@ hr{
                 
                 // 좋아요 여부 가져오기
                 var isLiked = $button.hasClass("clicked");
-
+                
+                // 왜 두번씩 찍히는거야
                 $.ajax({
                     url: "storeLikes.st",
                     method: "POST",
@@ -927,6 +945,7 @@ hr{
                     }
                 });
             });
+            
         }
 
         function openNav() {
@@ -958,6 +977,49 @@ hr{
         function goLoginForm(){
             alert("로그인 후 이용해주세요.");
             location.href = "loginForm.me?store="+ "store";
+        }
+
+        function likeMap() {
+            
+            storeList = [];
+            markerList = []; // 각 매장에 대한 마커들 담기
+            overlayList = []; // 각 매장에 대한 오버레이들 담기
+
+            // 초기화를 해줘야 하는거같은데 어떻게 해주냐.
+            memberId = '${loginUser.memberId}';
+            $.ajax({
+                url : "getLikeStores.st",
+                type : "get",
+                data : {
+                    memberId : memberId
+                },
+                success : function(result) {
+
+                    storeList = result;
+                    
+                    if(storeList.length == 0){
+                        $("#store-list-area").html("<div class='noResult'>검색 결과가 없습니다.</div>");
+                        $("#searchResult").html("<span>총 </span>" + 0 + "<span>개의 결과</span>");
+                        $("#paging-area").html("");
+                        return;
+                    }
+
+                    document.getElementById('map').innerHTML = ""; // 맵 초기화
+
+                    var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+                        mapOption = { 
+                            center: new kakao.maps.LatLng(storeList[0].storeLat, storeList[0].storeLon),
+                            level: 5
+                        };
+                    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+                    makeMarker(storeList, map);
+
+                },
+                error : function() {
+                    console.log("ajax 통신 실패");
+                }
+            });
         }
         
     </script>
