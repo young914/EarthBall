@@ -473,9 +473,10 @@ hr{
 
         function cityFilter(event){
             var city = $(event.target).text();
+            // 시/도 선택 시 드롭다운 메뉴에 선택한 시/도 표시
             $("#dropCityFilter").text(city);
-              // 시/도 선택 시 검색 버튼 활성화
-
+            
+            // 시/도 선택 시 검색 버튼 활성화
             enableSearchButton();
             
             $.ajax({
@@ -499,7 +500,10 @@ hr{
                 error : function() {
                     console.log("ajax 통신 실패");
                 }
-            })
+            });
+            // 구/군 선택 초기화
+            $("#dropProvinceFilter").text("구/군 선택");
+
         }
 
         function provinceFilter(event){

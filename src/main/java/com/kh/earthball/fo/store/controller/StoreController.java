@@ -1,16 +1,11 @@
 package com.kh.earthball.fo.store.controller;
-
-import java.util.ArrayList;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import java.util.ArrayList;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.kh.earthball.fo.member.service.MemberService;
 import com.kh.earthball.fo.member.vo.Member;
@@ -25,61 +20,34 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 public class StoreController {
-
-  private final StoreService storeService;
   private final MemberService memberService;
-  private final BCryptPasswordEncoder bcryptPasswordEncoder;
+  private final StoreService storeService;
+  
   @PostMapping("storeListView.st")
-  public String loginMember(Member m,
-                                                        HttpSession session,
-                                                        Model model,
-                                                        String saveId,
-                                                        HttpServletResponse response) {
-    System.out.println("여기는 selectList");
-    System.out.println(m);
-    String memberId = m.getMemberId();
-    
-    if (saveId != null && saveId.equals("y")) {
+  public String selectList(Member m, HttpSession session, Model model) {
+      System.out.println("여기는 selectList");
 
-      Cookie cookie = new Cookie("saveId", m.getMemberId());
-      cookie.setMaxAge(24 * 60 * 60);
-
-      response.addCookie(cookie);
-
-    } else {
-
-      Cookie cookie = new Cookie("saveId", m.getMemberId());
-      cookie.setMaxAge(0);
-
-      response.addCookie(cookie);
-    }
-
-    Member loginUser = memberService.loginMember(m);
-
-    
-    if (loginUser != null && bcryptPasswordEncoder.matches(m.getMemberPwd(), loginUser.getMemberPwd())) {
-
+      System.out.println(m);
+      String memberId = m.getMemberId();
+      if (memberId.equals("")) {
+          memberId = "없다!";
+      }
+      Member loginUser = memberService.loginMember(m);
+      // memberId 값을 세션에 저장
+      session.setAttribute("memberId", memberId);
       session.setAttribute("loginUser", loginUser);
-      session.setAttribute("alertMsg", "로그인에 성공했습니다.");
       
+      // 전체 다 가져오기
       ArrayList<Region> regionList = storeService.selectRegion();
 
       // 시/도 만 가져오기
-      
       ArrayList<Region> cityList = storeService.selectCityList();
-      model.addAttribute("memberId", m.getMemberId());
+
+      model.addAttribute("memberId", memberId);
       model.addAttribute("regionList", regionList);
       model.addAttribute("cityList", cityList);
+
       return "fo/store/storeListView";
-     
-    } else {
-
-      // System.out.println("연결 실패");
-
-      model.addAttribute("alertMsg", "아이디 혹은 비밀번호를 다시 확인해주세요");
-      return "fo/member/loginForm";
-    }
-
   }
   
   @ResponseBody
