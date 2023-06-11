@@ -139,4 +139,28 @@
 	    ORDER BY STORE_NO DESC 
 	 	</select>
 	 	
+	 	<insert id="insertStoreLike">
+	 		INSERT INTO STORE_LIKES
+	 		VALUES(SEQ_STORE_LIKES.NEXTVAL
+	 		 , #{memberId}
+	 		 , #{storeNo})
+	 	</insert>
+	 	
+	 	<delete id = "deleteStoreLike">
+	 		DELETE FROM STORE_LIKES 
+	 		WHERE MEMBER_ID = #{memberId} 
+	 		AND STORE_NO = #{storeNo}
+	 	</delete>
+	 	
+	 	<update id = "updateStoreLikesCount">
+	 		UPDATE STORE
+	 		<if test="isLiked">
+	 			SET STORE_LIKES = STORE_LIKES + 1
+	 		</if>
+	 		<if test="!isLiked">
+	 			SET STORE_LIKES = STORE_LIKES - 1
+	 		</if>
+	 		WHERE STORE_NO = #{storeNo}
+	 	</update>
+	 	
 </mapper>

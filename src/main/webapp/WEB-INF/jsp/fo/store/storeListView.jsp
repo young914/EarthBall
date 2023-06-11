@@ -643,8 +643,12 @@ hr{
             let limit = boardLimit;
             
 			let resultStr = "";
-			for(let i = offset; i < (offset + limit); i++) {
-
+			for(let i = offset; i < Math.min(offset + limit, listCount); i++) {
+                var memberId = `${loginUser.memberId}`;
+                var storeNo = storeList[i].storeNo;
+                console.log(memberId);
+                console.log(storeNo);
+                
                 if(i >= listCount) {
                     break;
                 }
@@ -657,11 +661,11 @@ hr{
                             +    "<span class='storeInfo'> " +     "<i class='xi-time-o' style='width: 20px;'></i>영업시간 " + storeList[i].businessHours + "</span>"
                             +    "<div class='detail-info' style='display: none;'>"
                             +        "<p>" + "<i class='xi-comment-o' style='width: 20px;'></i>" + storeList[i].storeInfo + "</p>"
-                            +        "<img src='이미지 URL'>"
-                            +        "<i class='xi-heart xi-2x like-btn' style='width: 20px; margin-right:10px;'></i>" + "<span id='likesCount'>" + storeList[i].storeLikes + "</span>"
+                            // +        "<img src='이미지 URL'>"
+                            +        "<i class='xi-heart xi-2x like-btn' style='width: 20px; margin-right:10px;'></i>" + "<span id='storeLikes'>" + storeList[i].storeLikes + "</span>"
                             +    "</div>"
                             + "</div>";
-		}
+		    }
 			
 			$("#store-list-area").html(resultStr);
 			
@@ -820,6 +824,7 @@ hr{
                 // 상세 정보를 보이도록 함
                 detailInfo.style.display = "block";
 
+                // 스크롤 이동시킴
                 detailInfo.scrollIntoView({ behavior: 'smooth', block: 'end' });
 
                  // 다른 div 숨기기
@@ -867,40 +872,42 @@ hr{
                 var storeNo = $searchList.data("storeno");
                 
                 // 좋아요의 수 가져오기
-                var $likesCount = $searchList.find("#likesCount");
-                var likesCount = parseInt($likesCount.text());
+                var $storeLikes = $searchList.find("#storeLikes");
+                var storeLikes = parseInt($storeLikes.text());
                 
                 // 좋아요 여부 가져오기
                 var isLiked = $button.hasClass("clicked");
                 
+                var memberId = `${loginUser.memberId}`;
+                console.log(memberId);
                 $.ajax({
-                    url: "storeLike.st",
+                    url: "storeLikes.st",
                     method: "POST",
                     data: {
                         storeNo: storeNo,
-                        isLiked: isLiked
+                        isLiked: isLiked,
+                        storeLikes: storeLikes,
+                        memberId: memberId
                     },
-                    success: function(response) {
+                    success: function(data) {
                         // 서버로부터 응답을 받은 후 처리할 로직 작성
-                        if (response.success) {
-                            if (isLiked) {
-                                // 좋아요 취소 시
-                                likesCount--;
-                                $button.removeClass("clicked");
-                            } else {
-                                // 좋아요 추가 시
-                                likesCount++;
-                                $button.addClass("clicked");
-                            }
-
-                            // 좋아요 수 업데이트
-                            $storeInfo.find(".like-btn").text(storeLikes);
+                        console.log(data);
+                        isLiked = data;
+                        if (!isLiked) {
+                            // 좋아요 취소 시
+                            storeLikes--;
+                            $button.removeClass("clicked");
                         } else {
-                            // 좋아요 업데이트 실패 시 처리할 로직 작성
+                            // 좋아요 추가 시
+                            storeLikes++;
+                            $button.addClass("clicked");
                         }
+                        // 좋아요 수 업데이트
+                        $storeLikes.text(storeLikes);
+
                     },
-                    error: function(xhr, status, error) {
-                        // AJAX 요청 실패 시 처리할 로직 작성
+                    error: function() {
+                        console.log("에러발생!!!ㅈ 삐ㅇㅣ용");
                     }
                 });
             });

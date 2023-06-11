@@ -73,4 +73,22 @@ public class StoreServiceImpl implements StoreService {
     return storeMapper.selectLikeList(memberId);
   }
 
+  @Override
+  public int insertStoreLike(int storeNo, String memberId) {
+    System.out.println( "memberId : "  + memberId + " storeNo : " +  storeNo);
+    return (int) storeMapper.insertStoreLike(storeNo, memberId);
+    
+  }
+
+  @Override
+  public int deleteStoreLike(int storeNo, String memberId) {
+    return (int) storeMapper.deleteStoreLike(storeNo, memberId);
+  }
+
+  @Override
+  public int updateStoreLikesCount(int storeNo, int storeLikes, boolean isLiked) {
+    return (int) storeMapper.updateStoreLikesCount(storeNo, storeLikes, isLiked);
+  }
+
+  
 }

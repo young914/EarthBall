@@ -23,7 +23,7 @@ public class StoreController {
   
   @GetMapping("storeListView.st")
   public String selectList(Model model) {
-    
+    System.out.println("selectList");
  // 전체 다 가져오기 
     ArrayList<Region> regionList = storeService.selectRegion();
 
@@ -39,7 +39,7 @@ public class StoreController {
   @ResponseBody
   @GetMapping(value = "getStores.st", produces = "application/json; charset=UTF-8")
   public String getStoreList() {
-     
+    System.out.println("getStoreList");
     ArrayList<Store> list = storeService.selectAllStoreList();
     
     for (int i = 0; i < list.size(); i++) {
@@ -61,7 +61,7 @@ public class StoreController {
   @ResponseBody
   @GetMapping(value = "getCities.st", produces = "application/json; charset=UTF-8")
   public String getCityFilter(String city, Model model) {
-    
+    System.out.println("getCityFilter");
     ArrayList<Region> provincesList = storeService.selectProvincesList(city); 
     
     return new Gson().toJson(provincesList);
@@ -71,6 +71,7 @@ public class StoreController {
   @ResponseBody
   @GetMapping(value = "getFilter.st", produces = "application/json; charset=UTF-8")
   public String getFilterList(String city, String provinces, Model model) {
+    System.out.println("getFilterList");
     if(provinces.equals("")) {
       ArrayList<Store> selectFilterList = storeService.selectFilterListC(city);
       
@@ -112,7 +113,7 @@ public class StoreController {
   @ResponseBody
   @GetMapping(value = "getNameSearch.st" , produces = "application/json; charset=UTF-8")
   public String selectNameSearch(String searchValue, Model model ) {
-    
+    System.out.println("selectNameSearch");
     ArrayList<Store> nameSearchList = storeService.selectNameSearch(searchValue);
     
     if (nameSearchList == null || nameSearchList.isEmpty()) {
@@ -137,14 +138,42 @@ public class StoreController {
   @ResponseBody
   @PostMapping(value= "likeListView.st", produces = "application/json; charset=UTF-8")
   public String selectLikeList(String memberId, Model model) {
+    System.out.println("selectLikeList");
     ArrayList<Store> likeList = storeService.selectLikeList(memberId);
     return "";
   }
   
   @ResponseBody
-  @PostMapping(value= "storeLike.st", produces = "application/json; charset=UTF-8")
-  public String updateStoreLike(int storeNo, boolean isLiked,Model model) {
-     System.out.println("storeNo : " + storeNo + "isLiked :  " + isLiked);
-    return "";
+  @PostMapping(value= "storeLikes.st", produces = "application/json; charset=UTF-8")
+  public boolean updatestoreLikes(int storeNo, boolean isLiked, int storeLikes, String memberId, Model model) {
+    System.out.println("updatestoreLikes");
+    System.out.println("나오나?");
+    System.out.println("storeNo : " + storeNo + " isLiked :  " + isLiked + " storeLikes : " + storeLikes + " memberId : " + memberId);
+
+    if(isLiked == true) {
+      int result1 = storeService.insertStoreLike(storeNo, memberId);
+     System.out.println("result 1 : "  + result1);
+      if(result1 > 0) {
+        int result2 = storeService.updateStoreLikesCount(storeNo, storeLikes, isLiked);
+        System.out.println("result2 : " + result2);
+      }
+      else {
+        System.out.println("변경실패!");
+      }
+      model.addAttribute("isLiked", isLiked);
+      return isLiked;
+      
+    } else {
+      int result1 = storeService.deleteStoreLike(storeNo, memberId);
+      if(result1 > 0) {
+        int result2 = storeService.updateStoreLikesCount(storeNo, storeLikes, isLiked);
+        System.out.println("result2 : " + result2);
+      }
+      else {
+        System.out.println("변경실패!");
+      }
+      model.addAttribute("isLiked", isLiked);
+      return isLiked;
+    }
   }
 }
