@@ -22,8 +22,12 @@ public class StoreController {
   private final StoreService storeService;
   
   @GetMapping("storeListView.st")
-  public String selectList(Model model) {
-    System.out.println("selectList");
+  public String selectList(String memberId, Model model) {
+    System.out.println("여기는 selectList");
+    if(memberId.equals("")) {
+      memberId = "없다!";
+    }
+    System.out.println("memberId는 : " + memberId);
  // 전체 다 가져오기 
     ArrayList<Region> regionList = storeService.selectRegion();
 
@@ -31,6 +35,7 @@ public class StoreController {
     ArrayList<Region> cityList = storeService.selectCityList();
     
     
+    model.addAttribute("memberId", memberId);
     model.addAttribute("regionList", regionList);
     model.addAttribute("cityList", cityList);
     return "fo/store/storeListView";
@@ -38,12 +43,12 @@ public class StoreController {
   
   @ResponseBody
   @GetMapping(value = "getStores.st", produces = "application/json; charset=UTF-8")
-  public String getStoreList() {
-    System.out.println("getStoreList");
+  public String getStoreList(String memberId) {
+    System.out.println("여기는 getStoreList");
     ArrayList<Store> list = storeService.selectAllStoreList();
+    System.out.println("여기는 getStoreList 의 memberId : " + memberId );
     
     for (int i = 0; i < list.size(); i++) {
-
       GeocodingApi geocodingApi = new GeocodingApi();
       double[] coordinates = geocodingApi.getGeocode(list.get(i).getStoreAddress());
       double latitude = coordinates[0];

@@ -393,11 +393,15 @@ hr{
                 };
             var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
             
-            
+            console.log("${memberId}");
+            memberId = "${memberId}";
             // 2_2. ajax 로 전체 매장 조회해오기
             $.ajax({
                 url : "getStores.st",
                 type : "get",
+                data : {
+                    memberId : memberId
+                },
                 success : function(result) {
 
                     makeMarker(result, map);
@@ -857,13 +861,25 @@ hr{
             $("#store-list-area").on("click", ".like-btn", function(event) {
                 event.stopPropagation();
 
+                var memberId = `${loginUser.memberId}`;
+                console.log("memberId 잘찍히나 ? : " + memberId);
+                if (!memberId) {
+                    alert("로그인 후 이용해주세요.");
+                    location.href = "loginForm.me?store="+ "store";
+                    return;
+                }
+
                 // button 의 정보들을 가져옴
                 var $button = $(this);
+
+                
                 if ($button.hasClass("clicked")) {
                     $button.removeClass("clicked");
                 } else {
                     $button.addClass("clicked");
                 }
+
+                
 
                 // button 의 부모 div 의 정보들을 가져옴
                 var $searchList = $button.closest(".searchList");
@@ -877,9 +893,7 @@ hr{
                 
                 // 좋아요 여부 가져오기
                 var isLiked = $button.hasClass("clicked");
-                
-                var memberId = `${loginUser.memberId}`;
-                console.log(memberId);
+
                 $.ajax({
                     url: "storeLikes.st",
                     method: "POST",
@@ -949,7 +963,7 @@ hr{
         }
 
         function goLoginForm(){
-            console.log("눌려");
+            alert("로그인 후 이용해주세요.");
             location.href = "loginForm.me?store="+ "store";
         }
         function likeListView(){

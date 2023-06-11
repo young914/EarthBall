@@ -93,7 +93,7 @@
                     </div>
                 </div>
                 <div class="dropdown">
-                    <span class="dropbtn"><a href="storeListView.st">매장찾기</a></span>
+                    <span class="dropbtn"><a href="storeListView.st?memberId=${ loginUser.memberId }"">매장찾기</a></span>
                 </div>
                 <div class="dropdown">
                     <span class="dropbtn"> <a href="#">고객센터</a> </span>
