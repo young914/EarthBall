@@ -30,8 +30,6 @@ public interface StoreService {
 
   ArrayList<Store> selectNameSearch(String searchValue);
 
-  ArrayList<Store> selectLikeList(String memberId);
-
   int insertStoreLike(int storeNo, String memberId);
 
   int deleteStoreLike(int storeNo, String memberId);
@@ -39,6 +37,8 @@ public interface StoreService {
   int updateStoreLikesCount(int storeNo, int storeLikes, boolean isLiked);
 
   boolean isStoreLiked(String memberId, int storeNo);
+
+  ArrayList<Store> selectLikeStore(String memberId);
 
 
 //  // 매장 상세 조회

@@ -68,10 +68,6 @@ public class StoreServiceImpl implements StoreService {
     return storeMapper.selectNameSearch(searchValue);
   }
 
-  @Override
-  public ArrayList<Store> selectLikeList(String memberId) {
-    return storeMapper.selectLikeList(memberId);
-  }
 
   @Override
   public int insertStoreLike(int storeNo, String memberId) {
@@ -93,6 +89,11 @@ public class StoreServiceImpl implements StoreService {
   @Override
   public boolean isStoreLiked(String memberId, int storeNo) {
     return storeMapper.isStoreLiked(memberId, storeNo);
+  }
+
+  @Override
+  public ArrayList<Store> selectLikeStore(String memberId) {
+    return storeMapper.selectLikeStore(memberId);
   }
   
 }

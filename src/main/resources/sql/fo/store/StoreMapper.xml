@@ -122,23 +122,6 @@
 	ORDER BY STORE_NO DESC
 	 	</select>
 	 	
-	 	<select id="selectLikeList" resultType="com.kh.earthball.fo.store.vo.Store">
- 	    SELECT STORE_NO
-        , STORE_NAME
-        , STORE_ADDRESS
-        , STORE_PHONE
-        , BUSINESS_HOURS
-        , STORE_LIKES
-        , STORE_REGION_NO
-        , STORE_INFO
-        , STATUS
-	    FROM STORE S
-	    JOIN STORE_LIKES SL ON S.STORE_
-	    WHERE STATUS = 'Y'
-	    AND 
-	    ORDER BY STORE_NO DESC 
-	 	</select>
-	 	
 	 	<insert id="insertStoreLike">
 	 		INSERT INTO STORE_LIKES
 	 		VALUES(SEQ_STORE_LIKES.NEXTVAL
@@ -168,4 +151,22 @@
 		  WHERE MEMBER_ID = #{memberId}
 		    AND STORE_NO = #{storeNo}
 		</select>
+		
+		<select id="selectLikeStore" resultType="com.kh.earthball.fo.store.vo.Store">
+	 	    SELECT S.STORE_NO
+		    , S.STORE_NAME
+		    , S.STORE_ADDRESS
+		    , S.STORE_PHONE
+		    , S.BUSINESS_HOURS
+		    , S.STORE_LIKES
+		    , S.STORE_REGION_NO
+		    , S.STORE_INFO
+		    , S.STATUS
+		FROM STORE S
+		JOIN STORE_LIKES SL ON S.STORE_NO = SL.STORE_NO
+		WHERE S.STATUS = 'Y'
+		    AND SL.MEMBER_ID = #{memberId}
+		ORDER BY S.STORE_NO DESC
+	 	</select>
+		
 </mapper>

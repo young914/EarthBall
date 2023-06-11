@@ -21,7 +21,7 @@ public class StoreController {
 
   private final StoreService storeService;
   
-  @GetMapping("storeListView.st")
+  @PostMapping("storeListView.st")
   public String selectList(String memberId, Model model) {
     System.out.println("여기는 selectList");
     if(memberId.equals("")) {
@@ -62,30 +62,6 @@ public class StoreController {
     }
     
     return new Gson().toJson(list);
-  }
-  
-  @ResponseBody
-  @GetMapping(value = "getLikeStores.st", produces = "application/json; charset=UTF-8")
-  public String getLikeStores(String memberId) {
-    System.out.println("여기는 getStoreList");
-    ArrayList<Store> listss = storeService.selectAllStoreList();
-    System.out.println("여기는 getStoreList 의 memberId : " + memberId );
-    
-    for (int i = 0; i < listss.size(); i++) {
-      GeocodingApi geocodingApi = new GeocodingApi();
-      double[] coordinates = geocodingApi.getGeocode(listss.get(i).getStoreAddress());
-      double latitude = coordinates[0];
-      double longitude = coordinates[1];
-      String jibunAddress = geocodingApi.getJibunAddress(latitude, longitude);
-      listss.get(i).setStoreLat(latitude); // Store 객체에 위도 값 설정
-      listss.get(i).setStoreLon(longitude); // Store 객체에 경도 값 설정
-      listss.get(i).setJibunAddress(jibunAddress); // Store 객체에 지번 주소 값 설정
-      
-      boolean liked = storeService.isStoreLiked(memberId, listss.get(i).getStoreNo());
-      listss.get(i).setLiked(liked); // Store 객체에 좋아요 여부 설정
-    }
-    
-    return new Gson().toJson(listss);
   }
   
   @ResponseBody
@@ -176,14 +152,6 @@ public class StoreController {
   }
   
   @ResponseBody
-  @PostMapping(value= "likeListView.st", produces = "application/json; charset=UTF-8")
-  public String selectLikeList(String memberId, Model model) {
-    System.out.println("selectLikeList");
-    ArrayList<Store> likeList = storeService.selectLikeList(memberId);
-    return "";
-  }
-  
-  @ResponseBody
   @PostMapping(value= "storeLikes.st", produces = "application/json; charset=UTF-8")
   public boolean updatestoreLikes(int storeNo, boolean isLiked, int storeLikes, String memberId, Model model) {
     System.out.println("updatestoreLikes");
@@ -212,5 +180,26 @@ public class StoreController {
       model.addAttribute("isLiked", isLiked);
       return isLiked;
     }
+  }
+  
+  @ResponseBody
+  @PostMapping(value = "likeListView.st", produces = "application/json; charset=UTF-8")
+  public String getLikeStore(String memberId) {
+    System.out.println("여기는 getLikeStore");
+    ArrayList<Store> likeStoreList = storeService.selectLikeStore(memberId);
+    for (int i = 0; i < likeStoreList.size(); i++) {
+      GeocodingApi geocodingApi = new GeocodingApi();
+      double[] coordinates = geocodingApi.getGeocode(likeStoreList.get(i).getStoreAddress());
+      double latitude = coordinates[0];
+      double longitude = coordinates[1];
+      String jibunAddress = geocodingApi.getJibunAddress(latitude, longitude);
+      likeStoreList.get(i).setStoreLat(latitude); // Store 객체에 위도 값 설정
+      likeStoreList.get(i).setStoreLon(longitude); // Store 객체에 경도 값 설정
+      likeStoreList.get(i).setJibunAddress(jibunAddress); // Store 객체에 지번 주소 값 설정
+      
+      boolean liked = storeService.isStoreLiked(memberId, likeStoreList.get(i).getStoreNo());
+      likeStoreList.get(i).setLiked(liked); // Store 객체에 좋아요 여부 설정
+    }
+    return new Gson().toJson(likeStoreList);
   }
 }

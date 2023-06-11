@@ -30,8 +30,6 @@ public interface StoreMapper {
 
     ArrayList<Store> selectNameSearch(@Param("searchValue") String searchValue);
 
-    ArrayList<Store> selectLikeList(@Param("memberId") String memberId);
-
     int insertStoreLike(@Param("storeNo") int storeNo, @Param("memberId") String memberId);
 
     int deleteStoreLike(@Param("storeNo") int storeNo, @Param("memberId") String memberId);
@@ -39,6 +37,8 @@ public interface StoreMapper {
     int updateStoreLikesCount(@Param("storeNo") int storeNo, @Param("storeLikes") int storeLikes, @Param("isLiked") boolean isLiked);
 
     boolean isStoreLiked(@Param("memberId") String memberId, @Param("storeNo") int storeNo);
+
+    ArrayList<Store> selectLikeStore(@Param("memberId") String memberId);
 
 
 }

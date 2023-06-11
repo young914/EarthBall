@@ -898,8 +898,6 @@ hr{
                     $button.addClass("clicked");
                 }
 
-                
-
                 // button 의 부모 div 의 정보들을 가져옴
                 var $searchList = $button.closest(".searchList");
 
@@ -941,7 +939,7 @@ hr{
 
                     },
                     error: function() {
-                        console.log("에러발생!!!ㅈ 삐ㅇㅣ용");
+                        console.log("에러발생");
                     }
                 });
             });
@@ -985,11 +983,10 @@ hr{
             markerList = []; // 각 매장에 대한 마커들 담기
             overlayList = []; // 각 매장에 대한 오버레이들 담기
 
-            // 초기화를 해줘야 하는거같은데 어떻게 해주냐.
             memberId = '${loginUser.memberId}';
             $.ajax({
-                url : "getLikeStores.st",
-                type : "get",
+                url : "likeListView.st",
+                type : "post",
                 data : {
                     memberId : memberId
                 },
