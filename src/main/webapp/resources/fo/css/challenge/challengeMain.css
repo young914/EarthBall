@@ -134,7 +134,7 @@
     border-radius: 7px;
     width: 120px;
     padding: 10px 0px;
-    font-size: 15px;
+    font-size: 20px;
     text-decoration: none;
    
     margin-top: 15px;
@@ -235,7 +235,7 @@
 .chall_Tag>ul>li { 
     display:inline-block;
     float: left;
-    margin: 5px;
+    margin: 0 5px;
 }
 
 
@@ -244,9 +244,10 @@
     border: solid 1px #69abce;
     border-radius: 7px;
     width: 200px;
-    height: 50px;
+    height: 35px;
     color: white;
-    font-weight: 700;
+    font-weight: 500;
+    display: block;
 }
 
 

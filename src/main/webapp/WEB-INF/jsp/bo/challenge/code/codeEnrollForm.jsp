@@ -124,7 +124,7 @@
         regExp = /^[가-힣a-zA-Z\s]{2,}$/;     // 한글, 영어 또는 공백문자가 2번 이상 반복되도록
 
         if (!regExp.test(codeName)) {
-            alert("2글자 이상의 코드를 입력해주세요.");
+            alert("2글자 이상의 코드를 입력해주세요.(영어, 한글만 사용가능)");
             $("input[name=codeName]").focus();
             return;
         }

@@ -39,7 +39,7 @@
         <div id="title_2_2">
                 <span>
                 <div id="title_profile_photo" style="  width: 150px;">
-                  <img src="/resources/img/jun.png" id="profile" alt="">
+                  <img src="/resources/fo/img/logo.png" id="profile" alt="">
                 </div>
               </span>
           <span style="  display: flex;">
@@ -71,7 +71,7 @@
     <div class="btn_div">
       <button class="btn_1" onclick="detailView(${challenge.chNo});">챌린지 소개</button>
       <button class="btn_2" onclick="confirmList(${challenge.chNo});">인증목록</button>
-    </div>
+    </div> <br>
 
 
     <div class="basic_info">
@@ -92,11 +92,21 @@
         <span class="form_content">${challenge.chStartDay}</span> ~ <span class="form_content">${challenge.chEndDay}</span> <br><br>
 
         <span class="form_title">진행상태 </span>
-        <span class="form_content">진행중</span> <br><br>
+        <c:choose>
+          <c:when test="${challenge.chStartDay le 'SYSDATE' &&  challenge.chEndDay ge 'SYSDATE'}">
+            <span class="form_content">진행중</span> <br><br>
+          </c:when>
+          <c:when test="${challenge.chStartDay lt 'SYSDATE'}">
+            <span class="form_content">진행예정</span> <br><br>
+          </c:when>
+          <c:otherwise>
+            <span class="form_content">진행완료</span> <br><br>
+          </c:otherwise>
+        </c:choose>
 
       </div>
 
-    </div>
+    </div><br>
 
 
     <div class="template">

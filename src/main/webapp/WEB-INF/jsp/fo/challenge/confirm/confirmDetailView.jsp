@@ -27,7 +27,7 @@
   <div id="title">
     <div id="bar_1"></div>
     <div id="title_text">챌린지 인증 상세</div>
-  </div>
+  </div> <br><br>
   <!-- 타이틀 끝-->
 
 
@@ -57,14 +57,14 @@
 
     </div>
 
-  </div>
+  </div> <br>
 
 
   <div class="template">
     <div class="info_title">
       <h2>인증 정보</h2>
       <div class="bar_2"></div>
-      <br>
+      <br> <br>
     </div>
 
     <div class="text">
@@ -179,7 +179,9 @@
             <div class="basic_form_2">
               <div class="flex-container">
                 <div class="wrapper">
-                  <img src="/resources"
+                  <c:forEach var="detail" items="${temp.chDetailInfoList}">
+                    <img src="${detail.filePath}"
+                  </c:forEach>
                        class="image-box"/>
                   <input type="file" class="fileUpload" accept="image/*"
                          data-category-template-no="${temp.categoryTemplateNo}" data-input-type="${temp.inputType}">

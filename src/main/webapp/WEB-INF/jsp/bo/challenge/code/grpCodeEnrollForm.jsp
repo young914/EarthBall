@@ -113,7 +113,7 @@
 
         regExp = /^[가-힣a-zA-Z0-9]{2,}$/;
         if (!regExp.test(grpCodeName)) {
-            alert("2글자 이상의 그룹코드명을 입력해주세요.");
+            alert("2글자 이상의 그룹코드명을 입력해주세요.(영어, 숫자, 한글 입력가능)");
             $("input[type=text][name=grpCodeName]").focus();
             return false;
         }

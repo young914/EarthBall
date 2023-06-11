@@ -27,6 +27,7 @@
         <div><img src="/resources/fo/img/challBanner_1.png" alt="" style="width:100%; height: 430px; align-items: center"></div>
         <div><img src="/resources/fo/img/challBanner_2.png" alt="" style="width:100%; height: 430px; align-items: center"></div>
         <div><img src="/resources/fo/img/challBanner_3.png" alt="" style="width:100%; height: 430px; align-items: center"></div>
+        <div><img src="/resources/fo/img/challBanner_4.png" alt="" style="width:100%; height: 430px; align-items: center"></div>
     </div>
 
 
@@ -85,8 +86,8 @@
                         <table>
                             <input type="hidden" name="chNo" value="${chall.chNo}">
                             <tr>
-                                <td rowspan="2"><img src="/resources/fo/img/bono.jpg" style="width: 50px; height: 50px;" alt=""></td>
-                                <td><h3 style="margin: 5px;">${chall.chTitle}</h3></td>
+                                <td rowspan="2"><img src="/resources/fo/img/logo.png" style="width: 50px; height: 50px;" alt=""></td>
+                                <td><h5 style="margin: 5px;">${chall.chTitle}</h5></td>
                             </tr>
                             <tr>
                                 <td><span class="userId">${chall.memberId}</span></td>
@@ -103,8 +104,17 @@
                     <div class="chall_Tag">
                         <ul>
                             <li><span class="tag">${chall.categoryName}</span></li>
-
-                            <li><span class="tag">진행 중</span></li>
+                            <c:choose>
+                                <c:when test="${chall.chStartDay le 'SYSDATE' &&  chall.chEndDay ge 'SYSDATE'}">
+                                    <li><span class="tag">진행 중</span></li>
+                                </c:when>
+                                <c:when test="${chall.chStartDay lt 'SYSDATE'}">
+                                    <li><span class="tag">진행 예정</span></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li><span class="tag">진행 완료</span></li>
+                                </c:otherwise>
+                            </c:choose>
                         </ul>
                     </div>
                 </div>
@@ -124,7 +134,7 @@
                     <table class="hot_one">
                         <tr>
                             <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/bono.jpg" alt="">
+                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/logo.png" alt="">
                             </td>
                             <td><span class="hot_title">제목이 들어갈 것임</span></td>
                         </tr>
@@ -143,7 +153,7 @@
                     <table class="hot_one">
                         <tr>
                             <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/bono.jpg" alt="">
+                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/logo.png" alt="">
                             </td>
                             <td><span class="hot_title">제목이 들어갈 것임</span></td>
                         </tr>
@@ -159,7 +169,7 @@
                     <table class="hot_one">
                         <tr>
                             <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/bono.jpg" alt="">
+                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/logo.png" alt="">
                             </td>
                             <td><span class="hot_title">제목이 들어갈 것임</span></td>
                         </tr>
@@ -175,7 +185,7 @@
                     <table class="hot_one">
                         <tr>
                             <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/bono.jpg" alt="">
+                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/logo.png" alt="">
                             </td>
                             <td><span class="hot_title">제목이 들어갈 것임</span></td>
                         </tr>
@@ -191,7 +201,7 @@
                     <table class="hot_one">
                         <tr>
                             <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/bono.jpg" alt="">
+                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/logo.png" alt="">
                             </td>
                             <td><span class="hot_title">제목이 들어갈 것임</span></td>
                         </tr>
@@ -207,7 +217,7 @@
                     <table class="hot_one">
                         <tr>
                             <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/bono.jpg" alt="">
+                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/logo.png" alt="">
                             </td>
                             <td><span class="hot_title">제목이 들어갈 것임</span></td>
                         </tr>
@@ -223,7 +233,7 @@
                     <table class="hot_one">
                         <tr>
                             <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/bono.jpg" alt="">
+                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/logo.png" alt="">
                             </td>
                             <td><span class="hot_title">제목이 들어갈 것임</span></td>
                         </tr>
@@ -239,7 +249,7 @@
                     <table class="hot_one">
                         <tr>
                             <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/bono.jpg" alt="">
+                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/logo.png" alt="">
                             </td>
                             <td><span class="hot_title">제목이 들어갈 것임</span></td>
                         </tr>
@@ -255,7 +265,7 @@
                     <table class="hot_one">
                         <tr>
                             <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/bono.jpg" alt="">
+                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/logo.png" alt="">
                             </td>
                             <td><span class="hot_title">제목이 들어갈 것임</span></td>
                         </tr>
@@ -271,7 +281,7 @@
                     <table class="hot_one">
                         <tr>
                             <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/bono.jpg" alt="">
+                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/logo.png" alt="">
                             </td>
                             <td><span class="hot_title">제목이 들어갈 것임</span></td>
                         </tr>

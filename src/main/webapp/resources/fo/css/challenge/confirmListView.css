@@ -197,6 +197,16 @@
   cursor: pointer;
 }
 
+.btn_4 {
+  background-color: #146C94;
+  border-radius: 7px;
+  border: #146C94 solid 1px;
+  width: 40px;
+  height: 30px;
+  font-weight: 400;
+  font-size: 15px;
+  color: white;
+}
 
 .bar_2 {
   width: 170px;
