@@ -58,6 +58,10 @@ public class StoreController {
       list.get(i).setStoreLat(latitude); // Store 객체에 위도 값 설정
       list.get(i).setStoreLon(longitude); // Store 객체에 경도 값 설정
       list.get(i).setJibunAddress(jibunAddress); // Store 객체에 지번 주소 값 설정
+      
+      boolean liked = storeService.isStoreLiked(memberId, list.get(i).getStoreNo());
+      System.out.println("store번호 : " + list.get(i).getStoreNo()+ " 은 ? : " +   liked);
+      list.get(i).setLiked(liked); // Store 객체에 좋아요 여부 설정
     }
     
     return new Gson().toJson(list);
@@ -152,7 +156,6 @@ public class StoreController {
   @PostMapping(value= "storeLikes.st", produces = "application/json; charset=UTF-8")
   public boolean updatestoreLikes(int storeNo, boolean isLiked, int storeLikes, String memberId, Model model) {
     System.out.println("updatestoreLikes");
-    System.out.println("나오나?");
     System.out.println("storeNo : " + storeNo + " isLiked :  " + isLiked + " storeLikes : " + storeLikes + " memberId : " + memberId);
 
     if(isLiked == true) {

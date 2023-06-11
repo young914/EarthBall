@@ -163,4 +163,9 @@
 	 		WHERE STORE_NO = #{storeNo}
 	 	</update>
 	 	
+	 	<select id="isStoreLiked" resultType="boolean">
+		  SELECT COUNT(*) FROM STORE_LIKES
+		  WHERE MEMBER_ID = #{memberId}
+		    AND STORE_NO = #{storeNo}
+		</select>
 </mapper>

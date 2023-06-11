@@ -650,8 +650,10 @@ hr{
 			for(let i = offset; i < Math.min(offset + limit, listCount); i++) {
                 var memberId = `${loginUser.memberId}`;
                 var storeNo = storeList[i].storeNo;
-                console.log(memberId);
-                console.log(storeNo);
+                
+                var liked = storeList[i].isLiked;
+                console.log(storeList[i] + " : " + liked);
+                var likeBtnClass = liked ? "xi-heart xi-2x like-btn clicked" : "xi-heart xi-2x like-btn";
                 
                 if(i >= listCount) {
                     break;
@@ -659,15 +661,14 @@ hr{
 				
 				 // 동적으로 리스트 요소 생성
                 resultStr += "<div class='searchList " + i + "' data-storelat='" + storeList[i].storeLat + "' data-storelon='" + storeList[i].storeLon + "' data-storeno='" + storeList[i].storeNo + "'>"
-                            +    "<span class='storeTitle'>" + storeList[i].storeName + "</span> <br>"
-                            +    "<span class='storeInfo'>" +    "<i class='xi-location-arrow' style='width: 20px;'></i>" + storeList[i].storeAddress + "</span> <br>"
-                            +    "<span class='storeInfo'>" +    "<i class='xi-call ' style='width: 20px;'></i>" + storeList[i].storePhone + "</span> <br>"
-                            +    "<span class='storeInfo'> " +     "<i class='xi-time-o' style='width: 20px;'></i>영업시간 " + storeList[i].businessHours + "</span>"
-                            +    "<div class='detail-info' style='display: none;'>"
-                            +        "<p>" + "<i class='xi-comment-o' style='width: 20px;'></i>" + storeList[i].storeInfo + "</p>"
-                            // +        "<img src='이미지 URL'>"
-                            +        "<i class='xi-heart xi-2x like-btn' style='width: 20px; margin-right:10px;'></i>" + "<span id='storeLikes'>" + storeList[i].storeLikes + "</span>"
-                            +    "</div>"
+                            + "<span class='storeTitle'>" + storeList[i].storeName + "</span> <br>"
+                            + "<span class='storeInfo'>" + "<i class='xi-location-arrow' style='width: 20px;'></i>" + storeList[i].storeAddress + "</span> <br>"
+                            + "<span class='storeInfo'>" + "<i class='xi-call ' style='width: 20px;'></i>" + storeList[i].storePhone + "</span> <br>"
+                            + "<span class='storeInfo'> " + "<i class='xi-time-o' style='width: 20px;'></i>영업시간 " + storeList[i].businessHours + "</span>"
+                            +   "<div class='detail-info' style='display: none;'>"
+                            +   "<p>" + "<i class='xi-comment-o' style='width: 20px;'></i>" + storeList[i].storeInfo + "</p>"
+                            +   "<i class='" + likeBtnClass + "' style='width: 20px; margin-right:10px;'></i>" + "<span id='storeLikes'>" + storeList[i].storeLikes + "</span>"
+                            +   "</div>"
                             + "</div>";
 		    }
 			

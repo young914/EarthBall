@@ -38,6 +38,8 @@ public interface StoreService {
 
   int updateStoreLikesCount(int storeNo, int storeLikes, boolean isLiked);
 
+  boolean isStoreLiked(String memberId, int storeNo);
+
 
 //  // 매장 상세 조회
 //  Store selectStoreDetail(int storeNo);

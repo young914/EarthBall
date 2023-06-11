@@ -20,4 +20,5 @@ public class Store {
   private String storeInfo;
   private String status;
   private String jibunAddress;
+  private boolean isLiked;
 }

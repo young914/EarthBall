@@ -38,5 +38,7 @@ public interface StoreMapper {
 //
     int updateStoreLikesCount(@Param("storeNo") int storeNo, @Param("storeLikes") int storeLikes, @Param("isLiked") boolean isLiked);
 
+    boolean isStoreLiked(@Param("memberId") String memberId, @Param("storeNo") int storeNo);
+
 
 }

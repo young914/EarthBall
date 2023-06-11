@@ -90,5 +90,9 @@ public class StoreServiceImpl implements StoreService {
     return (int) storeMapper.updateStoreLikesCount(storeNo, storeLikes, isLiked);
   }
 
+  @Override
+  public boolean isStoreLiked(String memberId, int storeNo) {
+    return storeMapper.isStoreLiked(memberId, storeNo);
+  }
   
 }
