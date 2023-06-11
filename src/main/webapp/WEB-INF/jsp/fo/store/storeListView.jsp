@@ -350,7 +350,7 @@ hr{
                         </div>
                     </c:when>
                     <c:otherwise>
-                        <div id="likeList" onclick="likeListView();">
+                        <div id="likeList" onclick="settingMap();">
                             <i class="xi-heart xi-2x"></i><span>찜 매장보기</span>
                         </div>
                     </c:otherwise>
@@ -372,7 +372,7 @@ hr{
     </div>
 
     <script>
-        console.log('${loginUser}');
+        
         let storeList = []; // [{}, {}, ..]
         let markerList = []; // 각 매장에 대한 마커들 담기
         let overlayList = []; // 각 매장에 대한 오버레이들 담기
@@ -384,7 +384,8 @@ hr{
         });
 
         function settingMap() {
-            
+            console.log("이거는 ? : " + '${loginUser}');
+            console.log("이거는 ? : " + '${loginUser.memberId}');
             // 2_1. 지도 셋팅 완료
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
                 mapOption = { 
@@ -393,8 +394,8 @@ hr{
                 };
             var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
             
-            console.log("${memberId}");
-            memberId = "${memberId}";
+            
+            memberId = '${loginUser.memberId}';
             // 2_2. ajax 로 전체 매장 조회해오기
             $.ajax({
                 url : "getStores.st",
@@ -670,7 +671,7 @@ hr{
                             +   "<i class='" + likeBtnClass + "' style='width: 20px; margin-right:10px;'></i>" + "<span id='storeLikes'>" + storeList[i].storeLikes + "</span>"
                             +   "</div>"
                             + "</div>";
-		    }
+            }
 			
 			$("#store-list-area").html(resultStr);
 			
@@ -943,21 +944,12 @@ hr{
         }
 
         function toggleNav() {
-
             if (document.getElementById("mySidebar").style.left == "0px") {
                 closeNav();
             } else {
                 openNav();
             }
         }
-        
-        // function storeZero(){
-
-        //     $("#store-list-area").html("<div class='noResult'>검색 결과가 없습니다.</div>");
-        //     $("#searchResult").html("<span>총 </span>" + 0 + "<span>개의 결과</span>");
-        //     $("#paging-area").html("");
-        //     return;
-        // }
 
         function backZigu(){
             location.href = "home";
@@ -966,61 +958,6 @@ hr{
         function goLoginForm(){
             alert("로그인 후 이용해주세요.");
             location.href = "loginForm.me?store="+ "store";
-        }
-        function likeListView(){
-            var memberId = `${loginUser.memberId}`;
-            console.log(memberId);
-            $.ajax({
-                url: "likeListView.st",
-                type: "post",
-                data: {
-                    memberId: memberId
-                },
-                success: function(data) {
-                    console.log(data);
-                    var likeList = data.likeList;
-                    var likeListLength = likeList.length;
-                    var html = "";
-                    if(likeListLength == 0){
-                        html += "<div class='noResult'>찜한 매장이 없습니다.</div>";
-                    }else{
-                        for(var i = 0; i < likeListLength; i++){
-                            html += "<div class='searchList " + i + "'>";
-                            html += "<div class='detail-info'>";
-                            html += "<div class='detail-info-img'>";
-                            html += "<img src='resources/images/store/" + likeList[i].storeImg + "' alt='매장 이미지'>";
-                            html += "</div>";
-                            html += "<div class='detail-info-text'>";
-                            html += "<div class='detail-info-title'>" + likeList[i].storeName + "</div>";
-                            html += "<div class='detail-info-address'>" + likeList[i].storeAddress + "</div>";
-                            html += "<div class='detail-info-businessHours'>" + likeList[i].businessHours + "</div>";
-                            html += "<div class='detail-info-like-btn'>";
-                            html += "<button class='like-btn' onclick='likeBtnClick(" + likeList[i].storeId + ")'>";
-                            html += "<i class='far fa-heart'></i>";
-                            html += "</button>";
-                            html += "</div>";
-                            html += "</div>";
-                            html += "</div>";
-                            html += "<div class='searchList-img'>";
-                            html += "<img src='resources/images/store/" + likeList[i].storeImg + "' alt='매장 이미지'>";
-                            html += "</div>";
-                            html += "<div class='searchList-text'>";
-                            html += "<div class='searchList-title'>" + likeList[i].storeName + "</div>";
-                            html += "<div class='searchList-address'>" + likeList[i].storeAddress + "</div>";
-                            html += "<div class='searchList-businessHours'>" + likeList[i].businessHours + "</div>";
-                            html += "</div>";
-                            html += "</div>";
-                        }
-                    }
-                    $("#store-list-area").html(html);
-                    $("#searchResult").html("<span>총 </span>" + likeListLength + "<span>개의 결과</span>");
-                    $("#paging-area").html("");
-                },
-                error: function() {
-                    console.log("에러");
-                }
-            });
-            
         }
         
     </script>
