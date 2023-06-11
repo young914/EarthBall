@@ -657,7 +657,6 @@ hr{
                 var storeNo = storeList[i].storeNo;
                 
                 var liked = storeList[i].isLiked;
-                console.log(storeList[i] + " : " + liked);
                 var likeBtnClass = liked ? "xi-heart xi-2x like-btn clicked" : "xi-heart xi-2x like-btn";
                 
                 if(i >= listCount) {
@@ -727,16 +726,12 @@ hr{
 
             $("#paging-area").on("click", ".paging-btn", function() {
                 currentPage = showList(storeList, Number($(this).text()));
-                // 여기도 두번 찍힘 
-                console.log("몇번찍히냐");
             });
             $("#paging-area").on("click", ".paging-prev", function() {
                 currentPage = showList(storeList, Number(currentPage) - 1);
-                console.log("몇번찍히냐");
             });
             $("#paging-area").on("click", ".paging-next", function() {
                 currentPage = showList(storeList, Number(currentPage) + 1);
-                console.log("몇번찍히냐");
             });
 
 
@@ -881,7 +876,6 @@ hr{
                 event.stopPropagation();
 
                 var memberId = `${loginUser.memberId}`;
-                console.log("memberId 잘찍히나 ? : " + memberId);
                 if (!memberId) {
                     alert("로그인 후 이용해주세요.");
                     location.href = "loginForm.me?store="+ "store";
@@ -923,7 +917,6 @@ hr{
                     },
                     success: function(data) {
                         // 서버로부터 응답을 받은 후 처리할 로직 작성
-                        console.log(data);
                         isLiked = data;
                         if (!isLiked) {
                             // 좋아요 취소 시
