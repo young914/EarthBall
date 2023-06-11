@@ -158,7 +158,7 @@
 
           <div class="textarea_class">
                     <textarea name="${temp.categoryTemplateNo}_${temp.inputType}" id="" cols="95" rows="10"
-                              class="textarea_font" style="resize:none;">나는 textarea다!!!</textarea>
+                              class="textarea_font" style="resize:none;"></textarea>
           </div>
         </div>
         <br>
@@ -237,7 +237,7 @@
           </div>
         </div>
       </c:if>
-      </c:forEach>
+      </c:forEach><br>
 
 
     </div>

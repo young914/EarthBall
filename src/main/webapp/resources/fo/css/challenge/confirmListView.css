@@ -198,14 +198,20 @@
 }
 
 .btn_4 {
-  background-color: #146C94;
+  background-color: white;
   border-radius: 7px;
   border: #146C94 solid 1px;
   width: 40px;
   height: 30px;
   font-weight: 400;
   font-size: 15px;
+  color: #146C94;
+}
+
+.btn_4:hover {
   color: white;
+  background-color: #146C94;
+  cursor: pointer;
 }
 
 .bar_2 {

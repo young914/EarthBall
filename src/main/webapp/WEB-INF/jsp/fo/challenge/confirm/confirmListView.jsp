@@ -53,8 +53,8 @@
                   </div>
                   <div style="  text-align: right;">
                     <c:if test="${ not empty loginUser && loginUser.memberId eq challenge.memberId}">
-                      <button class="btn_2" onclick="updateChallenge(${challenge.chNo});">수정</button>
-                      <button class="btn_2" onclick="deleteChallenge(${challenge.chNo})">삭제</button>
+                      <button class="btn_4" onclick="updateChallenge(${challenge.chNo});">수정</button>
+                      <button class="btn_4" onclick="deleteChallenge(${challenge.chNo})">삭제</button>
                     </c:if>
                   </div>
                   <div>

@@ -74,8 +74,8 @@
 
       <c:if test="${ not empty loginUser && loginUser.memberId eq chConfirm.memberId}"> <!-- 로그인한 유저와 인증 게시글 작성자 일치 할 때만 보이는 버튼 -->
         <div class="text_class_2">
-          <button class="btn_3" onclick="confirm_update(${chConfirm.chConNo});">수정</button>
-          <button class="btn_3" onclick="confirm_delete(${chConfirm.chConNo});">삭제</button>
+          <button class="btn_4" onclick="confirm_update(${chConfirm.chConNo});">수정</button> &nbsp;&nbsp;
+          <button class="btn_4" onclick="confirm_delete(${chConfirm.chConNo});">삭제</button>
         </div>
       </c:if>
     </div>
@@ -179,12 +179,8 @@
             <div class="basic_form_2">
               <div class="flex-container">
                 <div class="wrapper">
-                  <c:forEach var="detail" items="${temp.chDetailInfoList}">
-                    <img src="${detail.filePath}"
-                  </c:forEach>
+                  <img src="${chConfirm.filePath}"
                        class="image-box"/>
-                  <input type="file" class="fileUpload" accept="image/*"
-                         data-category-template-no="${temp.categoryTemplateNo}" data-input-type="${temp.inputType}">
                   <input type="hidden" name="${temp.categoryTemplateNo}_${temp.inputType}">
                   </label>
                 </div>

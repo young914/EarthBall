@@ -50,8 +50,8 @@
                   </div>
                   <div style="  text-align: right;">
                     <c:if test="${ not empty loginUser && loginUser.memberId eq challenge.memberId}">
-                      <button onclick="updateChallenge(${challenge.chNo});">수정</button>
-                      <button onclick="deleteChallenge(${challenge.chNo})">삭제</button>
+                      <button class="btn_4" onclick="updateChallenge(${challenge.chNo});">수정</button>
+                      <button class="btn_4" onclick="deleteChallenge(${challenge.chNo})">삭제</button>
                     </c:if>
                   </div>
                   <div>
@@ -89,7 +89,14 @@
         <span class="form_content">${challenge.categoryName}</span> <br><br>
 
         <span class="form_title">도전기간 </span>
-        <span class="form_content">${challenge.chStartDay}</span> ~ <span class="form_content">${challenge.chEndDay}</span> <br><br>
+        <c:choose>
+          <c:when test="${challenge.chStartDay eq challenge.chEndDay}">
+            <span class="form_content">${challenge.chStartDay}</span><br><br>
+          </c:when>
+          <c:otherwise>
+            <span class="form_content">${challenge.chStartDay}</span> ~ <span class="form_content">${challenge.chEndDay}</span> <br><br>
+          </c:otherwise>
+        </c:choose>
 
         <span class="form_title">진행상태 </span>
         <c:choose>

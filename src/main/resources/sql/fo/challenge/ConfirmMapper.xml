@@ -84,8 +84,12 @@
              , CH_CON_TITLE
              , MEMBER_ID
              , TO_CHAR(CH_CON_CREATE_DATE, 'YYYY-MM-DD') AS CH_CON_CREATE_DATE
+             , (SELECT tcf.FILE_PATH
+                FROM TB_CHA_FILE tcf
+                         JOIN TB_CH_DETAIL_INFO tcdi ON TCF.FILE_NO = TCDI.FILE_NO
+                WHERE CH_CON_NO = #{chConNo}) AS FILE_PATH
         FROM TB_CH_CONFIRM
-        WHERE CH_CON_NO = #{chConNo}
+        WHERE CH_CON_NO =  #{chConNo}
           AND STATUS = 'Y'
     </select>
 

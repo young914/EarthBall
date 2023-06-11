@@ -98,7 +98,14 @@
                     <img src="${chall.filePath}" alt="">
 
                     <div class="chall_Date" align="center">
-                        <span>${chall.chStartDay} ~ ${chall.chEndDay}</span>
+                        <c:choose>
+                            <c:when test="${chall.chStartDay eq chall.chEndDay}">
+                                <span>${chall.chStartDay}</span>
+                            </c:when>
+                            <c:otherwise>
+                                <span>${chall.chStartDay} ~ ${chall.chEndDay}</span>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
 
                     <div class="chall_Tag">

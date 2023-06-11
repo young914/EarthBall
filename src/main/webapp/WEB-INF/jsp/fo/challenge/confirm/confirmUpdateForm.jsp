@@ -194,7 +194,7 @@
                         <div class="basic_form_2">
                             <div class="flex-container">
                                 <div class="wrapper">
-                                    <img src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"
+                                    <img src="${chConfirm.filePath}"
                                          class="image-box"/>
                                     <input type="file" class="fileUpload" accept="image/*"
                                            data-category-template-no="${temp.categoryTemplateNo}"

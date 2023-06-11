@@ -70,7 +70,7 @@
         <div class="wrapper">
           <span class="form_title" align="right;">썸네일 <span class="star">*</span></span>
           <img src="https://i0.wp.com/adventure.co.kr/wp-content/uploads/2020/09/no-image.jpg"
-               class="image-box"/>
+               class="image-box" style="width: 200px;"/>
           <input type="file" accept="image/*" name="fileNo" id="fileNo" onchange="uploadImage();"/>
           <input type="hidden" name="resultFileNo" value="">
         </div>
