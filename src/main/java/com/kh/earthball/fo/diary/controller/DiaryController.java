@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -80,6 +79,11 @@ public class DiaryController {
       String content = diary.getDyBoardContent();
 
       if(!file.getOriginalFilename().isEmpty() && !title.isEmpty() && !content.isEmpty()) {
+
+        if (file.getSize() < 20000) {
+          return "그림을 (더) 그려주세요";
+      }
+
         String changeName = saveFile(file, session);
         diary.setOriginName(file.getOriginalFilename());
         diary.setChangeName("resources/fo/upfiles/" + changeName);
@@ -95,14 +99,15 @@ public class DiaryController {
     }
 
     // 필요한 데이터가 누락된 경우
-    model.addAttribute("errorMsg", "누락된 데이터가 있습니다");
-    return "redirect:/diaryEnrollForm.bo";
+    return "누락된 정보가 있습니다";
 }
 
   private String saveFile(MultipartFile file, HttpSession session) {
 
       String originName = file.getOriginalFilename();
       String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+
+     System.out.println(file);
 
       int ranNum = (int)(Math.random() * 90000 + 10000);
 

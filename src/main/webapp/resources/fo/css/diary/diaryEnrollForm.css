@@ -2,18 +2,27 @@
 @import "reset.css";
 @import url('https://fonts.googleapis.com/css2?family=Gaegu&family=Nanum+Pen+Script&display=swap');
 
+#container{
+    width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    margin-bottom: 100px;
+    margin-top: 300px;
+}
 
 #outer1{
     width: 660px;
     height: 660px;
     margin: 0 auto;
-    margin-top: 100px;
+    margin-top: 50px;
     border: 2px solid black;
     margin-bottom: 30px;
     border-radius: 13px;
 }
 
-.outer1_1 { margin-top: 102px;}
+.enroll_id { margin-top: 15px; font-weight: bold; font-size: 18px;}
+
+.outer1_1 { margin-bottom: 30px;}
 
 #outer1_2{
     width: 660px;
@@ -73,7 +82,7 @@
     background-color: white;
     border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius:13px;
-    width: 90px;
+    width: 100px;
     height: 30px;
     margin-bottom: 20px;
 }
@@ -92,7 +101,7 @@
 
 .outer2{
     width: 660px;
-    height: 430px;
+    height: 445px;
     margin: 0 auto;
     border-radius: 13px;
     border: 2px solid black;
@@ -105,9 +114,9 @@
     width : 95%;
 }
 .title input{
-    width: 90%;
+    width: 89%;
     height: 30px;
-    font-size: 33px;
+    font-size: 28px;
     box-sizing: border-box;
     border-bottom: 2px solid black;
     border-right: none;
@@ -122,7 +131,7 @@
     border: none;
     outline:none;
     resize: none;
-    font-size: 32px;
+    font-size: 28px;
     font-family: 'Gaegu', cursive;
     box-sizing: border-box;
     background-attachment: local;
@@ -144,7 +153,7 @@
 }
 .b>span{
 	margin-left: 15px;
-    font-size: 40px;
+    font-size: 35px;
     border : none;
 	font-family: 'Gaegu', cursive;
 }
@@ -164,7 +173,7 @@
     margin: 0 auto;
     text-align: right;
     height: 33px;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .submit_btn1>button{
