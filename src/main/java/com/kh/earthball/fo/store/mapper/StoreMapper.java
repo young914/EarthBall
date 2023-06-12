@@ -30,4 +30,15 @@ public interface StoreMapper {
 
     ArrayList<Store> selectNameSearch(@Param("searchValue") String searchValue);
 
+    int insertStoreLike(@Param("storeNo") int storeNo, @Param("memberId") String memberId);
+
+    int deleteStoreLike(@Param("storeNo") int storeNo, @Param("memberId") String memberId);
+//
+    int updateStoreLikesCount(@Param("storeNo") int storeNo, @Param("storeLikes") int storeLikes, @Param("isLiked") boolean isLiked);
+
+    boolean isStoreLiked(@Param("memberId") String memberId, @Param("storeNo") int storeNo);
+
+    ArrayList<Store> selectLikeStore(@Param("memberId") String memberId);
+
+
 }

@@ -13,11 +13,12 @@ public class Store {
   private String storeAddress;
   private String storePhone;
   private String businessHours;
-  private int storeRc;
+  private int storeLikes;
   private double storeLat;
   private double storeLon;
   private int storeRegionNo;
   private String storeInfo;
   private String status;
   private String jibunAddress;
+  private boolean isLiked;
 }

@@ -93,7 +93,12 @@
                     </div>
                 </div>
                 <div class="dropdown">
-                    <span class="dropbtn"><a href="storeListView.st">매장찾기</a></span>
+                    <span class="dropbtn">
+                        <form name="myForm" action='storeListView.st' method="POST">
+                            <input type="hidden" name="memberId" value="${ loginUser.memberId}" />
+                        </form>
+                        <a href="#" onclick="javascript:document.myForm.submit();">매장찾기</a>
+                    </span>
                 </div>
                 <div class="dropdown">
                     <span class="dropbtn"> <a href="#">고객센터</a> </span>

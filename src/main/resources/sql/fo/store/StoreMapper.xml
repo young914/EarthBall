@@ -17,7 +17,7 @@
         , STORE_ADDRESS
         , STORE_PHONE
         , BUSINESS_HOURS
-        , STORE_RC
+        , STORE_LIKES
         , STORE_REGION_NO
         , STORE_INFO
         , STATUS
@@ -33,7 +33,7 @@
         , STORE_ADDRESS
         , STORE_PHONE
         , BUSINESS_HOURS
-        , STORE_RC
+        , STORE_LIKES
         , STORE_REGION_NO
         , STORE_INFO
         , STATUS
@@ -78,7 +78,7 @@
         , STORE_ADDRESS
         , STORE_PHONE
         , BUSINESS_HOURS
-        , STORE_RC
+        , STORE_LIKES
         , STORE_REGION_NO
         , STORE_INFO
         , STATUS
@@ -94,7 +94,7 @@
     , S.STORE_ADDRESS
     , S.STORE_PHONE
     , S.BUSINESS_HOURS
-    , S.STORE_RC
+    , S.STORE_LIKES
     , S.STORE_REGION_NO
     , S.STORE_INFO
     , S.STATUS
@@ -105,13 +105,14 @@
 	ORDER BY S.STORE_NO DESC
 	 	</select>
 	 	
+	 	<!-- 매장 또는 지역 검색 조회 쿼리문  -->
 	 	<select id="selectNameSearch"  resultType="com.kh.earthball.fo.store.vo.Store">
  	  SELECT STORE_NO
         , STORE_NAME
         , STORE_ADDRESS
         , STORE_PHONE
         , BUSINESS_HOURS
-        , STORE_RC
+        , STORE_LIKES
         , STORE_REGION_NO
         , STORE_INFO
         , STATUS
@@ -121,5 +122,51 @@
 	ORDER BY STORE_NO DESC
 	 	</select>
 	 	
+	 	<insert id="insertStoreLike">
+	 		INSERT INTO STORE_LIKES
+	 		VALUES(SEQ_STORE_LIKES.NEXTVAL
+	 		 , #{memberId}
+	 		 , #{storeNo})
+	 	</insert>
 	 	
+	 	<delete id = "deleteStoreLike">
+	 		DELETE FROM STORE_LIKES 
+	 		WHERE MEMBER_ID = #{memberId} 
+	 		AND STORE_NO = #{storeNo}
+	 	</delete>
+	 	
+	 	<update id = "updateStoreLikesCount">
+	 		UPDATE STORE
+	 		<if test="isLiked">
+	 			SET STORE_LIKES = STORE_LIKES + 1
+	 		</if>
+	 		<if test="!isLiked">
+	 			SET STORE_LIKES = STORE_LIKES - 1
+	 		</if>
+	 		WHERE STORE_NO = #{storeNo}
+	 	</update>
+	 	
+	 	<select id="isStoreLiked" resultType="boolean">
+		  SELECT COUNT(*) FROM STORE_LIKES
+		  WHERE MEMBER_ID = #{memberId}
+		    AND STORE_NO = #{storeNo}
+		</select>
+		
+		<select id="selectLikeStore" resultType="com.kh.earthball.fo.store.vo.Store">
+	 	    SELECT S.STORE_NO
+		    , S.STORE_NAME
+		    , S.STORE_ADDRESS
+		    , S.STORE_PHONE
+		    , S.BUSINESS_HOURS
+		    , S.STORE_LIKES
+		    , S.STORE_REGION_NO
+		    , S.STORE_INFO
+		    , S.STATUS
+		FROM STORE S
+		JOIN STORE_LIKES SL ON S.STORE_NO = SL.STORE_NO
+		WHERE S.STATUS = 'Y'
+		    AND SL.MEMBER_ID = #{memberId}
+		ORDER BY S.STORE_NO DESC
+	 	</select>
+		
 </mapper>

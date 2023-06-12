@@ -82,7 +82,6 @@ public class MemberController {
 
       session.setAttribute("loginUser", loginUser);
       session.setAttribute("alertMsg", "로그인에 성공했습니다.");
-      System.out.println(store);
       // System.out.println("연결성공");
      if(store.equals("store")) {
        mv.setViewName("fo/store/storeListView");
