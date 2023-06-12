@@ -28,12 +28,13 @@ function startPainting() {
 }
 
 function onMouseMove(event) {
+
     const x = event.offsetX;
     const y = event.offsetY;
-    if(!painting) {
+    if (!painting) {
         ctx.beginPath();
         ctx.moveTo(x, y);
-    } else {
+    } else if (painting) {
         ctx.lineTo(x, y);
         ctx.stroke();
     }
@@ -61,7 +62,7 @@ function handleModeClick() {
 }
 
 function handleCanvasClick() {
-    if(filling) {
+    if ( filling) {
         ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE1);
     }
 }
@@ -96,10 +97,34 @@ function clearAll(){
 }
 
 
+// 날씨 선택 안 할 시 경고창 띄우기
+function validateSelection() {
+  var weatherInput = document.getElementById("weather");
+
+  if (weatherInput.value === "") {
+    // 날씨 버튼 또는 캔버스가 선택되지 않은 경우
+    alert("날씨를 선택해주세요.");
+    return false; // 다음으로 진행되지 않음
+  }
+
+  return true; // 선택이 유효하면 다음으로 진행
+}
+
 // 이미지 전송
  function drawingBtn() {
 
-	 console.log("호출되나?");
+	 if (!validateSelection()) {
+    // 선택이 유효하지 않은 경우
+    return false; // 글 등록 중단
+  }
+
+  // 내용 최소 글자수 200자
+  var content = document.getElementById('dyBoardContent').value;
+  if(content.length < 200) {
+    alert("최소 200자 이상 입력해야 합니다.");
+     return false;
+  }
+	 console.log("호출되나?")
 
     var imgDataUrl = canvas.toDataURL('image/png');
 
@@ -126,7 +151,7 @@ function clearAll(){
     console.log(formdata.get("dyBoardWriter"));
     console.log(formdata.get("dyBoardTitle"));
     console.log(formdata.get("dyBoardContent"));
-    console.log(formdata.get("weather"));
+    console.log(formdata.get("weather"))
 
     $.ajax({
         type : 'post',
@@ -146,11 +171,11 @@ function clearAll(){
 		   }
 
         }, error : function() {
-			console.log("실패");
+		 		alert("게시글 등록 실패");
 		}
     });
-  };
 
+    }
 
 // 날씨 아이콘 버튼 이벤트
  document.querySelector('#c_1').addEventListener('click', function(event) {
@@ -229,6 +254,7 @@ function clearAll(){
 
 });
 
+// 오늘 날짜 자동 설정
 const todayTime = () => {
 
 var now = new Date();
@@ -268,5 +294,3 @@ const updateDay = () => {
     document.getElementById("day").textContent = todayTime().day;
 };
 updateDay();
-
-
