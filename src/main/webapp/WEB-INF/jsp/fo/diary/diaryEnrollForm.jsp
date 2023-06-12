@@ -17,8 +17,8 @@
 		    <!-- 화면  -->
 				<div class="outer1_1">
 					 <div class="detail_header">
-			               	<div class="photo"><img src="image/bono.jpg"></div>
-			               <div  class="content"  id="dyBoardWriter"  >${ loginUser.memberId} </div>
+			               	<div class="photo"><img src="/resources/fo/img/logo.png"></div>
+			               <div  class="enroll_id"  id="dyBoardWriter"  >${ loginUser.memberId} </div>
 			         </div>
 			   	</div>
 
@@ -34,12 +34,12 @@
 
 		            <div id="c">
 		                <div class="icon">
-		                    <button id="c_1">
+		                    <div id="c_1">
 		                        <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="40px" fill="currentColor"
 		                              class="bi-sun" viewBox="0 0 16 16">
 		                            <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
 		                        </svg>
-		                    </button>
+		                    </div>
 		                    <div id="c_2">
 		                        <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="40px" fill="currentColor"
 		                             class="iconBtn" id="bi bi-cloud" id="f" viewBox="0 0 16 16">
@@ -66,7 +66,7 @@
 		    <input type="hidden" id="weather" value=""> <!-- 날씨 상태값 -->
 
 		        <div id="draw1">
-		            <canvas id="jsCanvas" class="canvas" name="file" required></canvas>
+		            <canvas id="jsCanvas" class="canvas" name="file" ></canvas>
 		        </div>
 
 		        <div class="controls">
@@ -100,8 +100,8 @@
 
 		    <div class="outer2">
 		    <br>
-		        <div class="title">제목: <input type="text" id="dyBoardTitle" required></div>
-		        <div class="content"><textarea id="dyBoardContent" required ></textarea></div>
+		        <div class="title">제목: <input type="text"  maxlength="10"  id="dyBoardTitle" required></div>
+		        <div class="content"><textarea id="dyBoardContent"   maxlength="500" required ></textarea></div>
 		    </div>
 
 
@@ -109,7 +109,6 @@
 		        <button type="button" onclick="drawingBtn()">글등록</button>
 		    </div>
 		   </div>
-	</div>
 
 		<script type="text/javascript" src="/resources/fo/js/diary/diary.js"></script>
 

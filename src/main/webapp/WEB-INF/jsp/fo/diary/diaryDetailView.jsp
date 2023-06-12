@@ -8,6 +8,7 @@
   <title>EcoDiary</title>
    <jsp:include page="/WEB-INF/jsp/fo/common/common.jsp"/>
     <link rel="stylesheet" href="/resources/fo/css/diary/diaryEnrollForm.css">
+    <link rel="stylesheet" href="/resources/fo/css/diary/diaryDetailView.css">
 
 </head>
 <body>
@@ -19,15 +20,18 @@
       <div class="outer1_1">
             <div class="detail_header">
             	<input type="hidden"  class="bno" value="${ d.dyBoardNo }">
-                	<div class="photo"><img src="image/bono.jpg"></div>
+                	<div class="photo"><img src="/resources/fo/img/logo.png"></div>
                 	<div class="content">
-                    <div>${ d.dyBoardWriter }</div>
+                    <div class="detail_id">${ d.dyBoardWriter }</div>
+                	</div>
+                	<div class="update_btn">
+                    <button type="">수정</button>
                 	</div>
                 	<div class="submit_btn">
-                    <button type="submit">목록</button>
-                </div>
+                    <button type="">목록</button>
+                	</div>
             </div>
-
+		 </div>
 
             <div id="outer1_2" >
                 <div id="a" >
@@ -113,8 +117,23 @@
                     <div class="content"><textarea id="dyBoardContent"  readonly>${ d.dyBoardContent }</textarea></div>
                 </div>
 
+				<div class="buttons">
+					<div class="delete_btn">
+                    <button type="">삭제</button>
+                	</div>
+                	<div class="back_btn">
+                    <button type="">목록</button>
+                	</div>
+                	</div>
+				<div class="area2">
+	                      <div><textarea name="" id="" cols="30" rows="10" placeholder="댓글"></textarea></div>
+	                      <div>
+	                          <i class="xi-library-image-o"></i>
+	                          <button>작성</button>
+	                      </div>
+                  </div>
             </div>
-        </div>
+
 
 		<script type="text/javascript" src="/resources/fo/js/diary/diary.js"></script>
 
