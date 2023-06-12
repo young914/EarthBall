@@ -19,6 +19,8 @@ public class CartController {
   public String cart(String memberId, Model model){
     ArrayList<Cart> list = cartService.selectList(memberId);
 
+    System.out.println("sdfdsf");
+
     model.addAttribute("list", list);
 
     return "fo/cart/cart";
