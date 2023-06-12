@@ -58,7 +58,7 @@
 
 		                <div class="thumbnail2">
 		                    <div>
-		                        <div class="photo" style="margin-right: 10px;"><img src="image/bono.jpg"></div>
+		                        <div class="photo" style="margin-right: 10px;"><img src="/resources/fo/img/logo.png"></div>
 		                        <div class="content">
 		                            <div>${ d.dyBoardWriter }</div>
 		                            <div>${ d.dyCreateDate }</div>
@@ -95,7 +95,7 @@
 		                </script>
 
 		            <!--  로그인한 사용자만 보이는 글작성 버튼 -->
-		            <c:if test="${ not empty loginUser }">
+		            <c:if test="${ not empty loginUser && loginUser.mailAuth eq '1'}">
 		            	<div class="submit_btn1">
 		                	<button onclick="location.href='diaryEnrollForm.bo'">글작성</button>
 		            	</div>
