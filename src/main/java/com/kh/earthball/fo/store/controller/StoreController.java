@@ -27,7 +27,7 @@ public class StoreController {
   public String selectList(Member m, HttpSession session, Model model) {
       System.out.println("여기는 selectList");
 
-      System.out.println(m);
+      
       String memberId = m.getMemberId();
       if (memberId.equals("")) {
           memberId = "없다!";
@@ -174,7 +174,6 @@ public class StoreController {
       int result1 = storeService.deleteStoreLike(storeNo, memberId);
       if(result1 > 0) {
         int result2 = storeService.updateStoreLikesCount(storeNo, storeLikes, isLiked);
-        System.out.println("result2 : " + result2);
       }
       else {
         System.out.println("변경실패!");

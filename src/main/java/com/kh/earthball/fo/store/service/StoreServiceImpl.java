@@ -71,7 +71,6 @@ public class StoreServiceImpl implements StoreService {
 
   @Override
   public int insertStoreLike(int storeNo, String memberId) {
-    System.out.println( "memberId : "  + memberId + " storeNo : " +  storeNo);
     return (int) storeMapper.insertStoreLike(storeNo, memberId);
     
   }
