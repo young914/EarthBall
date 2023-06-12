@@ -8,9 +8,14 @@ function allCheck(){
 }
 
 // 수량 변경 및 주문금액 변경 기능 및 총 주문금액 변경 기능
-$('table tr').each(function() {
-    var price = $(event.target).find('.price').text();
-    var quantity = $(event.target).find('.quantity').val();
-    console.log(price);
+function plus(){
+    // var productNo = $(event.target).parent().siblings(input[type=hidden]).val();
+    var quantity = $(event.target).parent().prev().children().val();
+
+    // console.log(productNo);
     console.log(quantity);
-})
+}
+
+
+
+
