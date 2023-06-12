@@ -46,7 +46,7 @@
 			                </c:otherwise>
 	                	</c:choose>
 	                	|
-	                	<div><a href="cart.me?memberId=${ loginUser.memberId }"><i class="xi-market"></i></a></div>
+	                	<div><a href="cart.me"><i class="xi-market"></i></a></div>
 	            	</c:otherwise>
         		</c:choose>
                 <div></div>

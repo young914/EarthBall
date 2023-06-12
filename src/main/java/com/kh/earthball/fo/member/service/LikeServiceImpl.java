@@ -34,6 +34,7 @@ public class LikeServiceImpl implements LikeService {
 
   @Override
   public ArrayList<Like> selectList(String memberId) {
+    System.out.println(memberId);
     return likeMapper.selectList(memberId);
   }
 

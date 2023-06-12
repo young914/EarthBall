@@ -28,53 +28,12 @@
 					<th width="50"><input type="checkbox" id="allCheck" onclick="allCheck();"></th>
 					<th width="700">상품 정보</th>
 					<th width="50">수량</th>
-					<th>적립금</th>
+					<th>상품금액</th>
 					<th>주문금액</th>
 				</tr>
+				<input type="hidden" id="memberId" value="${ loginUser.memberId }">
 			</thead>
 			<tbody>
-
-				<c:forEach var="c" items="${ list }">
-					<tr>
-						<td>
-							<input type="checkbox">
-						</td>
-						<td>
-							<div class="productArea">
-								<div>
-									<img src="/resources/fo/upfiles/${ c.changerName }">
-								</div>
-								<div>
-									${ c.productName }
-								</div>
-							</div>
-						</td>
-						<td>
-							<div>
-								<table class="quantityArea">
-									<tr>
-										<input type="hidden" value="${ c.productNo }">
-										<td><button class="down" onclick="minus();">-</button></td>
-										<td><input type="text" value="${ c.amount }" class="quantity"></td>
-										<td><button class="up" onclick="plus();">+</button></td>
-									</tr>
-								</table>
-							</div>
-						</td>
-						<td>
-							<div class="point">
-								<span>670</span>
-								<span>원</span>
-							</div>
-						</td>
-						<td>
-							<div>
-								<span class="price${ c.productNo }">${ c.price }</span>
-								<span>원</span>
-							</div>
-						</td>
-					</tr>
-				</c:forEach>
 
 			</tbody>
 		</table>
@@ -84,16 +43,16 @@
 	<button class="deleteButton">선택상품 삭제</button>
 
 	<div class="orderArea">
-		<div>총 주문 상품 <span>??</span>개</div>
+		<div>총 주문 상품 <span>${ list.size() }</span>개</div>
 		<div>
 			<table class="priceInformation">
 				<thead>
 					<tr>
-						<td><span>20100</span>원</td>
+						<td><span class="productTotal"></span>원</td>
 						<td>+</td>
 						<td>3000원</td>
 						<td>=</td>
-						<td><span>23100</span>원</td>
+						<td><span class="total"></span>원</td>
 					</tr>
 				</thead>
 				<tbody>
