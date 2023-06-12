@@ -23,16 +23,16 @@
 
 <jsp:include page="/WEB-INF/jsp/fo/common/header.jsp"/>
 
-    <div class="mainSlide">
-        <div><img src="/resources/fo/img/challBanner_1.png" style="margin-left: 150px;"></div>
-        <div><img src="/resources/fo/img/challBanner_2.png" style="margin-left: 150px;"></div>
-        <div><img src="/resources/fo/img/challBanner_3.png" style="margin-left: 150px;"></div>
-        <div><img src="/resources/fo/img/challBanner_4.png" style="margin-left: 150px;"></div>
-    </div>
-
 
 <!-- 내용 영역 시작 -->
     <div class="wrap">
+
+        <div class="mainSlide">
+            <div><img src="/resources/fo/img/challBanner_1.png"></div>
+            <div><img src="/resources/fo/img/challBanner_2.png"></div>
+            <div><img src="/resources/fo/img/challBanner_3.png"></div>
+            <div><img src="/resources/fo/img/challBanner_4.png"></div>
+        </div>
 
         <div id="title">
             <div id="title_1">
@@ -112,17 +112,7 @@
                     <div class="chall_Tag">
                         <ul>
                             <li><span class="tag">${chall.categoryName}</span></li>
-                            <c:choose>
-                                <c:when test="${chall.chStartDay le 'SYSDATE' &&  chall.chEndDay ge 'SYSDATE'}">
-                                    <li><span class="tag">진행 중</span></li>
-                                </c:when>
-                                <c:when test="${chall.chStartDay lt 'SYSDATE'}">
-                                    <li><span class="tag">진행 예정</span></li>
-                                </c:when>
-                                <c:otherwise>
-                                    <li><span class="tag">진행 완료</span></li>
-                                </c:otherwise>
-                            </c:choose>
+                            <li><span class="tag">${chall.chStatName}</span></li>
                         </ul>
                     </div>
                 </div>
