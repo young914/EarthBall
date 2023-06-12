@@ -7,7 +7,7 @@
 /* 전체를 감싸는 wrap*/
 .wrap {
     width: 1200px;
-    height: 2300px;
+    height: 2000px;
     margin: auto; /* 좌우로 항상 정정가운데에 위치시켜주는 속성 */
     padding-top: 20px;
     /* position : relative; */
@@ -21,11 +21,65 @@
 
 .wrap>div { width: 100%; }
 
-/* 영역별 높이 */
+/* 영역별 높이
 #banner {
   height: 15%;
   margin-top: 200px;
 }
+ */
+
+/* 메인슬라이드 */
+.mainSlide {
+    position: relative;
+    height: 15%;
+    margin-top: 200px;
+
+
+}
+
+.mainSlide img {
+    width: 1000px;
+    height: 430px;
+}
+.mainSlide button {
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    background: rgba(0,0,0,0.5);
+}
+.mainSlide button::before{
+    font-family: 'xeicon';
+    color: #fff;
+    font-size: 30px;
+}
+.mainSlide button.slick-prev {
+    left: 50px;
+    font-size: 0;
+    color: transparent;
+}
+.mainSlide button.slick-prev:before{
+    content:"\e93d";
+}
+.mainSlide button.slick-next {
+    right: 50px;
+    font-size: 0;
+    color: transparent;
+}
+.mainSlide button.slick-next::before{
+    content:"\e940";
+}
+.slick-dots{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+
 
 #filter {
   height: 10% ;
@@ -190,6 +244,15 @@
     margin-bottom: 10px;
     margin-top: 7px;
     border-radius: 5px;
+}
+
+#challTitle {
+    word-wrap : break-word; /*- 단어 단위로 줄바꿈*/
+    text-align : left; /*- 텍스트를 가운데나 오른쪽 정렬을 하게 되면 말줄임표가 이상한 곳으로 갈 수 있음*/
+    display: -webkit-box; /*유연하게 height를 증감시킬 수 있는 플렉스 박스형태로 변환*/
+    -webkit-line-clamp: 1; /* 보여줄 줄 수 */
+    -webkit-box-orient: vertical; /* 플렉스 박스의 방향 설정(가로)*/
+    overflow: hidden; /* 넘치는 글자는 감추기 */
 }
 
 

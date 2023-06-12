@@ -56,7 +56,7 @@
       <span class="form_title">챌린지명 <span class="star">*</span></span>
       <input type="text" class="form_text" name="chTitle" value="${challenge.chTitle}" required> <br><br>
 
-      <span class="form_title">카테고리 <span class="star">&nbsp;</span></span>
+      <span class="form_title">카테고리 <span class="star">&nbsp</span></span>
       <input type="hidden" name="categoryNo" value="${challenge.categoryNo}">
       <input type="hidden" name="chNo" value="${challenge.chNo}">
       <input type="text" class="form_text" value="${challenge.categoryName}" readonly> <br><br>
