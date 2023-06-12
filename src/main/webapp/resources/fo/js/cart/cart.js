@@ -8,6 +8,7 @@ $(document).ready(function() {
         data: {memberId: memberId},
         success: function(result) {
             var html = "";
+            var totalPrice = 0;
 
             for(let i in result){
                 html += "<tr>";
@@ -53,7 +54,14 @@ $(document).ready(function() {
                 html += "</tr>";
             }
 
+            for(let i in result){
+                totalPrice += result[i].price * result[i].amount;
+            }
+
             $(".cartList tbody").html(html);
+            $(".orderArea").children().children().eq(0).text(result.length);
+            $(".productTotal").text(totalPrice);
+            $(".total").text(totalPrice + 3000);
         }
     });
 });
@@ -63,10 +71,16 @@ function plus(){
     let productNo = $(event.target).parent().parent().parent().parent().find("input[type='hidden']").val();
     let amount = $(event.target).parent().parent().find(".amount").val();
     let price = $(".price" + productNo).children().eq(0).text();
+    let memberId = $("#memberId").val();
 
     amount++;
     $("#product-amount-" + productNo).val(amount);
     $(".totalPrice" + productNo).text(price * amount);
+
+    $(".productTotal").text($(".productTotal").text() * 1 + price * 1);
+    $(".total").text($(".total").text() * 1 + price * 1);
+
+    updateAmount(productNo, amount, memberId);
 }
 
 // -버튼 눌른 행만 수량 감소 및 주문금액 감소
@@ -74,10 +88,36 @@ function minus(){
     let productNo = $(event.target).parent().parent().parent().parent().find("input[type='hidden']").val();
     let amount = $(event.target).parent().parent().find(".amount").val();
     let price = $(".price" + productNo).children().eq(0).text();
+    let memberId = $("#memberId").val();
 
     if(amount > 1){
         amount--;
         $("#product-amount-" + productNo).val(amount);
         $(".totalPrice" + productNo).text(price * amount);
+        $(".productTotal").text($(".productTotal").text() * 1 - price * 1);
+        $(".total").text($(".total").text() * 1 - price * 1);
     }
+
+
+    
+    updateAmount(productNo, amount, memberId);
+}
+
+// 수량 수정 ajax
+function updateAmount(productNo, amount, memberId){
+    $.ajax({
+        url: "updateAmount.cart",
+        type: "post",
+        data: {productNo: productNo, amount: amount, memberId: memberId},
+        success: function(result) {
+            if(result == 1){
+                console.log("수량 수정 완료");
+            } else {
+                console.log("수량 수정 실패");
+            }
+        },
+        error: function() {
+            console.log("수량 수정 ajax 에러");
+        }
+    });
 }
