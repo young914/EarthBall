@@ -47,7 +47,7 @@
       <div class="content-wrapper">
         <!-- Content -->
         <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="fw-bold">공통 코드 등록</h4>
+          <h4 class="fw-bold">그룹 코드 등록</h4>
 
           <!-- Basic Layout -->
           <div class="col-xl">
@@ -111,9 +111,9 @@
             return false;
         }
 
-        regExp = /^[가-힣]{2,}$/;
+        regExp = /^[가-힣a-zA-Z0-9]{2,}$/;
         if (!regExp.test(grpCodeName)) {
-            alert("그룹코드는 2글자 이상의 한글로 입력해주세요.");
+            alert("2글자 이상의 그룹코드명을 입력해주세요.(영어, 숫자, 한글 입력가능)");
             $("input[type=text][name=grpCodeName]").focus();
             return false;
         }

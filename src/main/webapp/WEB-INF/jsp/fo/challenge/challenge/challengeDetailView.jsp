@@ -39,7 +39,7 @@
         <div id="title_2_2">
                 <span>
                 <div id="title_profile_photo" style="  width: 150px;">
-                  <img src="/resources/img/jun.png" id="profile" alt="">
+                  <img src="/resources/fo/img/logo.png" id="profile" alt="">
                 </div>
               </span>
           <span style="  display: flex;">
@@ -50,8 +50,8 @@
                   </div>
                   <div style="  text-align: right;">
                     <c:if test="${ not empty loginUser && loginUser.memberId eq challenge.memberId}">
-                      <button onclick="updateChallenge(${challenge.chNo});">수정</button>
-                      <button onclick="deleteChallenge(${challenge.chNo})">삭제</button>
+                      <button class="btn_4" onclick="updateChallenge(${challenge.chNo});">수정</button>
+                      <button class="btn_4" onclick="deleteChallenge(${challenge.chNo})">삭제</button>
                     </c:if>
                   </div>
                   <div>
@@ -71,7 +71,7 @@
     <div class="btn_div">
       <button class="btn_1" onclick="detailView(${challenge.chNo});">챌린지 소개</button>
       <button class="btn_2" onclick="confirmList(${challenge.chNo});">인증목록</button>
-    </div>
+    </div> <br>
 
 
     <div class="basic_info">
@@ -89,14 +89,31 @@
         <span class="form_content">${challenge.categoryName}</span> <br><br>
 
         <span class="form_title">도전기간 </span>
-        <span class="form_content">${challenge.chStartDay}</span> ~ <span class="form_content">${challenge.chEndDay}</span> <br><br>
+        <c:choose>
+          <c:when test="${challenge.chStartDay eq challenge.chEndDay}">
+            <span class="form_content">${challenge.chStartDay}</span><br><br>
+          </c:when>
+          <c:otherwise>
+            <span class="form_content">${challenge.chStartDay}</span> ~ <span class="form_content">${challenge.chEndDay}</span> <br><br>
+          </c:otherwise>
+        </c:choose>
 
         <span class="form_title">진행상태 </span>
-        <span class="form_content">진행중</span> <br><br>
+        <c:choose>
+          <c:when test="${challenge.chStartDay le 'SYSDATE' &&  challenge.chEndDay ge 'SYSDATE'}">
+            <span class="form_content">진행중</span> <br><br>
+          </c:when>
+          <c:when test="${challenge.chStartDay lt 'SYSDATE'}">
+            <span class="form_content">진행예정</span> <br><br>
+          </c:when>
+          <c:otherwise>
+            <span class="form_content">진행완료</span> <br><br>
+          </c:otherwise>
+        </c:choose>
 
       </div>
 
-    </div>
+    </div><br>
 
 
     <div class="template">
@@ -119,7 +136,11 @@
 <script>
 
   function confirmFormBtn(chNo) {
+    if(${ not empty loginUser}) {
       location.href="/insertForm.con?chNo=" + chNo;
+    } else {
+      alert("로그인 후, 이용할 수 있는 서비스입니다.");
+    }
   }
 
   function updateChallenge(chNo) {

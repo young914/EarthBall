@@ -27,7 +27,7 @@
   <div id="title">
     <div id="bar_1"></div>
     <div id="title_text">챌린지 인증</div>
-  </div>
+  </div> <br>
   <!-- 타이틀 끝-->
 
 
@@ -57,7 +57,7 @@
 
     </div>
 
-  </div>
+  </div> <br>
 
 
   <div class="template">
@@ -158,7 +158,7 @@
 
           <div class="textarea_class">
                     <textarea name="${temp.categoryTemplateNo}_${temp.inputType}" id="" cols="95" rows="10"
-                              class="textarea_font" style="resize:none;">나는 textarea다!!!</textarea>
+                              class="textarea_font" style="resize:none;"></textarea>
           </div>
         </div>
         <br>
@@ -211,8 +211,15 @@
 
           <div class="ranger_class">
             <input type="range" name="${temp.categoryTemplateNo}_${temp.inputType}" min="0" max="100"
-                   step="20"
-                   class="range_size">
+                   step="5"
+                   class="range_size"
+                    list="tickmarks"
+                    style="width: 750px;"/>
+            <datalist id="tickmarks">
+              <c:forEach var="i" begin="0" end="100" step="5">
+                <option value="${i}">i</option>
+              </c:forEach>
+            </datalist>
           </div>
         </div>
         <br>
@@ -230,7 +237,7 @@
           </div>
         </div>
       </c:if>
-      </c:forEach>
+      </c:forEach><br>
 
 
     </div>
@@ -393,7 +400,6 @@
               console.error('No file selected.');
           }
       });
-
 
 
   </script>

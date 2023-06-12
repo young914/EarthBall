@@ -229,13 +229,13 @@
                 }
             });
         }
-
-        $("#chContent").summernote({
-            height : 700
-            , minHeight : null
-            , maxHeight : null
-            , focus : true
-        });
+        //
+        // $("#chContent").summernote({
+        //     height : 700
+        //     , minHeight : null
+        //     , maxHeight : null
+        //     , focus : true
+        // });
 
 
 

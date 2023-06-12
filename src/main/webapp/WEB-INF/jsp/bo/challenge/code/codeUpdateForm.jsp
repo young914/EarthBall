@@ -76,8 +76,8 @@
                                     <input type="text" class="form-control" name="sortNo" id="sortNo" placeholder="sortNo"
                                            value="${code.sortNo}">
                                 </div>
-                                <button type="button" class="btn btn-primary" onclick="codeValidate();">생성하기</button>
-                                <button type="button" class="btn btn-danger" onclick="javascript:history.go(-1);">생성취소</button>
+                                <button type="button" class="btn btn-primary" onclick="codeValidate();">수정하기</button>
+                                <button type="button" class="btn btn-danger" onclick="javascript:history.go(-1);">수정취소</button>
                             </div>
                         </div>
                     </div>
@@ -116,10 +116,10 @@
         let codeName = $("input[name=codeName]").val();
         let sortNo = $("input[name=sortNo]").val();
 
-        let regExp = /^[가-힣]{2,}$/;
+        let regExp = /^[가-힣a-zA-Z\s]{2,}$/;
 
         if (!regExp.test(codeName)) {
-            alert("코드는 2글자 이상의 한글로 입력해주세요.");
+            alert("2글자 이상의 코드를 입력해주세요.(영어, 한글만 사용가능)");
             $("input[name=codeName]").focus();
             return;
         }

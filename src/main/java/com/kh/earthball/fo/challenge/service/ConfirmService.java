@@ -22,4 +22,6 @@ public interface ConfirmService {
 
   List<ChDetailInfo> selectDetailInfoList(ChDetailInfoParam detailInfoParam);
 
+  void deleteConfirm(ChConfirm chConfirm);
+
 }

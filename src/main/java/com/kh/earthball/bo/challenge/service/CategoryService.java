@@ -1,6 +1,7 @@
 package com.kh.earthball.bo.challenge.service;
 
 import com.kh.earthball.bo.challenge.vo.Category;
+import com.kh.earthball.bo.challenge.vo.Code;
 
 import java.util.List;
 
@@ -16,5 +17,8 @@ public interface CategoryService {
 
   int deleteCategory(int categoryNo);
 
+  //String selectGrpCode(String categoryName);
+
+  List<Code> selectCodeList(String categoryName);
 
 }

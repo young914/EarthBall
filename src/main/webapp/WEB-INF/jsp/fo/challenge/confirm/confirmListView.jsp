@@ -42,7 +42,7 @@
       <div id="title_2_2">
                 <span>
                 <div id="title_profile_photo" style="  width: 150px;">
-                  <img src="/resources/img/jun.png" id="profile" alt="">
+                  <img src="/resources/fo/img/logo.png" id="profile" alt="">
                 </div>
               </span>
         <span style="  display: flex;">
@@ -53,8 +53,8 @@
                   </div>
                   <div style="  text-align: right;">
                     <c:if test="${ not empty loginUser && loginUser.memberId eq challenge.memberId}">
-                      <button onclick="updateChallenge(${challenge.chNo});">수정</button>
-                      <button onclick="deleteChallenge(${challenge.chNo})">삭제</button>
+                      <button class="btn_4" onclick="updateChallenge(${challenge.chNo});">수정</button>
+                      <button class="btn_4" onclick="deleteChallenge(${challenge.chNo})">삭제</button>
                     </c:if>
                   </div>
                   <div>
