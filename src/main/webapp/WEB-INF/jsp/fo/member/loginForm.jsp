@@ -79,6 +79,13 @@
 		<input type="submit" value="Login">
 		</form>
     </div>
+    
+    
+    <% if(request.getAttribute("errorMsg") != null) { %>
+	    <script>
+	        alert('<%=request.getAttribute("errorMsg")%>');
+	    </script>
+	<% } %>
 </body>
 </html>
 		
