@@ -1,5 +1,6 @@
 package com.kh.earthball.fo.challenge.service;
 
+import com.kh.earthball.fo.challenge.vo.ChConReply;
 import com.kh.earthball.fo.challenge.vo.ChConfirm;
 import com.kh.earthball.fo.challenge.vo.ChDetailInfo;
 import com.kh.earthball.fo.challenge.vo.ChDetailInfoParam;
@@ -19,9 +20,12 @@ public interface ConfirmService {
 
   ChConfirm selectConfirm(int chConNo);
 
-
   List<ChDetailInfo> selectDetailInfoList(ChDetailInfoParam detailInfoParam);
 
   void deleteConfirm(ChConfirm chConfirm);
+
+  int insertReply(ChConReply reply);
+
+  List<ChConReply> selectReplyList(ChConReply reply);
 
 }

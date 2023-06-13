@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>±Û ÀÛ¼ºÇÏ±â</title>
+<title>ê¸€ ì‘ì„±í•˜ê¸°</title>
     <!-- include libraries(jQuery, bootstrap) -->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
@@ -31,12 +31,12 @@
         }
     </style>
 
-    <!-- ½æ¸Ó³ëÆ® ½ºÅ©¸³Æ® -->
+    <!-- ì¸ë¨¸ë…¸íŠ¸ ìŠ¤í¬ë¦½íŠ¸ -->
     <script>
-        // ¸ŞÀÎÈ­¸é ÆäÀÌÁö ·Îµå ÇÔ¼ö
+        // ë©”ì¸í™”ë©´ í˜ì´ì§€ ë¡œë“œ í•¨ìˆ˜
         $(document).ready(function () {
             $('#summernote').summernote({
-                placeholder: '³»¿ëÀ» ÀÛ¼ºÇÏ¼¼¿ä',
+                placeholder: 'ë‚´ìš©ì„ ì‘ì„±í•˜ì„¸ìš”',
                 height: 400,
                 maxHeight: 400,
                 focus : true,
@@ -53,10 +53,10 @@
 			    ['insert',['picture','link','video']],
 			    ['view', ['fullscreen', 'help']]
 			  ],
-			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','¸¼Àº °íµñ','±Ã¼­','±¼¸²Ã¼','±¼¸²','µ¸¿òÃ¼','¹ÙÅÁÃ¼'],
+			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','ë§‘ì€ ê³ ë”•','ê¶ì„œ','êµ´ë¦¼ì²´','êµ´ë¦¼','ë‹ì›€ì²´','ë°”íƒ•ì²´'],
 			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'] });
 
-            /* callbacks: {	//¿©±â ºÎºĞÀÌ ÀÌ¹ÌÁö¸¦ Ã·ºÎÇÏ´Â ºÎºĞ
+            /* callbacks: {	//ì—¬ê¸° ë¶€ë¶„ì´ ì´ë¯¸ì§€ë¥¼ ì²¨ë¶€í•˜ëŠ” ë¶€ë¶„
 					onImageUpload : function(files) {
 						uploadSummernoteImageFile(files[0],this);
 					},
@@ -73,7 +73,7 @@
 	}); */
 
     /**
-	* ÀÌ¹ÌÁö ÆÄÀÏ ¾÷·Îµå
+	* ì´ë¯¸ì§€ íŒŒì¼ ì—…ë¡œë“œ
 	*/
 	/* function uploadSummernoteImageFile(file, editor) {
 		data = new FormData();
@@ -86,24 +86,24 @@
 			processData : false,
             enctype: 'multipart/form-data',
 			success : function(data) {
-            	//Ç×»ó ¾÷·ÎµåµÈ ÆÄÀÏÀÇ urlÀÌ ÀÖ¾î¾ß ÇÑ´Ù.
+            	//í•­ìƒ ì—…ë¡œë“œëœ íŒŒì¼ì˜ urlì´ ìˆì–´ì•¼ í•œë‹¤.
 				$(editor).summernote('insertImage', data.url);
 			}
 		});
 	} */
 
-	        // ÀÛ¼º ¹öÆ° Å¬¸¯ ÇÔ¼ö
+	        // ì‘ì„± ë²„íŠ¼ í´ë¦­ í•¨ìˆ˜
 	        $(document).on('click','#saveBtn',function() {
 	            saveContent();
 	        });
-	        // Ãë¼Ò ¹öÆ° Å¬¸¯
+	        // ì·¨ì†Œ ë²„íŠ¼ í´ë¦­
 	        $(document).on('click','#resetBtn',function() {
 	            window.location.href ="list.bo";
 	        })
 
 	    });
 
-       		 // µ¥ÀÌÅÍ ÀúÀå
+       		 // ë°ì´í„° ì €ì¥
 		       function saveContent() {
 		    // get value
 		    var summernoteContent = $('#summernote').summernote('code'); //summer note (description)
@@ -116,11 +116,11 @@
 		        url: "/insert.bo",
 		        data: { boardTitle : boardTitle, boardContent : summernoteContent, memberId : memberId },
 		        success: function(response) {
-		            alert("±Û ÀÛ¼º ¿Ï·á");
+		            alert("ê¸€ ì‘ì„± ì™„ë£Œ");
 		            window.location.href="list.bo"; // redirect to another page
 		        },
 		        error: function(e) {
-		            alert("±Û ÀÛ¼º ½ÇÆĞ");
+		            alert("ê¸€ ì‘ì„± ì‹¤íŒ¨");
 		        }
 		    });
 		}
@@ -131,13 +131,13 @@
 </head>
 
 
-    <h1>±Û ÀÛ¼ºÇÏ±â</h1><hr>
-    <input id="post_title" name="boardTitle" class="no-margin basic_input title_name w100p mb24" type="text" placeholder="Á¦¸ñ" required="required"> <br><br>
+    <h1>ê¸€ ì‘ì„±í•˜ê¸°</h1><hr>
+    <input id="post_title" name="boardTitle" class="no-margin basic_input title_name w100p mb24" type="text" placeholder="ì œëª©" required="required"> <br><br>
     <input id="id" name="memberId" class="no-margin basic_input title_name w100p mb24" value="${loginUser.memberName}" readonly> <br><br>
     <textarea id="summernote" name="boardContent"></textarea>
         <div class="enrollFormBtn">
-        <button type="reset" id="resetBtn" class="btn btn-danger">¸ñ·ÏÀ¸·Î</button>
-        <button type="submit" class="btn btn-primary" id="saveBtn">ÀÛ¼º</button>
+        <button type="reset" id="resetBtn" class="btn btn-danger">ëª©ë¡ìœ¼ë¡œ</button>
+        <button type="submit" class="btn btn-primary" id="saveBtn">ì‘ì„±</button>
         </div>
 
 

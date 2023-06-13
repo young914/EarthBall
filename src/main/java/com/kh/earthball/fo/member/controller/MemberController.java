@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import com.kh.earthball.fo.member.service.MemberService;
 import com.kh.earthball.fo.member.vo.MailHandler;
@@ -89,9 +90,11 @@ public class MemberController {
 
       // System.out.println("연결 실패");
 
-      mv.addObject("alertMsg", "아이디 혹은 비밀번호를 다시 확인해주세요");
+      mv.addObject("errorMsg", "아이디 혹은 비밀번호를 다시 확인해주세요");
 
       mv.setViewName("fo/member/loginForm");
+      
+      
     }
 
     return mv;
@@ -251,4 +254,12 @@ public class MemberController {
 
     return (count > 0) ? "NNNNN" : "NNNNY";
   }
+  
 }
+  
+//  public String updateIng(MultipartHttpServletRequest mpRequest, HttpSession session, String memberId) throws Exception {
+//    
+//    // String memberImg = FileUtil.updateImg(mpRequest);
+//  }
+//  
+//}

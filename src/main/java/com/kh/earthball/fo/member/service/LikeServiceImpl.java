@@ -27,6 +27,7 @@ public class LikeServiceImpl implements LikeService {
     return likeMapper.likeStatus(memberId, productNo);
   }
 
+  @Transactional
   @Override
   public int deleteLike(int productNo, String memberId) {
     return likeMapper.deleteLike(productNo, memberId);
@@ -34,6 +35,7 @@ public class LikeServiceImpl implements LikeService {
 
   @Override
   public ArrayList<Like> selectList(String memberId) {
+    System.out.println(memberId);
     return likeMapper.selectList(memberId);
   }
 

@@ -131,6 +131,20 @@
   font-weight: 300;
 }
 
+.form_text {
+  width: 600px;
+  height: 35px;
+  font-size: 17px;
+  font-weight: 100;
+}
+
+.form_date {
+  width: 200px;
+  height: 35px;
+  font-size: 17px;
+  font-weight: 100;
+}
+
 
 
 .basic_form_1 {

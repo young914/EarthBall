@@ -16,7 +16,7 @@
 
 
 	<% Boolean isEmailVerified = (Boolean)session.getAttribute("isEmailVerified"); %>
-	
+
 		<c:if test="${isEmailVerified == null || !isEmailVerified}">
 			<div id="container">
         <!-- Sidebar Menu -->
@@ -28,7 +28,7 @@
                 <li><a href="delete.me">회원탈퇴</a></li>
             </ul>
         </div>
-		
+
 		<div class="main-content">
             <div class="profile">
 
@@ -46,12 +46,12 @@
             </div>
            </div>
           </div>
-           
+
            </c:if>
-		
+
 		<c:if test="${isEmailVerified != null && isEmailVerified}">
-		
-	
+
+
 	<!-- 메인 컨텐츠 -->
     <div id="container">
         <!-- Sidebar Menu -->
@@ -67,7 +67,7 @@
                 <li><a href="delete.me">회원탈퇴</a></li>
             </ul>
         </div>
-            
+
         <div class="main-content">
             <div class="profile">
 
@@ -92,7 +92,7 @@
             </div>
         </div>
     </div>
-    
+
     </c:if>
 
     <jsp:include page="/WEB-INF/jsp/fo/common/footer.jsp" />

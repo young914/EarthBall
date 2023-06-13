@@ -23,16 +23,16 @@
 
 <jsp:include page="/WEB-INF/jsp/fo/common/header.jsp"/>
 
-    <div id="banner">
-        <div><img src="/resources/fo/img/challBanner_1.png" alt="" style="width:100%; height: 430px; align-items: center"></div>
-        <div><img src="/resources/fo/img/challBanner_2.png" alt="" style="width:100%; height: 430px; align-items: center"></div>
-        <div><img src="/resources/fo/img/challBanner_3.png" alt="" style="width:100%; height: 430px; align-items: center"></div>
-        <div><img src="/resources/fo/img/challBanner_4.png" alt="" style="width:100%; height: 430px; align-items: center"></div>
-    </div>
-
 
 <!-- 내용 영역 시작 -->
     <div class="wrap">
+
+        <div class="mainSlide">
+            <div><img src="/resources/fo/img/challBanner_1.png"></div>
+            <div><img src="/resources/fo/img/challBanner_2.png"></div>
+            <div><img src="/resources/fo/img/challBanner_3.png"></div>
+            <div><img src="/resources/fo/img/challBanner_4.png"></div>
+        </div>
 
         <div id="title">
             <div id="title_1">
@@ -67,6 +67,7 @@
                 <h3>진행상태</h3>
                 <div id="filter_3_1">
                     <ul>
+                        <li><a class="btn_2" href="">진행 예정</a></li>
                         <li><a class="btn_2" href="">진행 중</a></li>
                         <li><a class="btn_2" href="">진행 완료</a></li>
                     </ul>
@@ -87,7 +88,7 @@
                             <input type="hidden" name="chNo" value="${chall.chNo}">
                             <tr>
                                 <td rowspan="2"><img src="/resources/fo/img/logo.png" style="width: 50px; height: 50px;" alt=""></td>
-                                <td><h5 style="margin: 5px;">${chall.chTitle}</h5></td>
+                                <td id="challTitle"><h5 style="margin: 5px;">${chall.chTitle}</h5></td>
                             </tr>
                             <tr>
                                 <td><span class="userId">${chall.memberId}</span></td>
@@ -111,17 +112,7 @@
                     <div class="chall_Tag">
                         <ul>
                             <li><span class="tag">${chall.categoryName}</span></li>
-                            <c:choose>
-                                <c:when test="${chall.chStartDay le 'SYSDATE' &&  chall.chEndDay ge 'SYSDATE'}">
-                                    <li><span class="tag">진행 중</span></li>
-                                </c:when>
-                                <c:when test="${chall.chStartDay lt 'SYSDATE'}">
-                                    <li><span class="tag">진행 예정</span></li>
-                                </c:when>
-                                <c:otherwise>
-                                    <li><span class="tag">진행 완료</span></li>
-                                </c:otherwise>
-                            </c:choose>
+                            <li><span class="tag">${chall.chStatName}</span></li>
                         </ul>
                     </div>
                 </div>
@@ -363,6 +354,20 @@
         function challengeDetailView(chNo) {
             location.href="/detailView.chall?chNo=" + chNo;
         }
+
+
+        // 메인 슬라이드
+        $(function(){
+            $('.mainSlide').slick({
+                dots: true,
+                autoplay : true,
+                autoplaySpeed : 3000,
+                speed : 1000,
+                infinite : true
+            });
+        })
+
+
     </script>
 
 </body>

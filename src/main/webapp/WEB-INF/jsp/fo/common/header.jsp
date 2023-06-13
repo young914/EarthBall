@@ -16,11 +16,9 @@
     	<!-- 로고+로그인 -->
         <div class="header">
             <div style="width: 200px;"></div>
-            <div class="logo">
-                <a href="home">
-                    <img src="/resources/fo/img/logo.png">
-                    <div>지구공</div>
-                </a>
+            <div class="logo" onclick="location.href='home'">
+                <div><img src="/resources/fo/img/logo.png"></div>
+                <div>지구공</div>
             </div>
             <div class="login-area">
                 <div></div>
@@ -46,7 +44,7 @@
 			                </c:otherwise>
 	                	</c:choose>
 	                	|
-	                	<div><a href="cart.me?memberId=${ loginUser.memberId }"><i class="xi-market"></i></a></div>
+	                	<div><a href="cart.me"><i class="xi-market"></i></a></div>
 	            	</c:otherwise>
         		</c:choose>
                 <div></div>
@@ -88,7 +86,7 @@
                 <div class="dropdown">
                     <span class="dropbtn"> <a href="#">환경일기</a> </span>
                     <div class="dropdown-content">
-                     	<a href="">환경일기란?</a>
+                        <a href="">환경일기란?</a>
                         <a href="diaryListView.bo">일기 보기</a>
                     </div>
                 </div>
@@ -104,7 +102,7 @@
                     <span class="dropbtn"> <a href="#">고객센터</a> </span>
                     <div class="dropdown-content">
                         <a href="list.no">공지사항</a>
-                    	<a href="list.faq">FAQ</a>
+                        <a href="list.faq">FAQ</a>
                         <a href="list.bo">1:1문의</a>
                     </div>
                 </div>

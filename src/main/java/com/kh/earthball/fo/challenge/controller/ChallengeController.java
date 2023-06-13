@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -33,7 +34,8 @@ public class ChallengeController {
   private final ChallengeService challengeService;
 
   @GetMapping("/main.chall")
-  public String challengeMain(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model) {
+  public String challengeMain(
+      @RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model) {
 
     // 전체 챌린지 게시글 수 조회
     int listCount = challengeService.selectListCount();
@@ -59,7 +61,7 @@ public class ChallengeController {
   public String categoryChoice_chall(Model model) {
     List<Category> categoryList = categoryService.selectCategoryList();
 
-    for(Category category : categoryList) {
+    for (Category category : categoryList) {
       // 카테고리 이름
       String categoryName = category.getCategoryName();
 
@@ -72,7 +74,7 @@ public class ChallengeController {
       log.info("codeList에 뭐 들음? : " + codeList);
     }
 
-    log.info("categoryList에 뭐 들음? : " +  categoryList);
+    log.info("categoryList에 뭐 들음? : " + categoryList);
     model.addAttribute("categoryList", categoryList);
     return "fo/challenge/challenge/challengeCategoryChoice";
   }
@@ -132,11 +134,12 @@ public class ChallengeController {
   public int challengeUpdate(@RequestBody Challenge challenge) {
     return challengeService.challengeUpdate(challenge);
   }
-@ResponseBody
-@GetMapping("delete.chall")
-public int challengeDelete(int chNo) {
+
+  @ResponseBody
+  @GetMapping("delete.chall")
+  public int challengeDelete(int chNo) {
     return challengeService.challengeDelete(chNo);
-}
+  }
 
 
 }

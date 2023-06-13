@@ -99,18 +99,7 @@
         </c:choose>
 
         <span class="form_title">진행상태 </span>
-        <c:choose>
-          <c:when test="${challenge.chStartDay le 'SYSDATE' &&  challenge.chEndDay ge 'SYSDATE'}">
-            <span class="form_content">진행중</span> <br><br>
-          </c:when>
-          <c:when test="${challenge.chStartDay lt 'SYSDATE'}">
-            <span class="form_content">진행예정</span> <br><br>
-          </c:when>
-          <c:otherwise>
-            <span class="form_content">진행완료</span> <br><br>
-          </c:otherwise>
-        </c:choose>
-
+        <span class="form_content">${challenge.chStatName}</span> <br><br>
       </div>
 
     </div><br>

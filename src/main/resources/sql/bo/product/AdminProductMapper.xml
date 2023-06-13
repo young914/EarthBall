@@ -16,7 +16,7 @@
 	<select id="adminAllProductList" resultType="com.kh.earthball.bo.product.vo.AdminProduct">
 		SELECT *
 		FROM PRODUCT
-		ORDER BY CREATE_DATE
+		ORDER BY CREATE_DATE DESC
 	</select>
 
 	<select id="selectListCount" resultType="_int">

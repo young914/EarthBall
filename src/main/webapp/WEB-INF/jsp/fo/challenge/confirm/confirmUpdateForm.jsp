@@ -194,12 +194,12 @@
                         <div class="basic_form_2">
                             <div class="flex-container">
                                 <div class="wrapper">
-                                    <img src="${chConfirm.filePath}"
+                                    <img src="${empty temp.chDetailInfoList ? '' : temp.chDetailInfoList[0].filePath}"
                                          class="image-box"/>
                                     <input type="file" class="fileUpload" accept="image/*"
                                            data-category-template-no="${temp.categoryTemplateNo}"
                                            data-input-type="${temp.inputType}">
-                                    <input type="hidden" name="${temp.categoryTemplateNo}_${temp.inputType}">
+                                    <input type="hidden" name="${temp.categoryTemplateNo}_${temp.inputType}" value="${empty temp.chDetailInfoList ? '' : temp.chDetailInfoList[0].fileNo}">
                                     </label>
                                 </div>
                             </div>

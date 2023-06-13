@@ -150,10 +150,11 @@
   width: 200px;
   height: 60px;
   color: white;
-  font-weight: 700;
-  font-size: 20px;
+  font-weight: 500;
+  font-size: 30px;
   margin: 20px;
 }
+
 
 .btn_1:hover {
   background-color: white;
@@ -168,8 +169,8 @@
   width: 200px;
   height: 60px;
   color: #69abce;
-  font-weight: 700;
-  font-size: 20px;
+  font-weight: 500;
+  font-size: 30px;
   margin: 20px;
 }
 
@@ -277,6 +278,10 @@
   font-weight: 900;
   border: #146C94 1px dashed;
   display: inline-block;
+}
+
+.table {
+  font-size: 20px;
 }
 
 .table>tbody>tr, table>tbody>tr>td, table>thead>tr, table>thead>tr>td {

@@ -35,11 +35,11 @@
 
         .search2>form>img {
             position : absolute;
-    width: 17px;
-    top: 10px;
-    right: 30px;
-    margin: 0;
-        }
+		    width: 17px;
+		    top: 10px;
+		    right: 30px;
+		    margin: 0;
+		 }
 
         .search2>form>input {
            border: 1px solid #bbb;
@@ -277,31 +277,41 @@
     </table>
     <br>
     <div id="page_search" align="center">
-        <div id="page">
-            <div class="page_btn">
-                <ul class="pagination">
-                    <li><a href="#" class="first">처음</a></li>
-                    <li><a href="#" class="arrow_left"><<</a></li>
-                    <li><a href="#" class="active num">1</a></li>
-                    <li><a href="#" class="num">2</a></li>
-                    <li><a href="#" class="num">3</a></li>
-                    <li><a href="#" class="num">4</a></li>
-                    <li><a href="#" class="num">5</a></li>
-                    <li><a href="#" class="arrow_right">>></a></li>
-                    <li><a href="#" class="last">마지막</a></li>
-                </ul>
-            </div>
-        </div>
-        <br><br>
-        <div id="search2-1" align="center">
-            <div class="search2">
-                <form action="">
-                    <input type="text" placeholder="검색어를 입력하세요">
-                    <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
-                </form>
-            </div>
-        </div>
+  <div id="page">
+    <div class="page_btn" align="center">
+      <ul class="pagination">
+        <li><a href="/list.bo?cPage=1" class="first">처음 페이지</a></li>
+
+        <c:choose>
+          <c:when test="${pi.currentPage eq 1}">
+            <li><a href="#" class="arrow_left" disabled> &lt;&lt; </a></li>
+          </c:when>
+          <c:otherwise>
+            <li><a href="/list.bo?cPage=${pi.currentPage - 1}" class="arrow_left"> &lt;&lt; </a></li>
+          </c:otherwise>
+        </c:choose>
+
+        <c:forEach var="page" begin="${pi.startPage}" end="${pi.endPage}" step="1">
+          <li>
+            <a href="/list.bo?cPage=${page}" class="active num">${page}</a>
+          </li>
+        </c:forEach>
+
+        <c:choose>
+          <c:when test="${pi.currentPage eq pi.maxPage}">
+            <li><a href="#" class="arrow_right" disabled> &gt;&gt; </a></li>
+          </c:when>
+          <c:otherwise>
+            <li><a href="/list.bo?cPage=${pi.currentPage + 1}" class="arrow_right"> &gt;&gt; </a></li>
+          </c:otherwise>
+        </c:choose>
+
+        <li>
+          <a href="/list.bo?cPage=${pi.maxPage}" class="last">끝 페이지</a>
+        </li>
+      </ul>
     </div>
+  </div>
 </div>
 <!-- page_search div -->
 </div>

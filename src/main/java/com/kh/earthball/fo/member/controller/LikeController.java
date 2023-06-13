@@ -17,7 +17,10 @@ public class LikeController {
 
   @GetMapping("list.like")
   public String selectList(String memberId, Model model) {
+    
     ArrayList<Like> list = likeService.selectList(memberId);
+    
+    System.out.println(list);
     model.addAttribute("list", list);
     return "fo/mypage/like";
   }

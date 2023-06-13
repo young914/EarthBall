@@ -1,21 +1,171 @@
-// 체크박스 전체 체크 기능
+$(document).ready(function() {
+    let memberId = $("#memberId").val();
+
+    // 장바구니에 담긴 상품이 있는지 확인
+    $.ajax({
+        url: "list.cart",
+        type: "get",
+        data: {memberId: memberId},
+        success: function(result) {
+            var html = "";
+            var totalPrice = 0;
+
+            for(let i in result){
+                html += "<tr>";
+                    html += "<td>";
+                        html += "<input type='hidden' value='" + result[i].productNo+ "'>";
+                        html += "<input type='checkbox'>";
+                    html += "</td>";
+                    html += "<td>";
+                        html += "<div class='productArea'>";
+                            html += "<div>";
+                                html += "<img src='/resources/fo/upfiles/" + result[i].changerName + "'>";
+                            html += "</div>";
+                            html += "<div>";
+                                html += result[i].productName;
+                            html += "</div>";
+                        html += "</div>";
+                    html += "</td>";
+                    html += "<td>";
+                        html += "<div>";
+                            html += "<table class='quantityArea'>";
+                                html += "<tr>";
+                                    html += "<input type='hidden' value='" + result[i].productNo + "'>";
+                                    html += "<td><button class='down' onclick='minus();'>-</button></td>";
+                                    html += "<td>";
+                                        html += "<input type='text' id='product-amount-" + result[i].productNo + "' value='" + result[i].amount + "' class='amount'>";
+                                    html += "</td>";
+                                    html += "<td><button class='up' onclick='plus();'>+</button></td>";
+                                html += "</tr>";
+                            html += "</table>";
+                        html += "</div>";
+                    html += "</td>";
+                    html += "<td>";
+                        html += "<div class='price" +  result[i].productNo + "'>";
+                            html += "<span>" + result[i].price + "</span>";
+                            html += "<span>원</span>";
+                        html += "</div>";
+                    html += "</td>";
+                    html += "<td>";
+                        html += "<div>";
+                            html += "<span class='totalPrice" + result[i].productNo + "'>" + (result[i].price * result[i].amount) + "</span>";
+                            html += "<span>원</span>";
+                        html += "</div>";
+                    html += "</td>";
+                html += "</tr>";
+            }
+
+            for(let i in result){
+                totalPrice += result[i].price * result[i].amount;
+            }
+
+            $(".cartList tbody").html(html);
+            $(".orderArea").children().children().eq(0).text(result.length);
+            $(".productTotal").text(totalPrice);
+            $(".total").text(totalPrice + 3000);
+        }
+    });
+});
+
+// +버튼 눌른 행만 수량 증가 및 주문금액 증가
+function plus(){
+    let productNo = $(event.target).parent().parent().parent().parent().find("input[type='hidden']").val();
+    let amount = $(event.target).parent().parent().find(".amount").val();
+    let price = $(".price" + productNo).children().eq(0).text();
+    let memberId = $("#memberId").val();
+
+    amount++;
+    $("#product-amount-" + productNo).val(amount);
+    $(".totalPrice" + productNo).text(price * amount);
+
+    $(".productTotal").text($(".productTotal").text() * 1 + price * 1);
+    $(".total").text($(".total").text() * 1 + price * 1);
+
+    updateAmount(productNo, amount, memberId);
+}
+
+// -버튼 눌른 행만 수량 감소 및 주문금액 감소
+function minus(){
+    let productNo = $(event.target).parent().parent().parent().parent().find("input[type='hidden']").val();
+    let amount = $(event.target).parent().parent().find(".amount").val();
+    let price = $(".price" + productNo).children().eq(0).text();
+    let memberId = $("#memberId").val();
+
+    if(amount > 1){
+        amount--;
+        $("#product-amount-" + productNo).val(amount);
+        $(".totalPrice" + productNo).text(price * amount);
+        $(".productTotal").text($(".productTotal").text() * 1 - price * 1);
+        $(".total").text($(".total").text() * 1 - price * 1);
+    }
+
+
+    
+    updateAmount(productNo, amount, memberId);
+}
+
+// 수량 수정 ajax
+function updateAmount(productNo, amount, memberId){
+    $.ajax({
+        url: "updateAmount.cart",
+        type: "post",
+        data: {productNo: productNo, amount: amount, memberId: memberId},
+        success: function(result) {
+            if(result == 1){
+                console.log("수량 수정 완료");
+            } else {
+                console.log("수량 수정 실패");
+            }
+        },
+        error: function() {
+            console.log("수량 수정 ajax 에러");
+        }
+    });
+}
+
+// 전체선택 체크박스 클릭 시
 function allCheck(){
     if($("#allCheck").prop("checked")){
-        $("input[type=checkbox]").prop("checked", true);
-    }else{
-        $("input[type=checkbox]").prop("checked", false);
+        $(".cartList tbody").find("input[type='checkbox']").prop("checked", true);
+    } else {
+        $(".cartList tbody").find("input[type='checkbox']").prop("checked", false);
     }
 }
 
-// 수량 변경 및 주문금액 변경 기능 및 총 주문금액 변경 기능
-function plus(){
-    // var productNo = $(event.target).parent().siblings(input[type=hidden]).val();
-    var quantity = $(event.target).parent().prev().children().val();
+// 선택상품 삭제
+function deleteCart(){
+    let memberId = $("#memberId").val();
+    let productNo = [];
 
-    // console.log(productNo);
-    console.log(quantity);
+    $(".cartList tbody").find("input[type='checkbox']").each(function(){
+        if($(this).prop("checked")){
+            productNo.push($(this).parent().parent().find("input[type='hidden']").val());
+        }
+    });
+
+
+    console.log(productNo);
+    console.log(memberId);
+
+    $.ajax({
+        url: "delete.cart",
+        type: "post",
+        data: {productNo: productNo, 
+               memberId: memberId},
+        success: function(result) {
+            if(result == 1){
+                console.log("장바구니 삭제 완료");
+                $(".cartList tbody").find("input[type='checkbox']").each(function(){
+                    if($(this).prop("checked")){
+                        $(this).parent().parent().remove();
+                    }
+                });
+            } else {
+                console.log("장바구니 삭제 실패");
+            }
+        },
+        error: function() {
+            console.log("장바구니 삭제 ajax 에러");
+        }
+    }); 
 }
-
-
-
-

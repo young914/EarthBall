@@ -13,6 +13,13 @@
          , CH_TITLE
          , TO_CHAR(TO_DATE(CH_START_DAY, 'YYYY-MM-DD'), 'YYYY-MM-DD') AS CH_START_DAY
          , TO_CHAR(TO_DATE(CH_END_DAY, 'YYYY-MM-DD'), 'YYYY-MM-DD') AS CH_END_DAY
+         <![CDATA[
+         , CASE
+               WHEN SYSDATE < TO_DATE(CH_START_DAY, 'YYYY-MM-DD')  THEN '진행예정'
+               WHEN SYSDATE > TO_DATE(CH_END_DAY, 'YYYY-MM-DD')  THEN '진행완료'
+               ELSE '진행중'
+        END AS CH_STAT_NAME
+         ]]>
          , MEMBER_ID
          , (SELECT CATEGORY_NAME
             FROM TB_CATEGORY CA
@@ -71,8 +78,16 @@
          , CH_TITLE
          , TO_CHAR(TO_DATE(CH_START_DAY, 'YYYY-MM-DD'), 'YYYY-MM-DD') AS CH_START_DAY
          , TO_CHAR(TO_DATE(CH_END_DAY, 'YYYY-MM-DD'), 'YYYY-MM-DD') AS CH_END_DAY
+         <![CDATA[
+         , CASE
+            WHEN SYSDATE < TO_DATE(CH_START_DAY, 'YYYY-MM-DD')  THEN '진행예정'
+            WHEN SYSDATE > TO_DATE(CH_END_DAY, 'YYYY-MM-DD')  THEN '진행완료'
+            ELSE '진행중'
+          END AS CH_STAT_NAME
+         ]]>
          , MEMBER_ID
          , CATEGORY_NO
+         , FILE_NO
          , (SELECT CATEGORY_NAME
             FROM TB_CATEGORY CA
             WHERE CA.CATEGORY_NO = C.CATEGORY_NO) CATEGORY_NAME
