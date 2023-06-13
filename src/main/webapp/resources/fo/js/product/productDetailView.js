@@ -1,26 +1,65 @@
 // 수량 증가, 감소 및 총 가격 계산
 function plus(){
-    let quantity = $(".quantity").val();
+    let amount = $(".amount").val();
     let price = parseInt($("#productPrice").children().text());
 
-    if(quantity  > 0){
-        quantity++;
-        var total = price * quantity
-        $(".quantity").val(quantity);
+    if(amount  > 0){
+        amount++;
+        var total = price * amount
+        $(".amount").val(amount);
         $("#total").children().eq(0).text(total);
     }
 }
 
 function minus(){
-    let quantity = $(".quantity").val();
+    let amount = $(".amount").val();
     let price = parseInt($("#productPrice").children().text());
 
-    if(quantity > 1){
-        quantity--;
-        var total = price * quantity
-        $(".quantity").val(quantity);
+    if(amount > 1){
+        amount--;
+        var total = price * amount
+        $(".amount").val(amount);
         $("#total").children().eq(0).text(total);
     }
+}
+
+// 장바구니 추가 
+// 로그인 안되어있으면 로그인 페이지로 이동
+function loginPage(){
+    alert("로그인이 필요한 서비스입니다.");
+    location.href = "loginForm.me";
+}
+// 로그인 되어있으면 장바구니 추가
+function insertCart(){
+    let productNo = $(".productNo").val();
+    let memberId = $(".memberId").val();
+    let amount = $(".amount").val();
+    let price = parseInt($("#productPrice").children().text());
+
+    console.log(productNo);
+    console.log(memberId);
+    console.log(amount);
+    console.log(price);
+
+    $.ajax({
+        url: "insert.cart",
+        type: "post",
+        data: {productNo: productNo, 
+                memberId: memberId, 
+                amount: amount, 
+                price: price},
+        success: function(result) {
+            if(result == 1){
+                console.log("장바구니 추가 완료");
+            } else {
+                console.log("장바구니 추가 실패");
+            }
+        },
+        error: function() {
+            console.log("장바구니 추가 ajax 에러");
+        }
+    });
+
 }
 
 

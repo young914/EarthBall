@@ -13,6 +13,7 @@ $(document).ready(function() {
             for(let i in result){
                 html += "<tr>";
                     html += "<td>";
+                        html += "<input type='hidden' value='" + result[i].productNo+ "'>";
                         html += "<input type='checkbox'>";
                     html += "</td>";
                     html += "<td>";
@@ -120,4 +121,51 @@ function updateAmount(productNo, amount, memberId){
             console.log("수량 수정 ajax 에러");
         }
     });
+}
+
+// 전체선택 체크박스 클릭 시
+function allCheck(){
+    if($("#allCheck").prop("checked")){
+        $(".cartList tbody").find("input[type='checkbox']").prop("checked", true);
+    } else {
+        $(".cartList tbody").find("input[type='checkbox']").prop("checked", false);
+    }
+}
+
+// 선택상품 삭제
+function deleteCart(){
+    let memberId = $("#memberId").val();
+    let productNo = [];
+
+    $(".cartList tbody").find("input[type='checkbox']").each(function(){
+        if($(this).prop("checked")){
+            productNo.push($(this).parent().parent().find("input[type='hidden']").val());
+        }
+    });
+
+
+    console.log(productNo);
+    console.log(memberId);
+
+    $.ajax({
+        url: "delete.cart",
+        type: "post",
+        data: {productNo: productNo, 
+               memberId: memberId},
+        success: function(result) {
+            if(result == 1){
+                console.log("장바구니 삭제 완료");
+                $(".cartList tbody").find("input[type='checkbox']").each(function(){
+                    if($(this).prop("checked")){
+                        $(this).parent().parent().remove();
+                    }
+                });
+            } else {
+                console.log("장바구니 삭제 실패");
+            }
+        },
+        error: function() {
+            console.log("장바구니 삭제 ajax 에러");
+        }
+    }); 
 }

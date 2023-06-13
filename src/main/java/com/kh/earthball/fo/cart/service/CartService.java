@@ -9,4 +9,12 @@ public interface CartService {
 
   int updateAmount(Cart c);
 
+  int deleteCart(int productNo, String memberId);
+
+  int insertCart(Cart c);
+
+  int addStatus(Cart c);
+
+  int plusAmount(Cart c);
+
 }

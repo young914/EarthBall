@@ -59,7 +59,7 @@
                         <table>
                             <tr>
                                 <td><button class="down" onclick="minus();">-</button></td>
-                                <td><input type="text" value="1" class="quantity"></td>
+                                <td><input type="text" value="1" class="amount"></td>
                                 <td><button class="up" onclick="plus();">+</button></td>
                             </tr>
                         </table>
@@ -72,21 +72,50 @@
                 <div id="buttonArea">
                     <div></div>
                     <div><button>구매하기</button></div>
-                    <div><button>장바구니</button></div>
                     <div>
-	                    <c:choose>
-	                    	<c:when test="${ likeStatus }"> <!-- 좋아요 한 경우 -->
-								<button onclick="unlike();" class="likeBtn"><i class="xi-heart"></i></button>
-	                    	</c:when>
-	                    	<c:otherwise> <!-- 좋아요를 안한 경우 -->
-								<button onclick="like();" class="unLikeBtn"><i class="xi-heart-o"></i></button>
-	                    	</c:otherwise>
-	                    </c:choose>
+                        <c:choose>
+                            <c:when test="${ loginUser.memberId != null }">
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="insertCart();">
+                                    장바구니
+                                </button>
+                            </c:when>
+                            <c:otherwise>
+                                <button onclick="loginPage();">
+                                    장바구니
+                                </button>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+                    <div>
+                        <c:choose>
+                            <c:when test="${ likeStatus }"> <!-- 좋아요 한 경우 -->
+                                <button onclick="unlike();" class="likeBtn"><i class="xi-heart"></i></button>
+                            </c:when>
+                            <c:otherwise> <!-- 좋아요를 안한 경우 -->
+                                <button onclick="like();" class="unLikeBtn"><i class="xi-heart-o"></i></button>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                     <div></div>
                 </div>
             </div>
         </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body" style="text-align: center; height: 100px; line-height: 100px;">
+                선택하신 상품을 장바구니에 담았습니다.
+                </div>
+                <div class="modal-footer" style="justify-content: space-evenly;">
+                <button type="button" class="btn" data-bs-dismiss="modal">계속쇼핑</button>
+                <button type="button" class="btn" onclick="location.href='cart.me'">장바구니</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
 
         <script>
         </script>
@@ -260,7 +289,7 @@
                             <div class="userPhoto"><img src="#"></div>
                             <div class="userName">이름</div>
                         </div>
-                    </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -327,10 +356,6 @@
                     </div>
                     </div>
                 </div>
-
-
-
-
 
                 <div><button class="onlyPhoto"><i class="xi-library-image-o"></i>포토 구매평만 보기</button></div>
 

@@ -4,7 +4,7 @@
 <mapper namespace="com.kh.earthball.fo.cart.mapper.CartMapper">
 
 	<select id="selectList" parameterType="String" resultType="com.kh.earthball.fo.cart.vo.Cart">
-		SELECT AMOUNT, C.PRICE, PRODUCT_NAME, CHANGER_NAME, PRODUCT_NO
+		SELECT AMOUNT, C.PRICE, PRODUCT_NAME, CHANGER_NAME, PRODUCT_NO, MEMBER_ID
 		FROM CART C
 		JOIN PRODUCT P USING (PRODUCT_NO)
 		JOIN PRODUCT_ATTA PA USING (PRODUCT_NO)
@@ -18,5 +18,32 @@
 		WHERE PRODUCT_NO = #{productNo}
 		AND MEMBER_ID = #{memberId}
 	</update>
+
+	<delete id="deleteCart">
+		DELETE
+		FROM CART
+		WHERE PRODUCT_NO = #{productNo}
+		AND MEMBER_ID = #{memberId}
+	</delete>
+
+	<select id="addStatus" parameterType="com.kh.earthball.fo.cart.vo.Cart">
+		SELECT COUNT(*)
+		FROM CART
+		WHERE PRODUCT_NO = #{productNo}
+		AND MEMBER_ID = #{memberId}
+	</select>
+
+	<update id="plusAmount" parameterType="com.kh.earthball.fo.cart.vo.Cart">
+		UPDATE CART
+		SET AMOUNT = AMOUNT + #{amount}
+		WHERE PRODUCT_NO = #{productNo}
+		AND MEMBER_ID = #{memberId}
+	</update>
+
+
+	<insert id="insertCart" parameterType="com.kh.earthball.fo.cart.vo.Cart">
+		INSERT INTO CART
+		VALUES(SEQ_CART.NEXTVAL, #{amount}, #{price}, #{productNo}, #{memberId})
+	</insert>
 
 </mapper>
