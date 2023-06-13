@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>1:1 게시판</title>
+<title>공지사항</title>
 
 	<jsp:include page="/WEB-INF/jsp/fo/common/common.jsp"/>
 
@@ -35,11 +35,11 @@
 
         .search2>form>img {
             position : absolute;
-		    width: 17px;
-		    top: 10px;
-		    right: 30px;
-		    margin: 0;
-		 }
+    width: 17px;
+    top: 10px;
+    right: 30px;
+    margin: 0;
+        }
 
         .search2>form>input {
            border: 1px solid #bbb;
@@ -225,27 +225,27 @@
     <thead>
         <tr>
             <th colspan="8">
-                <h1 id="boardtext">1:1 문의</h1>
-                <h4 style="text-align: center;">고객센터 운영시간 | 평일 10:00 ~ 17:00</h4>
-                <c:if test="${not empty loginUser}">
+                <h1 id="boardtext">공지사항</h1>
+                 <h4 style="text-align: center;">배송 및 운영관련 공지사항 게시판입니다.</h4>
+                <c:if test="${loginUser.memberId eq 'admin'}">
                     <span class="btn-group">
                         <!-- 버튼 클래스 -->
                         <button id="insertList">
-                            <a class="enrollbo"href="enrollForm.bo">작성하기</a>
+                            <a class="enrollno"href="enrollForm.no">작성하기</a>
                         </button>
                     </span>
                 </c:if>
             </tr>
             <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="list.bo">1:1 문의</a>
+                    <a class="navbar-brand">공지사항</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarColor01">
                         <ul class="navbar-nav me-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="list.no">공지사항</a>
+                                <a class="nav-link" href="list.bo">1:1문의</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="list.faq">FAQ</a>
@@ -254,46 +254,93 @@
                     </div>
                 </div>
             </nav>
-            <tr>
-                <th>No</th>
-                <th>제목</th>
-                <th>글쓴이</th>
-                <th>작성일</th>
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach var="b" items="${list}">
-                <tr>
-                    <td class="bno">${b.boardNo}</td>
-                    <td>
-                        <a href="${pageContext.request.contextPath}/detail.bo?bno=${b.boardNo}">${b.boardTitle}</a>
-                    </td>
-                    <td>${b.memberId}</td>
-                    <td>${b.boardDate}</td>
-                </tr>
-            </c:forEach>
-            <tr>
-        </tbody>
-    </table>
-    <br>
-    <div id="page_search" align="center">
+             <tr>
+      <th>No</th>
+      <th>
+        <select id="categoryFilter" onchange="changeCategory()">
+          <option value="all">All</option>
+          <option value="category1">Category 1</option>
+          <option value="category2">Category 2</option>
+        </select>
+      </th>
+      <th>Title</th>
+      <th>Created date</th>
+      <th>Views</th>
+    </tr>
+  </thead>
+  <tbody>
+    <c:forEach var="b" items="${list}">
+      <tr class="noticeRow" data-category="${b.noticeCategory}">
+        <td class="bno">${b.noticeNo}</td>
+        <td>
+          <c:choose>
+            <c:when test="${b.noticeCategory == 'category1'}">
+              Category 1
+            </c:when>
+            <c:when test="${b.noticeCategory == 'category2'}">
+              Category 2
+            </c:when>
+            <c:otherwise>
+              etc
+            </c:otherwise>
+          </c:choose>
+        </td>
+        <td>
+          <a href="${pageContext.request.contextPath}/detail.no?bno=${b.noticeNo}">${b.noticeTitle}</a>
+        </td>
+        <td>${b.noticeDate}</td>
+        <td>${b.noticeView}</td>
+      </tr>
+    </c:forEach>
+  </tbody>
+</table>
+
+
+<script>
+  var selectedCategory = "all"; // 기본적으로 모든 카테고리를 보여주기 위해 "all"로 초기화
+
+  // 페이지 로드 시 초기 필터링
+  window.onload = function() {
+    filterByCategory();
+  };
+
+  function changeCategory() {
+    selectedCategory = document.getElementById("categoryFilter").value;
+    filterByCategory();
+  }
+
+  function filterByCategory() {
+    var noticeRows = document.getElementsByClassName("noticeRow");
+
+    for (var i = 0; i < noticeRows.length; i++) {
+      var category = noticeRows[i].getAttribute("data-category");
+      if (selectedCategory === "all" || category === selectedCategory) {
+        noticeRows[i].style.display = "table-row";
+      } else {
+        noticeRows[i].style.display = "none";
+      }
+    }
+  }
+</script>
+<br>
+<div id="page_search" align="center">
   <div id="page">
     <div class="page_btn" align="center">
       <ul class="pagination">
-        <li><a href="/list.bo?cPage=1" class="first">처음 페이지</a></li>
+        <li><a href="/list.no?cPage=1" class="first">처음 페이지</a></li>
 
         <c:choose>
           <c:when test="${pi.currentPage eq 1}">
             <li><a href="#" class="arrow_left" disabled> &lt;&lt; </a></li>
           </c:when>
           <c:otherwise>
-            <li><a href="/list.bo?cPage=${pi.currentPage - 1}" class="arrow_left"> &lt;&lt; </a></li>
+            <li><a href="/list.no?cPage=${pi.currentPage - 1}" class="arrow_left"> &lt;&lt; </a></li>
           </c:otherwise>
         </c:choose>
 
         <c:forEach var="page" begin="${pi.startPage}" end="${pi.endPage}" step="1">
           <li>
-            <a href="/list.bo?cPage=${page}" class="active num">${page}</a>
+            <a href="/list.no?cPage=${page}" class="active num">${page}</a>
           </li>
         </c:forEach>
 
@@ -302,20 +349,32 @@
             <li><a href="#" class="arrow_right" disabled> &gt;&gt; </a></li>
           </c:when>
           <c:otherwise>
-            <li><a href="/list.bo?cPage=${pi.currentPage + 1}" class="arrow_right"> &gt;&gt; </a></li>
+            <li><a href="/list.no?cPage=${pi.currentPage + 1}" class="arrow_right"> &gt;&gt; </a></li>
           </c:otherwise>
         </c:choose>
 
         <li>
-          <a href="/list.bo?cPage=${pi.maxPage}" class="last">끝 페이지</a>
+          <a href="/list.no?cPage=${pi.maxPage}" class="last">끝 페이지</a>
         </li>
       </ul>
     </div>
   </div>
 </div>
+
+
+        <br><br>
+        <div id="search2-1" align="center">
+            <div class="search2">
+                <form action="">
+                    <input type="text" placeholder="검색어를 입력하세요">
+                    <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- page_search div -->
-</div>
-</div>
+
 <jsp:include page="/WEB-INF/jsp/fo/common/footer.jsp"/>
 </body>
 

@@ -23,21 +23,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
     <style>
-      html, body{
-    margin: 0;
-    padding: 0;
-}
-
         /* ---------------------------------- */
 
-        /* 메인영역 */
-        #container{
-            width: 1200px;
-            height: 3000px;
-            margin: 0 auto;
-            padding-top: 170px;
-            /* background-color: aliceblue; */
-        }
+
 
         /* 공지사항 */
         table {
@@ -85,14 +73,6 @@
         width: 36.4rem;
         }
 
-        /* 메인영역 */
-        #container{
-            width: 1200px;
-            height: 3000px;
-            margin: auto;
-            padding-top: 170px;
-            /* background-color: aliceblue; */
-        }
 
 	/*-------------  버튼 스타일 ---------------*/
 
@@ -296,10 +276,12 @@
 
     </div>
    </div>
+
    </div>
+          <jsp:include page="/WEB-INF/jsp/fo/common/footer.jsp"/>
 
 
-    <jsp:include page="/WEB-INF/jsp/fo/common/footer.jsp"/>
+
 
 
 
