@@ -47,7 +47,7 @@
       <div class="content-wrapper">
         <!-- Content -->
         <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="fw-bold">공통 코드 등록</h4>
+          <h4 class="fw-bold">그룹 코드 수정</h4>
 
           <!-- Basic Layout -->
           <div class="col-xl">
@@ -64,7 +64,7 @@
                     <input type="text" class="form-control" name="grpCodeName" id="grpCodeName" placeholder="그룹코드명" value="${grpCode.grpCodeName}">
                   </div>
                   <button type="button" class="btn btn-primary" onclick="grpCodeValidate();">수정하기</button>
-                  <button type="button" class="btn btn-danger" onclick="javascript:history.go(-1);">생성취소</button>
+                  <button type="button" class="btn btn-danger" onclick="javascript:history.go(-1);">수정취소</button>
                 </form>
               </div>
             </div>

@@ -47,7 +47,7 @@
             <div class="content-wrapper">
                 <!-- Content -->
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold">공통 코드 등록</h4>
+                    <h4 class="fw-bold">공통 코드 수정</h4>
 
                     <!-- Basic Layout -->
                     <div class="col-xl">

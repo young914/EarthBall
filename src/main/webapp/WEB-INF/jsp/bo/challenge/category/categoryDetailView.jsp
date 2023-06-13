@@ -175,7 +175,7 @@
         location.href = "/insertForm.te?categoryNo=" + categoryNo;
     }
     function viewCategoryTemplate(categoryNo) {
-        location.href = "/insertForm.te?categoryNo=" + categoryNo;
+        location.href = "/insertForm.ch?categoryNo=" + categoryNo;
     }
 
     function updateTemplate(button) {
