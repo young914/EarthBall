@@ -56,7 +56,7 @@
       <span class="form_title">챌린지명 <span class="star">*</span></span>
       <input type="text" class="form_text" placeholder="챌린지명을 입력해주세요." name="chTitle" required> <br><br>
 
-      <span class="form_title">카테고리 <span class="star">&nbsp;</span></span>
+      <span class="form_title">카테고리 <span class="star">&nbsp;</span>&nbsp;</span>
       <input type="hidden" name="categoryNo" value="${category.categoryNo}">
       <input type="text" class="form_text" value="${category.categoryName}" readonly> <br><br>
 

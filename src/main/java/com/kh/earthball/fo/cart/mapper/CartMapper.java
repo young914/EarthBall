@@ -9,4 +9,6 @@ public interface CartMapper {
 
   ArrayList<Cart> selectList(String memberId);
 
+  int updateAmount(Cart c);
+
 }

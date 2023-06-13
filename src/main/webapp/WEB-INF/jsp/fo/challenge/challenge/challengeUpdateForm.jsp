@@ -56,7 +56,7 @@
       <span class="form_title">챌린지명 <span class="star">*</span></span>
       <input type="text" class="form_text" name="chTitle" value="${challenge.chTitle}" required> <br><br>
 
-      <span class="form_title">카테고리 <span class="star">&nbsp;</span></span>
+      <span class="form_title">카테고리 <span class="star">&nbsp</span></span>
       <input type="hidden" name="categoryNo" value="${challenge.categoryNo}">
       <input type="hidden" name="chNo" value="${challenge.chNo}">
       <input type="text" class="form_text" value="${challenge.categoryName}" readonly> <br><br>
@@ -73,7 +73,7 @@
           <img src="${challenge.filePath}"
                class="image-box"/>
           <input type="file" accept="image/*" name="fileNo" id="fileNo" onchange="uploadImage();"/>
-          <input type="hidden" name="resultFileNo" value="">
+          <input type="hidden" name="resultFileNo" value="${challenge.fileNo}">
         </div>
       </div>
     </div>
@@ -204,12 +204,12 @@
                 , chStartDay: chStartDay.val()
                 , chEndDay: chEndDay.val()
                 , memberId: "${loginUser.memberId}"
-                , fileNo: fileNo
+                , fileNo: fileNo !
                 , chContent : markupStr
                 , chNo : chNo
             }
 
-            console.log("챌린지 오픈 요청_기본정보용 data : ", updateChallenge);
+            console.log("챌린지 오픈 요청_기본정보용 data : ", JSON.stringify(updateChallenge), updateChallenge);
 
             $.ajax({
                 url: "/update.chall"
@@ -229,16 +229,6 @@
                 }
             });
         }
-        //
-        // $("#chContent").summernote({
-        //     height : 700
-        //     , minHeight : null
-        //     , maxHeight : null
-        //     , focus : true
-        // });
-
-
-
     </script>
 
 

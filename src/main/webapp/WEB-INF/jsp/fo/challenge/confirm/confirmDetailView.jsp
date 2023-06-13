@@ -179,7 +179,7 @@
             <div class="basic_form_2">
               <div class="flex-container">
                 <div class="wrapper">
-                  <img src="${chConfirm.filePath}"
+                  <img src="${empty temp.chDetailInfoList ? '' : temp.chDetailInfoList[0].filePath}"
                        class="image-box"/>
                   <input type="hidden" name="${temp.categoryTemplateNo}_${temp.inputType}">
                   </label>

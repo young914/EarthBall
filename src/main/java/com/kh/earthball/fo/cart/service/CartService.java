@@ -5,6 +5,8 @@ import com.kh.earthball.fo.cart.vo.Cart;
 
 public interface CartService {
 
-  ArrayList<Cart> selectList(String memberID);
+  ArrayList<Cart> selectList(String memberId);
+
+  int updateAmount(Cart c);
 
 }

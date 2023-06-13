@@ -145,8 +145,8 @@
   width: 200px;
   height: 60px;
   color: white;
-  font-weight: 700;
-  font-size: 20px;
+  font-weight: 500;
+  font-size: 30px;
   margin: 20px;
 }
 
@@ -163,8 +163,8 @@
   width: 200px;
   height: 60px;
   color: #69abce;
-  font-weight: 700;
-  font-size: 20px;
+  font-weight: 500;
+  font-size: 30px;
   margin: 20px;
 }
 
@@ -237,8 +237,8 @@
 
 
 .form_title {
-  font-size: 20px;
-  font-weight: 800;
+  font-size: 30px;
+  font-weight: 500;
   margin-left: 30px;
   margin-top: 40px;
   color: rgb(94, 94, 94);
@@ -246,9 +246,9 @@
 }
 
 .form_content {
-  font-size: 20px;
+  font-size: 25px;
   margin-left: 30px;
-  font-weight: 800;
+  font-weight: 200;
 }
 
 
@@ -274,6 +274,15 @@
   font-weight: 900;
   border: #146C94 1px dashed;
   display: inline-block;
+}
+
+#title_title {
+  word-wrap : break-word; /*- 단어 단위로 줄바꿈*/
+  text-align : left; /*- 텍스트를 가운데나 오른쪽 정렬을 하게 되면 말줄임표가 이상한 곳으로 갈 수 있음*/
+  display: -webkit-box; /*유연하게 height를 증감시킬 수 있는 플렉스 박스형태로 변환*/
+  -webkit-line-clamp: 1; /* 보여줄 줄 수 */
+  -webkit-box-orient: vertical; /* 플렉스 박스의 방향 설정(가로)*/
+  overflow: hidden; /* 넘치는 글자는 감추기 */
 }
 
 

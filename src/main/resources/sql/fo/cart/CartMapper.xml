@@ -12,4 +12,11 @@
 		AND FILE_LEVEL = 0
 	</select>
 
+	<update id="updateAmount" parameterType="com.kh.earthball.fo.cart.vo.Cart">
+		UPDATE CART
+		SET AMOUNT = #{amount}
+		WHERE PRODUCT_NO = #{productNo}
+		AND MEMBER_ID = #{memberId}
+	</update>
+
 </mapper>
