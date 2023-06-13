@@ -21,4 +21,6 @@ public class Store {
   private String status;
   private String jibunAddress;
   private boolean isLiked;
+  private String changerName;
+  private int fileLevel;
 }

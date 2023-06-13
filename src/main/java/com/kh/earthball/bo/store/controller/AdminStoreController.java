@@ -48,18 +48,23 @@ public class AdminStoreController {
 
 
   @RequestMapping("insert.st")
-  public String insertStore(AdminStore s, String startAmPm, String endAmPm, String startHour, String endHour, String startMin, String endMin,
+  public String insertStore(AdminStore s, String startAmPm, String endAmPm,  @RequestParam int  startHour, @RequestParam int  endHour, String startMin, String endMin, String address_detail,
                             MultipartFile upfile1, MultipartFile upfile2, MultipartFile upfile3, MultipartFile upfile4, MultipartFile upfile5,
                             MultipartFile upfile6, MultipartFile upfile7, MultipartFile upfile8, MultipartFile upfile9, MultipartFile upfile10,
                             HttpSession session,
                             ModelAndView mv) {
-    System.out.println(s);
-    System.out.println("startAmPm : " + startAmPm + " endAmPm : " + endAmPm + " startHour : " + startHour + " endHour : " + endHour + " startMin : " + startMin + " endMin : " + endMin);
-
-    String startTime = startAmPm + " " + startHour + ":" + startMin;
-    String endTime = endAmPm + " " + endHour + ":" + endMin;
-    System.out.println(startTime);
-    System.out.println(endTime);
+    
+    if (startAmPm.equals("pm")) {
+      startHour += 12;
+    }
+    if (endAmPm.equals("pm")){
+      endHour += 12;
+    }
+    String businessHours = startHour+ ":" + startMin + " - " + endHour + ":" + endMin;
+    System.out.println(address_detail);
+    System.out.println(businessHours);
+    
+   s.setBusinessHours(businessHours);
     
     ArrayList<MultipartFile> fileList = new ArrayList<>();
     fileList.add(upfile1);

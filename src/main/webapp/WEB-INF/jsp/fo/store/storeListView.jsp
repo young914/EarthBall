@@ -782,7 +782,6 @@ hr{
                     '                <div class="ellipsis">'+ storeList[i].storeAddress + '</div>' + 
                     '                <div class="jibun ellipsis"> (지번) ' + storeList[i].jibunAddress +'</div>' + 
                     '                <div class="businessHours">'+ storeList[i].businessHours + ' </div>' + 
-                    '                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
                     '            </div>' + 
                     '        </div>' + 
                     '    </div>' +    
