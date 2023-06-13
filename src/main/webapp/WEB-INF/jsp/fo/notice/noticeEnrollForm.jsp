@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>글 작성하기</title>
+<title>공지사항 작성</title>
     <!-- include libraries(jQuery, bootstrap) -->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
@@ -98,7 +98,7 @@
 	        });
 	        // 취소 버튼 클릭
 	        $(document).on('click','#resetBtn',function() {
-	            window.location.href ="list.bo";
+	            window.location.href ="list.no";
 	        })
 
 	    });
@@ -107,17 +107,19 @@
 		       function saveContent() {
 		    // get value
 		    var summernoteContent = $('#summernote').summernote('code'); //summer note (description)
-		    var boardTitle = $("#post_title").val();
-		    var memberId = "${loginUser.memberId}";
+		    var noticeTitle = $("#post_title").val();
+		    var noticeCategory = $("#category").val();
 
 		    // Save to server
 		    $.ajax({
 		        type: "POST",
-		        url: "/insert.bo",
-		        data: { boardTitle : boardTitle, boardContent : summernoteContent, memberId : memberId },
+		        url: "/insert.no",
+		        data: { noticeTitle : noticeTitle, noticeContent : summernoteContent, noticeCategory : noticeCategory},
 		        success: function(response) {
+		            console.log(response);
+
 		            alert("글 작성 완료");
-		            window.location.href="list.bo"; // redirect to another page
+		            window.location.href="list.no"; // redirect to another page
 		        },
 		        error: function(e) {
 		            alert("글 작성 실패");
@@ -131,14 +133,23 @@
 </head>
 
 
-    <h1>글 작성하기</h1><hr>
-    <input id="post_title" name="boardTitle" class="no-margin basic_input title_name w100p mb24" type="text" placeholder="제목" required="required"> <br><br>
-    <input id="id" name="memberId" class="no-margin basic_input title_name w100p mb24" value="${loginUser.memberName}" readonly> <br><br>
-    <textarea id="summernote" name="boardContent"></textarea>
-        <div class="enrollFormBtn">
-        <button type="reset" id="resetBtn" class="btn btn-danger">목록으로</button>
-        <button type="submit" class="btn btn-primary" id="saveBtn">작성</button>
-        </div>
+<h1>공지사항 작성</h1>
+<hr>
+
+<input id="post_title" name="noticeTitle" class="no-margin basic_input title_name w100p mb24" type="text" placeholder="제목" required="required"><br><br>
+<input id="id" name="admin" class="no-margin basic_input title_name w100p mb24" value="admin" readonly><br><br>
+<select id="category" name="noticeCategory">
+  <option value="category1">카테고리1</option>
+  <option value="category2">카테고리2</option>
+</select>
+<textarea id="summernote" name="noticeContent"></textarea>
+
+<div class="enrollFormBtn">
+  <button type="button" id="resetBtn" class="btn btn-danger">목록으로</button>
+  <button type="button" class="btn btn-primary" id="saveBtn">작성</button>
+</div>
+
+
 
 
 </body>
