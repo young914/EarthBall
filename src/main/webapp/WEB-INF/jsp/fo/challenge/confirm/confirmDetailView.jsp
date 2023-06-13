@@ -42,6 +42,7 @@
       <span class="form_title">챌린지명</span>
       <span class="form_content">${challenge.chTitle}</span> <br><br>
 
+
       <span class="form_title">카테고리 </span>
       <span class="form_content">${challenge.categoryName}</span> <br><br>
 
@@ -52,8 +53,6 @@
       <span class="form_title">진행상태 </span>
       <span class="form_content">진행중</span> <br><br>
 
-      <input type="hidden" name="chNo" value="${challenge.chNo}">
-      <input type="hidden" name="memberId" value="${loginUser.memberId}">
 
     </div>
 
@@ -70,6 +69,7 @@
     <div class="text">
       <div class="text_class_1">
         <h1 style="color: #146C94; font-weight: 800">${chConfirm.chConTitle}</h1>
+
       </div>
 
       <c:if test="${ not empty loginUser && loginUser.memberId eq chConfirm.memberId}"> <!-- 로그인한 유저와 인증 게시글 작성자 일치 할 때만 보이는 버튼 -->
@@ -235,137 +235,67 @@
       </c:if>
       </c:forEach>
 
+      <div class="reply">
+        <table id="replyArea" class="table" align="center">
+          <thead>
+
+          <c:choose>
+            <c:when test="${ empty loginUser }">
+              <!-- 로그인 전 -->
+              <tr>
+                <th colspan="3">
+                  <textarea class="form-control" name="reContent" cols="55" rows="2" style="resize:none; width:900px; height: 150px;" readonly>로그인한 사용자만 이용이 가능한 서비스입니다. 로그인 후 이용해주세요.</textarea>
+                </th>
+                <th style="vertical-align:middle"><button class="btn_5" disabled>등록하기</button></th>
+              </tr>
+            </c:when>
+            <c:otherwise>
+              <!-- 로그인 후 -->
+              <tr>
+                <th colspan="3">
+                  <textarea class="form-control" name="reContent" cols="55" rows="2" style="resize:none; width:900px; height: 150px;" placeholder="댓글을 남겨주세요."></textarea>
+                </th>
+                <th style="vertical-align:middle"><button class="btn_5" onclick="addReply();">등록하기</button></th>
+              </tr>
+            </c:otherwise>
+          </c:choose>
+
+          <tr>
+            <td colspan="3">댓글(<span id="rcount"></span>)</td>
+          </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 히든 들 -->
+      <input type="hidden" name="chNo" value="${challenge.chNo}"> <!-- 챌린지의 번호 -->
+      <input type="hidden" name="memberId" value="${loginUser.memberId}"> <!-- 로그인한 사람 아이디 -->
+      <input type="hidden" name="chConNo" value="${chConfirm.chConNo}">  <!-- 챌린지 인증의 번호 -->
+      <input type="hidden" name="writer" value="${chConfirm.memberId}">  <!-- 챌린지 인증 작성자 -->
 
     </div>
     <!-- 탬플릿 폼 안 영역 끝-->
   </div>
 
-<!--
-  <div class="btn_div">
-    <button class="btn_1" onclick="confirm_challenge();">챌린지 인증</button>
-    <button class="btn_1" onclick="javascript:history.go(-1);">인증 취소</button>
-  </div>
--->
 
   <script>
+    $(document).ready(function () {
+      selectReplyList();
+    });
 
       function confirm_update(chConNo) {
           location.href="updateForm.con?chConNo=" + chConNo;
       }
-
-      function confirm_challenge() {
-          // TB_CH_CONFIRM 챌린지 인증 정보 넘기기
-          let chNo = $("input[type=hidden][name=chNo]").val();            // 챌린지 일련번호
-          let chConTitle = $("input[type=text][name=chConTitle]").val();      // 챌린지 인증 제목
-          let memberId = $("input[type=hidden][name=memberId]").val();       // 회원아이디
-
-          // 자 그럼 이제부터 여기에 챌린지 상세 정보 데이터 담기.....
-          let templateList = []
-          <c:forEach var="temp" items="${templateList}">
-          templateList.push({
-              categoryTemplateNo: '${temp.categoryTemplateNo}'
-              , inputType: '${temp.inputType}'
-          });
-          </c:forEach>
-
-          let list = []       // 이게 TB_CH_DETAIL_INFO
-          for (let i = 0; templateList.length > i; i++) {
-              // 만약 code랑 fileNo이 없을 경우
-              if (templateList[i].inputType == 'text' || templateList[i].inputType == 'number'
-                  || templateList[i].inputType == 'range' || templateList[i].inputType == 'datetime-local') {
-
-                  list.push({
-                      categoryTemplateNo: templateList[i].categoryTemplateNo,
-                      chDetailInfoData: $('input[name=' + templateList[i].categoryTemplateNo + "_" + templateList[i].inputType + ']').val(),
-                      code: null,
-                      fileNo: null
-                  });
-              }
-
-              if (templateList[i].inputType == 'textarea') {
-                  list.push({
-                      categoryTemplateNo: templateList[i].categoryTemplateNo,
-                      chDetailInfoData: $('textarea[name=' + templateList[i].categoryTemplateNo + "_" + templateList[i].inputType + ']').val(),
-                      code: null,
-                      fileNo: null
-                  });
-              }
-
-              if (templateList[i].inputType == 'file') {
-                  list.push({
-                      categoryTemplateNo: templateList[i].categoryTemplateNo,
-                      chDetailInfoData: null,
-                      code: null,
-                      fileNo: $('input[name=' + templateList[i].categoryTemplateNo + "_" + templateList[i].inputType + ']').val()
-                  });
-              }
-
-              if (templateList[i].inputType == 'select') {
-                  list.push({
-                      categoryTemplateNo: templateList[i].categoryTemplateNo,
-                      chDetailInfoData: null,
-                      code: $('select[name=' + templateList[i].categoryTemplateNo + "_" + templateList[i].inputType + ']').val(),
-                      fileNo: null
-                  });
-              }
-              if (templateList[i].inputType == 'radio') {
-                  list.push({
-                      categoryTemplateNo: templateList[i].categoryTemplateNo,
-                      chDetailInfoData: null,
-                      code: $('input[name=' + templateList[i].categoryTemplateNo + "_" + templateList[i].inputType + ']:checked').val(),
-                      fileNo: null
-                  });
-              }
-              if (templateList[i].inputType == 'checkbox') {
-                  $('input[type="checkbox"][name=' + templateList[i].categoryTemplateNo + "_" + templateList[i].inputType + ']').each(function () {
-                      if ($(this).is(':checked')) {
-                          list.push({
-                              categoryTemplateNo: templateList[i].categoryTemplateNo,
-                              chDetailInfoData: null,
-                              code: $(this).val(),
-                              fileNo: null
-                          });
-                      }
-                  });
-              }
-          }
-          //console.log("templateList : " , templateList);
-
-
-          let confirmInfo = { // 인증 기본 정보
-              chNo: chNo
-              , chConTitle: chConTitle
-              , memberId: memberId
-              , chDetailInfoList: list
-          }
-
-          console.log("인증 기본 정보 : ", confirmInfo);
-          console.log("디테일 정보 list : ", list);
-
-          $.ajax({
-              url: "/insert.con"
-              , type: "post"
-              , data: JSON.stringify(confirmInfo)
-              , contentType: 'application/json'
-              , success: function (result) {
-                  if (result > 0) {
-                  } else {
-                  }
-                  location.href = "/main.chall"
-              }
-              , error: function () {
-              }
-          });
-      }
-
-
 
       function confirm_delete(chConNo) {
 
         // TB_CH_CONFIRM 챌린지 인증 정보 넘기기
         let chNo = $("input[type=hidden][name=chNo]").val();            // 챌린지 일련번호
         let chConTitle = $("input[type=text][name=chConTitle]").val();      // 챌린지 인증 제목
-        let memberId = $("input[type=hidden][name=memberId]").val();       // 회원아이디
+        let memberId = $("input[type=hidden][name=writer]").val();       // 회원아이디
 
         let deleteConfirmInfo = { // 인증 기본 정보
           chNo: chNo
@@ -392,6 +322,97 @@
           }
         });
       }
+
+
+      /* 댓글 용 */
+      function addReply() {	// 댓글 작성용 ajax
+
+        let chNo = $("input[type=hidden][name=chNo]").val();
+        let chConNo = $("input[type=hidden][name=chConNo]").val();
+        let reContent = $("[name=reContent]").val();
+        let memberId = $("input[type=hidden][name=memberId]").val();
+
+        let replyData = {
+          chNo : chNo
+          , chConNo : chConNo
+          , reContent : reContent
+          , memberId : memberId
+        }
+
+        console.log("replyData", replyData);
+
+
+        if($("[name=reContent]").val().trim().length != 0) {	// 즉, 유효한 내용이 한글자라도 있을 경우
+          $.ajax({
+            url : "/rinsert.con"
+            , type : "post"
+            , data : replyData
+            , success : function(result) {
+              if(result == 'success') {
+                selectReplyList();
+                $("[name=reContent]").val("");	// 초기화 효과
+              }
+            }
+            , error : function() {
+              console.log("댓글 작성용 ajax 통신 실패!");
+            }
+          });
+        } else {
+          alertify.alert("알림", "댓글 작성 후 등록 요청해주세요.");
+        }
+      }
+
+
+      function selectReplyList() {
+
+        let chNo = $("input[type=hidden][name=chNo]").val();
+        let chConNo = $("input[type=hidden][name=chConNo]").val();
+
+        let selectReplyData = JSON.stringify({
+          chNo : chNo
+          , chConNo: chConNo
+        });
+
+        console.log("selectReplyData는 : " , selectReplyData);
+
+        $.ajax({
+          url : "/rlist.con"
+          , type : "post"
+          , data : selectReplyData
+          , contentType: 'application/json'
+          , success : function(result) {
+            console.log("reply 넘어왔나?: ", result);
+            let resultStr = "";
+
+            for(var i = 0; i < result.length; i++) {
+              resultStr += "<tr>"
+                      + 	"<td>" + result[i].memberId + "</td>"
+                      + 	"<td>" + result[i].reContent + "</td>"
+                      + 	"<td>" + result[i].reCreateDate + "</td>"
+                      +     "<td>"
+                      +           "<button class='btn_6' onclick='editReply(" + result[i].reNo + ")'>수정</button> "
+                      +           "<button class='btn_6' onclick='deleteReply(" + result[i].reNo + ")'>삭제</button>"
+                      +     "</td>"
+                      + "</tr>";
+            }
+            $("#replyArea>tbody").html(resultStr);
+            $("#rcount").text(result.length);
+          }
+          , error : function() {
+            console.log("댓글 조회용 ajax 통신 실패!");
+          }
+        });
+      }
+
+      function editReply(reNo) {  // 댓글 수정용
+
+      }
+
+      function deleteReply(reNo) {  // 댓글 삭제용
+
+      }
+
+
   </script>
 
 
