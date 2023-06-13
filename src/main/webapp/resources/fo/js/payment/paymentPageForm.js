@@ -1,25 +1,4 @@
-//카카오페이 결제요청
-
-//$(function() {
-//  $("#payComplete").click(function() {
-//      $.ajax({
-//          url : "kakaopay",
-//          dataType : "json",
-//          success : function(rsp) {
-//              // alert(rsp.tid); //결제 고유 번호
-//              // console.log(rsp);
-
-//              var box = rsp.next_redirect_pc_url;
-//              // window.open(box); // 새창 열기
-//              location.href = box;
-//          },
-//          error : function(error) {
-//              alert(error);
-//          }
-//      });
-//  });
-//});
-
+// 결제요청
 function orderPay() {
 
 	let today = new Date();
@@ -105,7 +84,7 @@ function orderPay() {
 						postCode : $("#postCode").val(),
 						receiveAddress1 : $("#address1").val(),
 						receiveAddress2 : $("#address2").val(),
-						deliveryComent : $("#deliveryComent").val(),
+						deliveryComment : $("#deliveryComment").val(),
 						paymentToken : rsp.pg_tid
 					},
 					success : function(data) {
@@ -173,3 +152,52 @@ function addressAPI() {
 		}
 	}).open();
 }
+
+// 포인트 입력 시 조건 확인
+$("#point").on("propertychange change keyup paste input", function(){
+
+	const maxPoint = parseInt($("#realPoint").val());
+
+	let inputValue = parseInt($(this).val());
+
+	if(inputValue < 0) {
+
+		$(this).val(0);
+
+	} else if(inputValue > maxPoint) {
+
+		$(this).val(maxPoint);
+
+	}
+});
+
+$(".point-btn").on("click", function() {
+
+	console.log("버튼변경");
+
+	const maxPoint = parseInt($("#realPoint").val());
+
+	let state = $(this).data("state");
+
+	if(state == "Y") {
+
+		console.log("y동작");
+		/* 모두사용 */
+		//값 변경
+		$("#point").val(maxPoint);
+		//글 변경
+		$("#pointCancel").css("display", "inline-block");
+		$("#pointAll").css("display", "none");
+
+	} else if(state == "N") {
+
+		console.log("n동작");
+		/* 취소 */
+		//값 변경
+		$("#point").val(0);
+		//글 변경
+		$("#pointCancel").css("display", "none");
+		$("#pointAll").css("display", "inline-block");
+
+	}
+});

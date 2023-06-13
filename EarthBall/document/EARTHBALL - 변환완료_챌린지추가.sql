@@ -126,10 +126,10 @@ CREATE TABLE PAYMENT
     PAYMENT_TOTAL          NUMBER NOT NULL,
     RECEIVE_NAME           VARCHAR2(20) NOT NULL,
     RECEIVE_PHONE          VARCHAR2(11) NOT NULL,
-    POST_CODE              NUMBER NOT NULL,
+    POST_CODE              VARCHAR2(5) NOT NULL,
     ADDRESS1               VARCHAR2(100) NOT NULL,
     ADDRESS2               VARCHAR2(100) NOT NULL,
-    DELIVERY_COMENT        VARCHAR2(100),
+    DELIVERY_COMMENT        VARCHAR2(100),
     PAYMENT_TOKEN          VARCHAR2(40) NOT NULL
 );
 
@@ -200,8 +200,8 @@ CREATE TABLE MEMBER
     GRADE_NAME   VARCHAR2(15) DEFAULT 'RED' NOT NULL,
     POST_CODE    VARCHAR2(5),
     MAIL_AUTH    NUMBER DEFAULT 0,
-    MAIL_KEY     VARCHAR2(50)
-
+    MAIL_KEY     VARCHAR2(50),
+    TOTAL_POINT  NUMBER DEFAULT 0
 );
 
 CREATE SEQUENCE SEQ_MEMBER;
@@ -555,8 +555,8 @@ ALTER TABLE TB_CH_CON_REPLY
         REFERENCES TB_CH_CONFIRM (CH_CON_NO, CH_NO);
 
 
-------------------- [ 챌린�?�??�� ?��?�� ] ------------------- 
--- < ?��?��조건 �?경사?�� >
+------------------- [ 챌린�??�???�� ?��?�� ] ------------------- 
+-- < ?��?��조건 �??경사?�� >
 
 ALTER TABLE TB_CH_DETAIL_INFO
 DROP
@@ -569,7 +569,7 @@ CONSTRAINT SYS_C0010295;
 
 
 ---------------------------------------------------------------------------------------
---  < ?��???�� �?경사?�� >
+--  < ?��???�� �??경사?�� >
 -- 1. TB_CATEGORY ?��???��
 DROP SEQUENCE SEQ_CATE_NO;
 
@@ -591,7 +591,7 @@ FROM DUAL;
 
 
 -----------------------------------------------------------------------------------
--- < 컬럼 �?경사?�� >
+-- < 컬럼 �??경사?�� >
 
 ALTER TABLE TB_CHALLENGE DROP COLUMN CODE;
 
@@ -603,67 +603,67 @@ ALTER TABLE TB_CATEGORY_TEMPLATE DROP COLUMN GRP_CODE;
 COMMENT
 ON COLUMN TB_CATEGORY.CATEGORY_NO IS '카테고리 ?��?��번호';
 COMMENT
-ON COLUMN TB_CATEGORY.CATEGORY_NAME IS '카테고리�?';
+ON COLUMN TB_CATEGORY.CATEGORY_NAME IS '카테고리�??';
 COMMENT
-ON COLUMN TB_CATEGORY.STATUS IS '?��?��?���?';
+ON COLUMN TB_CATEGORY.STATUS IS '?��?��?���??';
 
 -- 2. TB_CATEGORY_TEMPLATE
 COMMENT
-ON COLUMN TB_CATEGORY_TEMPLATE.CATEGORY_TEMPLATE_NO IS '?��?���? ?��?��번호';
+ON COLUMN TB_CATEGORY_TEMPLATE.CATEGORY_TEMPLATE_NO IS '?��?���?? ?��?��번호';
 COMMENT
 ON COLUMN TB_CATEGORY_TEMPLATE.INPUT_TYPE IS '?��?��???��';
 COMMENT
-ON COLUMN TB_CATEGORY_TEMPLATE.STATUS IS '?��?��?���?';
+ON COLUMN TB_CATEGORY_TEMPLATE.STATUS IS '?��?��?���??';
 COMMENT
 ON COLUMN TB_CATEGORY_TEMPLATE.SORT_NO IS '?��?��?��?��';
 COMMENT
-ON COLUMN TB_CATEGORY_TEMPLATE.CH_SUB_TITLE IS '챌린�? ?��?���?';
+ON COLUMN TB_CATEGORY_TEMPLATE.CH_SUB_TITLE IS '챌린�?? ?��?���??';
 COMMENT
 ON COLUMN TB_CATEGORY_TEMPLATE.CATEGORY_NO IS '카테고리 ?��?��번호';
 
 -- 3. TB_CH_CON_REPLY
 COMMENT
-ON COLUMN TB_CH_CON_REPLY.RE_NO IS '?���?번호';
+ON COLUMN TB_CH_CON_REPLY.RE_NO IS '?���??번호';
 COMMENT
-ON COLUMN TB_CH_CON_REPLY.CH_CON_NO IS '챌린�? ?���? ?��?��번호';
+ON COLUMN TB_CH_CON_REPLY.CH_CON_NO IS '챌린�?? ?���?? ?��?��번호';
 COMMENT
-ON COLUMN TB_CH_CON_REPLY.CH_NO IS '챌린�? ?��?��번호';
+ON COLUMN TB_CH_CON_REPLY.CH_NO IS '챌린�?? ?��?��번호';
 COMMENT
-ON COLUMN TB_CH_CON_REPLY.RE_CONTENT IS '?���??��?��';
+ON COLUMN TB_CH_CON_REPLY.RE_CONTENT IS '?���???��?��';
 COMMENT
 ON COLUMN TB_CH_CON_REPLY.RE_CREATE_DATE IS '?��?��?��';
 COMMENT
-ON COLUMN TB_CH_CON_REPLY.STATUS IS '?��?��?���?';
+ON COLUMN TB_CH_CON_REPLY.STATUS IS '?��?��?���??';
 COMMENT
 ON COLUMN TB_CH_CON_REPLY.MEMBER_ID IS '?��?��?��?��?��';
 
 -- 4. TB_CH_CONFIRM
 COMMENT
-ON COLUMN TB_CH_CONFIRM.CH_CON_NO IS '챌린�? ?���? ?��?��번호';
+ON COLUMN TB_CH_CONFIRM.CH_CON_NO IS '챌린�?? ?���?? ?��?��번호';
 COMMENT
-ON COLUMN TB_CH_CONFIRM.CH_NO IS '챌린�? ?��?��번호';
+ON COLUMN TB_CH_CONFIRM.CH_NO IS '챌린�?? ?��?��번호';
 COMMENT
-ON COLUMN TB_CH_CONFIRM.CH_CON_TITLE IS '챌린�? ?���? ?���?';
+ON COLUMN TB_CH_CONFIRM.CH_CON_TITLE IS '챌린�?? ?���?? ?���??';
 COMMENT
-ON COLUMN TB_CH_CONFIRM.CH_CON_CONTENT IS '챌린�? ?���? ?��?��';
+ON COLUMN TB_CH_CONFIRM.CH_CON_CONTENT IS '챌린�?? ?���?? ?��?��';
 COMMENT
 ON COLUMN TB_CH_CONFIRM.MEMBER_ID IS '?��?��?��?��?��';
 COMMENT
-ON COLUMN TB_CH_CONFIRM.STATUS IS '?��?��?���?';
+ON COLUMN TB_CH_CONFIRM.STATUS IS '?��?��?���??';
 COMMENT
 ON COLUMN TB_CH_CONFIRM.CH_CON_CREATE_DATE IS '?��?��?��';
 
 -- 5. TB_CH_DETAIL_INFO
 COMMENT
-ON COLUMN TB_CH_DETAIL_INFO.CH_DETAIL_INFO_NO IS '챌린�? ?��?��?���? ?��?��번호';
+ON COLUMN TB_CH_DETAIL_INFO.CH_DETAIL_INFO_NO IS '챌린�?? ?��?��?���?? ?��?��번호';
 COMMENT
-ON COLUMN TB_CH_DETAIL_INFO.CH_NO IS '챌린�? ?��?��번호';
+ON COLUMN TB_CH_DETAIL_INFO.CH_NO IS '챌린�?? ?��?��번호';
 COMMENT
-ON COLUMN TB_CH_DETAIL_INFO.CATEGORY_TEMPLATE_NO IS '?��?���? ?��?��번호';
+ON COLUMN TB_CH_DETAIL_INFO.CATEGORY_TEMPLATE_NO IS '?��?���?? ?��?��번호';
 COMMENT
-ON COLUMN TB_CH_DETAIL_INFO.CH_DETAIL_INFO_DATA IS '챌린�? ?��?��?���? ?��?��?��';
+ON COLUMN TB_CH_DETAIL_INFO.CH_DETAIL_INFO_DATA IS '챌린�?? ?��?��?���?? ?��?��?��';
 COMMENT
-ON COLUMN TB_CH_DETAIL_INFO.STATUS IS '?��?��?���?';
+ON COLUMN TB_CH_DETAIL_INFO.STATUS IS '?��?��?���??';
 COMMENT
 ON COLUMN TB_CH_DETAIL_INFO.CODE IS '코드';
 COMMENT
@@ -673,19 +673,19 @@ ON COLUMN TB_CH_DETAIL_INFO.FILE_NO IS '?��?�� ?��?��번호';
 COMMENT
 ON COLUMN TB_CHA_FILE.FILE_NO IS '?��?�� ?��?��번호';
 COMMENT
-ON COLUMN TB_CHA_FILE.FILE_NAME IS '?��?���?';
+ON COLUMN TB_CHA_FILE.FILE_NAME IS '?��?���??';
 COMMENT
 ON COLUMN TB_CHA_FILE.FILE_PATH IS '?��?��경로';
 
 -- 7. TB_CHALLENGE
 COMMENT
-ON COLUMN TB_CHALLENGE.CH_NO IS '챌린�? ?��?��번호';
+ON COLUMN TB_CHALLENGE.CH_NO IS '챌린�?? ?��?��번호';
 COMMENT
-ON COLUMN TB_CHALLENGE.CH_TITLE IS '챌린�?�?';
+ON COLUMN TB_CHALLENGE.CH_TITLE IS '챌린�??�??';
 COMMENT
-ON COLUMN TB_CHALLENGE.CH_START_DAY IS '챌린�? ?��?��?��';
+ON COLUMN TB_CHALLENGE.CH_START_DAY IS '챌린�?? ?��?��?��';
 COMMENT
-ON COLUMN TB_CHALLENGE.CH_END_DAY IS '챌린�? 종료?��';
+ON COLUMN TB_CHALLENGE.CH_END_DAY IS '챌린�?? 종료?��';
 COMMENT
 ON COLUMN TB_CHALLENGE.MEMBER_ID IS '?��?��?��?��?��';
 COMMENT
@@ -699,9 +699,9 @@ ON COLUMN TB_CODE.CODE IS '코드';
 COMMENT
 ON COLUMN TB_CODE.GRP_CODE IS '그룹코드';
 COMMENT
-ON COLUMN TB_CODE.CODE_NAME IS '코드�?';
+ON COLUMN TB_CODE.CODE_NAME IS '코드�??';
 COMMENT
-ON COLUMN TB_CODE.STATUS IS '?��?��?���?';
+ON COLUMN TB_CODE.STATUS IS '?��?��?���??';
 COMMENT
 ON COLUMN TB_CODE.SORT_NO IS '?��?��?��?��';
 
@@ -710,123 +710,123 @@ ON COLUMN TB_CODE.SORT_NO IS '?��?��?��?��';
 COMMENT
 ON COLUMN TB_GRP_CODE.GRP_CODE IS '그룹코드';
 COMMENT
-ON COLUMN TB_GRP_CODE.GRP_CODE_NAME IS '그룹코드�?';
+ON COLUMN TB_GRP_CODE.GRP_CODE_NAME IS '그룹코드�??';
 COMMENT
-ON COLUMN TB_GRP_CODE.STATUS IS '?��?��?���?';
-------------------- [ 챌린�?�??�� ?�� ] ------------------- 
+ON COLUMN TB_GRP_CODE.STATUS IS '?��?��?���??';
+------------------- [ 챌린�??�???�� ?�� ] ------------------- 
 
 
--- STORE_REGION ?���?
+-- STORE_REGION ?���??
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (1, '?��?��?��별시', '종로�?');
+VALUES (1, '?��?��?��별시', '종로�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (2, '?��?��?��별시', '중구');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (3, '?��?��?��별시', '?��?���?');
+VALUES (3, '?��?��?��별시', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (4, '?��?��?��별시', '?��?���?');
+VALUES (4, '?��?��?��별시', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (5, '?��?��?��별시', '광진�?');
+VALUES (5, '?��?��?��별시', '광진�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (6, '?��?��?��별시', '?��??문구');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (7, '?��?��?��별시', '중랑�?');
+VALUES (7, '?��?��?��별시', '중랑�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (8, '?��?��?��별시', '?��북구');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (9, '?��?��?��별시', '강북�?');
+VALUES (9, '?��?��?��별시', '강북�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (10, '?��?��?��별시', '?��봉구');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (11, '?��?��?��별시', '?��?���?');
+VALUES (11, '?��?��?��별시', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (12, '?��?��?��별시', '???���?');
+VALUES (12, '?��?��?��별시', '???���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (13, '?��?��?��별시', '?��??문구');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (14, '?��?��?��별시', '마포�?');
+VALUES (14, '?��?��?��별시', '마포�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (15, '?��?��?��별시', '?��천구');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (16, '?��?��?��별시', '강서�?');
+VALUES (16, '?��?��?��별시', '강서�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (17, '?��?��?��별시', '구로�?');
+VALUES (17, '?��?��?��별시', '구로�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (18, '?��?��?��별시', '금천�?');
+VALUES (18, '?��?��?��별시', '금천�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (19, '?��?��?��별시', '?��?��?���?');
+VALUES (19, '?��?��?��별시', '?��?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (20, '?��?��?��별시', '?��?���?');
+VALUES (20, '?��?��?��별시', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (21, '?��?��?��별시', '�??���?');
+VALUES (21, '?��?��?��별시', '�???���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (22, '?��?��?��별시', '?��초구');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (23, '?��?��?��별시', '강남�?');
+VALUES (23, '?��?��?��별시', '강남�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (24, '?��?��?��별시', '?��?���?');
+VALUES (24, '?��?��?��별시', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (25, '?��?��?��별시', '강동�?');
+VALUES (25, '?��?��?��별시', '강동�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (26, '�??��광역?��', '중구');
+VALUES (26, '�???��광역?��', '중구');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (27, '�??��광역?��', '?���?');
+VALUES (27, '�???��광역?��', '?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (28, '�??��광역?��', '?���?');
+VALUES (28, '�???��광역?��', '?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (29, '�??��광역?��', '?��?���?');
+VALUES (29, '�???��광역?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (30, '�??��광역?��', '�??��진구');
+VALUES (30, '�???��광역?��', '�???��진구');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (31, '�??��광역?��', '?��?���?');
+VALUES (31, '�???��광역?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (32, '�??��광역?��', '?���?');
+VALUES (32, '�???��광역?��', '?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (33, '�??��광역?��', '북구');
+VALUES (33, '�???��광역?��', '북구');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (34, '�??��광역?��', '강서�?');
+VALUES (34, '�???��광역?��', '강서�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (35, '�??��광역?��', '?��?��??�?');
+VALUES (35, '�???��광역?��', '?��?��??�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (36, '�??��광역?��', '?��?���?');
+VALUES (36, '�???��광역?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (37, '�??��광역?��', '금정�?');
+VALUES (37, '�???��광역?��', '금정�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (38, '�??��광역?��', '?��?���?');
+VALUES (38, '�???��광역?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (39, '�??��광역?��', '?��?���?');
+VALUES (39, '�???��광역?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (40, '�??��광역?��', '?��?���?');
+VALUES (40, '�???��광역?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (41, '�??��광역?��', '기장�?');
+VALUES (41, '�???��광역?��', '기장�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (42, '??구광?��?��', '중구');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (43, '??구광?��?��', '?���?');
+VALUES (43, '??구광?��?��', '?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (44, '??구광?��?��', '?���?');
+VALUES (44, '??구광?��?��', '?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (45, '??구광?��?��', '?���?');
+VALUES (45, '??구광?��?��', '?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (46, '??구광?��?��', '북구');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (47, '??구광?��?��', '?��?���?');
+VALUES (47, '??구광?��?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (48, '??구광?��?��', '?��?���?');
+VALUES (48, '??구광?��?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (49, '??구광?��?��', '?��?���?');
+VALUES (49, '??구광?��?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (50, '??구광?��?��', '군위�?');
+VALUES (50, '??구광?��?��', '군위�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (51, '경기?��', '?��?��?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (52, '경기?��', '?��?��?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (53, '경기?��', '?��?���??��');
+VALUES (53, '경기?��', '?��?���???��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (54, '경기?��', '?��?��?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (55, '경기?��', '�?천시');
+VALUES (55, '경기?��', '�??천시');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (56, '경기?��', '광명?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
@@ -862,7 +862,7 @@ VALUES (71, '경기?��', '?��천시');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (72, '경기?��', '?��?��?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (73, '경기?��', '�??��?��');
+VALUES (73, '경기?��', '�???��?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (74, '경기?��', '?��?��?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
@@ -876,9 +876,9 @@ VALUES (78, '경기?��', '?��주시');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (79, '경기?��', '?��천군');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (80, '경기?��', '�??���?');
+VALUES (80, '경기?��', '�???���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (81, '경기?��', '?��?���?');
+VALUES (81, '경기?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (82, '강원?��', '춘천?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
@@ -896,47 +896,47 @@ VALUES (88, '강원?��', '?��척시');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (89, '강원?��', '?��천군');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (90, '강원?��', '?��?���?');
+VALUES (90, '강원?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (91, '강원?��', '?��?���?');
+VALUES (91, '강원?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (92, '강원?��', '?��창군');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (93, '강원?��', '?��?���?');
+VALUES (93, '강원?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (94, '강원?��', '철원�?');
+VALUES (94, '강원?��', '철원�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (95, '강원?��', '?��천군');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (96, '강원?��', '?��구군');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (97, '강원?��', '?��?���?');
+VALUES (97, '강원?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (98, '강원?��', '고성�?');
+VALUES (98, '강원?��', '고성�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (99, '강원?��', '?��?���?');
+VALUES (99, '강원?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (100, '충청북도', '�?주시');
+VALUES (100, '충청북도', '�??주시');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (101, '충청북도', '충주?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (102, '충청북도', '?��천시');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (103, '충청북도', '보�?�?');
+VALUES (103, '충청북도', '보�?�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (104, '충청북도', '?��천군');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (105, '충청북도', '?��?���?');
+VALUES (105, '충청북도', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (106, '충청북도', '증평�?');
+VALUES (106, '충청북도', '증평�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (107, '충청북도', '진천�?');
+VALUES (107, '충청북도', '진천�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (108, '충청북도', '괴산�?');
+VALUES (108, '충청북도', '괴산�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (109, '충청북도', '?��?���?');
+VALUES (109, '충청북도', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (110, '충청북도', '?��?���?');
+VALUES (110, '충청북도', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (111, '충청?��?��', '천안?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
@@ -954,19 +954,19 @@ VALUES (117, '충청?��?��', '계룡?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (118, '충청?��?��', '?��진시');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (119, '충청?��?��', '금산�?');
+VALUES (119, '충청?��?��', '금산�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (120, '충청?��?��', '�??���?');
+VALUES (120, '충청?��?��', '�???���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (121, '충청?��?��', '?��천군');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (122, '충청?��?��', '�??���?');
+VALUES (122, '충청?��?��', '�???���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (123, '충청?��?��', '?��?���?');
+VALUES (123, '충청?��?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (124, '충청?��?��', '?��?���?');
+VALUES (124, '충청?��?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (125, '충청?��?��', '?��?���?');
+VALUES (125, '충청?��?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (126, '?��?��북도', '?��주시');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
@@ -978,23 +978,23 @@ VALUES (129, '?��?��북도', '?��?��?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (130, '?��?��북도', '?��?��?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (131, '?��?��북도', '�??��?��');
+VALUES (131, '?��?��북도', '�???��?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (132, '?��?��북도', '?��주군');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (133, '?��?��북도', '진안�?');
+VALUES (133, '?��?��북도', '진안�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (134, '?��?��북도', '무주�?');
+VALUES (134, '?��?��북도', '무주�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (135, '?��?��북도', '?��?���?');
+VALUES (135, '?��?��북도', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (136, '?��?��북도', '?��?���?');
+VALUES (136, '?��?��북도', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (137, '?��?��북도', '?��창군');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (138, '?��?��북도', '고창�?');
+VALUES (138, '?��?��북도', '고창�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (139, '?��?��북도', '�??���?');
+VALUES (139, '?��?��북도', '�???���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (140, '?��?��?��?��', '목포?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
@@ -1006,45 +1006,45 @@ VALUES (143, '?��?��?��?��', '?��주시');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (144, '?��?��?��?��', '광양?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (145, '?��?��?��?��', '?��?���?');
+VALUES (145, '?��?��?��?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (146, '?��?��?��?��', '곡성�?');
+VALUES (146, '?��?��?��?��', '곡성�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (147, '?��?��?��?��', '구�?�?');
+VALUES (147, '?��?��?��?��', '구�?�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (148, '?��?��?��?��', '고흥�?');
+VALUES (148, '?��?��?��?��', '고흥�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (149, '?��?��?��?��', '보성�?');
+VALUES (149, '?��?��?��?��', '보성�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (150, '?��?��?��?��', '?��?���?');
+VALUES (150, '?��?��?��?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (151, '?��?��?��?��', '?��?���?');
+VALUES (151, '?��?��?��?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (152, '?��?��?��?��', '강진�?');
+VALUES (152, '?��?��?��?��', '강진�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (153, '?��?��?��?��', '?��?���?');
+VALUES (153, '?��?��?��?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (154, '?��?��?��?��', '?��?���?');
+VALUES (154, '?��?��?��?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (155, '?��?��?��?��', '무안�?');
+VALUES (155, '?��?��?��?��', '무안�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (156, '?��?��?��?��', '?��?���?');
+VALUES (156, '?��?��?��?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (157, '?��?��?��?��', '?��광군');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (158, '?��?��?��?��', '?��?���?');
+VALUES (158, '?��?��?��?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (159, '?��?��?��?��', '?��?���?');
+VALUES (159, '?��?��?��?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (160, '?��?��?��?��', '진도�?');
+VALUES (160, '?��?��?��?��', '진도�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (161, '?��?��?��?��', '?��?���?');
+VALUES (161, '?��?��?��?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (162, '경상북도', '?��?��?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (163, '경상북도', '경주?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (164, '경상북도', '�?천시');
+VALUES (164, '경상북도', '�??천시');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (165, '경상북도', '?��?��?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
@@ -1060,27 +1060,27 @@ VALUES (170, '경상북도', '문경?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (171, '경상북도', '경산?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (172, '경상북도', '군위�?');
+VALUES (172, '경상북도', '군위�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (173, '경상북도', '?��?���?');
+VALUES (173, '경상북도', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (174, '경상북도', '�??���?');
+VALUES (174, '경상북도', '�???���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (175, '경상북도', '?��?���?');
+VALUES (175, '경상북도', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (176, '경상북도', '?��?���?');
+VALUES (176, '경상북도', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (177, '경상북도', '�??���?');
+VALUES (177, '경상북도', '�???���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (178, '경상북도', '고령�?');
+VALUES (178, '경상북도', '고령�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (179, '경상북도', '?��주군');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (180, '경상북도', '칠곡�?');
+VALUES (180, '경상북도', '칠곡�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (181, '경상북도', '?��천군');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (182, '경상북도', '봉화�?');
+VALUES (182, '경상북도', '봉화�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (183, '경상북도', '?��진군');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
@@ -1094,126 +1094,126 @@ VALUES (187, '경상?��?��', '?��?��?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (188, '경상?��?��', '?��천시');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (189, '경상?��?��', '�??��?��');
+VALUES (189, '경상?��?��', '�???��?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (190, '경상?��?��', '�??��?��');
+VALUES (190, '경상?��?��', '�???��?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (191, '경상?��?��', '거제?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (192, '경상?��?��', '?��?��?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (193, '경상?��?��', '?��?���?');
+VALUES (193, '경상?��?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (194, '경상?��?��', '?��?���?');
+VALUES (194, '경상?��?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (195, '경상?��?��', '창녕�?');
+VALUES (195, '경상?��?��', '창녕�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (196, '경상?��?��', '고성�?');
+VALUES (196, '경상?��?��', '고성�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (197, '경상?��?��', '?��?���?');
+VALUES (197, '경상?��?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (198, '경상?��?��', '?��?���?');
+VALUES (198, '경상?��?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (199, '경상?��?��', '?���?�?');
+VALUES (199, '경상?��?��', '?���??�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (200, '경상?��?��', '?��?���?');
+VALUES (200, '경상?��?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (201, '경상?��?��', '거창�?');
+VALUES (201, '경상?��?��', '거창�??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (202, '경상?��?��', '?��천군');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (203, '?��주특별자치도', '?��주시');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (204, '?��주특별자치도', '?���??��?��');
+VALUES (204, '?��주특별자치도', '?���???��?��');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (205, '?��종특별자치시', '?��종시');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (206, '???��광역?��', '???���?');
+VALUES (206, '???��광역?��', '???���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (207, '???��광역?��', '?���?');
+VALUES (207, '???��광역?��', '?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (208, '???��광역?��', '?���?');
+VALUES (208, '???��광역?��', '?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (209, '???��광역?��', '?��?���?');
+VALUES (209, '???��광역?��', '?��?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (210, '???��광역?��', '중구');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (211, '?��?��광역?��', '중구');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (212, '?��?��광역?��', '?���?');
+VALUES (212, '?��?��광역?��', '?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (213, '?��?��광역?��', '?���?');
+VALUES (213, '?��?��광역?��', '?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (214, '?��?��광역?��', '북구');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (215, '?��?��광역?��', '?��주군');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (216, '광주광역?��', '?���?');
+VALUES (216, '광주광역?��', '?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (217, '광주광역?��', '?���?');
+VALUES (217, '광주광역?��', '?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (218, '광주광역?��', '?���?');
+VALUES (218, '광주광역?��', '?���??');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
 VALUES (219, '광주광역?��', '북구');
 INSERT INTO STORE_REGION (STORE_REGION_NO, CITY, PROVINCES)
-VALUES (220, '광주광역?��', '광산�?');
+VALUES (220, '광주광역?��', '광산�??');
 
--- STORE 매장 ?���?
+-- STORE 매장 ?���??
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '�?구샵 ?��로웨?��?��?��?��', '?��?��?��별시 마포�? ?��미산�? 155 1�?, �?구샵', '0507-1372-2052', '11:00 - 21:30', 25, 14,
-        '�?구�?? ?��?�� 첫걸?��, �?구샵?��?��?��.', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '�??구샵 ?��로웨?��?��?��?��', '?��?��?��별시 마포�?? ?��미산�?? 155 1�??, �??구샵', '0507-1372-2052', '11:00 - 21:30', 25, 14,
+        '�??구�?? ?��?�� 첫걸?��, �??구샵?��?��?��.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '?��맹상?��', '?��?��?��별시 마포�? ?��?��컵로25�? 47 3�?, ?��맹상?��', '0507-1386-1064', '1112:00 - 20:00', 3, 14, '?��?��기�?? 줄이?�� ?��?? 마음?��?�� ?��?��?��
-?���? ?��?��?��?�� �?게이?�� 리필 ?��?��?��?��?��?��?��.', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '?��맹상?��', '?��?��?��별시 마포�?? ?��?��컵로25�?? 47 3�??, ?��맹상?��', '0507-1386-1064', '1112:00 - 20:00', 3, 14, '?��?��기�?? 줄이?�� ?��?? 마음?��?�� ?��?��?��
+?���?? ?��?��?��?�� �??게이?�� 리필 ?��?��?��?��?��?��?��.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '?��?���?', '?��?��?��별시 ?��?���? ?��?��리로14�? 9 1�?, ?��?���?', '070-4118-0710', '12:00 - 20:00', 6, 4,
-        '?��?���?(thepicker)?��, 건강?�� ?��?��?�� ?��?��?�� ?��경에 ?��?��?�� ?��?�� ?��?�� ?��?�� �??��?��?���? ?��?��?���? 고르?�� ?��?��?�� ?��미합?��?��.', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '?��?���??', '?��?��?��별시 ?��?���?? ?��?��리로14�?? 9 1�??, ?��?���??', '070-4118-0710', '12:00 - 20:00', 6, 4,
+        '?��?���??(thepicker)?��, 건강?�� ?��?��?�� ?��?��?�� ?��경에 ?��?��?�� ?��?�� ?��?�� ?��?�� �???��?��?���?? ?��?��?���?? 고르?�� ?��?��?�� ?��미합?��?��.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '?��?��?��?��', '?��?��?��별시 ???���? ?��번로6�? 2 1�?, ?��?��?��?��', '0507-1300-3388', '12:30 - 19:00', 3, 12,
-        '?��?��?��?��?�� ?��리�? ?��?��?�� ?��?���?면서 �?구�?? ?��?���? ?��?��?��?�� ?��?��?�� ?��???��?�� �??��?��?��?��.', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '?��?��?��?��', '?��?��?��별시 ???���?? ?��번로6�?? 2 1�??, ?��?��?��?��', '0507-1300-3388', '12:30 - 19:00', 3, 12,
+        '?��?��?��?��?�� ?��리�? ?��?��?�� ?��?���??면서 �??구�?? ?��?���?? ?��?��?��?�� ?��?��?�� ?��???��?�� �???��?��?��?��.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '?��?��?��?��', '?��?��?��별시 강동�? ?��?���?35�? 34 1�?, ?��?��?��?��', '0507-1395-3534', '10:30 - 19:00', 12, 25,
-        '?��?��?��?��?�� ?��리�? ?��?��?�� ?��?���?면서 �?구�?? ?��?���? ?��?��?��?�� ?��?��?�� ?��???��?�� �??��?��?��?��.', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '?��?��?��?��', '?��?��?��별시 강동�?? ?��?���??35�?? 34 1�??, ?��?��?��?��', '0507-1395-3534', '10:30 - 19:00', 12, 25,
+        '?��?��?��?��?�� ?��리�? ?��?��?�� ?��?���??면서 �??구�?? ?��?���?? ?��?��?��?�� ?��?��?�� ?��???��?�� �???��?��?��?��.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '?��구밭', '경기 ?��?��?�� 미사강�??���? 25 FB329?��, FB330?��, FB33', '0507-1306-9626', '10:30 - 19:00', 27, 68,
-        '?��구밭?? 비장?��?���? ?��?��?��?�� ?���? �??���??��?�� ?��?��?�� ?��?�� 고체 ?��?��?�� �? ?��?��?��?��?�� ?��?��?��?�� 브랜?��?��?�� ?��조사 ?��?��?��.', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '?��구밭', '경기 ?��?��?�� 미사강�??���?? 25 FB329?��, FB330?��, FB33', '0507-1306-9626', '10:30 - 19:00', 27, 68,
+        '?��구밭?? 비장?��?���?? ?��?��?��?�� ?���?? �???���???��?�� ?��?��?�� ?��?�� 고체 ?��?��?�� �?? ?��?��?��?��?�� ?��?��?��?�� 브랜?��?��?�� ?��조사 ?��?��?��.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '?��?��?��?��?��?��', '광주 ?���? ?��??�?74번길 27 ?��?��?��?��?��?��', '0507-1483-4030', '09:00 - 18:00', 37, 217,
-        '?��?��친화?�� ?��?��(비누, 주방?��?�� ?��)?�� ?��?��, ?��매하�? ?���? ?��?�� ?��?�� 기증받아 ?��매하?�� 중증?��?��?��?�� 고용?��?��?��.', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '?��?��?��?��?��?��', '광주 ?���?? ?��??�??74번길 27 ?��?��?��?��?��?��', '0507-1483-4030', '09:00 - 18:00', 37, 217,
+        '?��?��친화?�� ?��?��(비누, 주방?��?�� ?��)?�� ?��?��, ?��매하�?? ?���?? ?��?�� ?��?�� 기증받아 ?��매하?�� 중증?��?��?��?�� 고용?��?��?��.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '�?구별�?�?', '?���? ?��주시 ?��?���? 58 1�?', '064-711-8291', '10:00 - 19:00', 102, 203,
-        '?��로웨?��?��?�� 리빙?��, �?구별�?�? ?�� 몸과 �?구�?? ?��리는 ?��?��?�� 즐거??, ?��?��
-?��로웨?��?��?���? ?��?�� ?��?��?�� ?��?��?��?���? ?��기농 ?��?��?���? 직접 ?��?��?��?�� ?��?�� 브랜?�� ?��?��?�� 만나�? ?�� ?��?��?��?��.', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '�??구별�??�??', '?���?? ?��주시 ?��?���?? 58 1�??', '064-711-8291', '10:00 - 19:00', 102, 203,
+        '?��로웨?��?��?�� 리빙?��, �??구별�??�?? ?�� 몸과 �??구�?? ?��리는 ?��?��?�� 즐거??, ?��?��
+?��로웨?��?��?���?? ?��?�� ?��?��?�� ?��?��?��?���?? ?��기농 ?��?��?���?? 직접 ?��?��?��?�� ?��?�� 브랜?�� ?��?��?�� 만나�?? ?�� ?��?��?��?��.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '?��28 ?��?��브러�? ?��?��', '?��?��?��별시 ?��?���? ?��?��?���?12�? 2', '0507-1414-0198', '11:30 - 20:30', 58, 4,
-        '?��?�� ?��?�� ?��름다??, ?��28 ?��?��브러�?, ?��?��?��?��?��.', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '?��28 ?��?��브러�?? ?��?��', '?��?��?��별시 ?��?���?? ?��?��?���??12�?? 2', '0507-1414-0198', '11:30 - 20:30', 58, 4,
+        '?��?�� ?��?�� ?��름다??, ?��28 ?��?��브러�??, ?��?��?��?��?��.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '?��?��?���?�?', '?��?��?��?�� ?��?���? ?��북면 ?��?��?���? 548 1�? ?��?��?���?�?', '0507-1337-1858', '11:00 - 18:00', 137, 145,
-        '?��로웨?��?��?�� 리필?��& ?���? �?�?. ?��?? ?��?��, �?구에�? ?�� ?��?? ?��림살?��. ?��?��?�� ???��감들?�� 만들�? ?��매하?�� ?��?��?���?게입?��?��.', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '?��?��?���??�??', '?��?��?��?�� ?��?���?? ?��북면 ?��?��?���?? 548 1�?? ?��?��?���??�??', '0507-1337-1858', '11:00 - 18:00', 137, 145,
+        '?��로웨?��?��?�� 리필?��& ?���?? �??�??. ?��?? ?��?��, �??구에�?? ?�� ?��?? ?��림살?��. ?��?��?�� ???��감들?�� 만들�?? ?��매하?�� ?��?��?���??게입?��?��.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '?��?��?��그리?��', '?��?��?��별시 마포�? ?��?��리로 44 5�? 리�??��?��', '1522-5710', '10:00 - 16:00', 51, 14,
-        '?��?��?��?�� ?��?? ?��?��?��중한 ?��?��?�� ?��?�� ?��?��?���? ?��?��리고?�� ?��?��?�� ?��?��벤처�? ?��?��?��그리?�� ?��?�� ?���? 브랜?���? ?��분해 �??��?�� ?��?��?��?��?�� ?��?��, ?���? ?���? ?���? ?��거하?�� ?��?��?��?��?�� ?��?��?�� �??�� �??��?�� ?��?�� ?��?��?��?�� 만들?�� 갑니?��.', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '?��?��?��그리?��', '?��?��?��별시 마포�?? ?��?��리로 44 5�?? 리�??��?��', '1522-5710', '10:00 - 16:00', 51, 14,
+        '?��?��?��?�� ?��?? ?��?��?��중한 ?��?��?�� ?��?�� ?��?��?���?? ?��?��리고?�� ?��?��?�� ?��?��벤처�?? ?��?��?��그리?�� ?��?�� ?���?? 브랜?���?? ?��분해 �???��?�� ?��?��?��?��?�� ?��?��, ?���?? ?���?? ?���?? ?��거하?�� ?��?��?��?��?�� ?��?��?�� �???�� �???��?�� ?��?�� ?��?��?��?�� 만들?�� 갑니?��.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '천연?��?��?�� �??��?��', '�??��광역?�� 북구 ?���?1�? 93 2�?', '051-338-9619', '10:30 - 19:00', 93, 33,
-        '?��경오?��?�� 줄이?�� ?��?��, ?��?��?���?, �??�� 최초 ?��로웨?��?��?��?��', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '천연?��?��?�� �???��?��', '�???��광역?�� 북구 ?���??1�?? 93 2�??', '051-338-9619', '10:30 - 19:00', 93, 33,
+        '?��경오?��?�� 줄이?�� ?��?��, ?��?��?���??, �???�� 최초 ?��로웨?��?��?��?��', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '?��?��?��리얼 모레?��?��', '?��?�� ?��?���? ?��?���?1?���? 5 ?��?��그라?��?�� 7�?', '070-8633-1333', '09:00 - 19:00', 37, 4,
-        '?��?�� �? ?��?��?�� ?��각하?�� �??���??��?�� 책임?���?, 모레?��?��.', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '?��?��?��리얼 모레?��?��', '?��?�� ?��?���?? ?��?���??1?���?? 5 ?��?��그라?��?�� 7�??', '070-8633-1333', '09:00 - 19:00', 37, 4,
+        '?��?�� �?? ?��?��?�� ?��각하?�� �???���???��?�� 책임?���??, 모레?��?��.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '비누?��', '경기?�� 군포?�� ?��?���? 2 LT?���? ?��카이비즈 1412?��, 1413?��', '0507-1387-0513', '10:00 - 18:00', 62, 66,
-        '?��?��?��경과 건강?�� ?��각한 비누�? 만듭?��?��.', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '비누?��', '경기?�� 군포?�� ?��?���?? 2 LT?���?? ?��카이비즈 1412?��, 1413?��', '0507-1387-0513', '10:00 - 18:00', 62, 66,
+        '?��?��?��경과 건강?�� ?��각한 비누�?? 만듭?��?��.', 'Y');
 COMMIT;

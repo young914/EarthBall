@@ -28,6 +28,7 @@ public class Member {
   private int mailAuth; // 메일 인증
   private String mailKey; // 메일 인증키
   private String gradeName;
+  private int totalPoint;
 
 
 }

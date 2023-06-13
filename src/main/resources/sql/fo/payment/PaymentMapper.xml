@@ -16,7 +16,7 @@
 									  , POST_CODE
 									  , ADDRESS1
 									  , ADDRESS2
-									  , DELIVERY_COMENT
+									  , DELIVERY_COMMENT
 									  , PAYMENT_TOKEN)
 								VALUES (#{paymentNo}
 									  , #{memberId}
@@ -29,9 +29,22 @@
 									  , #{postCode}
 									  , #{receiveAddress1}
 									  , #{receiveAddress2}
-									  , #{deliveryComent}
+									  , #{deliveryComment}
 									  , #{paymentToken})
 </insert>
 
+<update id="addTotalPay" parameterType="com.kh.earthball.fo.payment.vo.PayInfo">
+	UPDATE MEMBER
+	      SET TOTAL_PAY = TOTAL_PAY + #{paymentTotal}
+	 WHERE MEMBER_ID = #{memberId}
+</update>
+
+<update id="updateGrade" parameterType="com.kh.earthball.fo.payment.vo.PayInfo">
+	UPDATE MEMBER M
+	      SET M.GRADE_NAME = (SELECT G.GRADE_NAME
+	      										 FROM GRADE G
+	      									   WHERE M.TOTAL_PAY BETWEEN G.PAYMENT_MIN AND G.PAYMENT_MAX)
+	WHERE M.MEMBER_ID = #{memberId}
+</update>
 
 </mapper>
