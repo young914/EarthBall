@@ -1,5 +1,6 @@
 package com.kh.earthball.fo.challenge.controller;
 
+import com.google.gson.Gson;
 import com.kh.earthball.bo.challenge.service.CategoryService;
 import com.kh.earthball.bo.challenge.service.CategoryTemplateService;
 import com.kh.earthball.bo.challenge.service.CodeService;
@@ -8,12 +9,10 @@ import com.kh.earthball.bo.challenge.vo.CategoryTemplate;
 import com.kh.earthball.bo.challenge.vo.Code;
 import com.kh.earthball.fo.challenge.service.ChallengeService;
 import com.kh.earthball.fo.challenge.service.ConfirmService;
-import com.kh.earthball.fo.challenge.vo.ChConfirm;
-import com.kh.earthball.fo.challenge.vo.ChDetailInfo;
-import com.kh.earthball.fo.challenge.vo.ChDetailInfoParam;
-import com.kh.earthball.fo.challenge.vo.Challenge;
+import com.kh.earthball.fo.challenge.vo.*;
 import com.kh.earthball.fo.common.template.Pagination;
 import com.kh.earthball.fo.common.vo.PageInfo;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -168,11 +167,19 @@ public class ConfirmController {
       }
     }
 
+    /*
+    ChConReply reply = new ChConReply();
+    reply.setChNo(chNo);
+    reply.setChConNo(chConNo);
+
+    List<ChConReply> replyList = confirmService.selectReplyList(reply);
+*/
     log.info("templateList에 들어있는 값 2 : " + templateList);   // code에 checked => true 부여 된 상태!!!!!!
 
     model.addAttribute("templateList", templateList);
     model.addAttribute("chConfirm", chConfirm);
     model.addAttribute("challenge", challenge);
+    //model.addAttribute("replyList", replyList);
 
     return "fo/challenge/confirm/confirmDetailView";
   }
@@ -247,6 +254,26 @@ public class ConfirmController {
     confirmService.deleteConfirm(chConfirm);
 
     return 1;
+  }
+
+  @ResponseBody
+  @PostMapping("/rinsert.con")
+  public String replyInsert(ChConReply reply) {
+
+    log.info("reply 정보 넘오왔는가?: " + reply);
+    int result = confirmService.insertReply(reply);
+
+    return (result > 0) ? "success" : "fail";
+  }
+
+  @ResponseBody
+  @PostMapping(value="/rlist.con")
+  public List<ChConReply> selectReplyList(@RequestBody ChConReply reply) {
+
+    log.info("reply 넘어왔어? : " + reply);
+    List<ChConReply> replyList = confirmService.selectReplyList(reply);
+
+    return replyList;
   }
 
 }

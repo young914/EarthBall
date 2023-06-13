@@ -1,5 +1,6 @@
 package com.kh.earthball.fo.challenge.mapper;
 
+import com.kh.earthball.fo.challenge.vo.ChConReply;
 import com.kh.earthball.fo.challenge.vo.ChConfirm;
 import com.kh.earthball.fo.challenge.vo.ChDetailInfo;
 import com.kh.earthball.fo.challenge.vo.ChDetailInfoParam;
@@ -29,7 +30,10 @@ public interface ConfirmMapper {
 
   int deleteConfirm(ChConfirm chConfirm);
 
- // int deleteDetailInfo(ChConfirm chConfirm);
+  int insertReply(ChConReply reply);
+
+  List<ChConReply> selectReplyList(ChConReply reply);
+
 }
 
 

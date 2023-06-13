@@ -1,6 +1,7 @@
 package com.kh.earthball.fo.challenge.service;
 
 import com.kh.earthball.fo.challenge.mapper.ConfirmMapper;
+import com.kh.earthball.fo.challenge.vo.ChConReply;
 import com.kh.earthball.fo.challenge.vo.ChConfirm;
 import com.kh.earthball.fo.challenge.vo.ChDetailInfo;
 import com.kh.earthball.fo.challenge.vo.ChDetailInfoParam;
@@ -85,6 +86,16 @@ public class ConfirmServiceImpl implements ConfirmService {
     confirmMapper.deleteConfirm(chConfirm);
     // 인증 디테일 정보는 모두 딜리트
     confirmMapper.deleteDetailInfo(chConfirm);
+  }
+
+  @Override
+  public int insertReply(ChConReply reply) {
+    return confirmMapper.insertReply(reply);
+  }
+
+  @Override
+  public List<ChConReply> selectReplyList(ChConReply reply) {
+    return confirmMapper.selectReplyList(reply);
   }
 
 }

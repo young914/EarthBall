@@ -115,5 +115,34 @@
            AND MEMBER_ID = #{memberId}
     </update>
 
+    <insert id="insertReply" parameterType="com.kh.earthball.fo.challenge.vo.ChConReply">
+        INSERT INTO TB_CH_CON_REPLY (RE_NO
+                                   , CH_CON_NO
+                                   , CH_NO
+                                   , RE_CONTENT
+                                   , RE_CREATE_DATE
+                                   , STATUS
+                                   , MEMBER_ID)
+                            VALUES (SEQ_TB_CH_CON_REPLY.NEXTVAL
+                                  , #{chConNo}
+                                  , #{chNo}
+                                  , #{reContent}
+                                  , SYSDATE
+                                  , 'Y'
+                                  , #{memberId})
+    </insert>
+
+    <select id="selectReplyList" parameterType="com.kh.earthball.fo.challenge.vo.ChConReply" resultType="com.kh.earthball.fo.challenge.vo.ChConReply">
+        SELECT RE_NO
+             , CH_CON_NO
+             , CH_NO
+             , RE_CONTENT
+             , TO_CHAR(RE_CREATE_DATE, 'YYYY-MM-DD') AS RE_CREATE_DATE
+             , STATUS
+             , MEMBER_ID
+        FROM TB_CH_CON_REPLY
+        WHERE CH_CON_NO = #{chConNo}
+          AND CH_NO = #{chNo}
+    </select>
 
 </mapper>
