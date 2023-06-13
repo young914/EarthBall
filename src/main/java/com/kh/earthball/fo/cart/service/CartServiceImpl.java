@@ -26,4 +26,25 @@ public class CartServiceImpl implements CartService  {
     return cartMapper.updateAmount(c);
   }
 
+  @Transactional
+  @Override
+  public int deleteCart(int productNo, String memberId) {
+    return cartMapper.deleteCart(productNo, memberId);
+  }
+
+  @Override
+  public int insertCart(Cart c) {
+    return cartMapper.insertCart(c);
+  }
+
+  @Override
+  public int addStatus(Cart c) {
+    return cartMapper.addStatus(c);
+  }
+
+  @Override
+  public int plusAmount(Cart c) {
+    return cartMapper.plusAmount(c);
+  }
+
 }

@@ -40,7 +40,7 @@
 
 	</div>
 
-	<button class="deleteButton">선택상품 삭제</button>
+	<button class="deleteButton" onclick="deleteCart();">선택상품 삭제</button>
 
 	<div class="orderArea">
 		<div>총 주문 상품 <span></span>개</div>
