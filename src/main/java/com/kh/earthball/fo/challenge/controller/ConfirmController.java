@@ -250,7 +250,7 @@ public class ConfirmController {
   @PostMapping("/delete.con")
   public int confirmDelete(@RequestBody ChConfirm chConfirm) {
 
-    log.info("chConfirm 들어옴? : " + chConfirm);
+    //log.info("chConfirm 들어옴? : " + chConfirm);
     confirmService.deleteConfirm(chConfirm);
 
     return 1;
@@ -260,7 +260,7 @@ public class ConfirmController {
   @PostMapping("/rinsert.con")
   public String replyInsert(ChConReply reply) {
 
-    log.info("reply 정보 넘오왔는가?: " + reply);
+    //log.info("reply 정보 넘오왔는가?: " + reply);
     int result = confirmService.insertReply(reply);
 
     return (result > 0) ? "success" : "fail";
@@ -270,10 +270,16 @@ public class ConfirmController {
   @PostMapping(value="/rlist.con")
   public List<ChConReply> selectReplyList(@RequestBody ChConReply reply) {
 
-    log.info("reply 넘어왔어? : " + reply);
+    //log.info("reply 넘어왔어? : " + reply);
     List<ChConReply> replyList = confirmService.selectReplyList(reply);
 
     return replyList;
   }
+
+  /*
+  public int replyDelete(int reNo) {
+    return confirmService.deleteReply(reNo);
+  }
+   */
 
 }

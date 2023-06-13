@@ -243,7 +243,7 @@
             <c:when test="${ empty loginUser }">
               <!-- 로그인 전 -->
               <tr>
-                <th colspan="2">
+                <th colspan="3">
                   <textarea class="form-control" name="reContent" cols="55" rows="2" style="resize:none; width:900px; height: 150px;" readonly>로그인한 사용자만 이용이 가능한 서비스입니다. 로그인 후 이용해주세요.</textarea>
                 </th>
                 <th style="vertical-align:middle"><button class="btn_5" disabled>등록하기</button></th>
@@ -252,7 +252,7 @@
             <c:otherwise>
               <!-- 로그인 후 -->
               <tr>
-                <th colspan="2">
+                <th colspan="3">
                   <textarea class="form-control" name="reContent" cols="55" rows="2" style="resize:none; width:900px; height: 150px;" placeholder="댓글을 남겨주세요."></textarea>
                 </th>
                 <th style="vertical-align:middle"><button class="btn_5" onclick="addReply();">등록하기</button></th>
@@ -261,7 +261,7 @@
           </c:choose>
 
           <tr>
-            <td colspan="2">댓글(<span id="rcount"></span>)</td>
+            <td colspan="3">댓글(<span id="rcount"></span>)</td>
           </tr>
           </thead>
           <tbody>
@@ -389,23 +389,27 @@
                       + 	"<td>" + result[i].memberId + "</td>"
                       + 	"<td>" + result[i].reContent + "</td>"
                       + 	"<td>" + result[i].reCreateDate + "</td>"
-                      /*
                       +     "<td>"
-                      +           "<button class='btn_5' onclick='editReply(" + result[i].reNo + ")'>수정</button> "
-                      +           "<button class='btn_5' onclick='deleteReply(" + result[i].reNo + ")'>삭제</button>"
+                      +           "<button class='btn_6' onclick='editReply(" + result[i].reNo + ")'>수정</button> "
+                      +           "<button class='btn_6' onclick='deleteReply(" + result[i].reNo + ")'>삭제</button>"
                       +     "</td>"
-                       */
                       + "</tr>";
             }
             $("#replyArea>tbody").html(resultStr);
             $("#rcount").text(result.length);
-
-
           }
           , error : function() {
             console.log("댓글 조회용 ajax 통신 실패!");
           }
         });
+      }
+
+      function editReply(reNo) {  // 댓글 수정용
+
+      }
+
+      function deleteReply(reNo) {  // 댓글 삭제용
+
       }
 
 
