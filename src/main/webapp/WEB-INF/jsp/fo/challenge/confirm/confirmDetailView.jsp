@@ -211,9 +211,15 @@
 
           <div class="ranger_class">
             <input type="range" name="${temp.categoryTemplateNo}_${temp.inputType}" min="0" max="100"
-                   step="20"
+                   step="5"
                    class="range_size"
+                   style="width: 750px;"
+                   list="tickmarks"
                    value="${temp.chDetailInfoList[0].chDetailInfoData}">
+            <datalist id="tickmarks">
+              <c:forEach var="i" begin="0" end="100" step="5">
+              <option value="${i}">i</option>
+              </c:forEach>
           </div>
         </div>
         <br>
