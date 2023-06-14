@@ -112,8 +112,7 @@
                         <tr>
                             <td colspan="2">
                                 <input type="checkbox" id="sameOrderUser">
-                                <label for="sameOrderUser" style="font-size : 14px; font-weight : 600;"> 주문자 정보와
-                                    동일</label>
+                                <label for="sameOrderUser" style="font-size : 14px; font-weight : 600;"> 주문자 정보와 동일</label>
                             </td>
                         </tr>
                         <tr>
@@ -140,7 +139,7 @@
                     <div id="content1_3_3">
                         <span style="font-size : 20px; font-weight : bold; margin : 30px 0px 20px 25px;">배송메모</span>
                         <div id="deliveryMemo">
-                            <select id="deliveryComent">
+                            <select id="deliveryComment">
                                 <option value="없음">배송메모를 선택해주세요.</option>
                                 <option>배송 전에 미리 연락 바랍니다.</option>
                                 <option>부재 시 경비실에 맡겨 주세요.</option>
@@ -153,37 +152,24 @@
             </div>
             <div id="content1_4">
                 <div id="content1_4_1">
-                    <h2 style="margin : 0px 0px 0px 20px;">쿠폰 / 포인트</h2>
+                    <h2 style="margin : 0px 0px 0px 20px;">포인트</h2>
                     <div id="bar_2"></div>
                 </div>
                 <div id="content1_4_2">
                     <table>
                         <tr>
-                            <td><h2>쿠폰</h2></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="text" id="coupon" value="보유쿠폰 0장" readonly>
-                                <input type="button" id="selectCoupon" value="쿠폰적용">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><h2>포인트</h2></td>
-                        </tr>
-                        <tr>
                             <td>
                                 <input type="number" id="point" value="0">
-                                <input type="button" id="pointAll" value="전액사용">
+                                <input type="hidden" id="realPoint" value="${ loginUser.totalPoint }">
+                                <input type="button" class="point-btn" id="pointAll" data-state="Y" value="전액사용">
+                                <input type="button" class="point-btn" id="pointCancel" data-state="N" style="display : none;" value="사용취소">
                             </td>
                         </tr>
                         <tr>
                             <td style="padding : 5px 0px;">
                                 <span>보유포인트</span>
-                                <span id="myPoint" style="font-size : 14px; font-weight : bold;">3,000</span>
+                                <span id="myPoint" style="font-size : 14px; font-weight : bold;">${ loginUser.totalPoint }</span>
                             </td>
-                        </tr>
-                        <tr>
-                            <td><span>1,000 포인트 이상 보유 및 10,000원 이상 구매 시<br> 사용 가능</span></td>
                         </tr>
                     </table>
                 </div>
@@ -206,20 +192,13 @@
                         </tr>
                         <tr>
                             <td class="orderSummaryName">배송비</td>
-                            <c:choose>
-                            	<c:when test="${ totalPrice gt 30000 }">
-                            		<td class="orderSummaryContent">무료</td>
-                            	</c:when>
-                            	<c:otherwise>
-                            		<td class="orderSummaryContent">3000</td>
-                            	</c:otherwise>
-                            </c:choose>
+                            <td class="orderSummaryContent">3,000원</td>
                         </tr>
                         <tr id="orderSummaryTotal-area">
                             <td class="orderSummaryTotal">총 주문금액</td>
                             <td style="padding-right : 20px;">
-                            	<p class="totalAmount"><fmt:formatNumber pattern="###,###원">100</fmt:formatNumber></p> <!-- ${ totalPrice } -->
-                            	<input type="hidden" id="realTotalAmount" value="100">
+                            	<p class="totalAmount"><fmt:formatNumber pattern="###,###원">100000</fmt:formatNumber></p> <!-- ${ totalPrice } -->
+                            	<input type="hidden" id="realTotalAmount" value="100000">
                             </td>
                         </tr>
                     </table>
@@ -232,24 +211,24 @@
                 <div id="content2_1_3">
                     <div>
                         <c:choose>
-                        	<c:when test="${ loginUser.memberName eq '회원1' }">
+                        	<c:when test="${ loginUser.gradeName eq 'RED' }">
                         		<span id="rewardPoint" style="color : #19A7CE">
-                        			${ totalPrice * 0.01 }
+                        			<fmt:formatNumber pattern="###,###">${ totalPrice * 0.01 }</fmt:formatNumber>
                         		</span>
                         	</c:when>
-                        	<c:when test="${ loginUser.memberName eq '회원2' }">
+                        	<c:when test="${ loginUser.gradeName eq 'ORANGE' }">
                         		<span id="rewardPoint" style="color : #19A7CE">
-                        			$("#realTotalAmount") * 0.02
+                        			<fmt:formatNumber pattern="###,###">${ loginUser.totalPoint * 0.02 }</fmt:formatNumber>
                         		</span>
                         	</c:when>
-                        	<c:when test="${ loginUser.memberName eq '회원3' }">
+                        	<c:when test="${ loginUser.gradeName eq 'GREEN' }">
                         		<span id="rewardPoint" style="color : #19A7CE">
-                        			$("#realTotalAmount") * 0.03
+                        			<fmt:formatNumber pattern="###,###">${ totalPrice * 0.03 }</fmt:formatNumber>
                         		</span>
                         	</c:when>
                         	<c:otherwise>
                         		<span id="rewardPoint" style="color : #19A7CE">
-                        			$("#realTotalAmount") * 0.05
+                        			<fmt:formatNumber pattern="###,###">${ totalPrice * 0.05 }</fmt:formatNumber>
                         		</span>
                         	</c:otherwise>
                         </c:choose>
@@ -297,6 +276,73 @@
 			$("#address2").val(same ? "${ loginUser.address2 }" : "");
 		});
 	});
+</script>
+
+<script>
+//포인트 입력 시 조건 확인
+$("#point").on("propertychange change keyup paste input", function(){
+
+	const maxPoint = parseInt($("#realPoint").val());
+
+	let inputValue = parseInt($(this).val());
+
+	if(inputValue < 0) {
+
+		$(this).val(0);
+
+	} else if(inputValue > maxPoint) {
+
+		$(this).val(maxPoint);
+
+	}
+});
+
+// 포인트 전액사용 버튼
+$(".point-btn").on("click", function() {
+
+	console.log("버튼변경");
+
+	const maxPoint = parseInt($("#realPoint").val());
+
+	let state = $(this).data("state");
+
+	if(state == "Y") {
+
+		console.log("y동작");
+		/* 모두사용 */
+		//값 변경
+		$("#point").val(maxPoint);
+		//글 변경
+		$("#pointCancel").css("display", "inline-block");
+		$("#pointAll").css("display", "none");
+
+	} else if(state == "N") {
+
+		console.log("n동작");
+		/* 취소 */
+		//값 변경
+		$("#point").val(0);
+		//글 변경
+		$("#pointCancel").css("display", "none");
+		$("#pointAll").css("display", "inline-block");
+
+	}
+
+});
+
+$("#point").blur(function() {
+
+	if($("#point").val() == "") {
+
+		$("#point").val(0);
+
+		$("#pointCancel").css("display", "none");
+		$("#pointAll").css("display", "inline-block");
+
+	}
+
+});
+
 </script>
 
 <jsp:include page="/WEB-INF/jsp/fo/common/footer.jsp"/>

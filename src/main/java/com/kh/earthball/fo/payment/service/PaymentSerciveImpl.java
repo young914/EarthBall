@@ -19,4 +19,16 @@ public class PaymentSerciveImpl implements PaymentService {
     return paymentMapper.payComplete(pi);
   }
 
+  @Override
+  public int addTotalPay(PayInfo pi) {
+
+    return paymentMapper.addTotalPay(pi);
+  }
+
+  @Override
+  public int updateGrade(PayInfo pi) {
+
+    return paymentMapper.updateGrade(pi);
+  }
+
 }
