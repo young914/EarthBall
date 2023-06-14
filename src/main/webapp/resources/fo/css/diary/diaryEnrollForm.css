@@ -1,6 +1,5 @@
 @charset "UTF-8";
-@import "reset.css";
-@import url('https://fonts.googleapis.com/css2?family=Gaegu&family=Nanum+Pen+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gaegu&family=Nanum+Pen+Script&display=swap'); 
 
 #container{
     width: 1200px;
@@ -14,7 +13,6 @@
     width: 660px;
     height: 660px;
     margin: 0 auto;
-    margin-top: 50px;
     border: 2px solid black;
     margin-bottom: 30px;
     border-radius: 13px;
@@ -123,7 +121,7 @@
     border-left: none;
     border-top: none;
     outline: none;
-    font-family: 'Gaegu', cursive;
+    font-family: 'Gaegu', cursive; 
 }
 .content textarea{
     width: 100%;

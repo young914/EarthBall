@@ -61,5 +61,12 @@
              WHERE DY_BOARD_NO = #{dyBoardNo}
 		</select>
 
+		<!-- 게시글 삭제용 쿼리문 -->
+		<update id="deleteDiary" parameterType="java.lang.Integer">
+				UPDATE DY_BOARD
+				      SET DY_STATUS = 'N'
+				 WHERE DY_BOARD_NO = #{dyBoardNo}
+		</update>
+
 
 </mapper>

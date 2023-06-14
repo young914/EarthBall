@@ -134,6 +134,18 @@
 		                </ul>
 		            </div>
 		        </div>
+
+				<div id="search-area">
+					<form action="search.bo" method="get">
+						<input type="hidden" name="currentPage" value="1">
+						<select name="condition">
+							<option value="writer">작성자</option>
+							<option value="title">제목</option>
+						</select>
+						<input type="text" name="keyword">
+						<button type="submit">검색</button>
+					</form>
+				</div>
 		    </div>
 
 		<script type="text/javascript" src="/resources/fo/js/diary/diary.js"></script>
