@@ -253,7 +253,7 @@
               <!-- 로그인 후 -->
               <tr>
                 <th colspan="3">
-                  <textarea class="form-control" name="reContent" cols="55" rows="2" style="resize:none; width:900px; height: 150px;" placeholder="댓글을 남겨주세요."></textarea>
+                  <textarea class="form-control" name="reContent" cols="55" rows="2" style="resize:none; width:1050px; height: 150px;" placeholder="댓글을 남겨주세요."></textarea>
                 </th>
                 <th style="vertical-align:middle"><button class="btn_5" onclick="addReply();">등록하기</button></th>
               </tr>
@@ -367,6 +367,7 @@
 
         let chNo = $("input[type=hidden][name=chNo]").val();
         let chConNo = $("input[type=hidden][name=chConNo]").val();
+        let loginUser = $("input[type=hidden][name=memberId]").val();
 
         let selectReplyData = JSON.stringify({
           chNo : chNo
@@ -389,11 +390,15 @@
                       + 	"<td>" + result[i].memberId + "</td>"
                       + 	"<td>" + result[i].reContent + "</td>"
                       + 	"<td>" + result[i].reCreateDate + "</td>"
-                      +     "<td>"
-                      +           "<button class='btn_6' onclick='editReply(" + result[i].reNo + ")'>수정</button> "
-                      +           "<button class='btn_6' onclick='deleteReply(" + result[i].reNo + ")'>삭제</button>"
-                      +     "</td>"
-                      + "</tr>";
+
+                      // 로그인 한 유저인 경우에만 수정 및 삭제 버튼 추가
+                      if(loginUser === result[i].memberId) {
+                        resultStr += "<td>"
+                                /*+           "<button class='btn_6' onclick='editReply(" + result[i].reNo + ")'>수정</button> "*/
+                                +           "<button class='btn_6' onclick='deleteReply(" + result[i].reNo + ")'>삭제</button>"
+                                +     "</td>"
+                      }
+                      resultStr += "</tr>";
             }
             $("#replyArea>tbody").html(resultStr);
             $("#rcount").text(result.length);
@@ -409,7 +414,22 @@
       }
 
       function deleteReply(reNo) {  // 댓글 삭제용
+        console.log("reNo : ", reNo);
 
+        $.ajax({
+          url : "/rdelete.con"
+          , type : "post"
+          , data : {reNo : reNo}
+          , success : function (result) {
+            if(result > 0) {
+              console.log("댓글 삭제 성공");
+              selectReplyList();
+            }
+          }
+          , error() {
+            console.log("댓글 삭제 ajax 통신 실패");
+          }
+        });
       }
 
 

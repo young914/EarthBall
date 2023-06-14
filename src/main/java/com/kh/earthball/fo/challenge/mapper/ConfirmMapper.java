@@ -34,6 +34,8 @@ public interface ConfirmMapper {
 
   List<ChConReply> selectReplyList(ChConReply reply);
 
+  int deleteReply(int reNo);
+
 }
 
 
