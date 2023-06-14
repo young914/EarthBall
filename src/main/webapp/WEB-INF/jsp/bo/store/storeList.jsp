@@ -40,10 +40,14 @@
       margin-bottom: 1.5rem;
       margin-top: 1.5rem;
     }
+    .nav{
+      display: flex;
+      justify-content: space-between;
+    }
     .nav>*{
       margin-right: 10px;
     }
-    .nav>button{
+    #searchStore>button{
       width: 100px;
       border: 1px solid #e5e5e5;
       border-radius: 5px;
@@ -52,7 +56,7 @@
       font-size: 14px;
       font-weight: 600;
     }
-    .nav>button:hover{
+    #searchStore>button:hover{
       background-color: #f5f5f5;
     }
     .storeList{
@@ -161,8 +165,16 @@
         <div class="content">
           <h1 class="title">매장리스트</h1>
           <div class="nav">
-            <input type="text" name="search" placeholder="검색어를 입력하세요."/>
-            <button type="button">검색</button>
+            <div id="searchStore">
+              <input type="text" name="search" placeholder="검색어를 입력하세요."/>
+              <button type="button">검색</button>
+            </div>
+            <div>
+
+            </div>
+            <div >
+              <td><button type="button" class="btn btn-primary" onclick="createStore();">매장 등록하기</button></td>
+            </div>
           </div>
           <div>
             <table class="storeList">
@@ -174,6 +186,8 @@
                     <th width="150">매장전화번호</th>
                     <th width="150">영업시간</th>
                     <th width="70">좋아요수</th>
+                    <th width="70">수정</th>
+                    <th width="70">삭제</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -185,6 +199,8 @@
                         <td>${ s.storePhone}</td>
                         <td>${ s.businessHours }</td>
                         <td>${ s.storeLikes }</td>
+                        <td><button type="button" class="btn btn-warning" onclick="updateStore();">수정</button></td>
+                        <td><button type="button" class="btn btn-danger" onclick="deleteStore();">삭제</button></td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -250,9 +266,17 @@
   <!-- Overlay -->
   <div class="layout-overlay layout-menu-toggle"></div>
 </div>
-<jsp:include page="/WEB-INF/jsp/bo/common/commonScript.jsp" />
-<script type="text/javascript">
-
+<script>
+  function createStore() {
+    location.href = "adminEnrollForm.st";
+  }
+  function updateStore() {
+    location.href = "updateStore.st";
+  }
+  function deleteStore() {
+    location.href = "deleteStore.st";
+  }
 </script>
+<jsp:include page="/WEB-INF/jsp/bo/common/commonScript.jsp" />
 </body>
 </html>

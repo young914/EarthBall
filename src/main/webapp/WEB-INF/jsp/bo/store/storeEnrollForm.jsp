@@ -119,7 +119,7 @@
 											주소 : <input type="text" name="storeAddress" required style="width: 40%;" id="address_kakao">
 										</td>
 										<td>
-											상세주소 : <input type="text" required style="width: 40%;" name="address_detail">
+											상세주소 : <input type="text" required style="width: 40%;" name="storeDetailAddress">
 										</td>
 		
 									</tr>
@@ -336,7 +336,7 @@ window.onload = function(){
         new daum.Postcode({
             oncomplete: function(data) { //선택시 입력값 세팅
                 document.getElementById("address_kakao").value = data.address; // 주소 넣기
-                document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
+                document.querySelector("input[name=storeDetailAddress]").focus(); //상세입력 포커싱
 
             }
         }).open();

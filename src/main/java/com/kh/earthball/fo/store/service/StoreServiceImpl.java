@@ -23,12 +23,6 @@ public class StoreServiceImpl implements StoreService {
   }
 
   @Override
-  public ArrayList<Store> selectStoreList(PageInfo pi) {
-
-    return storeMapper.selectStoreList(pi);
-  }
-
-  @Override
   public ArrayList<Store> selectAllStoreList() {
     return storeMapper.selectAllStoreList();
   }

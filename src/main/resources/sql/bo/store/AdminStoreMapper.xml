@@ -4,8 +4,8 @@
 <mapper namespace="com.kh.earthball.bo.store.mapper.AdminStoreMapper">
 
 	<insert id="insertStore" parameterType="com.kh.earthball.bo.store.vo.AdminStore">
-		INSERT INTO STORE(STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_INFO)
-		VALUES(SEQ_STORE.NEXTVAL, #{storeName}, #{storeAddress}, #{storePhone}, #{businessHours}, #{storeInfo})
+		INSERT INTO STORE(STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_DETAIL_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_INFO)
+		VALUES(SEQ_STORE.NEXTVAL, #{storeName}, #{storeAddress}, #{storeDetailAddress}, #{storePhone}, #{businessHours}, #{storeInfo})
 	</insert>
 
 	<insert id="insertStoreAtta" parameterType="com.kh.earthball.bo.store.vo.AdminAtta">

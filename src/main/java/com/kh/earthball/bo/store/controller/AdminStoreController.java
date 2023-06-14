@@ -77,7 +77,7 @@ public class AdminStoreController {
     fileList.add(upfile8);
     fileList.add(upfile9);
     fileList.add(upfile10);
-
+    System.out.println(fileList);   
     ArrayList<AdminAtta> list = new ArrayList<>();
 
     for(int i = 0; i < fileList.size(); i++) {
@@ -85,7 +85,7 @@ public class AdminStoreController {
 
       if(!file.isEmpty()) {
         String changerName = ChangeFileName.saveFile(file, session);
-
+        
         AdminAtta at = new AdminAtta();
         at.setChangerName(changerName);
         at.setFileLevel(i);

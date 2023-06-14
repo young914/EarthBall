@@ -668,16 +668,21 @@ hr{
                 }
 				
 				 // 동적으로 리스트 요소 생성
-                resultStr += "<div class='searchList " + i + "' data-storelat='" + storeList[i].storeLat + "' data-storelon='" + storeList[i].storeLon + "' data-storeno='" + storeList[i].storeNo + "'>"
-                            + "<span class='storeTitle'>" + storeList[i].storeName + "</span> <br>"
-                            + "<span class='storeInfo'>" + "<i class='xi-location-arrow' style='width: 20px;'></i>" + storeList[i].storeAddress + "</span> <br>"
-                            + "<span class='storeInfo'>" + "<i class='xi-call ' style='width: 20px;'></i>" + storeList[i].storePhone + "</span> <br>"
-                            + "<span class='storeInfo'> " + "<i class='xi-time-o' style='width: 20px;'></i>영업시간 " + storeList[i].businessHours + "</span>"
-                            +   "<div class='detail-info' style='display: none;'>"
-                            +   "<p>" + "<i class='xi-comment-o' style='width: 20px;'></i>" + storeList[i].storeInfo + "</p>"
-                            +   "<i class='" + likeBtnClass + "' style='width: 20px; margin-right:10px;'></i>" + "<span id='storeLikes'>" + storeList[i].storeLikes + "</span>"
+                resultStr += "<div class='searchList " + i + "' data-storelat='" + storeList[i].storeLat + "' data-storelon='" + storeList[i].storeLon + "' data-storeno='" + storeList[i].storeNo + "' style='display:flex'>"
+                            +   "<div class='storeInfo' style='width:280px;'>"
+                            +       "<span class='storeTitle'>" + storeList[i].storeName + "</span> <br>"
+                            +       "<span class='storeInfo'>" + "<i class='xi-location-arrow' style='width: 20px;'></i>" + storeList[i].storeAddress+" "+ storeList[i].storeDetailAddress + "</span> <br>"
+                            +       "<span class='storeInfo'>" + "<i class='xi-call ' style='width: 20px;'></i>" + storeList[i].storePhone + "</span> <br>"
+                            +       "<span class='storeInfo'> " + "<i class='xi-time-o' style='width: 20px;'></i>영업시간 " + storeList[i].businessHours + "</span>"
+                            +       "<div class='detail-info' style='display: none;'>"
+                            +           "<p>" + "<i class='xi-comment-o' style='width: 20px;'></i>" + storeList[i].storeInfo + "</p>"
+                            +           "<i class='" + likeBtnClass + "' style='width: 20px; margin-right:10px;'></i>" + "<span id='storeLikes'>" + storeList[i].storeLikes + "</span>"
+                            +       "</div>"
                             +   "</div>"
-                            + "</div>";
+                            +   "<div class='storeImg' style='width:91px;'>"
+                            +       "<img src='" + storeList[i].storeImg + "' alt='매장이미지'>"
+                            +   "</div>"
+                            +"</div>";
             }
 			
 			$("#store-list-area").html(resultStr);
@@ -775,8 +780,8 @@ hr{
                     '            <div class="close" onclick="closeOverlay(' + i + ')" title="닫기"></div>' + 
                     '        </div>' + 
                     '        <div class="body">' + 
-                    '            <div class="img">' +
-                    '                <img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
+                    '            <div class="img" style="border : none">' +
+                    '                <img src="/resources/fo/upfiles/' + storeList[i].changerName +'"' + ' " width="73" height="70">' +
                     '           </div>' + 
                     '            <div class="desc">' + 
                     '                <div class="ellipsis">'+ storeList[i].storeAddress + '</div>' + 
