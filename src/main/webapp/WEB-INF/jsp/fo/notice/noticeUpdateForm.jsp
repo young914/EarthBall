@@ -59,26 +59,33 @@
 </script>
 
 <script type="text/javascript">
-    function updateBoardBtn() {
-        var boardTitle = $("input[name=boardTitle]");
-        var boardContent = $("#summernote").summernote("code");
-        var boardNo = $("input[type=hidden][name=boardNo]").val();
+function updateBoardBtn() {
+    var noticeTitle = $("input[name=noticeTitle]");
+    var noticeContent = $("#summernote").summernote("code");
+    var noticeNo = $("input[type=hidden][name=noticeNo]").val();
+    var noticeCategory = $("#category").val();
 
-        var updateBoard = {
-            boardTitle: boardTitle.val(),
-            memberId: "${loginUser.memberId}",
-            boardContent : boardContent,
-            boardNo : boardNo
-        }
+    var updateBoard = {
+        noticeTitle: noticeTitle.val(),
+        memberId: "${loginUser.memberId}",
+        noticeContent: noticeContent,
+        noticeNo: noticeNo,
+        noticeCategory: noticeCategory
+    };
 </script>
+
 
 <body>
 <h1>글 수정하기</h1><hr>
-<form method="post" action="update.bo">
-<input type="hidden" name="boardNo" value="${b.boardNo}">
-<input id="boardTitle" name="boardTitle" class="no-margin basic_input title_name w100p mb24" type="text"  value="${b.boardTitle }" required="required"> <br><br>
+<form method="post" action="update.no">
+<input type="hidden" name="noticeNo" value="${b.noticeNo}">
+<input id="boardTitle" name="boardTitle" class="no-margin basic_input title_name w100p mb24" type="text"  value="${b.noticeTitle }" required="required"> <br><br>
 <input id="memberId" name="memberId" class="no-margin basic_input title_name w100p mb24" value="${loginUser.memberName}" readonly> <br><br>
-<textarea id="summernote" name="boardContent" required="required" >${b.boardContent }</textarea>
+<select id="category" name="noticeCategory">
+  <option value="category1">카테고리1</option>
+  <option value="category2">카테고리2</option>
+</select>
+<textarea id="summernote" name="boardContent" required="required" >${b.noticeContent}</textarea>
 <div class="enrollFormBtn">
     <button type="reset" id="resetBtn" class="btn btn-danger" onclick="javascript:history.go(-1);">목록</button>
     <button type="submit" class="btn btn-primary" id="saveBtn" onclick="updateBoardBtn()">수정</button>

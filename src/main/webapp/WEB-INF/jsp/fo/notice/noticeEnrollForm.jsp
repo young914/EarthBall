@@ -141,7 +141,7 @@
 <select id="category" name="noticeCategory">
   <option value="category1">카테고리1</option>
   <option value="category2">카테고리2</option>
-</select>
+</select><br><br>
 <textarea id="summernote" name="noticeContent"></textarea>
 
 <div class="enrollFormBtn">

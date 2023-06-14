@@ -24,6 +24,7 @@
      , NOTICE.NOTICE_TITLE
      , NOTICE.NOTICE_CATEGORY
      , TO_CHAR(NOTICE.NOTICE_DATE, 'YYYY-MM-DD') AS "NOTICE_DATE"
+     , NOTICE.NOTICE_VIEW
 	FROM NOTICE
 	WHERE NOTICE.STATUS = 'Y'
 	ORDER BY NOTICE.NOTICE_NO DESC
@@ -44,7 +45,7 @@
 <!-- 공지사항 조회수 증가용 쿼리문 -->
 	<update id="increaseCount" parameterType="_int">
 		UPDATE NOTICE
-		   SET COUNT = COUNT + 1
+		   SET NOTICE_VIEW = NOTICE_VIEW + 1
 		 WHERE NOTICE_NO = #{noticeNo}
 		   AND STATUS = 'Y'
 	</update>
@@ -61,6 +62,7 @@
 		UPDATE NOTICE
 		   SET NOTICE_TITLE = #{noticeTitle}
 		     , NOTICE_CONTENT = #{noticeContent}
+		     , NOTICE_CATEGORY = #{noticeCategory}
 		 WHERE NOTICE_NO = #{noticeNo}
 	</update>
 

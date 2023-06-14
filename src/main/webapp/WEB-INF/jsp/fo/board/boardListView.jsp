@@ -25,6 +25,10 @@
 
     <style>
 
+    .hover tr:hover {
+    background-color: #f5f5f5;
+  	}
+
         /* ---------------------------------- */
 
         .search2>form {
@@ -261,17 +265,15 @@
                 <th>작성일</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="hover">
             <c:forEach var="b" items="${list}">
-                <tr>
-                    <td class="bno">${b.boardNo}</td>
-                    <td>
-                        <a href="${pageContext.request.contextPath}/detail.bo?bno=${b.boardNo}">${b.boardTitle}</a>
-                    </td>
-                    <td>${b.memberId}</td>
-                    <td>${b.boardDate}</td>
-                </tr>
-            </c:forEach>
+			<tr onclick="location.href='${pageContext.request.contextPath}/detail.bo?bno=${b.boardNo}'">
+			  <td class="bno">${b.boardNo}</td>
+			  <td>${b.boardTitle}</td>
+			  <td>${b.memberId}</td>
+			  <td>${b.boardDate}</td>
+			</tr>
+			</c:forEach>
             <tr>
         </tbody>
     </table>
