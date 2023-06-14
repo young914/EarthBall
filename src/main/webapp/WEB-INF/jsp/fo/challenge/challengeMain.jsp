@@ -56,7 +56,7 @@
                 <div id="filter_1_1">
                     <ul>
                       <c:forEach var="category" items="${categoryList}">
-                        <li><a class="btn_2" href="javascript:categoryFilter();">${category.categoryName}</a></li>
+                        <li><a class="btn_2" href="javascript:categoryFilter(${category.categoryNo});">${category.categoryName}</a></li>
                       </c:forEach>
                     </ul>
                 </div>
@@ -366,6 +366,10 @@
                 infinite : true
             });
         })
+
+        function categoryFilter(categoryNo) {
+            location.href="/categoryFilter.chall?categoryNo=" + categoryNo;
+        }
 
 
     </script>

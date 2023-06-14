@@ -59,6 +59,7 @@
         SELECT COUNT(*)
         FROM TB_CH_CONFIRM
         WHERE CH_NO = #{chNo}
+          AND STATUS = 'Y'
     </select>
 
 

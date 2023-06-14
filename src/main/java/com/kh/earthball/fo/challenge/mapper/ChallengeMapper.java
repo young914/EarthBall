@@ -25,4 +25,8 @@ public interface ChallengeMapper {
   int challengeUpdate(Challenge challenge);
 
   int challengeDelete(int chNo);
+
+  int selectCategoryListCount(int categoryNo);
+
+  ArrayList<Challenge> selectCategoryList(@Param("offset") int offset, @Param("limit") int limit, @Param("categoryNo") int categoryNo);
 }
