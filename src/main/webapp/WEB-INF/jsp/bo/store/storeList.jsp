@@ -200,7 +200,7 @@
                         <td>${ s.businessHours }</td>
                         <td>${ s.storeLikes }</td>
                         <td><button type="button" class="btn btn-warning" onclick="updateStore('${ s.storeNo }');">수정</button></td>
-                        <td><button type="button" class="btn btn-danger" onclick="deleteStore();">삭제</button></td>
+                        <td><button type="button" class="btn btn-danger" onclick="deleteStore('${ s.storeNo }');">삭제</button></td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -271,11 +271,11 @@
     location.href = "storeEnrollForm.st";
   }
   function updateStore(storeNo) {
-    console.log(storeNo);
+    
     location.href = "storeUpdateForm.st?storeNo=" + storeNo;
   }
-  function deleteStore() {
-    location.href = "deleteStore.st";
+  function deleteStore(storeNo) {
+    location.href = "deleteStore.st?storeNo=" + storeNo;
   }
 </script>
 <jsp:include page="/WEB-INF/jsp/bo/common/commonScript.jsp" />

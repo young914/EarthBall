@@ -23,4 +23,6 @@ public interface AdminStoreService {
 
   ArrayList<AdminAtta> selectAtta(int storeNo);
 
+  int deleteService(int storeNo);
+
 }

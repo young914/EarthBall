@@ -78,4 +78,9 @@ public class AdminStoreServiceImpl implements AdminStoreService {
     return adminStoreMapper.selectAtta(storeNo);
   }
 
+  @Override
+  public int deleteService(int storeNo) {
+    return adminStoreMapper.deleteStore(storeNo);
+  }
+
 }
