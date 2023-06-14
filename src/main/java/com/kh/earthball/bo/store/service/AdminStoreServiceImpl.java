@@ -16,17 +16,17 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class AdminStoreServiceImpl implements AdminStoreService {
 
-  private final AdminStoreMapper storeMapper;
+  private final AdminStoreMapper adminStoreMapper;
 
   @Transactional
   @Override
-  public int insertStore(AdminStore p, ArrayList<AdminAtta> list) {
-    int result1 = storeMapper.insertStore(p);
+  public int insertStore(AdminStore s, ArrayList<AdminAtta> list) {
+    int result1 = adminStoreMapper.insertStore(s);
 
     int result2 = 0;
 
     for(AdminAtta at : list) {
-      result2 = storeMapper.insertStoreAtta(at);
+      result2 = adminStoreMapper.insertStoreAtta(at);
     }
 
     return result1 * result2;
@@ -40,12 +40,42 @@ public class AdminStoreServiceImpl implements AdminStoreService {
 
     RowBounds rowBounds = new RowBounds(offset, limit);
 
-    return storeMapper.adminAllStoreList(pi, rowBounds);
+    return adminStoreMapper.adminAllStoreList(pi, rowBounds);
   }
 
   @Override
   public int selectListCount() {
-    return storeMapper.selectListCount();
+    return adminStoreMapper.selectListCount();
+  }
+
+  // 매장 등록때 받은 city와 provinces로 지역값 불러오 
+  @Override
+  public int getRegionNo(String city, String provinces) {
+    
+    return adminStoreMapper.getRegionNo(city, provinces);
+  }
+
+  @Override
+  public int updateStore(AdminStore s, ArrayList<AdminAtta> list) {
+    int result1 = adminStoreMapper.updateStore(s);
+
+    int result2 = 0;
+
+    for(AdminAtta at : list) {
+      result2 = adminStoreMapper.updateStoreAtta(at);
+    }
+
+    return result1 * result2;
+  }
+
+  @Override
+  public AdminStore selectStore(int storeNo) {
+    return adminStoreMapper.selectStore(storeNo);
+  }
+
+  @Override
+  public ArrayList<AdminAtta> selectAtta(int storeNo) {
+    return adminStoreMapper.selectAtta(storeNo);
   }
 
 }

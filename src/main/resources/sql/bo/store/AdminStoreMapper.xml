@@ -4,8 +4,8 @@
 <mapper namespace="com.kh.earthball.bo.store.mapper.AdminStoreMapper">
 
 	<insert id="insertStore" parameterType="com.kh.earthball.bo.store.vo.AdminStore">
-		INSERT INTO STORE(STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_DETAIL_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_INFO)
-		VALUES(SEQ_STORE.NEXTVAL, #{storeName}, #{storeAddress}, #{storeDetailAddress}, #{storePhone}, #{businessHours}, #{storeInfo})
+		INSERT INTO STORE(STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_DETAIL_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_REGION_NO, STORE_INFO)
+		VALUES(SEQ_STORE.NEXTVAL, #{storeName}, #{storeAddress}, #{storeDetailAddress}, #{storePhone}, #{businessHours}, #{storeRegionNo}, #{storeInfo})
 	</insert>
 
 	<insert id="insertStoreAtta" parameterType="com.kh.earthball.bo.store.vo.AdminAtta">
@@ -19,9 +19,47 @@
 		ORDER BY STORE_NO
 	</select>
 
-	<select id="selectListCount" resultType="_int">
+	<select id="selectListCount" resultType="int">
 		SELECT COUNT(*)
 		FROM STORE
 	</select>
 
+		<select id="getRegionNo" parameterType="String" resultType="_int">
+		SELECT STORE_REGION_NO
+		FROM STORE_REGION
+		WHERE CITY = #{city}
+		AND PROVINCES = #{provinces}
+	</select>
+	
+	<select id="selectStore" resultType="com.kh.earthball.bo.store.vo.AdminStore">
+		SELECT *
+		FROM STORE
+		WHERE STORE_NO = #{storeNo}
+	</select>
+	
+	<select id = "selectAtta" resultType="com.kh.earthball.bo.store.vo.AdminAtta">
+		SELECT *
+		FROM STORE_ATTA
+		WHERE STORE_NO = #{storeNo}
+	</select>
+	
+	<update id="updateStore" parameterType="com.kh.earthball.bo.store.vo.AdminStore">
+    UPDATE STORE
+    SET STORE_NAME = #{storeName},
+        STORE_ADDRESS = #{storeAddress},
+        STORE_DETAIL_ADDRESS = #{storeDetailAddress},
+        STORE_PHONE = #{storePhone},
+        BUSINESS_HOURS = #{businessHours},
+        STORE_REGION_NO = #{storeRegionNo},
+        STORE_INFO = #{storeInfo}
+    WHERE STORE_NO = #{storeNo}
+</update>
+
+<update id="updateStoreAtta" parameterType="com.kh.earthball.bo.store.vo.AdminAtta">
+    UPDATE STORE_ATTA
+    SET CHANGER_NAME = #{changerName},
+        FILE_LEVEL = #{fileLevel}
+    WHERE STORE_NO = #{storeNo}
+</update>
+	
 </mapper>

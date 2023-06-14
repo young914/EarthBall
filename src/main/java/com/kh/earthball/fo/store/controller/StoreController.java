@@ -86,6 +86,8 @@ public class StoreController {
   @GetMapping(value = "getFilter.st", produces = "application/json; charset=UTF-8")
   public String getFilterList(String city, String provinces, String memberId) {
     System.out.println("getFilterList");
+    System.out.println(city);
+    System.out.println(provinces);
     if(provinces.equals("")) {
       ArrayList<Store> selectFilterList = storeService.selectFilterListC(city);
       

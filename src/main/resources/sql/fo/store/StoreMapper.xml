@@ -71,8 +71,11 @@
         , STORE_REGION_NO
         , STORE_INFO
         , STATUS
+        , CHANGER_NAME
 	    FROM STORE
+	    JOIN STORE_ATTA USING (STORE_NO)
 	    WHERE STATUS = 'Y'
+	    AND FILE_LEVEL = 0
 	    AND STORE_REGION_NO = #{regionNo}
 	    ORDER BY STORE_NO DESC 
 	 	</select>

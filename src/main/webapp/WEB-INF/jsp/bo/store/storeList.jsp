@@ -199,7 +199,7 @@
                         <td>${ s.storePhone}</td>
                         <td>${ s.businessHours }</td>
                         <td>${ s.storeLikes }</td>
-                        <td><button type="button" class="btn btn-warning" onclick="updateStore();">수정</button></td>
+                        <td><button type="button" class="btn btn-warning" onclick="updateStore('${ s.storeNo }');">수정</button></td>
                         <td><button type="button" class="btn btn-danger" onclick="deleteStore();">삭제</button></td>
                     </tr>
                 </c:forEach>
@@ -268,10 +268,11 @@
 </div>
 <script>
   function createStore() {
-    location.href = "adminEnrollForm.st";
+    location.href = "storeEnrollForm.st";
   }
-  function updateStore() {
-    location.href = "updateStore.st";
+  function updateStore(storeNo) {
+    console.log(storeNo);
+    location.href = "storeUpdateForm.st?storeNo=" + storeNo;
   }
   function deleteStore() {
     location.href = "deleteStore.st";
