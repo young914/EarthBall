@@ -29,4 +29,9 @@ public interface ChallengeMapper {
   int selectCategoryListCount(int categoryNo);
 
   ArrayList<Challenge> selectCategoryList(@Param("offset") int offset, @Param("limit") int limit, @Param("categoryNo") int categoryNo);
+
+  int selectStatListCount(String chStatName);
+
+  ArrayList<Challenge> selectStatList(@Param("offset") int offset, @Param("limit") int limit, @Param("chStatName") String chStatName);
+
 }

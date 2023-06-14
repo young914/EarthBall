@@ -25,4 +25,8 @@ public interface ChallengeService {
 
   ArrayList<Challenge> selectCategoryList(PageInfo pageInfo, int categoryNo);
 
+  int selectStatListCount(String chStatName);
+
+  ArrayList<Challenge> selectStatList(PageInfo pageInfo, String chStatName);
+
 }

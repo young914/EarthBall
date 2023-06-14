@@ -87,4 +87,19 @@ public class ChallengeServiceImpl implements ChallengeService {
     log.info("쿼리문 건너온 list : " + list);
     return list;
   }
+
+  @Override
+  public int selectStatListCount(String chStatName) {
+    return challengeMapper.selectStatListCount(chStatName);
+  }
+
+  @Override
+  @Transactional  // 모든 값들이 다 적용 된 후에 커밋 처리 될 수 있도록 묶어두는 개념
+  public ArrayList<Challenge> selectStatList(PageInfo pageInfo, String chStatName) {
+
+    int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getBoardLimit();
+    int limit = offset + pageInfo.getBoardLimit();
+
+    return challengeMapper.selectStatList(offset, limit, chStatName);
+  }
 }

@@ -67,9 +67,9 @@
                 <h3>진행상태</h3>
                 <div id="filter_3_1">
                     <ul>
-                        <li><a class="btn_2" href="">진행 예정</a></li>
-                        <li><a class="btn_2" href="">진행 중</a></li>
-                        <li><a class="btn_2" href="">진행 완료</a></li>
+                        <li><a class="btn_2" href="javascript:statFilter('진행예정')">진행 예정</a></li>
+                        <li><a class="btn_2" href="javascript:statFilter('진행중')">진행 중</a></li>
+                        <li><a class="btn_2" href="javascript:statFilter('진행완료')">진행 완료</a></li>
                     </ul>
                 </div>
             </div>
@@ -369,6 +369,10 @@
 
         function categoryFilter(categoryNo) {
             location.href="/categoryFilter.chall?categoryNo=" + categoryNo;
+        }
+
+        function statFilter(chStatName) {
+            location.href="/statFilter.chall?chStatName=" + chStatName;
         }
 
 
