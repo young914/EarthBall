@@ -1,9 +1,10 @@
 package com.kh.earthball.fo.board.service;
 
-import com.kh.earthball.fo.common.vo.PageInfo;
-import com.kh.earthball.fo.board.vo.Board;
-
 import java.util.ArrayList;
+
+import com.kh.earthball.fo.board.vo.Board;
+import com.kh.earthball.fo.board.vo.QReply;
+import com.kh.earthball.fo.common.vo.PageInfo;
 
 public interface BoardService {
 
@@ -31,6 +32,14 @@ public interface BoardService {
   // 다음글 조회
   Board selectNextBoard(int boardNo);
 
+  //댓글 조회 서비스
+  ArrayList<QReply> selectReplyList(int boardNo);
+
+  // 댓글 작성 서비스
+  int insertReply(QReply r);
+
+  // 댓글 삭제 서비스
+  int deleteReply(int boardNo);
 
 
 
