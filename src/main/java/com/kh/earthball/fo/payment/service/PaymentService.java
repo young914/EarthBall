@@ -6,4 +6,8 @@ public interface PaymentService {
 
   int payComplete(PayInfo pi);
 
+  int addTotalPay(PayInfo pi);
+
+  int updateGrade(PayInfo pi);
+
 }

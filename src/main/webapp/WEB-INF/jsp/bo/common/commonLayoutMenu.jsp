@@ -101,5 +101,11 @@
         </li>
       </ul>
     </li>
+    <li class="menu-item ${param.menuId eq '60' ? 'active' : ''}">
+      <a href="/" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-table"></i>
+        <div data-i18n="Tables">주문</div>
+      </a>
+    </li>
   </ul>
 </aside>
