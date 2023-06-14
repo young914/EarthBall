@@ -276,10 +276,11 @@ public class ConfirmController {
     return replyList;
   }
 
-  /*
+  @ResponseBody
+  @PostMapping("/rdelete.con")
   public int replyDelete(int reNo) {
+    log.info("reNo넘어옴 : " + reNo);
     return confirmService.deleteReply(reNo);
   }
-   */
 
 }

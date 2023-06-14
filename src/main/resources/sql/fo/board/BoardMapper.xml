@@ -10,6 +10,14 @@
 		 <result column="MEMBER_ID" property="memberId" />
 	</resultMap>
 
+	<resultMap id="replyResultSet" type="reply">
+		<result column="Q_REPLY_NO" property="QreplyNo" />
+		<result column="BOARD_NO" property="boardNo" />
+		<result column="Q_REPLY_CONTENT" property="QreplyContent" />
+		<result column="Q_CREATE_DATE" property="QcreateDate" />
+		<result column="MEMBER_ID" property="memberId" />
+	</resultMap>
+
   <!-- 게시글 총 갯수 구하는 쿼리문 -->
   <select id="selectListCount" resultType="_int">
     SELECT COUNT(*)
@@ -99,6 +107,37 @@
          ORDER BY QNA.BOARD_NO ASC
     ) WHERE ROWNUM = 1
 </select>
+
+<!-- 댓글 리스트 조회용 쿼리문 -->
+	<select id="selectReplyList" parameterType="_int" resultMap="replyResultSet">
+		SELECT Q_REPLY_NO
+			 , MEMBER_ID
+			 , Q_REPLY_CONTENT
+			 , TO_CHAR(Q_CREATE_DATE, 'YYYY-MM-DD') AS "Q_CREATE_DATE"
+		  FROM Q_REPLY
+		 WHERE STATUS = 'Y'
+		   AND BOARD_NO = #{boardNo}
+		 ORDER BY Q_REPLY_NO DESC
+	</select>
+
+	<!-- 댓글 작성용 쿼리문 -->
+	<insert id="insertReply" parameterType="reply">
+		INSERT INTO Q_REPLY(Q_REPLY_NO
+						, Q_REPLY_CONTENT
+						, BOARD_NO
+						, MEMBER_ID)
+				   VALUES(SEQ_Q_REPLY.NEXTVAL
+				   		, #{QreplyContent}
+				   		, #{boardNo}
+				   		, #{memberId})
+	</insert>
+
+	<!--  댓글 삭제용 쿼리문 -->
+	<update id="deleteReply" parameterType="reply">
+		UPDATE Q_REPLY
+		   SET STATUS = 'N'
+		 WHERE Q_REPLY_NO = #{QreplyNo}
+	</update>
 
 </mapper>
 

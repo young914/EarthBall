@@ -21,5 +21,12 @@ public interface ChallengeService {
 
   int challengeDelete(int chNo);
 
+  int selectCategoryListCount(int categoryNo);
+
+  ArrayList<Challenge> selectCategoryList(PageInfo pageInfo, int categoryNo);
+
+  int selectStatListCount(String chStatName);
+
+  ArrayList<Challenge> selectStatList(PageInfo pageInfo, String chStatName);
 
 }

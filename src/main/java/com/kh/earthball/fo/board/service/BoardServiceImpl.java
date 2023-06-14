@@ -1,11 +1,14 @@
 package com.kh.earthball.fo.board.service;
 
 import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.kh.earthball.fo.board.dao.BoardDao;
 import com.kh.earthball.fo.board.vo.Board;
+import com.kh.earthball.fo.board.vo.QReply;
 import com.kh.earthball.fo.common.vo.PageInfo;
 
 @Service
@@ -56,4 +59,22 @@ public class BoardServiceImpl implements BoardService {
   public int updateBoard(Board b) {
       return boardDao.updateBoard(sqlSession, b);
   }
+
+
+  @Override
+  public int insertReply(QReply r) {
+	  return boardDao.insertReply(sqlSession, r);
+	}
+
+  @Override
+  public ArrayList<QReply> selectReplyList(int boadrNo) {
+		return boardDao.selectReplyList(sqlSession, boadrNo);
+	}
+
+@Override
+public int deleteReply(int boardNo) {
+	return boardDao.deleteReply(sqlSession, boardNo);
+
+}
+
 }

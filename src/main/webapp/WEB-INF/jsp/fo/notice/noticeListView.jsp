@@ -25,6 +25,10 @@
 
     <style>
 
+    .hover tr:hover {
+    background-color: #f5f5f5;
+  	}
+
         /* ---------------------------------- */
 
         .search2>form {
@@ -236,6 +240,7 @@
                     </span>
                 </c:if>
             </tr>
+            <tr>
             <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
                 <div class="container-fluid">
                     <a class="navbar-brand">공지사항</a>
@@ -254,45 +259,44 @@
                     </div>
                 </div>
             </nav>
+            </tr>
              <tr>
       <th>No</th>
       <th>
         <select id="categoryFilter" onchange="changeCategory()">
-          <option value="all">All</option>
+          <option value="all">전체</option>
           <option value="category1">Category 1</option>
           <option value="category2">Category 2</option>
         </select>
       </th>
-      <th>Title</th>
-      <th>Created date</th>
-      <th>Views</th>
+      <th>제목</th>
+      <th>작성일</th>
+      <th>조회수</th>
     </tr>
   </thead>
-  <tbody>
-    <c:forEach var="b" items="${list}">
-      <tr class="noticeRow" data-category="${b.noticeCategory}">
-        <td class="bno">${b.noticeNo}</td>
-        <td>
-          <c:choose>
-            <c:when test="${b.noticeCategory == 'category1'}">
-              Category 1
-            </c:when>
-            <c:when test="${b.noticeCategory == 'category2'}">
-              Category 2
-            </c:when>
-            <c:otherwise>
-              etc
-            </c:otherwise>
-          </c:choose>
-        </td>
-        <td>
-          <a href="${pageContext.request.contextPath}/detail.no?bno=${b.noticeNo}">${b.noticeTitle}</a>
-        </td>
-        <td>${b.noticeDate}</td>
-        <td>${b.noticeView}</td>
-      </tr>
-    </c:forEach>
-  </tbody>
+  <tbody class="hover">
+  <c:forEach var="b" items="${list}">
+    <tr class="noticeRow" data-category="${b.noticeCategory}" onclick="location.href='${pageContext.request.contextPath}/detail.no?bno=${b.noticeNo}'">
+      <td class="bno">${b.noticeNo}</td>
+      <td>
+        <c:choose>
+          <c:when test="${b.noticeCategory == 'category1'}">
+            Category 1
+          </c:when>
+          <c:when test="${b.noticeCategory == 'category2'}">
+            Category 2
+          </c:when>
+          <c:otherwise>
+            etc
+          </c:otherwise>
+        </c:choose>
+      </td>
+      <td>${b.noticeTitle}</td>
+      <td>${b.noticeDate}</td>
+      <td>${b.noticeView}</td>
+    </tr>
+  </c:forEach>
+</tbody>
 </table>
 
 

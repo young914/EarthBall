@@ -30,6 +30,7 @@ DROP TABLE TB_GRP_CODE;
 DROP TABLE TB_CATEGORY_TEMPLATE;
 DROP TABLE TB_CH_CONFIRM;
 DROP TABLE TB_CHALLENGE;
+DROP TABLE Q_REPLY;
 
 DROP SEQUENCE SEQ_TB_CHALLENGE;
 DROP SEQUENCE SEQ_STORE;
@@ -62,7 +63,7 @@ DROP SEQUENCE SEQ_REVIEW_REPLY;
 DROP SEQUENCE SEQ_ORDER;
 DROP SEQUENCE SEQ_POINT;
 DROP SEQUENCE SEQ_CART;
-
+DROP SEQUENCE SEQ_Q_REPLY;
 
 CREATE TABLE TB_CHALLENGE
 (
@@ -149,15 +150,13 @@ CREATE TABLE PAYMENT
     MEMBER_ID              VARCHAR2(100) NOT NULL,
     PAYMENT_DATE           DATE DEFAULT SYSDATE NULL,
     PAYMENT_TYPE           VARCHAR2(20) NOT NULL,
-    STATUS                 VARCHAR2(1) DEFAULT 'Y' NOT NULL,
+    STATUS                 VARCHAR2(1) NOT NULL,
     PAYMENT_TOTAL          NUMBER NOT NULL,
     RECEIVE_NAME           VARCHAR2(20) NOT NULL,
     RECEIVE_PHONE          VARCHAR2(11) NOT NULL,
     POST_CODE              NUMBER NOT NULL,
-    ADDRESS1               VARCHAR2(100) NOT NULL,
-    ADDRESS2               VARCHAR2(100) NOT NULL,
-    DELIVERY_COMENT        VARCHAR2(100),
-    PAYMENT_TOKEN          VARCHAR2(40) NOT NULL
+    RECEIVE_ADDRESS        VARCHAR2(100) NOT NULL,
+    RECEIVE_DETAIL_ADDRESS VARCHAR2(100) NOT NULL
 );
 
 CREATE SEQUENCE SEQ_PAYMENT;
@@ -204,7 +203,9 @@ CREATE TABLE QNA
     BOARD_CONTENT VARCHAR(2000)        NOT NULL,
     BOARD_DATE    DATE DEFAULT SYSDATE NOT NULL,
     BOARD_REPLY   VARCHAR(1000) NULL,
-    MEMBER_ID     VARCHAR2(100) NOT NULL
+    MEMBER_ID     VARCHAR2(100) NOT NULL,
+    STATUS	VARCHAR2(1)	NOT NULL DEFAULT 'Y'
+
 );
 
 CREATE SEQUENCE SEQ_QNA;
@@ -224,35 +225,10 @@ CREATE TABLE MEMBER
     ADDRESS1     VARCHAR2(255) NULL,
     ADDRESS2     VARCHAR2(255) NULL,
     CHANGE_NAME  VARCHAR2(255) NULL,
-    GRADE_NAME   VARCHAR2(15) DEFAULT 'RED' NOT NULL,
-    POST_CODE    VARCHAR2(5),
-    MAIL_AUTH    NUMBER DEFAULT 0,
-    MAIL_KEY     VARCHAR2(50)
-
+    GRADE_NAME   VARCHAR2(15) DEFAULT 'RED' NOT NULL
 );
 
 CREATE SEQUENCE SEQ_MEMBER;
-
---  
-CREATE TABLE MP_FILE
-(
-    FILE_NO NUMBER,                         
-    BNO NUMBER NOT NULL,                    
-    ORG_FILE_NAME VARCHAR2(260) NOT NULL,   
-    STORED_FILE_NAME VARCHAR2(36) NOT NULL, 
-    FILE_SIZE NUMBER,                       
-    REGDATE DATE DEFAULT SYSDATE NOT NULL, 
-    DEL_GB VARCHAR2(1) DEFAULT 'N' NOT NULL,
-    PRIMARY KEY(FILE_NO)                    
-);
-
-
-CREATE SEQUENCE SEQ_MP_FILE_NO
-START WITH 1 
-INCREMENT BY 1 
-NOMAXVALUE NOCACHE;
-
-COMMIT;
 
 CREATE TABLE TB_GRP_CODE
 (
@@ -477,6 +453,19 @@ CREATE TABLE CART
 
 CREATE SEQUENCE SEQ_CART;
 
+CREATE TABLE Q_REPLY
+(
+    Q_REPLY_NO NUMBER NOT NULL,
+    BOARD_NO NUMBER NOT NULL,
+    Q_REPLY_CONTENT VARCHAR2(400) NOT NULL,
+    Q_CREATE_DATE DATE DEFAULT SYSDATE NOT NULL,
+    STATUS VARCHAR2(1) DEFAULT 'Y',
+    MEMBER_ID VARCHAR2(100) NOT NULL
+);
+
+CREATE SEQUENCE SEQ_Q_REPLY;
+
+
 
 
 ALTER TABLE TB_CHALLENGE
@@ -566,6 +555,9 @@ ALTER TABLE POINT
 ALTER TABLE CART
     ADD CONSTRAINT PK_CART PRIMARY KEY (CART_NO);
 
+ALTER TABLE Q_REPLY 
+ADD CONSTRAINT PK_Q_REPLY PRIMARY KEY (Q_REPLY_NO);
+
 
 
 ALTER TABLE TB_CODE
@@ -593,8 +585,10 @@ ALTER TABLE TB_CH_CON_REPLY
         REFERENCES TB_CH_CONFIRM (CH_CON_NO, CH_NO);
 
 
-------------------- [ 챌린�?�??�� ?��?�� ] ------------------- 
--- < ?��?��조건 �?경사?�� >
+
+
+------------------- [ 챌린지관련 시작 ] ------------------- 
+-- < 제약조건 변경사항 >
 
 ALTER TABLE TB_CH_DETAIL_INFO
 DROP
@@ -607,8 +601,8 @@ CONSTRAINT SYS_C0010295;
 
 
 ---------------------------------------------------------------------------------------
---  < ?��???�� �?경사?�� >
--- 1. TB_CATEGORY ?��???��
+--  < 시퀀스 변경사항 >
+-- 1. TB_CATEGORY 시퀀스
 DROP SEQUENCE SEQ_CATE_NO;
 
 CREATE SEQUENCE SEQ_CATE_NO
@@ -618,7 +612,7 @@ SELECT SEQ_CATE_NO.NEXTVAL
 FROM DUAL;
 
 
--- 2. TB_CATEGORY_TEMPLATE ?��???�� 
+-- 2. TB_CATEGORY_TEMPLATE 시퀀스 
 DROP SEQUENCE SEQ_TB_CATEGORY_TEMPLATE;
 
 CREATE SEQUENCE SEQ_TB_CATEGORY_TEMPLATE
@@ -629,107 +623,107 @@ FROM DUAL;
 
 
 -----------------------------------------------------------------------------------
--- < 컬럼 �?경사?�� >
+-- < 컬럼 변경사항 >
 
 ALTER TABLE TB_CHALLENGE DROP COLUMN CODE;
 
 ALTER TABLE TB_CATEGORY_TEMPLATE DROP COLUMN GRP_CODE;
 
 ------------------------------------------------------------------------------------
--- < 코멘?�� >
+-- < 코멘트 >
 -- 1. TB_CATEGORY
 COMMENT
-ON COLUMN TB_CATEGORY.CATEGORY_NO IS '카테고리 ?��?��번호';
+ON COLUMN TB_CATEGORY.CATEGORY_NO IS '카테고리 일련번호';
 COMMENT
-ON COLUMN TB_CATEGORY.CATEGORY_NAME IS '카테고리�?';
+ON COLUMN TB_CATEGORY.CATEGORY_NAME IS '카테고리명';
 COMMENT
-ON COLUMN TB_CATEGORY.STATUS IS '?��?��?���?';
+ON COLUMN TB_CATEGORY.STATUS IS '사용여부';
 
 -- 2. TB_CATEGORY_TEMPLATE
 COMMENT
-ON COLUMN TB_CATEGORY_TEMPLATE.CATEGORY_TEMPLATE_NO IS '?��?���? ?��?��번호';
+ON COLUMN TB_CATEGORY_TEMPLATE.CATEGORY_TEMPLATE_NO IS '탬플릿 일련번호';
 COMMENT
-ON COLUMN TB_CATEGORY_TEMPLATE.INPUT_TYPE IS '?��?��???��';
+ON COLUMN TB_CATEGORY_TEMPLATE.INPUT_TYPE IS '입력타입';
 COMMENT
-ON COLUMN TB_CATEGORY_TEMPLATE.STATUS IS '?��?��?���?';
+ON COLUMN TB_CATEGORY_TEMPLATE.STATUS IS '사용여부';
 COMMENT
-ON COLUMN TB_CATEGORY_TEMPLATE.SORT_NO IS '?��?��?��?��';
+ON COLUMN TB_CATEGORY_TEMPLATE.SORT_NO IS '우선순위';
 COMMENT
-ON COLUMN TB_CATEGORY_TEMPLATE.CH_SUB_TITLE IS '챌린�? ?��?���?';
+ON COLUMN TB_CATEGORY_TEMPLATE.CH_SUB_TITLE IS '챌린지 소제목';
 COMMENT
-ON COLUMN TB_CATEGORY_TEMPLATE.CATEGORY_NO IS '카테고리 ?��?��번호';
+ON COLUMN TB_CATEGORY_TEMPLATE.CATEGORY_NO IS '카테고리 일련번호';
 
 -- 3. TB_CH_CON_REPLY
 COMMENT
-ON COLUMN TB_CH_CON_REPLY.RE_NO IS '?���?번호';
+ON COLUMN TB_CH_CON_REPLY.RE_NO IS '댓글번호';
 COMMENT
-ON COLUMN TB_CH_CON_REPLY.CH_CON_NO IS '챌린�? ?���? ?��?��번호';
+ON COLUMN TB_CH_CON_REPLY.CH_CON_NO IS '챌린지 인증 일련번호';
 COMMENT
-ON COLUMN TB_CH_CON_REPLY.CH_NO IS '챌린�? ?��?��번호';
+ON COLUMN TB_CH_CON_REPLY.CH_NO IS '챌린지 일련번호';
 COMMENT
-ON COLUMN TB_CH_CON_REPLY.RE_CONTENT IS '?���??��?��';
+ON COLUMN TB_CH_CON_REPLY.RE_CONTENT IS '댓글내용';
 COMMENT
-ON COLUMN TB_CH_CON_REPLY.RE_CREATE_DATE IS '?��?��?��';
+ON COLUMN TB_CH_CON_REPLY.RE_CREATE_DATE IS '작성일';
 COMMENT
-ON COLUMN TB_CH_CON_REPLY.STATUS IS '?��?��?���?';
+ON COLUMN TB_CH_CON_REPLY.STATUS IS '사용여부';
 COMMENT
-ON COLUMN TB_CH_CON_REPLY.MEMBER_ID IS '?��?��?��?��?��';
+ON COLUMN TB_CH_CON_REPLY.MEMBER_ID IS '회원아이디';
 
 -- 4. TB_CH_CONFIRM
 COMMENT
-ON COLUMN TB_CH_CONFIRM.CH_CON_NO IS '챌린�? ?���? ?��?��번호';
+ON COLUMN TB_CH_CONFIRM.CH_CON_NO IS '챌린지 인증 일련번호';
 COMMENT
-ON COLUMN TB_CH_CONFIRM.CH_NO IS '챌린�? ?��?��번호';
+ON COLUMN TB_CH_CONFIRM.CH_NO IS '챌린지 일련번호';
 COMMENT
-ON COLUMN TB_CH_CONFIRM.CH_CON_TITLE IS '챌린�? ?���? ?���?';
+ON COLUMN TB_CH_CONFIRM.CH_CON_TITLE IS '챌린지 인증 제목';
 COMMENT
-ON COLUMN TB_CH_CONFIRM.CH_CON_CONTENT IS '챌린�? ?���? ?��?��';
+ON COLUMN TB_CH_CONFIRM.CH_CON_CONTENT IS '챌린지 인증 내용';
 COMMENT
-ON COLUMN TB_CH_CONFIRM.MEMBER_ID IS '?��?��?��?��?��';
+ON COLUMN TB_CH_CONFIRM.MEMBER_ID IS '회원아이디';
 COMMENT
-ON COLUMN TB_CH_CONFIRM.STATUS IS '?��?��?���?';
+ON COLUMN TB_CH_CONFIRM.STATUS IS '사용여부';
 COMMENT
-ON COLUMN TB_CH_CONFIRM.CH_CON_CREATE_DATE IS '?��?��?��';
+ON COLUMN TB_CH_CONFIRM.CH_CON_CREATE_DATE IS '작성일';
 
 -- 5. TB_CH_DETAIL_INFO
 COMMENT
-ON COLUMN TB_CH_DETAIL_INFO.CH_DETAIL_INFO_NO IS '챌린�? ?��?��?���? ?��?��번호';
+ON COLUMN TB_CH_DETAIL_INFO.CH_DETAIL_INFO_NO IS '챌린지 상세정보 일련번호';
 COMMENT
-ON COLUMN TB_CH_DETAIL_INFO.CH_NO IS '챌린�? ?��?��번호';
+ON COLUMN TB_CH_DETAIL_INFO.CH_NO IS '챌린지 일련번호';
 COMMENT
-ON COLUMN TB_CH_DETAIL_INFO.CATEGORY_TEMPLATE_NO IS '?��?���? ?��?��번호';
+ON COLUMN TB_CH_DETAIL_INFO.CATEGORY_TEMPLATE_NO IS '탬플릿 일련번호';
 COMMENT
-ON COLUMN TB_CH_DETAIL_INFO.CH_DETAIL_INFO_DATA IS '챌린�? ?��?��?���? ?��?��?��';
+ON COLUMN TB_CH_DETAIL_INFO.CH_DETAIL_INFO_DATA IS '챌린지 상세정보 데이터';
 COMMENT
-ON COLUMN TB_CH_DETAIL_INFO.STATUS IS '?��?��?���?';
+ON COLUMN TB_CH_DETAIL_INFO.STATUS IS '사용여부';
 COMMENT
 ON COLUMN TB_CH_DETAIL_INFO.CODE IS '코드';
 COMMENT
-ON COLUMN TB_CH_DETAIL_INFO.FILE_NO IS '?��?�� ?��?��번호';
+ON COLUMN TB_CH_DETAIL_INFO.FILE_NO IS '파일 일련번호';
 
 -- 6. TB_CHA_FILE
 COMMENT
-ON COLUMN TB_CHA_FILE.FILE_NO IS '?��?�� ?��?��번호';
+ON COLUMN TB_CHA_FILE.FILE_NO IS '파일 일련번호';
 COMMENT
-ON COLUMN TB_CHA_FILE.FILE_NAME IS '?��?���?';
+ON COLUMN TB_CHA_FILE.FILE_NAME IS '파일명';
 COMMENT
-ON COLUMN TB_CHA_FILE.FILE_PATH IS '?��?��경로';
+ON COLUMN TB_CHA_FILE.FILE_PATH IS '파일경로';
 
 -- 7. TB_CHALLENGE
 COMMENT
-ON COLUMN TB_CHALLENGE.CH_NO IS '챌린�? ?��?��번호';
+ON COLUMN TB_CHALLENGE.CH_NO IS '챌린지 일련번호';
 COMMENT
-ON COLUMN TB_CHALLENGE.CH_TITLE IS '챌린�?�?';
+ON COLUMN TB_CHALLENGE.CH_TITLE IS '챌린지명';
 COMMENT
-ON COLUMN TB_CHALLENGE.CH_START_DAY IS '챌린�? ?��?��?��';
+ON COLUMN TB_CHALLENGE.CH_START_DAY IS '챌린지 시작일';
 COMMENT
-ON COLUMN TB_CHALLENGE.CH_END_DAY IS '챌린�? 종료?��';
+ON COLUMN TB_CHALLENGE.CH_END_DAY IS '챌린지 종료일';
 COMMENT
-ON COLUMN TB_CHALLENGE.MEMBER_ID IS '?��?��?��?��?��';
+ON COLUMN TB_CHALLENGE.MEMBER_ID IS '회원아이디';
 COMMENT
-ON COLUMN TB_CHALLENGE.CATEGORY_NO IS '카테고리 ?��?��번호';
+ON COLUMN TB_CHALLENGE.CATEGORY_NO IS '카테고리 일련번호';
 COMMENT
-ON COLUMN TB_CHALLENGE.FILE_NO IS '?��?�� ?��?��번호';
+ON COLUMN TB_CHALLENGE.FILE_NO IS '파일 일련번호';
 
 -- 8. TB_CODE
 COMMENT
@@ -737,21 +731,21 @@ ON COLUMN TB_CODE.CODE IS '코드';
 COMMENT
 ON COLUMN TB_CODE.GRP_CODE IS '그룹코드';
 COMMENT
-ON COLUMN TB_CODE.CODE_NAME IS '코드�?';
+ON COLUMN TB_CODE.CODE_NAME IS '코드명';
 COMMENT
-ON COLUMN TB_CODE.STATUS IS '?��?��?���?';
+ON COLUMN TB_CODE.STATUS IS '사용여부';
 COMMENT
-ON COLUMN TB_CODE.SORT_NO IS '?��?��?��?��';
+ON COLUMN TB_CODE.SORT_NO IS '우선순위';
 
 
 -- 9. TB_GRP_CODE
 COMMENT
 ON COLUMN TB_GRP_CODE.GRP_CODE IS '그룹코드';
 COMMENT
-ON COLUMN TB_GRP_CODE.GRP_CODE_NAME IS '그룹코드�?';
+ON COLUMN TB_GRP_CODE.GRP_CODE_NAME IS '그룹코드명';
 COMMENT
-ON COLUMN TB_GRP_CODE.STATUS IS '?��?��?���?';
-------------------- [ 챌린�?�??�� ?�� ] ------------------- 
+ON COLUMN TB_GRP_CODE.STATUS IS '사용여부';
+------------------- [ 챌린지관련 끝 ] ------------------- 
 
 
 
@@ -1199,59 +1193,77 @@ VALUES (220, '광주', '광산구');
 -- STORE 매장 ?���?
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '�?구샵 ?��로웨?��?��?��?��', '?��?��?��별시 마포�? ?��미산�? 155 1�?, �?구샵', '0507-1372-2052', '11:00 - 21:30', 25, 14,
-        '�?구�?? ?��?�� 첫걸?��, �?구샵?��?��?��.', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '지구샵 제로웨이스트홈', '서울특별시 마포구 성미산로 155 1층, 지구샵', '0507-1372-2052', '11:00 - 21:30', 25, 14,
+        '지구를 위한 첫걸음, 지구샵입니다.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '?��맹상?��', '?��?��?��별시 마포�? ?��?��컵로25�? 47 3�?, ?��맹상?��', '0507-1386-1064', '1112:00 - 20:00', 3, 14, '?��?��기�?? 줄이?�� ?��?? 마음?��?�� ?��?��?��
-?���? ?��?��?��?�� �?게이?�� 리필 ?��?��?��?��?��?��?��.', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '알맹상점', '서울특별시 마포구 월드컵로25길 47 3층, 알맹상점', '0507-1386-1064', '1112:00 - 20:00', 3, 14, '쓰레기를 줄이는 작은 마음들의 플랫폼
+제로 웨이스트 가게이자 리필 스테이션입니다.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '?��?���?', '?��?��?��별시 ?��?���? ?��?��리로14�? 9 1�?, ?��?���?', '070-4118-0710', '12:00 - 20:00', 6, 4,
-        '?��?���?(thepicker)?��, 건강?�� ?��?��?�� ?��?��?�� ?��경에 ?��?��?�� ?��?�� ?��?�� ?��?�� �??��?��?���? ?��?��?���? 고르?�� ?��?��?�� ?��미합?��?��.', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '더피커', '서울특별시 성동구 왕십리로14길 9 1층, 더피커', '070-4118-0710', '12:00 - 20:00', 6, 4,
+        '더피커(thepicker)는, 건강한 자연의 소산을 환경에 유해한 포장 없이 순환 가능하도록 세심하게 고르는 사람을 의미합니다.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '?��?��?��?��', '?��?��?��별시 ???���? ?��번로6�? 2 1�?, ?��?��?��?��', '0507-1300-3388', '12:30 - 19:00', 3, 12,
-        '?��?��?��?��?�� ?��리�? ?��?��?�� ?��?���?면서 �?구�?? ?��?���? ?��?��?��?�� ?��?��?�� ?��???��?�� �??��?��?��?��.', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '디어얼스', '서울특별시 은평구 녹번로6길 2 1층, 디어얼스', '0507-1300-3388', '12:30 - 19:00', 3, 12,
+        '디어얼스는 우리가 일상을 살아가면서 지구를 아끼고 사랑하는 라이프 스타일을 지향합니다.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '?��?��?��?��', '?��?��?��별시 강동�? ?��?���?35�? 34 1�?, ?��?��?��?��', '0507-1395-3534', '10:30 - 19:00', 12, 25,
-        '?��?��?��?��?�� ?��리�? ?��?��?�� ?��?���?면서 �?구�?? ?��?���? ?��?��?��?�� ?��?��?�� ?��???��?�� �??��?��?��?��.', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '송포어스', '서울특별시 강동구 풍성로35길 34 1층, 송포어스', '0507-1395-3534', '10:30 - 19:00', 12, 25,
+        '송포어스는 우리가 일상을 살아가면서 지구를 아끼고 사랑하는 라이프 스타일을 지향합니다.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '?��구밭', '경기 ?��?��?�� 미사강�??���? 25 FB329?��, FB330?��, FB33', '0507-1306-9626', '10:30 - 19:00', 27, 68,
-        '?��구밭?? 비장?��?���? ?��?��?��?�� ?���? �??���??��?�� ?��?��?�� ?��?�� 고체 ?��?��?�� �? ?��?��?��?��?�� ?��?��?��?�� 브랜?��?��?�� ?��조사 ?��?��?��.', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '동구밭', '경기 하남시 미사강변서로 25 FB329호, FB330호, FB33', '0507-1306-9626', '10:30 - 19:00', 27, 68,
+        '동구밭은 비장애인과 장애인이 함께 지속가능한 일상을 위해 고체 화장품 및 생활용품을 생산하는 브랜드이자 제조사 입니다.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '?��?��?��?��?��?��', '광주 ?���? ?��??�?74번길 27 ?��?��?��?��?��?��', '0507-1483-4030', '09:00 - 18:00', 37, 217,
-        '?��?��친화?�� ?��?��(비누, 주방?��?�� ?��)?�� ?��?��, ?��매하�? ?���? ?��?�� ?��?�� 기증받아 ?��매하?�� 중증?��?��?��?�� 고용?��?��?��.', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '소화아람일터', '광주 남구 용대로74번길 27 소화아람일터', '0507-1483-4030', '09:00 - 18:00', 37, 217,
+        '자연친화적 제품(비누, 주방세제 등)을 생산, 판매하며 입지 않는 옷을 기증받아 판매하여 중증장애인을 고용합니다.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '�?구별�?�?', '?���? ?��주시 ?��?���? 58 1�?', '064-711-8291', '10:00 - 19:00', 102, 203,
-        '?��로웨?��?��?�� 리빙?��, �?구별�?�? ?�� 몸과 �?구�?? ?��리는 ?��?��?�� 즐거??, ?��?��
-?��로웨?��?��?���? ?��?�� ?��?��?�� ?��?��?��?���? ?��기농 ?��?��?���? 직접 ?��?��?��?�� ?��?�� 브랜?�� ?��?��?�� 만나�? ?�� ?��?��?��?��.', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '지구별가게', '제주 제주시 월랑로 58 1층', '064-711-8291', '10:00 - 19:00', 102, 203,
+        '제로웨이스트 리빙랩, 지구별가게 내 몸과 지구를 살리는 소소한 즐거움, 소락
+제로웨이스트를 위한 다회용 생활용품과 유기농 원단으로 직접 제작하는 소락 브랜드 제품을 만나볼 수 있습니다.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '?��28 ?��?��브러�? ?��?��', '?��?��?��별시 ?��?���? ?��?��?���?12�? 2', '0507-1414-0198', '11:30 - 20:30', 58, 4,
-        '?��?�� ?��?�� ?��름다??, ?��28 ?��?��브러�?, ?��?��?��?��?��.', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '톤28 라이브러리 성수', '서울특별시 성동구 성수이로12길 2', '0507-1414-0198', '11:30 - 20:30', 58, 4,
+        '의식 있는 아름다움, 톤28 라이브러리, 성수입니다.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '?��?��?���?�?', '?��?��?��?�� ?��?���? ?��북면 ?��?��?���? 548 1�? ?��?��?���?�?', '0507-1337-1858', '11:00 - 18:00', 137, 145,
-        '?��로웨?��?��?�� 리필?��& ?���? �?�?. ?��?? ?��?��, �?구에�? ?�� ?��?? ?��림살?��. ?��?��?�� ???��감들?�� 만들�? ?��매하?�� ?��?��?���?게입?��?��.', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '달팽이가게', '전라남도 담양군 수북면 한수동로 548 1층 달팽이가게', '0507-1337-1858', '11:00 - 18:00', 137, 145,
+        '제로웨이스트 리필샵& 살림 가게. 나와 아이, 지구에게 더 나은 살림살이. 따뜻한 놀잇감들을 만들고 판매하는 달팽이가게입니다.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '?��?��?��그리?��', '?��?��?��별시 마포�? ?��?��리로 44 5�? 리�??��?��', '1522-5710', '10:00 - 16:00', 51, 14,
-        '?��?��?��?�� ?��?? ?��?��?��중한 ?��?��?�� ?��?�� ?��?��?���? ?��?��리고?�� ?��?��?�� ?��?��벤처�? ?��?��?��그리?�� ?��?�� ?���? 브랜?���? ?��분해 �??��?�� ?��?��?��?��?�� ?��?��, ?���? ?���? ?���? ?��거하?�� ?��?��?��?��?�� ?��?��?�� �??�� �??��?�� ?��?�� ?��?��?��?�� 만들?�� 갑니?��.', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '아이엠그리너', '서울특별시 마포구 잔다리로 44 5층 리와인드', '1522-5710', '10:00 - 16:00', 51, 14,
+        '자연에서 얻은 사용소중한 자원을 다시 자연으로 되돌리고자 시작된 소셜벤처로 아이엠그리너 라는 자체 브랜드로 생분해 가능한 일회용품을 제작, 판매 하고 이를 수거하여 테이크아웃 용품의 지속 가능한 순환 플랫폼을 만들어 갑니다.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '천연?��?��?�� �??��?��', '�??��광역?�� 북구 ?���?1�? 93 2�?', '051-338-9619', '10:30 - 19:00', 93, 33,
-        '?��경오?��?�� 줄이?�� ?��?��, ?��?��?���?, �??�� 최초 ?��로웨?��?��?��?��', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '천연제작소 부산점', '부산광역시 북구 덕천1길 93 2층', '051-338-9619', '10:30 - 19:00', 93, 33,
+        '환경오염을 줄이는 제품, 세제소분, 부산 최초 제로웨이스트샵', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '?��?��?��리얼 모레?��?��', '?��?�� ?��?���? ?��?���?1?���? 5 ?��?��그라?��?�� 7�?', '070-8633-1333', '09:00 - 19:00', 37, 4,
-        '?��?�� �? ?��?��?�� ?��각하?�� �??���??��?�� 책임?���?, 모레?��?��.', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '임팩토리얼 모레상점', '서울 성동구 뚝섬로1나길 5 헤이그라운드 7층', '070-8633-1333', '09:00 - 19:00', 37, 4,
+        '내일 그 다음을 생각하는 지속가능한 책임소비, 모레상점.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '비누?��', '경기?�� 군포?�� ?��?���? 2 LT?���? ?��카이비즈 1412?��, 1413?��', '0507-1387-0513', '10:00 - 18:00', 62, 66,
-        '?��?��?��경과 건강?�� ?��각한 비누�? 만듭?��?��.', 'Y');
+VALUES (SEQ_STORE.NEXTVAL, '비누잎', '경기도 군포시 농심로 2 LT삼보 스카이비즈 1412호, 1413호', '0507-1387-0513', '10:00 - 18:00', 62, 66,
+        '자연환경과 건강을 생각한 비누를 만듭니다.', 'Y');
+
+-- QNA 더미
+
+INSERT INTO QNA (BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_DATE, MEMBER_ID)
+VALUES (1, '아이디를 찾는 법?', '아이디 찾는 법이 어떻게 되나요?', TO_DATE('2023-06-01', 'YYYY-MM-DD'), 'user01');
+
+INSERT INTO QNA (BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_DATE, MEMBER_ID)
+VALUES (2, '아이디를 찾는 법?', '아이디 찾는 법이 어떻게 되나요?', TO_DATE('2023-06-02', 'YYYY-MM-DD'), 'user01');
+
+INSERT INTO QNA (BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_DATE, MEMBER_ID)
+VALUES (3, '비밀번호를 분실한 경우', '비밀번호를 분실하였습니다. 어떻게 해결할 수 있나요?', TO_DATE('2023-06-03', 'YYYY-MM-DD'), 'user02');
+
+INSERT INTO QNA (BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_DATE, MEMBER_ID)
+VALUES (4, '회원가입 문의', '회원가입을 어떻게 진행해야 하나요?', TO_DATE('2023-06-04', 'YYYY-MM-DD'), 'user03');
+
+INSERT INTO QNA (BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_DATE, MEMBER_ID)
+VALUES (5, '회원정보 변경', '회원정보 변경은 어떻게 하나요?', TO_DATE('2023-06-05', 'YYYY-MM-DD'), 'user03');
+
 COMMIT;

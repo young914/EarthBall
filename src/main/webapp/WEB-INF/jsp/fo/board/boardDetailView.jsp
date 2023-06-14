@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 목록</title>
+<title>1:1문의 목록</title>
 
     <jsp:include page="/WEB-INF/jsp/fo/common/common.jsp"/>
 
@@ -175,7 +175,7 @@
 
 
         <!-- 공지사항 -->
-        <div class="board" style="padding-top: 10px">
+        <div class="board">
 
 
 
@@ -195,26 +195,117 @@
                                 <p class="lead" style="user-select: auto;"> ${ b.boardContent }
                                 </p><br><br>
 
-                                 <table id="replyArea" class="table" align="center">
+                               <table id="replyArea" class="table" align="center">
                 <thead>
+                	<c:choose>
+                		<c:when test="${ empty loginUser }">
+                			<!-- 로그인 전 -->
+                			<tr>
+		                        <th colspan="2">
+		                            <textarea class="form-control" id="content" cols="55" rows="2" style="resize:none; width:100%;" readonly>로그인한 사용자만 이용 가능한 서비스입니다. 로그인 후 이용 바랍니다.</textarea>
+		                        </th>
+		                        <th style="vertical-align:middle"><button class="btn btn-secondary" disabled>등록하기</button></th>
+		                    </tr>
+                		</c:when>
+                		<c:otherwise>
+                			<!-- 로그인 후 -->
+		                	<tr>
+		                        <th colspan="2">
+		                            <textarea class="form-control" id="content" cols="55" rows="2" style="resize:none; width:100%;"></textarea>
+		                        </th>
+		                        <th style="vertical-align:middle"><button class="btn btn-secondary" onclick="addReply();">등록하기</button></th>
+
+		                    </tr>
+                		</c:otherwise>
+                	</c:choose>
                     <tr>
-                        <th colspan="2">
-                            <textarea class="form-control" name="" id="content" cols="55" rows="2" style="resize:none; width:100%;"></textarea>
-                        </th>
-                        <th style="vertical-align:middle"><button class="btn btn-secondary">등록하기</button></th>
-                    </tr>
-                    <tr>
-                        <td colspan="3">댓글<span id="rcount"></span></td>
+                        <td colspan="3">댓글(<span id="rcount">0</span>)</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th>admin</th>
-                        <td>비밀번호 찾기를 이용해 주시길 바랍니다.</td>
-                        <td>2020-03-12</td>
-                    </tr>
                 </tbody>
             </table>
+        </div>
+
+     <script>
+    $(function() {
+        // 댓글 목록을 가져오기 위한 함수 호출
+        selectReplyList();
+    });
+
+    function addReply() {
+        if ($("#content").val().trim().length != 0) {
+            $.ajax({
+                url: "rinsert.bo",
+                data: {
+                    boardNo: ${b.boardNo},
+                    QreplyContent: $("#content").val(),
+                    memberId: "${loginUser.memberId}"
+                },
+                type: "post",
+                success: function(result) {
+                    if (result === "success") {
+                        selectReplyList();
+                        $("#content").val("");
+                    }
+                },
+                error: function() {
+                    console.log("댓글을 추가하기 위한 Ajax 통신 실패!");
+                }
+            });
+        } else {
+            alertify.alert("알림", "댓글을 작성하고 등록을 요청해주세요.");
+        }
+    }
+
+    function deleteReply(replyNo) {
+        $.ajax({
+            url: "rdelete.bo",
+            data: { bno: replyNo },
+            type: "post",
+            success: function(result) {
+                if (result === "success") {
+                    selectReplyList();
+                }
+            },
+            error: function() {
+                console.log("댓글 삭제를 위한 Ajax 통신 실패");
+            }
+        });
+    }
+
+    function selectReplyList() {
+        // 해당 게시물에 첨부된 댓글 목록을 가져오는 함수
+        $.ajax({
+            url: "rlist.bo",
+            data: { bno: ${b.boardNo} },
+            type: "get",
+            success: function(result) {
+                let resultStr = "";
+                for (let i = 0; i < result.length; i++) {
+                    resultStr += "<tr>" +
+                        "<td>" + result[i].memberId + "</td>" +
+                        "<td>" + result[i].QreplyContent + "</td>" +
+                        "<td>" + result[i].QcreateDate;
+
+                    // 작성자 본인인 경우에만 삭제 버튼 표시
+                    if (result[i].memberId === "${loginUser.memberId}") {
+                        resultStr += " <button class='btn btn-danger' onclick='deleteReply(" + result[i].QreplyNo + ");'>삭제</button>";
+                    }
+
+                    resultStr += "</td>" +
+                        "</tr>";
+                }
+                $("#replyArea > tbody").html(resultStr);
+                $("#rcount").text(result.length);
+            },
+            error: function() {
+                console.log("댓글 조회를 위한 Ajax 통신 실패");
+            }
+        });
+    }
+</script>
+
 
                                 <hr>
 

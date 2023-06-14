@@ -67,7 +67,7 @@ public class DiaryController {
 
   @ResponseBody
   @RequestMapping(value="/diaryInsert.bo", produces="text/html; charset=UTF-8")
-  public String insertDiary(String weather, @ModelAttribute Diary diary, HttpSession session, Model model, @RequestParam(value="file", required=true) MultipartFile file) {
+  public String insertDiary(String weather, @ModelAttribute Diary diary, HttpSession session, @RequestParam(value="file", required=true) MultipartFile file) {
 
     System.out.println("잘호출되나?");
 
@@ -147,8 +147,36 @@ public class DiaryController {
           }
 
           return mv;
-
   }
+
+    @RequestMapping("dyDelete.bo")
+    public String deleteDiary(int dyBoardNo,
+                                         Model model,
+                                         String filePath,
+                                         HttpSession session) {
+
+          // System.out.println(dyBoardNo);
+
+       int result = diaryService.deleteDiary(dyBoardNo);
+
+       if(result > 0) {
+
+         if(!filePath.equals("")) {
+
+               String realPath = session.getServletContext().getRealPath(filePath);
+               new File(realPath).delete();
+         }
+           session.setAttribute("alertMsg", "게시글 삭제 성공");
+
+           return "redirect:/diaryListView.bo";
+       } else {
+
+             model.addAttribute("errorMsg", "게시글 삭제 실패");
+
+             return "common/errorPage";
+       }
+
+    }
 
 
 }

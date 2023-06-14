@@ -141,6 +141,56 @@ public class ChallengeController {
     return challengeService.challengeDelete(chNo);
   }
 
+  @GetMapping("/categoryFilter.chall")
+  public String challengeCategory(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model, int categoryNo) {
+
+    // 카테고리별 챌린지 게시글 수 조회
+    int listCount = challengeService.selectCategoryListCount(categoryNo);
+
+    int pageLimit = 5;
+    int boardLimit = 12;
+
+    PageInfo pageInfo = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+
+    log.info("pageInfo : " + pageInfo);
+
+    ArrayList<Challenge> challengeList = challengeService.selectCategoryList(pageInfo, categoryNo);
+
+    log.info("챌린지 리스트 나옴? : " + challengeList);
+
+    List<Category> categoryList = categoryService.selectCategoryList();
+
+    model.addAttribute("pageInfo", pageInfo);
+    model.addAttribute("challengeList", challengeList);
+    model.addAttribute("categoryList", categoryList);
+
+    return "fo/challenge/challengeMain";
+  }
+
+  @GetMapping("/statFilter.chall")
+  public String challengeStat(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model, String chStatName) {
+    // 진행상태별 챌린지 게시글 수 조회
+    int listCount = challengeService.selectStatListCount(chStatName);
+
+    int pageLimit = 5;
+    int boardLimit = 12;
+
+    PageInfo pageInfo = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+
+    log.info("pageInfo : " + pageInfo);
+
+    ArrayList<Challenge> challengeList = challengeService.selectStatList(pageInfo, chStatName);
+
+    log.info("챌린지 리스트 나옴? : " + challengeList);
+
+    List<Category> categoryList = categoryService.selectCategoryList();
+
+    model.addAttribute("pageInfo", pageInfo);
+    model.addAttribute("challengeList", challengeList);
+    model.addAttribute("categoryList", categoryList);
+
+    return "fo/challenge/challengeMain";
+  }
 
 }
 

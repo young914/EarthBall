@@ -18,5 +18,7 @@ public interface DiaryMapper {
       int increaseCount(int dyBoardNo);
 
       Diary selectDiary(int dyBoardNo);
+
+      int deleteDiary(int dyBoardNo);
 }
 

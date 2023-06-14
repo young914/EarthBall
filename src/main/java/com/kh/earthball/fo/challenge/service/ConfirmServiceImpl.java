@@ -98,4 +98,9 @@ public class ConfirmServiceImpl implements ConfirmService {
     return confirmMapper.selectReplyList(reply);
   }
 
+  @Override
+  public int deleteReply(int reNo) {
+    return confirmMapper.deleteReply(reNo);
+  }
+
 }

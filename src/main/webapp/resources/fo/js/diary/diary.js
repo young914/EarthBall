@@ -294,3 +294,8 @@ const updateDay = () => {
     document.getElementById("day").textContent = todayTime().day;
 };
 updateDay();
+
+//이전페이지(목록)으로 돌아가기
+function goBack() {
+  window.history.back();
+}

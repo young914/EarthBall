@@ -2,36 +2,49 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
 <head>
 <meta charset="UTF-8">
   <title>EcoDiary</title>
    <jsp:include page="/WEB-INF/jsp/fo/common/common.jsp"/>
-    <link rel="stylesheet" href="/resources/fo/css/diary/diaryEnrollForm.css">
     <link rel="stylesheet" href="/resources/fo/css/diary/diaryDetailView.css">
-
 </head>
+
 <body>
 
-			<jsp:include page="/WEB-INF/jsp/fo/common/header.jsp"/>
+	<jsp:include page="/WEB-INF/jsp/fo/common/header.jsp"/>
 
 	<div id="container">
-      <!-- 여기다가 화면 넣자  -->
-      <div class="outer1_1">
+		<!-- 여기다가 화면 넣자  -->
+		<div class="outer1_1">
             <div class="detail_header">
             	<input type="hidden"  class="bno" value="${ d.dyBoardNo }">
-                	<div class="photo"><img src="/resources/fo/img/logo.png"></div>
-                	<div class="content">
-                    <div class="detail_id">${ d.dyBoardWriter }</div>
-                	</div>
-                	<div class="update_btn">
-                    <button type="">수정</button>
-                	</div>
-                	<div class="submit_btn">
-                    <button type="">목록</button>
-                	</div>
+				<div class="photo">
+					<img src="/resources/fo/img/logo.png">
+					<div class="detail_id">${ d.dyBoardWriter }</div>
+				</div>
+				<form id="postForm" action="" method="post">
+					<input type="hidden" name="dyBoardNo" value="${ d.dyBoardNo }">
+					<input type="hidden" name="filePath" value="${ d.changeName }">
+				</form>
+				<div class="top_btn">
+					<!--  수정하기 버튼은 본인이 작성한 글일 경우에만 보여져야 함 -->
+					<c:if test="${ (not empty loginUser) and (loginUser.memberId eq d.dyBoardWriter) }">
+						<button id="update_btn"  onclick="postFormSubmit(1); ">수정</button>
+					</c:if>
+					<button onclick="goBack()" id="back_btn">목록</button>
+				</div>
+				<script>
+					function postFormSubmit(num) {
+
+						if(num == 1) {
+							$("#postForm").attr("action", "dyUpdateForm.bo").submit();
+						} else {
+							$("#postForm").attr("action", "dyDelete.bo").submit();
+						}
+					}
+				</script>
             </div>
-		 </div>
+		</div>
 
             <div id="outer1_2" >
                 <div id="a" >
@@ -116,30 +129,34 @@
                     <div class="title">제목: <input type="text" value="${ d.dyBoardTitle }"></div>
                     <div class="content"><textarea id="dyBoardContent"  readonly>${ d.dyBoardContent }</textarea></div>
                 </div>
-
-				<div class="buttons">
-					<div class="delete_btn">
-                    <button type="">삭제</button>
-                	</div>
-                	<div class="back_btn">
-                    <button type="">목록</button>
-                	</div>
-                	</div>
+				<div class="detail_header1">
+					<div class="top_btn">
+						<!--  관리자만 보이는 삭제 버튼 -->
+						<c:if test="${ loginUser.memberId eq 'admin' }">
+						<button id="delete_btn" onclick=" postFormSubmit(2); ">삭제</button>
+						</c:if>
+						<button onclick="goBack()" id="back_btn">목록</button>
+					</div>
+				</div>
+                	<div class="icon2">
+                        <div style="padding: 0; height: 22px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                 class="bi-heart" viewBox="0 0 16 16">
+                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357
+                                3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868
+                                3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                            </svg>
+                        </div>
+                        <div><span id="icon2">20</span></div>
+		           </div>
 				<div class="area2">
-	                      <div><textarea name="" id="" cols="30" rows="10" placeholder="댓글"></textarea></div>
-	                      <div>
-	                          <i class="xi-library-image-o"></i>
-	                          <button>작성</button>
-	                      </div>
-                  </div>
-            </div>
+					<div><textarea name="" id="" cols="30" rows="10" placeholder="댓글"></textarea></div>
+					<button id="write_btn">작성</button>
+				</div>
+	</div>
 
-
-		<script type="text/javascript" src="/resources/fo/js/diary/diary.js"></script>
-
-
-		<jsp:include page="/WEB-INF/jsp/fo/common/footer.jsp"/>
-
+	<script type="text/javascript" src="/resources/fo/js/diary/diary.js"></script>
+	<jsp:include page="/WEB-INF/jsp/fo/common/footer.jsp"/>
 
 </body>
 </html>

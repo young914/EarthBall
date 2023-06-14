@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.earthball.fo.board.service.BoardService;
 import com.kh.earthball.fo.board.vo.Board;
+import com.kh.earthball.fo.board.vo.QReply;
 import com.kh.earthball.fo.common.template.Pagination;
 import com.kh.earthball.fo.common.vo.PageInfo;
 
@@ -123,14 +126,37 @@ public class BoardController {
     return mv;
   }
 
-  @RequestMapping("list.faq")
-  public ModelAndView selectfaq(ModelAndView mv) {
+	@ResponseBody
+	@RequestMapping(value = "rlist.bo", produces = "application/json; charset=UTF-8")
+	public String ajaxSelectReplyList(int bno) {
+		ArrayList<QReply> list = boardService.selectReplyList(bno);
+		return new Gson().toJson(list);
+	}
 
-    mv.setViewName("fo/board/faq");
+	@ResponseBody
+	@RequestMapping(value = "rinsert.bo", produces = "text/html; charset=UTF-8")
+	public String ajaxInsertReply(QReply r) {
+		int result = boardService.insertReply(r);
+		return (result > 0) ? "success" : "fail";
+	}
 
-    return mv;
+	@ResponseBody
+	@RequestMapping(value = "rdelete.bo", produces = "text/html; charset=UTF-8")
+	public String ajaxDeleteReply(int bno) {
+		int result = boardService.deleteReply(bno);
+		return (result > 0) ? "success" : "fail";
+	}
 
-  }
+
+	  @RequestMapping("list.faq")
+	  public ModelAndView selectfaq(ModelAndView mv) {
+
+	    mv.setViewName("fo/board/faq");
+
+	    return mv;
+
+	  }
+
 
 
 
