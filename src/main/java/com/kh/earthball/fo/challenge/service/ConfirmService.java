@@ -28,4 +28,6 @@ public interface ConfirmService {
 
   List<ChConReply> selectReplyList(ChConReply reply);
 
+  int deleteReply(int reNo);
+
 }
