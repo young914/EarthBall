@@ -56,8 +56,7 @@ public class DiaryServiceImpl  implements DiaryService {
 
   @Override
   public int deleteDiary(int dyBoardNo) {
-    // return diaryMapper.deleteDiary(dyBoardNo);
-    return 0;
+      return diaryMapper.deleteDiary(dyBoardNo);
   }
 
   @Override
