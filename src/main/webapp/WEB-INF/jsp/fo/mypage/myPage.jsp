@@ -58,7 +58,7 @@
         <div class="sidebar">
             <h2 class="divider"></h2>
             <ul class="menu1">
-                <li><a href="#">참여현황</a></li>
+                <li><a href="diaryList.me?memberId=${ loginUser.memberId }">환경일기</a></li>
                 <li><a href="#">주문 관리</a></li>
                 <li><a href="list.like?memberId=${ loginUser.memberId }">찜 목록</a></li>
                 <li><a href="#">1:1문의</a></li>
