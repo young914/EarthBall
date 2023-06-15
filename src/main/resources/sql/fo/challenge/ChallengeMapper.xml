@@ -223,4 +223,32 @@
         WHERE ROW_NUM BETWEEN 0 AND 3
     </select>
 
+    <select id="confirmCount" resultType="com.kh.earthball.fo.challenge.vo.ConfirmCount">
+        SELECT CH_NO
+             , COUNT_CONFIRM
+             , ROW_NUM
+        FROM ( SELECT TC.CH_NO
+                      , COUNT(*) AS COUNT_CONFIRM
+                      , ROW_NUMBER() OVER (ORDER BY COUNT(*) DESC) AS ROW_NUM
+                 FROM TB_CH_CONFIRM TCC
+                          LEFT JOIN TB_CHALLENGE TC ON TCC.CH_NO = TC.CH_NO
+                 GROUP BY TC.CH_NO )
+        WHERE ROW_NUM BETWEEN 1 AND 10
+    </select>
+
+    <select id="selectHotChallenge" parameterType="java.lang.Integer" resultType="com.kh.earthball.fo.challenge.vo.Challenge">
+        SELECT *
+          FROM ( SELECT CH_NO
+                      , CH_TITLE
+                      , CASE WHEN SYSDATE &lt; TO_DATE(CH_START_DAY, 'YYYY-MM-DD')  THEN '진행예정'
+                             WHEN SYSDATE &gt; TO_DATE(CH_END_DAY, 'YYYY-MM-DD')  THEN '진행완료'
+                             ELSE '진행중'
+                         END AS CH_STAT_NAME
+                      , (SELECT CATEGORY_NAME
+                           FROM TB_CATEGORY CA
+                          WHERE CA.CATEGORY_NO = C.CATEGORY_NO) CATEGORY_NAME
+                    FROM TB_CHALLENGE C
+                   WHERE CH_NO =  #{chNo}
+                     AND STATUS = 'Y')
+    </select>
 </mapper>

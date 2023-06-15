@@ -3,6 +3,7 @@ package com.kh.earthball.fo.challenge.service;
 
 import com.kh.earthball.fo.challenge.vo.ChConfirm;
 import com.kh.earthball.fo.challenge.vo.Challenge;
+import com.kh.earthball.fo.challenge.vo.ConfirmCount;
 import com.kh.earthball.fo.common.vo.PageInfo;
 
 import java.util.ArrayList;
@@ -31,4 +32,8 @@ public interface ChallengeService {
   ArrayList<Challenge> selectStatList(PageInfo pageInfo, String chStatName);
 
   List<Challenge> mainChallengeList();
+
+  List<ConfirmCount> confirmCount();
+
+  Challenge selectHotChallenge(int chNo);
 }
