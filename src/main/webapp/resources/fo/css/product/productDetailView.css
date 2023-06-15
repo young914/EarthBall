@@ -267,6 +267,9 @@
 .replyCount{margin-top: 20px;}
 .replyCount>span{color: #19A7CE;}
 /* 리뷰댓글 */
+.replyContent:focus{
+    outline: none;
+}
 .replyArea{
     display: none;
     width: 100%;

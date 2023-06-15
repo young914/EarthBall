@@ -43,4 +43,15 @@
 		ORDER BY R.CREATED_DATE DESC
 	</select>
 
+	<select id="selectTopList" parameterType="_int" resultType="com.kh.earthball.fo.product.vo.Review">
+		SELECT *
+		FROM (SELECT REVIEW_CONTENT, CREATE_DATE, RATING, R.CHANGE_NAME, MEMBER_NAME, COUNT
+		      FROM REVIEW R
+		      JOIN MEMBER USING (MEMBER_ID)
+		      WHERE PRODUCT_NO = #{productNo}
+		      AND R.CHANGE_NAME IS NOT NULL
+		      ORDER BY REVIEW_NO DESC)RNUM
+		WHERE ROWNUM &lt;= 10
+	</select>
+
 </mapper>
