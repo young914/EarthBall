@@ -120,5 +120,22 @@ public class ChallengeServiceImpl implements ChallengeService {
     return challengeMapper.selectHotChallenge(chNo);
   }
 
+  // 나의 오픈한 챌린지 수
+  @Override
+  public int myChallengeListCount(String memberId) {
+    return challengeMapper.myChallengeListCount(memberId);
+  }
+
+  // 마이페이지 오픈한 챌린지
+  @Override
+  public List<Challenge> selectMyChallenge(PageInfo pageInfo, String memberId) {
+
+    int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getBoardLimit();
+    int limit = offset + pageInfo.getBoardLimit();
+
+    return challengeMapper.selectMyChallenge(offset, limit, memberId);
+  }
+
+
 
 }

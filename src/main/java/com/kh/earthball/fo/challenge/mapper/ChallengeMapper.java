@@ -42,4 +42,10 @@ public interface ChallengeMapper {
 
   Challenge selectHotChallenge(int chNo);
 
+  // 나의 오픈한 챌린지 수
+  int myChallengeListCount(String memberId);
+
+  // 마이페이지 오픈한 챌린지
+  List<Challenge> selectMyChallenge(@Param("offset") int offset, @Param("limit") int limit, @Param("memberId")  String memberId);
+
 }

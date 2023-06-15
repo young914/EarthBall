@@ -215,6 +215,29 @@ public class ChallengeController {
     log.info("hotList 들어옴?" + hotList);
     return hotList;
   }
+
+
+
+  // 마이페이지 오픈한 챌린지
+  @GetMapping("/list.myChallenge")
+  public String myChallenge(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, String memberId, Model model) {
+
+    // 나의 챌린지 게시글 수 조회
+    int listCount = challengeService.myChallengeListCount(memberId);
+
+    int pageLimit = 5;
+    int boardLimit = 12;
+
+    PageInfo pageInfo = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+
+    // 나의 챌린지 게시글 리스트 조회
+    List<Challenge> challengeList = challengeService.selectMyChallenge(pageInfo, memberId);
+
+    model.addAttribute("pageInfo", pageInfo);
+    model.addAttribute("challengeList", challengeList);
+
+    return "fo/mypage/myChallenge";
+  }
 }
 
 

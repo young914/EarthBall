@@ -28,14 +28,10 @@ public class Member {
   private int mailAuth; // 메일 인증
   private String mailKey; // 메일 인증키
   private String gradeName; // 등급 이름
-<<<<<<< Updated upstream
+
   private int totalPoint; // 보유포인트
 
-=======
-  private int totalPoint;
-  
->>>>>>> Stashed changes
-  // -------------------------------------------
+
 
   // 프로필 첨부파일 관련
   private int profileNo; // 파일 번호
@@ -45,14 +41,8 @@ public class Member {
   private int fileSize; // 파일크기
   private Date regDate; // 올린날짜
   private String delGb;
-<<<<<<< Updated upstream
 
-=======
-  private String memberImg;
-  
-  
-  
->>>>>>> Stashed changes
+
 
 
 }
