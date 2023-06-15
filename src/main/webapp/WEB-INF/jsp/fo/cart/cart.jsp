@@ -68,7 +68,7 @@
 		</div>
 		<div class="buttonArea">
 			<div><button>구매하기</button></div>
-			<div><a href="">계속 쇼핑하기</a></div>
+			<div><a href="list.pro">계속 쇼핑하기</a></div>
 		</div>
 	</div>
 </div>

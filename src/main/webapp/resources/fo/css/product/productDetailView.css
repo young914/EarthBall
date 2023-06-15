@@ -198,6 +198,13 @@
 
 /* 상세정보 */
 /* 리뷰 */
+.review{
+    margin-bottom: 10px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    border-bottom: 1px solid #ddd9d9;
+}
 .insertReview{
     width: 120px;
     height: 30px;
@@ -226,17 +233,9 @@
     cursor: pointer;
     color: #19a7ce;
 }
-.review2{
-    width: 100%;
-    height: 100%;
-    border-top: 1px solid #999;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin: auto 0;
-}
 .star2{color: red;}
 /* 사진크기변경 */
-.review2 img{
+.reviewArea img{
     width: 120px;
     height: 120px;
 }
@@ -268,12 +267,24 @@
 .replyCount{margin-top: 20px;}
 .replyCount>span{color: #19A7CE;}
 /* 리뷰댓글 */
-.replyArea{display: none;}
+.replyArea{
+    display: none;
+    width: 100%;
+    height: 100%;
+    margin-top: 20px;
+}
 .area1{
     width: 100%;
     height: 100%;
-    display: flex;
     margin-top: 20px;
+}
+.replyOne{
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid #999;
 }
 .area1 img{
     width: 40px;

@@ -77,12 +77,12 @@ public class ProductController {
     }
 
     // 구매평 조회
-    ArrayList<Review> rlist = reviewService.selectList(productNo);
+//    ArrayList<Review> rlist = reviewService.selectList(productNo);
 
 
     model.addAttribute("p", p);
     model.addAttribute("list", list);
-    model.addAttribute("rlist", rlist);
+//    model.addAttribute("rlist", rlist);
     return "/fo/product/productDetailView";
   }
 
