@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Mapper
 public interface ChallengeMapper {
@@ -33,5 +34,7 @@ public interface ChallengeMapper {
   int selectStatListCount(String chStatName);
 
   ArrayList<Challenge> selectStatList(@Param("offset") int offset, @Param("limit") int limit, @Param("chStatName") String chStatName);
+
+  List<Challenge> mainChallengeList();
 
 }
