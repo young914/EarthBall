@@ -8,6 +8,7 @@ import com.kh.earthball.bo.challenge.vo.CategoryTemplate;
 import com.kh.earthball.bo.challenge.vo.Code;
 import com.kh.earthball.fo.challenge.service.ChallengeService;
 import com.kh.earthball.fo.challenge.vo.Challenge;
+import com.kh.earthball.fo.challenge.vo.ConfirmCount;
 import com.kh.earthball.fo.common.template.Pagination;
 import com.kh.earthball.fo.common.vo.PageInfo;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Array;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -105,6 +107,8 @@ public class ChallengeController {
   @GetMapping("/detailView.chall")
   public String challengeDetailView(int chNo, Model model) {
 
+    log.info("넘어온 chNo : " + chNo);
+
     // 챌린지 게시글 하나 조회
     Challenge challenge = challengeService.selectChallenge(chNo);
 
@@ -189,6 +193,28 @@ public class ChallengeController {
     return "fo/challenge/challengeMain";
   }
 
+  @ResponseBody
+  @GetMapping("/hotList.chall")
+  public List<Challenge> topChallengeList() {
+    log.info("여기 호출됨?");
+    
+    // 챌린지 게시글 별 인증게시글 갯수 조회
+    List<ConfirmCount> confirmCountList = challengeService.confirmCount();
+
+    log.info("confirmCountList : " + confirmCountList);
+
+    List<Challenge> hotList = new ArrayList<>();
+    // 1순위 부터 챌린지 번호 당 챌린지 정보 담은 리스트 조회
+    for(ConfirmCount confirmCount : confirmCountList) {
+      int chNo = confirmCount.getChNo();
+
+      Challenge hotChallenge = challengeService.selectHotChallenge(chNo);
+
+      hotList.add(hotChallenge);
+    }
+    log.info("hotList 들어옴?" + hotList);
+    return hotList;
+  }
 }
 
 

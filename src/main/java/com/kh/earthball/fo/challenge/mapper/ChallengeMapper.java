@@ -2,6 +2,7 @@ package com.kh.earthball.fo.challenge.mapper;
 
 import com.kh.earthball.fo.challenge.vo.ChDetailInfo;
 import com.kh.earthball.fo.challenge.vo.Challenge;
+import com.kh.earthball.fo.challenge.vo.ConfirmCount;
 import com.kh.earthball.fo.common.vo.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -36,5 +37,9 @@ public interface ChallengeMapper {
   ArrayList<Challenge> selectStatList(@Param("offset") int offset, @Param("limit") int limit, @Param("chStatName") String chStatName);
 
   List<Challenge> mainChallengeList();
+
+  List<ConfirmCount> confirmCount();
+
+  Challenge selectHotChallenge(int chNo);
 
 }

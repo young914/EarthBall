@@ -3,6 +3,7 @@ package com.kh.earthball.fo.challenge.service;
 import com.kh.earthball.fo.challenge.mapper.ChallengeMapper;
 import com.kh.earthball.fo.challenge.vo.ChDetailInfo;
 import com.kh.earthball.fo.challenge.vo.Challenge;
+import com.kh.earthball.fo.challenge.vo.ConfirmCount;
 import com.kh.earthball.fo.common.vo.PageInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -108,4 +109,16 @@ public class ChallengeServiceImpl implements ChallengeService {
   public List<Challenge> mainChallengeList() {
     return challengeMapper.mainChallengeList();
   }
+
+  @Override
+  public  List<ConfirmCount> confirmCount() {
+    return challengeMapper.confirmCount();
+  }
+
+  @Override
+  public Challenge selectHotChallenge(int chNo) {
+    return challengeMapper.selectHotChallenge(chNo);
+  }
+
+
 }
