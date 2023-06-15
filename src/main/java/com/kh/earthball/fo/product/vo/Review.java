@@ -21,5 +21,11 @@ public class Review {
   private String changeName;
   private int productNo;
   private String memberId;
+  private int count;
+  private int replyNo;
+  private String replyContent;
+  private String status;
+  private Date createdDate;
+  private String memberName;
 
 }
