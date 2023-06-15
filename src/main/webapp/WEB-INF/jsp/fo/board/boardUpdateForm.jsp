@@ -72,6 +72,7 @@
         }
 </script>
 
+
 <body>
 <h1>글 수정하기</h1><hr>
 <form method="post" action="update.bo">

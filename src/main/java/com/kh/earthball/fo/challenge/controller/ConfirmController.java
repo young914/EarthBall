@@ -270,16 +270,16 @@ public class ConfirmController {
   @PostMapping(value="/rlist.con")
   public List<ChConReply> selectReplyList(@RequestBody ChConReply reply) {
 
-    //log.info("reply 넘어왔어? : " + reply);
     List<ChConReply> replyList = confirmService.selectReplyList(reply);
 
     return replyList;
   }
 
-  /*
+  @ResponseBody
+  @PostMapping("/rdelete.con")
   public int replyDelete(int reNo) {
+    log.info("reNo넘어옴 : " + reNo);
     return confirmService.deleteReply(reNo);
   }
-   */
 
 }

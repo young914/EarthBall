@@ -143,10 +143,6 @@ function deleteCart(){
         }
     });
 
-
-    console.log(productNo);
-    console.log(memberId);
-
     $.ajax({
         url: "delete.cart",
         type: "post",
@@ -160,6 +156,7 @@ function deleteCart(){
                         $(this).parent().parent().remove();
                     }
                 });
+                updateInfomation();
             } else {
                 console.log("장바구니 삭제 실패");
             }
@@ -168,4 +165,27 @@ function deleteCart(){
             console.log("장바구니 삭제 ajax 에러");
         }
     }); 
+
+    
+
+
+}
+
+function updateInfomation(){
+
+    let count = $(".cartList>tbody>tr").length;
+
+    console.log(count);
+
+    $(".orderArea").children().children().eq(0).text(count);
+
+    let productTotal = 0;
+
+    for(var i = 1; i <= count; i++){
+        productTotal = productTotal + $(".totalPrice" + i).text() * 1;
+    }
+
+
+    $(".productTotal").text(productTotal);
+    $(".total").text(productTotal + 3000);
 }

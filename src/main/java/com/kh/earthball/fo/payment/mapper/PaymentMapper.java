@@ -8,4 +8,8 @@ public interface PaymentMapper {
 
   int payComplete(PayInfo pi);
 
+  int addTotalPay(PayInfo pi);
+
+  int updateGrade(PayInfo pi);
+
 }

@@ -21,9 +21,9 @@ public class PayInfo {
   private int paymentTotal;
   private String receiveName;
   private int receivePhone;
-  private int postCode;
+  private String postCode;
   private String receiveAddress1;
   private String receiveAddress2;
-  private String deliveryComent;
+  private String deliveryComment;
   private String paymentToken;
 }

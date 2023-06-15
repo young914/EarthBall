@@ -55,6 +55,16 @@ public class MemberServiceImpl implements MemberService {
     return memberMapper.mailAuthStatus(memberId);
   }
 
+  @Override
+  public void updateProfile(String memberId, String profileName) {
+    memberMapper.updateProfile(memberId, profileName);
+  }
+
+  @Override
+  public String selectProfile(String memberId) {
+    return memberMapper.selectProfile(memberId);
+  }
+
 
 }
   

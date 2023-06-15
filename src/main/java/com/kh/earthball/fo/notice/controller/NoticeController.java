@@ -85,7 +85,7 @@ public class NoticeController {
     Notice b = noticeService.selectNotice(bno);
 
     mv.addObject("b",b);
-    mv.setViewName("fo/notice/NoticeUpdateForm");
+    mv.setViewName("fo/notice/noticeUpdateForm");
 
     return mv;
   }

@@ -1,12 +1,16 @@
               package com.kh.earthball.fo.board.dao;
 
-import com.kh.earthball.fo.common.vo.PageInfo;
-import com.kh.earthball.fo.board.vo.Board;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
+import com.kh.earthball.fo.board.vo.Board;
+import com.kh.earthball.fo.board.vo.QReply;
+import com.kh.earthball.fo.common.vo.PageInfo;
 
 @Repository
 public class BoardDao {
@@ -49,6 +53,25 @@ public int updateBoard(SqlSessionTemplate sqlSession, Board b) {
   return sqlSession.update("boardMapper.updateBoard", b);
 }
 
+public int insertReply(SqlSessionTemplate sqlSession, QReply r) {
+	return sqlSession.insert("boardMapper.insertReply", r);
+}
+
+public ArrayList<QReply> selectReplyList(SqlSessionTemplate sqlSession, int boardNo) {
+	return (ArrayList)sqlSession.selectList("boardMapper.selectReplyList", boardNo);
+}
+
+public int deleteReply(SqlSessionTemplate sqlSession, int boardNo) {
+	  return sqlSession.update("boardMapper.deleteReply", boardNo);
+	}
+
+public Object saveFileToDB(SqlSessionTemplate sqlSession, String originalFileName, String savedFileName, String url) {
+    Map<String, Object> parameters = new HashMap<>();
+    parameters.put("originalFileName", originalFileName);
+    parameters.put("savedFileName", savedFileName);
+    parameters.put("url", url);
+    return sqlSession.insert("boardMapper.insertBoard", parameters);
+}
 
 
 }

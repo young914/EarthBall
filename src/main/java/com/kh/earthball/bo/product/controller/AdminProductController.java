@@ -55,7 +55,7 @@ public class AdminProductController {
                             HttpSession session,
                             ModelAndView mv) {
 
-
+    System.out.println(p);
     ArrayList<MultipartFile> fileList = new ArrayList<>();
     fileList.add(upfile1);
     fileList.add(upfile2);

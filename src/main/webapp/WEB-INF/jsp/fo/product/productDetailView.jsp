@@ -123,174 +123,32 @@
         <div id="photoReviewArea">
             <!-- 배너 -->
             <div class="reviewSlide">
-                <div class="review1">
-                    <div>
-                        <img src="#">
-                    </div>
-                    <div class="profileArea">
-                        <!-- 별점만들기 -->
-                        <div class="star1">
-                            <span class="starR1">★</span>
-                            <span class="starR2">★</span>
-                            <span class="starR3">★</span>
-                            <span class="starR4">★</span>
-                            <span class="starR5">★</span>
-                        </div>
+                <c:forEach var="r" items="${ rlist }">
+                    <div class="review1">
                         <div>
-                            <p>
-                                안녕하세요.
-                                저는 지구샵의 고객입니다.
-                                지구샵의 제품들은 모두 친환경적이고 좋은 제품들이 많아서 좋아요.
-                                앞으로도 좋은 제품들 많이 만들어주세요.
-                            </p>
+                            <img src="/resources/fo/upfiles/${r.changeName}">
                         </div>
-                        <!-- 유저프로필 -->
-                        <div class="userProfile">
-                            <div class="userPhoto"><img src="#"></div>
-                            <div class="userName">이름</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="review1">
-                    <div>
-                        <img src="#">
-                    </div>
-                    <div class="profileArea">
-                        <!-- 별점만들기 -->
-                        <div class="star1">
-                            <span class="starR1">★</span>
-                            <span class="starR2">★</span>
-                            <span class="starR3">★</span>
-                            <span class="starR4">★</span>
-                            <span class="starR5">★</span>
-                        </div>
-                        <div>
-                            <p>
-                                안녕하세요.
-                                저는 지구샵의 고객입니다.
-                                지구샵의 제품들은 모두 친환경적이고 좋은 제품들이 많아서 좋아요.
-                                앞으로도 좋은 제품들 많이 만들어주세요.
-                            </p>
-                        </div>
-                        <!-- 유저프로필 -->
-                        <div class="userProfile">
-                            <div class="userPhoto"><img src="#"></div>
-                            <div class="userName">이름</div>
+                        <div class="profileArea">
+                            <!-- 별점만들기 -->
+                            <div class="star1">
+                                <!-- r.rating의 값만큼 반복돌리기  -->
+                                <c:forEach var="i" begin="1" end="${r.rating}">
+                                    <span class="starR1">★</span>
+                                </c:forEach>
+                            </div>
+                            <div>
+                                <p>
+                                    ${r.reviewContent}
+                                </p>
+                            </div>
+                            <!-- 유저프로필 -->
+                            <div class="userProfile">
+                                <div class="userPhoto"><img src="#"></div>
+                                <div class="userName">${r.memberName}</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="review1">
-                    <div>
-                        <img src="#">
-                    </div>
-                    <div class="profileArea">
-                        <!-- 별점만들기 -->
-                        <div class="star1">
-                            <span class="starR1">★</span>
-                            <span class="starR2">★</span>
-                            <span class="starR3">★</span>
-                            <span class="starR4">★</span>
-                            <span class="starR5">★</span>
-                        </div>
-                        <div>
-                            <p>
-                                안녕하세요.
-                                저는 지구샵의 고객입니다.
-                                지구샵의 제품들은 모두 친환경적이고 좋은 제품들이 많아서 좋아요.
-                                앞으로도 좋은 제품들 많이 만들어주세요.
-                            </p>
-                        </div>
-                        <!-- 유저프로필 -->
-                        <div class="userProfile">
-                            <div class="userPhoto"><img src="#"></div>
-                            <div class="userName">이름</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="review1">
-                    <div>
-                        <img src="#">
-                    </div>
-                    <div class="profileArea">
-                        <!-- 별점만들기 -->
-                        <div class="star1">
-                            <span class="starR1">★</span>
-                            <span class="starR2">★</span>
-                            <span class="starR3">★</span>
-                            <span class="starR4">★</span>
-                            <span class="starR5">★</span>
-                        </div>
-                        <div>
-                            <p>
-                                안녕하세요.
-                                저는 지구샵의 고객입니다.
-                                지구샵의 제품들은 모두 친환경적이고 좋은 제품들이 많아서 좋아요.
-                                앞으로도 좋은 제품들 많이 만들어주세요.
-                            </p>
-                        </div>
-                        <!-- 유저프로필 -->
-                        <div class="userProfile">
-                            <div class="userPhoto"><img src="#"></div>
-                            <div class="userName">이름</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="review1">
-                    <div>
-                        <img src="#">
-                    </div>
-                    <div class="profileArea">
-                        <!-- 별점만들기 -->
-                        <div class="star1">
-                            <span class="starR1">★</span>
-                            <span class="starR2">★</span>
-                            <span class="starR3">★</span>
-                            <span class="starR4">★</span>
-                            <span class="starR5">★</span>
-                        </div>
-                        <div>
-                            <p>
-                                안녕하세요.
-                                저는 지구샵의 고객입니다.
-                                지구샵의 제품들은 모두 친환경적이고 좋은 제품들이 많아서 좋아요.
-                                앞으로도 좋은 제품들 많이 만들어주세요.
-                            </p>
-                        </div>
-                        <!-- 유저프로필 -->
-                        <div class="userProfile">
-                            <div class="userPhoto"><img src="#"></div>
-                            <div class="userName">이름</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="review1">
-                    <div>
-                        <img src="#">
-                    </div>
-                    <div class="profileArea">
-                        <!-- 별점만들기 -->
-                        <div class="star1">
-                            <span class="starR1">★</span>
-                            <span class="starR2">★</span>
-                            <span class="starR3">★</span>
-                            <span class="starR4">★</span>
-                            <span class="starR5">★</span>
-                        </div>
-                        <div>
-                            <p>
-                                안녕하세요.
-                                저는 지구샵의 고객입니다.
-                                지구샵의 제품들은 모두 친환경적이고 좋은 제품들이 많아서 좋아요.
-                                앞으로도 좋은 제품들 많이 만들어주세요.
-                            </p>
-                        </div>
-                        <!-- 유저프로필 -->
-                        <div class="userProfile">
-                            <div class="userPhoto"><img src="#"></div>
-                            <div class="userName">이름</div>
-                        </div>
-                </div>
-                </div>
+                </c:forEach>
             </div>
         </div>
 
@@ -357,53 +215,12 @@
                     </div>
                 </div>
 
-                <div><button class="onlyPhoto"><i class="xi-library-image-o"></i>포토 구매평만 보기</button></div>
+                <div><i class="xi-library-image-o"></i><button class="onlyPhoto" onclick="photoToggle();">포토 구매평만 보기</button></div>
 
-				<c:forEach var="r" items="${ rlist }">
-					<div class="review2" onclick="reviewToggle();">
-	                    <div class="reviewArea" >
-	                        <div class="star2">
-	                        	<c:forEach var="i" begin="1" end="${ r.rating }">
-		                            <span class="starR1">★</span>
-	                            </c:forEach>
-	                        </div>
-	                        <div>
-	                            <p>
-	                                ${ r.reviewContent }
-	                            </p>
-	                        </div>
-	                        <div>
-	                            <img src="/resources/fo/upfiles/${ r.changeName }">
-	                        </div>
-	                        <div class="replyCount">댓글 <span>1</span></div>
-	                    </div>
-	                    <div class="replyArea">
-	                        <div class="area1">
-	                            <div><img src="#"></div>
-	                            <div>
-	                                <div>
-	                                    <span>관리자</span> <span>2022-01-07</span>
-	                                </div>
-	                                <div>
-	                                    <p>
-	                                        안녕하세요. 지구샵입니다. <br>
-	                                        댓글을 달아주셔서 감사합니다. <br>
-	                                        앞으로도 좋은 제품들 많이 만들어드리겠습니다. <br>
-	                                        감사합니다.
-	                                    </p>
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <div class="area2">
-	                            <div><textarea name="" id="" cols="30" rows="10" placeholder="댓글"></textarea></div>
-	                            <div>
-	                                <i class="xi-library-image-o"></i>
-	                                <button>작성</button>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </div>
-				</c:forEach>
+                <div class="reviewContentArea">
+
+                </div>
+				
 
             </div>
 
@@ -413,7 +230,7 @@
                     궁금하신 점이 있으신가요? <br>
                     지구샵에 문의해주세요.
                 </div>
-                <button class="insertQna">문의하기</button>
+                <button class="insertQna" onclick="location.href='enrollForm.bo'">문의하기</button>
             </div>
 
         </div>

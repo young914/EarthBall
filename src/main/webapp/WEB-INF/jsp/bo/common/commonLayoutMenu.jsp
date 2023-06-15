@@ -62,7 +62,7 @@
       </a>
     </li>
     <li class="menu-item ${param.menuId eq '40' ? 'active' : ''}">
-      <a href="/" class="menu-link">
+      <a href="adminlist.st" class="menu-link">
         <i class="menu-icon tf-icons bx bx-table"></i>
         <div data-i18n="Tables">매장</div>
       </a>
@@ -100,6 +100,12 @@
           </a>
         </li>
       </ul>
+    </li>
+    <li class="menu-item ${param.menuId eq '60' ? 'active' : ''}">
+      <a href="/" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-table"></i>
+        <div data-i18n="Tables">주문</div>
+      </a>
     </li>
   </ul>
 </aside>

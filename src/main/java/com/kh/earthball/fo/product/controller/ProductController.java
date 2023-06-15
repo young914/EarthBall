@@ -61,6 +61,10 @@ public class ProductController {
 
     Product p = productService.selectProduct(productNo);
     ArrayList<Atta> list = productService.selectAtta(productNo);
+    ArrayList<Review> rlist = reviewService.selectTopList(productNo);
+    System.out.println(list);
+    System.out.println("------------------");
+    System.out.println(rlist);
 
     // 좋아요 여부 조회
     if(session.getAttribute("loginUser") != null) {
@@ -76,13 +80,10 @@ public class ProductController {
       }
     }
 
-    // 구매평 조회
-    ArrayList<Review> rlist = reviewService.selectList(productNo);
-
-
     model.addAttribute("p", p);
     model.addAttribute("list", list);
     model.addAttribute("rlist", rlist);
+
     return "/fo/product/productDetailView";
   }
 

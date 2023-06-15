@@ -59,6 +59,7 @@
         SELECT COUNT(*)
         FROM TB_CH_CONFIRM
         WHERE CH_NO = #{chNo}
+          AND STATUS = 'Y'
     </select>
 
 
@@ -143,6 +144,13 @@
         FROM TB_CH_CON_REPLY
         WHERE CH_CON_NO = #{chConNo}
           AND CH_NO = #{chNo}
+          AND STATUS = 'Y'
     </select>
+
+    <update id="deleteReply" parameterType="java.lang.Integer">
+        UPDATE TB_CH_CON_REPLY
+           SET STATUS = 'N'
+         WHERE RE_NO = #{reNo}
+    </update>
 
 </mapper>

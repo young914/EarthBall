@@ -11,6 +11,7 @@ public class Store {
   private int storeNo;
   private String storeName;
   private String storeAddress;
+  private String storeDetailAddress;
   private String storePhone;
   private String businessHours;
   private int storeLikes;
@@ -21,4 +22,6 @@ public class Store {
   private String status;
   private String jibunAddress;
   private boolean isLiked;
+  private String changerName;
+  private int fileLevel;
 }
