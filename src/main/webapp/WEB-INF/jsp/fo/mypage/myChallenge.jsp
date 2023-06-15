@@ -79,20 +79,20 @@
         <div class="page_btn" align="center">
 
           <ul class="pagination">
-            <li> <a href="/main.chall?currentPage=1" class="first">처음 페이지</a> </li>
+            <li> <a href="/list.myChallenge?memberId=${loginUser.memberId}&currentPage=1" class="first">처음 페이지</a> </li>
 
             <c:choose>
               <c:when test="${ pageInfo.currentPage eq 1}">
                 <li> <a href="#" class="arrow_left" disabled> << </a>  </li>
               </c:when>
               <c:otherwise>
-                <li> <a href="/main.chall?currentPage=${pageInfo.currentPage - 1}" class="arrow_left" disabled> << </a>  </li>
+                <li> <a href="/list.myChallenge?memberId=${loginUser.memberId}&currentPage=${pageInfo.currentPage - 1}" class="arrow_left" disabled> << </a>  </li>
               </c:otherwise>
             </c:choose>
 
 
             <c:forEach var="page" begin="${pageInfo.startPage}" end="${pageInfo.endPage}" step="1">
-              <li> <a href="/main.chall?currentPage=${page}" class="active num"> ${page} </a>  </li>
+              <li> <a href="/list.myChallenge?memberId=${loginUser.memberId}&currentPage=${page}" class="active num"> ${page} </a>  </li>
             </c:forEach>
 
 
@@ -101,11 +101,11 @@
                 <li> <a href="#" class="arrow_right" disabled> >> </a> </li>
               </c:when>
               <c:otherwise>
-                <li> <a href="/main.chall?currentPage=${[pageInfo.currentPage + 1]}" class="arrow_right" disabled> >> </a> </li>
+                <li> <a href="/list.myChallenge?memberId=${loginUser.memberId}&currentPage=${[pageInfo.currentPage + 1]}" class="arrow_right" disabled> >> </a> </li>
               </c:otherwise>
-            </c:choose>
+            </c:choose>zx
 
-            <li> <a href="/main.chall?currentPage=${pageInfo.maxPage}" class="last">끝 페이지</a> </li>
+            <li> <a href="/list.myChallenge?memberId=${loginUser.memberId}&currentPage=${pageInfo.maxPage}" class="last">끝 페이지</a> </li>
           </ul>
         </div>
       </div>
@@ -120,6 +120,13 @@
 </div>
 
 <jsp:include page="/WEB-INF/jsp/fo/common/footer.jsp" />
+
+<script>
+  // 챌린지 상세조회로 넘기기
+  function challengeDetailView(chNo) {
+    location.href="/detailView.chall?chNo=" + chNo;
+  }
+</script>
 
 </body>
 </html>
