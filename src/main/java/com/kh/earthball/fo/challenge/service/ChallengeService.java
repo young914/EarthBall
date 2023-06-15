@@ -36,4 +36,10 @@ public interface ChallengeService {
   List<ConfirmCount> confirmCount();
 
   Challenge selectHotChallenge(int chNo);
+
+  // 나의 오픈한 챌린지 수
+  int myChallengeListCount(String memberId);
+
+  // 마이페이지 오픈한 챌린지
+  List<Challenge> selectMyChallenge(PageInfo pageInfo, String memberId);
 }
