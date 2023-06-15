@@ -1,25 +1,4 @@
-//카카오페이 결제요청
-
-//$(function() {
-//  $("#payComplete").click(function() {
-//      $.ajax({
-//          url : "kakaopay",
-//          dataType : "json",
-//          success : function(rsp) {
-//              // alert(rsp.tid); //결제 고유 번호
-//              // console.log(rsp);
-
-//              var box = rsp.next_redirect_pc_url;
-//              // window.open(box); // 새창 열기
-//              location.href = box;
-//          },
-//          error : function(error) {
-//              alert(error);
-//          }
-//      });
-//  });
-//});
-
+// 결제요청
 function orderPay() {
 
 	let today = new Date();
@@ -105,7 +84,7 @@ function orderPay() {
 						postCode : $("#postCode").val(),
 						receiveAddress1 : $("#address1").val(),
 						receiveAddress2 : $("#address2").val(),
-						deliveryComent : $("#deliveryComent").val(),
+						deliveryComment : $("#deliveryComment").val(),
 						paymentToken : rsp.pg_tid
 					},
 					success : function(data) {
@@ -113,6 +92,9 @@ function orderPay() {
 						console.log("db insert 결과 : " + data);
 
 						if(data == 1) {
+
+							insertPoint();
+
 							var msg = "결제가 완료되었습니다.";
 							alert(msg);
 							// document.location.href="/payComplete.pa?paymentNo=" + rsp.merchant_uid;
@@ -173,3 +155,59 @@ function addressAPI() {
 		}
 	}).open();
 }
+
+// 포인트 추가 기능
+function insertPoint() {
+
+	$.ajax({
+		url : "/insertPoint",
+		type : "post",
+		data : {
+			pointContent : "상품 결제",
+			pointNum : $("#rewardPoint").html(),
+			status : "+",
+			memberId : $('.sessionMemberId').val()
+		},
+		success : function(result) {
+
+			if(result == "1") {
+
+				console.log("포인트 내역 추가 성공");
+			} else {
+				console.log("포인트 내역 추가 실패");
+			}
+		},
+		error : function() {
+			console.log("포인트 내역 추가 실패2");
+		}
+	});
+}
+
+/*
+// 포인트 삭감 기능
+function removePoint() {
+
+	$.ajax({
+		url : "/removePoint",
+		type : "post",
+		data : {
+			pointContent : "상품 결제취소",
+			pointNum : "100", // 삭감할 포인트
+			status : "+",
+			memberId : "회원아이디"
+		},
+		success : function(result) {
+
+			if(result == "1") {
+
+				console.log("포인트 삭감 성공");
+			} else {
+				console.log("포인트 삭감 실패");
+			}
+		},
+		error : function() {
+			console.log("포인트 삭감 실패2");
+		}
+	});
+}
+*/
