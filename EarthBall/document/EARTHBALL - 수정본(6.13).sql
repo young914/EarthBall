@@ -1210,7 +1210,7 @@ VALUES (SEQ_STORE.NEXTVAL, '디어얼스', '서울특별시 은평구 녹번로6
         '디어얼스는 우리가 일상을 살아가면서 지구를 아끼고 사랑하는 라이프 스타일을 지향합니다.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
-VALUES (SEQ_STORE.NEXTVAL, '송포어스', '서울특별시 강동구 풍성로35길 34 1층, 송포어스', '0507-1395-3534', '10:30 - 19:00', 12, 25,
+VALUES (SEQ_STORE.NEXTVAL, '송포어스', '서울특별시 강동구 풍성로35길 3 1층, 송포어스', '0507-1395-3534', '10:30 - 19:00', 12, 25,
         '송포어스는 우리가 일상을 살아가면서 지구를 아끼고 사랑하는 라이프 스타일을 지향합니다.', 'Y');
 INSERT INTO STORE (STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_RC, STORE_REGION_NO,
                    STORE_INFO, STATUS)
