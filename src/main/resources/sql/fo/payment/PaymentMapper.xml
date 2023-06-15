@@ -18,7 +18,8 @@
 									  , ADDRESS1
 									  , ADDRESS2
 									  , DELIVERY_COMMENT
-									  , PAYMENT_TOKEN)
+									  , PAYMENT_TOKEN
+									  , REWARD_POINT)
 								VALUES (#{paymentNo}
 									  , #{memberId}
 									  , SYSDATE
@@ -31,7 +32,8 @@
 									  , #{receiveAddress1}
 									  , #{receiveAddress2}
 									  , #{deliveryComment}
-									  , #{paymentToken})
+									  , #{paymentToken}
+									  , #{rewardPoint})
 </insert>
 
 <!-- 회원 주문누적금액 증가 -->
@@ -49,5 +51,8 @@
 	      									   WHERE M.TOTAL_PAY BETWEEN G.PAYMENT_MIN AND G.PAYMENT_MAX)
 	WHERE M.MEMBER_ID = #{memberId}
 </update>
+
+<!-- 결제페이지에 값 뿌려주기위해 상품DB에서 조회
+<select id="select"></select> -->
 
 </mapper>

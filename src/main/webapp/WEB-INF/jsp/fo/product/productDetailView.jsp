@@ -71,7 +71,13 @@
                 </div>
                 <div id="buttonArea">
                     <div></div>
-                    <div><button>구매하기</button></div>
+                    <div><button class="buy_btn">구매하기</button></div>
+                    <!-- 주문 form -->
+					<form action="payment.pa" method="get" class="order_form">
+						<input type="hidden" name="orders[0].productNo" value="${p.productNo}">
+						<input type="hidden" name="orders[0].amount" value="">
+						<input type="hidden" name="orders[0].memberId" value="${ loginUser.memberId }">
+					</form>
                     <div>
                         <c:choose>
                             <c:when test="${ loginUser.memberId != null }">
@@ -419,8 +425,17 @@
         </div>
     </div>
 
+    <script>
+ 	// 구매하기 버튼
+    $(".buy_btn").on("click", function(){
 
-    </div>
+    	console.log("버튼 눌리나?");
+    	let amount = $(".amount").val();
+    	console.log(amount);
+    	$(".order_form").find("input[name='orders[0].amount']").val(amount);
+    	$(".order_form").submit();
+    });
+    </script>
 
     <jsp:include page="/WEB-INF/jsp/fo/common/footer.jsp"/>
 

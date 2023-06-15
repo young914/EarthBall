@@ -23,7 +23,7 @@ function minus(){
     }
 }
 
-// 장바구니 추가 
+// 장바구니 추가
 // 로그인 안되어있으면 로그인 페이지로 이동
 function loginPage(){
     alert("로그인이 필요한 서비스입니다.");
@@ -44,9 +44,9 @@ function insertCart(){
     $.ajax({
         url: "insert.cart",
         type: "post",
-        data: {productNo: productNo, 
-                memberId: memberId, 
-                amount: amount, 
+        data: {productNo: productNo,
+                memberId: memberId,
+                amount: amount,
                 price: price},
         success: function(result) {
             if(result == 1){
@@ -197,3 +197,14 @@ $(function(){
         arrows : true
     })
 })
+
+// 구매하기 버튼
+$(".buy_btn").on("click", function(){
+
+	console.log("버튼 눌리나?");
+	let amount = $(".amount").val();
+	console.log(amount);
+	$(".order_form").find("input[name='orders[0].amount']").val(amount);
+	$(".order_form").submit();
+});
+
