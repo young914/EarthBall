@@ -1,6 +1,8 @@
               package com.kh.earthball.fo.board.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -62,6 +64,14 @@ public ArrayList<QReply> selectReplyList(SqlSessionTemplate sqlSession, int boar
 public int deleteReply(SqlSessionTemplate sqlSession, int boardNo) {
 	  return sqlSession.update("boardMapper.deleteReply", boardNo);
 	}
+
+public Object saveFileToDB(SqlSessionTemplate sqlSession, String originalFileName, String savedFileName, String url) {
+    Map<String, Object> parameters = new HashMap<>();
+    parameters.put("originalFileName", originalFileName);
+    parameters.put("savedFileName", savedFileName);
+    parameters.put("url", url);
+    return sqlSession.insert("boardMapper.insertBoard", parameters);
+}
 
 
 }

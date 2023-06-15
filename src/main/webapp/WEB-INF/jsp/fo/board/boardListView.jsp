@@ -272,6 +272,7 @@
 			  <td>${b.boardTitle}</td>
 			  <td>${b.memberId}</td>
 			  <td>${b.boardDate}</td>
+    			<input type="hidden" value="${b.originName}" name="originName" />
 			</tr>
 			</c:forEach>
             <tr>

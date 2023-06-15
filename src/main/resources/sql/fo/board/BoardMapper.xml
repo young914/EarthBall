@@ -8,6 +8,8 @@
 		<result column="BOARD_DATE" property="boardDate" />
 		<result column="BOARD_CONTENT" property="boardContent" />
 		 <result column="MEMBER_ID" property="memberId" />
+		<result column="ORIGIN_NAME" property="originName" />
+		<result column="CHANGE_NAME" property="changeName" />
 	</resultMap>
 
 	<resultMap id="replyResultSet" type="reply">
@@ -26,29 +28,22 @@
   </select>
 
   <!-- 게시글 리스트를 구해주는 쿼리문 -->
-  <select id="selectList" resultType="board" resultMap="boardResultSet">
-  SELECT QNA.BOARD_NO
-     , QNA.BOARD_TITLE
-     , TO_CHAR(QNA.BOARD_DATE, 'YYYY-MM-DD') AS "BOARD_DATE"
-     , MEMBER.MEMBER_ID
-	FROM QNA
-	INNER JOIN MEMBER ON QNA.MEMBER_ID = MEMBER.MEMBER_ID
-	WHERE QNA.STATUS = 'Y'
-	ORDER BY QNA.BOARD_NO DESC
-  </select>
-
+<select id="selectList" resultType="board" resultMap="boardResultSet">
+  SELECT QNA.BOARD_NO,
+         QNA.BOARD_TITLE,
+         TO_CHAR(QNA.BOARD_DATE, 'YYYY-MM-DD') AS BOARD_DATE,
+         MEMBER.MEMBER_ID,
+         QNA.ORIGIN_NAME
+  FROM QNA
+  INNER JOIN MEMBER ON QNA.MEMBER_ID = MEMBER.MEMBER_ID
+  WHERE QNA.STATUS = 'Y'
+  ORDER BY QNA.BOARD_NO DESC
+</select>
   <!--  게시글 작성용 쿼리문 -->
-  <insert id="insertBoard" parameterType="board">
-	  INSERT INTO QNA(BOARD_NO
-	  , BOARD_TITLE
-	  , BOARD_CONTENT
-	  , MEMBER_ID)
-	  VALUES(SEQ_BNO.NEXTVAL
-	  , #{boardTitle}
-	  , #{boardContent}
-	  , NVL(#{memberId}, 0))
+<insert id="insertBoard" parameterType="board">
+    INSERT INTO QNA (BOARD_NO, BOARD_TITLE, BOARD_CONTENT, MEMBER_ID, ORIGIN_NAME, CHANGE_NAME)
+    VALUES (SEQ_BNO.NEXTVAL, #{boardTitle}, #{boardContent}, #{memberId}, #{originName}, #{changeName})
 </insert>
-
 <!--  게시글 삭제용 쿼리문 -->
 <update id="deleteBoard" parameterType="_int">
 	UPDATE QNA
@@ -61,6 +56,8 @@
 		UPDATE QNA
 		   SET BOARD_TITLE = #{boardTitle}
 		     , BOARD_CONTENT = #{boardContent}
+		     , ORIGIN_NAME = #{originName}
+		     , CHANGE_NAME = #{changeName}
 		 WHERE BOARD_NO = #{boardNo}
 	</update>
 
@@ -71,6 +68,8 @@
          , MEMBER.MEMBER_ID
          , TO_CHAR(QNA.BOARD_DATE, 'YYYY-MM-DD') AS "BOARD_DATE"
          , QNA.BOARD_CONTENT
+         , QNA.ORIGIN_NAME AS "originName"
+         , QNA.CHANGE_NAME AS "changeName"
       FROM QNA
       INNER JOIN MEMBER ON QNA.MEMBER_ID = MEMBER.MEMBER_ID
      WHERE QNA.BOARD_NO = #{boardNo} AND QNA.STATUS = 'Y'
