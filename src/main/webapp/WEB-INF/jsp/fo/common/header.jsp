@@ -16,7 +16,7 @@
     	<!-- 로고+로그인 -->
         <div class="header">
             <div style="width: 200px;"></div>
-            <div class="logo" onclick="location.href='home'">
+            <div class="logo" onclick="location.href='/main'">
                 <div><img src="/resources/fo/img/logo.png"></div>
                 <div>지구공</div>
             </div>

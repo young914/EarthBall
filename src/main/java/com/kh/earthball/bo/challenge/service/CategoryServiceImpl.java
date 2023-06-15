@@ -3,6 +3,7 @@ package com.kh.earthball.bo.challenge.service;
 import com.kh.earthball.bo.challenge.mapper.CategoryMapper;
 import com.kh.earthball.bo.challenge.vo.Category;
 import com.kh.earthball.bo.challenge.vo.Code;
+import com.kh.earthball.fo.challenge.vo.Challenge;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -50,12 +51,6 @@ public class CategoryServiceImpl implements CategoryService {
     return categoryMapper.selectCodeList(categoryName);
   }
 
-  /*
-  @Override
-  public String selectGrpCode(String categoryName) {
-    return categoryMapper.selectGrpCode(categoryName);
-  }
-   */
 
 
 }

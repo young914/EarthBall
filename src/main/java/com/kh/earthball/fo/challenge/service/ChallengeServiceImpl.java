@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -101,5 +102,10 @@ public class ChallengeServiceImpl implements ChallengeService {
     int limit = offset + pageInfo.getBoardLimit();
 
     return challengeMapper.selectStatList(offset, limit, chStatName);
+  }
+
+  @Override
+  public List<Challenge> mainChallengeList() {
+    return challengeMapper.mainChallengeList();
   }
 }

@@ -6,6 +6,7 @@ import com.kh.earthball.fo.challenge.vo.Challenge;
 import com.kh.earthball.fo.common.vo.PageInfo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface ChallengeService {
 
@@ -29,4 +30,5 @@ public interface ChallengeService {
 
   ArrayList<Challenge> selectStatList(PageInfo pageInfo, String chStatName);
 
+  List<Challenge> mainChallengeList();
 }
