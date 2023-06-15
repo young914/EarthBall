@@ -217,7 +217,6 @@
             hotChallengeList();
 
             window.setInterval(hotChallengeList, 300000); // 5분 간격으로 실시간 조회
-
         })
 
 
