@@ -50,7 +50,7 @@ public class DiaryController {
       // 목록을 조회하는 요청
       ArrayList<Diary> list = diaryService.selectList(pi);
 
-       System.out.println(list);
+       // System.out.println(list);
 
       // 응답데이터를 model 에 담기
       model.addAttribute("pi", pi);
@@ -69,11 +69,11 @@ public class DiaryController {
   @RequestMapping(value="/diaryInsert.bo", produces="text/html; charset=UTF-8")
   public String insertDiary(String weather, @ModelAttribute Diary diary, HttpSession session, @RequestParam(value="file", required=true) MultipartFile file) {
 
-    System.out.println("잘호출되나?");
+    // System.out.println("잘호출되나?");
 
-    System.out.println(weather); // "1", "2", "3", "4",  ""
-    System.out.println(diary); // 여긴 changeName 이 null 인게 마즘
-    System.out.println(file);
+    // System.out.println(weather); // "1", "2", "3", "4",  ""
+    //  System.out.println(diary); // 여긴 changeName 이 null 인게 마즘
+    //  System.out.println(file);
 
       String title = diary.getDyBoardTitle();
       String content = diary.getDyBoardContent();
@@ -87,7 +87,7 @@ public class DiaryController {
         String changeName = saveFile(file, session);
         diary.setOriginName(file.getOriginalFilename());
         diary.setChangeName("resources/fo/upfiles/" + changeName);
-        System.out.println(diary.getChangeName()); // 잘찍힘
+        // System.out.println(diary.getChangeName()); // 잘찍힘
 
         int result = diaryService.insertDiary(diary);
 
@@ -107,7 +107,7 @@ public class DiaryController {
       String originName = file.getOriginalFilename();
       String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 
-     System.out.println(file);
+     // System.out.println(file);
 
       int ranNum = (int)(Math.random() * 90000 + 10000);
 
@@ -137,7 +137,7 @@ public class DiaryController {
 
                 Diary d = diaryService.selectDiary(bno);
 
-                System.out.println(d);
+                // System.out.println(d);
 
                 mv.addObject("d", d) .setViewName("fo/diary/diaryDetailView");
 
@@ -176,6 +176,69 @@ public class DiaryController {
              return "common/errorPage";
        }
 
+    }
+
+    @RequestMapping("dyUpdateForm.bo")
+    public String updateForm(int dyBoardNo,
+                                        Model model ) {
+
+      // System.out.println(dyBoardNo);
+
+      // 게시글 상세보기용 selectDiary 요청 재활용
+      Diary d = diaryService.selectDiary(dyBoardNo);
+
+      model.addAttribute("d", d);
+
+      return "fo/diary/diaryUpdateForm";
+    }
+
+    // 일기 수정하기
+    @ResponseBody
+    @RequestMapping(value="/dyUpdate.bo", produces="text/html; charset=UTF-8")
+    public String updateDiary (String weather, @ModelAttribute Diary diary, HttpSession session, @RequestParam(value="file", required=true) MultipartFile file) {
+
+      System.out.println("잘호출되나?");
+      System.out.println(weather); // "1", "2", "3", "4",  ""
+      System.out.println(diary); // 여긴 changeName 이 null 인게 마즘
+      System.out.println(file);
+
+        String title = diary.getDyBoardTitle();
+        String content = diary.getDyBoardContent();
+
+        if(!file.getOriginalFilename().isEmpty() && !title.isEmpty() && !content.isEmpty()) {
+
+          if (file.getSize() < 20000) {
+            return "그림을 (더) 그려주세요";
+        }
+
+          String changeName = saveFile(file, session);
+          diary.setOriginName(file.getOriginalFilename());
+          diary.setChangeName("resources/fo/upfiles/" + changeName);
+          System.out.println(diary.getChangeName()); // 잘찍힘
+
+          int result = diaryService.updateDiary(diary);
+
+          if(result > 0) {
+              return "게시글 등록 완료";
+          } else {
+              return "게시글 등록 실패";
+          }
+      }
+
+      // 필요한 데이터가 누락된 경우
+      return "누락된 정보가 있습니다";
+  }
+
+    // 마이페이지 내가 참여한 일기 보여주기
+    @RequestMapping("diaryList.me")
+    public String diaryListMe(String memberId, Model model) {
+      ArrayList<Diary> list = diaryService.diaryListMe(memberId);
+
+      System.out.println(list);
+
+      model.addAttribute("list", list);
+
+      return "fo/mypage/diary";
     }
 
 
