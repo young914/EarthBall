@@ -73,7 +73,7 @@
         <div data-i18n="Tables">신고</div>
       </a>
     </li>
-    <li class="menu-item ${param.menuId > '50' && param.menuId < '60' ? 'active' : ''}">
+    <li class="menu-item ${param.menuId eq '50' ? 'active' : ''}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-dock-top"></i>
         <div data-i18n="Account Settings">챌린지</div>
