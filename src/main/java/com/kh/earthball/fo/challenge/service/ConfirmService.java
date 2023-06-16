@@ -29,5 +29,10 @@ public interface ConfirmService {
   List<ChConReply> selectReplyList(ChConReply reply);
 
   int deleteReply(int reNo);
+  
+  // 마이페이지 인증 챌린지 보기
+  int myConfirmListCount(String memberId);
+
+  List<ChConfirm> selectMyConfirm(PageInfo pageInfo, String memberId);
 
 }

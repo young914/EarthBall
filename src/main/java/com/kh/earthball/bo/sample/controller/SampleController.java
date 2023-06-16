@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class SampleController {
 
-  @GetMapping("sample")
+  @GetMapping("admin")
   public String sample() {
-    return "/bo/sample/sample";
+    return "bo/dashboard/dashboard";
   }
 
 }

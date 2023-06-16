@@ -282,4 +282,24 @@ public class ConfirmController {
     return confirmService.deleteReply(reNo);
   }
 
+
+  @GetMapping("/list.myConfirm")
+  public String myConfirm(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, String memberId, Model model) {
+    // 나의 인증 게시글 수 조회
+    int listCount = confirmService.myConfirmListCount(memberId);
+
+    int pageLimit = 5;
+    int boardLimit = 10;
+
+    PageInfo pageInfo = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+
+    // 나의 챌린지 게시글 리스트 조회
+    List<ChConfirm> chConfirms = confirmService.selectMyConfirm(pageInfo, memberId);
+
+    model.addAttribute("pageInfo", pageInfo);
+    model.addAttribute("chConfirms", chConfirms);
+
+    return "fo/mypage/myConfirm";
+  }
+
 }

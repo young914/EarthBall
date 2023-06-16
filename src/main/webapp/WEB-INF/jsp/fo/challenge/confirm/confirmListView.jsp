@@ -186,6 +186,7 @@
         });
     }
 
+    // 챌린지 상세조회로 넘기기
     function detailViewChallenge(chNo) {
       location.href="/detailView.chall?chNo=" + chNo;
   }
