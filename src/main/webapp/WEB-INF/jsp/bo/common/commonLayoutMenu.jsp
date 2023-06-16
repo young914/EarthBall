@@ -90,7 +90,7 @@
           </a>
         </li>
         <li class="menu-item ${param.menuId eq '53' ? 'active' : ''}">
-          <a href="pages-account-settings-connections.html" class="menu-link">
+          <a href="/list.chall" class="menu-link">
             <div data-i18n="Connections">참여 게시판 관리</div>
           </a>
         </li>
