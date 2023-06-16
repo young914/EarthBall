@@ -15,12 +15,12 @@
 -->
 <!-- beautify ignore:start -->
 <html
-    lang="kr"
-    class="light-style layout-menu-fixed"
-    dir="ltr"
-    data-theme="theme-default"
-    data-assets-path="/resources/admin/assets/"
-    data-template="vertical-menu-template-free"
+        lang="kr"
+        class="light-style layout-menu-fixed"
+        dir="ltr"
+        data-theme="theme-default"
+        data-assets-path="/resources/admin/assets/"
+        data-template="vertical-menu-template-free"
 >
 <head>
   <jsp:include page="/WEB-INF/jsp/bo/common/commonHead.jsp" />
@@ -46,36 +46,91 @@
       <!-- Content wrapper -->
       <div class="content-wrapper">
         <!-- Content -->
+        <div class="container-xxl flex-grow-1 container-p-y">
+          <h4 class="fw-bold">챌린지 참여 게시판 상세 </h4>
 
-        <!-- / Content -->
+          <!-- Hoverable Table rows -->
+          <div class="card mb-2">
+            <div class="table-responsive text-nowrap" id="challengeList">
+              <table class="table">
+                <tbody class="table-border-bottom-0">
+                  <tr>
+                    <th class="text-center chNo"><strong>챌린지명</strong></th>
+                    <td class="text-center chNo"><strong>${challenge.chTitle}</strong></td>
+                  </tr>
+                  <tr>
+                    <th class="text-center chNo"><strong>카테고리</strong></th>
+                    <td class="text-center chNo"><strong>${challenge.categoryName}</strong></td>
+                  </tr>
+                  <tr>
+                    <th class="text-center chNo"><strong>도전기간</strong></th>
 
+                    <c:choose>
+                      <c:when test="${challenge.chStartDay eq challenge.chEndDay}">
+                        <td class="text-center chNo"><strong>${challenge.chStartDay}</strong></td>
+                      </c:when>
+                      <c:otherwise>
+                        <td class="text-center chNo"><strong>${challenge.chStartDay} ~ ${challenge.chEndDay}</strong></td> <br><br>
+                      </c:otherwise>
+                    </c:choose>
 
-        <!-- Footer -->
-        <footer class="content-footer footer bg-footer-theme">
-          <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-            <div class="mb-2 mb-md-0">
-              ©
-              <script>
-                  document.write(new Date().getFullYear());
-              </script>
+                  </tr>
+                  <tr>
+                    <th class="text-center chNo"><strong>진행상태</strong></th>
+                    <td class="text-center chNo"><strong>${challenge.chStatName}</strong></td>
+                  </tr>
+                  <tr>
+                    <th class="text-center chNo"><strong>회원ID</strong></th>
+                    <td class="text-center chNo"><strong>${challenge.memberId}</strong></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
-        </footer>
-        <!-- / Footer -->
+          <!--/ Hoverable Table rows -->
 
-        <div class="content-backdrop fade"></div>
-      </div>
-      <!-- Content wrapper -->
-    </div>
-    <!-- / Layout page -->
-  </div>
+          <div class="card mb-2">
+            <div class="card-body">
+              <h4 class="fw-bold">챌린지 썸네일</h4> <hr>
+              <div class="row">
+                <div class="col-sm-10">
+                  <img src="${challenge.filePath}" id="thumbnail" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
 
-  <!-- Overlay -->
-  <div class="layout-overlay layout-menu-toggle"></div>
-</div>
-<jsp:include page="/WEB-INF/jsp/bo/common/commonScript.jsp" />
-<script type="text/javascript">
 
-</script>
+          <div class="card mb-2">
+            <div class="card-body">
+              <h4 class="fw-bold">챌린지 상세 내용</h4> <hr>
+              <div class="row">
+                <div class="col-sm-10">
+                  ${challenge.chContent}
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- HTML5 Inputs -->
+          <div class="card mb-2">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-10">
+                  <button type="button" class="btn btn-primary" onclick="">삭제</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+            </div>
+          </div>
+
+          <jsp:include page="/WEB-INF/jsp/bo/common/commonScript.jsp" />
+          <script type="text/javascript">
+
+          </script>
 </body>
 </html>

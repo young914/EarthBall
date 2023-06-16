@@ -29,4 +29,9 @@ public class BoChallengeServiceImpl implements BoChallengeService {
 
     return boChallengeMapper.selectChallengeList(offset, limit);
   }
+
+  @Override
+  public BoChallenge selectChallenge(int chNo) {
+    return boChallengeMapper.selectChallenge(chNo);
+  }
 }

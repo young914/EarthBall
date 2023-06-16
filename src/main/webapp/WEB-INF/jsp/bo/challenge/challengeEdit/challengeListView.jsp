@@ -47,7 +47,7 @@
       <div class="content-wrapper">
         <!-- Content -->
         <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="fw-bold">참여 게시판 </h4>
+          <h4 class="fw-bold">챌린지 참여 게시판 </h4>
           <!-- HTML5 Inputs -->
           <div class="card mb-2">
             <div class="card-body">
@@ -75,12 +75,12 @@
                 <tbody class="table-border-bottom-0">
                 <c:forEach var="chall" items="${ boChallengeList }">
                   <tr>
-                    <td class="text-center chNo" data-category-no="${chall.chNo}"><strong>${chall.chNo}</strong></td>
-                    <td class="text-center chNo" data-category-no="${chall.chNo}"><strong>${chall.categoryName}</strong></td>
-                    <td class="text-center chNo" data-category-no="${chall.chNo}"><strong>${chall.chTitle}</strong></td>
-                    <td class="text-center chNo" data-category-no="${chall.chNo}"><strong>${chall.day}</strong></td>
-                    <td class="text-center chNo" data-category-no="${chall.chNo}"><strong>${chall.chStatName}</strong></td>
-                    <td class="text-center chNo" data-category-no="${chall.chNo}"><strong>${chall.memberId}</strong></td>
+                    <td class="text-center chNo" data-ch-no="${chall.chNo}"><strong>${chall.chNo}</strong></td>
+                    <td class="text-center chNo" data-ch-no="${chall.chNo}"><strong>${chall.categoryName}</strong></td>
+                    <td class="text-center chNo" data-ch-no="${chall.chNo}"><strong>${chall.chTitle}</strong></td>
+                    <td class="text-center chNo" data-ch-no="${chall.chNo}"><strong>${chall.day}</strong></td>
+                    <td class="text-center chNo" data-ch-no="${chall.chNo}"><strong>${chall.chStatName}</strong></td>
+                    <td class="text-center chNo" data-ch-no="${chall.chNo}"><strong>${chall.memberId}</strong></td>
                   </tr>
                 </c:forEach>
                 </tbody>

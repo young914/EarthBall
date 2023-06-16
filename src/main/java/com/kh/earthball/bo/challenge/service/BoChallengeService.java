@@ -10,4 +10,6 @@ public interface BoChallengeService {
   int ChallengeListCount();
 
   List<BoChallenge> selectChallengeList(PageInfo pageInfo);
+
+  BoChallenge selectChallenge(int chNo);
 }

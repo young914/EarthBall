@@ -37,4 +37,29 @@
           JOIN TB_CATEGORY GO ON C.CATEGORY_NO = GO.CATEGORY_NO )
         WHERE ROW_NUM BETWEEN #{offset} AND #{limit}
     </select>
+
+    <select id="selectChallenge" parameterType="java.lang.Integer" resultType="com.kh.earthball.bo.challenge.vo.BoChallenge">
+        SELECT CH_NO
+             , CH_TITLE
+             , TO_CHAR(TO_DATE(CH_START_DAY, 'YYYY-MM-DD'), 'YYYY-MM-DD') AS CH_START_DAY
+             , TO_CHAR(TO_DATE(CH_END_DAY, 'YYYY-MM-DD'), 'YYYY-MM-DD') AS CH_END_DAY
+             , CASE
+                   WHEN SYSDATE &lt; TO_DATE(CH_START_DAY, 'YYYY-MM-DD')  THEN '진행예정'
+                   WHEN SYSDATE &gt; TO_DATE(CH_END_DAY, 'YYYY-MM-DD')  THEN '진행완료'
+                   ELSE '진행중'
+            END AS CH_STAT_NAME
+         , MEMBER_ID
+             , CATEGORY_NO
+             , FILE_NO
+             , (SELECT CATEGORY_NAME
+                FROM TB_CATEGORY CA
+                WHERE CA.CATEGORY_NO = C.CATEGORY_NO) CATEGORY_NAME
+             , (SELECT FILE_PATH
+                FROM TB_CHA_FILE F
+                WHERE F.FILE_NO = C.FILE_NO) FILE_PATH
+             , CH_CONTENT
+        FROM TB_CHALLENGE C
+        WHERE CH_NO = #{chNo}
+          AND STATUS = 'Y'
+    </select>
 </mapper>

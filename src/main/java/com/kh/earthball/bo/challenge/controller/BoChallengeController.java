@@ -42,7 +42,12 @@ public class BoChallengeController {
 
 
   @GetMapping("/detail.chall")
-  public String challengeDetailView() {
+  public String challengeDetailView(int chNo, Model model) {
+
+    BoChallenge challenge = boChallengeService.selectChallenge(chNo);
+
+    model.addAttribute("challenge", challenge);
+
     return "bo/challenge/challengeEdit/challengeDetailView";
   }
 
