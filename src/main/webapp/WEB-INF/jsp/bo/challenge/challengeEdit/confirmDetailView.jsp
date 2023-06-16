@@ -47,7 +47,7 @@
       <div class="content-wrapper">
         <!-- Content -->
         <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="fw-bold">챌린지 참여 게시판 상세 </h4>
+          <h4 class="fw-bold">챌린지 인증 게시판 상세 </h4>
 
           <!-- Hoverable Table rows -->
           <div class="card mb-2">
@@ -91,12 +91,7 @@
 
           <div class="card mb-2">
             <div class="card-body">
-              <h4 class="fw-bold">챌린지 썸네일</h4> <hr>
-              <div class="row">
-                <div class="col-sm-10">
-                  <img src="${challenge.filePath}" id="thumbnail" alt="">
-                </div>
-              </div>
+              <h4 class="fw-bold">제목나올거야</h4>
             </div>
           </div>
 
