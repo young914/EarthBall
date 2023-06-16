@@ -23,8 +23,9 @@
     </insert>
 
     <update id="updateConfirm" parameterType="com.kh.earthball.fo.challenge.vo.ChConfirm">
-        UPDATE TB_CH_CONFIRM SET
-            CH_CON_TITLE = #{chConTitle}
+        UPDATE TB_CH_CONFIRM
+           SET CH_CON_TITLE = #{chConTitle}
+             , CH_CON_CREATE_DATE = SYSDATE
         WHERE CH_NO = #{chNo}
           AND CH_CON_NO = #{chConNo}
           AND MEMBER_ID = #{memberId}

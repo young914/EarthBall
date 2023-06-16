@@ -112,22 +112,18 @@ public class ConfirmController {
 
     // 챌린지 인증의 해당하는 챌린지 정보 조회해오기
     int chNo = chConfirm.getChNo();
-    log.info("너의 번호가 뭐니 : " + chNo);
 
     Challenge challenge = challengeService.selectChallenge(chNo);
-    log.info("해당 챌린지 나와라 : " + challenge);
 
     /*-------------------*/
 
     int categoryNo = challenge.getCategoryNo();
 
-    log.info("카테고리 번호 나와 : " + categoryNo);
 
     // 해당 챌린지의 카테고리번호를 가지고 인증 폼 가져오기
     List<CategoryTemplate> templateList = templateService.selectTemplateList(categoryNo);
 
     for (CategoryTemplate categoryTemplate : templateList) {
-      log.info("CategoryTemplateNo 넘어왔어? : " + categoryTemplate.getCategoryTemplateNo());
       if (categoryTemplate.getCategoryTemplateNo() != 0) {
         int categoryTemplateNo = categoryTemplate.getCategoryTemplateNo();
 
@@ -138,14 +134,10 @@ public class ConfirmController {
         categoryTemplate.setChDetailInfoList(chDetailInfoList);
       }
 
-      log.info("grp 넘어왔어? : " + categoryTemplate.getGrpCode());
       if (StringUtils.isNotEmpty(categoryTemplate.getGrpCode())) {
         List<Code> codeList = codeService.selectCodeList(categoryTemplate.getGrpCode());
         categoryTemplate.setCodeList(codeList);
       }
-
-      log.info(
-          "templateList에 들어있는 값 1 : " + templateList);   // 아직 code에 checked => true 부여 못한 상태!!!!!!
 
 
       if (categoryTemplate.getCodeList() != null && categoryTemplate.getCodeList()
@@ -166,15 +158,6 @@ public class ConfirmController {
         }
       }
     }
-
-    /*
-    ChConReply reply = new ChConReply();
-    reply.setChNo(chNo);
-    reply.setChConNo(chConNo);
-
-    List<ChConReply> replyList = confirmService.selectReplyList(reply);
-*/
-    log.info("templateList에 들어있는 값 2 : " + templateList);   // code에 checked => true 부여 된 상태!!!!!!
 
     model.addAttribute("templateList", templateList);
     model.addAttribute("chConfirm", chConfirm);
