@@ -27,7 +27,7 @@
     <div class="main-content2">
 
       <h2>오픈한 챌린지 <span>${ challengeList.size() }</span></h2>
-      <button class="btn_4">인증한 챌린지 보기</button><br><br>
+      <button class="btn_4" onclick="myConfirmList('${ loginUser.memberId }');">인증한 챌린지 보기</button><br><br>
 
       <!-- content_1 시작 -->
       <div id="content_1">
@@ -103,7 +103,7 @@
               <c:otherwise>
                 <li> <a href="/list.myChallenge?memberId=${loginUser.memberId}&currentPage=${[pageInfo.currentPage + 1]}" class="arrow_right" disabled> >> </a> </li>
               </c:otherwise>
-            </c:choose>zx
+            </c:choose>
 
             <li> <a href="/list.myChallenge?memberId=${loginUser.memberId}&currentPage=${pageInfo.maxPage}" class="last">끝 페이지</a> </li>
           </ul>
@@ -125,6 +125,10 @@
   // 챌린지 상세조회로 넘기기
   function challengeDetailView(chNo) {
     location.href="/detailView.chall?chNo=" + chNo;
+  }
+
+  function myConfirmList(memberId) {
+    location.href="/list.myConfirm?memberId=" + memberId;
   }
 </script>
 
