@@ -11,7 +11,7 @@
 
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
   <div class="app-brand demo">
-    <a href="home" class="app-brand-link">
+    <a href="/main" class="app-brand-link">
       <img src="/resources/fo/img/logo.png" class="navbar-brand-img" alt="..." style="width: 50px;">
       <h2 style="margin-left: 5px; margin: 0 auto; color: #19a7ce; font-weight: bold;">지구공</h2>
     </a>
