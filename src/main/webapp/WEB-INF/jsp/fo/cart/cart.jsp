@@ -71,7 +71,7 @@
 			<div><a href="list.pro">계속 쇼핑하기</a></div>
 		</div>
 		<!-- 주문 form -->
-		<form action="payment.pa" method="post" class="order_form">
+		<form action="payments.pa" method="post" class="order_form">
 
 		</form>
 	</div>
