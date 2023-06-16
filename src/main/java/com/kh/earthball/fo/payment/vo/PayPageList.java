@@ -14,6 +14,6 @@ import lombok.ToString;
 @AllArgsConstructor
 public class PayPageList {
 
-  private List<PayPageItem> pays;
+  private List<PayPageItem> orders;
 
 }

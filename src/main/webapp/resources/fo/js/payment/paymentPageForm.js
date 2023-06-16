@@ -68,7 +68,7 @@ function orderPay() {
 					console.log(rsp.buyer_postcode);
 					console.log(rsp.pg_tid);
 					console.log("----------");
-					console.log();
+					console.log($("#rewardPoint").html());
 
 					$.ajax({
 					url : "/paySuccess",
@@ -85,7 +85,8 @@ function orderPay() {
 						receiveAddress1 : $("#address1").val(),
 						receiveAddress2 : $("#address2").val(),
 						deliveryComment : $("#deliveryComment").val(),
-						paymentToken : rsp.pg_tid
+						paymentToken : rsp.pg_tid,
+						rewardPoint : $("#rewardPoint").html()
 					},
 					success : function(data) {
 
@@ -159,6 +160,8 @@ function addressAPI() {
 // 포인트 추가 기능
 function insertPoint() {
 
+
+
 	$.ajax({
 		url : "/insertPoint",
 		type : "post",
@@ -178,7 +181,7 @@ function insertPoint() {
 			}
 		},
 		error : function() {
-			console.log("포인트 내역 추가 실패2");
+			console.log("포인트 추가 ajax 실패");
 		}
 	});
 }

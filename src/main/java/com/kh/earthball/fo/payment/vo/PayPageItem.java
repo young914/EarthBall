@@ -15,8 +15,6 @@ public class PayPageItem {
 
   private int productNo;
   private int amount;
-  private String productName;
-  private int price;
-  private int totalPrice;
+  private String memberId;
 
 }
