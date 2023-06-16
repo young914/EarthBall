@@ -21,6 +21,8 @@
         <typeAlias type="com.kh.earthball.fo.board.vo.Board" alias="board"/>
         <typeAlias type="com.kh.earthball.fo.notice.vo.Notice" alias="notice"/>
         <typeAlias type="com.kh.earthball.fo.board.vo.QReply" alias="reply"/>
+        <typeAlias type="com.kh.earthball.bo.notice.vo.BoNotice" alias="Bonotice"/>
+
     </typeAliases>
 
     <!-- environments 영역에 기술했었던 environment, dataSource 등 DB 연결 정보 관련은 mybatis-config.xml

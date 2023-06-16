@@ -56,7 +56,7 @@
       </ul>
     </li>
     <li class="menu-item ${param.menuId eq '30' ? 'active' : ''}">
-      <a href="/" class="menu-link">
+      <a href="bolist.no" class="menu-link">
         <i class="menu-icon tf-icons bx bx-table"></i>
         <div data-i18n="Tables">공지사항</div>
       </a>
@@ -105,6 +105,12 @@
       <a href="/" class="menu-link">
         <i class="menu-icon tf-icons bx bx-table"></i>
         <div data-i18n="Tables">주문</div>
+      </a>
+    </li>
+    <li class="menu-item ${param.menuId eq '70' ? 'active' : ''}">
+      <a href="https://desk.channel.io/#/channels/137317/user_chats/648c1a7e590055d485df" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-table"></i>
+        <div data-i18n="Tables">챗봇</div>
       </a>
     </li>
   </ul>
