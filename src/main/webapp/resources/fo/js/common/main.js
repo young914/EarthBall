@@ -9,7 +9,7 @@ $(function(){
         speed : 1000,
         infinite : true
     });
-})
+});
 
 // 환경일기장 슬라이드
 $(function(){
@@ -20,5 +20,9 @@ $(function(){
         infinite: true,
         slidesToShow: 3,
         slidesToScroll: 3
-    })
-})
+    });
+});
+// 챌린지 상세조회로 넘기기
+function challengeDetailView(chNo) {
+    location.href="/detailView.chall?chNo=" + chNo;
+}

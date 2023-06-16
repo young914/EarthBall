@@ -11,4 +11,13 @@ public interface ReviewMapper {
 
   ArrayList<Review> selectList(int productNo);
 
+  ArrayList<Review> selectPhotoList(int productNo);
+
+  int insertReply(Review r);
+
+  int updateReviewCount(int reviewNo);
+
+  ArrayList<Review> selectReplyList(int reviewNo);
+
+  ArrayList<Review> selectTopList(int productNo);
 }

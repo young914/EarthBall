@@ -29,4 +29,6 @@ public interface AdminStoreMapper {
 
   ArrayList<AdminAtta> selectAtta(@Param("storeNo" )int storeNo);
 
+  int deleteStore(int storeNo);
+
 }

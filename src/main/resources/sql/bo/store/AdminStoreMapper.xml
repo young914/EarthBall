@@ -55,11 +55,16 @@
     WHERE STORE_NO = #{storeNo}
 </update>
 
-<update id="updateStoreAtta" parameterType="com.kh.earthball.bo.store.vo.AdminAtta">
-    UPDATE STORE_ATTA
-    SET CHANGER_NAME = #{changerName},
-        FILE_LEVEL = #{fileLevel}
-    WHERE STORE_NO = #{storeNo}
-</update>
+	<update id="updateStoreAtta" parameterType="com.kh.earthball.bo.store.vo.AdminAtta">
+	    UPDATE STORE_ATTA
+	    SET CHANGER_NAME = #{changerName},
+	        FILE_LEVEL = #{fileLevel}
+	    WHERE STORE_NO = #{storeNo}
+	</update>
+	
+	<delete id="deleteStore" >
+		DELETE STORE
+		WHERE STORE_NO = #{storeNo}
+	</delete>
 	
 </mapper>

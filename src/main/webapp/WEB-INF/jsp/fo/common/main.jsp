@@ -1,19 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<jsp:include page="jsp/fo/common/common.jsp"/>
+<jsp:include page="common.jsp"/>
 <link rel="stylesheet" href="/resources/fo/css/common/main.css">
 <script type="text/javascript" src="/resources/fo/js/common/main.js"></script>
 
 </head>
 <body>
 
-	<jsp:include page="jsp/fo/common/header.jsp"/>
+	<jsp:include page="header.jsp"/>
 
 	<div id="container">
         <!-- 배너 -->
@@ -155,56 +156,50 @@
                 <div><img src="/resources/fo/img/banner4.png" id="challengeImg"></div>
             </div>
             <div id="challengeList">
-                <div>
-                    <div class="challenge1">
-                        <div><img src="/resources/fo/img/logo.png"></div>
-                        <div>
-                            <div>챌린지 이름</div>
-                            <div>회원 ID</div>
-                        </div>
+
+                <!-- 카드 한 장 시작 -->
+                <c:forEach var="chall" items="${challengeList}">
+                <div class="chall_Card" onclick="challengeDetailView('${chall.chNo}');">
+                    <div class="chall_Title">
+                        <table>
+                            <input type="hidden" name="chNo" value="${chall.chNo}">
+                            <tr>
+                                <td rowspan="2"><img src="/resources/fo/img/logo.png" style="width: 50px; height: 50px;" alt=""></td>
+                                <td id="challTitle"><h5 style="margin: 5px;">${chall.chTitle}</h5></td>
+                            </tr>
+                            <tr>
+                                <td><span class="userId">${chall.memberId}</span></td>
+                            </tr>
+                        </table>
                     </div>
-                    <div class="challenge2"><img src="/resources/fo/img/logo.png"></div>
-                    <div class="challenge3">2023-05-15 ~ 23-05-22</div>
-                    <div class="challenge4">
-                        <div>친환경 소비</div>
-                        <div>1주</div>
-                        <div>진행중</div>
+
+                    <img src="${chall.filePath}" alt="">
+
+                    <div class="chall_Date" align="center">
+                        <c:choose>
+                            <c:when test="${chall.chStartDay eq chall.chEndDay}">
+                                <span>${chall.chStartDay}</span>
+                            </c:when>
+                            <c:otherwise>
+                                <span>${chall.chStartDay} ~ ${chall.chEndDay}</span>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+
+                    <div class="chall_Tag">
+                        <ul>
+                            <li><span class="tag">${chall.categoryName}</span></li>
+                            <li><span class="tag">${chall.chStatName}</span></li>
+                        </ul>
                     </div>
                 </div>
-                <div>
-                    <div class="challenge1">
-                        <div><img src="/resources/fo/img/logo.png"></div>
-                        <div>
-                            <div>챌린지 이름</div>
-                            <div>회원 ID</div>
-                        </div>
-                    </div>
-                    <div class="challenge2"><img src="/resources/fo/img/logo.png"></div>
-                    <div class="challenge3">2023-05-15 ~ 23-05-22</div>
-                    <div class="challenge4">
-                        <div>친환경 소비</div>
-                        <div>1주</div>
-                        <div>진행중</div>
-                    </div>
-                </div>
-                <div>
-                    <div class="challenge1">
-                        <div><img src="/resources/fo/img/logo.png"></div>
-                        <div>
-                            <div>챌린지 이름</div>
-                            <div>회원 ID</div>
-                        </div>
-                    </div>
-                    <div class="challenge2"><img src="/resources/fo/img/logo.png"></div>
-                    <div class="challenge3">2023-05-15 ~ 23-05-22</div>
-                    <div class="challenge4">
-                        <div>친환경 소비</div>
-                        <div>1주</div>
-                        <div>진행중</div>
-                    </div>
+                </c:forEach>
+                <!-- 카드 한 장 끝 -->
                 </div>
             </div>
-        </div>
+
+
+
         <!-- 에코 다이어리 -->
         <div id="diaryArea">
             <div id="diaryBox">
@@ -235,9 +230,11 @@
             </div>
         </div>
 
+    </div><!-- container 끝 : 이 밖에 나가면 틀 튀어나감... -->
+
     </div>
 
-    <jsp:include page="jsp/fo/common/footer.jsp"/>
+    <jsp:include page="footer.jsp"/>
 
 </body>
 </html>

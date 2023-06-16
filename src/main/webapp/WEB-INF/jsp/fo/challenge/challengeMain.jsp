@@ -126,172 +126,13 @@
             <!-- Hot 챌린지 영역 시작 -->
             <div id="content_2">
                 <h1 style="text-align: center;"><span style="color: #146C94;">HOT</span> 챌린지</h1>
-
+                <div id="content_2_1">
                 <!-- 챌린지 하나 시작 -->
-                <div class="hot_chall">
-                    <table class="hot_one">
-                        <tr>
-                            <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/logo.png" alt="">
-                            </td>
-                            <td><span class="hot_title">제목이 들어갈 것임</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="tags">#태그자리1</span>
-                                <span class="tags">#태그자리2</span> <br>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+
+                    <!-- ajax 실시간 5분마다 -->
+
                 <!-- 챌린지 하나 끝 -->
-
-
-                <div class="hot_chall">
-                    <table class="hot_one">
-                        <tr>
-                            <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/logo.png" alt="">
-                            </td>
-                            <td><span class="hot_title">제목이 들어갈 것임</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="tags">#태그자리1</span>
-                                <span class="tags">#태그자리2</span> <br>
-                            </td>
-                        </tr>
-                    </table>
                 </div>
-                <div class="hot_chall">
-                    <table class="hot_one">
-                        <tr>
-                            <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/logo.png" alt="">
-                            </td>
-                            <td><span class="hot_title">제목이 들어갈 것임</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="tags">#태그자리1</span>
-                                <span class="tags">#태그자리2</span> <br>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="hot_chall">
-                    <table class="hot_one">
-                        <tr>
-                            <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/logo.png" alt="">
-                            </td>
-                            <td><span class="hot_title">제목이 들어갈 것임</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="tags">#태그자리1</span>
-                                <span class="tags">#태그자리2</span> <br>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="hot_chall">
-                    <table class="hot_one">
-                        <tr>
-                            <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/logo.png" alt="">
-                            </td>
-                            <td><span class="hot_title">제목이 들어갈 것임</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="tags">#태그자리1</span>
-                                <span class="tags">#태그자리2</span> <br>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="hot_chall">
-                    <table class="hot_one">
-                        <tr>
-                            <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/logo.png" alt="">
-                            </td>
-                            <td><span class="hot_title">제목이 들어갈 것임</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="tags">#태그자리1</span>
-                                <span class="tags">#태그자리2</span> <br>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="hot_chall">
-                    <table class="hot_one">
-                        <tr>
-                            <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/logo.png" alt="">
-                            </td>
-                            <td><span class="hot_title">제목이 들어갈 것임</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="tags">#태그자리1</span>
-                                <span class="tags">#태그자리2</span> <br>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="hot_chall">
-                    <table class="hot_one">
-                        <tr>
-                            <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/logo.png" alt="">
-                            </td>
-                            <td><span class="hot_title">제목이 들어갈 것임</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="tags">#태그자리1</span>
-                                <span class="tags">#태그자리2</span> <br>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="hot_chall">
-                    <table class="hot_one">
-                        <tr>
-                            <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/logo.png" alt="">
-                            </td>
-                            <td><span class="hot_title">제목이 들어갈 것임</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="tags">#태그자리1</span>
-                                <span class="tags">#태그자리2</span> <br>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="hot_chall">
-                    <table class="hot_one">
-                        <tr>
-                            <td rowspan="2">
-                                <img class="hot_img" style="width: 50px; height: 50px; border-radius: 5px;" src="/resources/fo/img/logo.png" alt="">
-                            </td>
-                            <td><span class="hot_title">제목이 들어갈 것임</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="tags">#태그자리1</span>
-                                <span class="tags">#태그자리2</span> <br>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-
 
             </div>
             <!-- Hot 챌린지 영역 끝 -->
@@ -318,12 +159,7 @@
                   <c:forEach var="page" begin="${pageInfo.startPage}" end="${pageInfo.endPage}" step="1">
                     <li> <a href="/main.chall?currentPage=${page}" class="active num"> ${page} </a>  </li>
                   </c:forEach>
-                  <!--
-                    <li> <a href="#" class="num"> 2 </a>  </li>
-                    <li> <a href="#" class="num"> 3 </a>  </li>
-                    <li> <a href="#" class="num"> 4 </a>  </li>
-                    <li> <a href="#" class="num"> 5 </a>  </li>
-                  -->
+
 
                   <c:choose>
                     <c:when test="${pageInfo.currentPage eq pageInfo.maxPage}">
@@ -376,6 +212,57 @@
         }
 
 
+        /* 실시간 hot 챌린지 조회 */
+        $(function () {
+            hotChallengeList();
+
+            window.setInterval(hotChallengeList, 300000); // 5분 간격으로 실시간 조회
+        })
+
+
+        /* hot 챌린지 10개 분석용 ajax */
+        function hotChallengeList() {
+
+            $.ajax({
+                url : "/hotList.chall"
+                , type : "get"
+                , success : function (result) {
+                    console.log("hot 챌린지 조회용 ajax 통신 성공");
+                    let hotList = "";
+
+                    for(let i in result) {
+                        console.log("Index : " , i);
+
+                        let chNo = result[i].chNo;
+                        console.log("chNo이 잘 전달됐니? : ", chNo);
+
+                        hotList +="<div class='hot_chall' onclick='challengeDetailView(" + chNo + ");'>"
+                                +"<table class='hot_one'>"
+                                +   "<tr>"
+                                +       "<td rowspan='2'>"
+                                +           "<img class='hot_img' style='width: 50px; height: 50px; border-radius: 5px;' src='/resources/fo/img/logo.png'>"
+                                +       "</td>"
+                                +       "<td>"
+                                +           "<span class='hot_title'>" + result[i].chTitle + "</span>"
+                                +       "</td>"
+                                +   "</tr>"
+                                +   "<tr>"
+                                +       "<td>"
+                                +           "<span class='tags'>#" + result[i].categoryName + "</span>"
+                                +           "<span class='tags'>#" + result[i].chStatName + "</span>"
+                                +       "</td>"
+                                +   "</tr>"
+                                +"</table>"
+                                +"</div>"
+                        console.log("result: ", result[i]);
+                    }
+                    $("#content_2_1").html(hotList);
+                }
+                , error : function () {
+                    console.log("hot 챌린지 조회용 ajax 통신 실패");
+                }
+            });
+        }
     </script>
 
 </body>

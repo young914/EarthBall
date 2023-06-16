@@ -3,6 +3,7 @@ package com.kh.earthball.fo.challenge.service;
 import com.kh.earthball.fo.challenge.mapper.ChallengeMapper;
 import com.kh.earthball.fo.challenge.vo.ChDetailInfo;
 import com.kh.earthball.fo.challenge.vo.Challenge;
+import com.kh.earthball.fo.challenge.vo.ConfirmCount;
 import com.kh.earthball.fo.common.vo.PageInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -102,4 +104,38 @@ public class ChallengeServiceImpl implements ChallengeService {
 
     return challengeMapper.selectStatList(offset, limit, chStatName);
   }
+
+  @Override
+  public List<Challenge> mainChallengeList() {
+    return challengeMapper.mainChallengeList();
+  }
+
+  @Override
+  public  List<ConfirmCount> confirmCount() {
+    return challengeMapper.confirmCount();
+  }
+
+  @Override
+  public Challenge selectHotChallenge(int chNo) {
+    return challengeMapper.selectHotChallenge(chNo);
+  }
+
+  // 나의 오픈한 챌린지 수
+  @Override
+  public int myChallengeListCount(String memberId) {
+    return challengeMapper.myChallengeListCount(memberId);
+  }
+
+  // 마이페이지 오픈한 챌린지
+  @Override
+  public List<Challenge> selectMyChallenge(PageInfo pageInfo, String memberId) {
+
+    int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getBoardLimit();
+    int limit = offset + pageInfo.getBoardLimit();
+
+    return challengeMapper.selectMyChallenge(offset, limit, memberId);
+  }
+
+
+
 }

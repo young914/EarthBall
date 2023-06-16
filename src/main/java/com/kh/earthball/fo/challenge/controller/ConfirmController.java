@@ -270,7 +270,6 @@ public class ConfirmController {
   @PostMapping(value="/rlist.con")
   public List<ChConReply> selectReplyList(@RequestBody ChConReply reply) {
 
-    //log.info("reply 넘어왔어? : " + reply);
     List<ChConReply> replyList = confirmService.selectReplyList(reply);
 
     return replyList;

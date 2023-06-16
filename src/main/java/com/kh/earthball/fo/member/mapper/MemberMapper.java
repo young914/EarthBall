@@ -21,4 +21,10 @@ public interface MemberMapper {
   int emailAuthFail(String memberId);
   
   int mailAuthStatus(String memberId);
+  
+  int updateImg(String orgFileName, String memberId);
+  
+  void updateProfile(String memberId, String profileName);
+  
+  String selectProfile(String memberId);
 }

@@ -24,6 +24,31 @@ public class ReviewServiceImpl implements ReviewService {
     return reviewMapper.selectList(productNo);
   }
 
+  @Override
+  public ArrayList<Review> selectPhotoList(int productNo) {
+    return reviewMapper.selectPhotoList(productNo);
+  }
+
+  @Override
+  public int insertReply(Review r) {
+    return reviewMapper.insertReply(r);
+  }
+
+  @Override
+  public int updateReviewCount(int reviewNo) {
+    return reviewMapper.updateReviewCount(reviewNo);
+  }
+
+  @Override
+  public ArrayList<Review> selectReplyList(int reviewNo) {
+    return reviewMapper.selectReplyList(reviewNo);
+  }
+
+  @Override
+  public ArrayList<Review> selectTopList(int productNo) {
+    return reviewMapper.selectTopList(productNo);
+  }
+
 
 
 }

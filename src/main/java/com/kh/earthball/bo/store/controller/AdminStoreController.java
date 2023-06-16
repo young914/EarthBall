@@ -190,5 +190,15 @@ public class AdminStoreController {
       return "bo/store/storeList";
     }
   }
-  
+  @GetMapping("deleteStore.st")
+  public String deleteStore(int storeNo, HttpSession session) {
+    int result = storeService.deleteService(storeNo);
+    if(result>0) {
+      session.setAttribute("alertMsg", "매장삭제 성공");
+      return  "redirect:/adminlist.st";
+    }else {
+      session.setAttribute("alertMsg", "매장삭제 실패");
+      return "redirect:/adminlist.st";
+    }
+  }
 }

@@ -1,6 +1,7 @@
 package com.kh.earthball.fo.member.controller;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -8,10 +9,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.earthball.fo.member.service.MemberService;
+import com.kh.earthball.fo.member.vo.FileUtil;
 import com.kh.earthball.fo.member.vo.MailHandler;
 import com.kh.earthball.fo.member.vo.Member;
 import com.kh.earthball.fo.member.vo.TempKey;
@@ -254,12 +258,21 @@ public class MemberController {
 
     return (count > 0) ? "NNNNN" : "NNNNY";
   }
+ 
+  @RequestMapping("pfile.me")
+  public String profileUpload(HttpServletRequest req, RedirectAttributes redirectAttributes, MultipartHttpServletRequest multipartRequest) throws Exception {
+      String memberId = req.getParameter("memberId");
+      
+      String uploadPath = req.getSession().getServletContext().getRealPath("/") + "resources/fo/profile";
+      
+      String profileName = FileUtil.uploadFile(multipartRequest.getFile("profile"), uploadPath);
+      
+      memberService.updateProfile(memberId, profileName);
+      
+      redirectAttributes.addAttribute("memberId", memberId);
+      
+      return "redirect:/profile.do";
+  }
+
+}  
   
-}
-  
-//  public String updateIng(MultipartHttpServletRequest mpRequest, HttpSession session, String memberId) throws Exception {
-//    
-//    // String memberImg = FileUtil.updateImg(mpRequest);
-//  }
-//  
-//}

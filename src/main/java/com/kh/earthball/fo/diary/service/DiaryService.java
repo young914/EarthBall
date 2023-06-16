@@ -36,7 +36,7 @@ public interface DiaryService {
       // 댓글 작성 서비스 (Ajax)
       int insertDyReply(DyReply r);
 
-
+      ArrayList<Diary> diaryListMe(String memberId);
 
 
 

@@ -20,6 +20,9 @@ public interface MemberService {
   int emailAuthFail(String memberId) throws Exception;
   
   int mailAuthStatus(String memberId);
-
-
+  
+  void updateProfile(String memberId, String profileName);
+  
+  String selectProfile(String memberId);
+  
 }

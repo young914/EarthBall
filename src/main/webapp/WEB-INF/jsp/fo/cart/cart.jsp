@@ -68,7 +68,7 @@
 		</div>
 		<div class="buttonArea">
 			<div><button onclick="order()">구매하기</button></div>
-			<div><a href="">계속 쇼핑하기</a></div>
+			<div><a href="list.pro">계속 쇼핑하기</a></div>
 		</div>
 		<!-- 주문 form -->
 		<form action="payment.pa" method="post" class="order_form">
@@ -76,55 +76,6 @@
 		</form>
 	</div>
 </div>
-
-<!--
-<script>
-/* 주문 페이지 이동 */
-$(".order_btn").on("click", function() {
-
-	let form_contents = '';
-	let orderNumber = 0;
-
-	console.log("??");
-
-	$(".quantityArea").each(function(index, element){
-
-		console.log("이건되나");
-
-		if($(".cartList tbody").find("input[type='checkbox']").is(":checked") === true) { //체크여부
-
-			let productNo = $(element).children().children().find("input[type=hidden]").val();
-			let amount = $(element).children().children().children().find(".amount").val();
-
-			console.log("productNo = " + productNo);
-			console.log("amount = " + amount);
-
-			let productNo_input = "<input name='orders[" + orderNumber + "].productNo' type='hidden' value='" + productNo + "'>";
-			form_contents += productNo_input;
-
-			let amount_input = "<input name='orders[" + orderNumber + "].amount' type='hidden' value='" + amount + "'>";
-			form_contents += amount_input;
-
-			orderNumber += 1;
-
-			console.log("form_contents = " + form_contents);
-
-		}
-	});
-
-	if(form_contents != null) {
-
-
-		$(".order_form").html(form_contents);
-		// $(".order_form").submit();
-
-	} else {
-		alert("구매하실 상품을 선택해주세요.");
-	}
-
-});
-</script>
- -->
 
 <jsp:include page="/WEB-INF/jsp/fo/common/footer.jsp"/>
 

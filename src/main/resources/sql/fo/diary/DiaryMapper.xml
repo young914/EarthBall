@@ -68,5 +68,31 @@
 				 WHERE DY_BOARD_NO = #{dyBoardNo}
 		</update>
 
+		<!-- 게시글 수정용 쿼리문 -->
+		<update id="updateDiary" parameterType="com.kh.earthball.fo.diary.vo.Diary">
+			UPDATE DY_BOARD
+			      SET DY_BOARD_TITLE = #{dyBoardTitle}
+			           , DY_BOARD_CONTENT = #{dyBoardContent}
+			           , ORIGIN_NAME = #{originName}
+                       , CHANGE_NAME = #{changeName}
+			  WHERE DY_BOARD_NO = #{dyBoardNo}
+		</update>
+
+		<!-- 마이페이지 참여한 나의 일기 조회 -->
+			<select id="diaryListMe" parameterType="String"  resultType="com.kh.earthball.fo.diary.vo.Diary" >
+				SELECT  DY_BOARD_NO
+				          ,  DY_BOARD_TITLE
+				          ,  DY_BOARD_CONTENT
+				          , WEATHER
+				          , TO_CHAR(DY_CREATE_DATE, 'YYYY-MM-DD') AS DY_CREATE_DATE
+				          , DY_COUNT
+				          , CHANGE_NAME
+				          , DY_BOARD_WRITER
+				 FROM   DY_BOARD
+				 WHERE DY_STATUS = 'Y'
+				 	 AND DY_BOARD_WRITER = #{memberId}
+				 ORDER BY DY_BOARD_NO DESC
+			</select>
+
 
 </mapper>
