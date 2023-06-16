@@ -12,4 +12,6 @@ public interface BoChallengeService {
   List<BoChallenge> selectChallengeList(PageInfo pageInfo);
 
   BoChallenge selectChallenge(int chNo);
+
+  int deleteChallenge(int chNo);
 }

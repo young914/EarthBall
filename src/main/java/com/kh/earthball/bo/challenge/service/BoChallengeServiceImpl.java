@@ -34,4 +34,9 @@ public class BoChallengeServiceImpl implements BoChallengeService {
   public BoChallenge selectChallenge(int chNo) {
     return boChallengeMapper.selectChallenge(chNo);
   }
+
+  @Override
+  public int deleteChallenge(int chNo) {
+    return boChallengeMapper.deleteChallenge(chNo);
+  }
 }

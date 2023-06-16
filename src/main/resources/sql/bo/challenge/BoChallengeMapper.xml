@@ -62,4 +62,10 @@
         WHERE CH_NO = #{chNo}
           AND STATUS = 'Y'
     </select>
+
+    <update id="deleteChallenge" parameterType="java.lang.Integer">
+        UPDATE TB_CHALLENGE
+           SET STATUS = 'N'
+         WHERE CH_NO = #{chNo}
+    </update>
 </mapper>

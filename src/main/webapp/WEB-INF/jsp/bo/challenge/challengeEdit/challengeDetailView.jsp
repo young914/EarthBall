@@ -118,7 +118,7 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-sm-10">
-                  <button type="button" class="btn btn-primary" onclick="">삭제</button>
+                  <button type="button" class="btn btn-primary" onclick="deleteChallenge(${challenge.chNo});">삭제</button>
                 </div>
               </div>
             </div>
@@ -130,6 +130,25 @@
 
           <jsp:include page="/WEB-INF/jsp/bo/common/commonScript.jsp" />
           <script type="text/javascript">
+
+            function deleteChallenge(chNo) {
+              $.ajax({
+                url : "deleteBo.chall"
+                , type : "post"
+                , data : {chNo : chNo}
+                , success : function (result) {
+                  if (result > 0) {
+                    alert("챌린지가 삭제되었습니다.");
+                    location.href = "/list.chall";
+                  } else {
+                    alert("챌린지가 삭제되지 않았습니다.");
+                  }
+                }
+                , error: function () {
+                  console.log("챌린지 삭제 ajax 통신 실패");
+                }
+              });
+            }
 
           </script>
 </body>

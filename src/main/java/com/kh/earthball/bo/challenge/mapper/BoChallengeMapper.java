@@ -15,4 +15,6 @@ public interface BoChallengeMapper {
   List<BoChallenge> selectChallengeList(@Param("offset") int offset, @Param("limit") int limit);
 
   BoChallenge selectChallenge(int chNo);
+
+  int deleteChallenge(int chNo);
 }
