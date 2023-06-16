@@ -27,4 +27,10 @@ public class BoConfirmServiceImpl implements BoConfirmService{
     int limit = offset + pageInfo.getBoardLimit();
     return boConfirmMapper.selectConfirmList(offset, limit);
   }
+
+  @Override
+  public BoConfirm selectConfirm(int chConNo) {
+
+    return boConfirmMapper.selectConfirm(chConNo);
+  }
 }

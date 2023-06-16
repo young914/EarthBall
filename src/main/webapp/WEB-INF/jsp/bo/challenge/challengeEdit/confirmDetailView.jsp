@@ -91,7 +91,7 @@
 
           <div class="card mb-2">
             <div class="card-body">
-              <h4 class="fw-bold">제목나올거야</h4>
+              <h4 class="fw-bold">${confirm.chConTitle}</h4>
             </div>
           </div>
 
@@ -101,7 +101,7 @@
               <h4 class="fw-bold">챌린지 상세 내용</h4> <hr>
               <div class="row">
                 <div class="col-sm-10">
-                  ${challenge.chContent}
+
                 </div>
               </div>
             </div>

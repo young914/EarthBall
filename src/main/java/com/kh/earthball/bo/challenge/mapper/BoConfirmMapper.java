@@ -12,4 +12,6 @@ public interface BoConfirmMapper {
   int ConfirmListCount();
 
   List<BoConfirm> selectConfirmList(@Param("offset") int offset, @Param("limit") int limit);
+
+  BoConfirm selectConfirm(int chConNo);
 }

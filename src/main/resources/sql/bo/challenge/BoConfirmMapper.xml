@@ -21,4 +21,15 @@
               WHERE STATUS = 'Y')
         WHERE ROW_NUM BETWEEN #{offset} AND #{limit}
     </select>
+
+    <select id="selectConfirm" parameterType="java.lang.Integer" resultType="com.kh.earthball.bo.challenge.vo.BoConfirm">
+        SELECT CH_NO
+             , CH_CON_NO
+             , CH_CON_TITLE
+             , MEMBER_ID
+             , TO_CHAR(CH_CON_CREATE_DATE, 'YYYY-MM-DD') AS CH_CON_CREATE_DATE
+        FROM TB_CH_CONFIRM
+        WHERE CH_CON_NO =  #{chConNo}
+          AND STATUS = 'Y'
+    </select>
 </mapper>

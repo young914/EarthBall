@@ -1,6 +1,8 @@
 package com.kh.earthball.bo.challenge.controller;
 
+import com.kh.earthball.bo.challenge.service.BoChallengeService;
 import com.kh.earthball.bo.challenge.service.BoConfirmService;
+import com.kh.earthball.bo.challenge.vo.BoChallenge;
 import com.kh.earthball.bo.challenge.vo.BoConfirm;
 import com.kh.earthball.fo.common.template.Pagination;
 import com.kh.earthball.fo.common.vo.PageInfo;
@@ -19,6 +21,7 @@ import java.util.List;
 public class BoConfirmController {
 
   private final BoConfirmService boConfirmService;
+  private final BoChallengeService boChallengeService;
 
   @GetMapping("/list.conf")
   public String confirmList(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model) {
@@ -41,7 +44,20 @@ public class BoConfirmController {
   }
 
   @GetMapping("/detail.conf")
-  public String confirmDetailView(int chConNo) {
+  public String confirmDetailView(int chConNo, Model model) {
+
+    // 해당하는 챌린지 인증 게시글 조회 해오기
+    BoConfirm confirm = boConfirmService.selectConfirm(chConNo);
+
+    int chNo = confirm.getChNo();
+
+    // 해당하는 챌린지 조회
+    BoChallenge challenge = boChallengeService.selectChallenge(chNo);
+
+
+
+    model.addAttribute("confirm", confirm);
+    model.addAttribute("challenge", challenge);
 
     return "bo/challenge/challengeEdit/confirmDetailView";
   }

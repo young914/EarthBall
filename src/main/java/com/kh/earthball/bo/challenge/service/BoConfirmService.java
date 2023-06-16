@@ -10,4 +10,6 @@ public interface BoConfirmService {
   int ConfirmListCount();
 
   List<BoConfirm> selectConfirmList(PageInfo pageInfo);
+
+  BoConfirm selectConfirm(int chConNo);
 }
