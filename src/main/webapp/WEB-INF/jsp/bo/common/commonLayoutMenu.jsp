@@ -95,7 +95,7 @@
           </a>
         </li>
         <li class="menu-item ${param.menuId eq '54' ? 'active' : ''}">
-          <a href="pages-account-settings-connections.html" class="menu-link">
+          <a href="/list.conf" class="menu-link">
             <div data-i18n="Connections">인증 게시판 관리</div>
           </a>
         </li>
