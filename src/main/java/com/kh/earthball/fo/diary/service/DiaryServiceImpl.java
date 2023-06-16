@@ -61,8 +61,7 @@ public class DiaryServiceImpl  implements DiaryService {
 
   @Override
   public int updateDiary(Diary d) {
-    // return diaryMapper.deleteDiary(d);
-    return 0;
+    return diaryMapper.updateDiary(d);
   }
 
   @Override
@@ -73,6 +72,11 @@ public class DiaryServiceImpl  implements DiaryService {
   @Override
   public int insertDyReply(DyReply r) {
     return 0;
+  }
+
+  @Override
+  public ArrayList<Diary> diaryListMe(String memberId) {
+    return diaryMapper.diaryListMe(memberId);
   }
 
 

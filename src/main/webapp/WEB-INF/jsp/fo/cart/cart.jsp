@@ -67,9 +67,13 @@
 			</table>
 		</div>
 		<div class="buttonArea">
-			<div><button>구매하기</button></div>
+			<div><button onclick="order()">구매하기</button></div>
 			<div><a href="list.pro">계속 쇼핑하기</a></div>
 		</div>
+		<!-- 주문 form -->
+		<form action="payment.pa" method="post" class="order_form">
+
+		</form>
 	</div>
 </div>
 

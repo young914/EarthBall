@@ -126,7 +126,7 @@
                 </div>
 
                 <div class="outer2_1">
-                    <div class="title">제목: <input type="text" value="${ d.dyBoardTitle }"></div>
+                    <div class="title">제목: <input type="text" readonly  value="${ d.dyBoardTitle }"></div>
                     <div class="content"><textarea id="dyBoardContent"  readonly>${ d.dyBoardContent }</textarea></div>
                 </div>
 				<div class="detail_header1">

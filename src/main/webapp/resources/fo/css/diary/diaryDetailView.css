@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import url('https://fonts.googleapis.com/css2?family=Gaegu&family=Nanum+Pen+Script&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
 #container{
     width: 1200px;
     height: 100%;
@@ -109,7 +109,7 @@
 
 
 
-.icon2 { 
+.icon2 {
 	/* border : 1px solid black; */
 	width: 660px;
 	margin: 0 auto;
@@ -230,7 +230,7 @@
 	border-left: none;
 	border-top: none;
 	outline: none;
-	font-family: 'Gaegu', cursive;
+	font-family: 'Single Day', cursive;
 }
 .content textarea{
 	width: 100%;
@@ -239,7 +239,7 @@
 	outline:none;
 	resize: none;
 	font-size: 28px;
-	font-family: 'Gaegu', cursive;
+	font-family: 'Single Day', cursive;
 	box-sizing: border-box;
 	background-attachment: local;
 	background-image:
@@ -262,7 +262,7 @@
 	margin-left: 15px;
 	font-size: 35px;
 	border : none;
-	font-family: 'Gaegu', cursive;
+	font-family: 'Single Day', cursive;
 }
 
 
