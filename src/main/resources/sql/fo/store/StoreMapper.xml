@@ -30,6 +30,18 @@
     ORDER BY STORE_NO DESC 
  	</select>
 
+	<!-- 매장 사진 조회용 쿼리 -->
+	<select id="selectStoreAttaList" resultType="com.kh.earthball.fo.store.vo.StoreAtta">
+		SELECT ATTACHMENT_NO
+					, CHANGER_NAME
+					, FILE_LEVEL
+					, STORE_NO
+		FROM STORE_ATTA
+		JOIN STORE USING (STORE_NO)
+		WHERE FILE_LEVEL >= 1
+		ORDER BY  FILE_LEVEL
+	</select>
+	
 	<!-- 매장 지역 전체 선택조회용 쿼리문  -->
 		<select id="selectRegion" resultType="com.kh.earthball.fo.store.vo.Region">
 			SELECT DISTINCT CITY

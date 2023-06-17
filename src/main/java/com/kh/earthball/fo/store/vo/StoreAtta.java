@@ -16,5 +16,5 @@ public class StoreAtta {
   private int AttachmentNo;
   private String changerName;
   int fileLevel;
-  int productNo;
+  int storeNo;
 }

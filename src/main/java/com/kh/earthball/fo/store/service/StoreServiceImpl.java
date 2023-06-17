@@ -2,10 +2,10 @@ package com.kh.earthball.fo.store.service;
 
 import java.util.ArrayList;
 import org.springframework.stereotype.Service;
-import com.kh.earthball.fo.common.vo.PageInfo;
 import com.kh.earthball.fo.store.mapper.StoreMapper;
 import com.kh.earthball.fo.store.vo.Region;
 import com.kh.earthball.fo.store.vo.Store;
+import com.kh.earthball.fo.store.vo.StoreAtta;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -87,6 +87,11 @@ public class StoreServiceImpl implements StoreService {
   @Override
   public ArrayList<Store> selectLikeStore(String memberId) {
     return storeMapper.selectLikeStore(memberId);
+  }
+
+  @Override
+  public ArrayList<StoreAtta> selectStoreAttaList() {
+    return storeMapper.selectStoreAttaList();
   }
   
 }
