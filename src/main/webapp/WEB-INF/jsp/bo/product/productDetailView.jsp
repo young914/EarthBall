@@ -26,7 +26,6 @@
   <jsp:include page="/WEB-INF/jsp/bo/common/commonHead.jsp" />
   <style>
     .content{
-      width: calc(100% - (1.625rem * 2));
       margin: 0.75rem auto 0;
       border-radius: 0.375rem;
       padding: 0 1.5rem;
@@ -112,7 +111,7 @@
       <!-- Content wrapper -->
       <div class="content-wrapper">
         <!-- Content -->
-        <div class="content">
+        <div class="content container-xxl container-p-y">
 			<div class="listArea">
 				<h1 class="title">상품 </h1>
 				<form action="update.pro" method="post" enctype="multipart/form-data">
@@ -273,8 +272,7 @@
 					</div>
 					<div class="btn-area">
 						<button type="submit">수정</button>
-						<input type="button" value="취소" onclick="window.history.back();">
-
+						<input type="button" value="취소" onclick="location.href='adminlist.pro'">
 					</div>
 				</form>
 			</div>

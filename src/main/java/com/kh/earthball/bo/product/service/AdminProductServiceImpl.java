@@ -78,4 +78,10 @@ public class AdminProductServiceImpl implements AdminProductService {
     return result;
   }
 
+  @Transactional
+  @Override
+  public int updateStatus(int productNo, String status) {
+    return productMapper.updateStatus(productNo, status);
+  }
+
 }

@@ -7,10 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import com.google.gson.Gson;
 import com.kh.earthball.bo.product.service.AdminProductService;
 import com.kh.earthball.bo.product.vo.AdminAtta;
 import com.kh.earthball.bo.product.vo.AdminProduct;
@@ -73,7 +74,7 @@ public class AdminProductController {
 
     if(result > 0) {
       session.setAttribute("alertMsg", "상품 등록 성공");
-      return "redirect:adminlist.pro";
+      return "redirect:adminEnrollForm.pro";
     }else {
       session.setAttribute("alertMsg", "상품 등록 실패");
       return "redirect:adminEnrollForm.pro";
@@ -93,7 +94,7 @@ public class AdminProductController {
     return "bo/product/productDetailView";
   }
 
-  @RequestMapping("update.pro")
+  @PostMapping("update.pro")
   public String updateProduct(AdminProduct p,
                             MultipartFile[] upfiles,
                             String[] changeNames,
@@ -110,8 +111,6 @@ public class AdminProductController {
       if(!upfiles[i].isEmpty()){
 
         String realPath = session.getServletContext().getRealPath("resources/fo/upfiles/" + changeNames[i]);
-
-        System.out.println(realPath);
 
         new File(realPath).delete();
 
@@ -132,17 +131,6 @@ public class AdminProductController {
 
     }
 
-    System.out.println(list.get(0));
-    System.out.println(list.get(1));
-    System.out.println(list.get(2));
-    System.out.println(list.get(3));
-    System.out.println(list.get(4));
-    System.out.println(list.get(5));
-    System.out.println(list.get(6));
-    System.out.println(list.get(7));
-    System.out.println(list.get(8));
-    System.out.println(list.get(9));
-
     int result = productService.updateProduct(p, list);
 
     if(result>0) {
@@ -152,6 +140,15 @@ public class AdminProductController {
       session.setAttribute("alertMsg", "상품 수정 실패");
       return "redirect:adminDetailView.pro?productNo="+p.getProductNo();
     }
+  }
+
+  @ResponseBody
+  @PostMapping(value="adminStatusUpdate.pro", produces="application/json; charset=UTF-8")
+  public String updateStatus(int productNo, String status, Model model) {
+
+    int result = productService.updateStatus(productNo, status);
+
+    return new Gson().toJson(result);
   }
 
 }

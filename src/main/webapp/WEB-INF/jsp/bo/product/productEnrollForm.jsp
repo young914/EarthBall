@@ -26,7 +26,6 @@
   <jsp:include page="/WEB-INF/jsp/bo/common/commonHead.jsp" />
   <style>
     .content{
-      width: calc(100% - (1.625rem * 2));
       margin: 0.75rem auto 0;
       border-radius: 0.375rem;
       padding: 0 1.5rem;
@@ -112,7 +111,7 @@
       <!-- Content wrapper -->
       <div class="content-wrapper">
         <!-- Content -->
-        <div class="content">
+        <div class="container-xxl flex-grow-1 container-p-y content">
 			<div class="listArea">
 				<h1 class="title">상품 추가</h1>
 				<form action="insert.pro" method="post" enctype="multipart/form-data">

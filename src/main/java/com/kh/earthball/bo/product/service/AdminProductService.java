@@ -20,4 +20,6 @@ public interface AdminProductService {
 
   int updateProduct(AdminProduct p, ArrayList<AdminAtta> list);
 
+  int updateStatus(int productNo, String status);
+
 }

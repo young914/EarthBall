@@ -59,4 +59,10 @@
 		VALUES (SEQ_PRODUCT_ATTA.NEXTVAL, #{changerName }, #{fileLevel}, #{productNo})
 	</update>
 
+	<update id="updateStatus">
+		UPDATE PRODUCT
+		SET STATUS = #{status}
+		WHERE PRODUCT_NO = #{productNo}
+	</update>
+
 </mapper>
