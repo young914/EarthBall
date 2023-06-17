@@ -22,9 +22,16 @@
 </insert>
 
 <!-- 회원 총 포인트 추가 -->
-<update id="addMemberPoint" parameterType="com.kh.earthball.fo.point.vo.Point">
+<update id="plusMemberPoint" parameterType="com.kh.earthball.fo.point.vo.Point">
 	UPDATE MEMBER
 		  SET TOTAL_POINT = TOTAL_POINT + #{pointNum}
+	 WHERE MEMBER_ID = #{memberId}
+</update>
+
+<!-- 회원 총 포인트 삭감 -->
+<update id="minusMemberPoint" parameterType="com.kh.earthball.fo.point.vo.Point">
+	UPDATE MEMBER
+		  SET TOTAL_POINT = TOTAL_POINT - #{pointNum}
 	 WHERE MEMBER_ID = #{memberId}
 </update>
 

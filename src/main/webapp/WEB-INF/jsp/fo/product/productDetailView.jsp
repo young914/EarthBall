@@ -50,7 +50,7 @@
                         </tr>
                         <tr>
                             <td>배송비</td>
-                            <td>3,000원 (50,000원 이상 무료배송)</td>
+                            <td>3,000원</td>
                         </tr>
                     </table>
                 </div>
@@ -71,13 +71,7 @@
                 </div>
                 <div id="buttonArea">
                     <div></div>
-                    <div><button class="buy_btn">구매하기</button></div>
-                    <!-- 주문 form -->
-					<form action="payment.pa" method="get" class="order_form">
-						<input type="hidden" name="orders[0].productNo" value="${p.productNo}">
-						<input type="hidden" name="orders[0].amount" value="">
-						<input type="hidden" name="orders[0].memberId" value="${ loginUser.memberId }">
-					</form>
+                    <div><button onclick="order();">구매하기</button></div>
                     <div>
                         <c:choose>
                             <c:when test="${ loginUser.memberId != null }">
@@ -104,6 +98,12 @@
                     </div>
                     <div></div>
                 </div>
+                 <!-- 주문 form -->
+					<form action="payment.pa" method="post" class="order_form">
+						<input type="hidden" name="orders[0].productNo" value="${p.productNo}">
+						<input type="hidden" name="orders[0].amount" value="">
+						<input type="hidden" name="orders[0].memberId" value="${ loginUser.memberId }">
+					</form>
             </div>
         </div>
 
@@ -226,7 +226,7 @@
                 <div class="reviewContentArea">
 
                 </div>
-				
+
 
             </div>
 
@@ -241,18 +241,6 @@
 
         </div>
     </div>
-
-    <script>
- 	// 구매하기 버튼
-    $(".buy_btn").on("click", function(){
-
-    	console.log("버튼 눌리나?");
-    	let amount = $(".amount").val();
-    	console.log(amount);
-    	$(".order_form").find("input[name='orders[0].amount']").val(amount);
-    	$(".order_form").submit();
-    });
-    </script>
 
     <jsp:include page="/WEB-INF/jsp/fo/common/footer.jsp"/>
 

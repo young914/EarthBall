@@ -20,9 +20,15 @@ public class PointServiceImpl implements PointService {
   }
 
   @Override
-  public int addMemberPoint(Point p) {
+  public int plusMemberPoint(Point p) {
 
-    return pointMapper.addMemberPoint(p);
+    return pointMapper.plusMemberPoint(p);
+  }
+
+  @Override
+  public int minusMemberPoint(Point p) {
+
+    return pointMapper.minusMemberPoint(p);
   }
 
 }

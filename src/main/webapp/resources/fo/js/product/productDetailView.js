@@ -75,7 +75,7 @@ function review(){
     $("#productReview").show();
     $("#productQna").hide();
 
-    reviewList(); 
+    reviewList();
 }
 function qna(){
     $("#productDetail").hide();
@@ -83,7 +83,7 @@ function qna(){
     $("#productQna").show();
 }
 
-// 리뷰 불러오기 
+// 리뷰 불러오기
 function reviewList(){
     let productNo = $(".productNo").val();
 
@@ -384,11 +384,11 @@ $(function(){
 })
 
 // 구매하기 버튼
-$(".buy_btn").on("click", function(){
+function order() {
 
-	console.log("버튼 눌리나?");
 	let amount = $(".amount").val();
 	console.log(amount);
 	$(".order_form").find("input[name='orders[0].amount']").val(amount);
 	$(".order_form").submit();
-});
+
+}

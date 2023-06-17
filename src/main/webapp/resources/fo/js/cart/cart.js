@@ -168,7 +168,8 @@ function deleteCart(){
 }
 
 // 주문하기 버튼 클릭 시 체크된 상품만 주문페이지로 이동
-function order(){
+function order() {
+
     let productNo = [];
     let amount = [];
     let memberId = $("#memberId").val();
@@ -212,10 +213,6 @@ function order(){
 
 	$(".order_form").html(form_contents);
 	$(".order_form").submit();
-    }); 
-
-    
-
 
 }
 

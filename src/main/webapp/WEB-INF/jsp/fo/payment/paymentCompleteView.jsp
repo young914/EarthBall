@@ -99,7 +99,7 @@
             </table>
         </div>
         <div id="content2">
-            <input type="button" id="goMain" onclick="location.href='/'" value="메인페이지로">
+            <input type="button" id="goMain" onclick="location.href='/main'" value="메인페이지로">
         </div>
     </div>
 </div>
