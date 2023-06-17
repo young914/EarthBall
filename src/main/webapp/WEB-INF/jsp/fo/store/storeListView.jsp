@@ -2,12 +2,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d4ce7a8706f16f48bba913a5def2af6a"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <head>
+        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+        <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+        
+        <!-- icon 관련 -->
+        <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+        
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d4ce7a8706f16f48bba913a5def2af6a"></script>
+        
+        <link rel="stylesheet" href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
+        <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <style>
 html, body{
     height: 100%;
@@ -31,7 +43,7 @@ html, body{
 }
 
 #filterStore{
-    padding: 10px 32px; height: 30%;
+    padding: 10px 32px 0px 32px; height: 30%;
 }
 #backToMain{
     display: grid; 
@@ -154,7 +166,7 @@ hr{
 }
 .storeInfo{
     font-size: 15px;
-    color: #888;
+    color: black;
 }
 .searchList:hover{
     cursor: pointer;
@@ -289,7 +301,7 @@ hr{
 
     <!-- 사이드바 -->
     <div id="mySidebar" class="sidebar">
-        <div id="filterStore" style="height: 30%;">
+        <div id="filterStore" style="height: 27%;">
             <div id="backToMain" style="padding-left: 10px;">
                 <div id="backIcon" onclick="backZigu()">
                     <img src="/resources/fo/img/logo.png" style="width: 30px; height: 30px;"><div>HOME</div>
@@ -309,7 +321,7 @@ hr{
                     </ul>
                 </div>
             </div>
-
+            
             <div id="regionSelect" style="display: flex;">
                 <div class="dropdown citySearch" style="width: 129px;">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropCityFilter">
@@ -336,27 +348,28 @@ hr{
                 </div>
             </div>
         </div>
-
-        <div style="overflow-y: scroll; position:relative; height: 65%;">
-            <hr>
-            <div style="display: grid; grid-template-columns: 70% 30%; padding: 10px 32px;">
-                <div id="searchResult" style="padding-top: 1px;">
-                    
-                </div>
-                <c:choose>
-                    <c:when test="${empty loginUser}">
-                        <div id="likeList" onclick="goLoginForm();">
-                            <i class="xi-heart xi-2x"></i><span>찜 매장보기</span>
-                        </div>
-                    </c:when>
-                    <c:otherwise>
-                        <div id="likeList" onclick="likeMap();">
-                            <i class="xi-heart xi-2x"></i><span>찜 매장보기</span>
-                        </div>
-                    </c:otherwise>
-                </c:choose>
+        
+        <div style="display: grid; grid-template-columns: 70% 30%; padding: 0px 32px 10px 32px;">
+            <div id="searchResult" style="padding-top: 1px;">
+                
             </div>
+            <c:choose>
+                <c:when test="${empty loginUser}">
+                    <div id="likeList" onclick="goLoginForm();">
+                        <i class="xi-heart xi-2x"></i><span>찜 매장보기</span>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div id="likeList" onclick="likeMap();">
+                        <i class="xi-heart xi-2x"></i><span>찜 매장보기</span>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+        </div>
+        <hr>
+        <div style="overflow-y: scroll; position:relative; height: 64%;">
             <hr>
+            
             <div id="store-list-area">
             </div>
         </div>
@@ -406,7 +419,7 @@ hr{
                     memberId : memberId
                 },
                 success : function(result) {
-                    
+
                     makeMarker(result, map);
 
                 }, 
@@ -631,14 +644,16 @@ hr{
 
         // 오버레이 닫는 함수
         function closeOverlay(index) {
-            
             if (overlayList[index]) {
                 overlayList[index].setMap(null);
             }
         }
         
-        function showList(storeList, cPage) {
+        function showList(storeMap, cPage) {
 			// 페이징처리 (목록보기)
+            
+            let storeList = storeMap.storeList;
+            let storeAttaList = storeMap.storeAttaList;
 			let listCount = storeList.length;
 			let currentPage = cPage;
             let pageLimit = 5;
@@ -662,29 +677,39 @@ hr{
                 
                 var liked = storeList[i].isLiked;
                 var likeBtnClass = liked ? "xi-heart xi-2x like-btn clicked" : "xi-heart xi-2x like-btn";
-                
+                console.log(storeList[i]);
                 if(i >= listCount) {
                     break;
                 }
-				
+                
+                
+                var storeImgStr = "";
+                
+                for (let j = 0; j < storeAttaList.length; j++) {
+                    console.log("1storeAttaList[j].storeAttaName : " + storeAttaList[j].changerName);
+                    storeImgStr += "<img src='/resources/fo/upfiles/" + storeAttaList[j].changerName + "' alt='매장사진' style='width: 100%; height: 100%;'>";
+                    
+                }                
 				 // 동적으로 리스트 요소 생성
                 resultStr += "<div class='searchList " + i + "' data-storelat='" + storeList[i].storeLat + "' data-storelon='" + storeList[i].storeLon + "' data-storeno='" + storeList[i].storeNo + "' style='display:flex'>"
-                            +   "<div class='storeInfo' style='width:280px;'>"
-                            +       "<span class='storeTitle'>" + storeList[i].storeName + "</span> <br>"
-                            +       "<span class='storeInfo'>" + "<i class='xi-location-arrow' style='width: 20px;'></i>" + storeList[i].storeAddress+" "+ storeList[i].storeDetailAddress + "</span> <br>"
-                            +       "<span class='storeInfo'>" + "<i class='xi-call ' style='width: 20px;'></i>" + storeList[i].storePhone + "</span> <br>"
-                            +       "<span class='storeInfo'> " + "<i class='xi-time-o' style='width: 20px;'></i>영업시간 " + storeList[i].businessHours + "</span>"
-                            +       "<div class='detail-info' style='display: none;'>"
-                            +           "<p>" + "<i class='xi-comment-o' style='width: 20px;'></i>" + storeList[i].storeInfo + "</p>"
-                            +           "<i class='" + likeBtnClass + "' style='width: 20px; margin-right:10px;'></i>" + "<span id='storeLikes'>" + storeList[i].storeLikes + "</span>"
-                            +       "</div>"
-                            +   "</div>"
-                            +   "<div class='storeImg' style='width:91px;'>"
-                            +       "<img src='" + storeList[i].storeImg + "' alt='매장이미지'>"
-                            +   "</div>"
-                            +"</div>";
+                        +   "<div class='storeInfo' style='width:100%;'>"
+                        +       "<span class='storeTitle'>" + storeList[i].storeName + "</span> " +           "<i class='" + likeBtnClass + "' style='width: 20px; margin-right:10px;'></i>" + "<span id='storeLikes'>" + storeList[i].storeLikes + "</span> <br>" 
+                        +       "<span class='storeInfo'>" + "<i class='xi-location-arrow' style='width: 20px;'></i>" + storeList[i].storeAddress+" "+ storeList[i].storeDetailAddress + "</span> <br>"
+                        +       "<span class='storeInfo'>" + "<i class='xi-call ' style='width: 20px;'></i>" + storeList[i].storePhone + "</span> <br>"
+                        +       "<span class='storeInfo'> " + "<i class='xi-time-o' style='width: 20px;'></i>영업시간 " + storeList[i].businessHours + "</span>"
+                        +       "<div class='detail-info' style='display: none;'>"
+                        +           "<p style='margin:0px;'>" + "<i class='xi-comment-o' style='width: 20px;'></i>" + "<span class='storeInfoText'>" + storeList[i].storeInfo + "</span></p>"
+                        +           "<div class='storeImg' style='width:100%; border: 1px solid black; height: 150px'>"
+                        +               storeImgStr
+                        +           "</div>"
+                        +       "</div>"
+                        +   "</div>"
+                        +"</div>";
+
             }
 			
+
+
 			$("#store-list-area").html(resultStr);
 			
 			// 페이징처리 (페이징바보기)
@@ -716,13 +741,18 @@ hr{
 			return currentPage;
         }
 
-        function makeMarker(storeList, map){
+        function makeMarker(storeMap, map){
             // return 값 다 담기
+            let storeList = storeMap.storeList;
+            let storeAttaList = storeMap.storeAttaList;
+            console.log(storeList);
+            console.log(storeAttaList);
             
+
             var zoomControl = new kakao.maps.ZoomControl();
             map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
-            let currentPage= showList(storeList, 1);
+            let currentPage= showList(storeMap, 1);
             
             let listCount = storeList.length;
 
@@ -749,8 +779,8 @@ hr{
             
             let storeCountStr = "<span>총 </span>" + storeCount + "<span>개의 결과</span>";
             $("#searchResult").html(storeCountStr);
-            // 2_3_2. 조회해온 매장 데이터를 storeList에 담기
-            for (let i = 0; i < storeList.length; i ++) {
+            // 2_3_2. 조회해온 매장 데이터를 storeList에 담기s
+            for (let i = 0; i < storeCount; i ++) {
                 
                 // 각 매장에 대한 마커 생성                        
                 var imageSrc = '/resources/fo/img/shop.png', // 마커이미지의 주소입니다    
@@ -807,7 +837,9 @@ hr{
             }
 
             markerList.forEach(function(marker, index) {
+                
                 kakao.maps.event.addListener(marker, 'click', function() {
+                    openNav();
                     // 다른 오버레이 닫기
                     overlayList.forEach(function(item, idx) {
                         if (idx !== index) {
@@ -815,6 +847,11 @@ hr{
                             isClosed[idx] = true;
                         }
                     });
+                    
+                    // console.log(overlayList[index].n); 누를 시 좌표값 받음
+                    var position = overlayList[index].n;
+                    // 해당 마커의 좌표로 지도 중심 이동
+                    map.panTo(position);
 
                     if (isClosed[index]) { // 닫혀있음
                         overlayList[index].setMap(map);
@@ -1019,6 +1056,7 @@ hr{
                 }
             });
         }
+
         
     </script>
 </body>
