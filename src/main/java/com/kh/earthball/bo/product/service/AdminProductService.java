@@ -14,6 +14,10 @@ public interface AdminProductService {
 
   ArrayList<AdminProduct> adminAllProductList(PageInfo pi);
 
+  AdminProduct selectDetailView(int productNo);
 
+  ArrayList<AdminAtta> selectDetailviewAtta(int productNo);
+
+  int updateProduct(AdminProduct p, ArrayList<AdminAtta> list);
 
 }

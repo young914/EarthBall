@@ -201,7 +201,9 @@
 			  			<td>${ p.discount }</td>
 			  			<td>${ p.stock }</td>
 			  			<td>${ p.createDate }</td>
-			  			<td>${ p.status }</td>
+			  			<td>
+                ${ p.status }
+              </td>
 			  		</tr>
 			  	</c:forEach>
               </tbody>
@@ -269,7 +271,10 @@
 </div>
 <jsp:include page="/WEB-INF/jsp/bo/common/commonScript.jsp" />
 <script type="text/javascript">
-
+  // 상품 행 클릭시 상세보기 페이지로 이동
+  $(".productList tbody tr").click(function() {
+    location.href = "adminDetailView.pro?productNo=" + $(this).children().eq(0).text();
+  });
 </script>
 </body>
 </html>
