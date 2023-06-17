@@ -363,6 +363,7 @@ function insertReview(){
         success : function(result){
             if(result == 1){
                 reviewList();
+                insertPoint();
                 $(".onlyPhoto").text("전체리뷰 보기");
             }
         }
@@ -383,6 +384,33 @@ $(function(){
     })
 })
 
+// 포인트 추가 기능
+function insertPoint() {
+
+	$.ajax({
+		url : "/insertPoint",
+		type : "post",
+		data : {
+			pointContent : "상품평 작성", // 포인트적립 사유 ex) 일기 작성, 챌린지 인증
+			pointNum : 50, // 부여할 포인트값
+			status : "+",
+			memberId : $('.sessionMemberId').val() // 로그인한 회원 아이디
+		},
+		success : function(result) {
+
+			if(result == "1") {
+
+				console.log("포인트 내역 추가 성공");
+			} else {
+				console.log("포인트 내역 추가 실패");
+			}
+		},
+		error : function() {
+			console.log("포인트 추가 ajax 실패");
+		}
+	});
+  
+  
 // 구매하기 버튼
 function order() {
 
@@ -390,5 +418,4 @@ function order() {
 	console.log(amount);
 	$(".order_form").find("input[name='orders[0].amount']").val(amount);
 	$(".order_form").submit();
-
 }

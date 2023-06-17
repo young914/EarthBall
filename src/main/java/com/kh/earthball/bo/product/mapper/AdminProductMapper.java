@@ -18,6 +18,14 @@ public interface AdminProductMapper {
 
   ArrayList<AdminProduct> adminAllProductList(PageInfo pi, RowBounds rowBounds);
 
+  AdminProduct selectDetailView(int productNo);
 
+  ArrayList<AdminAtta> selectDetailviewAtta(int productNo);
+
+  int updateProduct(AdminProduct p);
+
+  int deleteAttaAll(AdminProduct p);
+
+  int updateProductAtta(AdminAtta at);
 
 }

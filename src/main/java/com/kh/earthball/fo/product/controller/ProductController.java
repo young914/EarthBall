@@ -62,9 +62,7 @@ public class ProductController {
     Product p = productService.selectProduct(productNo);
     ArrayList<Atta> list = productService.selectAtta(productNo);
     ArrayList<Review> rlist = reviewService.selectTopList(productNo);
-    System.out.println(list);
-    System.out.println("------------------");
-    System.out.println(rlist);
+    System.out.println(p);
 
     // 좋아요 여부 조회
     if(session.getAttribute("loginUser") != null) {
