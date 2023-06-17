@@ -73,5 +73,19 @@ public Object saveFileToDB(SqlSessionTemplate sqlSession, String originalFileNam
     return sqlSession.insert("boardMapper.insertBoard", parameters);
 }
 
+public ArrayList<Board> selectMyBoard(SqlSessionTemplate sqlSession, PageInfo pi, String memberId) {
+
+	 int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+	 int limit = pi.getBoardLimit();
+
+	 RowBounds rowBounds = new RowBounds(offset, limit);
+
+	 return (ArrayList) sqlSession.selectList("boardMapper.selectMyBoard", memberId, rowBounds);
+}
+
+public int myBoardListCount(SqlSessionTemplate sqlSession, String memberId) {
+    return sqlSession.selectOne("boardMapper.myBoardListCount", memberId);
+}
+
 
 }
