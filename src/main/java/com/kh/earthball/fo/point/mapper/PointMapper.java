@@ -8,6 +8,8 @@ public interface PointMapper {
 
   int insertPoint(Point p);
 
-  int addMemberPoint(Point p);
+  int plusMemberPoint(Point p);
+
+  int minusMemberPoint(Point p);
 
 }

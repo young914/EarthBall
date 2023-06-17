@@ -11,7 +11,7 @@
 
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
   <div class="app-brand demo">
-    <a href="home" class="app-brand-link">
+    <a href="/main" class="app-brand-link">
       <img src="/resources/fo/img/logo.png" class="navbar-brand-img" alt="..." style="width: 50px;">
       <h2 style="margin-left: 5px; margin: 0 auto; color: #19a7ce; font-weight: bold;">지구공</h2>
     </a>
@@ -56,7 +56,7 @@
       </ul>
     </li>
     <li class="menu-item ${param.menuId eq '30' ? 'active' : ''}">
-      <a href="/" class="menu-link">
+      <a href="bolist.no" class="menu-link">
         <i class="menu-icon tf-icons bx bx-table"></i>
         <div data-i18n="Tables">공지사항</div>
       </a>
@@ -73,7 +73,7 @@
         <div data-i18n="Tables">신고</div>
       </a>
     </li>
-    <li class="menu-item ${param.menuId > '50' && param.menuId < '60' ? 'active' : ''}">
+    <li class="menu-item ${param.menuId eq '50' ? 'active' : ''}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-dock-top"></i>
         <div data-i18n="Account Settings">챌린지</div>
@@ -90,12 +90,12 @@
           </a>
         </li>
         <li class="menu-item ${param.menuId eq '53' ? 'active' : ''}">
-          <a href="pages-account-settings-connections.html" class="menu-link">
+          <a href="/list.chall" class="menu-link">
             <div data-i18n="Connections">참여 게시판 관리</div>
           </a>
         </li>
         <li class="menu-item ${param.menuId eq '54' ? 'active' : ''}">
-          <a href="pages-account-settings-connections.html" class="menu-link">
+          <a href="/list.conf" class="menu-link">
             <div data-i18n="Connections">인증 게시판 관리</div>
           </a>
         </li>
@@ -105,6 +105,12 @@
       <a href="/" class="menu-link">
         <i class="menu-icon tf-icons bx bx-table"></i>
         <div data-i18n="Tables">주문</div>
+      </a>
+    </li>
+    <li class="menu-item ${param.menuId eq '70' ? 'active' : ''}">
+      <a href="https://desk.channel.io/#/channels/137317/user_chats/648c1a7e590055d485df" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-table"></i>
+        <div data-i18n="Tables">챗봇</div>
       </a>
     </li>
   </ul>

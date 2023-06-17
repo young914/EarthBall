@@ -4,24 +4,19 @@ import com.kh.earthball.bo.challenge.service.CategoryService;
 import com.kh.earthball.bo.challenge.service.CategoryTemplateService;
 import com.kh.earthball.bo.challenge.service.CodeService;
 import com.kh.earthball.bo.challenge.vo.Category;
-import com.kh.earthball.bo.challenge.vo.CategoryTemplate;
 import com.kh.earthball.bo.challenge.vo.Code;
 import com.kh.earthball.fo.challenge.service.ChallengeService;
+import com.kh.earthball.fo.challenge.service.ConfirmService;
 import com.kh.earthball.fo.challenge.vo.Challenge;
 import com.kh.earthball.fo.challenge.vo.ConfirmCount;
 import com.kh.earthball.fo.common.template.Pagination;
 import com.kh.earthball.fo.common.vo.PageInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Array;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +29,7 @@ public class ChallengeController {
   private final CategoryTemplateService templateService;
   private final CodeService codeService;
   private final ChallengeService challengeService;
+  private final ConfirmService confirmService;
 
   @GetMapping("/main.chall")
   public String challengeMain(
@@ -238,6 +234,8 @@ public class ChallengeController {
 
     return "fo/mypage/myChallenge";
   }
+
+
 }
 
 

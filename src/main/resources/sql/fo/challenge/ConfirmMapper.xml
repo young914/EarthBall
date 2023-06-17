@@ -23,8 +23,9 @@
     </insert>
 
     <update id="updateConfirm" parameterType="com.kh.earthball.fo.challenge.vo.ChConfirm">
-        UPDATE TB_CH_CONFIRM SET
-            CH_CON_TITLE = #{chConTitle}
+        UPDATE TB_CH_CONFIRM
+           SET CH_CON_TITLE = #{chConTitle}
+             , CH_CON_CREATE_DATE = SYSDATE
         WHERE CH_NO = #{chNo}
           AND CH_CON_NO = #{chConNo}
           AND MEMBER_ID = #{memberId}
@@ -152,5 +153,31 @@
            SET STATUS = 'N'
          WHERE RE_NO = #{reNo}
     </update>
+
+    <select id="myConfirmListCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+          FROM ( SELECT CH_NO
+                      , CH_CON_NO
+                      , CH_CON_TITLE
+                      , MEMBER_ID
+                      , TO_CHAR(CH_CON_CREATE_DATE, 'YYYY-MM-DD') AS CH_CON_CREATE_DATE
+                 FROM TB_CH_CONFIRM
+                 WHERE MEMBER_ID = #{memberId}
+                   AND STATUS = 'Y' )
+    </select>
+
+    <select id="selectMyConfirm" resultType="com.kh.earthball.fo.challenge.vo.ChConfirm">
+        SELECT *
+        FROM ( SELECT CH_NO
+                    , CH_CON_NO
+                    , CH_CON_TITLE
+                    , MEMBER_ID
+                    , TO_CHAR(CH_CON_CREATE_DATE, 'YYYY-MM-DD') AS CH_CON_CREATE_DATE
+                    , ROW_NUMBER() OVER (ORDER BY CH_NO) AS ROW_NUM
+                FROM TB_CH_CONFIRM
+               WHERE MEMBER_ID = #{memberId}
+                 AND STATUS = 'Y' )
+        WHERE ROW_NUM BETWEEN #{offset} AND #{limit}
+    </select>
 
 </mapper>

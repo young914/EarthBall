@@ -45,39 +45,40 @@
                     <h2 style="margin : 0px 0px 0px 20px;">주문 상품 정보</h2>
                     <div id="bar_2"></div>
                 </div>
-                <div id="content1_1_2">
+
+                <c:set var="totalPrice" value="0" />
+
+                <c:forEach items="${ orderList }" var="ol">
+                	<div id="content1_1_2">
                     <div id="img-area">
-                        <div id="product_img"><img src="/resources/fo/img/best1.png" width="100%" height="100%"
+                        <div id="product_img"><img src="/resources/fo/upfiles/${ ol.changerName }" width="100%" height="100%"
                                                    alt="상품이미지"></div>
                     </div>
                     <div id="product_content">
-                        <div id="product_name"><p class="product_name">[지구공] 베스트셀러</p></div>
-                        <div id="product_amount"><p>수량 : 2개</p></div>
-                        <div id="product_price"><p><fmt:formatNumber value="11000" pattern="###,###"/>원</p></div>
+                        <div id="product_name"><p class="product_name">${ ol.productName }</p></div>
+                        <c:choose>
+                        	<c:when test="${ amount ne null }">
+                        		<div id="product_amount"><p>수량 : ${ amount }개</p></div>
+                        		<div id="product_price"><p><fmt:formatNumber value="${ ol.price * amount }" pattern="###,###원"/></p></div>
+                        	</c:when>
+                        	<c:otherwise>
+                        		<div id="product_amount"><p>수량 : ${ ol.amount }개</p></div>
+		                        <div id="product_price"><p><fmt:formatNumber value="${ ol.price * ol.amount }" pattern="###,###원"/></p></div>
+                        	</c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
-                <div id="content1_1_2">
-                    <div id="img-area">
-                        <div id="product_img"><img src="/resources/fo/img/best1.png" width="100%" height="100%"
-                                                   alt="상품이미지"></div>
-                    </div>
-                    <div id="product_content">
-                        <div id="product_name"><p>[지구공] 베스트셀러</p></div>
-                        <div id="product_amount"><p>수량 : 2개</p></div>
-                        <div id="product_price"><p>11,000원</p></div>
-                    </div>
-                </div>
-                <div id="content1_1_2">
-                    <div id="img-area">
-                        <div id="product_img"><img src="/resources/fo/img/best1.png" width="100%" height="100%"
-                                                   alt="상품이미지"></div>
-                    </div>
-                    <div id="product_content">
-                        <div id="product_name"><p>[지구공] 베스트셀러</p></div>
-                        <div id="product_amount"><p>수량 : 2개</p></div>
-                        <div id="product_price"><p>11,000원</p></div>
-                    </div>
-                </div>
+				<c:choose>
+                   	<c:when test="${ amount ne null }">
+                   		<c:set var="totalPrice" value="${ ol.price * amount }" />
+                   	</c:when>
+                   	<c:otherwise>
+                		<c:set var="totalPrice" value="${ totalPrice + (ol.price * ol.amount) }" />
+                   	</c:otherwise>
+                   </c:choose>
+                </c:forEach>
+				<input type="hidden" id="orderList" value="${ orderList }">
+				<
             </div>
             <div id="content1_2">
                 <div id="content1_2_1">
@@ -178,7 +179,7 @@
         <div id="content2">
             <div id="content2_1">
                 <div id="content2_1_1">
-                    <h2 style="margin : 0px 0px 0px 20px;">주문 요약</h2>
+                    <h2 style="margin : 0px 0px 5px 20px;">주문 요약</h2>
                     <div id="bar_2"></div>
                 </div>
                 <div id="content2_1_2">
@@ -186,19 +187,25 @@
                         <tr>
                             <td class="orderSummaryName">상품가격</td>
                             <td class="orderSummaryContent">
-                            	<p id="totalProductAmount"><fmt:formatNumber value="33000" pattern="###,###"/>원</p>
-                            	<input type="hidden" id="realProductAmount" value="$('#totalProductAmount').val()">
+                            	<p id="totalProductPrice"><fmt:formatNumber value="${ totalPrice }" pattern="###,###원"/></p>
+                            	<input type="hidden" id="realProductPrice" value="${ totalPrice }">
                             </td>
                         </tr>
                         <tr>
                             <td class="orderSummaryName">배송비</td>
                             <td class="orderSummaryContent">3,000원</td>
                         </tr>
+                        <tr>
+                        	<td class="orderSummaryName">할인금액</td>
+                        	<td class="orderSummaryContent">
+                        		<p id="usePoint"><fmt:formatNumber pattern="###,###">0</fmt:formatNumber>원</p>
+                        	</td>
+                        </tr>
                         <tr id="orderSummaryTotal-area">
                             <td class="orderSummaryTotal">총 주문금액</td>
                             <td style="padding-right : 20px;">
-                            	<p class="totalAmount"><fmt:formatNumber pattern="###,###원">100000</fmt:formatNumber></p> <!-- ${ totalPrice } -->
-                            	<input type="hidden" id="realTotalAmount" value="100000">
+                            	<p class="totalPrice"><fmt:formatNumber pattern="###,###">${ totalPrice + 3000 }</fmt:formatNumber>원</p> <!-- ${ totalPrice } -->
+                            	<input type="hidden" id="realTotalPrice" value="${ totalPrice + 3000 }">
                             </td>
                         </tr>
                     </table>
@@ -212,23 +219,27 @@
                     <div>
                         <c:choose>
                         	<c:when test="${ loginUser.gradeName eq 'RED' }">
-                        		<span id="rewardPoint" style="color : #19A7CE">
+                        		<span class="rewardPoint" style="color : #19A7CE">
                         			<fmt:formatNumber pattern="###,###">${ totalPrice * 0.01 }</fmt:formatNumber>
+                        			<input type="hidden" id="rewardPoint" value="${ totalPrice * 0.01 }">
                         		</span>
                         	</c:when>
                         	<c:when test="${ loginUser.gradeName eq 'ORANGE' }">
-                        		<span id="rewardPoint" style="color : #19A7CE">
-                        			<fmt:formatNumber pattern="###,###">${ loginUser.totalPoint * 0.02 }</fmt:formatNumber>
+                        		<span class="rewardPoint" style="color : #19A7CE">
+                        			<fmt:formatNumber pattern="###,###">${ totalPrice * 0.03 }</fmt:formatNumber>
+                        			<input type="hidden" id="rewardPoint" value="${ totalPrice * 0.03 }">
                         		</span>
                         	</c:when>
                         	<c:when test="${ loginUser.gradeName eq 'GREEN' }">
-                        		<span id="rewardPoint" style="color : #19A7CE">
-                        			<fmt:formatNumber pattern="###,###">${ totalPrice * 0.03 }</fmt:formatNumber>
+                        		<span class="rewardPoint" style="color : #19A7CE">
+                        			<fmt:formatNumber pattern="###,###">${ totalPrice * 0.05 }</fmt:formatNumber>
+                        			<input type="hidden" id="rewardPoint" value="${ totalPrice * 0.05 }">
                         		</span>
                         	</c:when>
                         	<c:otherwise>
-                        		<span id="rewardPoint" style="color : #19A7CE">
-                        			<fmt:formatNumber pattern="###,###">${ totalPrice * 0.05 }</fmt:formatNumber>
+                        		<span class="rewardPoint" style="color : #19A7CE">
+                        			<fmt:formatNumber pattern="###,###">${ totalPrice * 0.1 }</fmt:formatNumber>
+                        			<input type="hidden" id="rewardPoint" value="${ totalPrice * 0.1 }">
                         		</span>
                         	</c:otherwise>
                         </c:choose>
@@ -276,73 +287,6 @@
 			$("#address2").val(same ? "${ loginUser.address2 }" : "");
 		});
 	});
-</script>
-
-<script>
-//포인트 입력 시 조건 확인
-$("#point").on("propertychange change keyup paste input", function(){
-
-	const maxPoint = parseInt($("#realPoint").val());
-
-	let inputValue = parseInt($(this).val());
-
-	if(inputValue < 0) {
-
-		$(this).val(0);
-
-	} else if(inputValue > maxPoint) {
-
-		$(this).val(maxPoint);
-
-	}
-});
-
-// 포인트 전액사용 버튼
-$(".point-btn").on("click", function() {
-
-	console.log("버튼변경");
-
-	const maxPoint = parseInt($("#realPoint").val());
-
-	let state = $(this).data("state");
-
-	if(state == "Y") {
-
-		console.log("y동작");
-		/* 모두사용 */
-		//값 변경
-		$("#point").val(maxPoint);
-		//글 변경
-		$("#pointCancel").css("display", "inline-block");
-		$("#pointAll").css("display", "none");
-
-	} else if(state == "N") {
-
-		console.log("n동작");
-		/* 취소 */
-		//값 변경
-		$("#point").val(0);
-		//글 변경
-		$("#pointCancel").css("display", "none");
-		$("#pointAll").css("display", "inline-block");
-
-	}
-
-});
-
-$("#point").blur(function() {
-
-	if($("#point").val() == "") {
-
-		$("#point").val(0);
-
-		$("#pointCancel").css("display", "none");
-		$("#pointAll").css("display", "inline-block");
-
-	}
-
-});
-
 </script>
 
 <jsp:include page="/WEB-INF/jsp/fo/common/footer.jsp"/>

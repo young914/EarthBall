@@ -75,6 +75,25 @@
      WHERE QNA.BOARD_NO = #{boardNo} AND QNA.STATUS = 'Y'
 </select>
 
+	<!-- 마이페이지 게시글 총 갯수 구하는 쿼리문 -->
+	<select id="myBoardListCount" resultType="_int">
+	    SELECT COUNT(*)
+	    FROM QNA WHERE QNA.MEMBER_ID = #{memberId}
+	</select>
+
+    <!-- 마이페이지 게시글 리스트를 구해주는 쿼리문 -->
+	<select id="selectMyBoard" resultMap="boardResultSet">
+	  SELECT QNA.BOARD_NO,
+	         QNA.BOARD_TITLE,
+	         TO_CHAR(QNA.BOARD_DATE, 'YYYY-MM-DD') AS BOARD_DATE,
+	         QNA.MEMBER_ID,
+	         QNA.ORIGIN_NAME,
+	         QNA.CHANGE_NAME
+	  FROM QNA
+	  WHERE QNA.STATUS = 'Y' AND QNA.MEMBER_ID = #{memberId}
+	  ORDER BY QNA.BOARD_NO DESC
+	</select>
+
 <!-- 이전글 조회용 쿼리문 -->
 <select id="selectPrevBoard" parameterType="_int" resultType="board">
     SELECT *
@@ -90,6 +109,8 @@
          ORDER BY QNA.BOARD_NO DESC
     ) WHERE ROWNUM = 1
 </select>
+
+
 
 <!-- 다음글 조회용 쿼리문 -->
 <select id="selectNextBoard" parameterType="_int" resultType="board">

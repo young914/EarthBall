@@ -352,6 +352,31 @@
                   if (result > 0) {
                   } else {
                   }
+
+                $.ajax({
+                  url : "/insertPoint",
+                  type : "post",
+                  data : {
+                    pointContent : "챌린지 인증", // 포인트적립 사유 ex) 일기 작성, 챌린지 인증
+                    pointNum : 100, // 부여할 포인트값
+                    status : "+",
+                    memberId : memberId // 로그인한 회원 아이디
+                  },
+                  success : function(result) {
+
+                    if(result == "1") {
+
+                      console.log("포인트 내역 추가 성공");
+                    } else {
+                      console.log("포인트 내역 추가 실패");
+                    }
+                  },
+                  error : function() {
+                    console.log("포인트 추가 ajax 실패");
+                  }
+                });
+
+
                   location.href = "/main.chall"
               }
               , error: function () {
