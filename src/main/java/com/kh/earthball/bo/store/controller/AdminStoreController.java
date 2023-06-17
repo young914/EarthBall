@@ -201,4 +201,16 @@ public class AdminStoreController {
       return "redirect:/adminlist.st";
     }
   }
+  
+  @GetMapping("detailStore.st")
+  public String detailStore(int storeNo, Model model) {
+    System.out.println("여기는 detailStore.");
+    AdminStore detailData = storeService.selectStore(storeNo);
+    ArrayList<AdminAtta> detailAtta = storeService.selectAtta(storeNo);
+    
+    
+    model.addAttribute("beforeData", detailData);
+    model.addAttribute("beforeAtta", detailAtta);
+    return "bo/store/storeDetailView";
+  }
 }

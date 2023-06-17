@@ -21,7 +21,7 @@
 	</select>
 
 	<select id="selectCategoryListCount" parameterType="String" resultType="_int">
-		SELECT COUNT(*)
+		SELECT COUNT(*) 
 		FROM PRODUCT
 		WHERE CATEGORY = #{category}
 		AND STATUS = 'Y'

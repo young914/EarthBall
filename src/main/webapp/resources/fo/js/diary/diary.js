@@ -177,6 +177,108 @@ function validateSelection() {
 
     }
 
+// 수정하기
+ function updateBtn() {
+
+	 console.log($("#dyBoardNo").val())
+
+  // 내용 최소 글자수 200자
+  var content = document.getElementById('dyBoardContent').value;
+  if(content.length < 200) {
+    alert("최소 200자 이상 입력해야 합니다.");
+     return false;
+  }
+	 console.log("호출되나?")
+
+    var imgDataUrl = canvas.toDataURL('image/png');
+
+    var blobBin = atob(imgDataUrl.split(',')[1]);	// base64 데이터 디코딩
+    var array = [];
+    for (var i = 0; i < blobBin.length; i++) {
+        array.push(blobBin.charCodeAt(i));
+    }
+    var file = new Blob([new Uint8Array(array)], {type: 'image/png'});	// Blob 생성
+    var formdata = new FormData();	// formData 생성
+    formdata.append("file", file, "image.png");	// file data 추가
+
+	let dyBoardWriter = document.getElementById('dyBoardWriter').innerText;
+    let dyBoardTitle = document.getElementById('dyBoardTitle').value;
+    let dyBoardContent = document.getElementById('dyBoardContent').value;
+	let weather = document.getElementById('weather').value;
+	let dyBoardNo = $("#dyBoardNo").val();
+
+    formdata.append('dyBoardWriter', dyBoardWriter);
+    formdata.append('dyBoardTitle', dyBoardTitle);
+    formdata.append('dyBoardContent', dyBoardContent);
+    formdata.append('weather', weather);
+    formdata.append('dyBoardNo', dyBoardNo);
+
+    console.log(formdata.get("file"));
+    console.log(formdata.get("dyBoardWriter"));
+    console.log(formdata.get("dyBoardTitle"));
+    console.log(formdata.get("dyBoardContent"));
+    console.log(formdata.get("weather"))
+
+    $.ajax({
+        type : 'post',
+        url : '/dyUpdate.bo',
+        data : formdata,
+        processData : false,	// data 파라미터 강제 string 변환 방지!!
+        contentType : false,	// application/x-www-form-urlencoded; 방지!!
+        success : function (data) {
+
+           if(data === "게시글 등록 완료") {
+
+			   alert(data);
+			   location.href = "diaryListView.bo";
+		   } else {
+
+			   alert(data);
+		   }
+
+        }, error : function() {
+		 		alert("게시글 등록 실패");
+		}
+    });
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // 날씨 아이콘 버튼 이벤트
  document.querySelector('#c_1').addEventListener('click', function(event) {
   event.preventDefault();

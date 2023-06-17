@@ -71,10 +71,21 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectReplyList(sqlSession, boadrNo);
 	}
 
-@Override
-public int deleteReply(int boardNo) {
-	return boardDao.deleteReply(sqlSession, boardNo);
+	@Override
+	public int deleteReply(int boardNo) {
+		return boardDao.deleteReply(sqlSession, boardNo);
 
-}
+	}
+
+	@Override
+	public ArrayList<Board> selectMyBoard(PageInfo pi, String memberId) {
+		return boardDao.selectMyBoard(sqlSession, pi,memberId);
+	}
+
+	@Override
+	public int myBoardListCount(String memberId) {
+		return boardDao.myBoardListCount(sqlSession, memberId);
+	}
+
 
 }

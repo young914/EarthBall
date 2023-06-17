@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import com.kh.earthball.fo.common.vo.PageInfo;
 import com.kh.earthball.fo.store.vo.Region;
 import com.kh.earthball.fo.store.vo.Store;
+import com.kh.earthball.fo.store.vo.StoreAtta;
 
 @Mapper
 public interface StoreMapper {
@@ -37,6 +38,8 @@ public interface StoreMapper {
     boolean isStoreLiked(@Param("memberId") String memberId, @Param("storeNo") int storeNo);
 
     ArrayList<Store> selectLikeStore(@Param("memberId") String memberId);
+
+    ArrayList<StoreAtta> selectStoreAttaList();
 
 
 }

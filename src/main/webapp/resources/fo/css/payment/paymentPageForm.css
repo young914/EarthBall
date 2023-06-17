@@ -184,7 +184,7 @@ input[type="number"]::-webkit-inner-spin-button{-webkit-appearance: none; margin
 
 #content2_1_2>table {
     width : 100%;
-    margin-top : 20px;
+    margin-top : 30px;
     /* border : 1px solid red; */
 }
 
@@ -411,15 +411,18 @@ input[type="number"]::-webkit-inner-spin-button{-webkit-appearance: none; margin
     color : gray;
 }
 
-.orderSummaryContent, .totalAmount {
+.orderSummaryContent, .totalPrice {
     width : 50%;
     font-size : 18px;
     font-weight : bold;
     text-align: right;
     padding-right : 20px;
+    align-items : center;
 }
 
-.totalAmount {
+#totalProductPrice, #usePoint { margin-bottom : 0px; }
+
+.totalPrice {
 	margin : 0px;
 	padding : 0px;
 	width : 100%;

@@ -1,6 +1,8 @@
 package com.kh.earthball.fo.store.controller;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,7 @@ import com.kh.earthball.fo.store.service.StoreService;
 import com.kh.earthball.fo.store.template.GeocodingApi;
 import com.kh.earthball.fo.store.vo.Region;
 import com.kh.earthball.fo.store.vo.Store;
+import com.kh.earthball.fo.store.vo.StoreAtta;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -53,25 +56,34 @@ public class StoreController {
   @ResponseBody
   @GetMapping(value = "getStores.st", produces = "application/json; charset=UTF-8")
   public String getStoreList(String memberId) {
-    System.out.println("여기는 getStoreList");
-    ArrayList<Store> list = storeService.selectAllStoreList();    
-    
-    for (int i = 0; i < list.size(); i++) {
-      GeocodingApi geocodingApi = new GeocodingApi();
-      double[] coordinates = geocodingApi.getGeocode(list.get(i).getStoreAddress());
-      double latitude = coordinates[0];
-      double longitude = coordinates[1];
-      String jibunAddress = geocodingApi.getJibunAddress(latitude, longitude);
-      list.get(i).setStoreLat(latitude); // Store 객체에 위도 값 설정
-      list.get(i).setStoreLon(longitude); // Store 객체에 경도 값 설정
-      list.get(i).setJibunAddress(jibunAddress); // Store 객체에 지번 주소 값 설정
+      System.out.println("여기는 getStoreList");
+      ArrayList<Store> list = storeService.selectAllStoreList();
+      ArrayList<StoreAtta> sList = storeService.selectStoreAttaList();
+      System.out.println(sList);
       
-      boolean liked = storeService.isStoreLiked(memberId, list.get(i).getStoreNo());
-      list.get(i).setLiked(liked); // Store 객체에 좋아요 여부 설정
-    }
-    
-    return new Gson().toJson(list);
+      // 결과를 담을 Map 생성
+      Map<String, Object> resultMap = new HashMap<>();
+      resultMap.put("storeList", list);
+      resultMap.put("storeAttaList", sList);
+      
+      for (int i = 0; i < list.size(); i++) {
+          GeocodingApi geocodingApi = new GeocodingApi();
+          double[] coordinates = geocodingApi.getGeocode(list.get(i).getStoreAddress());
+          double latitude = coordinates[0];
+          double longitude = coordinates[1];
+          String jibunAddress = geocodingApi.getJibunAddress(latitude, longitude);
+          list.get(i).setStoreLat(latitude); // Store 객체에 위도 값 설정
+          list.get(i).setStoreLon(longitude); // Store 객체에 경도 값 설정
+          list.get(i).setJibunAddress(jibunAddress); // Store 객체에 지번 주소 값 설정
+
+          boolean liked = storeService.isStoreLiked(memberId, list.get(i).getStoreNo());
+          list.get(i).setLiked(liked); // Store 객체에 좋아요 여부 설정
+      }
+      System.out.println(resultMap);
+      // Gson을 사용하여 Map을 JSON 형식으로 변환하여 반환
+      return new Gson().toJson(resultMap);
   }
+
   
   @ResponseBody
   @GetMapping(value = "getCities.st", produces = "application/json; charset=UTF-8")

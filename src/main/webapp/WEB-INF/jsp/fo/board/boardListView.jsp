@@ -100,18 +100,6 @@
 		    cursor: pointer;
         }
 
-        #QZWUheUHEXEqWaaaEWt8BP {
-        background-color: #19a7ce;
-        box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
-        color: #ffffff;
-        display: flex;
-        font-family: Inter, 'Source Sans Pro';
-        font-size: 1.2rem;
-        font-weight: 400;
-        line-height: 1.2125;
-        white-space: nowrap;
-        width: 36.4rem;
-        }
 
         .mId {
     text-decoration: none;
@@ -229,7 +217,7 @@
     <thead>
         <tr>
             <th colspan="8">
-                <h1 id="boardtext">1:1 문의</h1>
+            <div>
                 <h4 style="text-align: center;">고객센터 운영시간 | 평일 10:00 ~ 17:00</h4>
                 <c:if test="${not empty loginUser}">
                     <span class="btn-group">
@@ -239,9 +227,10 @@
                         </button>
                     </span>
                 </c:if>
+                </div>
             </tr>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-                <div class="container-fluid">
+            <nav class="navbar" style="background-color: #19A7CE;">
+            <div class="container-fluid">
                     <a class="navbar-brand" href="list.bo">1:1 문의</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -257,7 +246,7 @@
                         </ul>
                     </div>
                 </div>
-            </nav>
+			</nav>
             <tr>
                 <th>No</th>
                 <th>제목</th>
@@ -272,6 +261,7 @@
 			  <td>${b.boardTitle}</td>
 			  <td>${b.memberId}</td>
 			  <td>${b.boardDate}</td>
+    			<input type="hidden" value="${b.originName}" name="originName" />
 			</tr>
 			</c:forEach>
             <tr>

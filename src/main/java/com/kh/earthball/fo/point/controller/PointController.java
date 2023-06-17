@@ -20,15 +20,23 @@ public class PointController {
   public String insertPoint(Point p) {
 
     int result1 = pointService.insertPoint(p);
-    
+
     int result2 = 0;
 
     if(result1 == 1) {
 
-      result2 = pointService.addMemberPoint(p);
+      System.out.println("p : " + p);
+
+      if(p.getStatus().equals("+") && p.getPointNum() != 0) {
+        result2 = pointService.plusMemberPoint(p);
+      } else if(p.getStatus().equals("-") && p.getPointNum() != 0) {
+        result2 = pointService.minusMemberPoint(p);
+      }
+
+      System.out.println("result2 : " + result2);
 
     }
-    
+
     int result = (result1 * result2);
 
     return String.valueOf(result);// 1 = 성공, 0 = 실패

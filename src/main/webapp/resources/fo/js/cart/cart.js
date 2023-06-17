@@ -30,7 +30,7 @@ $(document).ready(function() {
                         html += "<div>";
                             html += "<table class='quantityArea'>";
                                 html += "<tr>";
-                                    html += "<input type='hidden' value='" + result[i].productNo + "'>";
+                                    html += "<input type='hidden' id='productNo' value='" + result[i].productNo + "'>";
                                     html += "<td><button class='down' onclick='minus();'>-</button></td>";
                                     html += "<td>";
                                         html += "<input type='text' id='product-amount-" + result[i].productNo + "' value='" + result[i].amount + "' class='amount'>";
@@ -100,7 +100,7 @@ function minus(){
     }
 
 
-    
+
     updateAmount(productNo, amount, memberId);
 }
 
@@ -146,7 +146,7 @@ function deleteCart(){
     $.ajax({
         url: "delete.cart",
         type: "post",
-        data: {productNo: productNo, 
+        data: {productNo: productNo,
                memberId: memberId},
         success: function(result) {
             if(result == 1){
@@ -164,10 +164,55 @@ function deleteCart(){
         error: function() {
             console.log("장바구니 삭제 ajax 에러");
         }
-    }); 
+    });
+}
 
-    
+// 주문하기 버튼 클릭 시 체크된 상품만 주문페이지로 이동
+function order() {
 
+    let productNo = [];
+    let amount = [];
+    let memberId = $("#memberId").val();
+    let form_contents = '';
+
+    $(".cartList tbody").find("input[type='checkbox']").each(function(){
+        if($(this).prop("checked")){
+            productNo.push($(this).parent().parent().find("input[type='hidden']").val());
+            amount.push($(this).parent().parent().find(".amount").val());
+        }
+    });
+
+    if(productNo.length == 0){
+        alert("상품을 선택해주세요.");
+        return false;
+    }
+
+    for(let i = 0; i < productNo.length; i++) {
+
+		let productNo_input = "<input name='orders[" + i + "].productNo' type='hidden' value='" + productNo[i] + "'>";
+		form_contents += productNo_input;
+
+		let amount_input = "<input name='orders[" + i + "].amount' type='hidden' value='" + amount[i] + "'>";
+		form_contents += amount_input;
+
+		let memberId_input = "<input name='orders[" + i + "].memberId' type='hidden' value='" + memberId + "'>";
+		form_contents += memberId_input;
+
+	}
+
+	let totalPrice_input = "<input name='totalPrice' type='hidden' value='" + $(".productTotal").html() + "'>";
+	form_contents += totalPrice_input;
+
+    console.log(productNo);
+    console.log(amount);
+    console.log(memberId);
+    console.log("form_contents = " + form_contents);
+
+    // 쿼리스트링으로 상품번호 배열을 주문페이지로 전달
+    // location.href = "payment.pa?productNo=" + productNo + "&amount=" + amount + "&memberId=" + memberId;
+
+	$(".order_form").html(form_contents);
+	$(".order_form").submit();
 
 }
 

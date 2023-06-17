@@ -20,5 +20,9 @@ public interface DiaryMapper {
       Diary selectDiary(int dyBoardNo);
 
       int deleteDiary(int dyBoardNo);
+
+      ArrayList<Diary> diaryListMe(String memberId);
+
+      int updateDiary(Diary d);
 }
 

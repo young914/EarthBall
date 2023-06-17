@@ -1,6 +1,8 @@
               package com.kh.earthball.fo.board.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -62,6 +64,28 @@ public ArrayList<QReply> selectReplyList(SqlSessionTemplate sqlSession, int boar
 public int deleteReply(SqlSessionTemplate sqlSession, int boardNo) {
 	  return sqlSession.update("boardMapper.deleteReply", boardNo);
 	}
+
+public Object saveFileToDB(SqlSessionTemplate sqlSession, String originalFileName, String savedFileName, String url) {
+    Map<String, Object> parameters = new HashMap<>();
+    parameters.put("originalFileName", originalFileName);
+    parameters.put("savedFileName", savedFileName);
+    parameters.put("url", url);
+    return sqlSession.insert("boardMapper.insertBoard", parameters);
+}
+
+public ArrayList<Board> selectMyBoard(SqlSessionTemplate sqlSession, PageInfo pi, String memberId) {
+
+	 int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+	 int limit = pi.getBoardLimit();
+
+	 RowBounds rowBounds = new RowBounds(offset, limit);
+
+	 return (ArrayList) sqlSession.selectList("boardMapper.selectMyBoard", memberId, rowBounds);
+}
+
+public int myBoardListCount(SqlSessionTemplate sqlSession, String memberId) {
+    return sqlSession.selectOne("boardMapper.myBoardListCount", memberId);
+}
 
 
 }

@@ -3,7 +3,7 @@ package com.kh.earthball.fo.store.service;
 import com.kh.earthball.fo.common.vo.PageInfo;
 import com.kh.earthball.fo.store.vo.Region;
 import com.kh.earthball.fo.store.vo.Store;
-
+import com.kh.earthball.fo.store.vo.StoreAtta;
 import java.util.ArrayList;
 
 public interface StoreService {
@@ -36,6 +36,8 @@ public interface StoreService {
   boolean isStoreLiked(String memberId, int storeNo);
 
   ArrayList<Store> selectLikeStore(String memberId);
+
+  ArrayList<StoreAtta> selectStoreAttaList();
 
 
 //  // 매장 상세 조회

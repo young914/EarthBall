@@ -49,7 +49,7 @@ ${p.productInfo}
                         </tr>
                         <tr>
                             <td>배송비</td>
-                            <td>3,000원 (50,000원 이상 무료배송)</td>
+                            <td>3,000원</td>
                         </tr>
                     </table>
                 </div>
@@ -70,7 +70,7 @@ ${p.productInfo}
                 </div>
                 <div id="buttonArea">
                     <div></div>
-                    <div><button>구매하기</button></div>
+                    <div><button onclick="order();">구매하기</button></div>
                     <div>
                         <c:choose>
                             <c:when test="${ loginUser.memberId != null }">
@@ -97,6 +97,12 @@ ${p.productInfo}
                     </div>
                     <div></div>
                 </div>
+                 <!-- 주문 form -->
+					<form action="payment.pa" method="post" class="order_form">
+						<input type="hidden" name="orders[0].productNo" value="${p.productNo}">
+						<input type="hidden" name="orders[0].amount" value="">
+						<input type="hidden" name="orders[0].memberId" value="${ loginUser.memberId }">
+					</form>
             </div>
         </div>
 
@@ -219,7 +225,7 @@ ${p.productInfo}
                 <div class="reviewContentArea">
 
                 </div>
-				
+
 
             </div>
 
@@ -233,9 +239,6 @@ ${p.productInfo}
             </div>
 
         </div>
-    </div>
-
-
     </div>
 
     <jsp:include page="/WEB-INF/jsp/fo/common/footer.jsp"/>

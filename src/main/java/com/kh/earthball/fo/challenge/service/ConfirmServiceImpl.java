@@ -103,4 +103,16 @@ public class ConfirmServiceImpl implements ConfirmService {
     return confirmMapper.deleteReply(reNo);
   }
 
+  @Override
+  public int myConfirmListCount(String memberId) {
+    return confirmMapper.myConfirmListCount(memberId);
+  }
+
+  @Override
+  public List<ChConfirm> selectMyConfirm(PageInfo pageInfo, String memberId) {
+    int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getBoardLimit();
+    int limit = offset + pageInfo.getBoardLimit();
+    return confirmMapper.selectMyConfirm(offset, limit, memberId);
+  }
+
 }
