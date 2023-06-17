@@ -409,8 +409,8 @@ function insertPoint() {
 			console.log("포인트 추가 ajax 실패");
 		}
 	});
-  
-  
+}
+
 // 구매하기 버튼
 function order() {
 
