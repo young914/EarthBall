@@ -1163,6 +1163,7 @@ hr{
                     
                     
                     // 전체매장 보기 버튼 생성
+                    
                     var settingMapBtn = document.createElement('div');
                     settingMapBtn.setAttribute('id', 'settingMap');
                     settingMapBtn.setAttribute('onclick', 'settingMap()');
