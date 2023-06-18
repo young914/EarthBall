@@ -148,6 +148,28 @@ hr{
     font-size: 18px;
 }
 
+#settingMap{
+    justify-self: end;
+    font-size: 16px;
+    border-radius: 25px;
+    width: 100%;
+    height: 100%;
+    background-color: #6c757d;;
+    text-align: center;
+    color: white;
+    padding: 3px 3px 3px 0px;
+}
+
+#settingMap:hover{
+    cursor: pointer;
+    background-color: #5c636d;
+}
+
+#settingMap>i{
+    color:white;
+    font-size: 18px;
+}
+
 .btn{
     width: 100%;
 }
@@ -347,19 +369,23 @@ hr{
             </div>
         </div>
         
-        <div style="display: grid; grid-template-columns: 70% 30%; padding: 0px 32px 10px 32px;">
+        <div style="display: grid; grid-template-columns: 30% 30% 40%; padding: 0px 32px 10px 32px;">
             <div id="searchResult" style="padding-top: 1px;">
                 
             </div>
+            <div style="justify-self: center; width: 80%;">
+                <input type="checkbox" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" >
+                <label class="btn btn-outline-secondary" for="btn-check-2-outlined" style="padding: 3px; border-radius: 30px;">좋아요 순</label><br>
+            </div>
             <c:choose>
                 <c:when test="${empty loginUser}">
-                    <div id="likeList" onclick="goLoginForm();">
-                        <i class="xi-heart xi-2x"></i><span>찜 매장보기</span>
+                    <div id="likeList" onclick="goLoginForm();" style="justify-self: end;">
+                        <i class="xi-heart xi-2x"></i>&nbsp;<span>맘에 든 매장보기</span>
                     </div>
                 </c:when>
                 <c:otherwise>
-                    <div id="likeList" onclick="likeMap();">
-                        <i class="xi-heart xi-2x"></i><span>찜 매장보기</span>
+                    <div id="likeList" onclick="likeMap();" style="justify-self: end;">
+                        <i class="xi-heart xi-2x"></i>&nbsp;<span>맘에 든 매장보기</span>
                     </div>
                 </c:otherwise>
             </c:choose>
@@ -423,7 +449,7 @@ hr{
                     var likeMapBtn = document.createElement('div');
                     likeMapBtn.setAttribute('id', 'likeList');
                     likeMapBtn.setAttribute('onclick', 'likeMap()');
-                    likeMapBtn.innerHTML = '<i class="xi-heart xi-2x"></i><span>찜 매장보기</span>';
+                    likeMapBtn.innerHTML = '<i class="xi-heart xi-2x"></i>&nbsp;<span>맘에 든 매장보기</span>';
                     document.getElementById('settingMap').replaceWith(likeMapBtn);
                 }, 
                 error : function() {
@@ -696,7 +722,7 @@ hr{
                 
                 for (let j = 0; j < storeAttaList.length; j++) {
                     if (storeAttaList[j].storeNo === storeNo) {
-                        storeImgStr += "<div class='swiper-slide'><img src='/resources/fo/upfiles/" + storeAttaList[j].changerName + "' alt='매장사진' style='width: 100%; height: 100%;' onclick='openModal(\"/resources/fo/upfiles/" + storeAttaList[j].changerName + "\")'></div>";
+                        storeImgStr += "<div class='swiper-slide' '><img src='/resources/fo/upfiles/" + storeAttaList[j].changerName + "' alt='매장사진' style='width: 100%; height: 100%;' onclick='openModal(\"/resources/fo/upfiles/" + storeAttaList[j].changerName + "\")'></div>";
                     }
 
                 }
@@ -870,6 +896,7 @@ hr{
             markerList.forEach(function(marker, index) {
                 
                 kakao.maps.event.addListener(marker, 'click', function() {
+                    console.log( index);
                     openNav();
                     // 다른 오버레이 닫기
                     overlayList.forEach(function(item, idx) {
@@ -897,6 +924,12 @@ hr{
                     }
 
                     isClosed[index] = !isClosed[index];
+                    
+                    // 리스트에서 해당 마커의 detailInfo 보이기
+                    var detailInfo = $(".searchList." + index + " .detail-info");
+                    detailInfo.show();
+                    // 열린 다른 detailInfo 닫기
+                    $(".searchList").not(".searchList." + index).find(".detail-info").hide();
                 });
             });
 
@@ -936,12 +969,16 @@ hr{
 
                      // 상세 정보, 이미지 및 좋아요 버튼을 보이도록 함
                     $(this).find(".detail-info").show();
+
                 } else { // 열려있음
                     overlayList[index].setMap(null);
                     // 상세 정보, 이미지 및 좋아요 버튼을 숨김
+
                     $(this).find(".detail-info").hide();
                 }
                 isClosed[index] = !isClosed[index];
+
+
             });
 
             $("#store-list-area").on("click", ".like-btn", function(event) {
@@ -1065,7 +1102,7 @@ hr{
                     var settingMapBtn = document.createElement('div');
                     settingMapBtn.setAttribute('id', 'settingMap');
                     settingMapBtn.setAttribute('onclick', 'settingMap()');
-                    settingMapBtn.innerHTML = '<i class="xi-list-square-o xi-2x"></i><span>전체매장 보기</span>';
+                    settingMapBtn.innerHTML = '<i class="xi-home xi-2x"></i>&nbsp;<span>전체매장 보기</span>';
                     document.getElementById('likeList').replaceWith(settingMapBtn);
 
                     if(storeList.length == 0){
@@ -1143,11 +1180,18 @@ hr{
             currentModalElement = modalElement;
 
             // 모달 닫기 이벤트 처리
+            
+
             modalElement.addEventListener("click", function(event) {
+                
                 modalElement.remove();
                 currentModalElement = null;
             });
+            
+        
         }
+
+
     </script>
 </body>
 </html>
