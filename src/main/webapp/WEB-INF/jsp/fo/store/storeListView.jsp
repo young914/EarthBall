@@ -6,20 +6,17 @@
         
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+        
         <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
         
-        <!-- icon 관련 -->
-        <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-        
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d4ce7a8706f16f48bba913a5def2af6a"></script>
         
-        <link rel="stylesheet" href="https://kenwheeler.github.io/slick/slick/slick-theme.css">
-        <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <style>
 html, body{
     height: 100%;
@@ -327,6 +324,7 @@ hr{
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropCityFilter">
                         시/도 선택
                     </button>
+
                     <ul class="dropdown-menu">
                         <c:forEach var="city" items="${cityList}">
                             <li>
@@ -367,7 +365,7 @@ hr{
             </c:choose>
         </div>
         <hr>
-        <div style="overflow-y: scroll; position:relative; height: 64%;">
+        <div style="overflow-y: scroll; overflow-x: hidden; position:relative; height: 64%;">
             <hr>
             
             <div id="store-list-area">
@@ -671,47 +669,54 @@ hr{
             let limit = boardLimit;
             
 			let resultStr = "";
-			for(let i = offset; i < Math.min(offset + limit, listCount); i++) {
+			for (let i = offset; i < Math.min(offset + limit, listCount); i++) {
                 var memberId = `${loginUser.memberId}`;
+                
                 var storeNo = storeList[i].storeNo;
                 
                 var liked = storeList[i].isLiked;
                 var likeBtnClass = liked ? "xi-heart xi-2x like-btn clicked" : "xi-heart xi-2x like-btn";
                 console.log(storeList[i]);
-                if(i >= listCount) {
+                if (i >= listCount) {
                     break;
                 }
-                
                 
                 var storeImgStr = "";
                 
                 for (let j = 0; j < storeAttaList.length; j++) {
-                    console.log("1storeAttaList[j].storeAttaName : " + storeAttaList[j].changerName);
-                    storeImgStr += "<img src='/resources/fo/upfiles/" + storeAttaList[j].changerName + "' alt='매장사진' style='width: 100%; height: 100%;'>";
-                    
-                }                
-				 // 동적으로 리스트 요소 생성
-                resultStr += "<div class='searchList " + i + "' data-storelat='" + storeList[i].storeLat + "' data-storelon='" + storeList[i].storeLon + "' data-storeno='" + storeList[i].storeNo + "' style='display:flex'>"
-                        +   "<div class='storeInfo' style='width:100%;'>"
-                        +       "<span class='storeTitle'>" + storeList[i].storeName + "</span> " +           "<i class='" + likeBtnClass + "' style='width: 20px; margin-right:10px;'></i>" + "<span id='storeLikes'>" + storeList[i].storeLikes + "</span> <br>" 
-                        +       "<span class='storeInfo'>" + "<i class='xi-location-arrow' style='width: 20px;'></i>" + storeList[i].storeAddress+" "+ storeList[i].storeDetailAddress + "</span> <br>"
-                        +       "<span class='storeInfo'>" + "<i class='xi-call ' style='width: 20px;'></i>" + storeList[i].storePhone + "</span> <br>"
-                        +       "<span class='storeInfo'> " + "<i class='xi-time-o' style='width: 20px;'></i>영업시간 " + storeList[i].businessHours + "</span>"
-                        +       "<div class='detail-info' style='display: none;'>"
-                        +           "<p style='margin:0px;'>" + "<i class='xi-comment-o' style='width: 20px;'></i>" + "<span class='storeInfoText'>" + storeList[i].storeInfo + "</span></p>"
-                        +           "<div class='storeImg' style='width:100%; border: 1px solid black; height: 150px'>"
-                        +               storeImgStr
-                        +           "</div>"
-                        +       "</div>"
-                        +   "</div>"
-                        +"</div>";
-
-            }
-			
-
-
+                    storeImgStr += "<div class='swiper-slide'><img src='/resources/fo/upfiles/" + storeAttaList[j].changerName + "' alt='매장사진' style='width: 100%; height: 100%;'></div>";
+                }
+                
+                // 동적으로 리스트 요소 생성
+                resultStr += "<div class='searchList " + i + "' data-storelat='" + storeList[i].storeLat + "' data-storelon='" + storeList[i].storeLon + "' data-storeno='" + storeList[i].storeNo + "' style='display:flex'>" +
+                                "<div class='storeInfo' style='width:100%;'>" +
+                                "<span class='storeTitle'>" + storeList[i].storeName + "</span> " +
+                                "<i class='" + likeBtnClass + "' style='width: 20px; margin-right:10px;'></i>" +
+                                "<span id='storeLikes'>" + storeList[i].storeLikes + "</span> <br>" +
+                                "<span class='storeInfo'><i class='xi-location-arrow' style='width: 20px;'></i>" + storeList[i].storeAddress + " " + storeList[i].storeDetailAddress + "</span> <br>" +
+                                "<span class='storeInfo'><i class='xi-call ' style='width: 20px;'></i>" + storeList[i].storePhone + "</span> <br>" +
+                                "<span class='storeInfo'><i class='xi-time-o' style='width: 20px;'></i>영업시간 " + storeList[i].businessHours + "</span>" +
+                                    "<div class='detail-info' style='display: none;'>" +
+                                    "<p style='margin:0px;'><i class='xi-comment-o' style='width: 20px;'></i><span class='storeInfoText'>" + storeList[i].storeInfo + "</span></p>" +
+                                        "<div class='swiper-container' style='width:100%; border: 1px solid black; height: 150px'>" +
+                                            "<div class='swiper-wrapper'>" +
+                                                storeImgStr +
+                                            "</div>" +
+                                        "</div>" +
+                                    "</div>" +
+                                "</div>" +
+                            "</div>";
+            } 
 			$("#store-list-area").html(resultStr);
-			
+            
+            const mySwipers = document.querySelectorAll('.swiper-container');
+            mySwipers.forEach(function(swiperElement) {
+                const mySwiper = new Swiper(swiperElement, {
+                    autoplay: {
+                        delay: 3000
+                    }
+                });
+            });
 			// 페이징처리 (페이징바보기)
 			let pagingStr = "";
 			
@@ -1056,8 +1061,12 @@ hr{
                 }
             });
         }
-
-        
+        const mySwiper = new Swiper('.swiper-container', {
+            pagination: {
+                el: '.swiper-pagination',
+                type: 'bullets'
+            }
+        });
     </script>
 </body>
 </html>
