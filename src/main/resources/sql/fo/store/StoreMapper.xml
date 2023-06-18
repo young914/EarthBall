@@ -11,6 +11,7 @@
   </select>
  	
  	<!--  매장 전체리스트 조회용 쿼리문   -->
+ 	<!--  매장 전체리스트 조회용 쿼리문   -->
  	<select id="selectAllStoreList" resultType="com.kh.earthball.fo.store.vo.Store">
  	    SELECT STORE_NO
         , STORE_NAME
@@ -27,7 +28,12 @@
     JOIN STORE_ATTA USING (STORE_NO)
     WHERE STATUS = 'Y'
     AND FILE_LEVEL = 0
-    ORDER BY STORE_NO DESC 
+     <if test="orderLikeCheck == false">
+        ORDER BY STORE_LIKES DESC
+    </if>
+    <if test="orderLikeCheck == true">
+        ORDER BY STORE_NAME 
+    </if>
  	</select>
 
 	<!-- 매장 사진 조회용 쿼리 -->
@@ -89,7 +95,12 @@
 	    WHERE STATUS = 'Y'
 	    AND FILE_LEVEL = 0
 	    AND STORE_REGION_NO = #{regionNo}
-	    ORDER BY STORE_NO DESC 
+	    <if test="orderLikeCheck == false">
+        ORDER BY STORE_LIKES DESC
+    </if>
+    <if test="orderLikeCheck == true">
+        ORDER BY STORE_NAME 
+    </if>
 	 	</select>
 	 	
 	 	<select id="selectFilterListC" resultType="com.kh.earthball.fo.store.vo.Store">
@@ -108,9 +119,14 @@
 	JOIN STORE_REGION SR ON S.STORE_REGION_NO = SR.STORE_REGION_NO
 	JOIN STORE_ATTA SA ON S.STORE_NO = SA.STORE_NO
 	WHERE S.STATUS = 'Y'
-	    AND SR.CITY = #{city}
-	    AND FILE_LEVEL = 0
-	ORDER BY S.STORE_NO DESC
+    AND SR.CITY = #{city}
+    AND FILE_LEVEL = 0
+	<if test="orderLikeCheck == false">
+        ORDER BY STORE_LIKES DESC
+    </if>
+    <if test="orderLikeCheck == true">
+        ORDER BY STORE_NAME 
+    </if>
 	 	</select>
 	 	
 	 	<select id="selectStoreAttaFilterList" resultType="com.kh.earthball.fo.store.vo.StoreAtta">
@@ -141,7 +157,12 @@
   JOIN STORE_ATTA USING (STORE_NO) 
   WHERE (STORE_ADDRESS LIKE '%' || #{searchValue} || '%' OR STORE_NAME LIKE '%' || #{searchValue} || '%')
     AND FILE_LEVEL = 0 
-  ORDER BY STORE_NO DESC
+  <if test="orderLikeCheck == false">
+        ORDER BY STORE_LIKES DESC
+    </if>
+    <if test="orderLikeCheck == true">
+        ORDER BY STORE_NAME 
+    </if>
 </select>
 
 	 	
@@ -193,7 +214,12 @@
 		WHERE S.STATUS = 'Y'
 		    AND SL.MEMBER_ID = #{memberId}
 		    AND FILE_LEVEL = 0
-		ORDER BY S.STORE_NO DESC
+		<if test="orderLikeCheck == false">
+        ORDER BY STORE_LIKES DESC
+	    </if>
+	    <if test="orderLikeCheck == true">
+	        ORDER BY STORE_NAME 
+	    </if>
 	 	</select>
 		
 </mapper>

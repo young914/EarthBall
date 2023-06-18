@@ -55,9 +55,11 @@ public class StoreController {
   
   @ResponseBody
   @GetMapping(value = "getStores.st", produces = "application/json; charset=UTF-8")
-  public String getStoreList(String memberId) {
+  public String getStoreList(String memberId, boolean orderLikeCheck) {
       System.out.println("여기는 getStoreList");
-      ArrayList<Store> list = storeService.selectAllStoreList();
+      System.out.println(orderLikeCheck);
+      
+      ArrayList<Store> list = storeService.selectAllStoreList(orderLikeCheck);
       ArrayList<StoreAtta> sList = storeService.selectStoreAttaList();
       System.out.println(sList);
       
@@ -96,13 +98,13 @@ public class StoreController {
   
   @ResponseBody
   @GetMapping(value = "getFilter.st", produces = "application/json; charset=UTF-8")
-  public String getFilterList(String city, String provinces, String memberId) {
+  public String getFilterList(String city, String provinces, String memberId, boolean orderLikeCheck) {
     System.out.println("getFilterList");
     System.out.println(city);
     System.out.println(provinces);
     if(provinces.equals("")) {
 
-      ArrayList<Store> selectFilterList = storeService.selectFilterListC(city);
+      ArrayList<Store> selectFilterList = storeService.selectFilterListC(city, orderLikeCheck);
       System.out.println("이건 : " +   selectFilterList);
       ArrayList<StoreAtta> sList = storeService.selectStoreAttaFilterList(selectFilterList);
       System.out.println("이건 : " + sList);
@@ -130,7 +132,7 @@ public class StoreController {
     else {
       int regionNo = storeService.selectRegionNo(city, provinces);
       
-      ArrayList<Store> selectFilterList = storeService.selectFilterListR(regionNo);
+      ArrayList<Store> selectFilterList = storeService.selectFilterListR(regionNo, orderLikeCheck);
       ArrayList<StoreAtta> sList = storeService.selectStoreAttaFilterList(selectFilterList);
       Map<String, Object> resultMap = new HashMap<>();
       resultMap.put("storeList", selectFilterList);
@@ -154,9 +156,10 @@ public class StoreController {
   
   @ResponseBody
   @GetMapping(value = "getNameSearch.st" , produces = "application/json; charset=UTF-8")
-  public String selectNameSearch(String searchValue, String memberId) {
+  public String selectNameSearch(String searchValue, String memberId, boolean orderLikeCheck) {
     System.out.println("여기는 : selectNameSearch");
-    ArrayList<Store> nameSearchList = storeService.selectNameSearch(searchValue);
+    System.out.println(orderLikeCheck);
+    ArrayList<Store> nameSearchList = storeService.selectNameSearch(searchValue, orderLikeCheck);
     ArrayList<StoreAtta> sList = storeService.selectStoreAttaFilterList(nameSearchList);
     Map<String, Object> resultMap = new HashMap<>();
     resultMap.put("storeList", nameSearchList);
@@ -214,9 +217,9 @@ public class StoreController {
   
   @ResponseBody
   @PostMapping(value = "likeListView.st", produces = "application/json; charset=UTF-8")
-  public String getLikeStore(String memberId) {
+  public String getLikeStore(String memberId, boolean orderLikeCheck) {
     System.out.println("여기는 getLikeStore");
-    ArrayList<Store> likeStoreList = storeService.selectLikeStore(memberId);
+    ArrayList<Store> likeStoreList = storeService.selectLikeStore(memberId, orderLikeCheck);
     ArrayList<StoreAtta> sList = storeService.selectStoreAttaFilterList(likeStoreList);
     Map<String, Object> resultMap = new HashMap<>();
       resultMap.put("storeList", likeStoreList);
