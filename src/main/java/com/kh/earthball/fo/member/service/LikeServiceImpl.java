@@ -39,4 +39,9 @@ public class LikeServiceImpl implements LikeService {
     return likeMapper.selectList(memberId);
   }
 
+  @Override
+  public int selectLikeCount(int productNo) {
+    return likeMapper.selectLikeCount(productNo);
+  }
+
 }

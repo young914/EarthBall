@@ -98,8 +98,7 @@ public class AdminProductController {
   public String updateProduct(AdminProduct p,
                             MultipartFile[] upfiles,
                             String[] changeNames,
-                            HttpSession session,
-                            ModelAndView mv) {
+                            HttpSession session) {
 
     ArrayList<AdminAtta> list = new ArrayList<>();
 

@@ -76,8 +76,8 @@
                         <p>${ p.price }원</p>
                     </div>
                     <div class="product-icon">
-                        <div><i class="xi-speech-o"></i>50</div>
-                        <div><i class="xi-heart-o"></i>50</div>
+                        <div><i class="xi-speech-o"></i>${ p.reviewCount }</div>
+                        <div><i class="xi-heart-o"></i>${ p.likeCount }</div>
                         <div><i class="xi-cart-o"></i></div>
                     </div>
                 </div>
@@ -86,38 +86,23 @@
     </div>
     <!-- 페이징바 넣을 자리 시작 -->
     <div id="page">
-        <div class="page_btn" align="center">
-            <ul class="pagination">
+    <div class="page_btn" align="center">
+        <ul class="pagination">
+            <li> <a href="list.pro" class="first">처음 페이지</a> </li>
 
-                <c:choose>
-                    <c:when test="${ pi.currentPage eq 1 }">
-                        <li style="display: none"> <a href="#" class="first">처음 페이지</a> </li>
-                    </c:when>
-                    <c:otherwise>
-                        <li> <a href="adminlist.pro" class="first">처음 페이지</a> </li>
-                    </c:otherwise>
-                </c:choose>
+            <li> <a href="#" class="arrow_left"> << </a>  </li>
 
-                <li> <a href="#" class="arrow_left"> << </a>  </li>
+            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                <li> <a href="list.pro?cPage=${ p }" class="active num"> ${ p } </a>  </li>
+            </c:forEach>
 
-                <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                    <li> <a href="adminlist.pro?cPage=${ p }" class="active num"> ${ p } </a>  </li>
-                </c:forEach>
+            <li> <a href="#" class="arrow_right"> >> </a> </li>
 
-                <li> <a href="#" class="arrow_right"> >> </a> </li>
-
-                <c:choose>
-                    <c:when test="${ pi.currentPage eq pi.maxPage }">
-                        <li style="display: none"> <a href="#" class="last">끝 페이지</a> </li>
-                    </c:when>
-                    <c:otherwise>
-                        <li> <a href="adminlist.pro?cPage=${ pi.maxPage }" class="last">끝 페이지</a> </li>
-                    </c:otherwise>
-                </c:choose>
-            </ul>
-        </div>
+            <li> <a href="list.pro?cPage=${ pi.maxPage }" class="last">끝 페이지</a> </li>
+        </ul>
     </div>
-    <!-- 페이징바 넣을 자리 끝 -->
+</div>
+<!-- 페이징바 넣을 자리 끝 -->
 </div>
 
 <jsp:include page="/WEB-INF/jsp/fo/common/footer.jsp"/>

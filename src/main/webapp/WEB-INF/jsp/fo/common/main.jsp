@@ -41,96 +41,28 @@
                 <div><img src="/resources/fo/img/best1.png" id="bestImg"></div>
             </div>
             <div id="bestList">
-                <div>
-                    <div class="product">
-                        <div class="product-img">
-                            <img src="/resources/fo/img/best2.png">
+                <!-- 아이템 시작 -->
+                <c:forEach var="p" items="${productList}">
+                    <div class="product" onclick="detailView();">
+                        <div>
+                            <a href="detailView.pro?productNo=${ p.productNo }" class="product-img"><img src="/resources/fo/upfiles/${ p.changerName }"></a>
                         </div>
                         <div class="product-info">
                             <div class="product-name">
-                                <p>[지구공] 베스트셀러</p>
+                                <a href="detailView.pro?productNo=${ p.productNo }"><p>${ p.productName }</p></a>
                             </div>
                             <div class="product-price">
-                                <p>25,000원</p>
+                                <p>${ p.price }원</p>
+                            </div>
+                            <div class="product-icon">
+                                <div><i class="xi-speech-o"></i>${ p.reviewCount }</div>
+                                <div><i class="xi-heart-o"></i>${ p.likeCount }</div>
+                                <div><i class="xi-cart-o"></i></div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div>
-                    <div class="product">
-                        <div class="product-img">
-                            <img src="/resources/fo/img/best3.png">
-                        </div>
-                        <div class="product-info">
-                            <div class="product-name">
-                                <p>[지구공] 베스트셀러</p>
-                            </div>
-                            <div class="product-price">
-                                <p>25,000원</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="product">
-                        <div class="product-img">
-                            <img src="/resources/fo/img/best4.png">
-                        </div>
-                        <div class="product-info">
-                            <div class="product-name">
-                                <p>[지구공] 베스트셀러</p>
-                            </div>
-                            <div class="product-price">
-                                <p>25,000원</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="product">
-                        <div class="product-img">
-                            <img src="/resources/fo/img/best5.png">
-                        </div>
-                        <div class="product-info">
-                            <div class="product-name">
-                                <p>[지구공] 베스트셀러</p>
-                            </div>
-                            <div class="product-price">
-                                <p>25,000원</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="product">
-                        <div class="product-img">
-                            <img src="/resources/fo/img/best6.png">
-                        </div>
-                        <div class="product-info">
-                            <div class="product-name">
-                                <p>[지구공] 베스트셀러</p>
-                            </div>
-                            <div class="product-price">
-                                <p>25,000원</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="product">
-                        <div class="product-img">
-                            <img src="/resources/fo/img/best7.png">
-                        </div>
-                        <div class="product-info">
-                            <div class="product-name">
-                                <p>[지구공] 베스트셀러</p>
-                            </div>
-                            <div class="product-price">
-                                <p>25,000원</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </c:forEach>
+                <!-- 아이템 끝 -->
             </div>
         </div>
         <!-- 챌린지 -->

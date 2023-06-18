@@ -49,6 +49,11 @@ public class ReviewServiceImpl implements ReviewService {
     return reviewMapper.selectTopList(productNo);
   }
 
+  @Override
+  public int selectReviewCount(int productNo) {
+    return reviewMapper.selectReviewCount(productNo);
+  }
+
 
 
 }

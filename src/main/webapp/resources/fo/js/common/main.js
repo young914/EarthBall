@@ -1,5 +1,3 @@
-
-
 // 메인 슬라이드
 $(function(){
     $('.mainSlide').slick({
@@ -22,7 +20,14 @@ $(function(){
         slidesToScroll: 3
     });
 });
+
 // 챌린지 상세조회로 넘기기
 function challengeDetailView(chNo) {
     location.href="/detailView.chall?chNo=" + chNo;
+}
+
+// 상품 상세조회로 넘기기
+function detailView(){
+    // input type hidden에 담긴 값 가져오기
+    var productNo = $(event.target).children("input").val();
 }

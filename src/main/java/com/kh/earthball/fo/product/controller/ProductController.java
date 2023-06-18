@@ -30,13 +30,26 @@ public class ProductController {
 
     int listCount = productService.selectListCount();
     int pageLimit = 10;
-    int boardLimit = 10;
+    int boardLimit = 16;
 
     PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 
     ArrayList<Product> list = productService.selectAllProduct(pi);
 
+    for(Product p : list){
+
+      int productNo = p.getProductNo();
+      int likeCount = likeService.selectLikeCount(productNo);
+      int reviewCount = reviewService.selectReviewCount(productNo);
+
+      p.setLikeCount(likeCount);
+      p.setReviewCount(reviewCount);
+
+      list.set(list.indexOf(p), p);
+    }
+    model.addAttribute("pi", pi);
     model.addAttribute("list", list);
+
     return "/fo/product/productList";
   }
 
@@ -62,7 +75,6 @@ public class ProductController {
     Product p = productService.selectProduct(productNo);
     ArrayList<Atta> list = productService.selectAtta(productNo);
     ArrayList<Review> rlist = reviewService.selectTopList(productNo);
-    System.out.println(p);
 
     // 좋아요 여부 조회
     if(session.getAttribute("loginUser") != null) {
