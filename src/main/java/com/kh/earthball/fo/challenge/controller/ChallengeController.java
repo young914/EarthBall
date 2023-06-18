@@ -75,10 +75,8 @@ public class ChallengeController {
       // 카테고리 이름에 해당하는 코드네임들 가져오기
       List<Code> codeList = categoryService.selectCodeList(categoryName);
       category.setCodeList(codeList);
-      log.info("codeList에 뭐 들음? : " + codeList);
     }
 
-    log.info("categoryList에 뭐 들음? : " + categoryList);
     model.addAttribute("categoryList", categoryList);
     return "fo/challenge/challenge/challengeCategoryChoice";
   }
@@ -125,8 +123,6 @@ public class ChallengeController {
   @GetMapping("/detailView.chall")
   public String challengeDetailView(int chNo, Model model) {
 
-    log.info("넘어온 chNo : " + chNo);
-
     // 챌린지 게시글 하나 조회
     Challenge challenge = challengeService.selectChallenge(chNo);
 
@@ -146,8 +142,6 @@ public class ChallengeController {
 
     // 수정할 챌린지 조회 해오기
     Challenge challenge = challengeService.selectChallenge(chNo);
-
-    log.info("날짜형식 잘 나오니? : " + challenge.getChStartDay());
 
     model.addAttribute("challenge", challenge);
 
@@ -179,11 +173,7 @@ public class ChallengeController {
 
     PageInfo pageInfo = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 
-    log.info("pageInfo : " + pageInfo);
-
     ArrayList<Challenge> challengeList = challengeService.selectCategoryList(pageInfo, categoryNo);
-
-    log.info("챌린지 리스트 나옴? : " + challengeList);
 
     List<Category> categoryList = categoryService.selectCategoryList();
 
@@ -206,11 +196,7 @@ public class ChallengeController {
 
     PageInfo pageInfo = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 
-    log.info("pageInfo : " + pageInfo);
-
     ArrayList<Challenge> challengeList = challengeService.selectStatList(pageInfo, chStatName);
-
-    log.info("챌린지 리스트 나옴? : " + challengeList);
 
     List<Category> categoryList = categoryService.selectCategoryList();
 
@@ -224,12 +210,9 @@ public class ChallengeController {
   @ResponseBody
   @GetMapping("/hotList.chall")
   public List<Challenge> topChallengeList() {
-    log.info("여기 호출됨?");
 
     // 챌린지 게시글 별 인증게시글 갯수 조회
     List<ConfirmCount> confirmCountList = challengeService.confirmCount();
-
-    log.info("confirmCountList : " + confirmCountList);
 
     List<Challenge> hotList = new ArrayList<>();
     // 1순위 부터 챌린지 번호 당 챌린지 정보 담은 리스트 조회
@@ -241,7 +224,6 @@ public class ChallengeController {
         hotList.add(hotChallenge);
       }
     }
-    log.info("hotList 들어옴?" + hotList);
     return hotList;
   }
 
@@ -269,8 +251,6 @@ public class ChallengeController {
 
     return "fo/mypage/myChallenge";
   }
-
-
 }
 
 

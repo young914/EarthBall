@@ -345,9 +345,6 @@
           , memberId : memberId
         }
 
-        console.log("replyData", replyData);
-
-
         if($("[name=reContent]").val().trim().length != 0) {	// 즉, 유효한 내용이 한글자라도 있을 경우
           $.ajax({
             url : "/rinsert.con"
@@ -379,8 +376,6 @@
           chNo : chNo
           , chConNo: chConNo
         });
-
-        console.log("selectReplyData는 : " , selectReplyData);
 
         $.ajax({
           url : "/rlist.con"
@@ -437,8 +432,6 @@
           }
         });
       }
-
-
   </script>
 
 

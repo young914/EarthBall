@@ -106,8 +106,6 @@
             categoryName: categoryName
         };
 
-        console.log("카테고리명 잘 들어감? : ", data);
-
         $.ajax({
             url: "insert.ca"
             , type: "post"

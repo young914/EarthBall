@@ -12,47 +12,7 @@
 
     <jsp:include page="/WEB-INF/jsp/fo/common/common.jsp"/>
 
-  <style>
-    body {
-      background-color: white;
-      font-family: 'Jua', sans-serif;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0px auto;
-      padding: 40px;
-      background-color: #69abce;
-      border-radius: 5px;
-      color: white;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 24px;
-      margin-top: 0;
-    }
-
-    p {
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
-
-    button {
-      padding: 10px 20px;
-      background-color: white;
-      color: #146C94;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #146C94;
-      color: white;
-    }
-  </style>
+    <link rel="stylesheet" href="/resources/fo/css/common/emailAuthError.css">
 </head>
 <body>
 

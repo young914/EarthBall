@@ -244,14 +244,11 @@
                 url : "/hotList.chall"
                 , type : "get"
                 , success : function (result) {
-                    console.log("hot 챌린지 조회용 ajax 통신 성공", result);
                     let hotList = "";
 
                     for(let i in result) {
-                        console.log("Index : " , i);
 
                         let chNo = result[i].chNo;
-                        console.log("chNo이 잘 전달됐니? : ", chNo);
 
                         hotList +="<div class='hot_chall' onclick='challengeDetailView(" + chNo + ");'>"
                                 +"<table class='hot_one'>"
@@ -271,7 +268,6 @@
                                 +   "</tr>"
                                 +"</table>"
                                 +"</div>"
-                        console.log("result: ", result[i]);
                     }
                     $("#content_2_1").html(hotList);
                 }

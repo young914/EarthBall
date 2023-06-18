@@ -323,8 +323,6 @@
             , chConTitle: chConTitle
             , memberId: memberId
           }
-          console.log("deleteConfirmInfo", deleteConfirmInfo);
-
 
           $.ajax({
             url : "deleteBo.conf"

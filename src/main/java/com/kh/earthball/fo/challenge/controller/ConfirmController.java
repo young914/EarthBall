@@ -209,5 +209,4 @@ public class ConfirmController {
 
     return "fo/mypage/myConfirm";
   }
-
 }

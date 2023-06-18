@@ -79,15 +79,11 @@ public class ChallengeServiceImpl implements ChallengeService {
 
   @Override
   public ArrayList<Challenge> selectCategoryList(PageInfo pageInfo, int categoryNo) {
-    log.info("서비스임플인데, pageInfo : " + pageInfo);
     int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getBoardLimit();
     int limit = offset + pageInfo.getBoardLimit();
-    log.info("offset : " + offset);
-    log.info("limit : " + limit);
 
     ArrayList<Challenge> list = challengeMapper.selectCategoryList(offset, limit, categoryNo);
 
-    log.info("쿼리문 건너온 list : " + list);
     return list;
   }
 

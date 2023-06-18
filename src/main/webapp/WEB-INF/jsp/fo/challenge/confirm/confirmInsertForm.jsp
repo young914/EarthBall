@@ -328,8 +328,6 @@
                   });
               }
           }
-          //console.log("templateList : " , templateList);
-
 
           let confirmInfo = { // 인증 기본 정보
               chNo : chNo
@@ -339,9 +337,6 @@
           }
 
           let categoryNo = $("input[type=hidden][name=categoryNo]").val();
-
-          console.log("인증 기본 정보 : ", confirmInfo);
-          console.log("디테일 정보 list : ", list);
 
           $.ajax({
               url: "/insert.con"
@@ -375,7 +370,6 @@
                     console.log("포인트 추가 ajax 실패");
                   }
                 });
-
 
                   location.href = "/main.chall"
               }
@@ -425,8 +419,6 @@
               console.error('No file selected.');
           }
       });
-
-
   </script>
 
 
