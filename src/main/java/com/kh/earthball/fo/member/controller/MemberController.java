@@ -66,7 +66,7 @@ public class MemberController {
     if (saveId != null && saveId.equals("y")) {
 
       Cookie cookie = new Cookie("saveId", m.getMemberId());
-      cookie.setMaxAge(24 * 60 * 60);
+      cookie.setMaxAge(24 * 60 * 60 * 1);
 
       response.addCookie(cookie);
 
@@ -274,7 +274,47 @@ public class MemberController {
       return "redirect:/profile.do";
   }
   
+  @RequestMapping("delete.me")
+  public String deleteMember(String memberId,
+                                                      String memberPwd,
+                                                       HttpSession session,
+                                                       Model model) {
+    
+      String encPwd = ((Member)session.getAttribute("loginUser")).getMemberPwd();
+      
+      if(bcryptPasswordEncoder.matches(memberPwd, encPwd)) {
+      
+        int result = memberService.deleteMember(memberId);
+        
+        if(result > 0) {
+          
+          session.removeAttribute("loginUser");
+          
+          session.setAttribute("alertMsg", "성공적으로 탈퇴되었습니다. 그동안 이용해주셔서 감사합니다.");
+          
+          return "redirect:/";
+          
+        } else {
+          
+          model.addAttribute("alertMsg", "회원 탈퇴 실패!");
+          
+          return "redirect:/";
+        }
+    
+  } else {
+    
+      session.setAttribute("alertMsg", "비밀번호를 잘못 입력했습니다. 확인해주세요");
+      
+      return "redirect:/mypage.me";
+  }
   
-
-}  
+  }
+  
+  @RequestMapping("menuMember.me")
+  public String adminMember() {
+    
+    return "bo/member/adminMemberList";
+  }
+}
+  
   

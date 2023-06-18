@@ -27,4 +27,6 @@ public interface MemberMapper {
   void updateProfile(String memberId, String profileName);
   
   String selectProfile(String memberId);
+  
+  int deleteMember(String memberId);
 }

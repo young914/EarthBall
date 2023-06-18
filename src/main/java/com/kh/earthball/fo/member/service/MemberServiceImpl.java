@@ -65,6 +65,11 @@ public class MemberServiceImpl implements MemberService {
     return memberMapper.selectProfile(memberId);
   }
 
+  @Override
+  public int deleteMember(String memberId) {
+    return memberMapper.deleteMember(memberId);
+  }
+
 
 }
   
