@@ -58,14 +58,18 @@
 		background-color: #19A7CE;
 		margin-top: 20px;
 	}
+	.loginLogo { text-decoration : none; }
+	
+	
 </style>
 
 <title>Login -------</title>
 </head>
 <body>
-
+	<jsp:include page="/WEB-INF/jsp/fo/common/common.jsp"/>
     <div class="login-wrapper">
-        <h2>지구공</h2>
+        <h2><a href="/">
+        <img class="logo" src="/resources/fo/img/logo2.png" alt="지구공 로고"></a></h2>
         <form id="login-form" action="${not empty store ? 'storeListView.st' : 'login.me'}" method="post">
 		<c:if test="${not empty store}">
 			<input type="hidden" name="store" value="${store}">
@@ -74,7 +78,6 @@
 		<input type="password" id="memberPwd" name="memberPwd" placeholder="비밀번호를 입력해주세요">
 		<label for="remember-check">
 			<input type="checkbox" id="remember-check">아이디 저장하기
-			<input type="checkbox" id="request-id">로그인 유지
 		</label>
 		<input type="submit" value="Login">
 		</form>

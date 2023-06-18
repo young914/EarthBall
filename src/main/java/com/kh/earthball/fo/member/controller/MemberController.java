@@ -273,6 +273,8 @@ public class MemberController {
       
       return "redirect:/profile.do";
   }
+  
+  
 
 }  
   
