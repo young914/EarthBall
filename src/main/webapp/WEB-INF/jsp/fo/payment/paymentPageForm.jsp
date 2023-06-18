@@ -47,6 +47,7 @@
                 </div>
 
                 <c:set var="totalPrice" value="0" />
+                <input type="hidden" id="itemAmount" value="${ amount }">
 
                 <c:forEach items="${ orderList }" var="ol">
                 	<div id="content1_1_2">
@@ -78,7 +79,6 @@
                    </c:choose>
                 </c:forEach>
 				<input type="hidden" id="orderList" value="${ orderList }">
-				<
             </div>
             <div id="content1_2">
                 <div id="content1_2_1">

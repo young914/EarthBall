@@ -1,15 +1,24 @@
 package com.kh.earthball.fo.payment.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpSession;
+import org.json.simple.JSONArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.kh.earthball.fo.cart.vo.Cart;
+import com.kh.earthball.fo.challenge.vo.Challenge;
+import com.kh.earthball.fo.common.template.Pagination;
+import com.kh.earthball.fo.common.vo.PageInfo;
 import com.kh.earthball.fo.payment.service.PaymentService;
+import com.kh.earthball.fo.payment.vo.Orders;
 import com.kh.earthball.fo.payment.vo.PayInfo;
 import com.kh.earthball.fo.payment.vo.PayPageList;
 import lombok.RequiredArgsConstructor;
@@ -47,8 +56,8 @@ public class PaymentController {
    int amount = ppl.getOrders().get(0).getAmount();
 
    model.addAttribute("amount", amount);
-   model.addAttribute("orderList", paymentService.selectProductList(ppl.getOrders()));
-   session.setAttribute("orderList", paymentService.selectProductList(ppl.getOrders()));
+   model.addAttribute("orderList", paymentService.selectProductItem(ppl.getOrders()));
+   session.setAttribute("orderList", paymentService.selectProductItem(ppl.getOrders()));
 
    System.out.println(session.getAttribute("orderList"));
 
@@ -88,14 +97,56 @@ public class PaymentController {
   }
 
   /*
+  // 주문상품 DB에 추가
   @ResponseBody
-  @RequestMapping(value="/insertOrder", method=RequestMethod.POST)
-  public String insertOrder(List<Cart> orderList) {
+  @RequestMapping(value="/insertOrder", method={RequestMethod.POST})
+  public String insertOrder(Orders param) {
 
-    int result = paymentService.insertOrder(orderList);
+    System.out.println("paymentNo : " + param.getPaymentNo());
+    System.out.println("itemAmount : " + param.getItemAmount());
+    System.out.println("orderList : " + param.getOrderList());
 
-    return result;
+    // int result = paymentService.insertOrder(orderList);
+
+    return "1";
   }
-  */
+*/
+
+  // 마이페이지 주문 내역
+  @GetMapping("/list.myOrder")
+  public String myOrder(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, String memberId, Model model) {
+
+    // 나의 챌린지 게시글 수 조회
+    int listCount = paymentService.myOrderListCount(memberId);
+
+    int pageLimit = 5;
+    int boardLimit = 10;
+
+    PageInfo pageInfo = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+
+    // 나의 챌린지 게시글 리스트 조회
+    List<PayInfo> orderList = paymentService.selectMyOrder(pageInfo, memberId);
+
+    model.addAttribute("pageInfo", pageInfo);
+    model.addAttribute("orderList", orderList);
+
+    return "fo/mypage/myOrder";
+  }
+
+  @ResponseBody
+  @PostMapping("/reqPayCancel")
+  public String reqPayCancel(String memberId, int paymentNo) {
+
+    System.out.println("요청 들어감?");
+
+    return String.valueOf(paymentService.reqPayCancel(memberId, paymentNo));
+  }
+
+  @ResponseBody
+  @PostMapping("/updatePayStatus")
+  public String updatePayStatus(String memberId, int paymentNo) {
+
+    return String.valueOf(paymentService.updatePayStatus(memberId, paymentNo));
+  }
 
 }
