@@ -29,6 +29,7 @@ public class BoChallengeController {
       @RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model,
       HttpSession session) {
 
+    // 관리자가 아니라면 접근 불가하도록 설정
     Member loginUser = (Member) session.getAttribute("loginUser");
     if (loginUser == null || !"admin".equals(loginUser.getMemberId())) {
       return "redirect:/loginForm.me";
@@ -53,7 +54,13 @@ public class BoChallengeController {
 
 
   @GetMapping("/detail.chall")
-  public String challengeDetailView(int chNo, Model model) {
+  public String challengeDetailView(int chNo, Model model, HttpSession session) {
+
+    // 관리자가 아니라면 접근 불가하도록 설정
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || !"admin".equals(loginUser.getMemberId())) {
+      return "redirect:/loginForm.me";
+    }
 
     BoChallenge challenge = boChallengeService.selectChallenge(chNo);
 
@@ -65,6 +72,7 @@ public class BoChallengeController {
   @ResponseBody
   @PostMapping("/deleteBo.chall")
   public int challengeDelete(int chNo) {
+
     return boChallengeService.deleteChallenge(chNo);
   }
 

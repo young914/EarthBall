@@ -6,6 +6,7 @@ import com.kh.earthball.bo.challenge.service.CodeService;
 import com.kh.earthball.bo.challenge.vo.Category;
 import com.kh.earthball.bo.challenge.vo.CategoryTemplate;
 import com.kh.earthball.bo.challenge.vo.Code;
+import com.kh.earthball.fo.member.vo.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -25,7 +27,13 @@ public class CategoryTemplateController {
   private final CodeService codeService;
 
   @GetMapping("insertForm.te")
-  public String insertTemplateForm(@RequestParam(value = "categoryNo") int categoryNo, Model model) {
+  public String insertTemplateForm(@RequestParam(value = "categoryNo") int categoryNo, Model model, HttpSession session) {
+
+    // 관리자가 아니라면 접근 불가하도록 설정
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || !"admin".equals(loginUser.getMemberId())) {
+      return "redirect:/loginForm.me";
+    }
 
     Category category = categoryService.selectCategory(categoryNo);
 
@@ -43,14 +51,19 @@ public class CategoryTemplateController {
 
 
   @GetMapping("insertForm.ch")
-  public String insertChallengeForm(@RequestParam(value = "categoryNo") int categoryNo, Model model) {
+  public String insertChallengeForm(@RequestParam(value = "categoryNo") int categoryNo, Model model, HttpSession session) {
+
+    // 관리자가 아니라면 접근 불가하도록 설정
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || !"admin".equals(loginUser.getMemberId())) {
+      return "redirect:/loginForm.me";
+    }
 
     List<CategoryTemplate> templateList = templateService.selectTemplateListNo(categoryNo);
 
     log.info("서비스다 다녀온 templateList : " + templateList);
 
     for (int i = 0; i < templateList.size(); i++) {
-      log.info("grp넘어왔어? : " + templateList.get(i).getGrpCode());
       if (StringUtils.isNotEmpty(templateList.get(i).getGrpCode())) {
         List<Code> codeList = codeService.selectCodeList(templateList.get(i).getGrpCode());
         templateList.get(i).setCodeList(codeList);
@@ -69,7 +82,13 @@ public class CategoryTemplateController {
   }
 
   @GetMapping("updateForm.te")
-  public String updateTemplateForm(@RequestParam(value = "categoryTemplateNo") int categoryTemplateNo, Model model) {
+  public String updateTemplateForm(@RequestParam(value = "categoryTemplateNo") int categoryTemplateNo, Model model, HttpSession session) {
+
+    // 관리자가 아니라면 접근 불가하도록 설정
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || !"admin".equals(loginUser.getMemberId())) {
+      return "redirect:/loginForm.me";
+    }
 
     // 조회해오기
     CategoryTemplate categoryTemplate = templateService.selectTemplateForm(categoryTemplateNo);
