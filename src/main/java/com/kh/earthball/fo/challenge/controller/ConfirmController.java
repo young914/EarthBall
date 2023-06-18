@@ -12,6 +12,7 @@ import com.kh.earthball.fo.challenge.service.ConfirmService;
 import com.kh.earthball.fo.challenge.vo.*;
 import com.kh.earthball.fo.common.template.Pagination;
 import com.kh.earthball.fo.common.vo.PageInfo;
+import com.kh.earthball.fo.member.vo.Member;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -35,7 +37,13 @@ public class ConfirmController {
 
 
   @GetMapping("/insertForm.con")
-  public String confirmInsertForm(@RequestParam(value = "chNo") int chNo, Model model) {
+  public String confirmInsertForm(@RequestParam(value = "chNo") int chNo, Model model, HttpSession session) {
+
+    // 이메일 인증한 회원이 아니라면 접근 불가하도록 설정
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || 1 != loginUser.getMailAuth()) {
+      return "fo/common/emailAuthError";
+    }
 
     // 해당 챌린지의 정보 가져오기
     Challenge challenge = challengeService.selectChallenge(chNo);
@@ -119,7 +127,14 @@ public class ConfirmController {
   }
 
   @GetMapping("updateForm.con")
-  public String confirmUpdateForm(int chConNo, Model model) {
+  public String confirmUpdateForm(int chConNo, Model model, HttpSession session) {
+
+    // 이메일 인증한 회원이 아니라면 접근 불가하도록 설정
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || 1 != loginUser.getMailAuth()) {
+      return "fo/common/emailAuthError";
+    }
+
     // 해당하는 챌린지 인증 게시글 조회 해오기
     ChConfirm chConfirm = confirmService.selectConfirm(chConNo);
 

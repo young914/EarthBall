@@ -11,12 +11,14 @@ import com.kh.earthball.fo.challenge.vo.Challenge;
 import com.kh.earthball.fo.challenge.vo.ConfirmCount;
 import com.kh.earthball.fo.common.template.Pagination;
 import com.kh.earthball.fo.common.vo.PageInfo;
+import com.kh.earthball.fo.member.vo.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +58,14 @@ public class ChallengeController {
 
 
   @GetMapping("/categoryList.chall")
-  public String categoryChoice_chall(Model model) {
+  public String categoryChoice_chall(Model model, HttpSession session) {
+
+    // 이메일 인증한 회원이 아니라면 접근 불가하도록 설정
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || 1 != loginUser.getMailAuth()) {
+      return "fo/common/emailAuthError";
+    }
+
     List<Category> categoryList = categoryService.selectCategoryList();
 
     for (Category category : categoryList) {
@@ -76,7 +85,13 @@ public class ChallengeController {
 
 
   @GetMapping("/openForm.chall")
-  public String openChallengeForm(@RequestParam(value = "categoryNo") int categoryNo, Model model) {
+  public String openChallengeForm(@RequestParam(value = "categoryNo") int categoryNo, Model model, HttpSession session) {
+
+    // 이메일 인증한 회원이 아니라면 접근 불가하도록 설정
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || 1 != loginUser.getMailAuth()) {
+      return "fo/common/emailAuthError";
+    }
 
     Category category = categoryService.selectCategory(categoryNo);
 
@@ -95,7 +110,14 @@ public class ChallengeController {
   }
 
   @GetMapping("confirmForm.chall")
-  public String confirmInsertForm() {
+  public String confirmInsertForm(HttpSession session) {
+
+    // 이메일 인증한 회원이 아니라면 접근 불가하도록 설정
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || 1 != loginUser.getMailAuth()) {
+      return "fo/common/emailAuthError";
+    }
+
     return "fo/challenge/confirm/confirmInsertForm";
   }
 
@@ -114,7 +136,13 @@ public class ChallengeController {
   }
 
   @GetMapping("/updateForm.chall")
-  public String challengeUpdateForm(int chNo, Model model) {
+  public String challengeUpdateForm(int chNo, Model model, HttpSession session) {
+
+    // 이메일 인증한 회원이 아니라면 접근 불가하도록 설정
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || 1 != loginUser.getMailAuth()) {
+      return "fo/common/emailAuthError";
+    }
 
     // 수정할 챌린지 조회 해오기
     Challenge challenge = challengeService.selectChallenge(chNo);
