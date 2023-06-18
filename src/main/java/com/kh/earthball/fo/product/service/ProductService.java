@@ -19,4 +19,6 @@ public interface ProductService {
 
   ArrayList<Atta> selectAtta(int productNo);
 
+  ArrayList<Product> selectTopList();
+
 }

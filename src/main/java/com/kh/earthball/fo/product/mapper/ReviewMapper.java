@@ -20,4 +20,6 @@ public interface ReviewMapper {
   ArrayList<Review> selectReplyList(int reviewNo);
 
   ArrayList<Review> selectTopList(int productNo);
+
+  int selectReviewCount(int productNo);
 }

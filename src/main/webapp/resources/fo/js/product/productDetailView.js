@@ -104,9 +104,9 @@ function reviewList(){
                             }
                         html += '</div>';
                         html += '<div>';
-                            html += '<p>';
+                            html += '<pre style="font-family: Jua, sans-serif; font-size: medium;">';
                                 html += r.reviewContent;
-                            html += '</p>';
+                            html += '</pre>';
                         html += '</div>';
                         if(r.changeName != null) {
                             html += '<div>';
@@ -166,9 +166,9 @@ function onlyPhoto(){
                             }
                         html += '</div>';
                         html += '<div>';
-                            html += '<p>';
+                            html += '<pre style="font-family: Jua, sans-serif; font-size: medium;">';
                                 html += r.reviewContent;
-                            html += '</p>';
+                            html += '</pre>';
                         html += '</div>';
                         if(r.changeName != null) {
                             html += '<div>';
@@ -259,7 +259,7 @@ function replyList(reviewNo){
                             html += "<span>" + r.memberName + "</span><span>" + r.createdDate + "</span>";
                         html += "</div>";
                         html += "<div>";
-                            html += "<p>" + r.replyContent + "</p>";
+                            html += "<pre style='font-family: Jua, sans-serif; font-size: medium;'>" + r.replyContent + "</pre>";
                         html += "</div>";
                     html += "</div>";
                 html += "</div>";

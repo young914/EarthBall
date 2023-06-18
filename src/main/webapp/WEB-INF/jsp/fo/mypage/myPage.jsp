@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    
+
     <title>마이페이지</title>
     <jsp:include page="/WEB-INF/jsp/fo/common/common.jsp"/>
     <link rel="stylesheet" href="/resources/fo/css/mypage/commonMyPage.css?after">
@@ -21,7 +21,7 @@
 		  overflow: auto;
 		  background-color: rgba(0, 0, 0, 0.5);
 		}
-		
+
 		.modal-content {
 		  background-color: #fefefe;
 		  margin: 15% auto;
@@ -30,14 +30,14 @@
 		  width: 50%; /* 모달 창의 너비 조정 */
 		  max-width: 600px; /* 모달 창의 최대 너비 설정 */
 		}
-		
+
 		.close {
 		  color: #aaa;
 		  float: right;
 		  font-size: 28px;
 		  font-weight: bold;
 		}
-		
+
 		.close:hover,
 		.close:focus {
 		  color: black;
@@ -78,7 +78,7 @@
                 </div>
                 <div class="profile-2">
                     포인트 <br>
-                    <span class="point">0</span>
+                    <span class="point">${loginUser.totalPoint}</span>
                 </div>
             </div>
            </div>
@@ -102,7 +102,7 @@
     </div>
 
     </c:if>
-    
+
     <div id="myModal" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="closeModal()">&times;</span>
@@ -113,31 +113,31 @@
                 <button onclick="updateProfile()">프로필 사진 업데이트</button>
             </div>
         </div>
-    
-    
+
+
     <script>
 		    function openModal() {
 		        document.getElementById("myModal").style.display = "block";
 		    }
-		
+
 		    // 모달 창 닫기
 		    function closeModal() {
 		        document.getElementById("myModal").style.display = "none";
 		    }
-		
+
 		    // 프로필 사진 업데이트 로직 추가
 		    function updateProfile() {
 		        // 프로필 사진 업데이트 로직을 구현합니다.
 		        // 선택된 파일을 가져오거나 AJAX 요청 등을 사용하여 업데이트를 처리할 수 있습니다.
 		    }
-		
+
 		    // 마우스를 가져다 댔을 때 커서를 클릭 커서로 변경
 		    var profilePicture = document.querySelector(".profile-picture");
 		    profilePicture.addEventListener("mouseover", function() {
 		        profilePicture.style.cursor = "pointer";
 		    });
 	</script>
-	
+
     <jsp:include page="/WEB-INF/jsp/fo/common/footer.jsp" />
 
 </body>

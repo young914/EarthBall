@@ -9,5 +9,6 @@ public interface LikeService {
   int deleteLike(int productNo, String memberId);
   int likeStatus(String memberId, int productNo);
   ArrayList<Like> selectList(String memberId);
+  int selectLikeCount(int productNo);
 
 }

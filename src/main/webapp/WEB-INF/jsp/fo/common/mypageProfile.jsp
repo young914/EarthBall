@@ -8,11 +8,11 @@
     <img class="profile-picture" src="/resources/fo/img/logo.png">
     <div>
       <p class="memberName">${loginUser.memberName}님 환영합니다!</p>
-      <p style="margin: 0;">현재 등급은 RED 입니다.</p>
+      <p style="margin: 0;">현재 등급은 ${loginUser.gradeName} 입니다.</p>
     </div>
   </div>
   <div class="profile-2">
     포인트 <br>
-    <span class="point">3000</span>
+    <span class="point">${loginUser.totalPoint}</span>
   </div>
 </div>
