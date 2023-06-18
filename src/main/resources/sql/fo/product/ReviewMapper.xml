@@ -54,4 +54,10 @@
 		WHERE ROWNUM &lt;= 10
 	</select>
 
+	<select id="selectReviewCount" parameterType="_int">
+		SELECT COUNT(*)
+		FROM REVIEW
+		WHERE PRODUCT_NO = #{productNo}
+	</select>
+
 </mapper>

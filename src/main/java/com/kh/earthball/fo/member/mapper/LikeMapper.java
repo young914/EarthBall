@@ -16,4 +16,6 @@ public interface LikeMapper {
 
   ArrayList<Like> selectList(String memberId);
 
+  int selectLikeCount(int productNo);
+
 }

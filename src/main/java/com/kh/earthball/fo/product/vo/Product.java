@@ -25,5 +25,7 @@ public class Product {
   private String status;
   private String changerName;
   private int fileLevel;
+  private int likeCount;
+  private int reviewCount;
 
 }

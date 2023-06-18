@@ -23,7 +23,7 @@ public class ProductServiceImpl implements ProductService {
 
     RowBounds rowBounds = new RowBounds(offset, limit);
 
-    return productMapper.selectAllProduct(offset, limit);
+    return productMapper.selectAllProduct(rowBounds);
   }
 
   @Override
@@ -43,7 +43,7 @@ public class ProductServiceImpl implements ProductService {
 
     RowBounds rowBounds = new RowBounds(offset, limit);
 
-    return productMapper.selectCategoryProduct(offset, limit, category);
+    return productMapper.selectCategoryProduct(rowBounds, category);
   }
 
   @Override
@@ -54,6 +54,11 @@ public class ProductServiceImpl implements ProductService {
   @Override
   public ArrayList<Atta> selectAtta(int productNo) {
     return productMapper.selectAtta(productNo);
+  }
+
+  @Override
+  public ArrayList<Product> selectTopList() {
+    return productMapper.selectTopList();
   }
 
 }

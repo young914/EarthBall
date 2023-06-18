@@ -16,10 +16,11 @@
     	<!-- 로고+로그인 -->
         <div class="header">
             <div style="width: 200px;"></div>
-            <div class="logo" onclick="location.href='/main'">
+            <div class="logo">
                 <div><img src="/resources/fo/img/logo.png"></div>
-                <div>지구공</div>
+                <div onclick="location.href='/main'">지구공</div>
             </div>
+
             <div class="login-area">
                 <div></div>
                 <c:choose>
