@@ -167,6 +167,7 @@
 <title>회원 가입</title>
 </head>
 <body>
+<jsp:include page="/WEB-INF/jsp/fo/common/common.jsp"/>
     
     <div class="member">
         <!-- 1. 로고 -->
