@@ -33,7 +33,7 @@ public class ChallengeController {
 
   @GetMapping("/main.chall")
   public String challengeMain(
-      @RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model) {
+      @RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Challenge challenge, Model model) {
 
     // 전체 챌린지 게시글 수 조회
     int listCount = challengeService.selectListCount();
@@ -43,7 +43,7 @@ public class ChallengeController {
 
     PageInfo pageInfo = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 
-    ArrayList<Challenge> challengeList = challengeService.selectList(pageInfo);
+    ArrayList<Challenge> challengeList = challengeService.selectList(pageInfo, challenge);
 
     List<Category> categoryList = categoryService.selectCategoryList();
 
@@ -139,7 +139,9 @@ public class ChallengeController {
   }
 
   @GetMapping("/categoryFilter.chall")
-  public String challengeCategory(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model, int categoryNo) {
+  public String challengeCategory(
+      @RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model,
+      int categoryNo) {
 
     // 카테고리별 챌린지 게시글 수 조회
     int listCount = challengeService.selectCategoryListCount(categoryNo);
@@ -165,7 +167,9 @@ public class ChallengeController {
   }
 
   @GetMapping("/statFilter.chall")
-  public String challengeStat(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model, String chStatName) {
+  public String challengeStat(
+      @RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model,
+      String chStatName) {
     // 진행상태별 챌린지 게시글 수 조회
     int listCount = challengeService.selectStatListCount(chStatName);
 
@@ -193,7 +197,7 @@ public class ChallengeController {
   @GetMapping("/hotList.chall")
   public List<Challenge> topChallengeList() {
     log.info("여기 호출됨?");
-    
+
     // 챌린지 게시글 별 인증게시글 갯수 조회
     List<ConfirmCount> confirmCountList = challengeService.confirmCount();
 
@@ -201,12 +205,13 @@ public class ChallengeController {
 
     List<Challenge> hotList = new ArrayList<>();
     // 1순위 부터 챌린지 번호 당 챌린지 정보 담은 리스트 조회
-    for(ConfirmCount confirmCount : confirmCountList) {
+    for (ConfirmCount confirmCount : confirmCountList) {
       int chNo = confirmCount.getChNo();
 
       Challenge hotChallenge = challengeService.selectHotChallenge(chNo);
-
-      hotList.add(hotChallenge);
+      if (hotChallenge != null) {
+        hotList.add(hotChallenge);
+      }
     }
     log.info("hotList 들어옴?" + hotList);
     return hotList;
@@ -216,7 +221,9 @@ public class ChallengeController {
 
   // 마이페이지 오픈한 챌린지
   @GetMapping("/list.myChallenge")
-  public String myChallenge(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, String memberId, Model model) {
+  public String myChallenge(
+      @RequestParam(value = "currentPage", defaultValue = "1") int currentPage, String memberId,
+      Model model) {
 
     // 나의 챌린지 게시글 수 조회
     int listCount = challengeService.myChallengeListCount(memberId);

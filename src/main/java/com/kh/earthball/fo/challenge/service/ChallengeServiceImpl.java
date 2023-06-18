@@ -27,14 +27,15 @@ public class ChallengeServiceImpl implements ChallengeService {
   }
 
   @Override
-  public ArrayList<Challenge> selectList(PageInfo pageInfo) {
+  public ArrayList<Challenge> selectList(PageInfo pageInfo, Challenge challenge) {
 
     int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getBoardLimit();
-    int limit = pageInfo.getBoardLimit();
+    int limit = offset + pageInfo.getBoardLimit();
 
-    RowBounds rowBounds = new RowBounds(offset, limit);
+    challenge.setOffset(offset);
+    challenge.setLimit(limit);
 
-    return challengeMapper.selectList(rowBounds);
+    return challengeMapper.selectList(challenge);
   }
 
   @Override
