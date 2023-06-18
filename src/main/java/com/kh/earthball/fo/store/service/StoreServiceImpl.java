@@ -85,8 +85,8 @@ public class StoreServiceImpl implements StoreService {
   }
 
   @Override
-  public ArrayList<Store> selectLikeStore(String memberId, boolean orderLikeCheck) {
-    return storeMapper.selectLikeStore(memberId, orderLikeCheck);
+  public ArrayList<Store> selectLikeStore(String memberId) {
+    return storeMapper.selectLikeStore(memberId);
   }
 
   @Override

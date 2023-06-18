@@ -37,7 +37,7 @@ public interface StoreMapper {
 
     boolean isStoreLiked(@Param("memberId") String memberId, @Param("storeNo") int storeNo);
 
-    ArrayList<Store> selectLikeStore(@Param("memberId") String memberId, @Param("orderLikeCheck") boolean orderLikeCheck);
+    ArrayList<Store> selectLikeStore(@Param("memberId") String memberId);
 
     ArrayList<StoreAtta> selectStoreAttaList();
 

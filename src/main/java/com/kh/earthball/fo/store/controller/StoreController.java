@@ -217,9 +217,9 @@ public class StoreController {
   
   @ResponseBody
   @PostMapping(value = "likeListView.st", produces = "application/json; charset=UTF-8")
-  public String getLikeStore(String memberId, boolean orderLikeCheck) {
+  public String getLikeStore(String memberId) {
     System.out.println("여기는 getLikeStore");
-    ArrayList<Store> likeStoreList = storeService.selectLikeStore(memberId, orderLikeCheck);
+    ArrayList<Store> likeStoreList = storeService.selectLikeStore(memberId);
     ArrayList<StoreAtta> sList = storeService.selectStoreAttaFilterList(likeStoreList);
     Map<String, Object> resultMap = new HashMap<>();
       resultMap.put("storeList", likeStoreList);

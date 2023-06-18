@@ -35,7 +35,7 @@ public interface StoreService {
 
   boolean isStoreLiked(String memberId, int storeNo);
 
-  ArrayList<Store> selectLikeStore(String memberId, boolean orderLikeCheck);
+  ArrayList<Store> selectLikeStore(String memberId);
 
   ArrayList<StoreAtta> selectStoreAttaList();
 

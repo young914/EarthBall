@@ -214,12 +214,7 @@
 		WHERE S.STATUS = 'Y'
 		    AND SL.MEMBER_ID = #{memberId}
 		    AND FILE_LEVEL = 0
-		<if test="orderLikeCheck == false">
-        ORDER BY STORE_LIKES DESC
-	    </if>
-	    <if test="orderLikeCheck == true">
-	        ORDER BY STORE_NAME 
-	    </if>
+		ORDER BY S.STORE_LIKES DESC
 	 	</select>
 		
 </mapper>

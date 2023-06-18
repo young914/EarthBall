@@ -461,6 +461,8 @@ hr{
                     likeMapBtn.setAttribute('onclick', 'likeMap()');
                     likeMapBtn.innerHTML = '<i class="xi-heart xi-2x"></i>&nbsp;<span>맘에 든 매장보기</span>';
                     document.getElementById('settingMap').replaceWith(likeMapBtn);
+                    var checkbox = document.getElementById('btn-check-2-outlined');
+                    checkbox.disabled = false;
                 }, 
                 error : function() {
                     console.log("ajax 통신 실패!");
@@ -487,6 +489,8 @@ hr{
                     likeMapBtn.setAttribute('onclick', 'likeMap()');
                     likeMapBtn.innerHTML = '<i class="xi-heart xi-2x"></i>&nbsp;<span>맘에 든 매장보기</span>';
                     document.getElementById('settingMap').replaceWith(likeMapBtn);
+                    var checkbox = document.getElementById('btn-check-2-outlined');
+                    checkbox.disabled = false;
                 }, 
                 error : function() {
                     console.log("ajax 통신 실패!");
@@ -1145,15 +1149,11 @@ hr{
             
             memberId = '${loginUser.memberId}';
             
-            var checkbox = document.getElementById('btn-check-2-outlined');
-            checkbox.setAttribute('onclick', 'likeMap();');
-            var orderLikeCheck = checkbox.checked;
             $.ajax({
                 url : "likeListView.st",
                 type : "post",
                 data : {
                     memberId : memberId,
-                    orderLikeCheck : orderLikeCheck
                 },
                 success : function(result) {
 
@@ -1170,6 +1170,8 @@ hr{
                     settingMapBtn.innerHTML = '<i class="xi-home xi-2x"></i>&nbsp;<span>전체매장 보기</span>';
                     document.getElementById('likeList').replaceWith(settingMapBtn);
                     
+                    var checkbox = document.getElementById('btn-check-2-outlined');
+                    checkbox.disabled = true;
 
                     if(storeList.length == 0){
                         $("#store-list-area").html("<div class='noResult'>검색 결과가 없습니다.</div>");
