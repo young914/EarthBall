@@ -420,6 +420,11 @@ hr{
 
                     makeMarker(result, map);
 
+                    var likeMapBtn = document.createElement('div');
+                    likeMapBtn.setAttribute('id', 'likeList');
+                    likeMapBtn.setAttribute('onclick', 'likeMap()');
+                    likeMapBtn.innerHTML = '<i class="xi-heart xi-2x"></i><span>찜 매장보기</span>';
+                    document.getElementById('settingMap').replaceWith(likeMapBtn);
                 }, 
                 error : function() {
                     console.log("ajax 통신 실패!");
@@ -560,7 +565,11 @@ hr{
                 },
                 success : function(result) {
 
-                    storeList = result;
+                    storMap = result;
+                    storeList = storMap.storeList;
+                    storeAttaList = storMap.storeAttaList;
+                    console.log(storeList);
+                    console.log(storeAttaList);
                     
                     if(storeList.length == 0){
                         $("#store-list-area").html("<div class='noResult'>검색 결과가 없습니다.</div>");
@@ -578,7 +587,7 @@ hr{
                         };
                     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
                     
-                    makeMarker(storeList, map);
+                    makeMarker(result, map);
 
                 }, 
                 error : function() {
@@ -605,7 +614,9 @@ hr{
                 },
                 success : function(result) {
 
-                    storeList = result;
+                    storMap = result;
+                    storeList = storMap.storeList;
+                    storeAttaList = storMap.storeAttaList;
                     
                     if(storeList.length == 0){
                         $("#store-list-area").html("<div class='noResult'>검색 결과가 없습니다.</div>");
@@ -623,7 +634,7 @@ hr{
                         };
                     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-                    makeMarker(storeList, map);
+                    makeMarker(result, map);
 
                 },
                 error : function() {
@@ -684,7 +695,10 @@ hr{
                 var storeImgStr = "";
                 
                 for (let j = 0; j < storeAttaList.length; j++) {
-                    storeImgStr += "<div class='swiper-slide'><img src='/resources/fo/upfiles/" + storeAttaList[j].changerName + "' alt='매장사진' style='width: 100%; height: 100%;'></div>";
+                    if (storeAttaList[j].storeNo === storeNo) {
+                        storeImgStr += "<div class='swiper-slide'><img src='/resources/fo/upfiles/" + storeAttaList[j].changerName + "' alt='매장사진' style='width: 100%; height: 100%;' onclick='openModal(\"/resources/fo/upfiles/" + storeAttaList[j].changerName + "\")'></div>";
+                    }
+
                 }
                 
                 // 동적으로 리스트 요소 생성
@@ -702,6 +716,8 @@ hr{
                                             "<div class='swiper-wrapper'>" +
                                                 storeImgStr +
                                             "</div>" +
+                                            "<div class='swiper-button-next'></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->" +
+	                                        "<div class='swiper-button-prev'></div><!-- 이전 버튼 -->" + 
                                         "</div>" +
                                     "</div>" +
                                 "</div>" +
@@ -714,7 +730,17 @@ hr{
                 const mySwiper = new Swiper(swiperElement, {
                     autoplay: {
                         delay: 3000
-                    }
+                    },
+                    navigation: {
+                        nextEl: swiperElement.querySelector('.swiper-button-next'),
+                        prevEl: swiperElement.querySelector('.swiper-button-prev')
+                        }
+                });
+                swiperElement.querySelector('.swiper-button-next').addEventListener('click', function(event) {
+                    event.stopPropagation();
+                });
+                swiperElement.querySelector('.swiper-button-prev').addEventListener('click', function(event) {
+                    event.stopPropagation();
                 });
             });
 			// 페이징처리 (페이징바보기)
@@ -882,9 +908,8 @@ hr{
 
             // 리스트에 클릭 걸기
             $("#store-list-area").on("click", ".searchList", function() {
-                let index = $(this).attr("class").split(" ")[1];
                 
-
+                let index = $(this).attr("class").split(" ")[1];
                 // 상세 정보를 보여줄 요소 찾기
                 var detailInfo = $(this).find(".detail-info")[0];
                 
@@ -893,7 +918,8 @@ hr{
 
                 // 스크롤 이동시킴
                 detailInfo.scrollIntoView({ behavior: 'smooth', block: 'end' });
-
+                
+                
                  // 다른 div 숨기기
                 $(".searchList").not(this).find(".detail-info").hide();
                 if (isClosed[index]) { // 닫혀있음
@@ -910,14 +936,10 @@ hr{
 
                      // 상세 정보, 이미지 및 좋아요 버튼을 보이도록 함
                     $(this).find(".detail-info").show();
-
                 } else { // 열려있음
                     overlayList[index].setMap(null);
                     // 상세 정보, 이미지 및 좋아요 버튼을 숨김
-
                     $(this).find(".detail-info").hide();
-
-
                 }
                 isClosed[index] = !isClosed[index];
             });
@@ -1035,8 +1057,17 @@ hr{
                 },
                 success : function(result) {
 
-                    storeList = result;
+                    storMap = result;
+                    storeList = storMap.storeList;
+                    storeAttaList = storMap.storeAttaList;
                     
+                    // 전체매장 보기 버튼 생성
+                    var settingMapBtn = document.createElement('div');
+                    settingMapBtn.setAttribute('id', 'settingMap');
+                    settingMapBtn.setAttribute('onclick', 'settingMap()');
+                    settingMapBtn.innerHTML = '<i class="xi-list-square-o xi-2x"></i><span>전체매장 보기</span>';
+                    document.getElementById('likeList').replaceWith(settingMapBtn);
+
                     if(storeList.length == 0){
                         $("#store-list-area").html("<div class='noResult'>검색 결과가 없습니다.</div>");
                         $("#searchResult").html("<span>총 </span>" + 0 + "<span>개의 결과</span>");
@@ -1053,20 +1084,70 @@ hr{
                         };
                     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-                    makeMarker(storeList, map);
-
+                    makeMarker(result, map);
+                    
+                    
                 },
                 error : function() {
                     console.log("ajax 통신 실패");
                 }
             });
         }
-        const mySwiper = new Swiper('.swiper-container', {
-            pagination: {
-                el: '.swiper-pagination',
-                type: 'bullets'
+
+        let currentModalElement = null;
+
+        function openModal(imageUrl) {
+            event.stopPropagation(); // 이벤트 버블링(stopPropagation) 방지
+        // 이미 모달이 열려있는 경우 닫기
+            if (currentModalElement) {
+                currentModalElement.remove();
+                currentModalElement = null;
             }
-        });
+
+            // 모달 요소 생성
+            const modalElement = document.createElement("div");
+            modalElement.classList.add("modal");
+
+            // 모달 내용 생성
+            const modalContentElement = document.createElement("div");
+            modalContentElement.classList.add("modal-content");
+
+            // 이미지 요소 생성
+            const imgElement = document.createElement("img");
+            imgElement.src = imageUrl;
+            imgElement.alt = "매장사진";
+            imgElement.style.width = "100%";
+            imgElement.style.height = "100%";
+
+            // 이미지를 모달 내용에 추가
+            modalContentElement.appendChild(imgElement);
+
+            // 모달 내용을 모달에 추가
+            modalElement.appendChild(modalContentElement);
+
+            // 모달 스타일 적용
+            modalElement.style.display = "block";
+            modalElement.style.justifyContent = "center";
+            modalElement.style.alignItems = "center";
+            modalElement.style.position = "fixed";
+            modalElement.style.top = "0";
+            modalElement.style.left = "0";
+            modalElement.style.width = "300px";
+            modalElement.style.height = "300px";
+            modalElement.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+
+            // 모달을 body 요소에 추가
+            document.body.appendChild(modalElement);
+
+            // 현재 열린 모달 요소 저장
+            currentModalElement = modalElement;
+
+            // 모달 닫기 이벤트 처리
+            modalElement.addEventListener("click", function(event) {
+                modalElement.remove();
+                currentModalElement = null;
+            });
+        }
     </script>
 </body>
 </html>

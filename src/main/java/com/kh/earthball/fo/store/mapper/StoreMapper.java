@@ -41,5 +41,7 @@ public interface StoreMapper {
 
     ArrayList<StoreAtta> selectStoreAttaList();
 
+    ArrayList<StoreAtta> selectStoreAttaFilterList(ArrayList<Store> selectFilterList);
+
 
 }

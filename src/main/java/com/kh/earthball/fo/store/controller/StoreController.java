@@ -101,7 +101,14 @@ public class StoreController {
     System.out.println(city);
     System.out.println(provinces);
     if(provinces.equals("")) {
+
       ArrayList<Store> selectFilterList = storeService.selectFilterListC(city);
+      System.out.println("이건 : " +   selectFilterList);
+      ArrayList<StoreAtta> sList = storeService.selectStoreAttaFilterList(selectFilterList);
+      System.out.println("이건 : " + sList);
+      Map<String, Object> resultMap = new HashMap<>();
+      resultMap.put("storeList", selectFilterList);
+      resultMap.put("storeAttaList", sList);
       
       for (int i = 0; i < selectFilterList.size(); i++) {
         GeocodingApi geocodingApi = new GeocodingApi();
@@ -117,15 +124,17 @@ public class StoreController {
         selectFilterList.get(i).setLiked(liked); // Store 객체에 좋아요 여부 설정
       }
       
-    return new Gson().toJson(selectFilterList);
+    return new Gson().toJson(resultMap);
     }
     
     else {
       int regionNo = storeService.selectRegionNo(city, provinces);
       
       ArrayList<Store> selectFilterList = storeService.selectFilterListR(regionNo);
-
-      
+      ArrayList<StoreAtta> sList = storeService.selectStoreAttaFilterList(selectFilterList);
+      Map<String, Object> resultMap = new HashMap<>();
+      resultMap.put("storeList", selectFilterList);
+      resultMap.put("storeAttaList", sList);
       for (int i = 0; i < selectFilterList.size(); i++) {
         GeocodingApi geocodingApi = new GeocodingApi();
         double[] coordinates = geocodingApi.getGeocode(selectFilterList.get(i).getStoreAddress());
@@ -139,16 +148,22 @@ public class StoreController {
         boolean liked = storeService.isStoreLiked(memberId, selectFilterList.get(i).getStoreNo());
         selectFilterList.get(i).setLiked(liked); // Store 객체에 좋아요 여부 설정
       }
-      return new Gson().toJson(selectFilterList);
+      return new Gson().toJson(resultMap);
     }
   }
   
   @ResponseBody
   @GetMapping(value = "getNameSearch.st" , produces = "application/json; charset=UTF-8")
   public String selectNameSearch(String searchValue, String memberId) {
-    System.out.println("selectNameSearch");
+    System.out.println("여기는 : selectNameSearch");
     ArrayList<Store> nameSearchList = storeService.selectNameSearch(searchValue);
-    
+    ArrayList<StoreAtta> sList = storeService.selectStoreAttaFilterList(nameSearchList);
+    Map<String, Object> resultMap = new HashMap<>();
+    resultMap.put("storeList", nameSearchList);
+    resultMap.put("storeAttaList", sList);
+    System.out.println("nameSearchList : " + nameSearchList);
+    System.out.println("sList : " + sList);
+    System.out.println("resultMap : " + resultMap);
     if (nameSearchList == null || nameSearchList.isEmpty()) {
       nameSearchList = new ArrayList<>();
     } else {
@@ -167,7 +182,7 @@ public class StoreController {
         }
     }
     
-    return new Gson().toJson(nameSearchList);
+    return new Gson().toJson(resultMap);
   }
   
   @ResponseBody
@@ -202,6 +217,10 @@ public class StoreController {
   public String getLikeStore(String memberId) {
     System.out.println("여기는 getLikeStore");
     ArrayList<Store> likeStoreList = storeService.selectLikeStore(memberId);
+    ArrayList<StoreAtta> sList = storeService.selectStoreAttaFilterList(likeStoreList);
+    Map<String, Object> resultMap = new HashMap<>();
+      resultMap.put("storeList", likeStoreList);
+      resultMap.put("storeAttaList", sList);
     for (int i = 0; i < likeStoreList.size(); i++) {
       GeocodingApi geocodingApi = new GeocodingApi();
       double[] coordinates = geocodingApi.getGeocode(likeStoreList.get(i).getStoreAddress());
@@ -215,6 +234,6 @@ public class StoreController {
       boolean liked = storeService.isStoreLiked(memberId, likeStoreList.get(i).getStoreNo());
       likeStoreList.get(i).setLiked(liked); // Store 객체에 좋아요 여부 설정
     }
-    return new Gson().toJson(likeStoreList);
+    return new Gson().toJson(resultMap);
   }
 }

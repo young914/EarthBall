@@ -93,5 +93,10 @@ public class StoreServiceImpl implements StoreService {
   public ArrayList<StoreAtta> selectStoreAttaList() {
     return storeMapper.selectStoreAttaList();
   }
+
+  @Override
+  public ArrayList<StoreAtta> selectStoreAttaFilterList(ArrayList<Store> selectFilterList) {
+    return storeMapper.selectStoreAttaFilterList(selectFilterList);
+  }
   
 }

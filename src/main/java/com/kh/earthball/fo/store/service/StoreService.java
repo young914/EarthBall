@@ -39,6 +39,8 @@ public interface StoreService {
 
   ArrayList<StoreAtta> selectStoreAttaList();
 
+  ArrayList<StoreAtta> selectStoreAttaFilterList(ArrayList<Store> selectFilterList);
+
 
 //  // 매장 상세 조회
 //  Store selectStoreDetail(int storeNo);
