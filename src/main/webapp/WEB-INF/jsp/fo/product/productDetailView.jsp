@@ -30,10 +30,9 @@
                 <div id="productName"><h1>${ p.productName }</h1></div>
                 <div id="productPrice"><h4>${ p.price }원</h4></div>
                 <hr>
-                <div id="productText">
-                    더 상큼한 제로웨이스트 양치시간! 지구샵 마일드 고체치약으로 시작해요 :) <br>
-                    *틴케이스 별도 구매
-                </div>
+<pre id="productText" style="font-family: 'Jua', sans-serif; font-size: large;">
+${p.productInfo}
+</pre>
                 <div id="productTable">
                     <table>
                         <tr>

@@ -111,15 +111,16 @@
       <!-- Content wrapper -->
       <div class="content-wrapper">
         <!-- Content -->
-        <div class="container-xxl flex-grow-1 container-p-y content">
+        <div class="content container-xxl container-p-y">
 			<div class="listArea">
-				<h1 class="title">상품 추가</h1>
-				<form action="insert.pro" method="post" enctype="multipart/form-data">
+				<h1 class="title">상품 </h1>
+				<form action="update.pro" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="productNo" value="${p.productNo}">
 					<div>
 						<table class="insertForm">
 							<tr>
 								<td width="100">상품명</td>
-								<td><input type="text" name="productName" required></td>
+								<td><input type="text" name="productName" value="${ p.productName }" required></td>
 							</tr>
 							<tr>
 								<td>카테고리</td>
@@ -140,19 +141,19 @@
 							</tr>
 							<tr>
 								<td>가격</td>
-								<td><input type="number" name="price" required></td>
+								<td><input type="number" name="price" value="${p.price}" required></td>
 							</tr>
 							<tr>
 								<td>할인률</td>
-								<td><input type="number" name="discount" required></td>
+								<td><input type="number" name="discount" value="${p.discount}" required></td>
 							</tr>
 							<tr>
 								<td>재고</td>
-								<td><input type="number" name="stock" required></td>
+								<td><input type="number" name="stock" value="${p.stock}" required></td>
 							</tr>
 							<tr>
 								<td>상품 설명</td>
-								<td><textarea name="productInfo" id="productInfo" required></textarea></td>
+								<td><textarea name="productInfo" id="productInfo" required>${p.productInfo}</textarea></td>
 							</tr>
 							<tr>
 								<td>사진</td>
@@ -160,47 +161,107 @@
 									<table class="fileArea">
 										<tr>
 											<td>
-												<div><input type="file" class="upfile1" name="upfiles" onchange="loadImg(this, 1);" required> <img id="preview1"></div>
+												<div>
+													<input type="file" class="upfile1" name="upfiles" onchange="loadImg(this, 1);"> 
+													<img id="preview1" src="/resources/fo/upfiles/${list[0].changerName}">
+													<c:if test="${list[0].changerName != null}">
+														<input type="hidden" name="changeNames" value="${ list[0].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+													</c:if>
+												</div>
 												<div>메인이미지</div>
 											</td>
 											<td>
-												<div><input type="file" class="upfile2" name="upfiles" onchange="loadImg(this, 2);"> <img id="preview2"></div>
+												<div>
+													<input type="file" class="upfile2" name="upfiles" onchange="loadImg(this, 2);"> 
+													<img id="preview2" src="/resources/fo/upfiles/${list[1].changerName}">
+													<c:if test="${list[0].changerName != null}">
+														<input type="hidden" name="changeNames" value="${ list[1].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+													</c:if>
+												</div>
 												<div>2번</div>
 											</td>
 											<td>
-												<div><input type="file" class="upfile3" name="upfiles" onchange="loadImg(this, 3);"> <img id="preview3"></div>
+												<div>
+													<input type="file" class="upfile3" name="upfiles" onchange="loadImg(this, 3);"> 
+													<img id="preview3" src="/resources/fo/upfiles/${list[2].changerName}">
+													<c:if test="${list[0].changerName != null}">
+														<input type="hidden" name="changeNames" value="${ list[2].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+													</c:if>
+												</div>
 												<div>3번</div>
 											</td>
 											<td>
-												<div><input type="file" class="upfile4" name="upfiles" onchange="loadImg(this, 4);"> <img id="preview4"></div>
+												<div>
+													<input type="file" class="upfile4" name="upfiles" onchange="loadImg(this, 4);"> 
+													<img id="preview4" src="/resources/fo/upfiles/${list[3].changerName}">
+													<c:if test="${list[0].changerName != null}">
+														<input type="hidden" name="changeNames" value="${ list[3].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+													</c:if>
+												</div>
 												<div>4번</div>
 											</td>
 										</tr>
 										<tr>
 											<td>
-												<div><input type="file" class="upfile5" name="upfiles" onchange="loadImg(this, 5);"> <img id="preview5"></div>
+												<div>
+													<input type="file" class="upfile5" name="upfiles" onchange="loadImg(this, 5);"> 
+													<img id="preview5" src="/resources/fo/upfiles/${list[4].changerName}">
+													<c:if test="${list[0].changerName != null}">
+														<input type="hidden" name="changeNames" value="${ list[4].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+													</c:if>
+												</div>
 												<div>5번</div>
 											</td>
 											<td>
-												<div><input type="file" class="upfile6" name="upfiles" onchange="loadImg(this, 6);"> <img id="preview6"></div>
+												<div>
+													<input type="file" class="upfile6" name="upfiles" onchange="loadImg(this, 6);"> 
+													<img id="preview6" src="/resources/fo/upfiles/${list[5].changerName}">
+													<c:if test="${list[0].changerName != null}">
+														<input type="hidden" name="changeNames" value="${ list[5].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+													</c:if>
+												</div>
 												<div>6번</div>
 											</td>
 											<td>
-												<div><input type="file" class="upfile7" name="upfiles" onchange="loadImg(this, 2);"> <img id="preview7"></div>
+												<div>
+													<input type="file" class="upfile7" name="upfiles" onchange="loadImg(this, 2);"> 
+													<img id="preview7" src="/resources/fo/upfiles/${list[6].changerName}">
+													<c:if test="${list[0].changerName != null}">
+														<input type="hidden" name="changeNames" value="${ list[6].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+													</c:if>
+												</div>
 												<div>7번</div>
 											</td>
 											<td>
-												<div><input type="file" class="upfile8" name="upfiles" onchange="loadImg(this, 7);"> <img id="preview8"></div>
+												<div>
+													<input type="file" class="upfile8" name="upfiles" onchange="loadImg(this, 7);">
+													<img id="preview8" src="/resources/fo/upfiles/${list[7].changerName}">
+													<c:if test="${list[0].changerName != null}">
+														<input type="hidden" name="changeNames" value="${ list[7].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+													</c:if>
+												</div>
 												<div>8번</div>
 											</td>
 										</tr>
 										<tr>
 											<td>
-												<div><input type="file" class="upfile9" name="upfiles" onchange="loadImg(this, 8);"> <img id="preview9"></div>
+												<div>
+													<input type="file" class="upfile9" name="upfiles" onchange="loadImg(this, 8);"> 
+													<img id="preview9" src="/resources/fo/upfiles/${list[8].changerName}">
+													<c:if test="${list[0].changerName != null}">
+														<input type="hidden" name="changeNames" value="${ list[8].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+													</c:if>
+												</div>
 												<div>9번</div>
 											</td>
 											<td>
-												<div><input type="file" class="upfile10" name="upfiles" onchange="loadImg(this, 10);"> <img id="preview10"></div>
+												<div>
+													<input type="file" class="upfile10" name="upfiles" onchange="loadImg(this, 10);"> 
+													<img id="preview10" src="/resources/fo/upfiles/${list[9].changerName}">
+													<c:if test="${list[0].changerName != null}">
+														<input type="hidden" name="changeNames" value="${ list[9].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+													</c:if>
+												</div>
 												<div>10번</div>
 											</td>
 										</tr>
@@ -210,9 +271,8 @@
 						</table>
 					</div>
 					<div class="btn-area">
-						<button type="submit">추가</button>
-						<input type="button" value="취소" onclick="window.history.back();">
-
+						<button type="submit">수정</button>
+						<input type="button" value="취소" onclick="location.href='adminlist.pro'">
 					</div>
 				</form>
 			</div>
@@ -313,9 +373,18 @@
 			}
 		}
 	}
-	// 메인이미지만 나오고 나머지는 안보이다가 
-	// 하나씩 추가할때마다 보이게 하기
-	
+
+	// 카테고리 불러오기
+	var selectedCategory = "${p.category}";
+
+	var selectElement = document.querySelector('.category');
+    for (var i = 0; i < selectElement.options.length; i++) {
+        if (selectElement.options[i].value === selectedCategory) {
+            selectElement.options[i].selected = true;
+            break;
+        }
+    }
+
 </script>
 </body>
 </html>

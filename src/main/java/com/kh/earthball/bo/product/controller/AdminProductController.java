@@ -1,20 +1,23 @@
 package com.kh.earthball.bo.product.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import com.google.gson.Gson;
 import com.kh.earthball.bo.product.service.AdminProductService;
 import com.kh.earthball.bo.product.vo.AdminAtta;
 import com.kh.earthball.bo.product.vo.AdminProduct;
 import com.kh.earthball.fo.common.template.ChangeFileName;
 import com.kh.earthball.fo.common.template.Pagination;
 import com.kh.earthball.fo.common.vo.PageInfo;
-import com.kh.earthball.fo.product.vo.Product;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -48,32 +51,15 @@ public class AdminProductController {
   }
 
 
-  @RequestMapping("insert.pro")
-  public String insertProduct(AdminProduct p,
-                            MultipartFile upfile1, MultipartFile upfile2, MultipartFile upfile3, MultipartFile upfile4, MultipartFile upfile5,
-                            MultipartFile upfile6, MultipartFile upfile7, MultipartFile upfile8, MultipartFile upfile9, MultipartFile upfile10,
-                            HttpSession session,
-                            ModelAndView mv) {
+  @PostMapping("insert.pro")
+  public String insertProduct(AdminProduct p, ArrayList<MultipartFile> upfiles, HttpSession session) {
 
-    System.out.println(p);
-    ArrayList<MultipartFile> fileList = new ArrayList<>();
-    fileList.add(upfile1);
-    fileList.add(upfile2);
-    fileList.add(upfile3);
-    fileList.add(upfile4);
-    fileList.add(upfile5);
-    fileList.add(upfile6);
-    fileList.add(upfile7);
-    fileList.add(upfile8);
-    fileList.add(upfile9);
-    fileList.add(upfile10);
+    ArrayList<AdminAtta> list = new ArrayList<AdminAtta>();
 
-    ArrayList<AdminAtta> list = new ArrayList<>();
+    for(int i = 0; i < upfiles.size(); i++){
+      MultipartFile file = upfiles.get(i);
 
-    for(int i = 0; i < fileList.size(); i++) {
-      MultipartFile file = fileList.get(i);
-
-      if(!file.isEmpty()) {
+      if(!file.isEmpty()){
         String changerName = ChangeFileName.saveFile(file, session);
 
         AdminAtta at = new AdminAtta();
@@ -84,16 +70,85 @@ public class AdminProductController {
       }
     }
 
+    int result = productService.insertProduct(p, list);
 
-    int result = productService.insertProduct(p,list);
+    if(result > 0) {
+      session.setAttribute("alertMsg", "상품 등록 성공");
+      return "redirect:adminEnrollForm.pro";
+    }else {
+      session.setAttribute("alertMsg", "상품 등록 실패");
+      return "redirect:adminEnrollForm.pro";
+    }
+  }
+
+
+  @GetMapping("adminDetailView.pro")
+  public String selectDetailView(int productNo, Model model) {
+    AdminProduct p = productService.selectDetailView(productNo);
+    ArrayList<AdminAtta> list = productService.selectDetailviewAtta(productNo);
+
+
+    model.addAttribute("p", p);
+    model.addAttribute("list", list);
+
+    return "bo/product/productDetailView";
+  }
+
+  @PostMapping("update.pro")
+  public String updateProduct(AdminProduct p,
+                            MultipartFile[] upfiles,
+                            String[] changeNames,
+                            HttpSession session,
+                            ModelAndView mv) {
+
+    ArrayList<AdminAtta> list = new ArrayList<>();
+
+
+    for(int i = 0; i < 10; i++){
+
+      AdminAtta at = new AdminAtta();
+
+      if(!upfiles[i].isEmpty()){
+
+        String realPath = session.getServletContext().getRealPath("resources/fo/upfiles/" + changeNames[i]);
+
+        new File(realPath).delete();
+
+        String changeName = ChangeFileName.saveFile(upfiles[i], session);
+
+        at.setChangerName(changeName);
+        at.setFileLevel(i);
+        at.setProductNo(p.getProductNo());
+
+      }else{
+
+        at.setChangerName(changeNames[i]);
+        at.setFileLevel(i);
+        at.setProductNo(p.getProductNo());
+      }
+
+      list.add(at);
+
+    }
+
+    int result = productService.updateProduct(p, list);
 
     if(result>0) {
-      session.setAttribute("alertMsg", "상품추가 성공");
-      return "redirect:/adminEnrollForm.pro";
-    }else {
-      session.setAttribute("alertMsg", "상품추가 실패");
-      return "redirect:/adminEnrollForm.pro";
+      session.setAttribute("alertMsg", "상품 수정 성공");
+      return "redirect:adminlist.pro";
+    }else{
+      session.setAttribute("alertMsg", "상품 수정 실패");
+      return "redirect:adminDetailView.pro?productNo="+p.getProductNo();
     }
+  }
+
+  @ResponseBody
+  @PostMapping(value="adminStatusUpdate.pro", produces="application/json; charset=UTF-8")
+  public String updateStatus(int productNo, String status, Model model) {
+
+    int result = productService.updateStatus(productNo, status);
+
+    return new Gson().toJson(result);
   }
 
 }
