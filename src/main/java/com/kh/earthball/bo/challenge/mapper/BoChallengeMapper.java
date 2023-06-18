@@ -1,6 +1,8 @@
 package com.kh.earthball.bo.challenge.mapper;
 
 import com.kh.earthball.bo.challenge.vo.BoChallenge;
+import com.kh.earthball.bo.challenge.vo.BoConfirm;
+import com.kh.earthball.fo.challenge.vo.ChConfirm;
 import com.kh.earthball.fo.common.vo.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -17,4 +19,6 @@ public interface BoChallengeMapper {
   BoChallenge selectChallenge(int chNo);
 
   int deleteChallenge(int chNo);
+
+
 }

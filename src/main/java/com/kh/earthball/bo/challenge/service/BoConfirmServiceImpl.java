@@ -33,4 +33,10 @@ public class BoConfirmServiceImpl implements BoConfirmService{
 
     return boConfirmMapper.selectConfirm(chConNo);
   }
+
+  @Override
+  public void deleteConfirm(BoConfirm boConfirm) {
+    boConfirmMapper.deleteConfirm(boConfirm);
+    boConfirmMapper.deleteDetailInfo(boConfirm);
+  }
 }

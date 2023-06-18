@@ -13,7 +13,7 @@ public interface ChallengeService {
 
   int selectListCount();
 
-  ArrayList<Challenge> selectList(PageInfo pageInfo);
+  ArrayList<Challenge> selectList(PageInfo pageInfo, Challenge challenge);
 
   int requestChallenge(Challenge challenge);
 

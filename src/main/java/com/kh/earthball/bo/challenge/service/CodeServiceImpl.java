@@ -62,9 +62,6 @@ public class CodeServiceImpl implements CodeService {
   public int insertCode(Code code) {
     int result = codeMapper.insertCode(code);
 
-//		log.info("Code 들어왔니? 서비스 : " + code);
-//		log.info("result? 서비스 : " + result);
-
     return result;
   }
 
@@ -82,11 +79,7 @@ public class CodeServiceImpl implements CodeService {
   @Override
   public int updateCode(Code code) {
 
-    log.info("service에 업데이트 넘어옴?:" + code);
-
     int result = codeMapper.updateCode(code);
-
-    log.info("업데이트 result 나왔음? : " + result);
 
     return result;
   }

@@ -111,7 +111,6 @@
                 , sortNo : sortNo
             }
 
-            console.log("탬플릿 생성용 data : ", data);
             $.ajax({
                   url : "insert.te"
                 , type : "post"

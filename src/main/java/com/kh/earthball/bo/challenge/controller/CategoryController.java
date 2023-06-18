@@ -4,6 +4,7 @@ import com.kh.earthball.bo.challenge.service.CategoryService;
 import com.kh.earthball.bo.challenge.service.CategoryTemplateService;
 import com.kh.earthball.bo.challenge.vo.Category;
 import com.kh.earthball.bo.challenge.vo.CategoryTemplate;
+import com.kh.earthball.fo.member.vo.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -24,10 +26,15 @@ public class CategoryController {
   private final CategoryTemplateService templateService;
 
   @GetMapping("list.ca")
-  public String selectListCategory(Model model) {
-    List<Category> categoryList = categoryService.selectCategoryList();
+  public String selectListCategory(Model model, HttpSession session) {
 
-    log.info("categoryList에 뭐 들음? : " + categoryList);
+    // 관리자가 아니라면 접근 불가하도록 설정
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || !"admin".equals(loginUser.getMemberId())) {
+      return "redirect:/loginForm.me";
+    }
+
+    List<Category> categoryList = categoryService.selectCategoryList();
 
     model.addAttribute("categoryList", categoryList);
 
@@ -36,7 +43,14 @@ public class CategoryController {
 
 
   @GetMapping("EnrollForm.ca")
-  public String insertCategoryForm() {
+  public String insertCategoryForm(HttpSession session) {
+
+    // 관리자가 아니라면 접근 불가하도록 설정
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || !"admin".equals(loginUser.getMemberId())) {
+      return "redirect:/loginForm.me";
+    }
+
     return "bo/challenge/category/categoryEnrollForm";
   }
 
@@ -49,10 +63,15 @@ public class CategoryController {
 
 
   @GetMapping("updateForm.ca")
-  public String updateCategoryForm(@RequestParam(value = "categoryNo") int categoryNo, Model model) {
-    Category category = categoryService.selectCategory(categoryNo);
+  public String updateCategoryForm(@RequestParam(value = "categoryNo") int categoryNo, Model model, HttpSession session) {
 
-    log.info("수정할 카테고리 : " + category);
+    // 관리자가 아니라면 접근 불가하도록 설정
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || !"admin".equals(loginUser.getMemberId())) {
+      return "redirect:/loginForm.me";
+    }
+
+    Category category = categoryService.selectCategory(categoryNo);
 
     model.addAttribute("category", category);
     return "bo/challenge/category/categoryUpdateForm";
@@ -61,9 +80,7 @@ public class CategoryController {
   @ResponseBody
   @PostMapping("update.ca")
   public int updateCategory(Category category) {
-    log.info("수정할 카테고리정보 : " + category);
     int result = categoryService.updateCategory(category);
-    log.info("카테고리 수정결과? : " + result);
     return result;
   }
 
@@ -75,9 +92,15 @@ public class CategoryController {
 
 
   @GetMapping("detail.ca")
-  public String categoryDetailView(int categoryNo, Model model) {
+  public String categoryDetailView(int categoryNo, Model model, HttpSession session) {
 
-    List<CategoryTemplate> templateList = templateService.selectTemplateList(categoryNo);
+    // 관리자가 아니라면 접근 불가하도록 설정
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || !"admin".equals(loginUser.getMemberId())) {
+      return "redirect:/loginForm.me";
+    }
+
+    List<CategoryTemplate> templateList = templateService.selectTemplateListNo(categoryNo);
     Category category = categoryService.selectCategory(categoryNo);
 
     model.addAttribute("templateList", templateList);
