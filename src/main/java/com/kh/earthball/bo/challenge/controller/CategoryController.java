@@ -77,7 +77,7 @@ public class CategoryController {
   @GetMapping("detail.ca")
   public String categoryDetailView(int categoryNo, Model model) {
 
-    List<CategoryTemplate> templateList = templateService.selectTemplateList(categoryNo);
+    List<CategoryTemplate> templateList = templateService.selectTemplateListNo(categoryNo);
     Category category = categoryService.selectCategory(categoryNo);
 
     model.addAttribute("templateList", templateList);

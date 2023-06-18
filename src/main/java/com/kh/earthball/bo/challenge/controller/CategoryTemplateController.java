@@ -45,7 +45,7 @@ public class CategoryTemplateController {
   @GetMapping("insertForm.ch")
   public String insertChallengeForm(@RequestParam(value = "categoryNo") int categoryNo, Model model) {
 
-    List<CategoryTemplate> templateList = templateService.selectTemplateList(categoryNo);
+    List<CategoryTemplate> templateList = templateService.selectTemplateListNo(categoryNo);
 
     log.info("서비스다 다녀온 templateList : " + templateList);
 

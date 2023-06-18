@@ -2,16 +2,19 @@ package com.kh.earthball.bo.challenge.controller;
 
 import com.kh.earthball.bo.challenge.service.BoChallengeService;
 import com.kh.earthball.bo.challenge.service.BoConfirmService;
+import com.kh.earthball.bo.challenge.service.CategoryTemplateService;
 import com.kh.earthball.bo.challenge.vo.BoChallenge;
 import com.kh.earthball.bo.challenge.vo.BoConfirm;
+import com.kh.earthball.bo.challenge.vo.CategoryTemplate;
+import com.kh.earthball.fo.challenge.service.ConfirmService;
+import com.kh.earthball.fo.challenge.vo.ChConfirm;
 import com.kh.earthball.fo.common.template.Pagination;
 import com.kh.earthball.fo.common.vo.PageInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,6 +25,8 @@ public class BoConfirmController {
 
   private final BoConfirmService boConfirmService;
   private final BoChallengeService boChallengeService;
+  private final CategoryTemplateService templateService;
+  private final ConfirmService confirmService;
 
   @GetMapping("/list.conf")
   public String confirmList(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model) {
@@ -47,19 +52,23 @@ public class BoConfirmController {
   public String confirmDetailView(int chConNo, Model model) {
 
     // 해당하는 챌린지 인증 게시글 조회 해오기
-    BoConfirm confirm = boConfirmService.selectConfirm(chConNo);
-
-    int chNo = confirm.getChNo();
-
-    // 해당하는 챌린지 조회
-    BoChallenge challenge = boChallengeService.selectChallenge(chNo);
-
-
+    ChConfirm confirm  = confirmService.selectConfirm(chConNo);
 
     model.addAttribute("confirm", confirm);
-    model.addAttribute("challenge", challenge);
+    // 해당하는 챌린지 조회
+    model.addAttribute("challenge", boChallengeService.selectChallenge(confirm.getChNo()));
+    // 해당 챌린지의 인증 폼 가져오기
+    model.addAttribute("templateList",  templateService.selectTemplateList(confirm));
 
     return "bo/challenge/challengeEdit/confirmDetailView";
   }
 
+  @ResponseBody
+  @PostMapping("/deleteBo.conf")
+  public int confirmDelete(@RequestBody BoConfirm boConfirm) {
+
+    boConfirmService.deleteConfirm(boConfirm);
+
+    return 1;
+  }
 }

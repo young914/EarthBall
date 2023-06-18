@@ -81,12 +81,17 @@
 
     <select id="selectConfirm" parameterType="java.lang.Integer"
             resultType="com.kh.earthball.fo.challenge.vo.ChConfirm">
-        SELECT CH_NO
-             , CH_CON_NO
-             , CH_CON_TITLE
-             , MEMBER_ID
-             , TO_CHAR(CH_CON_CREATE_DATE, 'YYYY-MM-DD') AS CH_CON_CREATE_DATE
-          FROM TB_CH_CONFIRM
+        SELECT CC.CH_NO
+             , CC.CH_CON_NO
+             , CC.CH_CON_TITLE
+             , CC.MEMBER_ID
+             , TO_CHAR(CC.CH_CON_CREATE_DATE, 'YYYY-MM-DD') AS CH_CON_CREATE_DATE
+             , (SELECT CATEGORY_NO
+                FROM TB_CHALLENGE tc
+                WHERE CH_NO =(SELECT CH_NO
+                              FROM TB_CH_CONFIRM
+                              WHERE CH_CON_NO = #{chConNo})) CATEGORY_NO
+        FROM TB_CH_CONFIRM CC
         WHERE CH_CON_NO =  #{chConNo}
           AND STATUS = 'Y'
     </select>

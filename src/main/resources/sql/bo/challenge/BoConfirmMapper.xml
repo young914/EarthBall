@@ -32,4 +32,18 @@
         WHERE CH_CON_NO =  #{chConNo}
           AND STATUS = 'Y'
     </select>
+
+    <update id="deleteConfirm" parameterType="com.kh.earthball.bo.challenge.vo.BoConfirm">
+        UPDATE TB_CH_CONFIRM
+        SET STATUS = 'N'
+        WHERE CH_CON_NO = #{chConNo}
+          AND MEMBER_ID = #{memberId}
+    </update>
+
+    <delete id="deleteDetailInfo" parameterType="com.kh.earthball.bo.challenge.vo.BoConfirm">
+        DELETE FROM TB_CH_DETAIL_INFO
+        WHERE CH_NO = #{chNo}
+          AND CH_CON_NO = #{chConNo}
+    </delete>
+
 </mapper>

@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kh.earthball.bo.challenge.mapper.CategoryTemplateMapper">
 
-    <select id="selectTemplateList" parameterType="Integer" resultType="com.kh.earthball.bo.challenge.vo.CategoryTemplate">
+    <select id="selectTemplateListNo" parameterType="Integer" resultType="com.kh.earthball.bo.challenge.vo.CategoryTemplate">
         SELECT CATEGORY_TEMPLATE_NO
              , INPUT_TYPE
              , SORT_NO
