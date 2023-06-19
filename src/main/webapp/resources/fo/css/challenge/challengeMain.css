@@ -1,6 +1,4 @@
 .wrap div {
-   /*border: 1px solid red;*/
-    /* 지금부터 지정하는 가로세로길이는 테두리까지 포함한 사이즈임 */
     box-sizing: border-box;
 }
 
@@ -10,23 +8,9 @@
     height: 2800px;
     margin: auto; /* 좌우로 항상 정정가운데에 위치시켜주는 속성 */
     padding-top: 20px;
-    /* position : relative; */
 }
-
-/* 크게 세가지 영역 */
-/* header, content, footer */
-/* #header, #content, #footer {
-    width: 100%;
-} */
 
 .wrap>div { width: 100%; }
-
-/* 영역별 높이
-#banner {
-  height: 15%;
-  margin-top: 200px;
-}
- */
 
 /* 메인슬라이드 */
 .mainSlide {
@@ -150,6 +134,9 @@
     border-radius: 4px;
 }
 
+#filter_1>h3, filter_2>h3 {
+    width: 150px;
+}
 
 #filter_1>div>ul>li a {
     text-align: center;
