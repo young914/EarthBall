@@ -81,7 +81,6 @@ public class BoChallengeController {
   @GetMapping("/search.chall")
   public String searchChallenge(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, @RequestParam("keyword") String keyword, Model model) {
 
-     log.info("키워드 넘어옴? : " + keyword);
     // 키워드가 속한 챌린지 게시글 수 조회
     int listCount = boChallengeService.searchChallengeListCount(keyword);
 
@@ -90,11 +89,8 @@ public class BoChallengeController {
 
     PageInfo pageInfo = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 
-    log.info("pageInfo 나왔니? : " + pageInfo);
     // 키워드가 속한 챌린지 리스트 조회
     List<BoChallenge> boChallengeList = boChallengeService.searchChallenge(pageInfo, keyword);
-
-    log.info("boChallengeList 나와랏 : " + boChallengeList);
 
     model.addAttribute("boChallengeList", boChallengeList);
 

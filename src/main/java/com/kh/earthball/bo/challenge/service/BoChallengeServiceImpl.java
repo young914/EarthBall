@@ -49,7 +49,6 @@ public class BoChallengeServiceImpl implements BoChallengeService {
   @Override
   public List<BoChallenge> searchChallenge(PageInfo pageInfo, String keyword) {
 
-    log.info("키워드 임플에 넘어왔니? :" + keyword);
     int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getBoardLimit();
     int limit = offset + pageInfo.getBoardLimit();
 
@@ -59,9 +58,6 @@ public class BoChallengeServiceImpl implements BoChallengeService {
     searchParameters.setLimit(limit);
     searchParameters.setKeyword(keyword);
 
-    List<BoChallenge> abc = boChallengeMapper.searchChallenge(searchParameters);
-
-    log.info("abc 나와 : " + abc);
-    return abc;
+    return boChallengeMapper.searchChallenge(searchParameters);
   }
 }

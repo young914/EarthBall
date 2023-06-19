@@ -24,6 +24,26 @@
 >
 <head>
   <jsp:include page="/WEB-INF/jsp/bo/common/commonHead.jsp" />
+
+  <style>
+    #searchForm {
+      width:80%;
+      margin:auto;
+    }
+    #searchForm>* {
+      float:left;
+      margin:5px;
+    }
+    .select {width:20%;}
+    .text {width:53%;}
+    .searchBtn {width:20%;}
+
+    .custom-select {
+      height: 40px;
+      width: 120px;
+    }
+
+  </style>
 </head>
 
 <body>
@@ -53,7 +73,14 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-sm-10">
-                  <button type="button" class="btn btn-primary" onclick="">검색</button>
+
+                  <form id="searchForm" action="/search.conf" method="get" align="center">
+                    <div class="text">
+                      <input type="text" class="form-control" placeholder="검색어를 입력하세요." name="keyword" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">검색</button>
+                  </form>
+
                 </div>
               </div>
             </div>

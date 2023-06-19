@@ -94,7 +94,7 @@
               <h4 class="fw-bold">챌린지 썸네일</h4> <hr>
               <div class="row">
                 <div class="col-sm-10">
-                  <img src="${challenge.filePath}" id="thumbnail" alt="">
+                  <img src="${challenge.filePath}" id="thumbnail" style="width: 700px">
                 </div>
               </div>
             </div>
