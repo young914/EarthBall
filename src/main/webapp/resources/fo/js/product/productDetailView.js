@@ -36,11 +36,6 @@ function insertCart(){
     let amount = $(".amount").val();
     let price = parseInt($("#productPrice").children().text());
 
-    console.log(productNo);
-    console.log(memberId);
-    console.log(amount);
-    console.log(price);
-
     $.ajax({
         url: "insert.cart",
         type: "post",
@@ -97,24 +92,39 @@ function reviewList(){
                 let r = result[i];
                 // HTML 요소 동적 생성
                 html += '<div class="review' + r.reviewNo + ' review" >';
+
                     html += '<div class="reviewArea" onclick="reviewToggle('+ r.reviewNo +');">';
-                        html += '<div class="star2">';
-                            for(let j = 1; j <= r.rating; j++) {
-                                html += '<span class="starR1">★</span>';
-                            }
-                        html += '</div>';
+
                         html += '<div>';
-                            html += '<pre style="font-family: Jua, sans-serif; font-size: medium;">';
-                                html += r.reviewContent;
-                            html += '</pre>';
-                        html += '</div>';
-                        if(r.changeName != null) {
-                            html += '<div>';
-                                html += '<img src="/resources/fo/upfiles/' + r.changeName + '">';
+                            html += '<div class="star2">';
+                                for(let j = 1; j <= r.rating; j++) {
+                                    html += '<span class="starR1">★</span>';
+                                }
                             html += '</div>';
-                        }
-                        html += '<div class="replyCount">댓글 <span>' + r.count + '</span></div>';
+                            html += '<div>';
+                                html += '<pre style="font-family: Jua, sans-serif; font-size: medium;">';
+                                    html += r.reviewContent;
+                                html += '</pre>';
+                            html += '</div>';
+                            if(r.changeName != null) {
+                                html += '<div>';
+                                    html += '<img src="/resources/fo/upfiles/' + r.changeName + '">';
+                                html += '</div>';
+                            }
+                            html += '<div class="replyCount">댓글 <span>' + r.count + '</span></div>';
+                        html += '</div>';
+
+                        html += '<div>';
+                            html += '<div>';
+                                html += '<span>작성자 : ' + r.memberId + '</span>';
+                            html += '</div>';
+                            html += '<div>';
+                                html += '<span>작성일 : ' + r.createDate + '</span>';
+                            html += '</div>';
+                        html += '</div>';
+
                     html += '</div>';
+
                     html += '<div class="replyArea">';
                         html += '<div class="area2">';
                             html += '<div><textarea name="" class="replyContent" cols="30" rows="10" placeholder="댓글"></textarea></div>';
@@ -125,6 +135,7 @@ function reviewList(){
                         html += '</div>';
                         html += '<div class="area1"></div>';
                     html += '</div>';
+
                 html += '</div>';
             }
             $(".reviewContentArea").html(html);
@@ -132,19 +143,6 @@ function reviewList(){
     });
 }
 
-// 사진리뷰 토글
-function photoToggle(){
-    // 한번 누르면 onlyPhoto() 실행
-    // 두번 누르면 reviewList() 실행
-    if($(".onlyPhoto").text() == "포토 구매평만 보기"){
-        $(".onlyPhoto").text("전체리뷰 보기");
-        onlyPhoto();
-    }
-    else {
-        $(".onlyPhoto").text("포토 구매평만 보기");
-        reviewList();
-    }
-}
 
 // 사진리뷰만 불러오기
 function onlyPhoto(){
@@ -194,6 +192,20 @@ function onlyPhoto(){
     });
 }
 
+// 사진리뷰 토글
+function photoToggle(){
+    // 한번 누르면 onlyPhoto() 실행
+    // 두번 누르면 reviewList() 실행
+    if($(".onlyPhoto").text() == "포토 구매평만 보기"){
+        $(".onlyPhoto").text("전체리뷰 보기");
+        onlyPhoto();
+    }
+    else {
+        $(".onlyPhoto").text("포토 구매평만 보기");
+        reviewList();
+    }
+}
+
 
 // 리뷰 댓글
 function reviewToggle(reviewNo){
@@ -209,9 +221,6 @@ function reviewToggle(reviewNo){
 function replyBtn(reviewNo){
     let replyContent = $(event.target).parent().prev().children().val();
     let memberId = $(".memberId").val();
-    console.log("댓글 내용 : " + replyContent);
-    console.log("리뷰 번호 : " + reviewNo);
-    console.log("회원 아이디 : " + memberId);
 
     if(memberId != "" && replyContent != null){
         $.ajax({
@@ -247,7 +256,6 @@ function replyList(reviewNo){
         type: "get",
         data: {reviewNo: reviewNo},
         success: function(result) {
-            console.log("불러오기 성공" + result);
             let html = "";
             for(let i in result){
                 let r = result[i];
@@ -335,13 +343,6 @@ function insertReview(){
     var reviewScore = $(".starR.on").length;
     var upfile = $("input[name=upfile]")[0].files[0];
 
-
-    console.log(productNo);
-    console.log(memberId);
-    console.log(reviewContent);
-    console.log(reviewScore);
-    console.log(upfile);
-
     var formData = new FormData();
 
     formData.append("productNo", productNo);
@@ -362,6 +363,10 @@ function insertReview(){
         contentType : false,
         success : function(result){
             if(result == 1){
+                // 리뷰 등록 후 textArea 및 별점 및 파일 초기화
+                $("#reviewContent").val("");
+                $(".starR").removeClass("on");
+                $("input[name=upfile]").val("");
                 reviewList();
                 insertPoint();
                 $(".onlyPhoto").text("전체리뷰 보기");
@@ -386,7 +391,8 @@ $(function(){
 
 // 포인트 추가 기능
 function insertPoint() {
-
+    let memberId = $('.memberId').val();
+    console.log(memberId);
 	$.ajax({
 		url : "/insertPoint",
 		type : "post",
@@ -394,7 +400,7 @@ function insertPoint() {
 			pointContent : "상품평 작성", // 포인트적립 사유 ex) 일기 작성, 챌린지 인증
 			pointNum : 50, // 부여할 포인트값
 			status : "+",
-			memberId : $('.sessionMemberId').val() // 로그인한 회원 아이디
+			memberId : memberId
 		},
 		success : function(result) {
 

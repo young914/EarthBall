@@ -206,6 +206,10 @@
     margin: 0 auto;
     border-bottom: 1px solid #ddd9d9;
 }
+.reviewArea{
+    display: flex;
+    justify-content: space-between;
+}
 .insertReview{
     width: 120px;
     height: 30px;

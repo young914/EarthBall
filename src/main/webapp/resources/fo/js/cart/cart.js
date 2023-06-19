@@ -225,9 +225,17 @@ function updateInfomation(){
     $(".orderArea").children().children().eq(0).text(count);
 
     let productTotal = 0;
+    let productNo = [];
 
     for(var i = 1; i <= count; i++){
-        productTotal = productTotal + $(".totalPrice" + i).text() * 1;
+
+        productNo = $(".cartList>tbody>tr").eq(i-1).find("input[type='hidden']").val();
+        let totalPrice = $(".totalPrice" + productNo).text();
+
+        console.log(productNo);
+        console.log(totalPrice );
+
+        productTotal = productTotal + $(".totalPrice" + productNo).text() * 1;
     }
 
 
