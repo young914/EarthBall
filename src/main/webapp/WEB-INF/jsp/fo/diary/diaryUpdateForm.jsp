@@ -26,7 +26,6 @@
 							<form id="updateForm" action="dyUpdate.bo" method="post">
 								<input type="hidden" name="dyBoardNo" id="dyBoardNo" value="${ d.dyBoardNo }">
 								<input type="hidden" name="filePath" value="${ d.changeName }">
-							</form>
 			         </div>
 			   	</div>
 
@@ -70,7 +69,7 @@
 		            </div>
 		        </div>
 
-				<input type="hidden" id="weather" value=""> <!-- 날씨 상태값 -->
+				<input type="hidden" id="weather" value="${d.weather}"> <!-- 날씨 상태값 -->
 
 		        <script>
 					$(function() {
@@ -79,6 +78,8 @@
 						let weather = ${d.weather};
 						let iconId = "";
 						let activeColor = "";
+
+						console.log(weather);
 
 						switch(weather) {
 						case 1 : iconId = "#c_1"; activeColor = "active1";  break;
@@ -133,6 +134,9 @@
 					    });
 				</script>
 
+				<!--  기존 첨부파일이 있을 경우 :  기존 첨부파일의 원본명과 수정명을 같이 넘겨줄 것 -->
+				<input type="hidden"  id="changeName" name="changeName" value="${ d.changeName}">
+					</form>
 		        <div class="controls">
 		            <div class="controls_range">
 		                <input type="range" id="jsRange" min="2.0" max="10.0" value="2.5" step="0.1"/>

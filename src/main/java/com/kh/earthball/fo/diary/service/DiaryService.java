@@ -5,7 +5,6 @@ import com.kh.earthball.fo.diary.vo.Diary;
 import com.kh.earthball.fo.diary.vo.DyReply;
 
 import java.util.ArrayList;
-import org.apache.ibatis.session.RowBounds;
 
 public interface DiaryService {
 
@@ -30,13 +29,22 @@ public interface DiaryService {
       // 게시글 수정 서비스
       int updateDiary(Diary d);
 
+      // 마이페이지 내가 참여한 일기 조회
+      ArrayList<Diary> diaryListMe(PageInfo pi, String memberId);
+
+      //마이페이지 내가 참여한 일기 총 갯수 조회
+       int diaryListMeCount(String memberId);
+
+      // 메인페이지 일기 조회
+      ArrayList<Diary> mainDiaryList();
+
+
       // 댓글 리스트 조회 서비스
       ArrayList<DyReply> selectDyReplyList(int dyBoardNo);
 
       // 댓글 작성 서비스 (Ajax)
       int insertDyReply(DyReply r);
 
-      ArrayList<Diary> diaryListMe(String memberId);
 
 
 

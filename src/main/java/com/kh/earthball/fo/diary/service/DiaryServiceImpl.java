@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -65,6 +64,27 @@ public class DiaryServiceImpl  implements DiaryService {
   }
 
   @Override
+  public ArrayList<Diary> diaryListMe(PageInfo pi,String memberId) {
+
+    int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+    int limit = offset + pi.getBoardLimit();
+
+    RowBounds rowBounds = new RowBounds(offset, limit);
+
+    return diaryMapper.diaryListMe( rowBounds, memberId);
+  }
+
+  @Override
+  public ArrayList<Diary> mainDiaryList() {
+    return diaryMapper.mainDiaryList();
+  }
+
+  @Override
+  public int diaryListMeCount(String memberId) {
+    return  diaryMapper.diaryListMeCount(memberId);
+  }
+
+  @Override
   public ArrayList<DyReply> selectDyReplyList(int dyBoardNo) {
     return null;
   }
@@ -72,11 +92,6 @@ public class DiaryServiceImpl  implements DiaryService {
   @Override
   public int insertDyReply(DyReply r) {
     return 0;
-  }
-
-  @Override
-  public ArrayList<Diary> diaryListMe(String memberId) {
-    return diaryMapper.diaryListMe(memberId);
   }
 
 
