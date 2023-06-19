@@ -2,6 +2,7 @@ package com.kh.earthball.fo.member.service;
 
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import com.kh.earthball.fo.member.mapper.MemberMapper;
 import com.kh.earthball.fo.member.vo.Member;
 import lombok.RequiredArgsConstructor;
@@ -65,6 +66,13 @@ public class MemberServiceImpl implements MemberService {
     return memberMapper.selectProfile(memberId);
   }
 
+  @Transactional
+  @Override
+  public int insertProfile(String memberImg, String memberId) {
+    return memberMapper.insertProfile(memberImg, memberId);
+  }
+
+
   @Override
   public int deleteMember(String memberId) {
     return memberMapper.deleteMember(memberId);
@@ -72,5 +80,5 @@ public class MemberServiceImpl implements MemberService {
 
 
 }
-  
+
 
