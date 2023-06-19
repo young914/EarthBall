@@ -10,40 +10,6 @@
     <jsp:include page="/WEB-INF/jsp/fo/common/common.jsp"/>
     <link rel="stylesheet" href="/resources/fo/css/mypage/commonMyPage.css?after">
 	<style>
-		.modal {
-		  display: none;
-		  position: fixed;
-		  z-index: 1;
-		  left: 0;
-		  top: 0;
-		  width: 100%;
-		  height: 100%;
-		  overflow: auto;
-		  background-color: rgba(0, 0, 0, 0.5);
-		}
-
-		.modal-content {
-		  background-color: #fefefe;
-		  margin: 15% auto;
-		  padding: 20px;
-		  border: 1px solid #888;
-		  width: 50%; /* 모달 창의 너비 조정 */
-		  max-width: 600px; /* 모달 창의 최대 너비 설정 */
-		}
-
-		.close {
-		  color: #aaa;
-		  float: right;
-		  font-size: 28px;
-		  font-weight: bold;
-		}
-
-		.close:hover,
-		.close:focus {
-		  color: black;
-		  text-decoration: none;
-		  cursor: pointer;
-		}
 
 	</style>
 </head>
@@ -62,7 +28,7 @@
             <ul class="menu1">
                 <li><a href="#">이메일인증</a></li>
                 <li><a href="updateInfo.me">내 정보 수정</a></li>
-                <li><a href="#" data-toggle="modal" data-target="#deleteForm">회원탈퇴</a></li>
+                <li><a href="" data-toggle="modal" data-target="#deleteForm">회원탈퇴</a></li>
             </ul>
         </div>
         
