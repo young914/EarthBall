@@ -129,10 +129,7 @@
 										<option value="식품">식품</option>
 										<option value="주방">주방</option>
 										<option value="생활">생활</option>
-										<option value="취미">취미</option>
 										<option value="음료용품">음료용품</option>
-										<option value="여성용품">여성용품</option>
-										<option value="반려동물">반려동물</option>
 										<option value="화장품">화장품</option>
 										<option value="문구">문구</option>
 									</select>
