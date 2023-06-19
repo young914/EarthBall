@@ -32,7 +32,7 @@
       </a>
     </li>
     <li class="menu-item ${param.menuId eq '10' ? 'active' : ''}">
-      <a href="/" class="menu-link">
+      <a href="menuMember.me" class="menu-link">
         <i class="menu-icon tf-icons bx bx-table"></i>
         <div data-i18n="Tables">회원</div>
       </a>
@@ -62,10 +62,22 @@
       </a>
     </li>
     <li class="menu-item ${param.menuId eq '40' ? 'active' : ''}">
-      <a href="adminlist.st" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-table"></i>
-        <div data-i18n="Tables">매장</div>
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-dock-top"></i>
+        <div data-i18n="Account Settings">매장</div>
       </a>
+      <ul class="menu-sub">
+        <li class="menu-item ${param.menuId eq '41' ? 'active' : ''}">
+          <a href="adminlist.st" class="menu-link">
+            <div data-i18n="Account">매장리스트</div>
+          </a>
+        </li>
+        <li class="menu-item ${param.menuId eq '42' ? 'active' : ''}">
+          <a href="adminSignUpList.st" class="menu-link">
+            <div data-i18n="Notifications">매장 신청리스트</div>
+          </a>
+        </li>
+      </ul>
     </li>
     <li class="menu-item ${param.menuId eq '0' ? 'active' : ''}">
       <a href="/" class="menu-link">

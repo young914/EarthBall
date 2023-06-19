@@ -86,7 +86,7 @@
                                 <li> <a href="#" class="arrow_right" disabled> >> </a> </li>
                             </c:when>
                             <c:otherwise>
-                                <li> <a href="/list.myConfirm?memberId=${loginUser.memberId}&currentPage=${[pageInfo.currentPage + 1]}" class="arrow_right" disabled> >> </a> </li>
+                                <li> <a href="/list.myConfirm?memberId=${loginUser.memberId}&currentPage=${pageInfo.currentPage + 1}" class="arrow_right" disabled> >> </a> </li>
                             </c:otherwise>
                         </c:choose>
 

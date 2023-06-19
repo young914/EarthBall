@@ -82,7 +82,7 @@
 
     <update id="updateProfile" parameterType="java.lang.String">
     	UPDATE MEMBER
-    	        SET ORG_FILE_NAME = #{1}
+    	        SET ORG_FILE_NAME = 1
     	 WHERE MEMBER_ID = #{memberId}
     </update>
 
@@ -99,5 +99,11 @@
     	WHERE MEMBER_ID = #{memberId}
     </update>
 
+    
+    <update id="deleteMember" parameterType="java.lang.String">
+    	UPDATE MEMBER
+    	        SET STATUS = 'N'
+    	 WHERE  MEMBER_ID = #{memberId}
+    </update>
 
 </mapper>

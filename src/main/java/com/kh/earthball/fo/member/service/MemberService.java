@@ -27,4 +27,7 @@ public interface MemberService {
 
   int insertProfile(String memberImg, String memberId);
 
+  
+  int deleteMember(String memberId);
+  
 }

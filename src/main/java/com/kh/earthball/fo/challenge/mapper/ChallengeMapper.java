@@ -20,7 +20,7 @@ public interface ChallengeMapper {
 
   int insertChDetailInfo(ChDetailInfo chDetailInfo);
 
-  ArrayList<Challenge> selectList(RowBounds rowBounds);
+  ArrayList<Challenge> selectList(Challenge challenge);
 
   Challenge selectChallenge(int chNo);
 

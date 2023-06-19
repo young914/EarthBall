@@ -30,4 +30,6 @@ public interface MemberMapper {
   String selectProfile(String memberId);
 
   int insertProfile(@Param("memberImg") String memberImg, @Param("memberId") String memberId);
+  
+  int deleteMember(String memberId);
 }

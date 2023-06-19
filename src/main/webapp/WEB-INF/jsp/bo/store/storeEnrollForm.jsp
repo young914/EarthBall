@@ -99,13 +99,13 @@
 				<!-- Content -->
 				<div class="content">
 					<div class="listArea">
-						<h1 class="title">매장 추가</h1>
+						<h1 class="title">매장 등록 신청 작성폼</h1>
 						<form action="insert.st" method="post" enctype="multipart/form-data">
 							<div>
 								<table class="insertForm">
 									<tr>
 										<td width="150">매장명</td>
-										<td><input type="text" name="storeName" id required style="width: 500px"></td>
+										<td><input type="text" name="storeName" id required style="width: 500px" placeholder="최대한 자세하게 적어주세요!"></td>
 									</tr>
 									<tr>
 										<td style="display: flex;">
@@ -116,17 +116,17 @@
 										</td>
 
 										<td style="width: 500px;">
-											주소 : <input type="text" name="storeAddress" required style="width: 40%;" id="address_kakao">
+											주소 : <input type="text" name="storeAddress" required style="width: 40%;" id="address_kakao" placeholder="도로명 주소로 선택해주세요!">
 										</td>
 										<td>
-											상세주소 : <input type="text" required style="width: 40%;" name="storeDetailAddress">
+											상세주소 : <input type="text" required style="width: 40%;" name="storeDetailAddress" placeholder="최대한 자세하게 적어주세요!">
 										</td>
 		
 									</tr>
 									<tr>
 										
 										<td>전화번호</td>
-										<td><input type="text" name="storePhone" required style="width: 80%;"></td>
+										<td><input type="text" name="storePhone" required style="width: 80%;" placeholder="최대한 자세하게 적어주세요!"></td>
 									</tr>
 									<tr style="margin: 10px 0;">
 										<td >운영시간</td>
@@ -191,7 +191,7 @@
 									<tr>
 										<td>매장 상세설명</td>
 										<td>
-											<textarea name="storeInfo"  rows="10" required style="width: 80%; resize: none;"></textarea>
+											<textarea name="storeInfo"  rows="10" required style="width: 80%; resize: none;" placeholder="최대한 자세하게 적어주세요!"></textarea>
 										</td>
 									</tr>
 								<tr>
@@ -199,24 +199,24 @@
 								<td>
 									<table class="fileArea">
 										<tr>
-											<td>로고<input type="file" name="upfile1" onchange="loadImg(this, 1);" required> <img id="preview1"></td>
-											<td>2번<input type="file" name="upfile2" onchange="loadImg(this, 2);"> <img id="preview2"></td>
+											<td>로고(필수)<input type="file" name="upfile1" onchange="loadImg(this, 1);"> <img id="preview1"></td>
+											<td>매장사진<input type="file" name="upfile2" onchange="loadImg(this, 2);"> <img id="preview2"></td>
 										</tr>
 										<tr>
-											<td>3번<input type="file" name="upfile3" onchange="loadImg(this, 3);"> <img id="preview3"></td>
-											<td>4번<input type="file" name="upfile4" onchange="loadImg(this, 4);"> <img id="preview4"></td>
+											<td>매장사진<input type="file" name="upfile3" onchange="loadImg(this, 3);"> <img id="preview3"></td>
+											<td>매장사진<input type="file" name="upfile4" onchange="loadImg(this, 4);"> <img id="preview4"></td>
 										</tr>
 										<tr>
-											<td>5번<input type="file" name="upfile5" onchange="loadImg(this, 5);"> <img id="preview5"></td>
-											<td>6번<input type="file" name="upfile6" onchange="loadImg(this, 6);"> <img id="preview6"></td>
+											<td>매장사진<input type="file" name="upfile5" onchange="loadImg(this, 5);"> <img id="preview5"></td>
+											<td>매장사진<input type="file" name="upfile6" onchange="loadImg(this, 6);"> <img id="preview6"></td>
 										</tr>
 										<tr>
-											<td>7번<input type="file" name="upfile7" onchange="loadImg(this, 7);"> <img id="preview7"></td>
-											<td>8번<input type="file" name="upfile8" onchange="loadImg(this, 8);"> <img id="preview8"></td>
+											<td>매장사진<input type="file" name="upfile7" onchange="loadImg(this, 7);"> <img id="preview7"></td>
+											<td>매장사진<input type="file" name="upfile8" onchange="loadImg(this, 8);"> <img id="preview8"></td>
 										</tr>
 										<tr>
-											<td>9번<input type="file" name="upfile9" onchange="loadImg(this, 9);"> <img id="preview9"></td>
-											<td>10번<input type="file" name="upfile10" onchange="loadImg(this, 10);"> <img id="preview10"></td>
+											<td>매장사진<input type="file" name="upfile9" onchange="loadImg(this, 9);"> <img id="preview9"></td>
+											<td>1매장사진<input type="file" name="upfile10" onchange="loadImg(this, 10);"> <img id="preview10"></td>
 										</tr>
 									</table>
 								</td>
@@ -258,6 +258,31 @@
 </div>
 <jsp:include page="/WEB-INF/jsp/bo/common/commonScript.jsp" />
 <script type="text/javascript">
+	var startPm = document.getElementById("startPm");
+	var endAm = document.getElementById("endAm");
+
+	startAm.addEventListener("change", function() {
+  if (startAm.checked) {
+    endAm.disabled = false;
+  } else {
+    if (startPm.checked) {
+      endAm.disabled = true;
+    }
+  }
+});
+
+startPm.addEventListener("change", function() {
+  if (startPm.checked) {
+    endAm.disabled = true;
+  } else {
+    if (!startAm.checked) {
+      endAm.disabled = false;
+    }
+  }
+});
+
+
+
 	$(function(){
 		$(".fileArea input[type=file]").hide();
 

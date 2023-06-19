@@ -112,8 +112,6 @@
             , categoryNo: categoryNo
         };
 
-        console.log("카테고리명 잘 들어감? : ", data);
-
         $.ajax({
             url: "update.ca"
             , type: "post"

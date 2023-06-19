@@ -4,8 +4,24 @@
 <mapper namespace="com.kh.earthball.bo.store.mapper.AdminStoreMapper">
 
 	<insert id="insertStore" parameterType="com.kh.earthball.bo.store.vo.AdminStore">
-		INSERT INTO STORE(STORE_NO, STORE_NAME, STORE_ADDRESS, STORE_DETAIL_ADDRESS, STORE_PHONE, BUSINESS_HOURS, STORE_REGION_NO, STORE_INFO)
-		VALUES(SEQ_STORE.NEXTVAL, #{storeName}, #{storeAddress}, #{storeDetailAddress}, #{storePhone}, #{businessHours}, #{storeRegionNo}, #{storeInfo})
+		INSERT INTO STORE(STORE_NO, 
+		STORE_NAME, 
+		STORE_ADDRESS, 
+		STORE_DETAIL_ADDRESS, 
+		STORE_PHONE, 
+		BUSINESS_HOURS, 
+		STORE_REGION_NO, 
+		STORE_INFO,
+		STATUS)
+		VALUES(SEQ_STORE.NEXTVAL, 
+		#{storeName}, 
+		#{storeAddress}, 
+		#{storeDetailAddress}, 
+		#{storePhone}, 
+		#{businessHours}, 
+		#{storeRegionNo}, 
+		#{storeInfo},
+		'N')
 	</insert>
 
 	<insert id="insertStoreAtta" parameterType="com.kh.earthball.bo.store.vo.AdminAtta">
@@ -13,15 +29,30 @@
 		VALUES(SEQ_STORE_ATTA.NEXTVAL, #{changerName}, #{fileLevel}, SEQ_STORE.CURRVAL)
 	</insert>
 
-	<select id="adminAllStoreList" resultType="com.kh.earthball.bo.store.vo.AdminStore">
+	<select id="selectSignUpListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM STORE
+		WHERE STATUS = 'N'
+	</select>
+
+	<select id="selectSignUpList" resultType="com.kh.earthball.bo.store.vo.AdminStore">
 		SELECT *
 		FROM STORE
+		WHERE STATUS = 'N'
 		ORDER BY STORE_NO
 	</select>
 
 	<select id="selectListCount" resultType="int">
 		SELECT COUNT(*)
 		FROM STORE
+		WHERE STATUS = 'Y'
+	</select>
+
+	<select id="adminAllStoreList" resultType="com.kh.earthball.bo.store.vo.AdminStore">
+		SELECT *
+		FROM STORE
+		WHERE STATUS = 'Y'
+		ORDER BY STORE_NO
 	</select>
 
 		<select id="getRegionNo" parameterType="String" resultType="_int">
@@ -66,5 +97,11 @@
 		DELETE STORE
 		WHERE STORE_NO = #{storeNo}
 	</delete>
+	
+	<update id="approvalStore" >
+		UPDATE STORE
+		SET STATUS = 'Y'
+		WHERE STORE_NO = #{storeNo}
+	</update>
 	
 </mapper>
