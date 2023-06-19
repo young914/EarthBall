@@ -10,7 +10,7 @@
     WHERE STATUS = 'Y'
   </select>
  	
- 	<!--  매장 전체리스트 조회용 쿼리문   -->
+ 	
  	<!--  매장 전체리스트 조회용 쿼리문   -->
  	<select id="selectAllStoreList" resultType="com.kh.earthball.fo.store.vo.Store">
  	    SELECT STORE_NO

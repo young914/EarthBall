@@ -83,4 +83,19 @@ public class AdminStoreServiceImpl implements AdminStoreService {
     return adminStoreMapper.deleteStore(storeNo);
   }
 
+  @Override
+  public int selectSignUpListCount() {
+   return adminStoreMapper.selectSignUpListCount();
+  }
+
+  @Override
+  public ArrayList<AdminStore> selectSignUpList(PageInfo pi) {
+    return adminStoreMapper.selectSignUpList(pi);
+  }
+
+  @Override
+  public int approvalStore(int storeNo) {
+    return adminStoreMapper.approvalStore(storeNo);
+  }
+
 }

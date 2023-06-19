@@ -92,12 +92,15 @@
                     </div>
                 </div>
                 <div class="dropdown">
-                    <span class="dropbtn">
+                    <span class="dropbtn"><a href="#">친환경 매장</a></span>
+                    <div class="dropdown-content">
                         <form name="myForm" action='storeListView.st' method="POST">
                             <input type="hidden" name="memberId" value="${ loginUser.memberId}" />
                         </form>
                         <a href="#" onclick="javascript:document.myForm.submit();">매장찾기</a>
-                    </span>
+                        <a href="storeEnrollForm.st">매장등록신청</a>
+                    </div>
+                    
                 </div>
                 <div class="dropdown">
                     <span class="dropbtn"> <a href="#">고객센터</a> </span>

@@ -30,7 +30,6 @@ public class StoreController {
   public String selectList(Member m, HttpSession session, Model model) {
       System.out.println("여기는 selectList");
 
-      
       String memberId = m.getMemberId();
       if (memberId.equals("")) {
           memberId = "없다!";
@@ -61,6 +60,7 @@ public class StoreController {
       
       ArrayList<Store> list = storeService.selectAllStoreList(orderLikeCheck);
       ArrayList<StoreAtta> sList = storeService.selectStoreAttaList();
+     
       System.out.println(sList);
       
       // 결과를 담을 Map 생성
