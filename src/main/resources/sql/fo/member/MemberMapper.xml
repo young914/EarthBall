@@ -82,7 +82,7 @@
     
     <update id="updateProfile" parameterType="java.lang.String">
     	UPDATE MEMBER
-    	        SET ORG_FILE_NAME = #{1}
+    	        SET ORG_FILE_NAME = 1
     	 WHERE MEMBER_ID = #{memberId}
     </update>
     
@@ -92,6 +92,12 @@
 		INNER JOIN MEMBER ON MP_FILE.MEMBER_ID = MEMBER.MEMBER_ID
 		WHERE MEMBER.MEMBER_ID = #{memberId}
     </select>
+    
+    <update id="deleteMember" parameterType="java.lang.String">
+    	UPDATE MEMBER
+    	        SET STATUS = 'N'
+    	 WHERE  MEMBER_ID = #{memberId}
+    </update>
     
 
 </mapper>

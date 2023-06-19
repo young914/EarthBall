@@ -30,7 +30,6 @@ public class ConfirmServiceImpl implements ConfirmService {
       chDetailInfo.setChConNo(chConfirm.getChConNo());
       chDetailInfo.setChNo(chConfirm.getChNo());
 
-      log.info("디테일 객체 하나 : " + chDetailInfo);
       confirmMapper.insertDetailInfo(chDetailInfo);
     }
   }
@@ -47,7 +46,6 @@ public class ConfirmServiceImpl implements ConfirmService {
       chDetailInfo.setChConNo(chConfirm.getChConNo());
       chDetailInfo.setChNo(chConfirm.getChNo());
 
-      log.info("디테일 객체 하나 : " + chDetailInfo);
       confirmMapper.insertDetailInfo(chDetailInfo);
     }
   }

@@ -32,7 +32,7 @@
       </a>
     </li>
     <li class="menu-item ${param.menuId eq '10' ? 'active' : ''}">
-      <a href="/" class="menu-link">
+      <a href="menuMember.me" class="menu-link">
         <i class="menu-icon tf-icons bx bx-table"></i>
         <div data-i18n="Tables">회원</div>
       </a>

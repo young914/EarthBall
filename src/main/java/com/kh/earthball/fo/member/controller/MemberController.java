@@ -66,7 +66,7 @@ public class MemberController {
     if (saveId != null && saveId.equals("y")) {
 
       Cookie cookie = new Cookie("saveId", m.getMemberId());
-      cookie.setMaxAge(24 * 60 * 60);
+      cookie.setMaxAge(24 * 60 * 60 * 1);
 
       response.addCookie(cookie);
 
@@ -161,12 +161,18 @@ public class MemberController {
     MailHandler sendMail = new MailHandler(mailSender);
     sendMail.setSubject("[(web) 지구공 인증메일입니다.]");
     sendMail.setText(
-                                  "<h1>지구공 메일인증</h1>" +
-                                   "<br>[지구공] 에 오신것을 황영합니다!" +
-                                   "<br>아래 [이메일 인증 확인] 을 눌러주세요." +
-                                   "<br><a href='http://localhost:8007/registerEmail.me?email=" + 
-                                   m.getEmail() + "&mailKey=" + mailKey + 
-                                   "'  target='_blank'>이메일 인증 확인</a>");
+                              "<div style='max-width: 600px; margin: auto; border: 1px solid #ccc; padding: 20px; font-family: Arial, sans-serif;'>"
+                              + "<h2 style='text-align: center; color: #007BFF;'>지구공 메일인증</h2>"
+                              + "<hr>"
+                              + "<p style='font-size: 1.1em;'> 지구공 에 오신 것을 환영합니다!</p>"
+                              + "<p style='font-size: 1.1em;'>아래 이메일 인증 확인 버튼을 눌러주세요.</p>"
+                              + "<div style='text-align: center;'>"
+                              + "<a href='http://localhost:8007/registerEmail.me?email=" + m.getEmail() + "&mailKey=" + mailKey
+                              + "' target='_blank' style='background-color: #007BFF; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; margin-top: 10px;'>이메일 인증 확인</a>"
+                              + "</div>"
+                              + "</div>"
+                          );
+
     sendMail.setFrom("geegu000@gmail.com",  "지구공");
     sendMail.setTo(m.getEmail());
     sendMail.send();
@@ -273,6 +279,48 @@ public class MemberController {
       
       return "redirect:/profile.do";
   }
-
-}  
+  
+  @RequestMapping("delete.me")
+  public String deleteMember(String memberId,
+                                                      String memberPwd,
+                                                       HttpSession session,
+                                                       Model model) {
+    
+      String encPwd = ((Member)session.getAttribute("loginUser")).getMemberPwd();
+      
+      if(bcryptPasswordEncoder.matches(memberPwd, encPwd)) {
+      
+        int result = memberService.deleteMember(memberId);
+        
+        if(result > 0) {
+          
+          session.removeAttribute("loginUser");
+          
+          session.setAttribute("alertMsg", "성공적으로 탈퇴되었습니다. 그동안 이용해주셔서 감사합니다.");
+          
+          return "redirect:/";
+          
+        } else {
+          
+          model.addAttribute("alertMsg", "회원 탈퇴 실패!");
+          
+          return "redirect:/";
+        }
+    
+  } else {
+    
+      session.setAttribute("alertMsg", "비밀번호를 잘못 입력했습니다. 확인해주세요");
+      
+      return "redirect:/mypage.me";
+  }
+  
+  }
+  
+  @RequestMapping("menuMember.me")
+  public String adminMember() {
+    
+    return "bo/member/adminMemberList";
+  }
+}
+  
   

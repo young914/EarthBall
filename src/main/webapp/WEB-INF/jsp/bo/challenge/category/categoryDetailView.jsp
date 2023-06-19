@@ -181,16 +181,10 @@
     function updateTemplate(button) {
         let categoryTemplateNo = button.closest("tr").querySelector("td:first-child strong").textContent;
         // 첫 번째 <td>의 텍스트 내용 가져오기
-
-        console.log("categoryTemplateNo : 들어오나?", categoryTemplateNo);
         location.href="/updateForm.te?categoryTemplateNo=" + categoryTemplateNo;
-
     }
     function deleteTemplate(button, categoryNo) {
         let categoryTemplateNo = button.closest("tr").querySelector("td:first-child strong").textContent;
-
-        console.log("categoryTemplateNo : 들어오나?", categoryTemplateNo);
-        console.log("categoryNo : 들어오나?", categoryNo);
 
         $.ajax({
               url : "delete.te"

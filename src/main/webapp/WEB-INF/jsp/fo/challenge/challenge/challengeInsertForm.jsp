@@ -204,8 +204,6 @@
                 , chContent : markupStr
             }
 
-            console.log("챌린지 오픈 요청_기본정보용 data : ", challengeData);
-
             $.ajax({
                 url: "/openRequest.chall"
                 , type: "post"

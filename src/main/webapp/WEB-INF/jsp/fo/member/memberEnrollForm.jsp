@@ -167,6 +167,7 @@
 <title>회원 가입</title>
 </head>
 <body>
+<jsp:include page="/WEB-INF/jsp/fo/common/common.jsp"/>
     
     <div class="member">
         <!-- 1. 로고 -->
@@ -177,32 +178,32 @@
         <!-- 2. 필드 -->
         <div class="field">
             <b>아이디 *</b>
-            <span class="placehold-text"><input type="text" placeholder="아이디를 입력해주세요" name="memberId" id="memberId"></span>
+            <span class="placehold-text"><input type="text" placeholder="아이디를 입력해주세요" name="memberId" id="memberId" required></span>
             <div id="checkResult" style="font-size : 0.8em; display : none">jjjj</div>
         </div>
         
         <div class="field">
             <b>비밀번호 *</b>
-            <input class="userpw" type="password" placeholder="8자 이상 - 대문자 특수문자 포함 비밀번호를 입력해주세요" name="memberPwd" id="memberPwd">
+            <input class="userpw" type="password" placeholder="8자 이상 - 대문자 특수문자 포함 비밀번호를 입력해주세요" name="memberPwd" id="memberPwd" required>
             <div id="checkPwdResult1" style="font-size : 0.8em; display : none">jjjj</div>
         </div>
         
         <div class="field">
             <b>비밀번호 재확인 *</b>
-            <input class="userpw-confirm" type="password" placeholder="다시한번 입력해주세요" id="checkPwd">
+            <input class="userpw-confirm" type="password" placeholder="다시한번 입력해주세요" id="checkPwd" required>
             <div id="checkPwdResult2" style="font-size : 0.8em; display : none">jjjj</div>
         </div>
         
         <div class="field">
             <b>닉네임 *</b>
-            <input type="text" name="memberName" id="memberName">
+            <input type="text" name="memberName" id="memberName" placeholder="닉네임을 입력해주세요!" required>
         </div>
 
         <!-- 3. 필드(생년월일) -->
         <div class="field birth" >
             <b>생년월일 *</b>
             <div>
-                <input type="date"  name="birthDate" id="birthDate">                
+                <input type="date"  name="birthDate" id="birthDate" required>                
     	   </div>
     	 </div>
        
@@ -219,68 +220,86 @@
         <div class="field">
             <b>본인 확인 이메일 *</b>
             <div>
-            	<input type="email" placeholder="이메일을 입력해주세요" name="email" id="email">
+            	<input type="email" placeholder="이메일을 입력해주세요" name="email" id="email" required>
             </div>
         </div>
         
         <div class="field tel-number">
             <b>휴대전화 *</b>
-            <select>
-                <option value="" >대한민국 +82</option>
-            </select>
             <div>
-                <input type="tel" placeholder="전화번호 입력" name="phone">
-                <input type="button" value="인증번호 받기">
+                <input type="tel" placeholder="전화번호 입력" name="phone" required>
             </div>
-            <input type="number" placeholder="인증번호를 입력하세요" disabled>
+            <input type="hidden" placeholder="인증번호를 입력하세요" disabled>
         </div>
+        
+        <div class="field tel-number">
+            <b>주소 *</b>
+            <div>
+                <input type="tel" placeholder="우편번호" id="sample6_postcode"  >
+                <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" >
+            </div>
+	            <input type="text" placeholder="주소" id="sample6_address">
+	            <input type="text" placeholder="상세주소" id="sample6_detailAddress">
+	            <input type="text" placeholder="참고항목" id="sample6_extraAddress">
+        </div>
+        
 
         <!-- 6. 가입하기 버튼 -->
         <input type="submit" value="가입하기" id="submit_button">
 
         </form>
         
-        <!-- id중복체크 스크립트 (ajax 방식) -->
-		<script>
-		    $(function() {
-		        const $idInput = $("#memberId");
-		        let idCheck = /^[a-zA-Z0-9]{5,20}$/;
-		
-		        $idInput.keyup(function() {
-		            if($idInput.val().length >= 5) {
-		                if(!idCheck.test($idInput.val())) {
-		                    $("#checkResult").show();
-		                    $("#checkResult").css("color", "red").text("영문과 숫자를 조합하여 5-20 자만 입력할 수 있습니다.");
-		                    $("#submitButton").attr("disabled", true);
-		                    return;
-		                }
-		
-		                $.ajax({
-		                    url : "idCheck.me",
-		                    data : {checkId : $idInput.val()},
-		                    type : "get",
-		                    success : function(result) {
-		                        if(result == "NNNNN") {
-		                            $("#checkResult").show();
-		                            $("#checkResult").css("color", "red").text("중복된 아이디가 존재합니다.");
-		                            $("#submitButton").attr("disabled", true);
-		                        } else {
-		                            $("#checkResult").show();
-		                            $("#checkResult").css("color", "green").text("어울리는 아이디에요!");
-		                            $("#submitButton").attr("disabled", false);
-		                        }
-		                    },
-		                    error : function() {
-		                        console.log("ajax 통신 실패!");
-		                    }
-		                });
-		            } else {
-		                $("#checkResult").hide();
-		                $("#submitButton").attr("disabled", true);
-		            }
-		        });
-		    });
-		</script>
+        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        <!-- 주소 API 등록 -->
+        <script>
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    // 조합된 참고항목을 해당 필드에 넣는다.
+                    document.getElementById("sample6_extraAddress").value = extraAddr;
+                
+                } else {
+                    document.getElementById("sample6_extraAddress").value = '';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample6_postcode').value = data.zonecode;
+                document.getElementById("sample6_address").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("sample6_detailAddress").focus();
+            }
+        }).open();
+    }
+</script>
 
         
         <!-- 비밀번호 일치 여부 -->

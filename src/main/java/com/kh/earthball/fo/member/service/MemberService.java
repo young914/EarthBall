@@ -25,4 +25,6 @@ public interface MemberService {
   
   String selectProfile(String memberId);
   
+  int deleteMember(String memberId);
+  
 }

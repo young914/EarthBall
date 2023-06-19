@@ -12,4 +12,6 @@ public interface BoConfirmService {
   List<BoConfirm> selectConfirmList(PageInfo pageInfo);
 
   BoConfirm selectConfirm(int chConNo);
+
+  void deleteConfirm(BoConfirm boConfirm);
 }

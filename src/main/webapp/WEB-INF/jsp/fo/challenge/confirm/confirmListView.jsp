@@ -163,7 +163,6 @@
         location.href="/updateForm.chall?chNo=" + chNo;
     }
 
-
     function deleteChallenge(chNo) {
 
         $.ajax({
