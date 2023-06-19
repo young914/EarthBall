@@ -47,6 +47,94 @@
       <div class="content-wrapper">
         <!-- Content -->
                    
+                   <div class="container-xxl flex-grow-1 container-p-y">
+          <h4 class="fw-bold">회원 정보 관리 </h4>
+          <!-- HTML5 Inputs -->
+          <div class="card mb-2">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-10">
+                  <form action="member.me" method="post">
+					    <input type="text" name="keyword" required>
+					    <input type="submit" value="검색" class="btn btn-primary" >
+				</form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Hoverable Table rows -->
+          <div class="card mb-2">
+            <div class="table-responsive text-nowrap" id="MemberList">
+              <table class="table table-hover">
+                <thead>
+                <tr>
+                  <th class="text-center" width="10%">회원 ID</th>
+                  <th class="text-center" width="25%">닉네임</th>
+                  <th class="text-center" width="20%">이메일</th>
+                  <th class="text-center" width="20%">전화번호</th>
+                  <th class="text-center" width="20%">주소</th>
+                  <th class="text-center" width="10%">회원 등급</th>
+                </tr>
+                </thead>
+					<tbody class="table-border-bottom-0">
+					  <c:forEach var="member" items="${ memberList }">
+					    <tr>
+					      <td class="text-center"><strong>${member.memberId}</strong></td>
+					      <td class="text-center"><strong>${member.memberName}</strong></td>
+					      <td class="text-center"><strong>${member.email}</strong></td>
+					      <td class="text-center"><strong>${member.phone}</strong></td>
+					      <td class="text-center"><strong>${member.address1}</strong></td>
+					      <td class="text-center"><strong>${member.gradeName}</strong></td>
+					    </tr>
+					  </c:forEach>
+					</tbody>
+              </table>
+            </div>
+          </div>
+          <!--/ Hoverable Table rows -->
+
+          <div class="card mb-4">
+            <!-- Basic Pagination -->
+            <div class="demo-inline-spacing">
+              <!-- Basic Pagination -->
+			 <nav aria-label="Page navigation">
+			  <ul class="pagination justify-content-center">
+			    <c:choose>
+			      <c:when test="${ pageInfo.currentPage eq 1 }">
+			        <li class="page-item prev disabled">
+			          <a class="page-link" href="#"><i class="tf-icon bx bx-chevron-left"></i></a>
+			        </li>
+			      </c:when>
+			      <c:otherwise>
+			        <li class="page-item prev">
+			          <a class="page-link" href="list.mem?currentPage=${ pageInfo.currentPage - 1 }"><i class="tf-icon bx bx-chevron-left"></i></a>
+			        </li>
+			      </c:otherwise>
+			    </c:choose>
+			    <c:forEach var="page" begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" step="1">
+			      <li class="page-item">
+			        <a class="page-link" href="list.mem?currentPage=${ page }">${ page }</a>
+			      </li>
+			    </c:forEach>
+			    <c:choose>
+			      <c:when test="${ pageInfo.currentPage eq pageInfo.maxPage }">
+			        <li class="page-item next disabled">
+			          <a class="page-link" href="#"><i class="tf-icon bx bx-chevron-right"></i></a>
+			        </li>
+			      </c:when>
+			      <c:otherwise>
+			        <li class="page-item next">
+			          <a class="page-link" href="list.mem?currentPage=${ pageInfo.currentPage + 1 }"><i class="tf-icon bx bx-chevron-right"></i></a>
+			        </li>
+			      </c:otherwise>
+			    </c:choose>
+			  </ul>
+			</nav>
+              <!--/ Basic Pagination -->
+            </div>
+          </div>
+                   
+                   
         <!-- / Content -->
 
 

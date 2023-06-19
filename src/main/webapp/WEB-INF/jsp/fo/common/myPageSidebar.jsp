@@ -12,6 +12,6 @@
     <li><a href="list.mybo?memberId=${loginUser.memberId}">1:1문의</a></li>
     <li><a href="#">포인트 내역</a></li>
     <li><a href="updateInfo.me">내 정보 수정</a></li>
-    <li><a href="delete.me">회원탈퇴</a></li>
+    <li><a href="#" data-toggle="modal" data-target="#deleteForm">회원탈퇴</a></li>
   </ul>
 </div>

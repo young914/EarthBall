@@ -203,13 +203,29 @@
     	 </div>
 
         <!-- 4. 필드(성별) -->
-        <div class="field gender">
+		       <div class="field gender">
 		    <b>성별</b>
 		    <div>
-		        <label><input type="radio" id="Male" value="M" name="gender" {{(gender === 'M') ? 'checked' : ''}}>남자</label>
-		        <label><input type="radio" id="Female" value="F" name="gender" {{(gender === 'F') ? 'checked' : ''}}>여자</label>
+		        <label>
+		            <input type="radio" id="Male" value="M" name="gender">남자
+		        </label>
+		        <label>
+		            <input type="radio" id="Female" value="F" name="gender">여자
+		        </label>
 		    </div>
 		</div>
+		
+		<script>
+		    $(function() {
+		        var gender = "${loginUser.gender}";
+		        
+		        if(gender) {
+		        	
+		            $("input[name=gender][value=" + gender + "]").prop("checked", true);
+		            
+		        }
+		    });
+		</script>
 
         <!-- 5. 이메일_전화번호 -->
         <div class="field">

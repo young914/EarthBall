@@ -24,6 +24,7 @@ public class adminMember {
   private String status;
   private String address1;
   private String address2;
+  private String gradeName;
   private int MailAuth;
 
 }

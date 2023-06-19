@@ -63,7 +63,7 @@
 	
 </style>
 
-<title>Login -------</title>
+<title>Login -</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/jsp/fo/common/common.jsp"/>
@@ -74,12 +74,29 @@
 		<c:if test="${not empty store}">
 			<input type="hidden" name="store" value="${store}">
 		</c:if>
-		<input type="text" id="memberId" name="memberId" placeholder="아이디를 입력해주세요">
+		<input type="text" id="memberId" name="memberId" placeholder="아이디를 입력해주세요" value="${cookie.saveId.value}" required>
 		<input type="password" id="memberPwd" name="memberPwd" placeholder="비밀번호를 입력해주세요">
-		<label for="remember-check">
-			<input type="checkbox" id="remember-check">아이디 저장하기
-		</label>
-		<input type="submit" value="Login">
+		
+		<c:choose>
+			<c:when test="${not empty cookie.saveId}">			
+				<label>
+					<input type="checkbox" id="saveId" name="saveId" value="y" checked>
+					<label for="saveId">아이디 저장</label>
+					
+				</label>
+			</c:when>
+			<c:otherwise>
+				<label>
+					<input type="checkbox" id="saveId" name="saveId" value="y">
+					<label for="saveId">아이디 저장</label>
+				</label>
+			</c:otherwise>	
+		</c:choose>
+		
+		<input type="submit" value="로그인">
+		<label ><a href="/">
+		<input type="button" value="메인페이지로 이동" style="color : black">
+		</a></label>
 		</form>
     </div>
     

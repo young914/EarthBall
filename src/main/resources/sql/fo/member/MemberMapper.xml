@@ -93,5 +93,11 @@
 		WHERE MEMBER.MEMBER_ID = #{memberId}
     </select>
     
+    <update id="deleteMember" parameterType="java.lang.String">
+    	UPDATE MEMBER
+    	        SET STATUS = 'N'
+    	 WHERE  MEMBER_ID = #{memberId}
+    </update>
+    
 
 </mapper>
