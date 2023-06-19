@@ -16,6 +16,7 @@ import com.kh.earthball.bo.store.vo.AdminStore;
 import com.kh.earthball.fo.common.template.ChangeFileName;
 import com.kh.earthball.fo.common.template.Pagination;
 import com.kh.earthball.fo.common.vo.PageInfo;
+import com.kh.earthball.fo.member.vo.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,8 +30,8 @@ public class AdminStoreController {
 
   @GetMapping("adminlist.st")
   public ModelAndView adminStoreList(@RequestParam(value="cPage", defaultValue="1") int currentPage,
-                                 ModelAndView mv) {
-
+                                 ModelAndView mv, HttpSession session) {
+    
     int listCount = storeService.selectListCount();
     int pageLimit = 10;
     int boardLimit = 10;
@@ -44,7 +45,12 @@ public class AdminStoreController {
   }
 
   @GetMapping("storeEnrollForm.st")
-  public String storeEnrollForm() {
+  public String storeEnrollForm(HttpSession session) {
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || 1 != loginUser.getMailAuth()) {
+      
+      return "fo/common/emailAuthError";
+    }
     return "bo/store/storeEnrollForm";
   }
 
@@ -55,7 +61,7 @@ public class AdminStoreController {
                             MultipartFile upfile6, MultipartFile upfile7, MultipartFile upfile8, MultipartFile upfile9, MultipartFile upfile10,
                             HttpSession session,
                             ModelAndView mv) {
-   
+  
    String regionAddress = s.getStoreAddress();
    String[] addressParts = regionAddress.split(" ");
    String city = addressParts[0];
@@ -225,15 +231,15 @@ public class AdminStoreController {
   }
   
   @GetMapping("approvalStore.st")
-  public String approvalStore(@RequestParam(value = "storeNo", required=false)Integer storeNo, HttpSession session) {
+  public String approvalStore(int storeNo, HttpSession session) {
     System.out.println("storeNo 못받나?" +  storeNo );
     int result = storeService.approvalStore(storeNo);
     if(result>0) {
       session.setAttribute("alertMsg", "매장승인 성공");
-      return  "redirect:/approvalStore.st";
     }else {
       session.setAttribute("alertMsg", "매장승인 실패");
-      return "redirect:/approvalStore.st";
     }
+    
+    return "redirect:adminSignUpList.st";
   }
 }

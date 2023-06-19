@@ -56,12 +56,12 @@ public class StoreController {
   @GetMapping(value = "getStores.st", produces = "application/json; charset=UTF-8")
   public String getStoreList(String memberId, boolean orderLikeCheck) {
       System.out.println("여기는 getStoreList");
-      System.out.println(orderLikeCheck);
+      
       
       ArrayList<Store> list = storeService.selectAllStoreList(orderLikeCheck);
       ArrayList<StoreAtta> sList = storeService.selectStoreAttaList();
      
-      System.out.println(sList);
+      
       
       // 결과를 담을 Map 생성
       Map<String, Object> resultMap = new HashMap<>();
@@ -81,7 +81,7 @@ public class StoreController {
           boolean liked = storeService.isStoreLiked(memberId, list.get(i).getStoreNo());
           list.get(i).setLiked(liked); // Store 객체에 좋아요 여부 설정
       }
-      System.out.println(resultMap);
+      
       // Gson을 사용하여 Map을 JSON 형식으로 변환하여 반환
       return new Gson().toJson(resultMap);
   }
@@ -100,14 +100,14 @@ public class StoreController {
   @GetMapping(value = "getFilter.st", produces = "application/json; charset=UTF-8")
   public String getFilterList(String city, String provinces, String memberId, boolean orderLikeCheck) {
     System.out.println("getFilterList");
-    System.out.println(city);
-    System.out.println(provinces);
+    
+    
     if(provinces.equals("")) {
 
       ArrayList<Store> selectFilterList = storeService.selectFilterListC(city, orderLikeCheck);
-      System.out.println("이건 : " +   selectFilterList);
+      
       ArrayList<StoreAtta> sList = storeService.selectStoreAttaFilterList(selectFilterList);
-      System.out.println("이건 : " + sList);
+      
       Map<String, Object> resultMap = new HashMap<>();
       resultMap.put("storeList", selectFilterList);
       resultMap.put("storeAttaList", sList);
@@ -158,15 +158,13 @@ public class StoreController {
   @GetMapping(value = "getNameSearch.st" , produces = "application/json; charset=UTF-8")
   public String selectNameSearch(String searchValue, String memberId, boolean orderLikeCheck) {
     System.out.println("여기는 : selectNameSearch");
-    System.out.println(orderLikeCheck);
+    
     ArrayList<Store> nameSearchList = storeService.selectNameSearch(searchValue, orderLikeCheck);
     ArrayList<StoreAtta> sList = storeService.selectStoreAttaFilterList(nameSearchList);
     Map<String, Object> resultMap = new HashMap<>();
     resultMap.put("storeList", nameSearchList);
     resultMap.put("storeAttaList", sList);
-    System.out.println("nameSearchList : " + nameSearchList);
-    System.out.println("sList : " + sList);
-    System.out.println("resultMap : " + resultMap);
+    
     if (nameSearchList == null || nameSearchList.isEmpty()) {
       nameSearchList = new ArrayList<>();
     } else {

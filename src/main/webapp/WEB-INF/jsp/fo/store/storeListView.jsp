@@ -427,7 +427,7 @@ hr{
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
                 mapOption = { 
                     center: new kakao.maps.LatLng(37.517232759035965, 126.97701521248901),
-                    level: 6
+                    level: 5
                 };
             var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
             // 체크한지 안한지 확인
@@ -786,8 +786,8 @@ hr{
                 for (let j = 0; j < storeAttaList.length; j++) {
                     if (storeAttaList[j].storeNo === storeNo) {
                         storeImgStr += "<div class='swiper-slide' '><img src='/resources/fo/upfiles/" + storeAttaList[j].changerName + "' alt='매장사진' style='width: 100%; height: 100%;' onclick='openModal(\"/resources/fo/upfiles/" + storeAttaList[j].changerName + "\")'></div>";
+                                    
                     }
-
                 }
                 
                 // 동적으로 리스트 요소 생성
@@ -802,11 +802,11 @@ hr{
                                     "<div class='detail-info' style='display: none;'>" +
                                     "<p style='margin:0px;'><i class='xi-comment-o' style='width: 20px;'></i><span class='storeInfoText'>" + storeList[i].storeInfo + "</span></p>" +
                                         "<div class='swiper-container' style='width:100%; border: 1px solid black; height: 150px'>" +
-                                            "<div class='swiper-wrapper'>" +
+                                            "<div class='swiper-wrapper' >" +
                                                 storeImgStr +
                                             "</div>" +
                                             "<div class='swiper-button-next'></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->" +
-	                                        "<div class='swiper-button-prev'></div><!-- 이전 버튼 -->" + 
+                                            "<div class='swiper-button-prev'></div><!-- 이전 버튼 -->" + 
                                         "</div>" +
                                     "</div>" +
                                 "</div>" +
@@ -818,12 +818,12 @@ hr{
             mySwipers.forEach(function(swiperElement) {
                 const mySwiper = new Swiper(swiperElement, {
                     autoplay: {
-                        delay: 3000
+                        delay: 2000
                     },
                     navigation: {
-                        nextEl: swiperElement.querySelector('.swiper-button-next'),
-                        prevEl: swiperElement.querySelector('.swiper-button-prev')
-                        }
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev'
+                    }
                 });
                 swiperElement.querySelector('.swiper-button-next').addEventListener('click', function(event) {
                     event.stopPropagation();
@@ -969,8 +969,13 @@ hr{
                     
                     // console.log(overlayList[index].n); 누를 시 좌표값 받음
                     var position = overlayList[index].n;
+
+                    // 맵 레벨 변경
+                    map.setLevel(4);
                     // 해당 마커의 좌표로 지도 중심 이동
                     map.panTo(position);
+                    
+                    
 
                     if (isClosed[index]) { // 닫혀있음
                         overlayList[index].setMap(map);
@@ -1030,6 +1035,9 @@ hr{
                     });
 
                     overlayList[index].setMap(map);
+                    
+                    // 맵 레벨 변경
+                    map.setLevel(4);
 
                     var moveLatLon = new kakao.maps.LatLng(storeList[index].storeLat, storeList[index].storeLon);
                     map.panTo(moveLatLon);
@@ -1136,7 +1144,7 @@ hr{
         }
 
         function backZigu(){
-            location.href = "home";
+            location.href = "/main";
         }
 
         function goLoginForm(){
@@ -1219,6 +1227,7 @@ hr{
 
             // 모달 내용 생성
             const modalContentElement = document.createElement("div");
+            
             modalContentElement.classList.add("modal-content");
 
             // 이미지 요소 생성
@@ -1239,10 +1248,11 @@ hr{
             modalElement.style.justifyContent = "center";
             modalElement.style.alignItems = "center";
             modalElement.style.position = "fixed";
-            modalElement.style.top = "0";
-            modalElement.style.left = "0";
-            modalElement.style.width = "300px";
-            modalElement.style.height = "300px";
+            modalElement.style.top = "50%";
+            modalElement.style.left = "30%";
+            modalElement.style.width = "350px";
+            modalElement.style.height = "350px";
+            modalElement.style.boxShadow = "0 0 6px 0 rgba(0, 0, 0, 0.5)";
             modalElement.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
 
             // 모달을 body 요소에 추가
@@ -1252,8 +1262,6 @@ hr{
             currentModalElement = modalElement;
 
             // 모달 닫기 이벤트 처리
-            
-
             modalElement.addEventListener("click", function(event) {
                 
                 modalElement.remove();
