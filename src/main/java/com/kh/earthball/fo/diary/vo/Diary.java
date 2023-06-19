@@ -24,6 +24,7 @@ public class Diary {
   private String changeName;     // CHANGE_NAME VARCHAR2(100) NOT NULL,
   private String dyBoardWriter;   // DY_BOARD_WRITER
   private String weather;
+  private int dyLike;
 }
 
 

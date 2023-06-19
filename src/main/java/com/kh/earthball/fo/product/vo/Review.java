@@ -27,5 +27,6 @@ public class Review {
   private String status;
   private Date createdDate;
   private String memberName;
+  private String memberImg;
 
 }

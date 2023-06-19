@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>1:1 게시판</title>
 
+
 	<jsp:include page="/WEB-INF/jsp/fo/common/common.jsp"/>
 
  	<link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
@@ -20,14 +21,17 @@
 	<!-- JavaScript Bundle with Popper -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
+<!--  돋보기 -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
 
 
-    <style>
+        <style>
 
-    .hover tr:hover {
+         .hover tr:hover {
     background-color: #f5f5f5;
   	}
+
 
         /* ---------------------------------- */
 
@@ -100,6 +104,18 @@
 		    cursor: pointer;
         }
 
+        #QZWUheUHEXEqWaaaEWt8BP {
+        background-color: #19a7ce;
+        box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
+        color: #ffffff;
+        display: flex;
+        font-family: Inter, 'Source Sans Pro';
+        font-size: 1.2rem;
+        font-weight: 400;
+        line-height: 1.2125;
+        white-space: nowrap;
+        width: 36.4rem;
+        }
 
         .mId {
     text-decoration: none;
@@ -201,9 +217,11 @@
     	<div id="container">
 
         		<!-- 배너 -->
+        		<div class="title_all" style="padding-top: 50px; padding-bottom: 25px">
 				<div class="title">
                 <div class="bar"></div>
-                <div class="title_text">고객센터</div>
+                <div class="title_text">1:1문의</div>
+				</div>
 				</div>
 
 
@@ -214,39 +232,44 @@
                 <br/>
 
 <table>
-    <thead>
+   <thead>
         <tr>
             <th colspan="8">
-            <div>
-                <h4 style="text-align: center;">고객센터 운영시간 | 평일 10:00 ~ 17:00</h4>
-                <c:if test="${not empty loginUser}">
-                    <span class="btn-group">
-                        <!-- 버튼 클래스 -->
-                        <button id="insertList">
-                            <a class="enrollbo"href="enrollForm.bo">작성하기</a>
-                        </button>
-                    </span>
-                </c:if>
-                </div>
-            </tr>
-            <nav class="navbar" style="background-color: #19A7CE;">
-            <div class="container-fluid">
-                    <a class="navbar-brand" href="list.bo">1:1 문의</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarColor01">
-                        <ul class="navbar-nav me-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="list.no">공지사항</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="list.faq">FAQ</a>
-                            </li>
-                        </ul>
+                <div style="display: grid; grid-template-columns: 1fr auto;">
+                    <div style="text-align: center;">
+                            <h4 style="margin: 0;">고객 센터 운영 시간 | 평일 10:00 ~ 17:00</h4>
+                    </div>
+                    <div style="text-align: right;">
+        	<c:if test="${not empty loginUser}">
+                            <button id="insertList">
+                                <a class="enrollbo" href="enrollForm.bo">글작성</a>
+                            </button>
+                        </c:if>
                     </div>
                 </div>
-			</nav>
+            </th>
+        </tr>
+    </thead>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">1:1문의</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+          <a class="nav-link" href="list.no">공지사항</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="list.faq">FAQ</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+</nav>
             <tr>
                 <th>No</th>
                 <th>제목</th>

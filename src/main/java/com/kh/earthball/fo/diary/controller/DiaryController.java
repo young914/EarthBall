@@ -5,15 +5,20 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import com.kh.earthball.fo.challenge.vo.Challenge;
 import com.kh.earthball.fo.common.template.Pagination;
 import com.kh.earthball.fo.common.vo.PageInfo;
 import com.kh.earthball.fo.diary.service.DiaryService;
@@ -34,7 +39,6 @@ public class DiaryController {
   public String selectList(@RequestParam(value = "cPage", defaultValue = "1") int currentPage,
                                    Model model) {
 
-    // System.out.println("cPage : " + currentPage);
 
     // 페이징 처리를 위한 PageInfo 객체 얻어내기
      int listCount = diaryService.selectListCount();
@@ -45,12 +49,10 @@ public class DiaryController {
       // Pagination 에 작성한 getPageInfo 메소드 호출
       PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 
-      // System.out.println(pi);
 
       // 목록을 조회하는 요청
       ArrayList<Diary> list = diaryService.selectList(pi);
 
-       // System.out.println(list);
 
       // 응답데이터를 model 에 담기
       model.addAttribute("pi", pi);
@@ -69,12 +71,6 @@ public class DiaryController {
   @RequestMapping(value="/diaryInsert.bo", produces="text/html; charset=UTF-8")
   public String insertDiary(String weather, @ModelAttribute Diary diary, HttpSession session, @RequestParam(value="file", required=true) MultipartFile file) {
 
-    // System.out.println("잘호출되나?");
-
-    // System.out.println(weather); // "1", "2", "3", "4",  ""
-    //  System.out.println(diary); // 여긴 changeName 이 null 인게 마즘
-    //  System.out.println(file);
-
       String title = diary.getDyBoardTitle();
       String content = diary.getDyBoardContent();
 
@@ -87,7 +83,6 @@ public class DiaryController {
         String changeName = saveFile(file, session);
         diary.setOriginName(file.getOriginalFilename());
         diary.setChangeName("resources/fo/upfiles/" + changeName);
-        // System.out.println(diary.getChangeName()); // 잘찍힘
 
         int result = diaryService.insertDiary(diary);
 
@@ -107,7 +102,6 @@ public class DiaryController {
       String originName = file.getOriginalFilename();
       String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 
-     // System.out.println(file);
 
       int ranNum = (int)(Math.random() * 90000 + 10000);
 
@@ -129,7 +123,6 @@ public class DiaryController {
   @RequestMapping("diaryDetailView.bo")
   public ModelAndView selectDiary(ModelAndView mv,
                                                     int bno) {
-          // System.out.println(bno);
 
           int result = diaryService.increaseCount(bno);
 
@@ -137,7 +130,6 @@ public class DiaryController {
 
                 Diary d = diaryService.selectDiary(bno);
 
-                // System.out.println(d);
 
                 mv.addObject("d", d) .setViewName("fo/diary/diaryDetailView");
 
@@ -154,8 +146,6 @@ public class DiaryController {
                                          Model model,
                                          String filePath,
                                          HttpSession session) {
-
-          // System.out.println(dyBoardNo);
 
        int result = diaryService.deleteDiary(dyBoardNo);
 
@@ -197,24 +187,26 @@ public class DiaryController {
     @RequestMapping(value="/dyUpdate.bo", produces="text/html; charset=UTF-8")
     public String updateDiary (String weather, @ModelAttribute Diary diary, HttpSession session, @RequestParam(value="file", required=true) MultipartFile file) {
 
-      System.out.println("잘호출되나?");
-      System.out.println(weather); // "1", "2", "3", "4",  ""
-      System.out.println(diary); // 여긴 changeName 이 null 인게 마즘
-      System.out.println(file);
-
         String title = diary.getDyBoardTitle();
         String content = diary.getDyBoardContent();
 
         if(!file.getOriginalFilename().isEmpty() && !title.isEmpty() && !content.isEmpty()) {
 
-          if (file.getSize() < 20000) {
+          if (file.getSize() < 15000) {
             return "그림을 (더) 그려주세요";
         }
+
+          if(!file.getOriginalFilename().equals("")) {
+
+               // 1. 기존에 첨부파일이 있었을 경우 => 기존의 첨부파일을 찾아서 삭제
+            String realPath = session.getServletContext().getRealPath(diary.getChangeName());
+
+            new File(realPath).delete();
+          }
 
           String changeName = saveFile(file, session);
           diary.setOriginName(file.getOriginalFilename());
           diary.setChangeName("resources/fo/upfiles/" + changeName);
-          System.out.println(diary.getChangeName()); // 잘찍힘
 
           int result = diaryService.updateDiary(diary);
 
@@ -231,11 +223,18 @@ public class DiaryController {
 
     // 마이페이지 내가 참여한 일기 보여주기
     @RequestMapping("diaryList.me")
-    public String diaryListMe(String memberId, Model model) {
-      ArrayList<Diary> list = diaryService.diaryListMe(memberId);
+    public String diaryListMe(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, String memberId, Model model) {
 
-      System.out.println(list);
+      int listCount = diaryService.diaryListMeCount(memberId);
 
+      int pageLimit = 5;
+      int boardLimit = 6;
+
+      PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+
+      ArrayList<Diary> list = diaryService.diaryListMe(pi, memberId);
+
+      model.addAttribute("pi", pi);
       model.addAttribute("list", list);
 
       return "fo/mypage/diary";

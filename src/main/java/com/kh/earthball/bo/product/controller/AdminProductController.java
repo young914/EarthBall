@@ -19,11 +19,9 @@ import com.kh.earthball.fo.common.template.ChangeFileName;
 import com.kh.earthball.fo.common.template.Pagination;
 import com.kh.earthball.fo.common.vo.PageInfo;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @RequiredArgsConstructor
 @Controller
-@Slf4j
 public class AdminProductController {
 
   private final AdminProductService productService;
@@ -31,7 +29,7 @@ public class AdminProductController {
 
   @GetMapping("adminlist.pro")
   public ModelAndView adminProductList(@RequestParam(value="cPage", defaultValue="1") int currentPage,
-                                 ModelAndView mv) {
+                                        ModelAndView mv) {
 
     int listCount = productService.selectListCount();
     int pageLimit = 10;
@@ -87,7 +85,6 @@ public class AdminProductController {
     AdminProduct p = productService.selectDetailView(productNo);
     ArrayList<AdminAtta> list = productService.selectDetailviewAtta(productNo);
 
-
     model.addAttribute("p", p);
     model.addAttribute("list", list);
 
@@ -100,18 +97,27 @@ public class AdminProductController {
                             String[] changeNames,
                             HttpSession session) {
 
+    for(int i = 0; i < 10; i++){
+      if(!upfiles[i].isEmpty()){
+        System.out.println(i + "번째 새로운 파일 : " + upfiles[i].getOriginalFilename());
+      }else{
+        System.out.println(i + "번째 새로운 파일이 없습니다.");
+      }
+    }
+
     ArrayList<AdminAtta> list = new ArrayList<>();
 
 
-    for(int i = 0; i < 10; i++){
+    for(int i = 0; i < upfiles.length; i++){
 
       AdminAtta at = new AdminAtta();
 
       if(!upfiles[i].isEmpty()){
 
+        if(!changeNames[i].isEmpty()) {
         String realPath = session.getServletContext().getRealPath("resources/fo/upfiles/" + changeNames[i]);
-
         new File(realPath).delete();
+        }
 
         String changeName = ChangeFileName.saveFile(upfiles[i], session);
 
@@ -125,7 +131,8 @@ public class AdminProductController {
         at.setFileLevel(i);
         at.setProductNo(p.getProductNo());
       }
-
+      System.out.println("----------");
+      System.out.println(at);
       list.add(at);
 
     }

@@ -11,6 +11,7 @@
 									  , PAYMENT_DATE
 									  , PAYMENT_TYPE
 									  , STATUS
+									  , PAYMENT_NAME
 									  , PAYMENT_TOTAL
 									  , RECEIVE_NAME
 									  , RECEIVE_PHONE
@@ -25,6 +26,7 @@
 									  , SYSDATE
 									  , #{paymentType}
 									  , 'Y'
+									  , #{paymentName}
 									  , #{paymentTotal}
 									  , #{receiveName}
 									  , #{receivePhone}
@@ -63,6 +65,49 @@
 		  AND FILE_LEVEL = 0
 </select>
 
+<select id="selectProductItem" parameterType="com.kh.earthball.fo.payment.vo.PayPageList" resultType="com.kh.earthball.fo.product.vo.Product">
+	SELECT P.PRICE, P.PRODUCT_NAME, PA.CHANGER_NAME, PRODUCT_NO
+	   FROM PRODUCT P
+		 JOIN PRODUCT_ATTA PA USING (PRODUCT_NO)
+	 WHERE MEMBER_ID = #{memberId}
+	 	  AND PRODUCT_NO = #{productNo}
+		  AND FILE_LEVEL = 0
+</select>
+
 <!-- 결제된 상품 orders 테이블에 추가 -->
+
+<!-- 마이페이지 결제내역 갯수 조회 -->
+<select id="myOrderListCount" parameterType="java.lang.String">
+	SELECT COUNT(*)
+	   FROM PAYMENT
+	 WHERE MEMBER_ID = #{memberId}
+</select>
+
+<!-- 마이페이지 결제내역 리스트 조회 -->
+<select id="selectMyOrder" resultType="com.kh.earthball.fo.payment.vo.PayInfo">
+	SELECT ROWNUM, P.*
+		FROM (SELECT PAYMENT_NO
+		           , MEMBER_ID
+		           , TO_CHAR(PAYMENT.PAYMENT_DATE, 'YYYY-MM-DD') AS "PAYMENT_DATE"
+		           , PAYMENT_TYPE
+                   , STATUS
+                   , PAYMENT_NAME
+                   , PAYMENT_TOTAL
+                   , REWARD_POINT
+		        FROM PAYMENT
+		       WHERE MEMBER_ID = #{memberId}
+		       ORDER BY PAYMENT_DATE DESC) P
+		WHERE ROWNUM BETWEEN #{offset} AND #{limit}
+</select>
+
+<!-- 회원 관리자에게 결제취소 요청 -->
+<!-- 결제상태 요청중(STATUS => R) 로 업데이트 -->
+<update id="reqPayCancel" parameterType="com.kh.earthball.fo.payment.vo.PayInfo">
+	UPDATE PAYMENT
+		  SET STATUS = 'R'
+	  WHERE MEMBER_ID = #{memberId}
+		  AND PAYMENT_NO = #{paymentNo}
+		  AND STATUS = 'Y'
+</update>
 
 </mapper>

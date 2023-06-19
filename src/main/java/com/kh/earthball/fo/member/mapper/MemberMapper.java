@@ -1,7 +1,8 @@
 package com.kh.earthball.fo.member.mapper;
 
-import com.kh.earthball.fo.member.vo.Member;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import com.kh.earthball.fo.member.vo.Member;
 
 @Mapper
 public interface MemberMapper {
@@ -13,20 +14,22 @@ public interface MemberMapper {
   int updateMember(Member m);
 
   int idCheck(String checkId);
-  
+
   int updateMailKey(Member m);
-  
+
   int updateMailAuth(Member m);
-  
+
   int emailAuthFail(String memberId);
-  
+
   int mailAuthStatus(String memberId);
-  
+
   int updateImg(String orgFileName, String memberId);
-  
+
   void updateProfile(String memberId, String profileName);
-  
+
   String selectProfile(String memberId);
+
+  int insertProfile(@Param("memberImg") String memberImg, @Param("memberId") String memberId);
   
   int deleteMember(String memberId);
 }

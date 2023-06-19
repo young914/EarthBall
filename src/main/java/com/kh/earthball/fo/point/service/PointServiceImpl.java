@@ -1,6 +1,8 @@
 package com.kh.earthball.fo.point.service;
 
+import java.util.List;
 import org.springframework.stereotype.Service;
+import com.kh.earthball.fo.common.vo.PageInfo;
 import com.kh.earthball.fo.point.mapper.PointMapper;
 import com.kh.earthball.fo.point.vo.Point;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +31,21 @@ public class PointServiceImpl implements PointService {
   public int minusMemberPoint(Point p) {
 
     return pointMapper.minusMemberPoint(p);
+  }
+
+  @Override
+  public int myPointListCount(String memberId) {
+
+    return pointMapper.myPointListCount(memberId);
+  }
+
+  @Override
+  public List<Point> selectMyPoint(PageInfo pageInfo, String memberId) {
+
+    int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getBoardLimit();
+    int limit = offset + pageInfo.getBoardLimit();
+
+    return pointMapper.selectMyPoint(offset, limit, memberId);
   }
 
 }

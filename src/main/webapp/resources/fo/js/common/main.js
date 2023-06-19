@@ -9,8 +9,11 @@ $(function(){
     });
 });
 
+
 // 환경일기장 슬라이드
+
 $(function(){
+	console.log("아니");
     $('.diarySlide').slick({
         autoplay : true,
         autoplaySpeed : 1000,
@@ -19,6 +22,7 @@ $(function(){
         slidesToShow: 3,
         slidesToScroll: 3
     });
+    		console.log("아니");
 });
 
 // 챌린지 상세조회로 넘기기

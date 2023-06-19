@@ -213,12 +213,12 @@
     	<div id="container">
 
         		<!-- 배너 -->
+				<div class="title_all" style="padding-top: 50px; padding-bottom: 25px">
 				<div class="title">
                 <div class="bar"></div>
-                <div class="title_text">고객센터</div>
+                <div class="title_text">공지사항</div>
 				</div>
-
-
+				</div>
 
         <!-- 공지사항 -->
         <div class="board">
@@ -229,37 +229,40 @@
     <thead>
         <tr>
             <th colspan="8">
-                <h1 id="boardtext">공지사항</h1>
-                 <h4 style="text-align: center;">배송 및 운영관련 공지사항 게시판입니다.</h4>
+                <div style="display: grid; grid-template-columns: 1fr auto;">
+                    <div style="text-align: center;">
+                            <h4 style="margin: 0;">배송 및 운영관련 공지사항 게시판입니다.</h4>
+                    </div>
+                    <div style="text-align: right;">
                 <c:if test="${loginUser.memberId eq 'admin'}">
-                    <span class="btn-group">
-                        <!-- 버튼 클래스 -->
-                        <button id="insertList">
-                            <a class="enrollno"href="enrollForm.no">작성하기</a>
-                        </button>
-                    </span>
-                </c:if>
-            </tr>
-            <tr>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-                <div class="container-fluid">
-                    <a class="navbar-brand">공지사항</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarColor01">
-                        <ul class="navbar-nav me-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="list.bo">1:1문의</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="list.faq">FAQ</a>
-                            </li>
-                        </ul>
+                            <button id="insertList">
+                                <a class="enrollbo" href="enrollForm.no">글작성</a>
+                            </button>
+                        </c:if>
                     </div>
                 </div>
-            </nav>
-            </tr>
+            </th>
+        </tr>
+    </thead>
+           <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">공지사항</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+          <a class="nav-link" href="list.bo">1:1문의</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="list.faq">FAQ</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
              <tr>
       <th>No</th>
       <th>
@@ -365,16 +368,6 @@
   </div>
 </div>
 
-
-        <br><br>
-        <div id="search2-1" align="center">
-            <div class="search2">
-                <form action="">
-                    <input type="text" placeholder="검색어를 입력하세요">
-                    <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
-                </form>
-            </div>
-        </div>
     </div>
 </div>
 <!-- page_search div -->
