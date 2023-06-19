@@ -197,7 +197,7 @@
 		</select>
 		
 		<select id="selectLikeStore" resultType="com.kh.earthball.fo.store.vo.Store">
-	 	    SELECT S.STORE_NO
+	 	    SELECT DISTINCT S.STORE_NO
 		    , S.STORE_NAME
 		    , S.STORE_ADDRESS
 		    , S.STORE_DETAIL_ADDRESS

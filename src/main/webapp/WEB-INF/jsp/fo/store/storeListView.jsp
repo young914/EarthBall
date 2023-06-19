@@ -123,7 +123,8 @@ hr{
 }
 
 #searchResult{
-    font-size: 19px;
+    font-size: 16px;
+    padding: 3px;
 }
 
 #likeList{
@@ -372,7 +373,7 @@ hr{
         </div>
         
         <div style="display: grid; grid-template-columns: 30% 30% 40%; padding: 0px 32px 10px 32px;">
-            <div id="searchResult" style="padding-top: 1px;">
+            <div id="searchResult" style="padding-top: 3px;">
                 
             </div>
             <div style="justify-self: center; width: 80%;">
@@ -469,10 +470,6 @@ hr{
                     console.log("ajax 통신 실패!");
                 }
             });
-        }
-        
-        function orderLikeList(){
-            
         }
         
         function regionSearch(event) {
@@ -768,8 +765,6 @@ hr{
                                             "<div class='swiper-wrapper'>" +
                                                 storeImgStr +
                                             "</div>" +
-                                            "<div class='swiper-button-next'></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->" +
-                                            "<div class='swiper-button-prev'></div><!-- 이전 버튼 -->" + 
                                         "</div>" +
                                     "</div>" +
                                 "</div>" +
@@ -783,18 +778,12 @@ hr{
                     spaceBetween: 50, //위 slidesPerview 여백
                     autoplay: {
                         delay: 2000
-
                     },
-                    navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev'
+                    loop: true,
+                    pagination: { // 호출(pager) 여부
+                        el: ".swiper-pagination", //버튼을 담을 태그 설정
+                        clickable: true // 버튼 클릭 여부
                     }
-                });
-                swiperElement.querySelector('.swiper-button-next').addEventListener('click', function(event) {
-                    event.stopPropagation();
-                });
-                swiperElement.querySelector('.swiper-button-prev').addEventListener('click', function(event) {
-                    event.stopPropagation();
                 });
             });
 			// 페이징처리 (페이징바보기)
