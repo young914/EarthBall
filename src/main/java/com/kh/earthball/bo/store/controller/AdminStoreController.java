@@ -221,6 +221,7 @@ public class AdminStoreController {
   }
   @GetMapping("deleteStore.st")
   public String deleteStore(@RequestParam("storeNo") int storeNo, HttpSession session) {
+    System.out.println(storeNo);
     int result = storeService.deleteService(storeNo);
     if(result>0) {
       session.setAttribute("alertMsg", "매장삭제 성공");

@@ -423,6 +423,9 @@ hr{
         });
 
         function settingMap() {
+            storeList = [];
+            markerList = []; // 각 매장에 대한 마커들 담기
+            overlayList = []; // 각 매장에 대한 오버레이들 담기
             // 지도 지우기 
             $('#map').empty();
             // 2_1. 지도 셋팅 완료
@@ -1118,7 +1121,6 @@ hr{
             storeList = [];
             markerList = []; // 각 매장에 대한 마커들 담기
             overlayList = []; // 각 매장에 대한 오버레이들 담기
-
             
             memberId = '${loginUser.memberId}';
             
@@ -1129,14 +1131,11 @@ hr{
                     memberId : memberId,
                 },
                 success : function(result) {
-
                     storMap = result;
                     storeList = storMap.storeList;
                     storeAttaList = storMap.storeAttaList;
-                    
-                    
-                    // 전체매장 보기 버튼 생성
-                    
+
+                    // 전체매장 보기 버튼 생성                    
                     var settingMapBtn = document.createElement('div');
                     settingMapBtn.setAttribute('id', 'settingMap');
                     settingMapBtn.setAttribute('onclick', 'settingMap()');
@@ -1163,8 +1162,7 @@ hr{
                     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
                     makeMarker(result, map);
-                    
-                    
+
                 },
                 error : function() {
                     console.log("ajax 통신 실패");
