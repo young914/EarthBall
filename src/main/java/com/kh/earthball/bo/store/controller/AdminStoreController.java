@@ -111,7 +111,21 @@ public class AdminStoreController {
     }
   }
   
-  
+  @GetMapping("adminSignUpList.st")
+  public ModelAndView storeSignUpList(@RequestParam(value="cPage", defaultValue="1") int currentPage,
+      ModelAndView mv) {
+
+      int listCount = storeService.selectSignUpListCount();
+      int pageLimit = 10;
+      int boardLimit = 10;
+      
+      PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+      
+      ArrayList<AdminStore> list = storeService.selectSignUpList(pi);
+      
+      mv.addObject("pi", pi).addObject("list", list).setViewName("bo/store/storeSignUpList");
+      return mv;
+      }
   @GetMapping("storeUpdateForm.st")
   public String storeUpdateForm(int storeNo, Model model) {
    System.out.println("여기는 storeUpdateForm.");
@@ -178,8 +192,6 @@ public class AdminStoreController {
         list.add(at);
       }
     }
-
-
     int result = storeService.updateStore(s,list);
 
     if(result>0) {
@@ -191,7 +203,7 @@ public class AdminStoreController {
     }
   }
   @GetMapping("deleteStore.st")
-  public String deleteStore(int storeNo, HttpSession session) {
+  public String deleteStore(@RequestParam("storeNo") int storeNo, HttpSession session) {
     int result = storeService.deleteService(storeNo);
     if(result>0) {
       session.setAttribute("alertMsg", "매장삭제 성공");
@@ -203,14 +215,25 @@ public class AdminStoreController {
   }
   
   @GetMapping("detailStore.st")
-  public String detailStore(int storeNo, Model model) {
+  public String detailStore(@RequestParam("storeNo") int storeNo, Model model) {
     System.out.println("여기는 detailStore.");
     AdminStore detailData = storeService.selectStore(storeNo);
     ArrayList<AdminAtta> detailAtta = storeService.selectAtta(storeNo);
-    
-    
     model.addAttribute("beforeData", detailData);
     model.addAttribute("beforeAtta", detailAtta);
     return "bo/store/storeDetailView";
+  }
+  
+  @GetMapping("approvalStore.st")
+  public String approvalStore(@RequestParam(value = "storeNo", required=false)Integer storeNo, HttpSession session) {
+    System.out.println("storeNo 못받나?" +  storeNo );
+    int result = storeService.approvalStore(storeNo);
+    if(result>0) {
+      session.setAttribute("alertMsg", "매장승인 성공");
+      return  "redirect:/approvalStore.st";
+    }else {
+      session.setAttribute("alertMsg", "매장승인 실패");
+      return "redirect:/approvalStore.st";
+    }
   }
 }

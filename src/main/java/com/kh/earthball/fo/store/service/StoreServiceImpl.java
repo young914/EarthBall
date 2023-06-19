@@ -23,8 +23,8 @@ public class StoreServiceImpl implements StoreService {
   }
 
   @Override
-  public ArrayList<Store> selectAllStoreList() {
-    return storeMapper.selectAllStoreList();
+  public ArrayList<Store> selectAllStoreList(boolean orderLikeCheck) {
+    return storeMapper.selectAllStoreList(orderLikeCheck);
   }
 
   @Override
@@ -48,18 +48,18 @@ public class StoreServiceImpl implements StoreService {
   }
 
   @Override
-  public ArrayList<Store> selectFilterListC(String city) {
-    return storeMapper.selectFilterListC(city);
+  public ArrayList<Store> selectFilterListC(String city, boolean orderLikeCheck) {
+    return storeMapper.selectFilterListC(city, orderLikeCheck);
   }
 
   @Override
-  public ArrayList<Store> selectFilterListR(int regionNo) {
-    return storeMapper.selectFilterListR(regionNo);
+  public ArrayList<Store> selectFilterListR(int regionNo, boolean orderLikeCheck) {
+    return storeMapper.selectFilterListR(regionNo, orderLikeCheck);
   }
 
   @Override
-  public ArrayList<Store> selectNameSearch(String searchValue) {
-    return storeMapper.selectNameSearch(searchValue);
+  public ArrayList<Store> selectNameSearch(String searchValue, boolean orderLikeCheck) {
+    return storeMapper.selectNameSearch(searchValue, orderLikeCheck);
   }
 
 
@@ -92,6 +92,11 @@ public class StoreServiceImpl implements StoreService {
   @Override
   public ArrayList<StoreAtta> selectStoreAttaList() {
     return storeMapper.selectStoreAttaList();
+  }
+
+  @Override
+  public ArrayList<StoreAtta> selectStoreAttaFilterList(ArrayList<Store> selectFilterList) {
+    return storeMapper.selectStoreAttaFilterList(selectFilterList);
   }
   
 }
