@@ -168,9 +168,11 @@
     <div id="container">
 
         		<!-- 배너 -->
+				<div class="title_all" style="padding-top: 50px; padding-bottom: 25px">
 				<div class="title">
                 <div class="bar"></div>
-                <div class="title_text">고객센터</div>
+                <div class="title_text">공지사항</div>
+				</div>
 				</div>
 
 
@@ -186,7 +188,7 @@
                 <thead>
                 <div>
                     <tr>
-                        <th colspan="8"><h1 id="boardtext">공지사항</h1> <br>
+                        <th colspan="8"><br>
                             <h3 style="text-align: center;">배송 및 운영관련 공지사항 게시판입니다.</h3> <br><br>
                             <div class="jumbotron" style="user-select: auto;">
                                 <h5><strong>공지사항</strong> ${ b.noticeTitle }</h5> <hr>
@@ -196,20 +198,7 @@
 
                                 <hr>
 
-							    <p style="user-select: auto;">
-							      <span class="material-symbols-outlined">
-							        <a href="${pageContext.request.contextPath}/detail.no?bno=${b.noticeNo - 1}">이전글</a>
-							      </span>
-							    </p>
-							    <hr>
 
-							    <p style="user-select: auto;">
-							      <span class="material-symbols-outlined">
-							        <a href="${pageContext.request.contextPath}/detail.no?bno=${b.noticeNo + 1}" >다음글</a>
-							      </span>
-							    </p>
-
-							    <hr>
 
                               </div>
 

@@ -168,9 +168,11 @@
     <div id="container">
 
         		<!-- 배너 -->
+        		<div class="title_all" style="padding-top: 50px; padding-bottom: 25px">
 				<div class="title">
                 <div class="bar"></div>
-                <div class="title_text">고객센터</div>
+                <div class="title_text">1:1문의</div>
+				</div>
 				</div>
 
 
@@ -187,7 +189,7 @@
                 <thead>
                 <div>
                     <tr>
-                        <th colspan="8"><h1 id="boardtext">1:1문의</h1> <br>
+                        <th colspan="8"><br>
                             <h3 style="text-align: center;">고객센터 운영시간 | 평일 10:00 ~ 17:00</h3> <br><br>
                             <div class="jumbotron" style="user-select: auto;">
                                 <h5><strong>1:1 문의</strong> ${ b.boardTitle }</h5> <hr>
@@ -307,22 +309,8 @@
 </script>
 
 
-                                <hr>
 
-							    <p style="user-select: auto;">
-							      <span class="material-symbols-outlined">
-							        <a href="${pageContext.request.contextPath}/detail.bo?bno=${b.boardNo - 1}">이전글</a>
-							      </span>
-							    </p>
-							    <hr>
 
-							    <p style="user-select: auto;">
-							      <span class="material-symbols-outlined">
-							        <a href="${pageContext.request.contextPath}/detail.bo?bno=${b.boardNo + 1}" >다음글</a>
-							      </span>
-							    </p>
-
-							    <hr>
 
                               </div>
 
@@ -350,6 +338,7 @@
             	            	}
                             </script>
                               </c:if>
+                              <hr>
                             <div class="listBtn">
                                 <p class="lead">
                                 <a class="btn btn-primary" href="list.bo" role="button"  id="btn_previous">목록</a>

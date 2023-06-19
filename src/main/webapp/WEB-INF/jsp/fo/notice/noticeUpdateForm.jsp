@@ -85,6 +85,7 @@ function updateBoardBtn() {
   <option value="category1">카테고리1</option>
   <option value="category2">카테고리2</option>
 </select>
+<br><br>
 <textarea id="summernote" name="boardContent" required="required" >${b.noticeContent}</textarea>
 <div class="enrollFormBtn">
     <button type="reset" id="resetBtn" class="btn btn-danger" onclick="javascript:history.go(-1);">목록</button>
