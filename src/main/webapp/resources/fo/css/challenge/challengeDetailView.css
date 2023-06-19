@@ -143,10 +143,10 @@
   border: solid 1px #69abce;
   border-radius: 7px;
   width: 200px;
-  height: 60px;
+  height: 45px;
   color: white;
-  font-weight: 500;
-  font-size: 30px;
+  font-weight: 100;
+  font-size: 25px;
   margin: 20px;
 }
 
@@ -161,10 +161,10 @@
   border: solid 1px #69abce;
   border-radius: 7px;
   width: 200px;
-  height: 60px;
+  height: 45px;
   color: #69abce;
-  font-weight: 500;
-  font-size: 30px;
+  font-weight: 100;
+  font-size: 25px;
   margin: 20px;
 }
 
@@ -180,8 +180,8 @@
   border: #146C94 solid 1px;
   width: 250px;
   height: 40px;
-  font-weight: 700;
-  font-size: 20px;
+  font-weight: 100;
+  font-size: 17px;
   margin: 20px;
   color: white;
 }
@@ -219,7 +219,7 @@
 }
 
 
-.info_title h2 {
+.info_title h3 {
   margin-left: 30px;
 }
 
@@ -237,7 +237,7 @@
 
 
 .form_title {
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 500;
   margin-left: 30px;
   margin-top: 40px;
@@ -246,7 +246,7 @@
 }
 
 .form_content {
-  font-size: 25px;
+  font-size: 18px;
   margin-left: 30px;
   font-weight: 200;
 }
@@ -271,8 +271,8 @@
   margin-left: 45px;
   border-radius: 5px;
   color: #146C94;
-  font-weight: 900;
-  border: #146C94 1px dashed;
+  font-weight: 500;
+  /*border: #146C94 1px dashed;*/
   display: inline-block;
 }
 
@@ -455,5 +455,6 @@ EDIT ON
   padding: 6px 12px;
   display: inline-block;
   cursor: pointer;
+
 }
 /*--------------이미지 미리보기----------------*/

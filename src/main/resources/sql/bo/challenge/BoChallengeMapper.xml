@@ -77,12 +77,13 @@
                     , C.MEMBER_ID
                     , C.CH_CONTENT
                FROM TB_CHALLENGE C
-               JOIN TB_CATEGORY GO ON C.CATEGORY_NO = GO.CATEGORY_NO ) CHALL
+               JOIN TB_CATEGORY GO ON C.CATEGORY_NO = GO.CATEGORY_NO
+              WHERE C.STATUS = 'Y'
+                AND GO.STATUS = 'Y') CHALL
         WHERE CHALL.CH_TITLE LIKE '%' || #{keyword} || '%'
            OR CHALL.MEMBER_ID LIKE '%' || #{keyword} || '%'
            OR CHALL.CH_CONTENT LIKE '%' || #{keyword} || '%'
            OR CHALL.CATEGORY_NAME LIKE '%' || #{keyword} || '%'
-          AND STATUS = 'Y'
     </select>
 
 
@@ -105,7 +106,8 @@
                              , C.CH_CONTENT
                           FROM TB_CHALLENGE C
                           JOIN TB_CATEGORY GO ON C.CATEGORY_NO = GO.CATEGORY_NO
-                         WHERE C.STATUS = 'Y') CHALL
+                         WHERE C.STATUS = 'Y'
+                           AND GO.STATUS = 'Y') CHALL
                WHERE CHALL.CH_TITLE LIKE '%' || #{keyword} || '%'
                   OR CHALL.MEMBER_ID LIKE '%' || #{keyword} || '%'
                   OR CHALL.CATEGORY_NAME LIKE '%' || #{keyword} || '%'

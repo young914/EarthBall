@@ -28,14 +28,12 @@ import java.util.List;
 public class ChallengeController {
 
   private final CategoryService categoryService;
-  private final CategoryTemplateService templateService;
-  private final CodeService codeService;
   private final ChallengeService challengeService;
-  private final ConfirmService confirmService;
 
   @GetMapping("/main.chall")
   public String challengeMain(
-      @RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Challenge challenge, Model model) {
+      @RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Challenge challenge,
+      Model model) {
 
     // 전체 챌린지 게시글 수 조회
     int listCount = challengeService.selectListCount();
@@ -83,7 +81,8 @@ public class ChallengeController {
 
 
   @GetMapping("/openForm.chall")
-  public String openChallengeForm(@RequestParam(value = "categoryNo") int categoryNo, Model model, HttpSession session) {
+  public String openChallengeForm(@RequestParam(value = "categoryNo") int categoryNo, Model model,
+      HttpSession session) {
 
     // 이메일 인증한 회원이 아니라면 접근 불가하도록 설정
     Member loginUser = (Member) session.getAttribute("loginUser");
