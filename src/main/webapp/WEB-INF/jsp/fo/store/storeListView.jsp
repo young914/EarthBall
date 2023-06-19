@@ -442,47 +442,36 @@ hr{
             // 2_2. ajax 로 전체 매장 조회해오기
             
             $.ajax({
-            url : "getStores.st",
-            type : "get",
-            data : {
-                memberId : memberId, 
-                orderLikeCheck : orderLikeCheck
-            },
-            success : function(result) {
+                url : "getStores.st",
+                type : "get",
+                data : {
+                    memberId : memberId, 
+                    orderLikeCheck : orderLikeCheck
+                },
+                success : function(result) {
 
-                var checkbox = document.getElementById('btn-check-2-outlined');
-                
-                makeMarker(result, map);
-                
-                var likeMapBtn = document.createElement('div');
-                likeMapBtn.setAttribute('id', 'likeList');
-                likeMapBtn.setAttribute('onclick', 'likeMap()');
-                likeMapBtn.innerHTML = '<i class="xi-heart xi-2x"></i>&nbsp;<span>맘에 든 매장보기</span>';
-                document.getElementById('settingMap').replaceWith(likeMapBtn);
-                var checkbox = document.getElementById('btn-check-2-outlined');
-                checkbox.disabled = false;
-            }, 
-            error : function() {
-                console.log("ajax 통신 실패!");
-            }
-        });
-    }
-    
-    function orderLikeList(){
-        
-    }
-    // 매장 리스트를 업데이트하고 새로운 리스트로 HTML을 생성하여 출력하는 함수
-    function updateStoreList(storeList) {
-        var storeListArea = document.getElementById('store-list-area');
-        storeListArea.innerHTML = '';
-
-        for (var i = 0; i < storeList.length; i++) {
-            var store = storeList[i];
-            // 새로운 리스트 아이템 생성 및 출력
-            // ...
+                    var checkbox = document.getElementById('btn-check-2-outlined');
+                    
+                    makeMarker(result, map);
+                    
+                    var likeMapBtn = document.createElement('div');
+                    likeMapBtn.setAttribute('id', 'likeList');
+                    likeMapBtn.setAttribute('onclick', 'likeMap()');
+                    likeMapBtn.innerHTML = '<i class="xi-heart xi-2x"></i>&nbsp;<span>맘에 든 매장보기</span>';
+                    document.getElementById('settingMap').replaceWith(likeMapBtn);
+                    var checkbox = document.getElementById('btn-check-2-outlined');
+                    checkbox.disabled = false;
+                }, 
+                error : function() {
+                    console.log("ajax 통신 실패!");
+                }
+            });
         }
-    }
-
+        
+        function orderLikeList(){
+            
+        }
+        
         function regionSearch(event) {
             var region = $(event.target).text();
             $("#dropClasificarFilter").text(region);
@@ -961,7 +950,7 @@ hr{
                     }
 
                     isClosed[index] = !isClosed[index];
-
+                    console.log(Math.ceil((index + 1) / 10));
                     currentPage = showList(storeMap, Math.ceil((index + 1) / 10));
                     
                     // 리스트에서 해당 마커의 detailInfo 보이기
