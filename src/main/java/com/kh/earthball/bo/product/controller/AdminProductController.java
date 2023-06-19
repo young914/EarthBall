@@ -97,16 +97,7 @@ public class AdminProductController {
                             String[] changeNames,
                             HttpSession session) {
 
-    for(int i = 0; i < 10; i++){
-      if(!upfiles[i].isEmpty()){
-        System.out.println(i + "번째 새로운 파일 : " + upfiles[i].getOriginalFilename());
-      }else{
-        System.out.println(i + "번째 새로운 파일이 없습니다.");
-      }
-    }
-
     ArrayList<AdminAtta> list = new ArrayList<>();
-
 
     for(int i = 0; i < upfiles.length; i++){
 
@@ -131,10 +122,7 @@ public class AdminProductController {
         at.setFileLevel(i);
         at.setProductNo(p.getProductNo());
       }
-      System.out.println("----------");
-      System.out.println(at);
       list.add(at);
-
     }
 
     int result = productService.updateProduct(p, list);
