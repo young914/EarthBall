@@ -3,7 +3,7 @@ package com.kh.earthball.bo.Member.service;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.kh.earthball.bo.Member.mapper.AdminMemberMapper;
-import com.kh.earthball.bo.Member.vo.adminMember;
+import com.kh.earthball.bo.Member.vo.AdminMember;
 import com.kh.earthball.fo.common.vo.PageInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ public class MemberAdminServiceImpl implements MemberAdminService {
   }
 
   @Override
-  public List<adminMember> selectAdminMemberList(PageInfo pageInfo) {
+  public List<AdminMember> selectAdminMemberList(PageInfo pageInfo) {
     
     int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getBoardLimit();
     int limit = offset + pageInfo.getBoardLimit();
@@ -30,7 +30,7 @@ public class MemberAdminServiceImpl implements MemberAdminService {
   }
 
   @Override
-  public List<adminMember> searchAdminMember(String keyword) {
+  public List<AdminMember> searchAdminMember(String keyword) {
     return adminMemberMapper.searchAdminMember(keyword);
   }
  }
