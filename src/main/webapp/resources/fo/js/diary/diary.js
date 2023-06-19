@@ -159,7 +159,7 @@ function validateSelection() {
            if(data === "게시글 등록 완료") {
 
 			// 포인트 지급
-			insertPoint();
+			plusPoint();
 
 			   alert(data);
 			   location.href = "diaryListView.bo";

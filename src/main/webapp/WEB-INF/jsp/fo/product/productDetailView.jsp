@@ -213,7 +213,7 @@ ${p.productInfo}
                             </div>
                             <div class="modal-footer">
                                 <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="insertReview();">작성</button>
+                                <button type="reset" class="btn btn-primary" data-bs-dismiss="modal" onclick="insertReview();">작성</button>
                             </div>
                         </form>
                     </div>

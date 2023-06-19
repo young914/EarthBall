@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.earthball.fo.common.template.Pagination;
 import com.kh.earthball.fo.common.vo.PageInfo;
 import com.kh.earthball.fo.member.vo.Member;
-import com.kh.earthball.fo.payment.vo.PayInfo;
 import com.kh.earthball.fo.point.service.PointService;
 import com.kh.earthball.fo.point.vo.Point;
 import lombok.RequiredArgsConstructor;
@@ -62,7 +61,7 @@ public class PointController {
     // 나의 주문내역 수 조회
     int listCount = pointService.myPointListCount(memberId);
 
-    int pageLimit = 20;
+    int pageLimit = 15;
     int boardLimit = 10;
 
     PageInfo pageInfo = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);

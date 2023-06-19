@@ -18,9 +18,6 @@
     <!-- 버튼 -->
     <div id="buttonArea">
         <div>
-            <button onclick="categoryList();" value="선물꾸러미">선물꾸러미</button>
-        </div>
-        <div>
             <button onclick="categoryList();" value="욕실">욕실</button>
         </div>
         <div>
@@ -33,16 +30,7 @@
             <button onclick="categoryList();" value="생활">생활</button>
         </div>
         <div>
-            <button onclick="categoryList();" value="취미">취미</button>
-        </div>
-        <div>
             <button onclick="categoryList();" value="음료용품">음료용품</button>
-        </div>
-        <div>
-            <button onclick="categoryList();" value="여성용품">여성용품</button>
-        </div>
-        <div>
-            <button onclick="categoryList();" value="반려동물">반려동물</button>
         </div>
         <div>
             <button onclick="categoryList();" value="화장품">화장품</button>

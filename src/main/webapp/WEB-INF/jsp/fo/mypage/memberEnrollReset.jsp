@@ -181,7 +181,7 @@
         <div class="field">
             <b>아이디 *</b>
             <span class="placehold-text">
-            <input type="text" name="memberId" value="${loginUser.memberId }" readonly></span>
+            <input type="text" name="memberId" value="${loginUser.memberId }" readonly reqruid></span>
         </div>
         <div class="field">
             <b>비밀번호 *</b>
@@ -246,11 +246,11 @@
         <div class="field tel-number">
             <b>주소 *</b>
             <div>
-                <input type="tel" placeholder="우편번호" id="sample6_postcode" value="${loginUser.postCode }" required readonly >
+                <input type="tel" name="postCode" placeholder="우편번호" id="sample6_postcode" value="${loginUser.postCode }" required readonly >
                 <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" >
             </div>
-	            <input type="text" placeholder="주소" id="sample6_address" value="${ loginUser.address1 }" required>
-	            <input type="text" placeholder="상세주소" id="sample6_detailAddress" value="${ loginUser.address2 }" required>
+	            <input type="text" name="address1" placeholder="주소"  id="sample6_address" value="${ loginUser.address1 }" required>
+	            <input type="text" name="address2"placeholder="상세주소"  id="sample6_detailAddress" value="${ loginUser.address2 }" required>
 	            <input type="text" placeholder="참고항목" id="sample6_extraAddress">
         </div>
         <!-- 6. 가입하기 버튼 -->
@@ -259,6 +259,8 @@
         </form>
         
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        
+        
         <!-- 주소 API 등록 -->
         <script>
 		    function sample6_execDaumPostcode() {

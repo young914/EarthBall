@@ -160,12 +160,13 @@
 $("#cancel_btn").on("click", function() {
 
 	let paymentNo = $(this).parent().parent().children(0).eq(0).text();
+	let memberId = $(this).parent().parent().children(0).eq(1).text();
 
 	$.ajax({
 		url : "/acceptCancel",
 		type : "post",
 		data : {
-			memberId : "${loginUser.memberId}",
+			memberId : memberId,
 			paymentNo : paymentNo
 		},
 		success : function(result) {

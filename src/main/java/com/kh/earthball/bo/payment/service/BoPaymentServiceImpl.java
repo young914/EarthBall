@@ -30,4 +30,10 @@ public class BoPaymentServiceImpl implements BoPaymentService {
     return boPaymentMapper.selectCancelPayList(offset, limit);
   }
 
+  @Override
+  public int acceptCancel(BoPayInfo p) {
+
+    return boPaymentMapper.acceptCancel(p);
+  }
+
 }
