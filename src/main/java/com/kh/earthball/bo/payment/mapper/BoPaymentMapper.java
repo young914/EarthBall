@@ -12,4 +12,6 @@ public interface BoPaymentMapper {
 
   List<BoPayInfo> selectCancelPayList(@Param("offset") int offset, @Param("limit") int limit);
 
+  int acceptCancel(BoPayInfo p);
+
 }

@@ -7,10 +7,8 @@
 <!-- 관리자페이지 주문취소 개수 조회 -->
 <select id="cancelPayListCount">
 	SELECT COUNT(*)
-	   FROM PAYMENT_REQ_CANCEL PRC
-	 WHERE PRC.PAYMENT_NO = (SELECT P.PAYMENT_NO
-	 												 FROM PAYMENT P
-	 											   WHERE P.STATUS = 'R')
+       FROM PAYMENT P
+     WHERE P.STATUS = 'R'
 </select>
 
 <!-- 관리자페이지 주문취소 리스트 조회 -->
@@ -29,5 +27,14 @@
 		       ORDER BY PAYMENT_DATE DESC) P
 		WHERE ROWNUM BETWEEN #{offset} AND #{limit}
 </select>
+
+<!-- 관리자페이지 결제처리 사이트에서 결제 취소 후 결제취소처리 -->
+<update id="acceptCancel" parameterType="com.kh.earthball.bo.payment.vo.BoPayInfo">
+	UPDATE PAYMENT
+		  SET STATUS = 'N'
+	  WHERE MEMBER_ID = #{memberId}
+		  AND PAYMENT_NO = #{paymentNo}
+		  AND STATUS = 'R'
+</update>
 
 </mapper>

@@ -99,7 +99,7 @@
 }
 
 
-.info_title h2 {
+.info_title h3 {
   margin-left: 30px;
 }
 
@@ -126,9 +126,9 @@
 
 
 .form_content {
-  font-size: 20px;
+  font-size: 18px;
   margin-left: 30px;
-  font-weight: 300;
+  font-weight: 200;
 }
 
 .form_text {
@@ -166,7 +166,7 @@
   border-radius: 5px;
   color: #146C94;
   font-weight: 500;
-  border: #146C94 1px dashed;
+  /*border: #146C94 1px dashed;*/
   display: inline-block;
 }
 
@@ -202,7 +202,7 @@
   left: 400px;
   justify-content: center;
   margin-left: 40px;
-  width: 500px;
+  width: 700px;
   text-align: center;
 }
 
@@ -330,7 +330,6 @@
 
 /* 화면에 선택적으로 뿌려지는 템플릿 폼들*/
 
-
 /*--------------이미지 미리보기----------------*/
 HTML SCSS BabelResult Skip Results Iframe
 EDIT ON
@@ -346,9 +345,10 @@ EDIT ON
 
 .image-box {
   width: 700px;
+  height: 500px;
   object-fit: cover;
   display: block;
-  margin: 20px 50px;
+  margin: 10px 80px;
 }
 
 .upload-btn {
@@ -356,6 +356,11 @@ EDIT ON
   padding: 6px 12px;
   display: inline-block;
   cursor: pointer;
+  margin-left: 80px;
+}
+
+.fileUpload {
+  margin-left: 50px;
 }
 
 /*--------------이미지 미리보기----------------*/

@@ -48,7 +48,7 @@
         <span style="  display: flex;">
 
                 <div id="title_profile_btn" style="width: 300px;">
-                  <div>
+                  <div style="font-size: 25px;">
                     ${challenge.memberId}
                   </div>
                   <div style="  text-align: right;">
@@ -68,7 +68,7 @@
                     </c:choose>
                   </div>
                   <div>
-                    <button class="btn_3">챌린지 채팅 참여</button>
+                    <button class="btn_3" onclick="serviceReady();">챌린지 채팅 참여</button>
                   </div>
                 </div>
               </span>
@@ -210,6 +210,10 @@
 
   function detailViewConfirm(chConNo) {
       location.href="/detailView.con?chConNo=" + chConNo;
+  }
+
+  function serviceReady() {
+      alert("서비스 준비 중 입니다.");
   }
 
 </script>

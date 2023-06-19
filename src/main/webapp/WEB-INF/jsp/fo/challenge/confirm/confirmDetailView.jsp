@@ -317,7 +317,17 @@
           , contentType: 'application/json'
           , success : function (result) {
              if(result > 0) {
-               alert("챌린지 인증 게시글이 삭제되었습니다.");
+
+                $.ajax({  // 포인트 삭감용 ajax
+                       url : "/insertPoint",
+                       type : "post",
+                       data : { pointContent : "챌린지 인증 삭제", // 포인트 추가 / 삭감 사유
+                                pointNum : 100, // 추가 / 삭감할 포인트
+                                status : "-", // 추가 시 "+" / 삭감 시 "-"
+                                memberId : "memberId" }// 로그인한 회원의 아이디
+                });
+
+               alert("챌린지 인증 게시글이 삭제되었습니다. 챌린지 인증 게시글을 삭제하였으므로 포인트가 삭감됩니다.");
                location.href="/listView.con?chNo=" + chNo;
              } else {
                alert("챌린지 인증 게시글이 삭제되지 않았습니다.");
@@ -388,14 +398,13 @@
 
             for(var i = 0; i < result.length; i++) {
               resultStr += "<tr>"
-                      + 	"<td>" + result[i].memberId + "</td>"
-                      + 	"<td>" + result[i].reContent + "</td>"
-                      + 	"<td>" + result[i].reCreateDate + "</td>"
+                      + 	"<td style='width: 10%;'>" + result[i].memberId + "</td>"
+                      + 	"<td style='width: 60%;'>" + result[i].reContent + "</td>"
+                      + 	"<td style='width: 20%;'>" + result[i].reCreateDate + "</td>"
 
                       // 로그인 한 유저인 경우에만 수정 및 삭제 버튼 추가
                       if(loginUser === result[i].memberId) {
-                        resultStr += "<td>"
-                                /*+           "<button class='btn_6' onclick='editReply(" + result[i].reNo + ")'>수정</button> "*/
+                        resultStr += "<td style='width: 10%;'>"
                                 +           "<button class='btn_6' onclick='deleteReply(" + result[i].reNo + ")'>삭제</button>"
                                 +     "</td>"
                       }

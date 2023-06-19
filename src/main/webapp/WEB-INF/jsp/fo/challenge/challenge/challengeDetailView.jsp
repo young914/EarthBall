@@ -45,7 +45,7 @@
           <span style="  display: flex;">
 
                 <div id="title_profile_btn" style="width: 300px;">
-                  <div>
+                  <div style="font-size: 25px;">
                     ${challenge.memberId}
                   </div>
                   <div style="  text-align: right;">
@@ -66,7 +66,7 @@
 
                   </div>
                   <div>
-                    <button class="btn_3">챌린지 채팅 참여</button>
+                    <button class="btn_3" onclick="serviceReady();">챌린지 채팅 참여</button>
                   </div>
                 </div>
               </span>
@@ -84,7 +84,7 @@
 
     <div class="basic_info">
       <div class="info_title">
-        <h2>기본 정보</h2>
+        <h3>기본 정보</h3>
         <div class="bar_2"></div>
         <br>
       </div>
@@ -115,7 +115,7 @@
 
     <div class="template">
       <div class="info_title">
-        <h2>챌린지 상세 내용</h2>
+        <h3>챌린지 상세 내용</h3>
         <div class="bar_2" style="width: 220px;"></div>
         <br>
       </div>
@@ -177,6 +177,10 @@
 
   function detailView(chNo) {
       location.href="/detailView.chall?chNo=" + chNo;
+  }
+
+  function serviceReady() {
+    alert("서비스 준비 중 입니다.");
   }
 </script>
 
