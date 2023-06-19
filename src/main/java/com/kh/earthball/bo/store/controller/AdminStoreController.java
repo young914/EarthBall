@@ -152,7 +152,7 @@ public class AdminStoreController {
                             ModelAndView mv) {
     ArrayList<AdminAtta> list = new ArrayList<>();
     
-    for(int i=0; i < upfiles.length; i ++) {
+    for(int i=0; i < 10; i ++) {
       AdminAtta at = new AdminAtta();
       
       if(!upfiles[i].isEmpty()){

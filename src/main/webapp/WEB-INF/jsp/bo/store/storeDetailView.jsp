@@ -206,10 +206,9 @@
                                                     <td>
                                                         <div>
                                                             <input type="file" class="upfile1" name="upfiles" onchange="loadImg(this, 1);"> 
-                                                            <img id="preview1" src="/resources/fo/upfiles/${ beforeAtta[0].changerName }">
-                                                            <c:if test="${beforeAtta[0].changerName != null}">
-                                                                <input type="hidden" name="changeNames" value="${ beforeAtta[0].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
-                                                            </c:if>
+                                                            <img id="preview1" onclick="upfile();" src="/resources/fo/upfiles/${ beforeAtta[0].changerName }">
+                                                            <input type="hidden" name="changeNames" value="${ beforeAtta[0].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+
                                                         </div>
                                                         <div>로고</div>
                                                     </td>
@@ -218,30 +217,30 @@
 													<td>
 														<div>
                                                             <input type="file" class="upfile2" name="upfiles" onchange="loadImg(this, 2);"> 
-                                                            <img id="preview2" src="/resources/fo/upfiles/${ beforeAtta[1].changerName }">
-                                                            <c:if test="${ beforeAtta[1].changerName  != null}">
-                                                                <input type="hidden" name="changeNames" value="${ beforeAtta[1].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
-                                                            </c:if>    
+                                                            <img id="preview2" onclick="upfile();" src="/resources/fo/upfiles/${ beforeAtta[1].changerName }">
+                                                            
+                                                            <input type="hidden" name="changeNames" value="${ beforeAtta[1].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+                                                            
                                                         </div>
 														<div>매장사진 1번</div>
 													</td>
 													<td>
 														<div>
                                                             <input type="file" class="upfile3" name="upfiles" onchange="loadImg(this, 3);"> 
-                                                            <img id="preview3" src="/resources/fo/upfiles/${ beforeAtta[2].changerName }">
-                                                            <c:if test="${ beforeAtta[2].changerName  != null}">
-                                                                <input type="hidden" name="changeNames" value="${ beforeAtta[2].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
-                                                            </c:if>
+                                                            <img id="preview3" onclick="upfile();" src="/resources/fo/upfiles/${ beforeAtta[2].changerName }">
+                                                            
+                                                            <input type="hidden" name="changeNames" value="${ beforeAtta[2].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+                                                            
                                                         </div>
 														<div>매장사진 2번</div>
 													</td>
 													<td>
 														<div>
                                                             <input type="file" class="upfile4" name="upfiles" onchange="loadImg(this, 4);"> 
-                                                            <img id="preview4" src="/resources/fo/upfiles/${ beforeAtta[3].changerName }">
-                                                            <c:if test="${ beforeAtta[3].changerName  != null}">
-                                                                <input type="hidden" name="changeNames" value="${ beforeAtta[3].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
-                                                            </c:if>
+                                                            <img id="preview4" onclick="upfile();" src="/resources/fo/upfiles/${ beforeAtta[3].changerName }">
+                                                            
+                                                            <input type="hidden" name="changeNames" value="${ beforeAtta[3].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+                                                            
                                                         </div>
 														<div>매장사진 3번</div>
 													</td>
@@ -250,30 +249,30 @@
 													<td>
 														<div>
                                                             <input type="file" class="upfile5" name="upfiles" onchange="loadImg(this, 5);"> 
-                                                            <img id="preview5" src="/resources/fo/upfiles/${ beforeAtta[4].changerName }">
-                                                            <c:if test="${ beforeAtta[4].changerName  != null}">
-                                                                <input type="hidden" name="changeNames" value="${ beforeAtta[4].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
-                                                            </c:if>    
+                                                            <img id="preview5" onclick="upfile();" src="/resources/fo/upfiles/${ beforeAtta[4].changerName }">
+                                                            
+                                                            <input type="hidden" name="changeNames" value="${ beforeAtta[4].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+                                                            
                                                         </div>
 														<div>매장사진 4번</div>
 													</td>
 													<td>
 														<div>
                                                             <input type="file" class="upfile6" name="upfiles" onchange="loadImg(this, 6);"> 
-                                                            <img id="preview6" src="/resources/fo/upfiles/${ beforeAtta[5].changerName }">
-                                                            <c:if test="${ beforeAtta[5].changerName  != null}">
-                                                                <input type="hidden" name="changeNames" value="${ beforeAtta[5].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
-                                                            </c:if>
+                                                            <img id="preview6" onclick="upfile();" src="/resources/fo/upfiles/${ beforeAtta[5].changerName }">
+                                                            
+                                                            <input type="hidden" name="changeNames" value="${ beforeAtta[5].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+                                                            
                                                         </div>
 														<div>매장사진 5번</div>
 													</td>
 													<td>
 														<div>
                                                             <input type="file" class="upfile7" name="upfiles" onchange="loadImg(this, 7);"> 
-                                                            <img id="preview7" src="/resources/fo/upfiles/${ beforeAtta[6].changerName }">
-                                                            <c:if test="${ beforeAtta[6].changerName  != null}">
-                                                                <input type="hidden" name="changeNames" value="${ beforeAtta[6].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
-                                                            </c:if>    
+                                                            <img id="preview7" onclick="upfile();" src="/resources/fo/upfiles/${ beforeAtta[6].changerName }">
+                                                            
+                                                            <input type="hidden" name="changeNames" value="${ beforeAtta[6].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+                                                            
                                                         </div>
 														<div>매장사진 6번</div>
 													</td>
@@ -282,30 +281,30 @@
 													<td>
 														<div>
                                                             <input type="file" class="upfile8" name="upfiles" onchange="loadImg(this, 8);">
-                                                            <img id="preview8" src="/resources/fo/upfiles/${ beforeAtta[7].changerName }">
-                                                            <c:if test="${ beforeAtta[7].changerName  != null}">
-                                                                <input type="hidden" name="changeNames" value="${ beforeAtta[7].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
-                                                            </c:if>    
+                                                            <img id="preview8" onclick="upfile();" src="/resources/fo/upfiles/${ beforeAtta[7].changerName }">
+                                                            
+                                                            <input type="hidden" name="changeNames" value="${ beforeAtta[7].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+                                                            
                                                         </div>
 														<div>매장사진 7번</div>
 													</td>
 													<td>
 														<div>
                                                             <input type="file" class="upfile9" name="upfiles" onchange="loadImg(this, 9);"> 
-                                                            <img id="preview9" src="/resources/fo/upfiles/${ beforeAtta[8].changerName }">
-                                                            <c:if test="${ beforeAtta[8].changerName  != null}">
-                                                                <input type="hidden" name="changeNames" value="${ beforeAtta[8].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
-                                                            </c:if>    
+                                                            <img id="preview9" onclick="upfile();" src="/resources/fo/upfiles/${ beforeAtta[8].changerName }">
+                                                            
+                                                            <input type="hidden" name="changeNames" value="${ beforeAtta[8].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+                                                            
                                                         </div>
 														<div>매장사진 8번</div>
 													</td>
 													<td>
 														<div>
                                                             <input type="file" class="upfile10" name="upfiles" onchange="loadImg(this, 10);"> 
-                                                            <img id="preview10" src="/resources/fo/upfiles/${ beforeAtta[9].changerName }">
-                                                            <c:if test="${ beforeAtta[9].changerName  != null}">
-                                                                <input type="hidden" name="changeNames" value="${ beforeAtta[9].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
-                                                            </c:if>    
+                                                            <img id="preview10" onclick="upfile();" src="/resources/fo/upfiles/${ beforeAtta[9].changerName }">
+                                                            
+                                                            <input type="hidden" name="changeNames" value="${ beforeAtta[9].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+                                                            
                                                         </div>
 														<div>매장사진 9번</div>
 													</td>
@@ -423,12 +422,11 @@
 		}
 	}
     // 첨부 파일 취소 버튼 클릭 시 이미지 초기화
-    $(".fileArea input[type=file]").on("change", function() {
-		let num = parseInt($(this).attr("class").replace("upfile", ""));
-		if (!this.files || !this.files[0]) {
-			resetImage(num);
-		}
-	});
+    function upfile(){
+		$(event.target).siblings("input[type=hidden]").val("");
+		$(event.target).attr("src", null);
+	}
+	
 
 </script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

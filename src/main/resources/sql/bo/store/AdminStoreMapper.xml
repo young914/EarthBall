@@ -95,7 +95,7 @@
 	
 	<update id="updateStoreAtta" parameterType="com.kh.earthball.bo.store.vo.AdminAtta">
 	    INSERT INTO STORE_ATTA
-	    VALUES (SEQ_STORE_ATTA.NEXTVAL,#{changerName }, #{fileLevel}, #{productNo})
+	    VALUES (SEQ_STORE_ATTA.NEXTVAL,#{changerName }, #{fileLevel}, #{storeNo})
 	</update>
 	
 	<delete id="deleteStore" >
