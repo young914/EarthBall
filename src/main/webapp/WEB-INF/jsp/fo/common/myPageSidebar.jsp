@@ -10,7 +10,7 @@
     <li><a href="/list.myOrder?memberId=${ loginUser.memberId }">주문 관리</a></li>
     <li><a href="list.like?memberId=${ loginUser.memberId }">찜 목록</a></li>
     <li><a href="list.mybo?memberId=${loginUser.memberId}">1:1문의</a></li>
-    <li><a href="#">포인트 내역</a></li>
+    <li><a href="/list.myPoint?memberId=${loginUser.memberId}">포인트 내역</a></li>
     <li><a href="updateInfo.me">내 정보 수정</a></li>
     <li><a href="delete.me">회원탈퇴</a></li>
   </ul>

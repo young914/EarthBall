@@ -51,28 +51,31 @@
       <div id="content_1">
      <table>
         <tr>
-            <th>주문번호</th>
-            <th>상품명</th>
-            <th>결제금액</th>
-            <th>결제일</th>
-            <th>취소</th>
+            <th width="23%">주문번호</th>
+            <th width="34%">상품명</th>
+            <th width="13%">결제금액</th>
+            <th width="17%">결제일</th>
+            <th width="13%">취소</th>
         </tr>
         <tbody class="hover">
           <c:forEach var="ol" items="${orderList}">
             <tr>
-              <td class="ono" width="200">${ol.paymentNo}</td>
-              <td width="350">${ol.paymentName}</td>
-              <td width="120"><fmt:formatNumber value="${ol.paymentTotal}" pattern="###,###원"/></td>
-              <td width="110">${ol.paymentDate}</td>
+              <c:if test="${ orderList eq null }">
+              	<td colspan="5">주문한 상품이 없습니다.</td>
+              </c:if>
+              <td class="ono">${ol.paymentNo}</td>
+              <td>${ol.paymentName}</td>
+              <td><fmt:formatNumber value="${ol.paymentTotal}" pattern="###,###원"/></td>
+              <td>${ol.paymentDate}</td>
               <c:choose>
                 <c:when test="${ol.status == 'Y'}">
                   <td width="100"><button id="payCancel" class="cancel_btn">취소하기</button></td>
                 </c:when>
                 <c:when test="${ol.status == 'R'}">
-                  <td width="100">취소요청됨</td>
+                  <td>취소요청됨</td>
                 </c:when>
                 <c:otherwise>
-                  <td width="100">취소됨</td>
+                  <td>취소됨</td>
                 </c:otherwise>
               </c:choose>
             </tr>
@@ -134,25 +137,28 @@
 
 $(".cancel_btn").on("click", function() {
 
-	let paymentNo = parseInt($(this).parent().parent().children(0).eq(0).text());
-
-	console.log(paymentNo);
+	let paymentNo = $(this).parent().parent().children(0).eq(0).text();
 
 	$.ajax({
 		url : "/reqPayCancel",
 		type : "post",
 		data : {
 			memberId : "${loginUser.memberId}",
-			paymentNo : 2023061903370495
+			paymentNo : paymentNo
 		},
 		success : function(result) {
 
 			if(result == "1") {
 
-				updatePayStatus();
-
 				var msg = "취소요청이 등록되었습니다.";
 				alert(msg);
+				location.reload();
+
+			} else {
+
+				var msg = "취소요청이 실패하였습니다. 다시 시도해 주세요.";
+				alert(msg);
+
 			}
 		},
 		error : function() {
@@ -163,32 +169,6 @@ $(".cancel_btn").on("click", function() {
 	});
 
 })
-
-function updatePayStatus() {
-
-
-
-	$.ajax({
-		url : "/updatePayStatus",
-		type : "post",
-		data : {
-			memberId : ${loginUser.memberId},
-			paymentNo : paymentNo
-		},
-		success : function(result) {
-
-			if(result == "1") {
-				console.log("payStatus 변경 성공");
-			}
-
-		},
-		error : function() {
-
-			console.log("payStatus ajax 실패");
-		}
-	});
-
-}
 </script>
 
 </body>

@@ -15,7 +15,7 @@ import lombok.ToString;
 @AllArgsConstructor
 public class Orders {
 
-  private int paymentNo;
+  private String paymentNo;
   private int itemAmount;
   private List<Cart> orderList;
 

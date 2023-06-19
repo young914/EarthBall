@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 
 <!-- =========================================================
@@ -24,6 +25,18 @@
 >
 <head>
   <jsp:include page="/WEB-INF/jsp/bo/common/commonHead.jsp" />
+  <style>
+  /* 취소확인 버튼 스타일 */
+  #cancel_btn {
+  	width : 80px;
+    height : 30px;
+    font-size : 16px;
+    color : white;
+    border : 1px solid #19A7CE;
+    background-color : #19A7CE;
+    border-radius : 7px;
+  }
+  </style>
 </head>
 
 <body>
@@ -33,7 +46,7 @@
     <!-- Menu -->
 
     <jsp:include page="/WEB-INF/jsp/bo/common/commonLayoutMenu.jsp">
-      <jsp:param name="menuId" value="51"/>
+      <jsp:param name="menuId" value="60"/>
     </jsp:include>
     <!-- / Menu -->
 
@@ -47,36 +60,44 @@
       <div class="content-wrapper">
         <!-- Content -->
         <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="fw-bold">챌린지 인증 게시판 </h4>
+          <h4 class="fw-bold">주문 취소 관리</h4>
           <!-- HTML5 Inputs -->
           <div class="card mb-2">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-sm-10">
-                  <button type="button" class="btn btn-primary" onclick="">검색</button>
-                </div>
-              </div>
-            </div>
+
           </div>
           <!-- Hoverable Table rows -->
           <div class="card mb-2">
-            <div class="table-responsive text-nowrap" id="confirmList">
+            <div class="table-responsive text-nowrap" id="cancelList">
               <table class="table table-hover">
                 <thead>
                 <tr>
-                  <th class="text-center" width="15%">인증 번호</th>
-                  <th class="text-center" width="50%">챌린지명</th>
+                  <th class="text-center" width="20%">주문번호</th>
                   <th class="text-center" width="15%">회원ID</th>
-                  <th class="text-center" width="20%">등록일</th>
+                  <th class="text-center" width="23%">상품명</th>
+                  <th class="text-center" width="12%">판매금액</th>
+                  <th class="text-center" width="18%">판매일</th>
+                  <th class="text-center" width="12%">처리상태</th>
                 </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                <c:forEach var="confirm" items="${ confirmList }">
+                <c:forEach var="cancel" items="${ cancelList }">
                   <tr>
-                    <td class="text-center chConNo" data-ch-con-no="${confirm.chConNo}"><strong>${confirm.chConNo}</strong></td>
-                    <td class="text-center chConNo" data-ch-con-no="${confirm.chConNo}"><strong>${confirm.chConTitle}</strong></td>
-                    <td class="text-center chConNo" data-ch-con-no="${confirm.chConNo}"><strong>${confirm.memberId}</strong></td>
-                    <td class="text-center chConNo" data-ch-con-no="${confirm.chConNo}"><strong>${confirm.chConCreateDate}</strong></td>
+                  	<c:if test="${ cancelList eq null }">
+                  		<td class="text-center chConNo" data-ch-con-no="noData"><strong>등록된 취소요청이 없습니다.</strong></td>
+                  	</c:if>
+                    <td class="text-center chConNo" data-ch-con-no="${cancel.paymentNo}"><strong>${cancel.paymentNo}</strong></td>
+                    <td class="text-center chConNo" data-ch-con-no="${cancel.memberId}"><strong>${cancel.memberId}</strong></td>
+                    <td class="text-center chConNo" data-ch-con-no="${cancel.paymentName}"><strong>${cancel.paymentName}</strong></td>
+                    <td class="text-center chConNo" data-ch-con-no="${cancel.paymentTotal}"><strong><fmt:formatNumber value="${cancel.paymentTotal}" pattern="###,###원"/></strong></td>
+                    <td class="text-center chConNo" data-ch-con-no="${cancel.paymentDate}"><strong>${cancel.paymentDate}</strong></td>
+                    <c:choose>
+                    	<c:when test="${ cancel.status == 'R' }">
+                    		<td class="text-center chConNo" data-ch-con-no="${cancel.status}"><button id="cancel_btn">취소하기</button></td>
+                    	</c:when>
+                    	<c:when test="${ cancel.status == 'N' }">
+                    		<td class="text-center chConNo" data-ch-con-no="${cancel.status}"><strong>취소완료</strong></td>
+                    	</c:when>
+                    </c:choose>
                   </tr>
                 </c:forEach>
                 </tbody>
@@ -99,14 +120,14 @@
                     </c:when>
                     <c:otherwise>
                       <li class="page-item prev">
-                        <a class="page-link" href="list.conf?currentPage=${ pageInfo.currentPage - 1 }"><i
+                        <a class="page-link" href="list.cpa?currentPage=${ pageInfo.currentPage - 1 }"><i
                                 class="tf-icon bx bx-chevron-left"></i></a>
                       </li>
                     </c:otherwise>
                   </c:choose>
                   <c:forEach var="page" begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" step="1">
                     <li class="page-item">
-                      <a class="page-link" href="list.conf?currentPage=${ page }">${ page }</a>
+                      <a class="page-link" href="list.cpa?currentPage=${ page }">${ page }</a>
                     </li>
                   </c:forEach>
                   <c:choose>
@@ -117,7 +138,7 @@
                     </c:when>
                     <c:otherwise>
                       <li class="page-item next">
-                        <a class="page-link" href="list.conf?currentPage=${ pageInfo.currentPage + 1 }"><i
+                        <a class="page-link" href="list.cpa?currentPage=${ pageInfo.currentPage + 1 }"><i
                                 class="tf-icon bx bx-chevron-right"></i></a>
                       </li>
                     </c:otherwise>
@@ -132,14 +153,45 @@
    </div>
   </div>
 </div>
-          <jsp:include page="/WEB-INF/jsp/bo/common/commonScript.jsp" />
-          <script type="text/javascript">
 
-            $(document).on('click', '#confirmList .chConNo', function () {
-              let chConNo = $(this).data('chConNo');
-              location.href = "/detail.conf?chConNo=" + chConNo;
-            });
+<jsp:include page="/WEB-INF/jsp/bo/common/commonScript.jsp" />
+<script type="text/javascript">
 
-          </script>
+$("#cancel_btn").on("click", function() {
+
+	let paymentNo = $(this).parent().parent().children(0).eq(0).text();
+
+	$.ajax({
+		url : "/acceptCancel",
+		type : "post",
+		data : {
+			memberId : "${loginUser.memberId}",
+			paymentNo : paymentNo
+		},
+		success : function(result) {
+
+			if(result == "1") {
+
+				var msg = "취소처리가 반영되었습니다.";
+				alert(msg);
+				location.reload();
+
+			} else {
+
+				var msg = "취소처리에 실패하였습니다. 다시 시도해 주세요.";
+				alert(msg);
+
+			}
+		},
+		error : function() {
+
+			var msg = "알 수 없는 이유로 취소요청에 실패하였습니다.";
+			alert(msg);
+		}
+	});
+});
+
+</script>
+
 </body>
 </html>

@@ -35,5 +35,26 @@
 	 WHERE MEMBER_ID = #{memberId}
 </update>
 
+<!-- 마이페이지 포인트 내역 갯수 조회 -->
+<select id="myPointListCount" parameterType="java.lang.String">
+	SELECT COUNT(*)
+	   FROM POINT
+	 WHERE MEMBER_ID = #{memberId}
+</select>
+
+<!-- 관리자페이지 포인트 내역 리스트 조회 -->
+<select id="selectMyPoint" resultType="com.kh.earthball.fo.point.vo.Point">
+	SELECT ROWNUM, P.*
+		FROM (SELECT POINT_NO
+		           , POINT_CONTENT
+                   , POINT_NUM
+                   , STATUS
+		           , TO_CHAR(POINT.POINT_DATE, 'YYYY-MM-DD') AS "POINT_DATE"
+                   , MEMBER_ID
+		        FROM POINT
+		       WHERE MEMBER_ID = #{memberId}
+		       ORDER BY POINT_DATE DESC) P
+		WHERE ROWNUM BETWEEN #{offset} AND #{limit}
+</select>
 
 </mapper>

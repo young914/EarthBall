@@ -96,15 +96,9 @@ public class PaymentSerciveImpl implements PaymentService {
   }
 
   @Override
-  public int reqPayCancel(String memberId, int paymentNo) {
+  public int reqPayCancel(PayInfo p) {
 
-    return paymentMapper.reqPayCancel(memberId, paymentNo);
-  }
-
-  @Override
-  public int updatePayStatus(String memberId, int paymentNo) {
-
-    return paymentMapper.updatePayStatus(memberId, paymentNo);
+    return paymentMapper.reqPayCancel(p);
   }
 
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org// Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kh.earthball.bo.payment.mapper.BoPaymentMapper">
+
+<!-- 관리자페이지 주문취소 개수 조회 -->
+<select id="cancelPayListCount">
+	SELECT COUNT(*)
+	   FROM PAYMENT_REQ_CANCEL PRC
+	 WHERE PRC.PAYMENT_NO = (SELECT P.PAYMENT_NO
+	 												 FROM PAYMENT P
+	 											   WHERE P.STATUS = 'R')
+</select>
+
+<!-- 관리자페이지 주문취소 리스트 조회 -->
+<select id="selectCancelPayList" resultType="com.kh.earthball.bo.payment.vo.BoPayInfo">
+	SELECT ROWNUM, P.*
+		FROM (SELECT PAYMENT_NO
+		           , MEMBER_ID
+		           , TO_CHAR(PAYMENT.PAYMENT_DATE, 'YYYY-MM-DD') AS "PAYMENT_DATE"
+		           , PAYMENT_TYPE
+                   , STATUS
+                   , PAYMENT_NAME
+                   , PAYMENT_TOTAL
+                   , REWARD_POINT
+		        FROM PAYMENT
+		       WHERE STATUS = 'R'
+		       ORDER BY PAYMENT_DATE DESC) P
+		WHERE ROWNUM BETWEEN #{offset} AND #{limit}
+</select>
+
+</mapper>

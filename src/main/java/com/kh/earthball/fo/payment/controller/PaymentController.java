@@ -1,24 +1,17 @@
 package com.kh.earthball.fo.payment.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.http.HttpSession;
-import org.json.simple.JSONArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.kh.earthball.fo.challenge.vo.Challenge;
 import com.kh.earthball.fo.common.template.Pagination;
 import com.kh.earthball.fo.common.vo.PageInfo;
+import com.kh.earthball.fo.member.vo.Member;
 import com.kh.earthball.fo.payment.service.PaymentService;
-import com.kh.earthball.fo.payment.vo.Orders;
 import com.kh.earthball.fo.payment.vo.PayInfo;
 import com.kh.earthball.fo.payment.vo.PayPageList;
 import lombok.RequiredArgsConstructor;
@@ -35,13 +28,13 @@ public class PaymentController {
   @PostMapping("payments.pa")
   public String paymentsPageForm(PayPageList ppl, Model model, HttpSession session) {
 
-    session.removeAttribute("orderList");
-    // System.out.println("orders : " + ppl.getOrders());
+    // 이메일 인증한 회원이 아니라면 접근 불가하도록 설정
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || 1 != loginUser.getMailAuth()) {
+      return "fo/common/emailAuthError";
+    }
 
     model.addAttribute("orderList", paymentService.selectProductList(ppl.getOrders()));
-    session.setAttribute("orderList", paymentService.selectProductList(ppl.getOrders()));
-
-    System.out.println(session.getAttribute("orderList"));
 
     return "fo/payment/paymentPageForm";
   }
@@ -50,23 +43,29 @@ public class PaymentController {
  @PostMapping("payment.pa")
  public String paymentPageForm(PayPageList ppl, Model model, HttpSession session) {
 
-   session.removeAttribute("orderList");
-   System.out.println("orders : " + ppl.getOrders().get(0).getAmount());
+  // 이메일 인증한 회원이 아니라면 접근 불가하도록 설정
+  Member loginUser = (Member) session.getAttribute("loginUser");
+  if (loginUser == null || 1 != loginUser.getMailAuth()) {
+    return "fo/common/emailAuthError";
+  }
 
    int amount = ppl.getOrders().get(0).getAmount();
 
    model.addAttribute("amount", amount);
    model.addAttribute("orderList", paymentService.selectProductItem(ppl.getOrders()));
-   session.setAttribute("orderList", paymentService.selectProductItem(ppl.getOrders()));
-
-   System.out.println(session.getAttribute("orderList"));
 
    return "fo/payment/paymentPageForm";
  }
 
   // 결제페이지 => 결제완료페이지 포워딩
   @PostMapping("payComplete.pa")
-  public String paymentCompleteView(String paymentNo, Model m) {
+  public String paymentCompleteView(String paymentNo, Model m, HttpSession session) {
+
+    // 이메일 인증한 회원이 아니라면 접근 불가하도록 설정
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || 1 != loginUser.getMailAuth()) {
+      return "fo/common/emailAuthError";
+    }
 
     m.addAttribute("paymentNo", paymentNo);
     return "fo/payment/paymentCompleteView";
@@ -114,9 +113,15 @@ public class PaymentController {
 
   // 마이페이지 주문 내역
   @GetMapping("/list.myOrder")
-  public String myOrder(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, String memberId, Model model) {
+  public String myOrder(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, String memberId, Model model, HttpSession session) {
 
-    // 나의 챌린지 게시글 수 조회
+    // 이메일 인증한 회원이 아니라면 접근 불가하도록 설정
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || 1 != loginUser.getMailAuth()) {
+      return "fo/common/emailAuthError";
+    }
+
+    // 나의 주문내역 수 조회
     int listCount = paymentService.myOrderListCount(memberId);
 
     int pageLimit = 5;
@@ -124,7 +129,7 @@ public class PaymentController {
 
     PageInfo pageInfo = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 
-    // 나의 챌린지 게시글 리스트 조회
+    // 나의 주문내역 리스트 조회
     List<PayInfo> orderList = paymentService.selectMyOrder(pageInfo, memberId);
 
     model.addAttribute("pageInfo", pageInfo);
@@ -133,20 +138,14 @@ public class PaymentController {
     return "fo/mypage/myOrder";
   }
 
+  // 주문 취소 요청
   @ResponseBody
   @PostMapping("/reqPayCancel")
-  public String reqPayCancel(String memberId, int paymentNo) {
+  public String reqPayCancel(PayInfo p) {
 
-    System.out.println("요청 들어감?");
+    int result = paymentService.reqPayCancel(p);
 
-    return String.valueOf(paymentService.reqPayCancel(memberId, paymentNo));
-  }
-
-  @ResponseBody
-  @PostMapping("/updatePayStatus")
-  public String updatePayStatus(String memberId, int paymentNo) {
-
-    return String.valueOf(paymentService.updatePayStatus(memberId, paymentNo));
+    return String.valueOf(result);
   }
 
 }

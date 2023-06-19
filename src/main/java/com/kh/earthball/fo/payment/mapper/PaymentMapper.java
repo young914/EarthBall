@@ -26,8 +26,6 @@ public interface PaymentMapper {
 
   List<PayInfo> selectMyOrder(@Param("offset") int offset, @Param("limit") int limit, @Param("memberId")  String memberId);
 
-  int reqPayCancel(String memberId, int paymentNo);
-
-  int updatePayStatus(String memberId, int paymentNo);
+  int reqPayCancel(PayInfo p);
 
 }

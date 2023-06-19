@@ -24,8 +24,6 @@ public interface PaymentService {
 
   List<PayInfo> selectMyOrder(PageInfo pageInfo, String memberId);
 
-  int reqPayCancel(String memberId, int paymentNo);
-
-  int updatePayStatus(String memberId, int paymentNo);
+  int reqPayCancel(PayInfo p);
 
 }

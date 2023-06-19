@@ -101,25 +101,13 @@
 </select>
 
 <!-- 회원 관리자에게 결제취소 요청 -->
-<insert id="reqPayCancel">
-	INSERT INTO PAYMENT_REQ_CANCEL(REQUEST_NO
-													   , PAYMENT_NO
-													   , MEMBER_ID
-													   , REQUEST_DATE
-													   , STATUS)
-											 VALUES(SEQ_PAYMENT_REQ_CANCEL.NEXTVAL
-													   , #{paymentNo}
-													   , #{memberId}
-													   , SYSDATE
-													   , 'Y')
-</insert>
-
-<!-- 결제상태 요청중(R) 로 업데이트 -->
-<update id="updatePayStatus">
+<!-- 결제상태 요청중(STATUS => R) 로 업데이트 -->
+<update id="reqPayCancel" parameterType="com.kh.earthball.fo.payment.vo.PayInfo">
 	UPDATE PAYMENT
 		  SET STATUS = 'R'
 	  WHERE MEMBER_ID = #{memberId}
 		  AND PAYMENT_NO = #{paymentNo}
+		  AND STATUS = 'Y'
 </update>
 
 </mapper>

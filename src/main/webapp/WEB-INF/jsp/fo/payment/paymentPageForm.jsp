@@ -7,8 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>EarthBall</title>
-    <!-- 카카오페이 script -->
-    <!-- <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script> -->
+    <!-- 결제api script -->
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 
     <!-- 주소 api -->

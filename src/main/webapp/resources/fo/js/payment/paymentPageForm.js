@@ -100,7 +100,7 @@ function orderPay() {
 
 							$("#payCompleteForm").children().eq(0).val(rsp.merchant_uid);
 
-							insertOrder();
+							// insertOrder();
 
 							var msg = "결제가 완료되었습니다.";
 							alert(msg);
