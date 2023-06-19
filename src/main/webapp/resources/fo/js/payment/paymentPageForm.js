@@ -11,6 +11,8 @@
 	let milliseconds = ('0' + today.getMilliseconds()).slice(-2); // 밀리초
 	let pg = "";
 	let pay_method = "";
+	let paymentNo = "" + year+month+date+hours+minutes+seconds+milliseconds;
+	let paymentName = $(".product_name").html() + " 외";
 
 	IMP.init("imp43570318"); // 가맹점 식별코드
 
@@ -34,8 +36,8 @@
 		IMP.request_pay({
 			pg: pg,
 			pay_method: pay_method,
-			merchant_uid: "" + year+month+date+hours+minutes+seconds+milliseconds,   // 주문번호
-			name: $(".product_name").html(),
+			merchant_uid: paymentNo,   // 주문번호
+			name: paymentName,
 			amount: $("#realTotalPrice").val(),                         // 숫자 타입
 			buyer_email: $("#email").html(),
 			buyer_name: $("#name").html(),
@@ -78,6 +80,7 @@
 						paymentNo : rsp.merchant_uid,
 						memberId : $('.sessionMemberId').val(),
 						paymentType : rsp.pg_provider,
+						paymentName : paymentName,
 						paymentTotal : rsp.paid_amount,
 						receiveName : $("#receiveName").val(),
 						receivePhone : $("#receivePhone").val(),
@@ -95,12 +98,14 @@
 							plusPoint();
 							minusPoint();
 
+							$("#payCompleteForm").children().eq(0).val(rsp.merchant_uid);
+
+							// insertOrder();
+
 							var msg = "결제가 완료되었습니다.";
 							alert(msg);
-							// document.location.href="/payComplete.pa?paymentNo=" + rsp.merchant_uid;
 
-							$("#payCompleteForm").children().eq(0).val(rsp.merchant_uid);
-							$("#payCompleteForm").submit();
+							// $("#payCompleteForm").submit();
 
 						} else {
 							var msg = "결제에 실패하였습니다. 다시 시도해 주세요.";
@@ -320,24 +325,30 @@ function setTotalSummary() {
 function insertOrder() {
 
 	let orderList = $("#orderList").val();
+	let itemAmount = $("#itemAomunt").val();
+	let paymentNo = $("#payCompleteForm").children().eq(0).val();
 
-	console.log(orderList);
+	if(itemAmount == null) {
+		itemAmount = 0;
+	}
+
+	console.log("insert order : " + orderList);
+	console.log("insert itemAmount : " + itemAmount);
+	console.log("insert paymentNo : " + paymentNo);
 
 	$.ajax({
 		url : "/insertOrder",
-		type : "post",
-		contentType : "application/json",
+		type : "POST",
 		data : {
-			JSON.stringify(orderList),
-			paymentNo : rsp.merchant_uid
+			paymentNo : paymentNo,
+			itemAmount : itemAmount,
+			orderList : JSON.stringify(orderList)
 		},
 		success : function(result) {
-
-			console.log("성공" + result);
-		},
-		error : function() {
-
-			console.log("실패 ㅠ");
+			console.log(result);
+			console.log("인서트 성공");
+		}, error : function() {
+			console.log("인서트 ajax 실패");
 		}
 	});
 

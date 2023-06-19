@@ -1,4 +1,4 @@
-package com.kh.earthball.fo.payment.vo;
+package com.kh.earthball.bo.payment.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +13,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 @ToString
-public class PayInfo {
+public class BoPayInfo {
 
   private String paymentNo; // 결제번호
   private String memberId; // 회원아이디
@@ -30,4 +30,5 @@ public class PayInfo {
   private String deliveryComment; // 베송메모
   private String paymentToken; // 결제토큰
   private int rewardPoint; // 결제 시 얻는 포인트
+
 }
