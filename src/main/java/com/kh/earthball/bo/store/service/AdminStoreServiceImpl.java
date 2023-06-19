@@ -57,15 +57,22 @@ public class AdminStoreServiceImpl implements AdminStoreService {
 
   @Override
   public int updateStore(AdminStore s, ArrayList<AdminAtta> list) {
-    int result1 = adminStoreMapper.updateStore(s);
+    
+    int result = 0;
 
-    int result2 = 0;
+    result = adminStoreMapper.updateStore(s);
+    
+    result = adminStoreMapper.deleteAttaAll(s);
 
     for(AdminAtta at : list) {
-      result2 = adminStoreMapper.updateStoreAtta(at);
-    }
+      
+      if(!"".equals(at.getChangerName()) && at.getChangerName() != null) {
 
-    return result1 * result2;
+        result = adminStoreMapper.updateStoreAtta(at);
+
+      }
+    }
+    return result;
   }
 
   @Override

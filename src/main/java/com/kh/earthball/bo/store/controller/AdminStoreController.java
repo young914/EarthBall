@@ -1,5 +1,6 @@
 package com.kh.earthball.bo.store.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -63,11 +64,25 @@ public class AdminStoreController {
 
   @RequestMapping("insert.st")
   public String insertStore(AdminStore s, String startAmPm, String endAmPm,  @RequestParam int  startHour, @RequestParam int  endHour, String startMin, String endMin, String address_detail,
-                            MultipartFile upfile1, MultipartFile upfile2, MultipartFile upfile3, MultipartFile upfile4, MultipartFile upfile5,
-                            MultipartFile upfile6, MultipartFile upfile7, MultipartFile upfile8, MultipartFile upfile9, MultipartFile upfile10,
-                            HttpSession session,
-                            ModelAndView mv) {
-  
+      ArrayList<MultipartFile> upfiles, HttpSession session, ModelAndView mv) {
+    
+   ArrayList<AdminAtta> list = new ArrayList<AdminAtta>();
+   
+   for(int i = 0 ; i < upfiles.size(); i++) {
+     MultipartFile file = upfiles.get(i);
+     
+     if(!file.isEmpty()) {
+       String changerName = ChangeFileName.saveFile(file, session);
+       
+       AdminAtta at = new AdminAtta();
+       at.setChangerName(changerName);
+       at.setFileLevel(i);
+
+       list.add(at);
+     }
+   }
+   
+   
    String regionAddress = s.getStoreAddress();
    String[] addressParts = regionAddress.split(" ");
    String city = addressParts[0];
@@ -83,35 +98,8 @@ public class AdminStoreController {
     String businessHours = startHour+ ":" + startMin + " - " + endHour + ":" + endMin;
 
    s.setBusinessHours(businessHours);
-    ArrayList<MultipartFile> fileList = new ArrayList<>();
-    fileList.add(upfile1);
-    fileList.add(upfile2);
-    fileList.add(upfile3);
-    fileList.add(upfile4);
-    fileList.add(upfile5);
-    fileList.add(upfile6);
-    fileList.add(upfile7);
-    fileList.add(upfile8);
-    fileList.add(upfile9);
-    fileList.add(upfile10);
     
-    ArrayList<AdminAtta> list = new ArrayList<>();
-
-    for(int i = 0; i < fileList.size(); i++) {
-      MultipartFile file = fileList.get(i);
-
-      if(!file.isEmpty()) {
-        String changerName = ChangeFileName.saveFile(file, session);
-        
-        AdminAtta at = new AdminAtta();
-        at.setChangerName(changerName);
-        at.setFileLevel(i);
-
-        list.add(at);
-      }
-    }
-
-    
+   
     int result = storeService.insertStore(s,list);
 
     if(result>0) {
@@ -144,7 +132,7 @@ public class AdminStoreController {
       mv.addObject("pi", pi).addObject("list", list).setViewName("bo/store/storeSignUpList");
       return mv;
       }
-  @GetMapping("storeUpdateForm.st")
+  @GetMapping("detailStore.st")
   public String storeUpdateForm(int storeNo, Model model) {
    
     AdminStore beforeData = storeService.selectStore(storeNo);
@@ -153,15 +141,41 @@ public class AdminStoreController {
     
     model.addAttribute("beforeData", beforeData);
     model.addAttribute("beforeAtta", beforeAttaList);
-    return "bo/store/storeUpdateForm";
+    return "bo/store/storeDetailView";
   }
 
   @PostMapping("updateStore.st")
   public String updateStore(AdminStore s, String startAmPm, String endAmPm,  @RequestParam int  startHour, @RequestParam int  endHour, String startMin, String endMin, String address_detail,
-                            MultipartFile upfile1, MultipartFile upfile2, MultipartFile upfile3, MultipartFile upfile4, MultipartFile upfile5,
-                            MultipartFile upfile6, MultipartFile upfile7, MultipartFile upfile8, MultipartFile upfile9, MultipartFile upfile10,
+                            MultipartFile[] upfiles, 
+                            String[] changeNames,
                             HttpSession session,
                             ModelAndView mv) {
+    ArrayList<AdminAtta> list = new ArrayList<>();
+    
+    for(int i=0; i < upfiles.length; i ++) {
+      AdminAtta at = new AdminAtta();
+      
+      if(!upfiles[i].isEmpty()){
+
+        String realPath = session.getServletContext().getRealPath("resources/fo/upfiles/" + changeNames[i]);
+
+        new File(realPath).delete();
+
+        String changeName = ChangeFileName.saveFile(upfiles[i], session);
+
+        at.setChangerName(changeName);
+        at.setFileLevel(i);
+        at.setStoreNo(s.getStoreNo());
+
+      }else{
+
+        at.setChangerName(changeNames[i]);
+        at.setFileLevel(i);
+        at.setStoreNo(s.getStoreNo());
+      }
+
+      list.add(at);
+    }
     
     int storeNo = s.getStoreNo();
     String regionAddress = s.getStoreAddress();
@@ -179,36 +193,9 @@ public class AdminStoreController {
       endHour += 12;
     }
     String businessHours = startHour+ ":" + startMin + " - " + endHour + ":" + endMin;
-  
     
    s.setBusinessHours(businessHours);
     
-    ArrayList<MultipartFile> fileList = new ArrayList<>();
-    fileList.add(upfile1);
-    fileList.add(upfile2);
-    fileList.add(upfile3);
-    fileList.add(upfile4);
-    fileList.add(upfile5);
-    fileList.add(upfile6);
-    fileList.add(upfile7);
-    fileList.add(upfile8);
-    fileList.add(upfile9);
-    fileList.add(upfile10);
-    ArrayList<AdminAtta> list = new ArrayList<>();
-
-    for(int i = 0; i < fileList.size(); i++) {
-      MultipartFile file = fileList.get(i);
-
-      if(!file.isEmpty()) {
-        String changerName = ChangeFileName.saveFile(file, session);
-        
-        AdminAtta at = new AdminAtta();
-        at.setChangerName(changerName);
-        at.setFileLevel(i);
-
-        list.add(at);
-      }
-    }
     int result = storeService.updateStore(s,list);
 
     if(result>0) {
@@ -230,16 +217,6 @@ public class AdminStoreController {
       session.setAttribute("alertMsg", "매장삭제 실패");
       return "redirect:/adminlist.st";
     }
-  }
-  
-  @GetMapping("detailStore.st")
-  public String detailStore(@RequestParam("storeNo") int storeNo, Model model) {
-    
-    AdminStore detailData = storeService.selectStore(storeNo);
-    ArrayList<AdminAtta> detailAtta = storeService.selectAtta(storeNo);
-    model.addAttribute("beforeData", detailData);
-    model.addAttribute("beforeAtta", detailAtta);
-    return "bo/store/storeDetailView";
   }
   
   @GetMapping("approvalStore.st")

@@ -102,153 +102,227 @@
 				<!-- Content -->
 				<div class="content">
 					<div class="listArea">
-						<h1 class="title">매장 상세</h1>
-                        <input type="hidden" name="storeNo" value="${beforeData.storeNo}">
-                        <div>
-                            <table class="insertForm">
-                                <tr>
-                                    <td width="150">매장명</td>
-                                    <td><input type="text" name="storeName" id required style="width: 500px" value="${beforeData.storeName}"></td>
-                                </tr>
-                                <tr>
-                                    <td style="display: flex;">
-                                        <span style="margin: 0px; width: 31px;">주소</span>
-                                        <input type="button" value="주소검색" 
-                                        id="addressSearchBtn"
-                                        style="width: 70%; height: 25px; border-radius: 10px; border: none; background-color: #19a7ce; color: white; font-weight: 600;">
-                                    </td>
+						<h1 class="title">매장 수정</h1>
+						<form action="updateStore.st" method="post" enctype="multipart/form-data">
+							<input type="hidden" name="storeNo" value="${beforeData.storeNo}">
+							<div>
+								<table class="insertForm">
+									<tr>
+										<td width="150">매장명</td>
+										<td><input type="text" name="storeName" id required style="width: 500px" value="${beforeData.storeName}"></td>
+									</tr>
+									<tr>
+										<td style="display: flex;">
+											<span style="margin: 0px; width: 31px;">주소</span>
+											<input type="button" value="주소검색" 
+											id="addressSearchBtn"
+											style="width: 70%; height: 25px; border-radius: 10px; border: none; background-color: #19a7ce; color: white; font-weight: 600;">
+										</td>
 
-                                    <td style="width: 500px;">
-                                        주소 : <input type="text" name="storeAddress" required style="width: 40%;" id="address_kakao" value="${beforeData.storeAddress}">
-                                    </td>
-                                    <td>
-                                        상세주소 : <input type="text" required style="width: 40%;" name="storeDetailAddress" value="${beforeData.storeDetailAddress}">
-                                    </td>
-    
-                                </tr>
-                                <tr>
-                                    
-                                    <td>전화번호</td>
-                                    <td><input type="text" name="storePhone" required style="width: 80%;" value="${beforeData.storePhone}" ></td>
-                                </tr>
-                                <tr style="margin: 10px 0;">
-                                    <td >운영시간</td>
-                                    <td>
-                                        <div style="display: flex; align-items: center;">
-                                            <label for="startHour" style="margin-right: 10px;">시작 시간:</label>
-                                            <input type="radio" name="startAmPm" id="startAm" value="am" checked style="margin-right: 5px;">
-                                            <label for="startAm" style="margin-right: 5px;">오전</label>
-                                            <input type="radio" name="startAmPm" id="startPm" value="pm" style="margin-right: 5px;">
-                                            <label for="startPm" style="margin-right: 10px;">오후</label>
-                                            <select name="startHour" id="start-hour" style="padding: 5px;">
-                                                <option value="0">0</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
-                                                <option value="9">9</option>
-                                                <option value="10">10</option>
-                                                <option value="11">11</option>
-                                                <option value="12">12</option>
-                                            </select>
-                                            <span> : </span>
-                                            <select name="startMin" id="startMin" style="padding: 5px;">
-                                                <option value="00">00</option>
-                                            <option value="30">30</option>
-                                            </select>
-                                        </div>
-                                        <div style="display: flex; align-items: center;">
-                                            <label for="endHour" style="margin-right: 10px;">종료 시간:</label>
-                                            <input type="radio" name="endAmPm" id="endAm" value="am" checked style="margin-right: 5px;">
-                                            <label for="endAm" style="margin-right: 5px;">오전</label>
-                                            <input type="radio" name="endAmPm" id="endPm" value="pm" style="margin-right: 5px;">
-                                            <label for="endPm" style="margin-right: 10px;">오후</label>
-                                            
-                                            <select name="endHour" id="endHour" style="padding: 5px;">
-                                                <option value="0">0</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
-                                                <option value="9">9</option>
-                                                <option value="10">10</option>
-                                                <option value="11">11</option>
-                                                <option value="12">12</option>
-                                            </select>
-                                            <span> : </span>
-                                            <select name="endMin" id="endMin" style="padding: 5px;">
-                                                <option value="00">00</option>
-                                                <option value="30">30</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>매장 상세설명</td>
-                                    <td>
-                                        <textarea name="storeInfo"  rows="10" required style="width: 80%; resize: none;">${beforeData.storeInfo}</textarea>
-                                    </td>
-                                </tr>
-                            <tr>
-                            <td>사진</td>
-                            <td>
-                                <table class="fileArea">
+										<td style="width: 500px;">
+											주소 : <input type="text" name="storeAddress" required style="width: 40%;" id="address_kakao" value="${beforeData.storeAddress}">
+										</td>
+										<td>
+											상세주소 : <input type="text" required style="width: 40%;" name="storeDetailAddress" value="${beforeData.storeDetailAddress}">
+										</td>
+		
+									</tr>
+									<tr>
+										
+										<td>전화번호</td>
+										<td><input type="text" name="storePhone" required style="width: 80%;" value="${beforeData.storePhone}" ></td>
+									</tr>
+									<tr style="margin: 10px 0;">
+										<td >운영시간</td>
+										<td>
+											<div style="display: flex; align-items: center;">
+												<label for="startHour" style="margin-right: 10px;">시작 시간:</label>
+												<input type="radio" name="startAmPm" id="startAm" value="am" checked style="margin-right: 5px;">
+												<label for="startAm" style="margin-right: 5px;">오전</label>
+												<input type="radio" name="startAmPm" id="startPm" value="pm" style="margin-right: 5px;">
+												<label for="startPm" style="margin-right: 10px;">오후</label>
+												<select name="startHour" id="start-hour" style="padding: 5px;">
+													<option value="0">0</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+													<option value="11">11</option>
+													<option value="12">12</option>
+												</select>
+												<span> : </span>
+												<select name="startMin" id="startMin" style="padding: 5px;">
+													<option value="00">00</option>
+												<option value="30">30</option>
+												</select>
+											</div>
+											<div style="display: flex; align-items: center;">
+												<label for="endHour" style="margin-right: 10px;">종료 시간:</label>
+												<input type="radio" name="endAmPm" id="endAm" value="am" checked style="margin-right: 5px;">
+												<label for="endAm" style="margin-right: 5px;">오전</label>
+												<input type="radio" name="endAmPm" id="endPm" value="pm" style="margin-right: 5px;">
+												<label for="endPm" style="margin-right: 10px;">오후</label>
+												
+												<select name="endHour" id="endHour" style="padding: 5px;">
+													<option value="0">0</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+													<option value="11">11</option>
+													<option value="12">12</option>
+												</select>
+												<span> : </span>
+												<select name="endMin" id="endMin" style="padding: 5px;">
+													<option value="00">00</option>
+													<option value="30">30</option>
+												</select>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>매장 상세설명</td>
+										<td>
+											<textarea name="storeInfo"  rows="10" required style="width: 80%; resize: none;">${beforeData.storeInfo}</textarea>
+										</td>
+									</tr>
                                     <tr>
-                                        <td>로고<input type="file" name="upfile1" onchange="loadImg(this, 1);" required>
-                                            <img id="preview1" src="">
-                                        </td>
-                                        <td>2번<input type="file" name="upfile2" onchange="loadImg(this, 2);">
-                                            <img id="preview2" src="">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3번<input type="file" name="upfile3" onchange="loadImg(this, 3);">
-                                            <img id="preview3" src="">
-                                        </td>
-                                        <td>4번<input type="file" name="upfile4" onchange="loadImg(this, 4);">
-                                            <img id="preview4" src="">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>5번<input type="file" name="upfile5" onchange="loadImg(this, 5);">
-                                            <img id="preview5" src="">
-                                        </td>
-                                        <td>6번<input type="file" name="upfile6" onchange="loadImg(this, 6);">
-                                            <img id="preview6" src="">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>7번<input type="file" name="upfile7" onchange="loadImg(this, 7);">
-                                            <img id="preview7" src="">
-                                        </td>
-                                        <td>8번<input type="file" name="upfile8" onchange="loadImg(this, 8);">
-                                            <img id="preview8" src="">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>9번<input type="file" name="upfile9" onchange="loadImg(this, 9);">
-                                            <img id="preview9" src="">
-                                        </td>
-                                        <td>10번<input type="file" name="upfile10" onchange="loadImg(this, 10);">
-                                            <img id="preview10" src="">
-                                        </td>
-                                    </tr>
+										<td>사진</td>
+										<td>
+											<table class="fileArea">
+                                                <tr>
+                                                    <td>
+                                                        <div>
+                                                            <input type="file" class="upfile1" name="upfiles" onchange="loadImg(this, 1);"> 
+                                                            <img id="preview1" src="/resources/fo/upfiles/${ beforeAtta[0].changerName }">
+                                                            <c:if test="${beforeAtta[0].changerName != null}">
+                                                                <input type="hidden" name="changeNames" value="${ beforeAtta[0].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+                                                            </c:if>
+                                                        </div>
+                                                        <div>로고</div>
+                                                    </td>
+                                                </tr>
+												<tr>
+													<td>
+														<div>
+                                                            <input type="file" class="upfile2" name="upfiles" onchange="loadImg(this, 2);"> 
+                                                            <img id="preview2" src="/resources/fo/upfiles/${ beforeAtta[1].changerName }">
+                                                            <c:if test="${ beforeAtta[1].changerName  != null}">
+                                                                <input type="hidden" name="changeNames" value="${ beforeAtta[1].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+                                                            </c:if>    
+                                                        </div>
+														<div>매장사진 1번</div>
+													</td>
+													<td>
+														<div>
+                                                            <input type="file" class="upfile3" name="upfiles" onchange="loadImg(this, 3);"> 
+                                                            <img id="preview3" src="/resources/fo/upfiles/${ beforeAtta[2].changerName }">
+                                                            <c:if test="${ beforeAtta[2].changerName  != null}">
+                                                                <input type="hidden" name="changeNames" value="${ beforeAtta[2].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+                                                            </c:if>
+                                                        </div>
+														<div>매장사진 2번</div>
+													</td>
+													<td>
+														<div>
+                                                            <input type="file" class="upfile4" name="upfiles" onchange="loadImg(this, 4);"> 
+                                                            <img id="preview4" src="/resources/fo/upfiles/${ beforeAtta[3].changerName }">
+                                                            <c:if test="${ beforeAtta[3].changerName  != null}">
+                                                                <input type="hidden" name="changeNames" value="${ beforeAtta[3].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+                                                            </c:if>
+                                                        </div>
+														<div>매장사진 3번</div>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<div>
+                                                            <input type="file" class="upfile5" name="upfiles" onchange="loadImg(this, 5);"> 
+                                                            <img id="preview5" src="/resources/fo/upfiles/${ beforeAtta[4].changerName }">
+                                                            <c:if test="${ beforeAtta[4].changerName  != null}">
+                                                                <input type="hidden" name="changeNames" value="${ beforeAtta[4].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+                                                            </c:if>    
+                                                        </div>
+														<div>매장사진 4번</div>
+													</td>
+													<td>
+														<div>
+                                                            <input type="file" class="upfile6" name="upfiles" onchange="loadImg(this, 6);"> 
+                                                            <img id="preview6" src="/resources/fo/upfiles/${ beforeAtta[5].changerName }">
+                                                            <c:if test="${ beforeAtta[5].changerName  != null}">
+                                                                <input type="hidden" name="changeNames" value="${ beforeAtta[5].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+                                                            </c:if>
+                                                        </div>
+														<div>매장사진 5번</div>
+													</td>
+													<td>
+														<div>
+                                                            <input type="file" class="upfile7" name="upfiles" onchange="loadImg(this, 7);"> 
+                                                            <img id="preview7" src="/resources/fo/upfiles/${ beforeAtta[6].changerName }">
+                                                            <c:if test="${ beforeAtta[6].changerName  != null}">
+                                                                <input type="hidden" name="changeNames" value="${ beforeAtta[6].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+                                                            </c:if>    
+                                                        </div>
+														<div>매장사진 6번</div>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<div>
+                                                            <input type="file" class="upfile8" name="upfiles" onchange="loadImg(this, 8);">
+                                                            <img id="preview8" src="/resources/fo/upfiles/${ beforeAtta[7].changerName }">
+                                                            <c:if test="${ beforeAtta[7].changerName  != null}">
+                                                                <input type="hidden" name="changeNames" value="${ beforeAtta[7].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+                                                            </c:if>    
+                                                        </div>
+														<div>매장사진 7번</div>
+													</td>
+													<td>
+														<div>
+                                                            <input type="file" class="upfile9" name="upfiles" onchange="loadImg(this, 9);"> 
+                                                            <img id="preview9" src="/resources/fo/upfiles/${ beforeAtta[8].changerName }">
+                                                            <c:if test="${ beforeAtta[8].changerName  != null}">
+                                                                <input type="hidden" name="changeNames" value="${ beforeAtta[8].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+                                                            </c:if>    
+                                                        </div>
+														<div>매장사진 8번</div>
+													</td>
+													<td>
+														<div>
+                                                            <input type="file" class="upfile10" name="upfiles" onchange="loadImg(this, 10);"> 
+                                                            <img id="preview10" src="/resources/fo/upfiles/${ beforeAtta[9].changerName }">
+                                                            <c:if test="${ beforeAtta[9].changerName  != null}">
+                                                                <input type="hidden" name="changeNames" value="${ beforeAtta[9].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
+                                                            </c:if>    
+                                                        </div>
+														<div>매장사진 9번</div>
+													</td>
+												</tr>
+												
+											</table>
+										</td>
+									</tr>
                                 </table>
-                            </td>
-                        </tr>
-                    </table>
+                            </div>
+                            <div class="btn-area">
+                                <button type="submit">수정</button>
+                                <input type="button" value="취소" onclick="home();">
+                            </div>
+                        </form>
+                    </div>
                 </div>
-
-			</div>
-	    </div>
         <!-- / Content -->
 
         <!-- Footer -->
@@ -276,63 +350,46 @@
 </div>
 <jsp:include page="/WEB-INF/jsp/bo/common/commonScript.jsp" />
 <script type="text/javascript">
-	document.addEventListener('DOMContentLoaded', function() {
-    for (let i = 0; i < 10; i++) {
-        const preview = document.getElementById('preview' + i);
-        const imageUrl = getImageUrl(beforeAtta, i);
-        if (preview) {
-            preview.src = '/resources/fo/upfiles/' + imageUrl;
-            console.log(preview.src);
-        }
+
+    function home(){
+        location.href = "/main";
     }
-});
-
-function getImageUrl(beforeAtta, index) {
-    if (index < beforeAtta.length && beforeAtta[index].fileLevel === index) {
-        return beforeAtta[index].changerName;
-    } else {
-        return '';
-    }
-}
-
-
 	$(function(){
 		$(".fileArea input[type=file]").hide();
 
 		$("#preview1").click(function(){
-			$("input[name=upfile1]").click();
+			$(".upfile1").click();
 		});
 		$("#preview2").click(function(){
-			$("input[name=upfile2]").click();
+			$(".upfile2").click();
 		});
 		$("#preview3").click(function(){
-			$("input[name=upfile3]").click();
+			$(".upfile3").click();
 		});
 		$("#preview4").click(function(){
-			$("input[name=upfile4]").click();
+			$(".upfile4").click();
 		});
 		$("#preview5").click(function(){
-			$("input[name=upfile5]").click();
+			$(".upfile5").click();
 		});
 		$("#preview6").click(function(){
-			$("input[name=upfile6]").click();
+			$(".upfile6").click();
 		});
 		$("#preview7").click(function(){
-			$("input[name=upfile7]").click();
+			$(".upfile7").click();
 		});
 		$("#preview8").click(function(){
-			$("input[name=upfile8]").click();
+			$(".upfile8").click();
 		});
 		$("#preview9").click(function(){
-			$("input[name=upfile9]").click();
+			$(".upfile9").click();
 		});
 		$("#preview10").click(function(){
-			$("input[name=upfile10]").click();
+			$(".upfile10").click();
 		});
 	});
 
 	function loadImg(input, num){
-		
 		if(input.files.length == 1){
 			let reader = new FileReader();
 			reader.readAsDataURL(input.files[0]);
@@ -365,7 +422,14 @@ function getImageUrl(beforeAtta, index) {
 			}
 		}
 	}
-    
+    // 첨부 파일 취소 버튼 클릭 시 이미지 초기화
+    $(".fileArea input[type=file]").on("change", function() {
+		let num = parseInt($(this).attr("class").replace("upfile", ""));
+		if (!this.files || !this.files[0]) {
+			resetImage(num);
+		}
+	});
+
 </script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -375,7 +439,7 @@ window.onload = function(){
         new daum.Postcode({
             oncomplete: function(data) { //선택시 입력값 세팅
                 document.getElementById("address_kakao").value = data.address; // 주소 넣기
-                document.querySelector("input[name=storeDetailAddress]").focus(); //상세입력 포커싱
+                document.querySelector(".storeDeailAddress]").focus(); //상세입력 포커싱
 
             }
         }).open();

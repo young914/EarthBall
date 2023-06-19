@@ -49,7 +49,7 @@
 		width: 100%;
 	}
 	.insertForm td{
-		padding: 10px 20px;
+		padding: 10px;
 	}
 	.btn-area{
 		text-align: center;
@@ -69,8 +69,8 @@
 		background-color: #0d8db8;
 	}
 	.insertForm img{
-		width: 300px;
-		height: 300px;
+		width: 250px;
+		height: 250px;
 
 	}
   </style>
@@ -83,15 +83,15 @@
 	<div class="layout-container">
 		<!-- Menu -->
 
-		<jsp:include page="/WEB-INF/jsp/bo/common/commonLayoutMenu.jsp">
-		<jsp:param name="menuId" value="51"/>
-		</jsp:include>
+		
+		
+		
 		<!-- / Menu -->
 
 		<!-- Layout container -->
 		<div class="layout-page">
 			<!-- Navbar -->
-			<jsp:include page="/WEB-INF/jsp/bo/common/commonLayoutNavbar.jsp" />
+			
 			<!-- / Navbar -->
 
 			<!-- Content wrapper -->
@@ -105,7 +105,7 @@
 								<table class="insertForm">
 									<tr>
 										<td width="150">매장명</td>
-										<td><input type="text" name="storeName" id required style="width: 500px" placeholder="최대한 자세하게 적어주세요!"></td>
+										<td><input type="text" name="storeName" id required style="width: 50%" placeholder="최대한 자세하게 적어주세요!"></td>
 									</tr>
 									<tr>
 										<td style="display: flex;">
@@ -114,19 +114,19 @@
 											id="addressSearchBtn"
 											style="width: 70%; height: 25px; border-radius: 10px; border: none; background-color: #19a7ce; color: white; font-weight: 600;">
 										</td>
-
 										<td style="width: 500px;">
-											주소 : <input type="text" name="storeAddress" required style="width: 40%;" id="address_kakao" placeholder="도로명 주소로 선택해주세요!">
+											<input type="text" name="storeAddress" required style="width: 50%;" id="address_kakao" placeholder="도로명 주소로 선택해주세요!">
 										</td>
-										<td>
-											상세주소 : <input type="text" required style="width: 40%;" name="storeDetailAddress" placeholder="최대한 자세하게 적어주세요!">
-										</td>
-		
 									</tr>
 									<tr>
-										
+										<td> 상세주소 </td>
+										<td>
+											<input type="text" required style="width: 50%;" name="storeDetailAddress" placeholder="최대한 자세하게 적어주세요!">
+										</td>
+									</tr>
+									<tr>
 										<td>전화번호</td>
-										<td><input type="text" name="storePhone" required style="width: 80%;" placeholder="최대한 자세하게 적어주세요!"></td>
+										<td><input type="text" name="storePhone" required style="width: 50%;" placeholder="최대한 자세하게 적어주세요!"></td>
 									</tr>
 									<tr style="margin: 10px 0;">
 										<td >운영시간</td>
@@ -191,46 +191,77 @@
 									<tr>
 										<td>매장 상세설명</td>
 										<td>
-											<textarea name="storeInfo"  rows="10" required style="width: 80%; resize: none;" placeholder="최대한 자세하게 적어주세요!"></textarea>
+											<textarea name="storeInfo"  rows="10" required style="width:  50%; resize: none;" placeholder="최대한 자세하게 적어주세요!"></textarea>
 										</td>
 									</tr>
-								<tr>
-								<td>사진</td>
-								<td>
-									<table class="fileArea">
-										<tr>
-											<td>로고(필수)<input type="file" name="upfile1" onchange="loadImg(this, 1);"> <img id="preview1"></td>
-											<td>매장사진<input type="file" name="upfile2" onchange="loadImg(this, 2);"> <img id="preview2"></td>
-										</tr>
-										<tr>
-											<td>매장사진<input type="file" name="upfile3" onchange="loadImg(this, 3);"> <img id="preview3"></td>
-											<td>매장사진<input type="file" name="upfile4" onchange="loadImg(this, 4);"> <img id="preview4"></td>
-										</tr>
-										<tr>
-											<td>매장사진<input type="file" name="upfile5" onchange="loadImg(this, 5);"> <img id="preview5"></td>
-											<td>매장사진<input type="file" name="upfile6" onchange="loadImg(this, 6);"> <img id="preview6"></td>
-										</tr>
-										<tr>
-											<td>매장사진<input type="file" name="upfile7" onchange="loadImg(this, 7);"> <img id="preview7"></td>
-											<td>매장사진<input type="file" name="upfile8" onchange="loadImg(this, 8);"> <img id="preview8"></td>
-										</tr>
-										<tr>
-											<td>매장사진<input type="file" name="upfile9" onchange="loadImg(this, 9);"> <img id="preview9"></td>
-											<td>1매장사진<input type="file" name="upfile10" onchange="loadImg(this, 10);"> <img id="preview10"></td>
-										</tr>
-									</table>
-								</td>
-							</tr>
-						</table>
+									<tr>
+										<td>사진</td>
+										<td>
+											<table class="fileArea">
+												<tr>
+													<tr>
+														<td>
+															<div><input type="file" class="upfile1" name="upfiles" onchange="loadImg(this, 1);" required> <img id="preview1"></div>
+															<div>로고</div>
+														</td>
+													</tr>
+												</tr>
+												<tr>
+													<td>
+														<div><input type="file" class="upfile2" name="upfiles" onchange="loadImg(this, 2);"> <img id="preview2"></div>
+														<div>매장사진 1번</div>
+													</td>
+													<td>
+														<div><input type="file" class="upfile3" name="upfiles" onchange="loadImg(this, 3);"> <img id="preview3"></div>
+														<div>매장사진 2번</div>
+													</td>
+													<td>
+														<div><input type="file" class="upfile4" name="upfiles" onchange="loadImg(this, 4);"> <img id="preview4"></div>
+														<div>매장사진 3번</div>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<div><input type="file" class="upfile5" name="upfiles" onchange="loadImg(this, 5);"> <img id="preview5"></div>
+														<div>매장사진 4번</div>
+													</td>
+													<td>
+														<div><input type="file" class="upfile6" name="upfiles" onchange="loadImg(this, 6);"> <img id="preview6"></div>
+														<div>매장사진 5번</div>
+													</td>
+													<td>
+														<div><input type="file" class="upfile7" name="upfiles" onchange="loadImg(this, 7);"> <img id="preview7"></div>
+														<div>매장사진 6번</div>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<div><input type="file" class="upfile8" name="upfiles" onchange="loadImg(this, 8);"> <img id="preview8"></div>
+														<div>매장사진 7번</div>
+													</td>
+													<td>
+														<div><input type="file" class="upfile9" name="upfiles" onchange="loadImg(this, 9);"> <img id="preview9"></div>
+														<div>매장사진 8번</div>
+													</td>
+													<td>
+														<div><input type="file" class="upfile10" name="upfiles" onchange="loadImg(this, 10);"> <img id="preview10"></div>
+														<div>매장사진 9번</div>
+													</td>
+												</tr>
+												
+											</table>
+										</td>
+									</tr>
+								</table>
+							</div>
+							<div class="btn-area">
+								<button type="submit">추가</button>
+								<input type="button" value="취소" onclick="home();">
+		
+							</div>
+						</form>
 					</div>
-					<div class="btn-area">
-						<button type="submit">추가</button>
-						<input type="button" value="취소" onclick="window.history.back();">
-
-					</div>
-				</form>
-			</div>
-	    </div>
+				</div>
         <!-- / Content -->
 
         <!-- Footer -->
@@ -281,40 +312,42 @@ startPm.addEventListener("change", function() {
   }
 });
 
+function home(){
+	location.href = "/main"
+}
 
-
-	$(function(){
+$(function(){
 		$(".fileArea input[type=file]").hide();
 
 		$("#preview1").click(function(){
-			$("input[name=upfile1]").click();
+			$(".upfile1").click();
 		});
 		$("#preview2").click(function(){
-			$("input[name=upfile2]").click();
+			$(".upfile2").click();
 		});
 		$("#preview3").click(function(){
-			$("input[name=upfile3]").click();
+			$(".upfile3").click();
 		});
 		$("#preview4").click(function(){
-			$("input[name=upfile4]").click();
+			$(".upfile4").click();
 		});
 		$("#preview5").click(function(){
-			$("input[name=upfile5]").click();
+			$(".upfile5").click();
 		});
 		$("#preview6").click(function(){
-			$("input[name=upfile6]").click();
+			$(".upfile6").click();
 		});
 		$("#preview7").click(function(){
-			$("input[name=upfile7]").click();
+			$(".upfile7").click();
 		});
 		$("#preview8").click(function(){
-			$("input[name=upfile8]").click();
+			$(".upfile8").click();
 		});
 		$("#preview9").click(function(){
-			$("input[name=upfile9]").click();
+			$(".upfile9").click();
 		});
 		$("#preview10").click(function(){
-			$("input[name=upfile10]").click();
+			$(".upfile10").click();
 		});
 	});
 
@@ -351,6 +384,15 @@ startPm.addEventListener("change", function() {
 			}
 		}
 	}
+
+	// 첨부 파일 취소 버튼 클릭 시 이미지 초기화
+	$(".fileArea input[type=file]").on("change", function() {
+		let num = parseInt($(this).attr("class").replace("upfile", ""));
+		if (!this.files || !this.files[0]) {
+			resetImage(num);
+		}
+	});
+
     
 </script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

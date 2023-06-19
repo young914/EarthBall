@@ -38,4 +38,6 @@ public interface AdminStoreMapper {
 
   int approvalStore(int storeNo);
 
+  int deleteAttaAll(AdminStore s);
+  
 }

@@ -72,25 +72,30 @@
 		SELECT *
 		FROM STORE_ATTA
 		WHERE STORE_NO = #{storeNo}
+		ORDER BY FILE_LEVEL
 	</select>
 	
 	<update id="updateStore" parameterType="com.kh.earthball.bo.store.vo.AdminStore">
-    UPDATE STORE
-    SET STORE_NAME = #{storeName},
-        STORE_ADDRESS = #{storeAddress},
-        STORE_DETAIL_ADDRESS = #{storeDetailAddress},
-        STORE_PHONE = #{storePhone},
-        BUSINESS_HOURS = #{businessHours},
-        STORE_REGION_NO = #{storeRegionNo},
-        STORE_INFO = #{storeInfo}
-    WHERE STORE_NO = #{storeNo}
-</update>
-
-	<update id="updateStoreAtta" parameterType="com.kh.earthball.bo.store.vo.AdminAtta">
-	    UPDATE STORE_ATTA
-	    SET CHANGER_NAME = #{changerName},
-	        FILE_LEVEL = #{fileLevel}
+	    UPDATE STORE
+	    SET STORE_NAME = #{storeName},
+	        STORE_ADDRESS = #{storeAddress},
+	        STORE_DETAIL_ADDRESS = #{storeDetailAddress},
+	        STORE_PHONE = #{storePhone},
+	        BUSINESS_HOURS = #{businessHours},
+	        STORE_REGION_NO = #{storeRegionNo},
+	        STORE_INFO = #{storeInfo}
 	    WHERE STORE_NO = #{storeNo}
+	</update>
+
+		<delete id="deleteAttaAll">
+		DELETE
+		FROM STORE_ATTA
+		WHERE STORE_NO = #{storeNo}
+	</delete>
+	
+	<update id="updateStoreAtta" parameterType="com.kh.earthball.bo.store.vo.AdminAtta">
+	    INSERT INTO STORE_ATTA
+	    VALUES (SEQ_STORE_ATTA.NEXTVAL,#{changerName }, #{fileLevel}, #{productNo})
 	</update>
 	
 	<delete id="deleteStore" >
