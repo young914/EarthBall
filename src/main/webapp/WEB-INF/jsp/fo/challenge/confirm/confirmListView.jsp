@@ -58,7 +58,14 @@
                     </c:if>
                   </div>
                   <div>
-                    <button class="btn_3" onclick="confirmFormBtn(${challenge.chNo});">챌린지 참여(인증하기)</button>
+                    <c:choose>
+                      <c:when test="${challenge.chStatName eq '진행중' || challenge.chStatName eq '진행완료'}" >
+                        <button class="btn_3" onclick="confirmFormBtn(${challenge.chNo});">챌린지 참여(인증하기)</button>
+                      </c:when>
+                      <c:otherwise>
+                        <button class="btn_3" onclick="alertMsg();">챌린지 참여(인증하기)</button>
+                      </c:otherwise>
+                    </c:choose>
                   </div>
                   <div>
                     <button class="btn_3">챌린지 채팅 참여</button>
@@ -168,6 +175,10 @@
 
     function updateChallenge(chNo) {
         location.href="/updateForm.chall?chNo=" + chNo;
+    }
+
+    function alertMsg() {
+      alert("아직 진행 예정인 챌린지 입니다.");
     }
 
     function deleteChallenge(chNo) {
