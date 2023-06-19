@@ -237,7 +237,7 @@
                 }
             },
             error: function () {
-                console.log("공통코드 생성 ajax 통신 실패");
+                console.log("공통코드 삭제 ajax 통신 실패");
             }
         });
     }

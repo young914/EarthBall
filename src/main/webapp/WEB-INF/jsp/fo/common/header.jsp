@@ -16,10 +16,11 @@
     	<!-- 로고+로그인 -->
         <div class="header">
             <div style="width: 200px;"></div>
-            <div class="logo" onclick="location.href='/main'">
+            <div class="logo">
                 <div><img src="/resources/fo/img/logo.png"></div>
-                <div>지구공</div>
+                <div onclick="location.href='/main'">지구공</div>
             </div>
+
             <div class="login-area">
                 <div></div>
                 <c:choose>
@@ -37,7 +38,7 @@
 		                |
 	                	<c:choose>
 			                <c:when test="${loginUser.memberId eq 'admin'}">
-			                	<div><a href="sample"><i class="xi-user"></i></a></div>
+			                	<div><a href="admin"><i class="xi-user"></i></a></div>
 			                </c:when>
 			                <c:otherwise>
 			                	<div><a href="myPage.me"><i class="xi-user"></i></a></div>
@@ -91,12 +92,15 @@
                     </div>
                 </div>
                 <div class="dropdown">
-                    <span class="dropbtn">
+                    <span class="dropbtn"><a href="#">친환경 매장</a></span>
+                    <div class="dropdown-content">
                         <form name="myForm" action='storeListView.st' method="POST">
                             <input type="hidden" name="memberId" value="${ loginUser.memberId}" />
                         </form>
                         <a href="#" onclick="javascript:document.myForm.submit();">매장찾기</a>
-                    </span>
+                        <a href="storeEnrollForm.st">매장등록신청</a>
+                    </div>
+                    
                 </div>
                 <div class="dropdown">
                     <span class="dropbtn"> <a href="#">고객센터</a> </span>
@@ -110,7 +114,7 @@
 
             <div class="search">
                 <form action="">
-                    <input type="text" placeholder="검색어 입력">
+                    <input type="text" placeholder="서비스 준비중..." readonly>
                     <i class="xi-search"></i>
                 </form>
             </div>

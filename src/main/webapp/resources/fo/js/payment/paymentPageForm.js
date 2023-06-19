@@ -1,5 +1,5 @@
 // 결제요청
-function orderPay() {
+ function orderPay() {
 
 	let today = new Date();
 	let year = today.getFullYear(); // 년도
@@ -29,14 +29,14 @@ function orderPay() {
 
 		}
 
-		console.log($("#realTotalAmount").val());
+		console.log($("#realTotalPrice").val());
 
 		IMP.request_pay({
 			pg: pg,
 			pay_method: pay_method,
 			merchant_uid: "" + year+month+date+hours+minutes+seconds+milliseconds,   // 주문번호
 			name: $(".product_name").html(),
-			amount: $("#realTotalAmount").val(),                         // 숫자 타입
+			amount: $("#realTotalPrice").val(),                         // 숫자 타입
 			buyer_email: $("#email").html(),
 			buyer_name: $("#name").html(),
 			buyer_tel: $("#phone").html(),
@@ -68,7 +68,7 @@ function orderPay() {
 					console.log(rsp.buyer_postcode);
 					console.log(rsp.pg_tid);
 					console.log("----------");
-					console.log();
+					console.log(Math.floor($("#rewardPoint").val()));
 
 					$.ajax({
 					url : "/paySuccess",
@@ -85,15 +85,15 @@ function orderPay() {
 						receiveAddress1 : $("#address1").val(),
 						receiveAddress2 : $("#address2").val(),
 						deliveryComment : $("#deliveryComment").val(),
-						paymentToken : rsp.pg_tid
+						paymentToken : rsp.pg_tid,
+						rewardPoint : Math.floor($("#rewardPoint").val())
 					},
 					success : function(data) {
 
-						console.log("db insert 결과 : " + data);
-
 						if(data == 1) {
 
-							insertPoint();
+							plusPoint();
+							minusPoint();
 
 							var msg = "결제가 완료되었습니다.";
 							alert(msg);
@@ -109,7 +109,7 @@ function orderPay() {
 					},
 					error : function() {
 
-						console.log("ajax 실패");
+						console.log("결제 ajax 실패");
 						var msg = "결제에 실패하였습니다." + rsp.error_msg;
 						alert(msg);
 					}
@@ -157,16 +157,16 @@ function addressAPI() {
 }
 
 // 포인트 추가 기능
-function insertPoint() {
+function plusPoint() {
 
 	$.ajax({
 		url : "/insertPoint",
 		type : "post",
 		data : {
-			pointContent : "상품 결제",
-			pointNum : $("#rewardPoint").html(),
+			pointContent : "상품 결제", // 포인트적립 사유 ex) 일기 작성, 챌린지 인증
+			pointNum : Math.floor($("#rewardPoint").val()), // 부여할 포인트값
 			status : "+",
-			memberId : $('.sessionMemberId').val()
+			memberId : $('.sessionMemberId').val() // 로그인한 회원 아이디
 		},
 		success : function(result) {
 
@@ -178,23 +178,22 @@ function insertPoint() {
 			}
 		},
 		error : function() {
-			console.log("포인트 내역 추가 실패2");
+			console.log("포인트 추가 ajax 실패");
 		}
 	});
 }
 
-/*
 // 포인트 삭감 기능
-function removePoint() {
+function minusPoint() {
 
 	$.ajax({
-		url : "/removePoint",
+		url : "/insertPoint",
 		type : "post",
 		data : {
-			pointContent : "상품 결제취소",
-			pointNum : "100", // 삭감할 포인트
-			status : "+",
-			memberId : "회원아이디"
+			pointContent : "결제 시 포인트 사용",
+			pointNum : $("#point").val(), // 삭감할 포인트
+			status : "-",
+			memberId : $('.sessionMemberId').val()
 		},
 		success : function(result) {
 
@@ -209,5 +208,138 @@ function removePoint() {
 			console.log("포인트 삭감 실패2");
 		}
 	});
+}
+
+$(function() {
+
+	//포인트 입력 시 조건 확인
+	$("#point").on("propertychange change keyup paste input", function(){
+
+		const maxPoint = parseInt($("#realPoint").val());
+
+		let inputValue = parseInt($(this).val());
+
+		if(inputValue < 0) {
+
+			$(this).val(0);
+
+		} else if(inputValue > maxPoint) {
+
+			$(this).val(maxPoint);
+
+		}
+
+	});
+
+	// 포인트 전액사용 버튼
+	$(".point-btn").on("click", function() {
+
+		// console.log("버튼변경");
+
+		const maxPoint = parseInt($("#realPoint").val());
+
+		let state = $(this).data("state");
+
+		if(state == "Y") {
+
+			// console.log("y동작");
+			/* 모두사용 */
+			//값 변경
+			$("#point").val(maxPoint);
+			//글 변경
+			$("#pointCancel").css("display", "inline-block");
+			$("#pointAll").css("display", "none");
+
+		} else if(state == "N") {
+
+			// console.log("n동작");
+			/* 취소 */
+			//값 변경
+			$("#point").val(0);
+			//글 변경
+			$("#pointCancel").css("display", "none");
+			$("#pointAll").css("display", "inline-block");
+
+		}
+
+		setTotalSummary();
+
+	});
+
+	$("#point").blur(function() {
+
+		if($("#point").val() == "") {
+
+			$("#point").val(0);
+
+			$("#pointCancel").css("display", "none");
+			$("#pointAll").css("display", "inline-block");
+
+		}
+
+		setTotalSummary();
+
+	});
+
+})
+
+// 주문요약 세팅
+function setTotalSummary() {
+
+	let totalPrice = 0;		// 총 가격
+	let deliveryPrice = 3000;	// 배송비
+	let usePoint = 0;			// 사용 포인트(할인가격)
+	let finalTotalPrice = 0;	// 최종 가격(총 가격 + 배송비)
+
+	totalPrice = parseInt($("#realProductPrice").val());
+
+	/* 사용 포인트 */
+	usePoint = parseInt($("#point").val());
+
+	finalTotalPrice = totalPrice + deliveryPrice - usePoint;
+
+	// 입력한 포인트가 최종 금액보다 클 경우
+	if(finalTotalPrice < 3000) {
+		usePoint = totalPrice;
+		finalTotalPrice = 3000;
+		$("#point").val(usePoint);
+	}
+
+	// console.log("총가격" + totalPrice);
+	// console.log("사용포인트" + usePoint);
+	// console.log("최종가격" + finalTotalPrice);
+
+	$("#usePoint").html(usePoint.toLocaleString("ko-KR") + "원");
+	$("#realTotalPrice").val(finalTotalPrice);
+	$(".totalPrice").html( finalTotalPrice.toLocaleString("ko-KR") + "원");
+
+}
+
+/*
+// DB에 결제상품 insert
+function insertOrder() {
+
+	let orderList = $("#orderList").val();
+
+	console.log(orderList);
+
+	$.ajax({
+		url : "/insertOrder",
+		type : "post",
+		contentType : "application/json",
+		data : {
+			JSON.stringify(orderList),
+			paymentNo : rsp.merchant_uid
+		},
+		success : function(result) {
+
+			console.log("성공" + result);
+		},
+		error : function() {
+
+			console.log("실패 ㅠ");
+		}
+	});
+
 }
 */

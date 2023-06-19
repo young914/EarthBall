@@ -26,4 +26,5 @@ public class PayInfo {
   private String receiveAddress2;
   private String deliveryComment;
   private String paymentToken;
+  private int rewardPoint;
 }

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -136,6 +137,26 @@ public class BoardController {
     }
 
     return mv;
+  }
+
+  @GetMapping("list.mybo")
+  public String myBoard(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, String memberId, Model model) {
+
+    // 게시글 조회
+    int listCount = boardService.myBoardListCount(memberId);
+
+    int pageLimit = 5;
+    int boardLimit = 12;
+
+    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+
+    // 내 게시글 리스트 조회
+    ArrayList<Board> mylist = boardService.selectMyBoard(pi, memberId);
+
+    model.addAttribute("pi", pi);
+    model.addAttribute("mylist", mylist);
+
+    return "fo/mypage/board";
   }
 
 	@ResponseBody

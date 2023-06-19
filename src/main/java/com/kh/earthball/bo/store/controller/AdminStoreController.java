@@ -16,6 +16,7 @@ import com.kh.earthball.bo.store.vo.AdminStore;
 import com.kh.earthball.fo.common.template.ChangeFileName;
 import com.kh.earthball.fo.common.template.Pagination;
 import com.kh.earthball.fo.common.vo.PageInfo;
+import com.kh.earthball.fo.member.vo.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,8 +30,14 @@ public class AdminStoreController {
 
   @GetMapping("adminlist.st")
   public ModelAndView adminStoreList(@RequestParam(value="cPage", defaultValue="1") int currentPage,
-                                 ModelAndView mv) {
-
+                                 ModelAndView mv, HttpSession session) {
+    
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || !"admin".equals(loginUser.getMemberId())) {
+      mv.setViewName("redirect:/loginForm.me");
+      return mv;
+    }
+    
     int listCount = storeService.selectListCount();
     int pageLimit = 10;
     int boardLimit = 10;
@@ -44,7 +51,12 @@ public class AdminStoreController {
   }
 
   @GetMapping("storeEnrollForm.st")
-  public String storeEnrollForm() {
+  public String storeEnrollForm(HttpSession session) {
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || 1 != loginUser.getMailAuth()) {
+      
+      return "fo/common/emailAuthError";
+    }
     return "bo/store/storeEnrollForm";
   }
 
@@ -55,7 +67,7 @@ public class AdminStoreController {
                             MultipartFile upfile6, MultipartFile upfile7, MultipartFile upfile8, MultipartFile upfile9, MultipartFile upfile10,
                             HttpSession session,
                             ModelAndView mv) {
-   
+  
    String regionAddress = s.getStoreAddress();
    String[] addressParts = regionAddress.split(" ");
    String city = addressParts[0];
@@ -82,7 +94,7 @@ public class AdminStoreController {
     fileList.add(upfile8);
     fileList.add(upfile9);
     fileList.add(upfile10);
-    System.out.println(fileList);   
+    
     ArrayList<AdminAtta> list = new ArrayList<>();
 
     for(int i = 0; i < fileList.size(); i++) {
@@ -104,20 +116,40 @@ public class AdminStoreController {
 
     if(result>0) {
       session.setAttribute("alertMsg", "매장추가 성공");
-      return  "redirect:/adminlist.st";
+      return  "redirect:/main";
     }else {
       session.setAttribute("alertMsg", "매장추가 실패");
-      return "redirect:/adminlist.st";
+      return "redirect:/main";
     }
   }
   
-  
+  @GetMapping("adminSignUpList.st")
+  public ModelAndView storeSignUpList(@RequestParam(value="cPage", defaultValue="1") int currentPage,
+      HttpSession session, ModelAndView mv) {
+
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || !"admin".equals(loginUser.getMemberId())) {
+      mv.setViewName("redirect:/loginForm.me");
+      return mv;
+    }
+      
+      int listCount = storeService.selectSignUpListCount();
+      int pageLimit = 10;
+      int boardLimit = 10;
+      
+      PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+      
+      ArrayList<AdminStore> list = storeService.selectSignUpList(pi);
+      
+      mv.addObject("pi", pi).addObject("list", list).setViewName("bo/store/storeSignUpList");
+      return mv;
+      }
   @GetMapping("storeUpdateForm.st")
   public String storeUpdateForm(int storeNo, Model model) {
-   System.out.println("여기는 storeUpdateForm.");
+   
     AdminStore beforeData = storeService.selectStore(storeNo);
     ArrayList<AdminAtta> beforeAttaList = storeService.selectAtta(storeNo);
-    System.out.println(beforeData);
+    
     
     model.addAttribute("beforeData", beforeData);
     model.addAttribute("beforeAtta", beforeAttaList);
@@ -130,14 +162,14 @@ public class AdminStoreController {
                             MultipartFile upfile6, MultipartFile upfile7, MultipartFile upfile8, MultipartFile upfile9, MultipartFile upfile10,
                             HttpSession session,
                             ModelAndView mv) {
-    System.out.println("여기는 :  updateStore ");
+    
     int storeNo = s.getStoreNo();
     String regionAddress = s.getStoreAddress();
     String[] addressParts = regionAddress.split(" ");
     String city = addressParts[0];
     String provinces = addressParts[1];
     int regionNo = storeService.getRegionNo(city, provinces);
-    System.out.println(regionNo);
+    
     s.setStoreRegionNo(regionNo);
     
     if (startAmPm.equals("pm")) {
@@ -147,8 +179,7 @@ public class AdminStoreController {
       endHour += 12;
     }
     String businessHours = startHour+ ":" + startMin + " - " + endHour + ":" + endMin;
-    System.out.println(address_detail);
-    System.out.println(businessHours);
+  
     
    s.setBusinessHours(businessHours);
     
@@ -178,8 +209,6 @@ public class AdminStoreController {
         list.add(at);
       }
     }
-
-
     int result = storeService.updateStore(s,list);
 
     if(result>0) {
@@ -191,7 +220,7 @@ public class AdminStoreController {
     }
   }
   @GetMapping("deleteStore.st")
-  public String deleteStore(int storeNo, HttpSession session) {
+  public String deleteStore(@RequestParam("storeNo") int storeNo, HttpSession session) {
     int result = storeService.deleteService(storeNo);
     if(result>0) {
       session.setAttribute("alertMsg", "매장삭제 성공");
@@ -200,5 +229,28 @@ public class AdminStoreController {
       session.setAttribute("alertMsg", "매장삭제 실패");
       return "redirect:/adminlist.st";
     }
+  }
+  
+  @GetMapping("detailStore.st")
+  public String detailStore(@RequestParam("storeNo") int storeNo, Model model) {
+    
+    AdminStore detailData = storeService.selectStore(storeNo);
+    ArrayList<AdminAtta> detailAtta = storeService.selectAtta(storeNo);
+    model.addAttribute("beforeData", detailData);
+    model.addAttribute("beforeAtta", detailAtta);
+    return "bo/store/storeDetailView";
+  }
+  
+  @GetMapping("approvalStore.st")
+  public String approvalStore(int storeNo, HttpSession session) {
+    
+    int result = storeService.approvalStore(storeNo);
+    if(result>0) {
+      session.setAttribute("alertMsg", "매장승인 성공");
+    }else {
+      session.setAttribute("alertMsg", "매장승인 실패");
+    }
+    
+    return "redirect:adminSignUpList.st";
   }
 }

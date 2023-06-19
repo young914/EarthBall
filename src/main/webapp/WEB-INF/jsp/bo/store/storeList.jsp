@@ -192,15 +192,15 @@
                 </thead>
                 <tbody>
                 <c:forEach var="s" items="${ list }">
-                    <tr>
+                  <tr onclick="goToDetail('${s.storeNo}')">
                         <td>${ s.storeNo }</td>
                         <td>${ s.storeName }</td>
                         <td>${ s.storeAddress }</td>
                         <td>${ s.storePhone}</td>
                         <td>${ s.businessHours }</td>
                         <td>${ s.storeLikes }</td>
-                        <td><button type="button" class="btn btn-warning" onclick="updateStore('${ s.storeNo }');">수정</button></td>
-                        <td><button type="button" class="btn btn-danger" onclick="deleteStore('${ s.storeNo }');">삭제</button></td>
+                        <td><button type="button" class="btn btn-warning"  onclick="event.stopPropagation(); updateStore('${ s.storeNo }');">수정</button></td>
+                        <td><button type="button" class="btn btn-danger"  onclick="event.stopPropagation(); deleteStore('${ s.storeNo }');">삭제</button></td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -218,15 +218,11 @@
                         <li> <a href="adminlist.st" class="first">처음 페이지</a> </li>
                         </c:otherwise>
                     </c:choose>
-
                         <li> <a href="#" class="arrow_left"> << </a>  </li>
-
                         <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
                         <li> <a href="adminlist.st?cPage=${ p }" class="active num"> ${ p } </a>  </li>
                         </c:forEach>
-
                         <li> <a href="#" class="arrow_right"> >> </a> </li>
-
                         <c:choose>
                         <c:when test="${ pi.currentPage eq pi.maxPage }">
                             <li style="display: none"> <a href="#" class="last">끝 페이지</a> </li>
@@ -267,6 +263,11 @@
   <div class="layout-overlay layout-menu-toggle"></div>
 </div>
 <script>
+  function goToDetail(storeNo) {
+        
+    location.href = 'detailStore.st?storeNo=' + storeNo;
+  }
+
   function createStore() {
     location.href = "storeEnrollForm.st";
   }
@@ -277,6 +278,7 @@
   function deleteStore(storeNo) {
     location.href = "deleteStore.st?storeNo=" + storeNo;
   }
+
 </script>
 <jsp:include page="/WEB-INF/jsp/bo/common/commonScript.jsp" />
 </body>

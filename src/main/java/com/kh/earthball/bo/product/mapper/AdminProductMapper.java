@@ -2,6 +2,7 @@ package com.kh.earthball.bo.product.mapper;
 
 import java.util.ArrayList;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 import com.kh.earthball.bo.product.vo.AdminAtta;
 import com.kh.earthball.bo.product.vo.AdminProduct;
@@ -18,6 +19,16 @@ public interface AdminProductMapper {
 
   ArrayList<AdminProduct> adminAllProductList(PageInfo pi, RowBounds rowBounds);
 
+  AdminProduct selectDetailView(int productNo);
 
+  ArrayList<AdminAtta> selectDetailviewAtta(int productNo);
+
+  int updateProduct(AdminProduct p);
+
+  int deleteAttaAll(AdminProduct p);
+
+  int updateProductAtta(AdminAtta at);
+
+  int updateStatus(@Param("productNo") int productNo, @Param("status") String status);
 
 }

@@ -203,7 +203,7 @@
 								<td>
 									<table class="fileArea">
 										<tr>
-											<td>로고<input type="file" name="upfile1" onchange="loadImg(this, 1);" required>
+											<td>로고(필수)<input type="file" name="upfile1" onchange="loadImg(this, 1);" required>
 												<img id="preview1" src="">
 											</td>
 											<td>2번<input type="file" name="upfile2" onchange="loadImg(this, 2);">

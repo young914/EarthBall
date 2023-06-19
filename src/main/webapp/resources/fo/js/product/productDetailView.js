@@ -23,7 +23,7 @@ function minus(){
     }
 }
 
-// 장바구니 추가 
+// 장바구니 추가
 // 로그인 안되어있으면 로그인 페이지로 이동
 function loginPage(){
     alert("로그인이 필요한 서비스입니다.");
@@ -44,9 +44,9 @@ function insertCart(){
     $.ajax({
         url: "insert.cart",
         type: "post",
-        data: {productNo: productNo, 
-                memberId: memberId, 
-                amount: amount, 
+        data: {productNo: productNo,
+                memberId: memberId,
+                amount: amount,
                 price: price},
         success: function(result) {
             if(result == 1){
@@ -75,7 +75,7 @@ function review(){
     $("#productReview").show();
     $("#productQna").hide();
 
-    reviewList(); 
+    reviewList();
 }
 function qna(){
     $("#productDetail").hide();
@@ -83,7 +83,7 @@ function qna(){
     $("#productQna").show();
 }
 
-// 리뷰 불러오기 
+// 리뷰 불러오기
 function reviewList(){
     let productNo = $(".productNo").val();
 
@@ -104,9 +104,9 @@ function reviewList(){
                             }
                         html += '</div>';
                         html += '<div>';
-                            html += '<p>';
+                            html += '<pre style="font-family: Jua, sans-serif; font-size: medium;">';
                                 html += r.reviewContent;
-                            html += '</p>';
+                            html += '</pre>';
                         html += '</div>';
                         if(r.changeName != null) {
                             html += '<div>';
@@ -166,9 +166,9 @@ function onlyPhoto(){
                             }
                         html += '</div>';
                         html += '<div>';
-                            html += '<p>';
+                            html += '<pre style="font-family: Jua, sans-serif; font-size: medium;">';
                                 html += r.reviewContent;
-                            html += '</p>';
+                            html += '</pre>';
                         html += '</div>';
                         if(r.changeName != null) {
                             html += '<div>';
@@ -253,13 +253,13 @@ function replyList(reviewNo){
                 let r = result[i];
                 // HTML 요소 동적 생성
                 html += "<div class='replyOne' value='" + r.replyNo + "'>";
-                    html += "<div><img src=''></div>";
+                    html += '<div><img src="/resources/fo/upfiles/'+  r.memberImg  + '"></div>';
                     html += "<div>";
                         html += "<div>";
-                            html += "<span>" + r.memberName + "</span><span>" + r.createdDate + "</span>";
+                            html += "<span>" + r.memberName + "</span><span style='margin-left: 10px;'>" + r.createdDate + "</span>";
                         html += "</div>";
                         html += "<div>";
-                            html += "<p>" + r.replyContent + "</p>";
+                            html += "<pre style='font-family: Jua, sans-serif; font-size: medium;'>" + r.replyContent + "</pre>";
                         html += "</div>";
                     html += "</div>";
                 html += "</div>";
@@ -363,6 +363,7 @@ function insertReview(){
         success : function(result){
             if(result == 1){
                 reviewList();
+                insertPoint();
                 $(".onlyPhoto").text("전체리뷰 보기");
             }
         }
@@ -382,3 +383,39 @@ $(function(){
         arrows : true
     })
 })
+
+// 포인트 추가 기능
+function insertPoint() {
+
+	$.ajax({
+		url : "/insertPoint",
+		type : "post",
+		data : {
+			pointContent : "상품평 작성", // 포인트적립 사유 ex) 일기 작성, 챌린지 인증
+			pointNum : 50, // 부여할 포인트값
+			status : "+",
+			memberId : $('.sessionMemberId').val() // 로그인한 회원 아이디
+		},
+		success : function(result) {
+
+			if(result == "1") {
+
+				console.log("포인트 내역 추가 성공");
+			} else {
+				console.log("포인트 내역 추가 실패");
+			}
+		},
+		error : function() {
+			console.log("포인트 추가 ajax 실패");
+		}
+	});
+}
+
+// 구매하기 버튼
+function order() {
+
+	let amount = $(".amount").val();
+	console.log(amount);
+	$(".order_form").find("input[name='orders[0].amount']").val(amount);
+	$(".order_form").submit();
+}

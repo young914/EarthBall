@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface CategoryTemplateMapper {
-  List<CategoryTemplate> selectTemplateList(int categoryNo);
+  List<CategoryTemplate> selectTemplateListNo(int categoryNo);
 
   int insertTemplate(CategoryTemplate template);
 

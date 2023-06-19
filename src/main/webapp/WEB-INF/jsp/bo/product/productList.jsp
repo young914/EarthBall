@@ -26,12 +26,9 @@
   <jsp:include page="/WEB-INF/jsp/bo/common/commonHead.jsp" />
   <style>
     .content{
-      width: calc(100% - (1.625rem * 2));
       margin: 0.75rem auto 0;
       border-radius: 0.375rem;
-      padding: 0 1.5rem;
       background-color: white;
-      /* 그림자효과 */
       box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     }
     .title{
@@ -158,7 +155,7 @@
       <!-- Content wrapper -->
       <div class="content-wrapper">
         <!-- Content -->
-        <div class="content">
+        <div class="container-xxl flex-grow-1 container-p-y content">
           <h1 class="title">상품리스트</h1>
           <div class="nav">
             <select name="category" required>
@@ -188,7 +185,7 @@
                   <th width="70">할인률</th>
                   <th width="70">재고</th>
                   <th width="130">등록일</th>
-                  <th width="70">상태값</th>
+                  <th width="100">노출여부</th>
                 </tr>
               </thead>
               <tbody>
@@ -201,7 +198,16 @@
 			  			<td>${ p.discount }</td>
 			  			<td>${ p.stock }</td>
 			  			<td>${ p.createDate }</td>
-			  			<td>${ p.status }</td>
+			  			<td>
+                <c:choose>
+                  <c:when test="${ p.status eq 'Y' }">
+                    <button type="button" onclick="status();" class="btn btn-success">Y</button>
+                  </c:when>
+                  <c:otherwise>
+                    <button type="button" onclick="status();" class="btn btn-danger">N</button>
+                  </c:otherwise>
+                </c:choose>
+              </td>
 			  		</tr>
 			  	</c:forEach>
               </tbody>
@@ -211,14 +217,7 @@
           <div id="page">
               <div class="page_btn" align="center">
                   <ul class="pagination">
-                    <c:choose>
-                      <c:when test="${ pi.currentPage eq 1 }">
-                        <li style="display: none"> <a href="#" class="first">처음 페이지</a> </li>
-                      </c:when>
-                      <c:otherwise>
-                        <li> <a href="adminlist.pro" class="first">처음 페이지</a> </li>
-                      </c:otherwise>
-                    </c:choose>
+                      <li> <a href="adminlist.pro" class="first">처음 페이지</a> </li>
 
                       <li> <a href="#" class="arrow_left"> << </a>  </li>
 
@@ -228,14 +227,7 @@
 
                       <li> <a href="#" class="arrow_right"> >> </a> </li>
 
-                      <c:choose>
-                        <c:when test="${ pi.currentPage eq pi.maxPage }">
-                          <li style="display: none"> <a href="#" class="last">끝 페이지</a> </li>
-                        </c:when>
-                        <c:otherwise>
-                          <li> <a href="adminlist.pro?cPage=${ pi.maxPage }" class="last">끝 페이지</a> </li>
-                        </c:otherwise>
-                      </c:choose>
+                      <li> <a href="adminlist.pro?cPage=${ pi.maxPage }" class="last">끝 페이지</a> </li>
                   </ul>
               </div>
           </div>
@@ -269,7 +261,64 @@
 </div>
 <jsp:include page="/WEB-INF/jsp/bo/common/commonScript.jsp" />
 <script type="text/javascript">
+  // 상품 행 클릭시 상세보기 페이지로 이동
+  $(".productList tbody tr").click(function() {
+    location.href = "adminDetailView.pro?productNo=" + $(this).children().eq(0).text();
+  });
 
+  // 노출여부 버튼 클릭시
+  // 상세보기 페이지로 이동하는거 막음
+  // 호버표과 안함
+  function status() {
+    event.stopPropagation();
+
+    if($(event.target).text() == "Y") {
+      $(event.target).text("N");
+      $(event.target).removeClass("btn-success");
+      $(event.target).addClass("btn-danger");
+    } else {
+      $(event.target).text("Y");
+      $(event.target).removeClass("btn-danger");
+      $(event.target).addClass("btn-success");
+    }
+
+    // 상품번호
+    var productNo = $(event.target).parent().siblings().eq(0).text();
+    // 노출여부
+    var status = $(event.target).text();
+    
+    console.log(productNo);
+    console.log(status);
+
+    $.ajax({
+      url: "adminStatusUpdate.pro",
+      type: "post",
+      data: {
+        productNo: productNo,
+        status: status
+      },
+      success: function(data) {
+        if(data == 1) {
+          alert("상품 노출여부 변경 성공");
+        } else {
+          alert("상품 노출여부 변경 실패");
+
+          if($(event.target).text() == "Y") {
+            $(event.target).text("N");
+            $(event.target).removeClass("btn-success");
+            $(event.target).addClass("btn-danger");
+          } else {
+            $(event.target).text("Y");
+            $(event.target).removeClass("btn-danger");
+            $(event.target).addClass("btn-success");
+          }
+        }
+      },
+      error: function() {
+        console.log("상품 노출여부 변경 실패");
+      }
+    });
+  }
 </script>
 </body>
 </html>

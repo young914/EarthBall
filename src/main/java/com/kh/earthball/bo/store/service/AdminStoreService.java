@@ -25,4 +25,10 @@ public interface AdminStoreService {
 
   int deleteService(int storeNo);
 
+  int selectSignUpListCount();
+
+  ArrayList<AdminStore> selectSignUpList(PageInfo pi);
+
+  int approvalStore(int storeNo);
+
 }

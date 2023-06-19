@@ -30,10 +30,9 @@
                 <div id="productName"><h1>${ p.productName }</h1></div>
                 <div id="productPrice"><h4>${ p.price }원</h4></div>
                 <hr>
-                <div id="productText">
-                    더 상큼한 제로웨이스트 양치시간! 지구샵 마일드 고체치약으로 시작해요 :) <br>
-                    *틴케이스 별도 구매
-                </div>
+<pre id="productText" style="font-family: 'Jua', sans-serif; font-size: large;">
+${p.productInfo}
+</pre>
                 <div id="productTable">
                     <table>
                         <tr>
@@ -50,7 +49,7 @@
                         </tr>
                         <tr>
                             <td>배송비</td>
-                            <td>3,000원 (50,000원 이상 무료배송)</td>
+                            <td>3,000원</td>
                         </tr>
                     </table>
                 </div>
@@ -71,7 +70,7 @@
                 </div>
                 <div id="buttonArea">
                     <div></div>
-                    <div><button>구매하기</button></div>
+                    <div><button onclick="order();">구매하기</button></div>
                     <div>
                         <c:choose>
                             <c:when test="${ loginUser.memberId != null }">
@@ -98,6 +97,12 @@
                     </div>
                     <div></div>
                 </div>
+                 <!-- 주문 form -->
+					<form action="payment.pa" method="post" class="order_form">
+						<input type="hidden" name="orders[0].productNo" value="${p.productNo}">
+						<input type="hidden" name="orders[0].amount" value="">
+						<input type="hidden" name="orders[0].memberId" value="${ loginUser.memberId }">
+					</form>
             </div>
         </div>
 
@@ -143,7 +148,7 @@
                             </div>
                             <!-- 유저프로필 -->
                             <div class="userProfile">
-                                <div class="userPhoto"><img src="#"></div>
+                                <div class="userPhoto"><img src="/resources/fo/upfiles/${ r.memberImg }"></div>
                                 <div class="userName">${r.memberName}</div>
                             </div>
                         </div>
@@ -220,7 +225,7 @@
                 <div class="reviewContentArea">
 
                 </div>
-				
+
 
             </div>
 
@@ -234,9 +239,6 @@
             </div>
 
         </div>
-    </div>
-
-
     </div>
 
     <jsp:include page="/WEB-INF/jsp/fo/common/footer.jsp"/>

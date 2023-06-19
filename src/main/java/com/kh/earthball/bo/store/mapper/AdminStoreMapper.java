@@ -17,10 +17,13 @@ public interface AdminStoreMapper {
 
   int insertStoreAtta(AdminAtta at);
 
+  int selectSignUpListCount();
+  
   ArrayList<AdminStore> adminAllStoreList(PageInfo pi, RowBounds rowBounds);
 
   int getRegionNo(@Param("city") String city, @Param("provinces") String province);
 
+  
   int updateStore(AdminStore s);
 
   int updateStoreAtta(AdminAtta at);
@@ -30,5 +33,9 @@ public interface AdminStoreMapper {
   ArrayList<AdminAtta> selectAtta(@Param("storeNo" )int storeNo);
 
   int deleteStore(int storeNo);
+
+  ArrayList<AdminStore> selectSignUpList(PageInfo pi);
+
+  int approvalStore(int storeNo);
 
 }

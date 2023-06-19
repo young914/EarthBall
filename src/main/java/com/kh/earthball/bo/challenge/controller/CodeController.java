@@ -4,6 +4,7 @@ import com.kh.earthball.bo.challenge.service.CodeService;
 import com.kh.earthball.bo.challenge.vo.Code;
 import com.kh.earthball.bo.challenge.vo.GrpCode;
 import com.kh.earthball.fo.common.vo.PageInfo;
+import com.kh.earthball.fo.member.vo.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -24,7 +26,14 @@ public class CodeController {
   private final CodeService codeService;
 
   @GetMapping("grpCodeForm")
-  public String insertGrpForm() {
+  public String insertGrpForm(HttpSession session) {
+
+    // 관리자가 아니라면 접근 불가하도록 설정
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || !"admin".equals(loginUser.getMemberId())) {
+      return "redirect:/loginForm.me";
+    }
+
     return "bo/challenge/code/grpCodeEnrollForm";
   }
 
@@ -35,7 +44,13 @@ public class CodeController {
   }
 
   @GetMapping("list.grp")
-  public String grpList(Model model, @RequestParam(value = "currentPage", defaultValue = "1") int currentPage) {
+  public String grpList(Model model, @RequestParam(value = "currentPage", defaultValue = "1") int currentPage, HttpSession session) {
+
+    // 관리자가 아니라면 접근 불가하도록 설정
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || !"admin".equals(loginUser.getMemberId())) {
+      return "redirect:/loginForm.me";
+    }
 
     int listCount = codeService.selectListCount();
     int pageLimit = 10;
@@ -53,8 +68,6 @@ public class CodeController {
 
     List<GrpCode> grpCodeList = codeService.selectList(pi);
 
-    log.info("grpCodeList : " + grpCodeList);
-
     model.addAttribute("pi", pi);
     model.addAttribute("grpCodeList", grpCodeList);
 
@@ -62,7 +75,13 @@ public class CodeController {
   }
 
   @GetMapping("updateForm.grp")
-  public String updateGrpForm(@RequestParam(value = "grpCode") String grpCode, Model model) {
+  public String updateGrpForm(@RequestParam(value = "grpCode") String grpCode, Model model, HttpSession session) {
+
+    // 관리자가 아니라면 접근 불가하도록 설정
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || !"admin".equals(loginUser.getMemberId())) {
+      return "redirect:/loginForm.me";
+    }
 
     GrpCode grpCodeInfo = codeService.selectGrp(grpCode);
 
@@ -85,8 +104,13 @@ public class CodeController {
   }
 
   @GetMapping("codeEnrollForm")
-  public String codeEnrollForm(String grpCode, Model model) {
-//		log.info("grpCode 들어왔니? : " + grpCode);
+  public String codeEnrollForm(String grpCode, Model model, HttpSession session) {
+
+    // 관리자가 아니라면 접근 불가하도록 설정
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || !"admin".equals(loginUser.getMemberId())) {
+      return "redirect:/loginForm.me";
+    }
 
     GrpCode grp = codeService.selectGrp(grpCode);
 
@@ -102,7 +126,13 @@ public class CodeController {
   }
 
   @GetMapping("list.code")
-  public String selectListCode(Model model, @RequestParam(value = "grpCode") String grpCode) {
+  public String selectListCode(Model model, @RequestParam(value = "grpCode") String grpCode, HttpSession session) {
+
+    // 관리자가 아니라면 접근 불가하도록 설정
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || !"admin".equals(loginUser.getMemberId())) {
+      return "redirect:/loginForm.me";
+    }
 
     List<Code> codeList = codeService.selectCodeList(grpCode);
 
@@ -112,9 +142,13 @@ public class CodeController {
   }
 
   @GetMapping("updateForm.code")
-  public String codeUpdateForm(@RequestParam(value = "grpCode") String grpCode, @RequestParam(value = "code") String code, Model model) {
+  public String codeUpdateForm(@RequestParam(value = "grpCode") String grpCode, @RequestParam(value = "code") String code, Model model, HttpSession session) {
 
-    log.info("값 들어옴? : " + grpCode + code);
+    // 관리자가 아니라면 접근 불가하도록 설정
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || !"admin".equals(loginUser.getMemberId())) {
+      return "redirect:/loginForm.me";
+    }
 
     // 코드 정보 조회해와야지
     Code selectCode = codeService.selectCode(grpCode, code);

@@ -16,6 +16,7 @@ public class Product {
 
   private int productNo;
   private String productName;
+  private String productInfo;
   private String category;
   private int price;
   private int discount;
@@ -24,5 +25,7 @@ public class Product {
   private String status;
   private String changerName;
   private int fileLevel;
+  private int likeCount;
+  private int reviewCount;
 
 }

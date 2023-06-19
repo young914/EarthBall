@@ -41,7 +41,7 @@
             </div>
 
             <!-- 로그인하고, 이메일 인증 받은 사람에게만 보이는 챌린지 오픈 버튼 -->
-            <c:if test="${ not empty loginUser && loginUser.mailAuth eq '1'}">
+            <c:if test="${ not empty loginUser && loginUser.mailAuth eq '1' || loginUser.memberId eq 'admin'}">
                 <div id="title_2">
                     <button class="btn_1" onclick="chall_open();">챌린지 오픈</button>
                 </div>
@@ -53,10 +53,11 @@
 
             <div id="filter_1">
                 <h3>카테고리</h3>
+                <input type="hidden" name="categoryNo" id="categoryNo" value="${param.categoryNo}">
                 <div id="filter_1_1">
                     <ul>
                       <c:forEach var="category" items="${categoryList}">
-                        <li><a class="btn_2" href="javascript:categoryFilter(${category.categoryNo});">${category.categoryName}</a></li>
+                        <li><a class="btn_2 ${param.categoryNo eq category.categoryNo ? 'on' : ''}" data-category-no="${category.categoryNo}" href="javascript:categoryFilter(${category.categoryNo});">${category.categoryName}</a></li>
                       </c:forEach>
                     </ul>
                 </div>
@@ -65,11 +66,12 @@
 
             <div id="filter_2">
                 <h3>진행상태</h3>
+                <input type="hidden" name="chStatName" id="chStatName" value="${param.chStatName}">
                 <div id="filter_3_1">
                     <ul>
-                        <li><a class="btn_2" href="javascript:statFilter('진행예정')">진행 예정</a></li>
-                        <li><a class="btn_2" href="javascript:statFilter('진행중')">진행 중</a></li>
-                        <li><a class="btn_2" href="javascript:statFilter('진행완료')">진행 완료</a></li>
+                        <li><a class="btn_2 ${param.chStatName eq '진행예정' ? 'on' : ''}" data-ch-stat-name="진행예정" href="javascript:statFilter('진행예정')">진행 예정</a></li>
+                        <li><a class="btn_2 ${param.chStatName eq '진행중' ? 'on' : ''}" data-ch-stat-name="진행중" href="javascript:statFilter('진행중')">진행 중</a></li>
+                        <li><a class="btn_2 ${param.chStatName eq '진행완료' ? 'on' : ''}" data-ch-stat-name="진행완료" href="javascript:statFilter('진행완료')">진행 완료</a></li>
                     </ul>
                 </div>
             </div>
@@ -204,13 +206,28 @@
         })
 
         function categoryFilter(categoryNo) {
-            location.href="/categoryFilter.chall?categoryNo=" + categoryNo;
+            if ($("a.btn_2.on[data-category-no]").data("categoryNo") == categoryNo) {
+                // data-category-no에 이미 넣어 놓았던 categoryNo과( => "a.btn_2.on[data-category-no]").data("categoryNo"))
+                // 파라미터로 받은 categoryNo이 일치한다면 초기화
+                $("#categoryNo").val("");
+            } else {
+                $("#categoryNo").val(categoryNo);
+            }
+            challFilter();
         }
 
         function statFilter(chStatName) {
-            location.href="/statFilter.chall?chStatName=" + chStatName;
+            if ($("a.btn_2.on[data-ch-stat-name]").data("chStatName") == chStatName) {
+                $("#chStatName").val("");
+            } else {
+                $("#chStatName").val(chStatName);
+            }
+            challFilter();
         }
 
+        function challFilter() {
+            location.href="/main.chall?categoryNo=" + $("#categoryNo").val() + "&chStatName=" + $("#chStatName").val();
+        }
 
         /* 실시간 hot 챌린지 조회 */
         $(function () {
@@ -227,14 +244,11 @@
                 url : "/hotList.chall"
                 , type : "get"
                 , success : function (result) {
-                    console.log("hot 챌린지 조회용 ajax 통신 성공");
                     let hotList = "";
 
                     for(let i in result) {
-                        console.log("Index : " , i);
 
                         let chNo = result[i].chNo;
-                        console.log("chNo이 잘 전달됐니? : ", chNo);
 
                         hotList +="<div class='hot_chall' onclick='challengeDetailView(" + chNo + ");'>"
                                 +"<table class='hot_one'>"
@@ -254,7 +268,6 @@
                                 +   "</tr>"
                                 +"</table>"
                                 +"</div>"
-                        console.log("result: ", result[i]);
                     }
                     $("#content_2_1").html(hotList);
                 }

@@ -26,7 +26,6 @@
   <jsp:include page="/WEB-INF/jsp/bo/common/commonHead.jsp" />
   <style>
     .content{
-      width: calc(100% - (1.625rem * 2));
       margin: 0.75rem auto 0;
       border-radius: 0.375rem;
       padding: 0 1.5rem;
@@ -42,9 +41,21 @@
     }
 	.insertForm{
 		width: 100%;
+		/* border: 1px solid #ddd; */
+	}
+	.insertForm tr{
+		height: 50px;
+		margin: 10px;
+		/* border: 1px solid #ddd; */
 	}
 	.insertForm td{
-		padding: 10px;
+		padding-right: 10px;
+		/* border: 1px solid #ddd; */
+	}
+	.insertForm input{
+		width: 400px;
+		height: 40px;
+		border-radius: 5px;
 	}
 	.btn-area{
 		text-align: center;
@@ -66,7 +77,16 @@
 	.insertForm img{
 		width: 300px;
 		height: 300px;
-
+	}
+	#productInfo{
+		width: 400px;
+		height: 200px;
+		resize: none;
+	}
+	.category{
+		width: 100px;
+		height: 40px;
+		border-radius: 5px;
 	}
   </style>
 </head>
@@ -91,7 +111,7 @@
       <!-- Content wrapper -->
       <div class="content-wrapper">
         <!-- Content -->
-        <div class="content">
+        <div class="container-xxl flex-grow-1 container-p-y content">
 			<div class="listArea">
 				<h1 class="title">상품 추가</h1>
 				<form action="insert.pro" method="post" enctype="multipart/form-data">
@@ -104,8 +124,7 @@
 							<tr>
 								<td>카테고리</td>
 								<td>
-									<select name="category" required>
-										<option value="전체">전체</option>
+									<select name="category" class="category" required>
 										<option value="욕실">욕실</option>
 										<option value="식품">식품</option>
 										<option value="주방">주방</option>
@@ -132,28 +151,58 @@
 								<td><input type="number" name="stock" required></td>
 							</tr>
 							<tr>
+								<td>상품 설명</td>
+								<td><textarea name="productInfo" id="productInfo" required></textarea></td>
+							</tr>
+							<tr>
 								<td>사진</td>
 								<td>
 									<table class="fileArea">
 										<tr>
-											<td>1번<input type="file" name="upfile1" onchange="loadImg(this, 1);" required> <img id="preview1"></td>
-											<td>2번<input type="file" name="upfile2" onchange="loadImg(this, 2);"> <img id="preview2"></td>
+											<td>
+												<div><input type="file" class="upfile1" name="upfiles" onchange="loadImg(this, 1);" required> <img id="preview1"></div>
+												<div>메인이미지</div>
+											</td>
+											<td>
+												<div><input type="file" class="upfile2" name="upfiles" onchange="loadImg(this, 2);"> <img id="preview2"></div>
+												<div>2번</div>
+											</td>
+											<td>
+												<div><input type="file" class="upfile3" name="upfiles" onchange="loadImg(this, 3);"> <img id="preview3"></div>
+												<div>3번</div>
+											</td>
+											<td>
+												<div><input type="file" class="upfile4" name="upfiles" onchange="loadImg(this, 4);"> <img id="preview4"></div>
+												<div>4번</div>
+											</td>
 										</tr>
 										<tr>
-											<td>3번<input type="file" name="upfile3" onchange="loadImg(this, 3);"> <img id="preview3"></td>
-											<td>4번<input type="file" name="upfile4" onchange="loadImg(this, 4);"> <img id="preview4"></td>
+											<td>
+												<div><input type="file" class="upfile5" name="upfiles" onchange="loadImg(this, 5);"> <img id="preview5"></div>
+												<div>5번</div>
+											</td>
+											<td>
+												<div><input type="file" class="upfile6" name="upfiles" onchange="loadImg(this, 6);"> <img id="preview6"></div>
+												<div>6번</div>
+											</td>
+											<td>
+												<div><input type="file" class="upfile7" name="upfiles" onchange="loadImg(this, 7);"> <img id="preview7"></div>
+												<div>7번</div>
+											</td>
+											<td>
+												<div><input type="file" class="upfile8" name="upfiles" onchange="loadImg(this, 8);"> <img id="preview8"></div>
+												<div>8번</div>
+											</td>
 										</tr>
 										<tr>
-											<td>5번<input type="file" name="upfile5" onchange="loadImg(this, 5);"> <img id="preview5"></td>
-											<td>6번<input type="file" name="upfile6" onchange="loadImg(this, 6);"> <img id="preview6"></td>
-										</tr>
-										<tr>
-											<td>7번<input type="file" name="upfile7" onchange="loadImg(this, 7);"> <img id="preview7"></td>
-											<td>8번<input type="file" name="upfile8" onchange="loadImg(this, 8);"> <img id="preview8"></td>
-										</tr>
-										<tr>
-											<td>9번<input type="file" name="upfile9" onchange="loadImg(this, 9);"> <img id="preview9"></td>
-											<td>10번<input type="file" name="upfile10" onchange="loadImg(this, 10);"> <img id="preview10"></td>
+											<td>
+												<div><input type="file" class="upfile9" name="upfiles" onchange="loadImg(this, 9);"> <img id="preview9"></div>
+												<div>9번</div>
+											</td>
+											<td>
+												<div><input type="file" class="upfile10" name="upfiles" onchange="loadImg(this, 10);"> <img id="preview10"></div>
+												<div>10번</div>
+											</td>
 										</tr>
 									</table>
 								</td>
@@ -200,34 +249,34 @@
 		$(".fileArea input[type=file]").hide();
 
 		$("#preview1").click(function(){
-			$("input[name=upfile1]").click();
+			$(".upfile1").click();
 		});
 		$("#preview2").click(function(){
-			$("input[name=upfile2]").click();
+			$(".upfile2").click();
 		});
 		$("#preview3").click(function(){
-			$("input[name=upfile3]").click();
+			$(".upfile3").click();
 		});
 		$("#preview4").click(function(){
-			$("input[name=upfile4]").click();
+			$(".upfile4").click();
 		});
 		$("#preview5").click(function(){
-			$("input[name=upfile5]").click();
+			$(".upfile5").click();
 		});
 		$("#preview6").click(function(){
-			$("input[name=upfile6]").click();
+			$(".upfile6").click();
 		});
 		$("#preview7").click(function(){
-			$("input[name=upfile7]").click();
+			$(".upfile7").click();
 		});
 		$("#preview8").click(function(){
-			$("input[name=upfile8]").click();
+			$(".upfile8").click();
 		});
 		$("#preview9").click(function(){
-			$("input[name=upfile9]").click();
+			$(".upfile9").click();
 		});
 		$("#preview10").click(function(){
-			$("input[name=upfile10]").click();
+			$(".upfile10").click();
 		});
 	});
 
@@ -264,6 +313,9 @@
 			}
 		}
 	}
+	// 메인이미지만 나오고 나머지는 안보이다가 
+	// 하나씩 추가할때마다 보이게 하기
+	
 </script>
 </body>
 </html>

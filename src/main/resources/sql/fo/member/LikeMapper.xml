@@ -32,4 +32,10 @@
 		AND FILE_LEVEL = 0
 	</select>
 
+	<select id="selectLikeCount" parameterType="_int">
+		SELECT COUNT(*)
+		FROM LIKES
+		WHERE PRODUCT_NO = #{productNo}
+	</select>
+
 </mapper>

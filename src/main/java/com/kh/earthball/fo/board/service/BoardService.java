@@ -41,4 +41,10 @@ public interface BoardService {
   // 댓글 삭제 서비스
   int deleteReply(int boardNo);
 
+  // 마이페이지 리스트 조회
+  ArrayList<Board> selectMyBoard(PageInfo pi, String memberId);
+
+  // 마이페이지 개수 조회
+  int myBoardListCount(String memberId);
+
 }

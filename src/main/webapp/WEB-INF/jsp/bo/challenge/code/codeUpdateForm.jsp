@@ -139,8 +139,6 @@
             , grpCode: grpCode
         };
 
-        console.log("그룹코드 잘 들어감? : " + data);
-
         $.ajax({
             url: "update.code"
             , type: "post"

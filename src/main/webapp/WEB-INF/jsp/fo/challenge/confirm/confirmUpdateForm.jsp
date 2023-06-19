@@ -353,8 +353,6 @@
                     });
                 }
             }
-            //console.log("templateList : " , templateList);
-
 
             let confirmInfo = { // 인증 기본 정보
                 chNo: chNo
@@ -363,9 +361,6 @@
                 , memberId: memberId
                 , chDetailInfoList: list
             }
-
-            console.log("인증 기본 정보 : ", confirmInfo);
-            console.log("디테일 정보 list : ", list);
 
             $.ajax({
                 url: "/update.con"
@@ -428,8 +423,6 @@
                 console.error('No file selected.');
             }
         });
-
-
     </script>
 
 

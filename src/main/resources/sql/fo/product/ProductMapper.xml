@@ -3,6 +3,17 @@
 
 <mapper namespace="com.kh.earthball.fo.product.mapper.ProductMapper">
 
+	<select id="selectTopList" resultType="com.kh.earthball.fo.product.vo.Product">
+		SELECT *
+		FROM (SELECT PRODUCT_NO, PRODUCT_NAME, CATEGORY, PRICE, DISCOUNT, STOCK, CREATE_DATE, STATUS, CHANGER_NAME
+		        FROM PRODUCT
+		        JOIN PRODUCT_ATTA USING (PRODUCT_NO)
+		        WHERE STATUS = 'Y'
+		        AND FILE_LEVEL = 0
+		        ORDER BY CREATE_DATE DESC)
+		WHERE ROWNUM &lt;= 6
+	</select>
+
 	<select id="selectListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM PRODUCT
@@ -10,37 +21,33 @@
 	</select>
 
 	<select id="selectAllProduct" resultType="com.kh.earthball.fo.product.vo.Product">
-		SELECT ROWNUM, P.*
-		FROM(SELECT PRODUCT_NO, PRODUCT_NAME, CATEGORY, PRICE, DISCOUNT, STOCK, CREATE_DATE, STATUS, CHANGER_NAME
-			 FROM PRODUCT
-			 JOIN PRODUCT_ATTA USING (PRODUCT_NO)
-			 WHERE STATUS = 'Y'
-			 AND FILE_LEVEL = 0
-			 ORDER BY CREATE_DATE DESC)P
-		WHERE ROWNUM BETWEEN #{offset} AND #{limit}
+		SELECT PRODUCT_NO, PRODUCT_NAME, CATEGORY, PRICE, DISCOUNT, STOCK, CREATE_DATE, STATUS, CHANGER_NAME
+		FROM PRODUCT
+		JOIN PRODUCT_ATTA USING (PRODUCT_NO)
+		WHERE STATUS = 'Y'
+		AND FILE_LEVEL = 0
+		ORDER BY CREATE_DATE DESC
 	</select>
 
 	<select id="selectCategoryListCount" parameterType="String" resultType="_int">
-		SELECT COUNT(*) 
+		SELECT COUNT(*)
 		FROM PRODUCT
 		WHERE CATEGORY = #{category}
 		AND STATUS = 'Y'
 	</select>
 
 	<select id="selectCategoryProduct" resultType="com.kh.earthball.fo.product.vo.Product">
-		SELECT ROWNUM, B.*
-		FROM (SELECT PRODUCT_NO, PRODUCT_NAME, CATEGORY, PRICE, DISCOUNT, STOCK, CREATE_DATE, STATUS, CHANGER_NAME
-			  FROM PRODUCT
-			  JOIN PRODUCT_ATTA USING(PRODUCT_NO)
-			  WHERE STATUS = 'Y'
-			  AND FILE_LEVEL = 0
-			  AND CATEGORY = #{category}
-			  ORDER BY CREATE_DATE DESC)B
-		WHERE ROWNUM BETWEEN #{offset} and #{limit}
+		SELECT PRODUCT_NO, PRODUCT_NAME, CATEGORY, PRICE, DISCOUNT, STOCK, CREATE_DATE, STATUS, CHANGER_NAME
+		FROM PRODUCT
+		JOIN PRODUCT_ATTA USING(PRODUCT_NO)
+		WHERE STATUS = 'Y'
+		AND FILE_LEVEL = 0
+		AND CATEGORY = #{category}
+		ORDER BY CREATE_DATE DESC
 	</select>
 
 	<select id="selectProduct" parameterType="int" resultType="com.kh.earthball.fo.product.vo.Product">
-		SELECT PRODUCT_NO, PRODUCT_NAME, CATEGORY, PRICE, DISCOUNT
+		SELECT PRODUCT_NO, PRODUCT_NAME,PRODUCT_INFO, CATEGORY, PRICE, DISCOUNT
 		FROM PRODUCT
 		WHERE PRODUCT_NO = #{productNo}
 	</select>

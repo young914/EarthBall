@@ -209,8 +209,6 @@
                 , chNo : chNo
             }
 
-            console.log("챌린지 오픈 요청_기본정보용 data : ", JSON.stringify(updateChallenge), updateChallenge);
-
             $.ajax({
                 url: "/update.chall"
                 , type: "post"
