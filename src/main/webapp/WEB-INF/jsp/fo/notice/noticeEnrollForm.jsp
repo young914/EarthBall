@@ -136,11 +136,13 @@
 <h1>공지사항 작성</h1>
 <hr>
 
-<input id="post_title" name="noticeTitle" class="no-margin basic_input title_name w100p mb24" type="text" placeholder="제목" required="required"><br><br>
+<input id="post_title" name="noticeTitle" class="no-margin basic_input title_name w100p mb24" type="text" placeholder="제목" required><br><br>
 <input id="id" name="admin" class="no-margin basic_input title_name w100p mb24" value="admin" readonly><br><br>
 <select id="category" name="noticeCategory">
-  <option value="category1">카테고리1</option>
-  <option value="category2">카테고리2</option>
+ <option value="category1">공지사항</option>
+<option value="category2">배송안내</option>
+<option value="category3">안내사항</option>
+<option value="category4">이벤트/혜택</option>
 </select><br><br>
 <textarea id="summernote" name="noticeContent"></textarea>
 

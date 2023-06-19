@@ -338,16 +338,13 @@
             	            	}
                             </script>
                               </c:if>
-                              <hr>
                             <div class="listBtn">
                                 <p class="lead">
                                 <a class="btn btn-primary" href="list.bo" role="button"  id="btn_previous">목록</a>
                                 </p>
-                            </span>
                             </div>
                            </div>
-                    </tr>
-                </div>
+
                 </thead>
             </table>
 

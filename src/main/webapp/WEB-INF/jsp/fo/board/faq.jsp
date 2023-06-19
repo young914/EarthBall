@@ -325,6 +325,197 @@
                              </div>
                           </div>
                         </div>
+                        <div class="accordion-item">
+						  <h2 class="accordion-header" id="headingThree2">
+						    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree2" aria-expanded="false" aria-controls="collapseThree2">
+						      <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">회원 탈퇴를 하고 싶어요.</font></font>
+						    </button>
+						  </h2>
+						  <div id="collapseThree2" class="accordion-collapse collapse" aria-labelledby="headingThree2" data-bs-parent="#accordionExample">
+						    <div class="accordion-body">
+						      <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">회원탈퇴를 희망하실 경우, '마이페이지 > 회원탈퇴' 메뉴를 통해 가능합니다.
+회원 정보는 탈퇴 시 모두 즉시 삭제되며, 작성하신 게시물은 삭제되지 않습니다.
+탈퇴 후 같은 계정으로 재가입하여도 기존에 보유하신 적립금 및 쿠폰은 복원되지 않습니다.</font></font></strong>
+						    </div>
+						  </div>
+						</div>
+						<div class="accordion-item">
+						  <h2 class="accordion-header" id="headingThree3">
+						    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree3" aria-expanded="false" aria-controls="collapseThree3">
+						      <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">회원가입 시 어떤 혜택이 있나요?</font></font>
+						    </button>
+						  </h2>
+						  <div id="collapseThree3" class="accordion-collapse collapse" aria-labelledby="headingThree3" data-bs-parent="#accordionExample">
+						    <div class="accordion-body">
+						      <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">회원 가입 시 기본 적립금을 제공하며, 특별 이벤트 기간에 할인이나 무료배송 등 다양한 혜택을 받으실 수 있습니다.
+또한, 누적 구매 금액에 따라 등급별 혜택도 제공하고 있습니다.
+비회원의 경우 혜택 대상에서 제외되니, 회원가입을 통해 여러 가지 혜택을 받아보세요.</font></font></strong>
+						    </div>
+						  </div>
+						</div>
+						<div class="accordion-item">
+						  <h2 class="accordion-header" id="headingThree4">
+						    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree4" aria-expanded="false" aria-controls="collapseThree4">
+						      <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">불량/오배송의 경우 택배비를 부담해야 하나요?</font></font>
+						    </button>
+						  </h2>
+						  <div id="collapseThree4" class="accordion-collapse collapse" aria-labelledby="headingThree4" data-bs-parent="#accordionExample">
+						    <div class="accordion-body">
+						      <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">불량/오배송 등 판매자 귀책사유로 인한 반품/교환의 경우 택배비를 모두 부담하고 있습니다.</font></font></strong>
+						    </div>
+						  </div>
+						</div>
+						<div class="accordion-item">
+						  <h2 class="accordion-header" id="headingThree5">
+						    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree5" aria-expanded="false" aria-controls="collapseThree5">
+						      <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">교환/반품시 택배비는 얼마인가요?</font></font>
+						    </button>
+						  </h2>
+						  <div id="collapseThree5" class="accordion-collapse collapse" aria-labelledby="headingThree5" data-bs-parent="#accordionExample">
+						    <div class="accordion-body">
+						      <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">지구샵의 기본 택배비는 3,000원입니다.
+이에 따라 반품/교환 시 왕복 택배배송료는 6,000원입니다.
+불량/오배송 등 판매자 귀책사유로 인한 반품/교환의 경우 택배비를 모두 부담하고 있습니다.
+반품/교환의 사유에 따라 반품/교환 배송비가 달라질 수 있으므로 반품/교환 접수 전 고객센터를 통해 문의 부탁드립니다.</font></font></strong>
+						    </div>
+						  </div>
+						</div>
+						<div class="accordion-item">
+						  <h2 class="accordion-header" id="headingThree6">
+						    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree6" aria-expanded="false" aria-controls="collapseThree6">
+						      <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">배송 전 주문 취소하고 싶어요.</font></font>
+						    </button>
+						  </h2>
+						  <div id="collapseThree6" class="accordion-collapse collapse" aria-labelledby="headingThree6" data-bs-parent="#accordionExample">
+						    <div class="accordion-body">
+						      <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">배송 전 주문 취소는 주문상태가 '결제완료' 상태일 경우만 가능하며, 이미 배송처리된 경우 불가합니다.
+자세한 사항은 고객센터로 문의 주시면 친절히 안내해드리겠습니다.</font></font></strong>
+						    </div>
+						  </div>
+						</div>
+						<div class="accordion-item">
+						  <h2 class="accordion-header" id="headingThree7">
+						    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree7" aria-expanded="false" aria-controls="collapseThree7">
+						      <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">비회원도 상품 주문이 가능한가요?</font></font>
+						    </button>
+						  </h2>
+						  <div id="collapseThree7" class="accordion-collapse collapse" aria-labelledby="headingThree7" data-bs-parent="#accordionExample">
+						    <div class="accordion-body">
+						      <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">지구샵은 비회원으로도 이용가능합니다.
+다만 적립금, 쿠폰 및 각종 할인혜택 대상에서 제외됩니다.
+회원가입시 다양한 혜택을 제공하고 있으니 사이트 이용에 참고 부탁드립니다.</font></font></strong>
+						    </div>
+						  </div>
+						</div>
+						<div class="accordion-item">
+						  <h2 class="accordion-header" id="headingThree8">
+						    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree8" aria-expanded="false" aria-controls="collapseThree8">
+						      <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">비회원 주문확인 및 배송 조회는 어떻게 하나요?</font></font>
+						    </button>
+						  </h2>
+						  <div id="collapseThree8" class="accordion-collapse collapse" aria-labelledby="headingThree8" data-bs-parent="#accordionExample">
+						    <div class="accordion-body">
+						      <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">'로그인' 메뉴에서 비회원 주문 건에 대한 주문정보를 확인하실 수 있습니다.</font></font></strong>
+						    </div>
+						  </div>
+						</div>
+						<div class="accordion-item">
+						  <h2 class="accordion-header" id="headingThree9">
+						    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree9" aria-expanded="false" aria-controls="collapseThree9">
+						      <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+상품을 포장 없이 구매하고 싶어요.</font></font>
+						    </button>
+						  </h2>
+						  <div id="collapseThree9" class="accordion-collapse collapse" aria-labelledby="headingThree9" data-bs-parent="#accordionExample">
+						    <div class="accordion-body">
+						      <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">지구샵 내 제품은 가급적 포장없이 제공하고 있습니다.
+다만, 제조사 측의 요청이나 제품 위생상 포장이 반드시 필요한 경우, 제품의 안전한 배송을 위해 포장이 필요한 경우 등 포장된 제품도 있으니 구매에 참고 부탁드립니다. 포장이 필요한 경우, 자원의 낭비를 최소화 하기위해 다중포장 되지 않도록 노력하고 있습니다.
+
+최소한의 포장, 무포장으로 제품을 받고자 희망하실 경우 배송메세지에 꼭 메세지를 남겨주세요. 확인 후, 제품 발송 시 최소한의 포장으로 보내드립니다.</font></font></strong>
+						    </div>
+						  </div>
+						</div>
+						<div class="accordion-item">
+						  <h2 class="accordion-header" id="headingThree10">
+						    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree10" aria-expanded="false" aria-controls="collapseThree10">
+						      <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+주문한 상품 중 일부만 배송됐어요.</font></font>
+						    </button>
+						  </h2>
+						  <div id="collapseThree10" class="accordion-collapse collapse" aria-labelledby="headingThree10" data-bs-parent="#accordionExample">
+						    <div class="accordion-body">
+						      <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">지구샵은 낭비되는 자원 및 탄소배출을 최소화하고자 가급적 모든 상품을 일괄 발송하고 있습니다.
+다만, 일부 품절 상품의 재입고가 늦어지는 경우 품절상품을 제외한 나머지 상품들을 먼저 발송합니다.
+품절 상품이 생길 경우 미리 고객님께 연락드려 합배송받으실지, 품절 외 상품만 먼저 받으실지 여쭤보고 있습니다.</font></font></strong>
+						    </div>
+						  </div>
+						</div>
+
+						<div class="accordion-item">
+						  <h2 class="accordion-header" id="headingThree11">
+						    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree11" aria-expanded="false" aria-controls="collapseThree11">
+						      <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+회원등급에 대해 알고 싶어요.</font></font>
+						    </button>
+						  </h2>
+						  <div id="collapseThree11" class="accordion-collapse collapse" aria-labelledby="headingThree11" data-bs-parent="#accordionExample">
+						    <div class="accordion-body">
+						      <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">지구샵은 누적 구매 금액에 따라 등급별 혜택을 제공하고 있습니다.
+
+ECO LOVER : 가입시 적용 / 기본적립금 1%
+EARTH LOVER : 최근3개월간 구매금액 100,000원 이상 / 기본적립금 1% + 추가적립금 1% (최대적립금 10,000원)
+LESS WASTER : 최근3개월간 구매금액 300,000원 이상 / 기본적립금 1% + 추가적립금 2% (최대적립금 30,000원)
+ZERO WASTER : 최근3개월간 구매금액 500,000원 이상 / 기본적립금 1% + 추가적립금4% (최대적립금 50,000원)</font></font></strong>
+						    </div>
+						  </div>
+						</div>
+
+						<div class="accordion-item">
+						  <h2 class="accordion-header" id="headingThree12">
+						    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree12" aria-expanded="false" aria-controls="collapseThree12">
+						      <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+반품 보낸 상품은 언제 환불되나요?</font></font>
+						    </button>
+						  </h2>
+						  <div id="collapseThree12" class="accordion-collapse collapse" aria-labelledby="headingThree12" data-bs-parent="#accordionExample">
+						    <div class="accordion-body">
+						      <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">반품이 완료된 날 바로 환불을 진행하며, 환불은 카드사 사정에 따라 영업일 기준 3~7일 정도 소요됩니다.
+자세한 사항은 카드사에 문의 부탁드리며, 7일 이후에도 환불이 되지 않은 경우 고객센터를 통해 문의 부탁드립니다.</font></font></strong>
+						    </div>
+						  </div>
+						</div>
+
+						<div class="accordion-item">
+						  <h2 class="accordion-header" id="headingThree13">
+						    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree13" aria-expanded="false" aria-controls="collapseThree13">
+						      <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+
+주문 취소한 대금은 언제 환불되나요?</font></font>
+						    </button>
+						  </h2>
+						  <div id="collapseThree13" class="accordion-collapse collapse" aria-labelledby="headingThree13" data-bs-parent="#accordionExample">
+						    <div class="accordion-body">
+						      <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">취소한 주문 건에 대한 환불은 카드사 사정에 따라 환불 접수일로부터 영업일 기준 3~7일 정도 소요됩니다.
+자세한 사항은 카드사에 문의 부탁드리며, 7일 이후에도 환불이 되지 않은 경우 고객센터를 통해 문의 부탁드립니다.</font></font></strong>
+						    </div>
+						  </div>
+						</div>
+
+						<div class="accordion-item">
+						  <h2 class="accordion-header" id="headingThree14">
+						    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree14" aria-expanded="false" aria-controls="collapseThree14">
+						      <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+주문한 상품 중 일부만 배송됐어요.</font></font>
+						    </button>
+						  </h2>
+						  <div id="collapseThree14" class="accordion-collapse collapse" aria-labelledby="headingThree14" data-bs-parent="#accordionExample">
+						    <div class="accordion-body">
+						      <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">지구샵은 낭비되는 자원 및 탄소배출을 최소화하고자 가급적 모든 상품을 일괄 발송하고 있습니다.
+다만, 일부 품절 상품의 재입고가 늦어지는 경우 품절상품을 제외한 나머지 상품들을 먼저 발송합니다.
+품절 상품이 생길 경우 미리 고객님께 연락드려 합배송받으실지, 품절 외 상품만 먼저 받으실지 여쭤보고 있습니다.</font></font></strong>
+						    </div>
+						  </div>
+						</div>
                       </div>
 </div>
 <!-- page_search div -->

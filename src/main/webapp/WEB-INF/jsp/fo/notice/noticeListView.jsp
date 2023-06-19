@@ -236,7 +236,7 @@
                     <div style="text-align: right;">
                 <c:if test="${loginUser.memberId eq 'admin'}">
                             <button id="insertList">
-                                <a class="enroll" href="enrollForm.no">글작성</a>
+                                <a class="enrollbo" href="enrollForm.no">글작성</a>
                             </button>
                         </c:if>
                     </div>
@@ -268,8 +268,11 @@
       <th>
         <select id="categoryFilter" onchange="changeCategory()">
           <option value="all">전체</option>
-          <option value="category1">Category 1</option>
-          <option value="category2">Category 2</option>
+          <option value="category1">공지사항</option>
+          <option value="category2">배송안내</option>
+          <option value="category3">안내사항</option>
+          <option value="category4">이벤트/혜택</option>
+
         </select>
       </th>
       <th>제목</th>
@@ -282,17 +285,23 @@
     <tr class="noticeRow" data-category="${b.noticeCategory}" onclick="location.href='${pageContext.request.contextPath}/detail.no?bno=${b.noticeNo}'">
       <td class="bno">${b.noticeNo}</td>
       <td>
-        <c:choose>
-          <c:when test="${b.noticeCategory == 'category1'}">
-            Category 1
-          </c:when>
-          <c:when test="${b.noticeCategory == 'category2'}">
-            Category 2
-          </c:when>
-          <c:otherwise>
-            etc
-          </c:otherwise>
-        </c:choose>
+ <c:choose>
+  <c:when test="${b.noticeCategory == 'category1'}">
+    공지사항
+  </c:when>
+  <c:when test="${b.noticeCategory == 'category2'}">
+    배송안내
+  </c:when>
+  <c:when test="${b.noticeCategory == 'category3'}">
+    안내사항
+  </c:when>
+  <c:when test="${b.noticeCategory == 'category4'}">
+    이벤트/혜택
+  </c:when>
+  <c:otherwise>
+    기타
+  </c:otherwise>
+</c:choose>
       </td>
       <td>${b.noticeTitle}</td>
       <td>${b.noticeDate}</td>
