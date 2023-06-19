@@ -55,6 +55,7 @@ public class StoreController {
   @ResponseBody
   @GetMapping(value = "getStores.st", produces = "application/json; charset=UTF-8")
   public String getStoreList(String memberId, boolean orderLikeCheck) {
+    System.out.println(orderLikeCheck);
       System.out.println("여기는 getStoreList");
       
       
