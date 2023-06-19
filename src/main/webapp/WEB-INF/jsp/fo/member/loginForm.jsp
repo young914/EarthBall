@@ -75,7 +75,7 @@
 			<input type="hidden" name="store" value="${store}">
 		</c:if>
 		<input type="text" id="memberId" name="memberId" placeholder="아이디를 입력해주세요" value="${cookie.saveId.value}" required>
-		<input type="password" id="memberPwd" name="memberPwd" placeholder="비밀번호를 입력해주세요">
+		<input type="password" id="memberPwd" name="memberPwd" placeholder="비밀번호를 입력해주세요" required>
 		
 		<c:choose>
 			<c:when test="${not empty cookie.saveId}">			
