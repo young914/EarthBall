@@ -32,6 +32,12 @@ public class AdminStoreController {
   public ModelAndView adminStoreList(@RequestParam(value="cPage", defaultValue="1") int currentPage,
                                  ModelAndView mv, HttpSession session) {
     
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || !"admin".equals(loginUser.getMemberId())) {
+      mv.setViewName("redirect:/loginForm.me");
+      return mv;
+    }
+    
     int listCount = storeService.selectListCount();
     int pageLimit = 10;
     int boardLimit = 10;
@@ -119,8 +125,14 @@ public class AdminStoreController {
   
   @GetMapping("adminSignUpList.st")
   public ModelAndView storeSignUpList(@RequestParam(value="cPage", defaultValue="1") int currentPage,
-      ModelAndView mv) {
+      HttpSession session, ModelAndView mv) {
 
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || !"admin".equals(loginUser.getMemberId())) {
+      mv.setViewName("redirect:/loginForm.me");
+      return mv;
+    }
+      
       int listCount = storeService.selectSignUpListCount();
       int pageLimit = 10;
       int boardLimit = 10;
