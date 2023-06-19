@@ -33,7 +33,7 @@
 
   <div class="basic_info">
     <div class="info_title">
-      <h2>기본 정보</h2>
+      <h3>기본 정보</h3>
       <div class="bar_2"></div>
       <br>
     </div>
@@ -62,7 +62,7 @@
 
   <div class="template">
     <div class="info_title">
-      <h2>인증 정보</h2>
+      <h3>인증 정보</h3>
       <div class="bar_2"></div>
       <br>
     </div>
@@ -424,6 +424,7 @@
 
 </div>
 <!-- 내용 영역 끝 -->
+
 
 <jsp:include page="/WEB-INF/jsp/fo/common/footer.jsp"/>
 
