@@ -10,6 +10,7 @@
     WHERE STATUS = 'Y'
   </select>
  	
+ 	
  	<!--  매장 전체리스트 조회용 쿼리문   -->
  	<select id="selectAllStoreList" resultType="com.kh.earthball.fo.store.vo.Store">
  	    SELECT STORE_NO
@@ -27,19 +28,24 @@
     JOIN STORE_ATTA USING (STORE_NO)
     WHERE STATUS = 'Y'
     AND FILE_LEVEL = 0
-    ORDER BY STORE_NO DESC 
+     <if test="orderLikeCheck == false">
+        ORDER BY STORE_LIKES DESC
+    </if>
+    <if test="orderLikeCheck == true">
+        ORDER BY STORE_NAME 
+    </if>
  	</select>
 
 	<!-- 매장 사진 조회용 쿼리 -->
 	<select id="selectStoreAttaList" resultType="com.kh.earthball.fo.store.vo.StoreAtta">
-		SELECT ATTACHMENT_NO
-					, CHANGER_NAME
-					, FILE_LEVEL
-					, STORE_NO
-		FROM STORE_ATTA
-		JOIN STORE USING (STORE_NO)
-		WHERE FILE_LEVEL >= 1
-		ORDER BY  FILE_LEVEL
+		SELECT SA.ATTACHMENT_NO
+			, SA.CHANGER_NAME
+			, SA.FILE_LEVEL
+			, SA.STORE_NO
+		FROM STORE_ATTA SA
+		INNER JOIN STORE S ON SA.STORE_NO = S.STORE_NO
+		WHERE SA.FILE_LEVEL >= 1
+		ORDER BY SA.FILE_LEVEL
 	</select>
 	
 	<!-- 매장 지역 전체 선택조회용 쿼리문  -->
@@ -89,7 +95,12 @@
 	    WHERE STATUS = 'Y'
 	    AND FILE_LEVEL = 0
 	    AND STORE_REGION_NO = #{regionNo}
-	    ORDER BY STORE_NO DESC 
+	    <if test="orderLikeCheck == false">
+        ORDER BY STORE_LIKES DESC
+    </if>
+    <if test="orderLikeCheck == true">
+        ORDER BY STORE_NAME 
+    </if>
 	 	</select>
 	 	
 	 	<select id="selectFilterListC" resultType="com.kh.earthball.fo.store.vo.Store">
@@ -108,31 +119,52 @@
 	JOIN STORE_REGION SR ON S.STORE_REGION_NO = SR.STORE_REGION_NO
 	JOIN STORE_ATTA SA ON S.STORE_NO = SA.STORE_NO
 	WHERE S.STATUS = 'Y'
-	    AND SR.CITY = #{city}
-	    AND FILE_LEVEL = 0
-	ORDER BY S.STORE_NO DESC
+    AND SR.CITY = #{city}
+    AND FILE_LEVEL = 0
+	<if test="orderLikeCheck == false">
+        ORDER BY STORE_LIKES DESC
+    </if>
+    <if test="orderLikeCheck == true">
+        ORDER BY STORE_NAME 
+    </if>
 	 	</select>
 	 	
+	 	<select id="selectStoreAttaFilterList" resultType="com.kh.earthball.fo.store.vo.StoreAtta">
+		SELECT ATTACHMENT_NO
+					, CHANGER_NAME
+					, FILE_LEVEL
+					, STORE_NO
+		FROM STORE_ATTA
+		JOIN STORE USING (STORE_NO)
+		WHERE FILE_LEVEL >= 1
+		ORDER BY  FILE_LEVEL
+	</select>
+	 	
 	 	<!-- 매장 또는 지역 검색 조회 쿼리문  -->
-	 	<select id="selectNameSearch"  resultType="com.kh.earthball.fo.store.vo.Store">
- 	  SELECT STORE_NO
-        , STORE_NAME
-        , STORE_ADDRESS
-        , STORE_DETAIL_ADDRESS
-        , STORE_PHONE
-        , BUSINESS_HOURS
-        , STORE_LIKES
-        , STORE_REGION_NO
-        , STORE_INFO
-        , STATUS
-        , CHANGER_NAME
-	FROM STORE
-	JOIN STORE_ATTA USING (STORE_NO) 
-	WHERE STORE_ADDRESS LIKE '%' || #{searchValue} || '%'
-	OR STORE_NAME LIKE '%'  || #{searchValue} || '%'
-	AND FILE_LEVEL = 0
-	ORDER BY STORE_NO DESC
-	 	</select>
+<select id="selectNameSearch" resultType="com.kh.earthball.fo.store.vo.Store">
+  SELECT STORE_NO
+    , STORE_NAME
+    , STORE_ADDRESS
+    , STORE_DETAIL_ADDRESS
+    , STORE_PHONE
+    , BUSINESS_HOURS
+    , STORE_LIKES
+    , STORE_REGION_NO
+    , STORE_INFO
+    , STATUS
+    , CHANGER_NAME
+  FROM STORE
+  JOIN STORE_ATTA USING (STORE_NO) 
+  WHERE (STORE_ADDRESS LIKE '%' || #{searchValue} || '%' OR STORE_NAME LIKE '%' || #{searchValue} || '%')
+    AND FILE_LEVEL = 0 
+  <if test="orderLikeCheck == false">
+        ORDER BY STORE_LIKES DESC
+    </if>
+    <if test="orderLikeCheck == true">
+        ORDER BY STORE_NAME 
+    </if>
+</select>
+
 	 	
 	 	<insert id="insertStoreLike">
 	 		INSERT INTO STORE_LIKES
@@ -182,7 +214,7 @@
 		WHERE S.STATUS = 'Y'
 		    AND SL.MEMBER_ID = #{memberId}
 		    AND FILE_LEVEL = 0
-		ORDER BY S.STORE_NO DESC
+		ORDER BY S.STORE_LIKES DESC
 	 	</select>
 		
 </mapper>

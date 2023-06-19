@@ -24,6 +24,27 @@
 >
 <head>
   <jsp:include page="/WEB-INF/jsp/bo/common/commonHead.jsp" />
+
+  <style>
+    #searchForm {
+      width:80%;
+      margin:auto;
+    }
+    #searchForm>* {
+      float:left;
+      margin:5px;
+    }
+    .select {width:20%;}
+    .text {width:53%;}
+    .searchBtn {width:20%;}
+
+    .custom-select {
+      height: 40px;
+      width: 120px;
+    }
+
+  </style>
+
 </head>
 
 <body>
@@ -53,7 +74,22 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-sm-10">
-                  <button type="button" class="btn btn-primary" onclick="">검색</button>
+
+                  <form id="searchForm" action="" method="get" align="center">
+                    <div class="select">
+                      <select class="custom-select" name="condition">
+                        <option value="categoryName" <c:out value="${custom-select eq 'categoryName' ? 'selected' : ''}"/>>카테고리</option>
+                        <option value="chTitle" <c:out value="${custom-select eq 'chTitle' ? 'selected' : ''}"/>>챌린지명</option>
+                        <option value="chStatName" <c:out value="${custom-select eq 'chStatName' ? 'selected' : ''}"/>>진행상태</option>
+                        <option value="memberId" <c:out value="${custom-select eq 'memberId' ? 'selected' : ''}"/>>회원ID</option>
+                      </select>
+                    </div>
+                    <div class="text">
+                      <input type="text" class="form-control" placeholder="검색어를 입력하세요." name="keyword">
+                    </div>
+                    <button type="submit" class="btn btn-primary searchBtn">검색</button>
+                  </form>
+
                 </div>
               </div>
             </div>

@@ -9,13 +9,13 @@
 		   
 	</select>
 	
-	<select id="selectAdminMemberList" resultType="com.kh.earthball.fo.member.vo.Member">
+	<select id="selectAdminMemberList" resultType="com.kh.earthball.bo.Member.vo.AdminMember">
     	SELECT *
         FROM MEMBER
         LIMIT #{offset}, #{limit}
 	</select>
 	
-	<select id="searchAdminMember" parameterType="java.lang.String" resultType="com.kh.earthball.bo.Member.vo.adminMember">
+	<select id="searchAdminMember" parameterType="java.lang.String" resultType="com.kh.earthball.bo.Member.vo.AdminMember">
     	SELECT * 
     	   FROM MEMBER 
     	WHERE MEMBER_NAME LIKE '%' || #{keyword} || '%' OR MEMBER_ID LIKE '%' || #{keyword} || '%'
