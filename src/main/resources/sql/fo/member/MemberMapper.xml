@@ -17,14 +17,20 @@
                           , BIRTH_DATE
                           , GENDER
                           , EMAIL
-                          , PHONE)
+                          , PHONE
+                          , POST_CODE
+                          , ADDRESS1
+                          , ADDRESS2)
         VALUES ( #{memberId}
                , #{memberPwd}
                , #{memberName}
                , #{birthDate}
                , #{gender}
                , #{email}
-               , #{phone})
+               , #{phone}
+               , #{postCode}
+               , #{address1}
+               , #{address2})
     </insert>
 
     <update id="updateMember" parameterType="com.kh.earthball.fo.member.vo.Member">
@@ -35,6 +41,9 @@
           , GENDER       = #{gender}
           , EMAIL        = #{email}
           , PHONE        = #{phone}
+          , POST_CODE = #{postCode}
+          , ADDRESS1 = #{address1}
+          , ADDRESS2 = #{address2}
           , CREATED_DATE = SYSDATE
         WHERE MEMBER_ID = #{memberId}
     </update>

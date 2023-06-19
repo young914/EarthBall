@@ -180,8 +180,6 @@ public class MemberController {
     sendMail.setTo(m.getEmail());
     sendMail.send();
 
-    //  System.out.println("회원가입 정보 : " + result);
-
     if (result > 0) {
 
       session.setAttribute("alertMsg", "회원가입 이후 이메일인증을 완료해주세요!");

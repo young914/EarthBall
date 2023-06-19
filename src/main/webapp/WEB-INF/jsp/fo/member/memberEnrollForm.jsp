@@ -178,20 +178,20 @@
         <!-- 2. 필드 -->
         <div class="field">
             <b>아이디 *</b>
-            <span class="placehold-text"><input type="text" placeholder="아이디를 입력해주세요" name="memberId" id="memberId" required></span>
-            <div id="checkResult" style="font-size : 0.8em; display : none">jjjj</div>
+            <span class="placehold-text"><input type="text" placeholder="아이디를 입력해주세요" name="memberId" id="memberId" required minlength="5"></span>
+            <div id="checkResult" style="font-size : 0.8em; display : none"></div>
         </div>
         
         <div class="field">
             <b>비밀번호 *</b>
             <input class="userpw" type="password" placeholder="8자 이상 - 대문자 특수문자 포함 비밀번호를 입력해주세요" name="memberPwd" id="memberPwd" required>
-            <div id="checkPwdResult1" style="font-size : 0.8em; display : none">jjjj</div>
+            <div id="checkPwdResult1" style="font-size : 0.8em; display : none"></div>
         </div>
         
         <div class="field">
             <b>비밀번호 재확인 *</b>
             <input class="userpw-confirm" type="password" placeholder="다시한번 입력해주세요" id="checkPwd" required>
-            <div id="checkPwdResult2" style="font-size : 0.8em; display : none">jjjj</div>
+            <div id="checkPwdResult2" style="font-size : 0.8em; display : none"></div>
         </div>
         
         <div class="field">
@@ -220,14 +220,15 @@
         <div class="field">
             <b>본인 확인 이메일 *</b>
             <div>
-            	<input type="email" placeholder="이메일을 입력해주세요" name="email" id="email" required>
+            	<input type="email" placeholder="본인인증 용도이니 잘 입력해주세요(이메일)" name="email" id="email" required>
+            	<div id="checkEmailResult" style="font-size : 0.8em; display : none"></div>
             </div>
         </div>
         
         <div class="field tel-number">
             <b>휴대전화 *</b>
             <div>
-                <input type="tel" placeholder="전화번호 입력" name="phone" required>
+                <input type="text" placeholder="전화번호 입력 - 제외" name="phone" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
             </div>
             <input type="hidden" placeholder="인증번호를 입력하세요" disabled>
         </div>
@@ -235,12 +236,12 @@
         <div class="field tel-number">
             <b>주소 *</b>
             <div>
-                <input type="tel" placeholder="우편번호" id="sample6_postcode"  readonly>
+                <input type="tel" name="postCode" placeholder="우편번호" id="sample6_postcode"  readonly required>
                 <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" >
             </div>
-	            <input type="text" placeholder="주소" id="sample6_address">
-	            <input type="text" placeholder="상세주소" id="sample6_detailAddress">
-	            <input type="text" placeholder="참고항목" id="sample6_extraAddress">
+	            <input type="text" name="address1" placeholder="주소" id="sample6_address" required>
+	            <input type="text" name="address2" placeholder="상세주소" id="sample6_detailAddress" required>
+	            <input type="text" placeholder="참고항목" id="sample6_extraAddress" required>
         </div>
         
 
@@ -250,6 +251,74 @@
         </form>
         
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        
+        <script>
+	        var memberId = document.getElementById('memberId');
+	        var memberPwd = document.getElementById('memberPwd');
+	        var checkPwd = document.getElementById('checkPwd');
+	        var email = document.getElementById('email');
+	        var checkIdResult = document.getElementById('checkResult');
+	        var checkPwdResult1 = document.getElementById('checkPwdResult1');
+	        var checkPwdResult2 = document.getElementById('checkPwdResult2');
+	        var checkEmailResult = document.getElementById('checkEmailResult');
+	
+	        var idReg = /^[a-zA-Z0-9]{5,}$/;
+	        var pwReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+	        var emailReg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+	
+	        function validateId() {
+	            if(!idReg.test(memberId.value)) {
+	                checkIdResult.style.color = 'red';
+	                checkIdResult.style.display = 'block';
+	                checkIdResult.innerHTML = '아이디는 5자 이상의 영문자 또는 숫자로 이루어져야 합니다.';
+	                return;
+	            } else {
+	                checkIdResult.style.display = 'none';
+	            }
+	        }
+	
+	        function validateEmail() {
+	            if(!emailReg.test(email.value)) {
+	                checkEmailResult.style.color = 'red';
+	                checkEmailResult.style.display = 'block';
+	                checkEmailResult.innerHTML = '이메일 형식이 올바르지 않습니다.';
+	                return;
+	            } else {
+	                checkEmailResult.style.display = 'none';
+	            }
+	        }
+	
+	        function validatePassword() {
+	            if(!pwReg.test(memberPwd.value)) {
+	                checkPwdResult1.style.color = 'red';
+	                checkPwdResult1.style.display = 'block';
+	                checkPwdResult1.innerHTML = '비밀번호는 최소 8자 이상이며, 대문자, 소문자, 숫자, 특수문자를 최소 하나 이상 포함해야 합니다.';
+	                return;
+	            } else {
+	                checkPwdResult1.style.display = 'none';
+	            }
+	            
+	            if(memberPwd.value === checkPwd.value) {
+	                checkPwdResult2.style.color = 'green';
+	                checkPwdResult2.style.display = 'block';
+	                checkPwdResult2.innerHTML = '두 비밀번호가 일치합니다.';
+	            } else {
+	                checkPwdResult2.style.color = 'red';
+	                checkPwdResult2.style.display = 'block';
+	                checkPwdResult2.innerHTML = '두 비밀번호가 일치하지 않습니다.';
+	            }
+	        }
+	        
+	        memberId.onchange = validateId;
+	        memberId.onkeyup = validateId;
+	        email.onchange = validateEmail;
+	        email.onkeyup = validateEmail;
+	        memberPwd.onchange = validatePassword;
+	        memberPwd.onkeyup = validatePassword;
+	        checkPwd.onkeyup = validatePassword;
+    </script>
+
+        
         <!-- 주소 API 등록 -->
         <script>
     function sample6_execDaumPostcode() {
@@ -300,6 +369,63 @@
         }).open();
     }
 </script>
+
+	<script>
+	$(function() {
+		
+		// 아이디를 입력받을 수 있는 input 요소 객체 자체를 변수에 담아두기
+		const $idInput = $("#enrollForm input[name=memberId]");
+		
+		$idInput.keyup(function() {
+			
+			// console.log("keyup 이벤트 발생!");
+			// console.log($idInput.val());
+			
+			// 우선 최소 5글자 이상으로 입력되어 있을 경우에만 ajax 를 요청해서 중복체크 하기
+			if($idInput.val().length >= 5) {
+				
+				// 아이디 중복체크 요청 보내기
+				$.ajax({
+					url : "idCheck.me",
+					data : {checkId : $idInput.val()},
+					type : "get",
+					success : function(result) {
+						
+						if(result == "NNNNN") { // 사용 불가능
+							
+							// 빨간색 메세지로 (사용불가능함) 출력
+							$("#checkResult").show();
+							$("#checkResult").css("color", "red").text("중복된 아이디가 존재합니다. 다시 입력해주세요.");
+							
+							// 버튼 비활성
+							$("#enrollForm button[type=submit]").attr("disabled", true);
+							
+						} else { // 사용 가능
+							
+							// 초록색 메세지로 (사용가능함) 출력
+							$("#checkResult").show();
+							$("#checkResult").css("color", "green").text("멋진 아이디네요!");
+							
+							// 버튼 활성화
+							$("#enrollForm button[type=submit]").attr("disabled", false);
+						}
+					}, 
+					error : function() {
+						console.log("아이디 중복 체크용 ajax 통신 실패!");
+					}
+				});
+				
+			} else { // 5글자 미만일 경우 => 버튼 비활성화, 메세지 숨기기
+				
+				$("#checkResult").hide();
+				$("#enrollForm button[type=submit]").attr("disabled", true);
+			}
+		});
+	});
+</script>
+	
+	
+	</script>
 
         
         <!-- 비밀번호 일치 여부 -->
