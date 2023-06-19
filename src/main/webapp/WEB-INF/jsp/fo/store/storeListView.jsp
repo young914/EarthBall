@@ -436,7 +436,7 @@ hr{
 
             var checkbox = document.getElementById('btn-check-2-outlined');
             var orderLikeCheck = checkbox.checked;
-            console.log(orderLikeCheck);
+            
             memberId = '${loginUser.memberId}';
             
             // 2_2. ajax 로 전체 매장 조회해오기
@@ -451,8 +451,6 @@ hr{
                 success : function(result) {
 
                     var checkbox = document.getElementById('btn-check-2-outlined');
-            
-                    console.log(checkbox);
                     
                     makeMarker(result, map);
                     
@@ -479,8 +477,6 @@ hr{
                 success : function(result) {
 
                     var checkbox = document.getElementById('btn-check-2-outlined');
-            
-                    console.log(checkbox);
                     
                     makeMarker(result, map);
                     
@@ -502,8 +498,6 @@ hr{
         // 체크박스 상태 가져오기
             var checkbox = document.getElementById('btn-check-2-outlined');
             var isChecked = checkbox.checked;
-            console.log(isChecked);
-
         }
 
     // 매장 리스트를 업데이트하고 새로운 리스트로 HTML을 생성하여 출력하는 함수
@@ -753,10 +747,12 @@ hr{
         
         function showList(storeMap, cPage) {
 			// 페이징처리 (목록보기)
-            
             let storeList = storeMap.storeList;
             let storeAttaList = storeMap.storeAttaList;
+            
 			let listCount = storeList.length;
+
+            let listAttaCount = storeAttaList.length;
 			let currentPage = cPage;
             let pageLimit = 5;
             let boardLimit = 10;
@@ -877,7 +873,8 @@ hr{
             
             let listCount = storeList.length;
 
-            // 이벤트핸들러 중복 제거 해줘야함 아오 이거진짜 개빡치네
+            // 이벤트핸들러 중복 제거 해줘야함 
+
             $("#paging-area").off("click", ".paging-btn");
             $("#paging-area").off("click", ".paging-prev");
             $("#paging-area").off("click", ".paging-next");
@@ -885,13 +882,14 @@ hr{
             $("#store-list-area").off("click", ".like-btn");
 
             $("#paging-area").on("click", ".paging-btn", function() {
-                currentPage = showList(storeList, Number($(this).text()));
+                currentPage = showList(storeMap, Number($(this).text()));
+                
             });
             $("#paging-area").on("click", ".paging-prev", function() {
-                currentPage = showList(storeList, Number(currentPage) - 1);
+                currentPage = showList(storeMap, Number(currentPage) - 1);
             });
             $("#paging-area").on("click", ".paging-next", function() {
-                currentPage = showList(storeList, Number(currentPage) + 1);
+                currentPage = showList(storeMap, Number(currentPage) + 1);
             });
 
 
@@ -987,10 +985,17 @@ hr{
                     }
 
                     isClosed[index] = !isClosed[index];
+
+                    currentPage = showList(storeMap, Math.ceil((index + 1) / 10));
                     
                     // 리스트에서 해당 마커의 detailInfo 보이기
                     var detailInfo = $(".searchList." + index + " .detail-info");
+                    console.log(detailInfo);
+                    
                     detailInfo.show();
+
+                    detailInfo[0].scrollIntoView({ behavior: 'smooth', block: 'end' });
+
                     // 열린 다른 detailInfo 닫기
                     $(".searchList").not(".searchList." + index).find(".detail-info").hide();
                 });
@@ -1008,13 +1013,12 @@ hr{
                 let index = $(this).attr("class").split(" ")[1];
                 // 상세 정보를 보여줄 요소 찾기
                 var detailInfo = $(this).find(".detail-info")[0];
-                
+                console.log("리스트클릭" + detailInfo);
                 // 상세 정보를 보이도록 함
                 detailInfo.style.display = "block";
 
                 // 스크롤 이동시킴
                 detailInfo.scrollIntoView({ behavior: 'smooth', block: 'end' });
-                
                 
                  // 다른 div 숨기기
                 $(".searchList").not(this).find(".detail-info").hide();
