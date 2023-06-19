@@ -127,6 +127,11 @@
               <!--/ Basic Pagination -->
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
           <jsp:include page="/WEB-INF/jsp/bo/common/commonScript.jsp" />
           <script type="text/javascript">
