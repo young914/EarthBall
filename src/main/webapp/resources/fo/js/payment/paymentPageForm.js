@@ -1,5 +1,5 @@
 // 결제요청
-function orderPay() {
+ function orderPay() {
 
 	let today = new Date();
 	let year = today.getFullYear(); // 년도
