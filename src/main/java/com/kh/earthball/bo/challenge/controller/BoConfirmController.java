@@ -5,6 +5,7 @@ import com.kh.earthball.bo.challenge.service.BoConfirmService;
 import com.kh.earthball.bo.challenge.service.CategoryTemplateService;
 import com.kh.earthball.bo.challenge.vo.BoChallenge;
 import com.kh.earthball.bo.challenge.vo.BoConfirm;
+import com.kh.earthball.bo.challenge.vo.BoDetailInfo;
 import com.kh.earthball.bo.challenge.vo.CategoryTemplate;
 import com.kh.earthball.fo.challenge.service.ConfirmService;
 import com.kh.earthball.fo.challenge.vo.ChConfirm;
@@ -84,5 +85,33 @@ public class BoConfirmController {
     boConfirmService.deleteConfirm(boConfirm);
 
     return 1;
+  }
+
+  @GetMapping("/search.conf")
+  public String searchConfirm(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, @RequestParam("keyword") String keyword, Model model) {
+
+    // 키워드가 속한 인증 게시글 수 조회
+    int listCount = boConfirmService.searchConfirmListCount(keyword);
+
+    int pageLimit = 10;
+    int boardLimit = 10;
+
+    PageInfo pageInfo = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+
+    // 키워드가 속한 인증 리스트 조회
+    List<BoConfirm> confirmList = boConfirmService.searchConfirm(pageInfo, keyword);
+
+    // 키워드가 속한 인증 디테일정보 조회
+    List<BoConfirm> detailInfoList = boConfirmService.searchDetail(pageInfo, keyword);
+
+    for(BoConfirm boConfirm : detailInfoList) {
+
+      confirmList.add(boConfirm);
+    }
+
+
+    model.addAttribute("confirmList", confirmList);
+
+    return "bo/challenge/challengeEdit/confirmListView";
   }
 }

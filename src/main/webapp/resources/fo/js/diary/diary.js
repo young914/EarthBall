@@ -120,8 +120,8 @@ function validateSelection() {
 
   // 내용 최소 글자수 200자
   var content = document.getElementById('dyBoardContent').value;
-  if(content.length < 200) {
-    alert("최소 200자 이상 입력해야 합니다.");
+  if(content.length < 150) {
+    alert("최소 150자 이상 입력해야 합니다.");
      return false;
   }
 	 console.log("호출되나?")
@@ -147,11 +147,6 @@ function validateSelection() {
     formdata.append('dyBoardContent', dyBoardContent);
     formdata.append('weather', weather);
 
-    console.log(formdata.get("file"));
-    console.log(formdata.get("dyBoardWriter"));
-    console.log(formdata.get("dyBoardTitle"));
-    console.log(formdata.get("dyBoardContent"));
-    console.log(formdata.get("weather"))
 
     $.ajax({
         type : 'post',
@@ -162,6 +157,9 @@ function validateSelection() {
         success : function (data) {
 
            if(data === "게시글 등록 완료") {
+
+			// 포인트 지급
+			insertPoint();
 
 			   alert(data);
 			   location.href = "diaryListView.bo";
@@ -182,10 +180,10 @@ function validateSelection() {
 
 	 console.log($("#dyBoardNo").val())
 
-  // 내용 최소 글자수 200자
+  // 내용 최소 글자수 150자
   var content = document.getElementById('dyBoardContent').value;
-  if(content.length < 200) {
-    alert("최소 200자 이상 입력해야 합니다.");
+  if(content.length < 150) {
+    alert("최소 150자 이상 입력해야 합니다.");
      return false;
   }
 	 console.log("호출되나?")
@@ -206,18 +204,19 @@ function validateSelection() {
     let dyBoardContent = document.getElementById('dyBoardContent').value;
 	let weather = document.getElementById('weather').value;
 	let dyBoardNo = $("#dyBoardNo").val();
+	let originName = $("#originName").val();
+	let changeName = $("#changeName").val();
 
     formdata.append('dyBoardWriter', dyBoardWriter);
     formdata.append('dyBoardTitle', dyBoardTitle);
     formdata.append('dyBoardContent', dyBoardContent);
     formdata.append('weather', weather);
     formdata.append('dyBoardNo', dyBoardNo);
+    formdata.append('originName', originName);
+    formdata.append('changeName', changeName);
 
-    console.log(formdata.get("file"));
-    console.log(formdata.get("dyBoardWriter"));
-    console.log(formdata.get("dyBoardTitle"));
-    console.log(formdata.get("dyBoardContent"));
-    console.log(formdata.get("weather"))
+    console.log(formdata.get("originName"))
+    console.log(formdata.get("changeName"))
 
     $.ajax({
         type : 'post',
@@ -243,40 +242,63 @@ function validateSelection() {
 
     }
 
+// 포인트 넣어주기
+function plusPoint() {
 
+	let dyBoardWriter = document.getElementById('dyBoardWriter').innerText;
 
+	$.ajax({
+		url : "/insertPoint",
+		type : "post",
+		data : {
+			pointContent : "일기 작성", // 포인트적립 사유 ex) 일기 작성, 챌린지 인증
+			pointNum : 100, // 부여할 포인트값
+			status : "+",
+			memberId : dyBoardWriter // 로그인한 회원 아이디
+		},
+		success : function(result) {
 
+			if(result == "1") {
 
+				console.log("포인트 내역 추가 성공");
+			} else {
+				console.log("포인트 내역 추가 실패");
+			}
+		},
+		error : function() {
+			console.log("포인트 추가 ajax 실패");
+		}
+	});
+}
 
+// 포인트 삭제하기
+function minusPoint() {
 
+	let dyBoardWriter = document.getElementById('dyBoardWriter').innerText;
 
+	$.ajax({
+		url : "/insertPoint",
+		type : "post",
+		data : {
+			pointContent : "일기 삭제", // 포인트적립 사유 ex) 일기 작성, 챌린지 인증
+			pointNum : 100, // 부여할 포인트값
+			status : "-",
+			memberId : dyBoardWriter // 로그인한 회원 아이디
+		},
+		success : function(result) {
 
+			if(result == "1") {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+				console.log("포인트 삭제 성공");
+			} else {
+				console.log("포인트 삭제 실패");
+			}
+		},
+		error : function() {
+			console.log("포인트 추가 ajax 실패");
+		}
+	});
+}
 
 
 // 날씨 아이콘 버튼 이벤트
@@ -294,10 +316,9 @@ function validateSelection() {
 	document.querySelector('#c_4').classList.remove('active4');
 
 	document.getElementById("weather").value = "1";
-  //console.log(document.getElementById("weather").value);
+
   }
 
- // console.log(document.getElementById("weather").value);
 });
 
  document.querySelector('#c_2').addEventListener('click', function(event) {
@@ -313,10 +334,10 @@ function validateSelection() {
 	document.querySelector('#c_4').classList.remove('active4');
 
 	document.getElementById("weather").value = "2";
-  //console.log(document.getElementById("weather").value);
+
   }
 
-  //console.log(document.getElementById("weather").value);
+
 });
 
  document.querySelector('#c_3').addEventListener('click', function(event) {
@@ -332,10 +353,9 @@ function validateSelection() {
 	document.querySelector('#c_4').classList.remove('active4');
 
 	document.getElementById("weather").value = "3";
-  //console.log(document.getElementById("weather").value);
+
   }
 
- // console.log(document.getElementById("weather").value);
 });
 
  document.querySelector('#c_4').addEventListener('click', function(event) {
@@ -355,6 +375,7 @@ function validateSelection() {
   }
 
 });
+
 
 // 오늘 날짜 자동 설정
 const todayTime = () => {

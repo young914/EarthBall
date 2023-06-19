@@ -2,6 +2,7 @@ package com.kh.earthball.bo.challenge.controller;
 
 import com.kh.earthball.bo.challenge.service.BoChallengeService;
 import com.kh.earthball.bo.challenge.vo.BoChallenge;
+import com.kh.earthball.fo.challenge.vo.Challenge;
 import com.kh.earthball.fo.common.template.Pagination;
 import com.kh.earthball.fo.common.vo.PageInfo;
 import com.kh.earthball.fo.member.vo.Member;
@@ -74,6 +75,27 @@ public class BoChallengeController {
   public int challengeDelete(int chNo) {
 
     return boChallengeService.deleteChallenge(chNo);
+  }
+
+
+  @GetMapping("/search.chall")
+  public String searchChallenge(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, @RequestParam("keyword") String keyword, Model model) {
+
+    // 키워드가 속한 챌린지 게시글 수 조회
+    int listCount = boChallengeService.searchChallengeListCount(keyword);
+
+    int pageLimit = 10;
+    int boardLimit = 10;
+
+    PageInfo pageInfo = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+
+    // 키워드가 속한 챌린지 리스트 조회
+    List<BoChallenge> boChallengeList = boChallengeService.searchChallenge(pageInfo, keyword);
+
+    model.addAttribute("boChallengeList", boChallengeList);
+
+    return "bo/challenge/challengeEdit/challengeListView";
+
   }
 
 }

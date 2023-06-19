@@ -253,10 +253,10 @@ function replyList(reviewNo){
                 let r = result[i];
                 // HTML 요소 동적 생성
                 html += "<div class='replyOne' value='" + r.replyNo + "'>";
-                    html += "<div><img src=''></div>";
+                    html += '<div><img src="/resources/fo/upfiles/'+  r.memberImg  + '"></div>';
                     html += "<div>";
                         html += "<div>";
-                            html += "<span>" + r.memberName + "</span><span>" + r.createdDate + "</span>";
+                            html += "<span>" + r.memberName + "</span><span style='margin-left: 10px;'>" + r.createdDate + "</span>";
                         html += "</div>";
                         html += "<div>";
                             html += "<pre style='font-family: Jua, sans-serif; font-size: medium;'>" + r.replyContent + "</pre>";

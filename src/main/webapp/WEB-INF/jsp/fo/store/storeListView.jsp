@@ -301,7 +301,9 @@ hr{
     color: #e87272; /* 호버 시 배경색을 빨간색으로 변경 */
 }
 
-
+.swiper-slide{
+    border: none;
+}
 
 
 </style>
@@ -427,85 +429,48 @@ hr{
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
                 mapOption = { 
                     center: new kakao.maps.LatLng(37.517232759035965, 126.97701521248901),
-                    level: 6
+                    level: 5
                 };
             var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-            // 체크한지 안한지 확인
-
             
-
+            // 체크한지 안한지 확인
             var checkbox = document.getElementById('btn-check-2-outlined');
             var orderLikeCheck = checkbox.checked;
-            console.log(orderLikeCheck);
+            
             memberId = '${loginUser.memberId}';
             
             // 2_2. ajax 로 전체 매장 조회해오기
-            if(orderLikeCheck == true) {
-                $.ajax({
-                url : "getStores.st",
-                type : "get",
-                data : {
-                    memberId : memberId, 
-                    orderLikeCheck : orderLikeCheck
-                },
-                success : function(result) {
-
-                    var checkbox = document.getElementById('btn-check-2-outlined');
             
-                    console.log(checkbox);
-                    
-                    makeMarker(result, map);
-                    
-                    var likeMapBtn = document.createElement('div');
-                    likeMapBtn.setAttribute('id', 'likeList');
-                    likeMapBtn.setAttribute('onclick', 'likeMap()');
-                    likeMapBtn.innerHTML = '<i class="xi-heart xi-2x"></i>&nbsp;<span>맘에 든 매장보기</span>';
-                    document.getElementById('settingMap').replaceWith(likeMapBtn);
-                    var checkbox = document.getElementById('btn-check-2-outlined');
-                    checkbox.disabled = false;
-                }, 
-                error : function() {
-                    console.log("ajax 통신 실패!");
-                }
-            });
-            } else {
-                $.ajax({
-                url : "getStores.st",
-                type : "get",
-                data : {
-                    memberId : memberId, 
-                    orderLikeCheck : orderLikeCheck
-                },
-                success : function(result) {
+            $.ajax({
+            url : "getStores.st",
+            type : "get",
+            data : {
+                memberId : memberId, 
+                orderLikeCheck : orderLikeCheck
+            },
+            success : function(result) {
 
-                    var checkbox = document.getElementById('btn-check-2-outlined');
-            
-                    console.log(checkbox);
-                    
-                    makeMarker(result, map);
-                    
-                    var likeMapBtn = document.createElement('div');
-                    likeMapBtn.setAttribute('id', 'likeList');
-                    likeMapBtn.setAttribute('onclick', 'likeMap()');
-                    likeMapBtn.innerHTML = '<i class="xi-heart xi-2x"></i>&nbsp;<span>맘에 든 매장보기</span>';
-                    document.getElementById('settingMap').replaceWith(likeMapBtn);
-                    var checkbox = document.getElementById('btn-check-2-outlined');
-                    checkbox.disabled = false;
-                }, 
-                error : function() {
-                    console.log("ajax 통신 실패!");
-                }
-            });
-        }}
-
-        function orderLike() {
-        // 체크박스 상태 가져오기
-            var checkbox = document.getElementById('btn-check-2-outlined');
-            var isChecked = checkbox.checked;
-            console.log(isChecked);
-
-        }
-
+                var checkbox = document.getElementById('btn-check-2-outlined');
+                
+                makeMarker(result, map);
+                
+                var likeMapBtn = document.createElement('div');
+                likeMapBtn.setAttribute('id', 'likeList');
+                likeMapBtn.setAttribute('onclick', 'likeMap()');
+                likeMapBtn.innerHTML = '<i class="xi-heart xi-2x"></i>&nbsp;<span>맘에 든 매장보기</span>';
+                document.getElementById('settingMap').replaceWith(likeMapBtn);
+                var checkbox = document.getElementById('btn-check-2-outlined');
+                checkbox.disabled = false;
+            }, 
+            error : function() {
+                console.log("ajax 통신 실패!");
+            }
+        });
+    }
+    
+    function orderLikeList(){
+        
+    }
     // 매장 리스트를 업데이트하고 새로운 리스트로 HTML을 생성하여 출력하는 함수
     function updateStoreList(storeList) {
         var storeListArea = document.getElementById('store-list-area');
@@ -517,7 +482,7 @@ hr{
             // ...
         }
     }
-  
+
         function regionSearch(event) {
             var region = $(event.target).text();
             $("#dropClasificarFilter").text(region);
@@ -753,10 +718,12 @@ hr{
         
         function showList(storeMap, cPage) {
 			// 페이징처리 (목록보기)
-            
             let storeList = storeMap.storeList;
             let storeAttaList = storeMap.storeAttaList;
+            
 			let listCount = storeList.length;
+
+            let listAttaCount = storeAttaList.length;
 			let currentPage = cPage;
             let pageLimit = 5;
             let boardLimit = 10;
@@ -789,9 +756,9 @@ hr{
                 
                 for (let j = 0; j < storeAttaList.length; j++) {
                     if (storeAttaList[j].storeNo === storeNo) {
-                        storeImgStr += "<div class='swiper-slide' '><img src='/resources/fo/upfiles/" + storeAttaList[j].changerName + "' alt='매장사진' style='width: 100%; height: 100%;' onclick='openModal(\"/resources/fo/upfiles/" + storeAttaList[j].changerName + "\")'></div>";
+                        storeImgStr += "<div class='swiper-slide' style='border: none;' ><img src='/resources/fo/upfiles/" + storeAttaList[j].changerName + "' alt='매장사진' style='width: 100%; height: 100%;' onclick='openModal(\"/resources/fo/upfiles/" + storeAttaList[j].changerName + "\")'></div>";
+                                    
                     }
-
                 }
                 
                 // 동적으로 리스트 요소 생성
@@ -805,12 +772,12 @@ hr{
                                 "<span class='storeInfo'><i class='xi-time-o' style='width: 20px;'></i>영업시간 " + storeList[i].businessHours + "</span>" +
                                     "<div class='detail-info' style='display: none;'>" +
                                     "<p style='margin:0px;'><i class='xi-comment-o' style='width: 20px;'></i><span class='storeInfoText'>" + storeList[i].storeInfo + "</span></p>" +
-                                        "<div class='swiper-container' style='width:100%; border: 1px solid black; height: 150px'>" +
+                                        "<div class='swiper-container' style='width:100%; height: 200px; margin-top : 15px;'>" +
                                             "<div class='swiper-wrapper'>" +
                                                 storeImgStr +
                                             "</div>" +
                                             "<div class='swiper-button-next'></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->" +
-	                                        "<div class='swiper-button-prev'></div><!-- 이전 버튼 -->" + 
+                                            "<div class='swiper-button-prev'></div><!-- 이전 버튼 -->" + 
                                         "</div>" +
                                     "</div>" +
                                 "</div>" +
@@ -821,13 +788,15 @@ hr{
             const mySwipers = document.querySelectorAll('.swiper-container');
             mySwipers.forEach(function(swiperElement) {
                 const mySwiper = new Swiper(swiperElement, {
+                    spaceBetween: 50, //위 slidesPerview 여백
                     autoplay: {
-                        delay: 3000
+                        delay: 2000
+
                     },
                     navigation: {
-                        nextEl: swiperElement.querySelector('.swiper-button-next'),
-                        prevEl: swiperElement.querySelector('.swiper-button-prev')
-                        }
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev'
+                    }
                 });
                 swiperElement.querySelector('.swiper-button-next').addEventListener('click', function(event) {
                     event.stopPropagation();
@@ -877,7 +846,8 @@ hr{
             
             let listCount = storeList.length;
 
-            // 이벤트핸들러 중복 제거 해줘야함 아오 이거진짜 개빡치네
+            // 이벤트핸들러 중복 제거 해줘야함 
+
             $("#paging-area").off("click", ".paging-btn");
             $("#paging-area").off("click", ".paging-prev");
             $("#paging-area").off("click", ".paging-next");
@@ -885,13 +855,14 @@ hr{
             $("#store-list-area").off("click", ".like-btn");
 
             $("#paging-area").on("click", ".paging-btn", function() {
-                currentPage = showList(storeList, Number($(this).text()));
+                currentPage = showList(storeMap, Number($(this).text()));
+                
             });
             $("#paging-area").on("click", ".paging-prev", function() {
-                currentPage = showList(storeList, Number(currentPage) - 1);
+                currentPage = showList(storeMap, Number(currentPage) - 1);
             });
             $("#paging-area").on("click", ".paging-next", function() {
-                currentPage = showList(storeList, Number(currentPage) + 1);
+                currentPage = showList(storeMap, Number(currentPage) + 1);
             });
 
 
@@ -971,8 +942,11 @@ hr{
                     
                     // console.log(overlayList[index].n); 누를 시 좌표값 받음
                     var position = overlayList[index].n;
+
                     // 해당 마커의 좌표로 지도 중심 이동
                     map.panTo(position);
+                    
+                    
 
                     if (isClosed[index]) { // 닫혀있음
                         overlayList[index].setMap(map);
@@ -987,10 +961,17 @@ hr{
                     }
 
                     isClosed[index] = !isClosed[index];
+
+                    currentPage = showList(storeMap, Math.ceil((index + 1) / 10));
                     
                     // 리스트에서 해당 마커의 detailInfo 보이기
                     var detailInfo = $(".searchList." + index + " .detail-info");
-                    detailInfo.show();
+                    console.log(detailInfo);
+                    if (detailInfo) {
+                        detailInfo.show();
+
+                        detailInfo[0].scrollIntoView({ behavior: 'smooth', block: 'end' });
+                    }
                     // 열린 다른 detailInfo 닫기
                     $(".searchList").not(".searchList." + index).find(".detail-info").hide();
                 });
@@ -1008,14 +989,16 @@ hr{
                 let index = $(this).attr("class").split(" ")[1];
                 // 상세 정보를 보여줄 요소 찾기
                 var detailInfo = $(this).find(".detail-info")[0];
-                
+                console.log("리스트클릭" + detailInfo);
                 // 상세 정보를 보이도록 함
-                detailInfo.style.display = "block";
+                if (detailInfo) {
+                    // 상세 정보를 보이도록 함
+                    detailInfo.style.display = "block";
 
-                // 스크롤 이동시킴
-                detailInfo.scrollIntoView({ behavior: 'smooth', block: 'end' });
-                
-                
+                    // 스크롤 이동시킴
+                    detailInfo.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                }
+
                  // 다른 div 숨기기
                 $(".searchList").not(this).find(".detail-info").hide();
                 if (isClosed[index]) { // 닫혀있음
@@ -1026,6 +1009,7 @@ hr{
                     });
 
                     overlayList[index].setMap(map);
+                    
 
                     var moveLatLon = new kakao.maps.LatLng(storeList[index].storeLat, storeList[index].storeLon);
                     map.panTo(moveLatLon);
@@ -1075,7 +1059,7 @@ hr{
                 // 좋아요 여부 가져오기
                 var isLiked = $button.hasClass("clicked");
                 
-                // 왜 두번씩 찍히는거야
+                
                 $.ajax({
                     url: "storeLikes.st",
                     method: "POST",
@@ -1132,7 +1116,7 @@ hr{
         }
 
         function backZigu(){
-            location.href = "home";
+            location.href = "/main";
         }
 
         function goLoginForm(){
@@ -1215,6 +1199,7 @@ hr{
 
             // 모달 내용 생성
             const modalContentElement = document.createElement("div");
+            
             modalContentElement.classList.add("modal-content");
 
             // 이미지 요소 생성
@@ -1222,7 +1207,7 @@ hr{
             imgElement.src = imageUrl;
             imgElement.alt = "매장사진";
             imgElement.style.width = "100%";
-            imgElement.style.height = "100%";
+            imgElement.style.height = "100% !important";
 
             // 이미지를 모달 내용에 추가
             modalContentElement.appendChild(imgElement);
@@ -1235,11 +1220,12 @@ hr{
             modalElement.style.justifyContent = "center";
             modalElement.style.alignItems = "center";
             modalElement.style.position = "fixed";
-            modalElement.style.top = "0";
-            modalElement.style.left = "0";
-            modalElement.style.width = "300px";
-            modalElement.style.height = "300px";
-            modalElement.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+            modalElement.style.top = "50%";
+            modalElement.style.left = "30%";
+            modalElement.style.width = "400px";
+            modalElement.style.height = "400px";
+            
+            
 
             // 모달을 body 요소에 추가
             document.body.appendChild(modalElement);
@@ -1248,8 +1234,6 @@ hr{
             currentModalElement = modalElement;
 
             // 모달 닫기 이벤트 처리
-            
-
             modalElement.addEventListener("click", function(event) {
                 
                 modalElement.remove();

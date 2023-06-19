@@ -186,17 +186,17 @@
 												<div>6번</div>
 											</td>
 											<td>
-												<div><input type="file" class="upfile7" name="upfiles" onchange="loadImg(this, 2);"> <img id="preview7"></div>
+												<div><input type="file" class="upfile7" name="upfiles" onchange="loadImg(this, 7);"> <img id="preview7"></div>
 												<div>7번</div>
 											</td>
 											<td>
-												<div><input type="file" class="upfile8" name="upfiles" onchange="loadImg(this, 7);"> <img id="preview8"></div>
+												<div><input type="file" class="upfile8" name="upfiles" onchange="loadImg(this, 8);"> <img id="preview8"></div>
 												<div>8번</div>
 											</td>
 										</tr>
 										<tr>
 											<td>
-												<div><input type="file" class="upfile9" name="upfiles" onchange="loadImg(this, 8);"> <img id="preview9"></div>
+												<div><input type="file" class="upfile9" name="upfiles" onchange="loadImg(this, 9);"> <img id="preview9"></div>
 												<div>9번</div>
 											</td>
 											<td>

@@ -26,4 +26,5 @@ public class BoConfirm {
   private List<ChDetailInfo> chDetailInfoList;      // 인증 디테일 정보 리스트
   private int categoryNo;
   private String filePath;
+  private String chDetailInfoData;
 }

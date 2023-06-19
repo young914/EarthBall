@@ -75,7 +75,9 @@
 			           , DY_BOARD_CONTENT = #{dyBoardContent}
 			           , ORIGIN_NAME = #{originName}
                        , CHANGE_NAME = #{changeName}
+                       , WEATHER = #{weather}
 			  WHERE DY_BOARD_NO = #{dyBoardNo}
+			       AND DY_BOARD_WRITER = #{dyBoardWriter }
 		</update>
 
 		<!-- 마이페이지 참여한 나의 일기 조회 -->
@@ -93,6 +95,43 @@
 				 	 AND DY_BOARD_WRITER = #{memberId}
 				 ORDER BY DY_BOARD_NO DESC
 			</select>
+
+			<!-- 마이페이지 참여한 나의 일기 게시글 총 조회 -->
+			<select id="diaryListMeCount"   parameterType="java.lang.String" resultType="java.lang.Integer" >
+				SELECT COUNT(*)
+				FROM (  SELECT  DY_BOARD_NO
+				          ,  DY_BOARD_TITLE
+				          , TO_CHAR(DY_CREATE_DATE, 'YYYY-MM-DD') AS DY_CREATE_DATE
+				          , DY_COUNT
+				          , CHANGE_NAME
+				          , DY_BOARD_WRITER
+				 FROM   DY_BOARD
+				 WHERE DY_STATUS = 'Y'
+				 	 AND DY_BOARD_WRITER = #{memberId}
+				 ORDER BY DY_BOARD_NO DESC)
+			</select>
+
+
+
+
+			<!-- 메인페이지 일기 조회 -->
+			<select id="mainDiaryList" resultType="com.kh.earthball.fo.diary.vo.Diary" >
+    			<![CDATA[
+    					SELECT * FROM (
+        					SELECT DY_BOARD_NO
+            						  , DY_BOARD_TITLE
+                                      , TO_CHAR(DY_CREATE_DATE, 'YYYY-MM-DD') AS DY_CREATE_DATE
+                                      , DY_COUNT
+                                      , CHANGE_NAME
+                                      , DY_BOARD_WRITER
+                            FROM DY_BOARD
+                            WHERE DY_STATUS = 'Y'
+                            ORDER BY DY_BOARD_NO DESC
+                            ) WHERE ROWNUM <= 3
+                             ]]>
+                </select>
+
+
 
 
 </mapper>

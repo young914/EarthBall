@@ -14,4 +14,8 @@ public interface BoChallengeService {
   BoChallenge selectChallenge(int chNo);
 
   int deleteChallenge(int chNo);
+
+  int searchChallengeListCount(String keyword);
+
+  List<BoChallenge> searchChallenge(PageInfo pageInfo, String keyword);
 }

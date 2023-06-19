@@ -148,7 +148,7 @@ ${p.productInfo}
                             </div>
                             <!-- 유저프로필 -->
                             <div class="userProfile">
-                                <div class="userPhoto"><img src="#"></div>
+                                <div class="userPhoto"><img src="/resources/fo/upfiles/${ r.memberImg }"></div>
                                 <div class="userName">${r.memberName}</div>
                             </div>
                         </div>

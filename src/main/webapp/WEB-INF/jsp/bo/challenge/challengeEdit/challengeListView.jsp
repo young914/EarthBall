@@ -75,19 +75,11 @@
               <div class="row">
                 <div class="col-sm-10">
 
-                  <form id="searchForm" action="" method="get" align="center">
-                    <div class="select">
-                      <select class="custom-select" name="condition">
-                        <option value="categoryName" <c:out value="${custom-select eq 'categoryName' ? 'selected' : ''}"/>>카테고리</option>
-                        <option value="chTitle" <c:out value="${custom-select eq 'chTitle' ? 'selected' : ''}"/>>챌린지명</option>
-                        <option value="chStatName" <c:out value="${custom-select eq 'chStatName' ? 'selected' : ''}"/>>진행상태</option>
-                        <option value="memberId" <c:out value="${custom-select eq 'memberId' ? 'selected' : ''}"/>>회원ID</option>
-                      </select>
-                    </div>
+                  <form id="searchForm" action="/search.chall" method="get" align="center">
                     <div class="text">
-                      <input type="text" class="form-control" placeholder="검색어를 입력하세요." name="keyword">
+                      <input type="text" class="form-control" placeholder="검색어를 입력하세요." name="keyword" required>
                     </div>
-                    <button type="submit" class="btn btn-primary searchBtn">검색</button>
+                    <button type="submit" class="btn btn-primary">검색</button>
                   </form>
 
                 </div>
