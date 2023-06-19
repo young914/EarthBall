@@ -53,5 +53,17 @@ import lombok.extern.slf4j.Slf4j;
           model.addAttribute("memberList", memberList);
           return "bo/member/adminMemberList";
         }
+        
+//        public String deleteAdminMember(AdminMember m,
+//                                                                       HttpSession session,
+//                                                                       Model model) {
+//          
+//          int result = memberAdminService.deleteAdminMember(m);
+//          
+//          if(result > 0) {
+//              
+//            
+//        }
+          
+        }
 
-    }
