@@ -9,7 +9,7 @@
 		   
 	</select>
 	
-	<select id="selectAdminMemberList" resultType="com.kh.earthball.fo.member.vo.Member">
+	<select id="selectAdminMemberList" resultType="com.kh.earthball.bo.Member.vo.AdminMember">
     	SELECT *
         FROM MEMBER
         LIMIT #{offset}, #{limit}
