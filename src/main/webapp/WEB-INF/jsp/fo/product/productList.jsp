@@ -44,9 +44,10 @@
     </div>
     <hr style="margin-top: 90px; border-color: #e5e7eb; opacity: 0.3;">
     <div id="dropBox">
-        <select class="form-select" aria-label="Default select example">
+        <select class="form-select" onclick="sortList();" aria-label="Default select example">
             <option value="1">등록순</option>
-            <option value="2">가격순</option>
+            <option value="2">낮은 가격순</option>
+            <option value="2">높은 가격순</option>
         </select>
     </div>
     <!-- 리스트 -->
