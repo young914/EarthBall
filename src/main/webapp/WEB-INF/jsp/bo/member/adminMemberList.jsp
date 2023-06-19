@@ -85,12 +85,20 @@
 					      <td class="text-center"><strong>${member.phone}</strong></td>
 					      <td class="text-center"><strong>${member.address1}</strong></td>
 					      <td class="text-center"><strong>${member.gradeName}</strong></td>
-					    </tr>
-					  </c:forEach>
-					</tbody>
-              </table>
-            </div>
-          </div>
+					      
+					      <td class="text-center">
+            <div class="dropdown">
+        <!-- 삭제 버튼 추가 -->
+        <td class="text-center">
+            <button type="button" class="btn btn-danger" onclick="deleteMember('${member.memberId}')">계정 비활성화</button>
+        </td>
+		    </tr>
+		  </c:forEach>
+		</tbody>
+       </table>
+      </div>
+    </div>
+         
           <!--/ Hoverable Table rows -->
 
           <div class="card mb-4">
@@ -163,7 +171,24 @@
 </div>
 <jsp:include page="/WEB-INF/jsp/bo/common/commonScript.jsp" />
 <script type="text/javascript">
-
+  function deleteMember(memberId) {
+    if(confirm('정말로 해당 계정을 비활성화하시겠습니까?')) {
+      $.ajax({
+        type: 'POST',
+        url: "delete.me", 
+        data: {
+          memberId: memberId
+        },
+        success: function(response) {
+          alert('계정이 비활성화되었습니다.');
+          location.reload(); // 현재 페이지 새로고침
+        },
+        error: function(request, status, error) {
+          alert('계정 비활성화에 실패하였습니다. 다시 시도해주세요.');
+        }
+      });
+    }
+  }
 </script>
 </body>
 </html>

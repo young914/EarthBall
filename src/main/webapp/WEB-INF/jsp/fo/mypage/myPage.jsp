@@ -9,9 +9,7 @@
     <title>마이페이지</title>
     <jsp:include page="/WEB-INF/jsp/fo/common/common.jsp"/>
     <link rel="stylesheet" href="/resources/fo/css/mypage/commonMyPage.css?after">
-	<style>
-
-	</style>
+	
 </head>
 <body>
 
