@@ -261,6 +261,7 @@
   }
   function approvalStore(storeNo) {
     
+    // console.log(storeNo);
     location.href = "approvalStore.st?storeNo=" + storeNo;
   }
   function deleteStore(storeNo) {
