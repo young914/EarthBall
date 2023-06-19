@@ -82,6 +82,11 @@
 
             <!-- content_1 시작 -->
             <div id="content_1">
+              <c:if test="${empty challengeList}">
+                  <h1>조회된 챌린지가 없습니다.</h1>
+              </c:if>
+
+
               <c:forEach var="chall" items="${challengeList}">
                 <!-- 카드 한 장 시작 -->
                 <div class="chall_Card" onclick="challengeDetailView('${chall.chNo}');">

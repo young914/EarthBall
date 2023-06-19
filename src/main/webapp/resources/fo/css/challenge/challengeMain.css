@@ -132,10 +132,13 @@
 #filter {
     background-color: #c7c6c64a ;
     border-radius: 4px;
+    display: flex;
+    align-content: flex-end;
+    flex-wrap: wrap;
 }
 
 #filter_1>h3, filter_2>h3 {
-    width: 150px;
+    width: 160px;
 }
 
 #filter_1>div>ul>li a {
@@ -202,6 +205,12 @@
 /* content 영역 */
 #content_1 { width: 75%;}
 #content_2 { width: 25%;}
+
+#content_1>h1 {
+    text-align: center;
+    margin-top: 300px;
+}
+
 
 #content_2 {
     margin-top: 20px;

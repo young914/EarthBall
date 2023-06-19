@@ -98,7 +98,7 @@
                         <option value=“${code.code}”>${code.codeName}</option>
                       </c:forEach>
 
-                      </select>
+                      </select><br><br>
                     </c:if>
 
                     <!-- checkbox면!!! -->
@@ -107,7 +107,7 @@
                         <input type="${temp.inputType}" id=“${temp.categoryTemplateNo}_${code.code}”
                                name="${temp.categoryTemplateNo}_${temp.inputType}">
                         <label for=“${temp.categoryTemplateNo}_${code.code}”> ${code.codeName} </label>
-                      </c:forEach>
+                      </c:forEach><br><br>
                     </c:if>
 
 
@@ -117,28 +117,52 @@
                         <input type=${temp.inputType} id=“${temp.categoryTemplateNo}_${code.code}”
                                name=“${temp.categoryTemplateNo}_${temp.inputType}”>
                         <label for=“${temp.categoryTemplateNo}_${code.code}”> ${code.codeName} </label>
-                      </c:forEach>
+                      </c:forEach><br><br>
                     </c:if>
 
 
                     <!--textarea 일 때 -->
                     <c:if test="${temp.inputType eq 'textarea'}">
-                    <${temp.inputType} name=“${temp.categoryTemplateNo}_${temp.inputType}” row=“” cols=“”>
-
+                      <textarea name=“${temp.categoryTemplateNo}_${temp.inputType}” style="resize: none; width: 800px; height: 50px"></textarea><br><br>
                   </c:if>
 
 
                   <!-- 이미지 파일일 때 -->
                   <c:if test="${temp.inputType eq 'file'}">
-                  <input type=${temp.inputType} name=“${temp.categoryTemplateNo}_${temp.inputType}” accept=“image/*”>
+                  <input type=${temp.inputType} name=“${temp.categoryTemplateNo}_${temp.inputType}” accept=“image/*”><br><br>
+                  </c:if>
+
+
+                  <!-- number -->
+                  <c:if test="${temp.inputType eq 'number'}">
+                        <input type="number" name="${temp.categoryTemplateNo}_${temp.inputType}" min="0" max="100"
+                               step="1"
+                               class="number_size"><br><br>
+                  </c:if>
+
+
+                  <!-- range 일 경우 -->
+                  <c:if test="${temp.inputType eq 'range'}">
+                        <input type="range" name="${temp.categoryTemplateNo}_${temp.inputType}" min="0" max="100"
+                               step="5"
+                               class="range_size"
+                               list="tickmarks"
+                               style="width: 750px;"/>
+                        <datalist id="tickmarks">
+                          <c:forEach var="i" begin="0" end="100" step="5">
+                            <option value="${i}">i</option>
+                          </c:forEach>
+                        </datalist><br><br>
+                  </c:if>
+
+
+                  <!--datetime-local : 연도, 월, 일, 오전/오후 여부, 시, 분 입력 -->
+                  <c:if test="${temp.inputType eq 'datetime-local'}">
+                        <input type="datetime-local" name="${temp.categoryTemplateNo}_${temp.inputType}"
+                               class="datetime_size"><br><br>
                   </c:if>
                   </c:forEach>
-                  <br>
-                  <div align="center">
-                    <button type="submit" class="btn btn-primary">등록하기</button>
-                    <button type="reset" class="btn btn-danger">취소하기</button>
-                  </div>
-                  <br><br>
+                    <br><br>
 
                   <button type="button" class="btn btn-danger" onclick="javascript:history.go(-1);">확인완료</button>
                   </div>
