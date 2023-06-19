@@ -98,6 +98,13 @@
 
 
         <tbody>
+
+        <c:if test="${empty chConfirms}">
+          <tr>
+            <td colspan="4">챌린지 인증 게시글이 없습니다.</td>
+          </tr>
+        </c:if>
+
         <c:forEach var="confirm" items="${chConfirms}">
         <tr onclick="detailViewConfirm(${confirm.chConNo});">
           <td>${confirm.chConNo}</td>
