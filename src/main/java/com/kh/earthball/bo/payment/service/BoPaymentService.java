@@ -10,4 +10,6 @@ public interface BoPaymentService {
 
   List<BoPayInfo> selectCancelPayList(PageInfo pageInfo);
 
+  int acceptCancel(BoPayInfo p);
+
 }

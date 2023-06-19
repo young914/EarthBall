@@ -58,13 +58,13 @@
         <tbody class="hover">
           <c:forEach var="pl" items="${pointList}">
             <tr>
-              <c:if test="${ pointList eq null }">
+              <c:if test="${ pointList == null }">
               	<td colspan="5">누적된 포인트가 없습니다.</td>
               </c:if>
               <td>${pl.pointDate}</td>
               <td>${pl.pointContent}</td>
               <c:choose>
-              	<c:when test="${ pl.status eq '+' }">
+              	<c:when test="${ pl.status == '+' }">
               		<td style="color : lightgreen;">${ pl.status } <fmt:formatNumber value="${pl.pointNum}" pattern="###,###원"/></td>
               	</c:when>
               	<c:otherwise>
