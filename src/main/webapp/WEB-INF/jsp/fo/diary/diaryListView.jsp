@@ -6,17 +6,16 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Insert title here</title>
+    <title>환경일기</title>
     <jsp:include page="/WEB-INF/jsp/fo/common/common.jsp"/>
     <link rel="stylesheet" href="/resources/fo/css/diary/diaryListView.css">
-    <link rel="stylesheet" href="/resources/fo/css/common/pagingBar.css">
 
 </head>
 <body>
 
 		<jsp:include page="/WEB-INF/jsp/fo/common/header.jsp"/>
 
-		<div class="whole">
+	<div id="container">
 		    <!-- 화면  -->
 		    <div class="outer">
 		        <div class="head">
@@ -25,6 +24,7 @@
 		                <div class="title_text">EcoDiary</div>
 		            </div>
 
+					<!--
 		            <div class="search1">
 		                <select class="search2">
 		                    <option>최신순</option>
@@ -32,6 +32,7 @@
 		                    <option>조회수</option>
 		                </select>
 		            </div>
+		             -->
 		        </div>
 
 		        <div class="list-area">
@@ -102,8 +103,9 @@
 		            </c:if>
 		        </div>
 
-		        <div id="page1">
-		            <div class="page_btn1">
+
+		        <div id="page">
+		            <div class="page_btn">
 		                <ul class="pagination">
 
 		                  <c:choose>
@@ -135,6 +137,7 @@
 		            </div>
 		        </div>
 
+                 <!--
 				<div id="search-area">
 					<form action="search.bo" method="get">
 						<input type="hidden" name="currentPage" value="1">
@@ -146,6 +149,7 @@
 						<button type="submit">검색</button>
 					</form>
 				</div>
+				 -->
 		    </div>
 
 		<script type="text/javascript" src="/resources/fo/js/diary/diary.js"></script>
