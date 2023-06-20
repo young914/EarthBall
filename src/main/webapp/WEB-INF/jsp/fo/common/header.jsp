@@ -80,7 +80,7 @@
                 <div class="dropdown">
                     <span class="dropbtn"> <a href="#">환경일기</a> </span>
                     <div class="dropdown-content">
-                        <a href="">환경일기란?</a>
+                        <a href="/diaryStory.bo">환경일기란?</a>
                         <a href="diaryListView.bo">일기 보기</a>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                         <a href="#" onclick="javascript:document.myForm.submit();">매장찾기</a>
                         <a href="storeEnrollForm.st">매장등록신청</a>
                     </div>
-                    
+
                 </div>
                 <div class="dropdown">
                     <span class="dropbtn"> <a href="#">고객센터</a> </span>
