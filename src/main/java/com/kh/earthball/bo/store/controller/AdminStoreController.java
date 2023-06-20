@@ -200,10 +200,10 @@ public class AdminStoreController {
 
     if(result>0) {
       session.setAttribute("alertMsg", "매장수정 성공");
-      return "bo/store/storeList";
+      return "redirect:/adminlist.st";
     }else {
       session.setAttribute("alertMsg", "매장수정 실패");
-      return "bo/store/storeList";
+      return "redirect:/adminlist.st";
     }
   }
   @GetMapping("deleteStore.st")

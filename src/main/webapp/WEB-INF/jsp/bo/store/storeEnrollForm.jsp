@@ -126,7 +126,7 @@
 									</tr>
 									<tr>
 										<td>전화번호</td>
-										<td><input type="text" name="storePhone" required style="width: 50%;" pattern="(\d{4}-\d{4}-\d{4})|(\d{3}-\d{4}-\d{4})" placeholder="xxxx-xxxx-xxxx 또는 xxx-xxxx-xxxx 형식으로 입력해주세요!" title="xxxx-xxxx-xxxx 또는 xxx-xxxx-xxxx 형식으로 입력해주세요!" /></td>
+										<td><input type="text" name="storePhone" required style="width: 50%;" pattern="(\d{2}-\d{4}-\d{4})|(\d{4}-\d{4}-\d{4})|(\d{3}-\d{4}-\d{4})" placeholder="xx-xxxx-xxxx 또는 xxx-xxxx-xxxx 또는 xxxx-xxxx-xxxx 형식으로 입력해주세요!" title="xx-xxxx-xxxx 또는 xxx-xxxx-xxxx 또는 xxxx-xxxx-xxxx 형식으로 입력해주세요!" /></td>
 									</tr>
 									<tr style="margin: 10px 0;">
 										<td >운영시간</td>
@@ -202,18 +202,18 @@
 													<tr>
 														<td>
 															<div><input type="file" class="upfile1" name="upfiles" onchange="loadImg(this, 1);" required> <img id="preview1"></div>
-															<div>로고</div>
+															<div>로고(필수)</div>
 														</td>
 													</tr>
 												</tr>
 												<tr>
 													<td>
-														<div><input type="file" class="upfile2" name="upfiles" onchange="loadImg(this, 2);"> <img id="preview2"></div>
-														<div>매장사진 1번</div>
+														<div><input type="file" class="upfile2" name="upfiles" onchange="loadImg(this, 2);" required> <img id="preview2"></div>
+														<div>매장사진 1번(필수)</div>
 													</td>
 													<td>
-														<div><input type="file" class="upfile3" name="upfiles" onchange="loadImg(this, 3);"> <img id="preview3"></div>
-														<div>매장사진 2번</div>
+														<div><input type="file" class="upfile3" name="upfiles" onchange="loadImg(this, 3);" required> <img id="preview3"></div>
+														<div>매장사진 2번(필수)</div>
 													</td>
 													<td>
 														<div><input type="file" class="upfile4" name="upfiles" onchange="loadImg(this, 4);"> <img id="preview4"></div>
@@ -293,24 +293,26 @@
 	var endAm = document.getElementById("endAm");
 
 	startAm.addEventListener("change", function() {
-  if (startAm.checked) {
-    endAm.disabled = false;
-  } else {
-    if (startPm.checked) {
-      endAm.disabled = true;
-    }
-  }
-});
+		if (startAm.checked) {
+			endAm.disabled = false;
+		} else {
+			if (startPm.checked) {
+			endAm.disabled = true;
+			}
+		}
+	});
 
-startPm.addEventListener("change", function() {
-  if (startPm.checked) {
-    endAm.disabled = true;
-  } else {
-    if (!startAm.checked) {
-      endAm.disabled = false;
-    }
-  }
-});
+	startPm.addEventListener("change", function() {
+	if (startPm.checked) {
+		endAm.disabled = true;
+	} else {
+		if (!startAm.checked) {
+		endAm.disabled = false;
+		}
+	}
+	});
+
+	
 
 function home(){
 	location.href = "/main"

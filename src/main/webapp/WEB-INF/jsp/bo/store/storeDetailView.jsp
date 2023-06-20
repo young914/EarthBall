@@ -109,7 +109,7 @@
 								<table class="insertForm">
 									<tr>
 										<td width="150">매장명</td>
-										<td><input type="text" name="storeName" id required style="width: 500px" value="${beforeData.storeName}"></td>
+										<td><input type="text" name="storeName" id required style="width: 50%" value="${beforeData.storeName}"></td>
 									</tr>
 									<tr>
 										<td style="display: flex;">
@@ -118,19 +118,21 @@
 											id="addressSearchBtn"
 											style="width: 70%; height: 25px; border-radius: 10px; border: none; background-color: #19a7ce; color: white; font-weight: 600;">
 										</td>
-
 										<td style="width: 500px;">
-											주소 : <input type="text" name="storeAddress" required style="width: 40%;" id="address_kakao" value="${beforeData.storeAddress}">
+											<input type="text" name="storeAddress" required style="width: 50%;" id="address_kakao" value="${beforeData.storeAddress}">
 										</td>
-										<td>
-											상세주소 : <input type="text" required style="width: 40%;" name="storeDetailAddress" value="${beforeData.storeDetailAddress}">
+									</tr>
+									<tr>
+										<td>상세주소</td>
+										<td>	
+											<input type="text" style="width: 50%;" name="storeDetailAddress" value="${beforeData.storeDetailAddress}">
 										</td>
 		
 									</tr>
 									<tr>
 										
 										<td>전화번호</td>
-										<td><input type="text" name="storePhone" required style="width: 80%;" value="${beforeData.storePhone}" ></td>
+										<td><input type="text" name="storePhone" required style="width: 50%;" value="${beforeData.storePhone}" pattern="(\d{2}-\d{4}-\d{4})|(\d{4}-\d{4}-\d{4})|(\d{3}-\d{4}-\d{4})" placeholder="xx-xxxx-xxxx 또는 xxx-xxxx-xxxx 또는 xxxx-xxxx-xxxx 형식으로 입력해주세요!" title="xx-xxxx-xxxx 또는 xxx-xxxx-xxxx 또는 xxxx-xxxx-xxxx 형식으로 입력해주세요!" /> </td>
 									</tr>
 									<tr style="margin: 10px 0;">
 										<td >운영시간</td>
@@ -205,34 +207,34 @@
                                                 <tr>
                                                     <td>
                                                         <div>
-                                                            <input type="file" class="upfile1" name="upfiles" onchange="loadImg(this, 1);"> 
+                                                            <input type="file" class="upfile1" name="upfiles" onchange="loadImg(this, 1);" > 
                                                             <img id="preview1" onclick="upfile();" src="/resources/fo/upfiles/${ beforeAtta[0].changerName }">
                                                             <input type="hidden" name="changeNames" value="${ beforeAtta[0].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
 
                                                         </div>
-                                                        <div>로고</div>
+                                                        <div>로고(필수)</div>
                                                     </td>
                                                 </tr>
 												<tr>
 													<td>
 														<div>
-                                                            <input type="file" class="upfile2" name="upfiles" onchange="loadImg(this, 2);"> 
+                                                            <input type="file" class="upfile2" name="upfiles" onchange="loadImg(this, 2);" > 
                                                             <img id="preview2" onclick="upfile();" src="/resources/fo/upfiles/${ beforeAtta[1].changerName }">
                                                             
                                                             <input type="hidden" name="changeNames" value="${ beforeAtta[1].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
                                                             
                                                         </div>
-														<div>매장사진 1번</div>
+														<div>매장사진 1번(필수)</div>
 													</td>
 													<td>
 														<div>
-                                                            <input type="file" class="upfile3" name="upfiles" onchange="loadImg(this, 3);"> 
+                                                            <input type="file" class="upfile3" name="upfiles" onchange="loadImg(this, 3);" > 
                                                             <img id="preview3" onclick="upfile();" src="/resources/fo/upfiles/${ beforeAtta[2].changerName }">
                                                             
                                                             <input type="hidden" name="changeNames" value="${ beforeAtta[2].changerName }"> <!-- 기존에 파일이 있을 경우만 넘어가는놈 -->
                                                             
                                                         </div>
-														<div>매장사진 2번</div>
+														<div>매장사진 2번(필수)</div>
 													</td>
 													<td>
 														<div>
@@ -349,6 +351,29 @@
 </div>
 <jsp:include page="/WEB-INF/jsp/bo/common/commonScript.jsp" />
 <script type="text/javascript">
+
+	var startPm = document.getElementById("startPm");
+	var endAm = document.getElementById("endAm");
+
+	startAm.addEventListener("change", function() {
+		if (startAm.checked) {
+			endAm.disabled = false;
+		} else {
+			if (startPm.checked) {
+			endAm.disabled = true;
+			}
+		}
+	});
+
+	startPm.addEventListener("change", function() {
+	if (startPm.checked) {
+		endAm.disabled = true;
+	} else {
+		if (!startAm.checked) {
+		endAm.disabled = false;
+		}
+	}
+	});
 
     function home(){
         location.href = "/main";

@@ -742,11 +742,14 @@ hr{
                 }
                 
                 var storeImgStr = "";
-                
-                for (let j = 0; j < storeAttaList.length; j++) {
-                    if (storeAttaList[j].storeNo === storeNo) {
-                        storeImgStr += "<div class='swiper-slide' style='border: none;' ><img src='/resources/fo/upfiles/" + storeAttaList[j].changerName + "' alt='매장사진' style='width: 100%; height: 100%;' onclick='openModal(\"/resources/fo/upfiles/" + storeAttaList[j].changerName + "\")'></div>";
-                                    
+                if (storeAttaList.length === 0) {
+                    storeImgStr = "<div class='swiper-slide' style='border: none;' ><img src='/resources/fo/img/k.png"+ "' alt='매장사진' style='width: 100%; height: 100%;')'></div>";
+                } else{
+                    for (let j = 0; j < storeAttaList.length; j++) {
+                        if (storeAttaList[j].storeNo === storeNo) {
+                            storeImgStr += "<div class='swiper-slide' style='border: none;' ><img src='/resources/fo/upfiles/" + storeAttaList[j].changerName + "' alt='매장사진' style='width: 100%; height: 100%;' onclick='openModal(\"/resources/fo/upfiles/" + storeAttaList[j].changerName + "\")'></div>";
+                                        
+                        }
                     }
                 }
                 
