@@ -28,9 +28,12 @@ public class PointController {
   @PostMapping("/insertPoint")
   public String insertPoint(Point p) {
 
-    int result1 = pointService.insertPoint(p);
-
+    int result1 = 0;
     int result2 = 0;
+
+    if(p.getPointNum() != 0) {
+      result1 = pointService.insertPoint(p);
+    }
 
     if(result1 == 1) {
 
@@ -61,8 +64,8 @@ public class PointController {
     // 나의 주문내역 수 조회
     int listCount = pointService.myPointListCount(memberId);
 
-    int pageLimit = 15;
-    int boardLimit = 10;
+    int pageLimit = 5;
+    int boardLimit = 20;
 
     PageInfo pageInfo = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 

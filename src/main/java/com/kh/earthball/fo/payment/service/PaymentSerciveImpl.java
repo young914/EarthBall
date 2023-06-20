@@ -52,13 +52,13 @@ public class PaymentSerciveImpl implements PaymentService {
   }
 
   @Override
-  public List<Cart> selectProductItem(List<PayPageItem> orders) {
+  public List<PayPageItem> selectProductItem(List<PayPageItem> orders) {
 
-    List<Cart> list = new ArrayList<Cart>();
+    List<PayPageItem> list = new ArrayList<PayPageItem>();
 
     for(PayPageItem ppi : orders) {
 
-      Cart productInfo = paymentMapper.selectProductList(ppi);
+      PayPageItem productInfo = paymentMapper.selectProductItem(ppi);
 
       list.add(productInfo);
     }
@@ -100,5 +100,7 @@ public class PaymentSerciveImpl implements PaymentService {
 
     return paymentMapper.reqPayCancel(p);
   }
+
+
 
 }

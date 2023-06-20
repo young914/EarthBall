@@ -18,7 +18,7 @@ public interface PaymentMapper {
 
   Cart selectProductList(PayPageItem ppi);
 
-  Cart selectProductItem(PayPageItem ppi);
+  PayPageItem selectProductItem(PayPageItem ppi);
 
   int insertOrder(Cart c);
 

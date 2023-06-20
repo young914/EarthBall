@@ -125,7 +125,7 @@ public class PaymentController {
     int listCount = paymentService.myOrderListCount(memberId);
 
     int pageLimit = 5;
-    int boardLimit = 10;
+    int boardLimit = 20;
 
     PageInfo pageInfo = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 

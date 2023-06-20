@@ -55,7 +55,7 @@
                                                    alt="상품이미지"></div>
                     </div>
                     <div id="product_content">
-                        <div id="product_name"><p class="product_name">${ ol.productName }</p></div>
+                        <div id="product_name"><span class="product_name">${ ol.productName }</span></div>
                         <c:choose>
                         	<c:when test="${ amount ne null }">
                         		<div id="product_amount"><p>수량 : ${ amount }개</p></div>
