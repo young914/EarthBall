@@ -82,10 +82,10 @@
                 <tbody class="table-border-bottom-0">
                 <c:forEach var="cancel" items="${ cancelList }">
                   <tr>
-                  	<c:if test="${ cancelList eq null }">
+                  	<c:if test="${empty cancelList}">
                   		<td class="text-center chConNo" data-ch-con-no="noData"><strong>등록된 취소요청이 없습니다.</strong></td>
                   	</c:if>
-                    <td class="text-center chConNo" data-ch-con-no="${cancel.paymentNo}"><strong>${cancel.paymentNo}</strong></td>
+                    <td class="text-center chConNo paymentNo" data-ch-con-no="${cancel.paymentNo}" style="cursor:pointer;"><strong>${cancel.paymentNo}</strong></td>
                     <td class="text-center chConNo" data-ch-con-no="${cancel.memberId}"><strong>${cancel.memberId}</strong></td>
                     <td class="text-center chConNo" data-ch-con-no="${cancel.paymentName}"><strong>${cancel.paymentName}</strong></td>
                     <td class="text-center chConNo" data-ch-con-no="${cancel.paymentTotal}"><strong><fmt:formatNumber value="${cancel.paymentTotal}" pattern="###,###원"/></strong></td>
@@ -104,6 +104,7 @@
               </table>
             </div>
           </div>
+          <input type="text" id="paymentNoCopy" style="position:absolute;top:-9999em;">
           <!--/ Hoverable Table rows -->
 
           <div class="card mb-4">
@@ -190,6 +191,17 @@ $("#cancel_btn").on("click", function() {
 			alert(msg);
 		}
 	});
+});
+
+$(document).ready(function(){
+
+    $('.paymentNo').on("click", function() { //클릭 이벤트
+      $("#paymentNoCopy").val($(this).text()); //해당 문구 가져와 텍스트박스에 입력
+      document.getElementById("paymentNoCopy").select(); //텍스트 박스 선택
+      document.execCommand("copy"); //클립보드 복사
+      alert("주문번호가 복사되었습니다.");
+    });
+
 });
 
 </script>
