@@ -45,7 +45,7 @@
 
     <div class="main-content2">
 
-      <h2>포인트 내역 <span>${ pointList.size()} 개</span></h2>
+      <h2>포인트 내역</h2>
 
       <!-- content_1-->
       <div id="content_1">
@@ -58,19 +58,12 @@
         <tbody class="hover">
           <c:forEach var="pl" items="${pointList}">
             <tr>
-              <c:if test="${ pointList == null }">
+              <c:if test="${empty pointList}">
               	<td colspan="5">누적된 포인트가 없습니다.</td>
               </c:if>
               <td>${pl.pointDate}</td>
               <td>${pl.pointContent}</td>
-              <c:choose>
-              	<c:when test="${ pl.status == '+' }">
-              		<td style="color : lightgreen;">${ pl.status } <fmt:formatNumber value="${pl.pointNum}" pattern="###,###원"/></td>
-              	</c:when>
-              	<c:otherwise>
-              		<td style="color : red;">${ pl.status } <fmt:formatNumber value="${pl.pointNum}" pattern="###,###원"/></td>
-              	</c:otherwise>
-              </c:choose>
+              <td class="point_area">${pl.status} <fmt:formatNumber value="${pl.pointNum}" pattern="###,###원"/></td>
             </tr>
           </c:forEach>
         </tbody>
@@ -87,7 +80,7 @@
             <li> <a href="/list.myPoint?memberId=${loginUser.memberId}&currentPage=1" class="first">처음 페이지</a> </li>
 
             <c:choose>
-              <c:when test="${ pi.currentPage eq 1}">
+              <c:when test="${ pageInfo.currentPage eq 1}">
                 <li> <a href="#" class="arrow_left" disabled> << </a>  </li>
               </c:when>
               <c:otherwise>
@@ -96,17 +89,17 @@
             </c:choose>
 
 
-            <c:forEach var="page" begin="${pi.startPage}" end="${pi.endPage}" step="1">
+            <c:forEach var="page" begin="${pageInfo.startPage}" end="${pageInfo.endPage}" step="1">
               <li> <a href="/list.myPoint?memberId=${loginUser.memberId}&currentPage=${page}" class="active num"> ${page} </a>  </li>
             </c:forEach>
 
 
             <c:choose>
-              <c:when test="${pi.currentPage eq pi.maxPage}">
+              <c:when test="${pageInfo.currentPage eq pageInfo.maxPage}">
                 <li> <a href="#" class="arrow_right" disabled> >> </a> </li>
               </c:when>
               <c:otherwise>
-                <li> <a href="/list.myPoint?memberId=${loginUser.memberId}&currentPage=${pi.currentPage + 1}" class="arrow_right" disabled> >> </a> </li>
+                <li> <a href="/list.myPoint?memberId=${loginUser.memberId}&currentPage=${pageInfo.currentPage + 1}" class="arrow_right" disabled> >> </a> </li>
               </c:otherwise>
             </c:choose>
 
@@ -116,7 +109,24 @@
       </div>
 
       <!-- 페이징바 넣을 자리 끝 -->
+		<script>
+		$(function() {
 
+			let point = document.getElementsByClassName("point_area");
+
+			for(let i = 0; i < point.length; i++) {
+
+				if(point[i].innerText.includes("+")) {
+					point[i].style.color = "#19A7CE";
+				} else {
+					point[i].style.color = "red";
+				}
+			}
+
+		})
+
+
+		</script>
 
 
     </div>

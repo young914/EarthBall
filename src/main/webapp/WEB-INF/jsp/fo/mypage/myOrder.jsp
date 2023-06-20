@@ -91,10 +91,10 @@
         <div class="page_btn" align="center">
 
           <ul class="pagination">
-            <li> <a href="/list.myorder?memberId=${loginUser.memberId}&currentPage=1" class="first">처음 페이지</a> </li>
+            <li> <a href="/list.myOrder?memberId=${loginUser.memberId}&currentPage=1" class="first">처음 페이지</a> </li>
 
             <c:choose>
-              <c:when test="${ pi.currentPage eq 1}">
+              <c:when test="${ pageInfo.currentPage eq 1}">
                 <li> <a href="#" class="arrow_left" disabled> << </a>  </li>
               </c:when>
               <c:otherwise>
@@ -103,17 +103,17 @@
             </c:choose>
 
 
-            <c:forEach var="page" begin="${pi.startPage}" end="${pi.endPage}" step="1">
+            <c:forEach var="page" begin="${pageInfo.startPage}" end="${pageInfo.endPage}" step="1">
               <li> <a href="/list.myOrder?memberId=${loginUser.memberId}&currentPage=${page}" class="active num"> ${page} </a>  </li>
             </c:forEach>
 
 
             <c:choose>
-              <c:when test="${pi.currentPage eq pi.maxPage}">
+              <c:when test="${pageInfo.currentPage eq pageInfo.maxPage}">
                 <li> <a href="#" class="arrow_right" disabled> >> </a> </li>
               </c:when>
               <c:otherwise>
-                <li> <a href="/list.myOrder?memberId=${loginUser.memberId}&currentPage=${pi.currentPage + 1}" class="arrow_right" disabled> >> </a> </li>
+                <li> <a href="/list.myOrder?memberId=${loginUser.memberId}&currentPage=${pageInfo.currentPage + 1}" class="arrow_right" disabled> >> </a> </li>
               </c:otherwise>
             </c:choose>
 

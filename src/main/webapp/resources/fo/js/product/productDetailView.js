@@ -392,7 +392,6 @@ $(function(){
 // 포인트 추가 기능
 function insertPoint() {
     let memberId = $('.memberId').val();
-    console.log(memberId);
 	$.ajax({
 		url : "/insertPoint",
 		type : "post",
@@ -421,7 +420,6 @@ function insertPoint() {
 function order() {
 
 	let amount = $(".amount").val();
-	console.log(amount);
 	$(".order_form").find("input[name='orders[0].amount']").val(amount);
 	$(".order_form").submit();
 }
