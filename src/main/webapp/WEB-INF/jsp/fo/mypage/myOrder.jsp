@@ -137,36 +137,40 @@
 
 $(".cancel_btn").on("click", function() {
 
-	let paymentNo = $(this).parent().parent().children(0).eq(0).text();
+	if(window.confirm("정말로 결제취소 요청하시겠습니까?")) {
 
-	$.ajax({
-		url : "/reqPayCancel",
-		type : "post",
-		data : {
-			memberId : "${loginUser.memberId}",
-			paymentNo : paymentNo
-		},
-		success : function(result) {
+		let paymentNo = $(this).parent().parent().children(0).eq(0).text();
 
-			if(result == "1") {
+		$.ajax({
+			url : "/reqPayCancel",
+			type : "post",
+			data : {
+				memberId : "${loginUser.memberId}",
+				paymentNo : paymentNo
+			},
+			success : function(result) {
 
-				var msg = "취소요청이 등록되었습니다.";
+				if(result == "1") {
+
+					var msg = "취소요청이 등록되었습니다.";
+					alert(msg);
+					location.reload();
+
+				} else {
+
+					var msg = "취소요청이 실패하였습니다. 다시 시도해 주세요.";
+					alert(msg);
+
+				}
+			},
+			error : function() {
+
+				var msg = "알 수 없는 이유로 취소요청에 실패하였습니다.";
 				alert(msg);
-				location.reload();
-
-			} else {
-
-				var msg = "취소요청이 실패하였습니다. 다시 시도해 주세요.";
-				alert(msg);
-
 			}
-		},
-		error : function() {
+		});
+	}
 
-			var msg = "알 수 없는 이유로 취소요청에 실패하였습니다.";
-			alert(msg);
-		}
-	});
 
 })
 </script>
