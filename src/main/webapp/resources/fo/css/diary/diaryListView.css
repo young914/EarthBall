@@ -108,7 +108,7 @@
 .imgBorder{ box-shadow : 3px 3px 3px gray;
 			      transition-duration : 0.8s;}
 
-.imgBorder:active{ border: 2px groove black;
+.imgBorder:active{
 						  transform: scale(0.98);
       					  box-shadow: 3px 2px 22px 1px gray};
 

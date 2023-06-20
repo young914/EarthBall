@@ -64,6 +64,7 @@
 		                            <div>${ d.dyBoardWriter }</div>
 		                            <div>${ d.dyCreateDate }</div>
 		                        </div>
+		                        <!--
 		                        <div class="icon1">
 		                            <div style="padding: 0; height: 22px;">
 		                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
@@ -75,6 +76,7 @@
 		                            </div>
 		                            <div><span id="icon2">20</span></div>
 		                        </div>
+		                        -->
 		                    </div>
 		                </div>
 		            </div>

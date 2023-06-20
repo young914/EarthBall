@@ -249,6 +249,12 @@ public class DiaryController {
       return "fo/mypage/diary";
     }
 
+    @RequestMapping("/diaryStory.bo")
+    public String diaryStory() {
+
+      return "fo/diary/diaryStory";
+    }
+
 
 }
 

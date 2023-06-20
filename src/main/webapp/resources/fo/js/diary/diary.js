@@ -93,7 +93,9 @@ function colorChange(color){
 
 // 전체 지우기
 function clearAll(){
+	if(window.confirm("전체 지우기 하시겠습니까?")) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
 }
 
 
