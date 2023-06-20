@@ -4,6 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
 <title>지구공 프로젝트</title>
+<link rel="shortcut icon" type="resources/admin/image/x-icon" href="resources/fo/img/logo.png">
 
 <meta name="description" content="" />
 

@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="shortcut icon" type="resources/admin/image/x-icon" href="resources/fo/img/logo.png">
 <script type="text/javascript">
 	location.href = '/main';
 </script>
