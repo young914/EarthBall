@@ -79,17 +79,17 @@
         
     <div class="page_btn" align="center">
         <ul class="pagination">
-            <li> <a href="list.pro" class="first">처음 페이지</a> </li>
+            <li> <a href="list.pro?category=${ p.category }" class="first">처음 페이지</a> </li>
 
             <li> <a href="#" class="arrow_left"> << </a>  </li>
 
             <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                <li> <a href="list.pro?cPage=${ p }" class="active num"> ${ p } </a>  </li>
+                <li> <a href="list.pro?cPage=${ p }&category=${ p.category }" class="active num"> ${ p } </a>  </li>
             </c:forEach>
 
             <li> <a href="#" class="arrow_right"> >> </a> </li>
 
-            <li> <a href="list.pro?cPage=${ pi.maxPage }" class="last">끝 페이지</a> </li>
+            <li> <a href="list.pro?cPage=${ pi.maxPage }&category=${ p.category }" class="last">끝 페이지</a> </li>
         </ul>
     </div>
 
