@@ -20,6 +20,12 @@
     	   FROM MEMBER 
     	WHERE MEMBER_NAME LIKE '%' || #{keyword} || '%' OR MEMBER_ID LIKE '%' || #{keyword} || '%'
 	</select>
+	
+	<update id="updateMemberStatus">
+		UPDATE MEMBER
+		SET STATUS = #{status}
+		WHERE MEMBER_ID = #{memberId}
+	</update>
 
 
 

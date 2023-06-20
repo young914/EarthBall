@@ -59,7 +59,7 @@
 		margin-top: 20px;
 	}
 	.loginLogo { text-decoration : none; }
-	
+	.logo{margin: 0 auto;}
 	
 </style>
 
@@ -94,9 +94,7 @@
 		</c:choose>
 		
 		<input type="submit" value="로그인">
-		<label ><a href="/">
-		<input type="button" value="메인페이지로 이동" style="color : black">
-		</a></label>
+		<input type="button" value="홈으로" onclick="location.href='/'">
 		</form>
     </div>
     

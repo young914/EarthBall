@@ -33,5 +33,10 @@ public class MemberAdminServiceImpl implements MemberAdminService {
   public List<AdminMember> searchAdminMember(String keyword) {
     return adminMemberMapper.searchAdminMember(keyword);
   }
+
+  @Override
+  public int updateMemberStatus(String memberId, String status) {
+    return adminMemberMapper.updateMemberStatus(memberId, status);
+  }
  }
 

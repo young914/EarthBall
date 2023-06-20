@@ -32,4 +32,7 @@ public interface MemberMapper {
   int insertProfile(@Param("memberImg") String memberImg, @Param("memberId") String memberId);
   
   int deleteMember(String memberId);
+  
+  int nameCheck(String memberName);
+  
 }

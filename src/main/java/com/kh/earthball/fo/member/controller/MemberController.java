@@ -266,6 +266,15 @@ public class MemberController {
     return (count > 0) ? "NNNNN" : "NNNNY";
   }
 
+  @ResponseBody
+  @RequestMapping(value = "nameCheck.me", produces = "text/html; charset=UTF-8")
+  public String nameCheck(String checkName) {
+
+    int count = memberService.nameCheck(checkName);
+
+    return (count > 0) ? "NNNNN" : "NNNNY";
+  }
+  
   @RequestMapping("pfile.me")
   public String profileUpload(HttpServletRequest req, RedirectAttributes redirectAttributes, MultipartHttpServletRequest multipartRequest) throws Exception {
       String memberId = req.getParameter("memberId");

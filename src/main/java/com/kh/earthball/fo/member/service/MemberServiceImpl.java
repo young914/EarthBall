@@ -78,6 +78,15 @@ public class MemberServiceImpl implements MemberService {
     return memberMapper.deleteMember(memberId);
   }
 
+  @Override
+  public int nameCheck(String memberName) {
+   return memberMapper.nameCheck(memberName);
+  }
+
+  
+
+
+  
 
 }
 
