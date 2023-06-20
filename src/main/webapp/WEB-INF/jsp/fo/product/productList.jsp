@@ -73,8 +73,10 @@
             </div>
 		</c:forEach>
     </div>
+
     <!-- 페이징바 넣을 자리 시작 -->
     <div id="page">
+        
     <div class="page_btn" align="center">
         <ul class="pagination">
             <li> <a href="list.pro" class="first">처음 페이지</a> </li>
@@ -90,6 +92,7 @@
             <li> <a href="list.pro?cPage=${ pi.maxPage }" class="last">끝 페이지</a> </li>
         </ul>
     </div>
+
 </div>
 <!-- 페이징바 넣을 자리 끝 -->
 </div>

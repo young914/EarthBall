@@ -258,6 +258,12 @@
           let chConTitle = $("input[type=text][name=chConTitle]").val();      // 챌린지 인증 제목
           let memberId = $("input[type=hidden][name=memberId]").val();       // 회원아이디
 
+        if (chConTitle === "") {
+          alert("제목을 입력하세요.");
+          $("input[type=text][name=chConTitle]").focus(); // 입력 필드에 포커스 설정
+          return; // 함수 실행 중단
+        }
+
           // 자 그럼 이제부터 여기에 챌린지 상세 정보 데이터 담기.....
           let templateList = []
           <c:forEach var="temp" items="${templateList}">
@@ -370,8 +376,8 @@
                     console.log("포인트 추가 ajax 실패");
                   }
                 });
-
-                  location.href = "/main.chall"
+                  alert("챌린지 인증 게시글이 작성되었습니다.")
+                  location.href = "/detailView.chall?chNo=" + chNo;
               }
               , error: function () {
               }
