@@ -19,9 +19,9 @@
 	<div id="container">
         <!-- 배너 -->
         <div class="mainSlide">
-            <div><img src="/resources/fo/img/banner1.png" alt=""></div>
-            <div><img src="/resources/fo/img/banner2.png" alt=""></div>
-            <div><img src="/resources/fo/img/banner3.png" alt=""></div>
+            <div><img src="/resources/fo/img/banner1.png" onclick="location.href='detailView.pro?productNo=94'"></div>
+            <div><img src="/resources/fo/img/banner2.png" onclick="location.href='detailView.pro?productNo=92'"></div>
+            <div><img src="/resources/fo/img/banner3.png" onclick="location.href='detailView.pro?productNo=93'"></div>
         </div>
         <!--  베스트 아이템 -->
         <div id="bestArea">

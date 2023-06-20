@@ -30,7 +30,7 @@
                 <div id="productName"><h1>${ p.productName }</h1></div>
                 <div id="productPrice"><h4>${ p.price }원</h4></div>
                 <hr>
-<pre id="productText" style="font-family: 'Jua', sans-serif; font-size: large;">
+<pre id="productText" style="font-family: 'Jua', sans-serif; font-size: 13px;">
 ${p.productInfo}
 </pre>
                 <div id="productTable">
@@ -41,7 +41,25 @@ ${p.productInfo}
                         </tr>
                         <tr>
                             <td>구매혜택</td>
-                            <td>??? 포인트 적립예정</td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${loginUser.gradeName eq 'RED'}">
+                                        <fmt:formatNumber pattern="###,###">${ totalPrice * 0.01 }</fmt:formatNumber> 포인트 적립예정
+                                    </c:when>
+                                    <c:when test="${loginUser.gradeName eq 'ORANGE'}">
+                                         <fmt:formatNumber pattern="###,###">${ totalPrice * 0.03 }</fmt:formatNumber> 포인트 적립예정
+                                    </c:when>
+                                    <c:when test="${loginUser.gradeName eq 'GREEN'}">
+                                         <fmt:formatNumber pattern="###,###">${ totalPrice * 0.05 }</fmt:formatNumber> 포인트 적립예정
+                                    </c:when>
+                                    <c:when test="${loginUser.gradeName eq 'BLUE'}">
+                                         <fmt:formatNumber pattern="###,###">${ totalPrice * 0.1 }</fmt:formatNumber> 포인트 적립예정
+                                    </c:when>
+                                    <c:otherwise>
+                                    	회원만 적립됩니다.
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
                         </tr>
                         <tr>
                             <td>배송방법</td>
