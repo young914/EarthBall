@@ -55,8 +55,8 @@ public class AdminStoreController {
   public String storeEnrollForm(HttpSession session) {
     Member loginUser = (Member) session.getAttribute("loginUser");
     if (loginUser == null || 1 != loginUser.getMailAuth()) {
-      
-      return "fo/common/emailAuthError";
+      session.setAttribute("alertMsg", "로그인시 이용가능합니다");
+      return "redirect:/main";
     }
     return "bo/store/storeEnrollForm";
   }

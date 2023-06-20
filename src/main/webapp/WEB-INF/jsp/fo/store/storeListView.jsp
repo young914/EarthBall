@@ -323,7 +323,7 @@ hr{
 
     <!-- 사이드바 -->
     <div id="mySidebar" class="sidebar">
-        <div id="filterStore" style="height: 27%;">
+        <div id="filterStore" style="height: 250px;">
             <div id="backToMain" style="padding-left: 10px;">
                 <div id="backIcon" onclick="backZigu()">
                     <img src="/resources/fo/img/logo.png" style="width: 30px; height: 30px;"><div>HOME</div>
@@ -394,7 +394,7 @@ hr{
             </c:choose>
         </div>
         <hr>
-        <div style="overflow-y: scroll; overflow-x: hidden; position:relative; height: 64%;">
+        <div style="overflow-y: scroll; overflow-x: hidden; position:relative; height: 570px;">
             <hr>
             
             <div id="store-list-area">
@@ -432,7 +432,7 @@ hr{
             // 2_1. 지도 셋팅 완료
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
                 mapOption = { 
-                    center: new kakao.maps.LatLng(37.517232759035965, 126.97701521248901),
+                    center: new kakao.maps.LatLng(37.533880, 126.896771),
                     level: 5
                 };
             var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -1060,6 +1060,7 @@ hr{
                             // 좋아요 취소 시
                             storeLikes--;
                             $button.removeClass("clicked");
+                            
                         } else {
                             // 좋아요 추가 시
                             storeLikes++;
@@ -1067,6 +1068,8 @@ hr{
                         }
                         // 좋아요 수 업데이트
                         $storeLikes.text(storeLikes);
+
+                        location.href = location.href;
 
                     },
                     error: function() {
