@@ -5,9 +5,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.google.gson.Gson;
 import com.kh.earthball.bo.Member.service.MemberAdminService;
 import com.kh.earthball.bo.Member.vo.AdminMember;
 import com.kh.earthball.fo.common.template.Pagination;
@@ -54,16 +57,14 @@ import lombok.extern.slf4j.Slf4j;
           return "bo/member/adminMemberList";
         }
         
-//        public String deleteAdminMember(AdminMember m,
-//                                                                       HttpSession session,
-//                                                                       Model model) {
-//          
-//          int result = memberAdminService.deleteAdminMember(m);
-//          
-//          if(result > 0) {
-//              
-//            
-//        }
+        @ResponseBody
+        @PostMapping(value="adminMemberStatusUpdate.me", produces="application/json; charset=UTF-8")
+        public String updateStatus(String memberId, String status, Model model) {
+
+          int result = memberAdminService.updateMemberStatus(memberId, status);
+
+          return new Gson().toJson(result);
+        }
           
         }
 

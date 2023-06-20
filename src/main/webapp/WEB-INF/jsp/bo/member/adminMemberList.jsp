@@ -86,14 +86,19 @@
 					      <td class="text-center"><strong>${member.address1}</strong></td>
 					      <td class="text-center"><strong>${member.gradeName}</strong></td>
 					      
-					      <td class="text-center">
-            <div class="dropdown">
-        <!-- 삭제 버튼 추가 -->
-        <td class="text-center">
-            <button type="button" class="btn btn-danger" onclick="deleteMember('${member.memberId}')">계정 비활성화</button>
-        </td>
-		    </tr>
-		  </c:forEach>
+					 <td class="text-center">
+		
+						<c:choose>
+							<c:when test="${ member.status eq 'Y' }">
+								<button type="button" onclick="status();" class="btn btn-success">계정 활성화</button>
+							</c:when>
+							<c:otherwise>
+								<button type="button" onclick="status();" class="btn btn-danger">계정 비활성화</button>
+							</c:otherwise>
+						</c:choose>
+        			</td>
+		    	</tr>
+		  	</c:forEach>
 		</tbody>
        </table>
       </div>
@@ -171,24 +176,65 @@
 </div>
 <jsp:include page="/WEB-INF/jsp/bo/common/commonScript.jsp" />
 <script type="text/javascript">
-  function deleteMember(memberId) {
-    if(confirm('정말로 해당 계정을 비활성화하시겠습니까?')) {
-      $.ajax({
-        type: 'POST',
-        url: "delete.me", 
-        data: {
-          memberId: memberId
-        },
-        success: function(response) {
-          alert('계정이 비활성화되었습니다.');
-          location.reload(); // 현재 페이지 새로고침
-        },
-        error: function(request, status, error) {
-          alert('계정 비활성화에 실패하였습니다. 다시 시도해주세요.');
-        }
-      });
-    }
-  }
+
+	// 상품 행 클릭시 상세보기 페이지로 이동
+	$(".productList tbody tr").click(function() {
+	  location.href = "adminDetailView.pro?productNo=" + $(this).children().eq(0).text();
+	});
+	
+	// 노출여부 버튼 클릭시
+	// 상세보기 페이지로 이동하는거 막음
+	// 호버표과 안함
+	function status() {
+	  event.stopPropagation();
+	
+	  if($(event.target).text() == "Y") {
+	    $(event.target).text("N");
+	    $(event.target).removeClass("btn-success");
+	    $(event.target).addClass("btn-danger");
+	  } else {
+	    $(event.target).text("Y");
+	    $(event.target).removeClass("btn-danger");
+	    $(event.target).addClass("btn-success");
+	  }
+	
+	  // 상품번호
+	  var productNo = $(event.target).parent().siblings().eq(0).text();
+	  // 노출여부
+	  var status = $(event.target).text();
+	  
+	  console.log(productNo);
+	  console.log(status);
+	
+	  $.ajax({
+	    url: "adminStatusUpdate.pro",
+	    type: "post",
+	    data: {
+	      productNo: productNo,
+	      status: status
+	    },
+	    success: function(data) {
+	      if(data == 1) {
+	        alert("상품 노출여부 변경 성공");
+	      } else {
+	        alert("상품 노출여부 변경 실패");
+	
+	        if($(event.target).text() == "Y") {
+	          $(event.target).text("N");
+	          $(event.target).removeClass("btn-success");
+	          $(event.target).addClass("btn-danger");
+	        } else {
+	          $(event.target).text("Y");
+	          $(event.target).removeClass("btn-danger");
+	          $(event.target).addClass("btn-success");
+	        }
+	      }
+	    },
+	    error: function() {
+	      console.log("상품 노출여부 변경 실패");
+	    }
+	  });
+	}
 </script>
 </body>
 </html>

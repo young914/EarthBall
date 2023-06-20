@@ -13,4 +13,6 @@ public interface AdminMemberMapper {
   List<AdminMember>selectAdminMemberList(@Param("offset") int offset, @Param("limit") int limit);
 
   List<AdminMember> searchAdminMember(@Param("keyword") String keyword);
+  
+  int updateMemberStatus(@Param("MemberId") String memberId, @Param("status") String status);
 }

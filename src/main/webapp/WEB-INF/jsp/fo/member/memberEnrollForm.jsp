@@ -48,6 +48,7 @@
 
     .logo {
         width: 345px;
+        margin: 0 auto;
     }
 
     .member b{
@@ -197,6 +198,7 @@
         <div class="field">
             <b>닉네임 *</b>
             <input type="text" name="memberName" id="memberName" placeholder="닉네임을 입력해주세요!" required>
+            <div id="checkNameResult" style="font-size : 0.8em; display : none"></div>
         </div>
 
         <!-- 3. 필드(생년월일) -->
@@ -371,7 +373,7 @@
 </script>
 
 	<script>
-	$(function() {
+		$(function() {
 		
 		// 아이디를 입력받을 수 있는 input 요소 객체 자체를 변수에 담아두기
 		const $idInput = $("#enrollForm input[name=memberId]");
@@ -423,9 +425,53 @@
 		});
 	});
 </script>
+
+<script>
+$(function() {
+	 
+	  const $idInput = $("#enrollForm input[name=memberName]");
+
+	  $idInput.keyup(function() {
+	    if ($idInput.val().length >= 2) {
+	     
+	    	
+	      $.ajax({
+	        url: "nameCheck.me", 
+	        data: { checkName: $idInput.val() },
+	        type: "get",
+	        success: function(result) {
+	          if (result == "NNNNN") {
+	            
+	        	  // 사용 불가능
+	            $("#checkNameResult")
+	              .show()
+	              .css("color", "red")
+	              .text("중복된 이름이 존재합니다. 다시 입력해주세요.");
+	            $("#enrollForm button[type=submit]").attr("disabled", true);
+	          } else {
+	            
+	        	  // 사용 가능
+	            $("#checkNameResult")
+	              .show()
+	              .css("color", "green")
+	              .text("최고의 이름이에요!");
+	            $("#enrollForm button[type=submit]").attr("disabled", false);
+	          }
+	        },
+	        error: function() {
+	          console.log("아이디 중복 체크용 ajax 통신 실패!");
+	        }
+	      });
+	    } else {
+	      // 5글자 미만일 경우 => 버튼 비활성화, 메세지 숨기기
+	      $("#checkNameResult").hide();
+	      $("#enrollForm button[type=submit]").attr("disabled", true);
+	    }
+	  });
+	});
+
+</script>
 	
-	
-	</script>
 
         
         <!-- 비밀번호 일치 여부 -->
@@ -465,12 +511,6 @@
 		     
         </script>
         
-			        
-        <!-- 비밀번호 제약조건 (정규화) -->
-        <script>
-        
-        </script>
-
         <!-- 7. 푸터 -->
         <div class="member-footer">
             <div>

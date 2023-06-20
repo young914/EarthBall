@@ -114,5 +114,11 @@
     	        SET STATUS = 'N'
     	 WHERE  MEMBER_ID = #{memberId}
     </update>
+    
+    <select id="nameCheck" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM MEMBER
+        WHERE MEMBER_NAME = #{checkName}
+    </select>
 
 </mapper>

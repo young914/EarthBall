@@ -46,6 +46,7 @@
 
     .logo {
         width: 345px;
+        margin: 0 auto;
     }
 
     .member b{
@@ -181,19 +182,24 @@
         <div class="field">
             <b>아이디 *</b>
             <span class="placehold-text">
-            <input type="text" name="memberId" value="${loginUser.memberId }" readonly reqruid></span>
+            <input type="text" name="memberId" value="${loginUser.memberId }" readonly ></span>
         </div>
+        
         <div class="field">
-            <b>비밀번호 *</b>
-            <input class="userpw" type="password" placeholder="8자 이상 - 대문자 특수문자 포함 비밀번호를 입력해주세요" name="memberPwd" required>
-        </div>
-        <div class="field">
-            <b>비밀번호 재확인 *</b>
-            <input class="userpw-confirm" type="password" placeholder="다시한번 입력해주세요" required>
-        </div>
+		    <b>비밀번호 *</b>
+		    <input id="memberPwd" class="userpw" type="password" placeholder="8자 이상 - 대문자 특수문자 포함 비밀번호를 입력해주세요" name="memberPwd" required>
+		    <div id="checkPwdResult1" style="font-size : 0.8em; display : none"></div>
+		</div>
+		
+		<div class="field">
+		    <b>비밀번호 재확인 *</b>
+		    <input id="checkPwd" class="userpw-confirm" type="password" placeholder="다시한번 입력해주세요" required>
+		    <div id="checkPwdResult2" style="font-size : 0.8em; display : none"></div>
+		</div>
+
         <div class="field">
             <b>닉네임 *</b>
-            <input type="text" name="memberName" value="${loginUser.memberName}" required>
+            <input type="text" name="memberName" value="${loginUser.memberName}" readonly>
         </div>
 
         <!-- 3. 필드(생년월일) -->
@@ -216,29 +222,16 @@
 		        </label>
 		    </div>
 		</div>
-		
-		<script>
-		    $(function() {
-		        var gender = "${loginUser.gender}";
-		        
-		        if(gender) {
-		        	
-		            $("input[name=gender][value=" + gender + "]").prop("checked", true);
-		            
-		        }
-		    });
-		</script>
-
         <!-- 5. 이메일_전화번호 -->
         <div class="field">
             <b>본인 확인 이메일<small> *</small></b>
-            <input type="email" placeholder="선택입력" name="email" value="${loginUser.email}" required>
+            <input type="email" placeholder="선택입력" name="email" value="${loginUser.email}" readonly>
         </div>
         
         <div class="field tel-number">
             <b>휴대전화 *</b>
             <div>
-                <input type="tel" placeholder="전화번호 입력" name="phone" value="${ loginUser.phone }" required>
+                <input type="text" placeholder="전화번호 입력 - 제외" name="phone" value="${ loginUser.phone }" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
             </div>
             <input type="hidden" placeholder="인증번호를 입력하세요" disabled>
         </div>
@@ -260,6 +253,17 @@
         
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
         
+        <script>
+		    $(function() {
+		        var gender = "${loginUser.gender}";
+		        
+		        if(gender) {
+		        	
+		            $("input[name=gender][value=" + gender + "]").prop("checked", true);
+		            
+		        }
+		    });
+		</script>
         
         <!-- 주소 API 등록 -->
         <script>
@@ -311,7 +315,48 @@
 		        }).open();
 		    }
 		</script>
-
+		
+		<script>
+	        
+	        var memberPwd = document.getElementById('memberPwd');
+	        var checkPwd = document.getElementById('checkPwd');
+	        
+	        
+	        var checkPwdResult1 = document.getElementById('checkPwdResult1');
+	        var checkPwdResult2 = document.getElementById('checkPwdResult2');
+	        
+	
+	        var pwReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+	
+	
+	     
+	        function validatePassword() {
+	            if(!pwReg.test(memberPwd.value)) {
+	                checkPwdResult1.style.color = 'red';
+	                checkPwdResult1.style.display = 'block';
+	                checkPwdResult1.innerHTML = '비밀번호는 최소 8자 이상이며, 대문자, 소문자, 숫자, 특수문자를 최소 하나 이상 포함해야 합니다.';
+	                return;
+	            } else {
+	                checkPwdResult1.style.display = 'none';
+	            }
+	            
+	            if(memberPwd.value === checkPwd.value) {
+	                checkPwdResult2.style.color = 'green';
+	                checkPwdResult2.style.display = 'block';
+	                checkPwdResult2.innerHTML = '두 비밀번호가 일치합니다.';
+	            } else {
+	                checkPwdResult2.style.color = 'red';
+	                checkPwdResult2.style.display = 'block';
+	                checkPwdResult2.innerHTML = '두 비밀번호가 일치하지 않습니다.';
+	            }
+	        }
+	        
+	        memberPwd.onchange = validatePassword;
+	        memberPwd.onkeyup = validatePassword;
+	        checkPwd.onkeyup = validatePassword;
+    </script>
+		
+		
         <!-- 7. 푸터 -->
         <div class="member-footer">
             <div>
