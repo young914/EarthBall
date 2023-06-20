@@ -125,11 +125,16 @@
 
                 </div>
 
-                <div class="outer2_1">
+                <div class="outer2_1" >
                     <div class="title">제목: <input type="text" readonly  value="${ d.dyBoardTitle }"></div>
-                    <div class="content"><textarea id="dyBoardContent"  readonly>${ d.dyBoardContent }</textarea></div>
+                    <div class="content" style="position:relative;"><textarea id="dyBoardContent"  readonly>${ d.dyBoardContent }</textarea></div>
+                    <div style="position: absolute; top: 50px; left : 50px;">
+						<img src=""></img>
+                    </div>
                 </div>
+
 				<div class="detail_header1">
+
 					<div class="top_btn">
 						<!--  관리자만 보이는 삭제 버튼 -->
 						<c:if test="${ loginUser.memberId eq 'admin' }">
@@ -138,7 +143,7 @@
 						<button onclick="goBack()" id="back_btn">목록</button>
 					</div>
 				</div>
-                	<div class="icon2">
+                	  <!--<div class="icon2">
                         <div style="padding: 0; height: 22px;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
                                  class="bi-heart" viewBox="0 0 16 16">
@@ -146,13 +151,14 @@
                                 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868
                                 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
                             </svg>
-                        </div>
-                        <div><span id="icon2">20</span></div>
+                        </div>-->
+
+                        <!--<div><span id="icon2">20</span></div>-->
 		           </div>
-				<div class="area2">
+				<!-- <div class="area2">
 					<div><textarea name="" id="" cols="30" rows="10" placeholder="댓글"></textarea></div>
 					<button id="write_btn">작성</button>
-				</div>
+				</div> -->
 	</div>
 
 	<script type="text/javascript" src="/resources/fo/js/diary/diary.js"></script>
