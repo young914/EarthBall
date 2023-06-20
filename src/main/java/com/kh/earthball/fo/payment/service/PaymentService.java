@@ -16,7 +16,7 @@ public interface PaymentService {
 
   List<Cart> selectProductList(List<PayPageItem> orders);
 
-  List<Cart> selectProductItem(List<PayPageItem> orders);
+  List<PayPageItem> selectProductItem(List<PayPageItem> orders);
 
   int insertOrder(List<Cart> orderList);
 

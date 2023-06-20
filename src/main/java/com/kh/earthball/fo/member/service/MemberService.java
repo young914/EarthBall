@@ -12,7 +12,7 @@ public interface MemberService {
   int updateMember(Member m);
 
   int idCheck(String checkId);
-
+  
   int updateMailKey(Member m) throws Exception;
 
   int updateMailAuth(Member m) throws Exception;
@@ -27,7 +27,8 @@ public interface MemberService {
 
   int insertProfile(String memberImg, String memberId);
 
-  
   int deleteMember(String memberId);
+  
+  int nameCheck(String memberName);
   
 }

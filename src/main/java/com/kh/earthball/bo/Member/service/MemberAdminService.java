@@ -11,4 +11,7 @@ public interface MemberAdminService {
   List<AdminMember>selectAdminMemberList(PageInfo pageInfo);
   
   List<AdminMember> searchAdminMember(String keyword);
+  
+  int updateMemberStatus(String memberId, String status);
+
 }

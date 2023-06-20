@@ -265,7 +265,7 @@ input[type="number"]::-webkit-inner-spin-button{-webkit-appearance: none; margin
 }
 
 #img-area {
-    width : 35%;
+    width : 30%;
     height : 100%;
     /* border : 1px solid red; */
 }
@@ -279,7 +279,7 @@ input[type="number"]::-webkit-inner-spin-button{-webkit-appearance: none; margin
 }
 
 #product_content {
-    width : 65%;
+    width : 70%;
     /* height : 100%; */
     flex-direction: column;
     /* border : 1px solid red; */
@@ -298,6 +298,12 @@ input[type="number"]::-webkit-inner-spin-button{-webkit-appearance: none; margin
 #product_name {
     font-size : 16px;
     font-weight : bold;
+    height : 35%;
+}
+
+.product_name {
+	height : 100%;
+	white-space: normal;
 }
 
 #product_amount {

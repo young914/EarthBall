@@ -22,4 +22,8 @@ public interface ProductMapper {
 
   ArrayList<Product> selectTopList();
 
+  ArrayList<Product> lowPriceList(RowBounds rowBounds);
+
+  ArrayList<Product> highPriceList(RowBounds rowBounds);
+
 }
