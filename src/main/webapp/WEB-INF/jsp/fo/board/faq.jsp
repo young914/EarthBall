@@ -237,11 +237,7 @@
 							더 자세한 문의는 '문의하기' 게시판을 이용해주세요</h4>
                     </div>
                     <div style="text-align: right;">
-                <c:if test="${loginUser.memberId eq 'admin'}">
-                            <button id="insertList">
-                                <a class="enrollbo" href="enrollForm.bo">글작성</a>
-                            </button>
-                        </c:if>
+
                     </div>
                 </div>
             </th>
