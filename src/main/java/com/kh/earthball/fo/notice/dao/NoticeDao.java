@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
-import com.kh.earthball.fo.board.vo.Board;
 import com.kh.earthball.fo.common.vo.PageInfo;
 import com.kh.earthball.fo.notice.vo.Notice;
 
