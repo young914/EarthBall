@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import com.kh.earthball.fo.member.vo.Member;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,7 +64,15 @@ public class DiaryController {
   }
 
   @RequestMapping("diaryEnrollForm.bo")
-  public String diaryEnrollForm() {
+  public String diaryEnrollForm(HttpSession session) {
+
+ // 이메일 인증한 회원이 아니라면 접근 불가하도록 설정
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser == null || 1 != loginUser.getMailAuth()) {
+
+      return "fo/common/emailAuthError";
+    }
+
     return "fo/diary/diaryEnrollForm";
   }
 
