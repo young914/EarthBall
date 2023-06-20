@@ -157,20 +157,7 @@
         <!-- Content -->
         <div class="container-xxl flex-grow-1 container-p-y content">
           <h1 class="title">상품리스트</h1>
-          <div class="nav">
-            <select name="category" required>
-              <option value="전체">전체</option>
-              <option value="욕실">욕실</option>
-              <option value="식품">식품</option>
-              <option value="주방">주방</option>
-              <option value="생활">생활</option>
-              <option value="음료용품">음료용품</option>
-              <option value="화장품">화장품</option>
-              <option value="문구">문구</option>
-            </select>
-            <input type="text" name="search" placeholder="검색어를 입력하세요."/>
-            <button type="button">검색</button>
-          </div>
+
           <div>
             <table class="productList">
               <thead>
