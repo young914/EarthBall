@@ -59,6 +59,11 @@ public class commonController {
     return "fo/common/main";
   }
 
+  @RequestMapping("information")
+  public String information() {
+    return "fo/common/information";
+  }
+
 
 /*
   @GetMapping("/")

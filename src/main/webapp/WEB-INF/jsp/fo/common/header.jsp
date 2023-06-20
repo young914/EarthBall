@@ -70,10 +70,7 @@
                     </div>
                 </div>
                 <div class="dropdown">
-                    <span class="dropbtn">지구소개</span>
-                    <div class="dropdown-content">
-                        <a href="">#</a>
-                    </div>
+                    <span class="dropbtn"> <a href="information">지구소개</a></span>
                 </div>
 
                 <div class="dropdown">

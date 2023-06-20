@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,16 +45,16 @@ ${p.productInfo}
                             <td>
                                 <c:choose>
                                     <c:when test="${loginUser.gradeName eq 'RED'}">
-                                        <fmt:formatNumber pattern="###,###">${ totalPrice * 0.01 }</fmt:formatNumber> 포인트 적립예정
+                                        <fmt:formatNumber pattern="###,###">${ p.price * 0.01 }</fmt:formatNumber> 포인트 적립예정
                                     </c:when>
                                     <c:when test="${loginUser.gradeName eq 'ORANGE'}">
-                                         <fmt:formatNumber pattern="###,###">${ totalPrice * 0.03 }</fmt:formatNumber> 포인트 적립예정
+                                         <fmt:formatNumber pattern="###,###">${ p.price * 0.03 }</fmt:formatNumber> 포인트 적립예정
                                     </c:when>
                                     <c:when test="${loginUser.gradeName eq 'GREEN'}">
-                                         <fmt:formatNumber pattern="###,###">${ totalPrice * 0.05 }</fmt:formatNumber> 포인트 적립예정
+                                         <fmt:formatNumber pattern="###,###">${ p.price * 0.05 }</fmt:formatNumber> 포인트 적립예정
                                     </c:when>
                                     <c:when test="${loginUser.gradeName eq 'BLUE'}">
-                                         <fmt:formatNumber pattern="###,###">${ totalPrice * 0.1 }</fmt:formatNumber> 포인트 적립예정
+                                         <fmt:formatNumber pattern="###,###">${ p.price * 0.1 }</fmt:formatNumber> 포인트 적립예정
                                     </c:when>
                                     <c:otherwise>
                                     	회원만 적립됩니다.

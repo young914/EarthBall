@@ -15,11 +15,10 @@
 <body>
 
 	<jsp:include page="header.jsp"/>
-
-	<div id="container">
-
-    </div>  <!-- container 끝 : 이 밖에 나가면 틀 튀어나감... -->
-
+        <div style="margin-top: 158px;">
+            <img src="/resources/fo/img/information2.png" style="width: 100%;">
+            <img src="/resources/fo/img/information1.png" style="width: 100%;">
+        </div>
     <jsp:include page="footer.jsp"/>
 
 </body>
