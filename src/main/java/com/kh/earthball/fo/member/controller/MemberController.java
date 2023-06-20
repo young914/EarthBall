@@ -207,6 +207,7 @@ public class MemberController {
         mv.addObject("isEmailVerified", mailAuthStatus == 1);
     }
 
+    session.setAttribute("loginUser", loginUser);
     mv.setViewName("fo/mypage/myPage");
     return mv;
   }
@@ -274,7 +275,7 @@ public class MemberController {
 
     return (count > 0) ? "NNNNN" : "NNNNY";
   }
-  
+
   @RequestMapping("pfile.me")
   public String profileUpload(HttpServletRequest req, RedirectAttributes redirectAttributes, MultipartHttpServletRequest multipartRequest) throws Exception {
       String memberId = req.getParameter("memberId");
