@@ -61,4 +61,29 @@ public class ProductServiceImpl implements ProductService {
     return productMapper.selectTopList();
   }
 
+  @Override
+  public ArrayList<Product> selectCategoryList(int category, PageInfo pi) {
+
+    int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+    int limit = pi.getBoardLimit();
+
+    RowBounds rowBounds = new RowBounds(offset, limit);
+
+    ArrayList<Product> list = new ArrayList<>();
+
+    if(category == 1) {
+      // 등록순
+      list = productMapper.selectAllProduct(rowBounds);
+    }else if(category == 2) {
+      // 낮은 가격순
+      list = productMapper.lowPriceList(rowBounds);
+    }else {
+      //높은 가격순
+      list = productMapper.highPriceList(rowBounds);
+    }
+
+
+    return list;
+  }
+
 }

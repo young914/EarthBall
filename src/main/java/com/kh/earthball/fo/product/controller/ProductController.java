@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.earthball.fo.common.template.Pagination;
@@ -64,9 +65,21 @@ public class ProductController {
 
     ArrayList<Product> list = productService.selectCategoryProduct(pi, category);
 
+    for(Product p : list){
+
+      int productNo = p.getProductNo();
+      int likeCount = likeService.selectLikeCount(productNo);
+      int reviewCount = reviewService.selectReviewCount(productNo);
+
+      p.setLikeCount(likeCount);
+      p.setReviewCount(reviewCount);
+
+      list.set(list.indexOf(p), p);
+    }
+
     model.addAttribute("list", list);
     model.addAttribute("pi", pi);
-    return "/fo/product/productList";
+    return "/fo/product/categoryProductList";
   }
 
   @RequestMapping("detailView.pro")
@@ -96,5 +109,20 @@ public class ProductController {
 
     return "/fo/product/productDetailView";
   }
+
+//  @GetMapping("selectCategory.pro")
+//  public String selectCategoryList(@RequestParam(value="cPage", defaultValue="1") int currentPage, int category, Model model) {
+//
+//    int listCount = productService.selectListCount();
+//    int pageLimit = 10;
+//    int boardLimit = 16;
+//
+//    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+//
+//    ArrayList<Product> list = productService.selectCategoryList(category, pi);
+//    model.addAttribute("list", list);
+//    model.addAttribute("pi", pi);
+//    return "/fo/product/productList";
+//  }
 
 }

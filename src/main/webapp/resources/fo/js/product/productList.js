@@ -1,4 +1,5 @@
 function categoryList(){
+    //console.log(event.target.value);
     location.href = "categoryList.pro?category=" + event.target.value;
 }
 
@@ -12,6 +13,9 @@ function detailView(){
 }
 
 // 등록순, 낮은 가격순, 높은 가격순 정렬
-function sortList(){
-    console.log(event.target.value);
-}
+// function changeCategory(){
+//     console.log("changeCategory() 호출됨");
+//     var category = $("#sel").val();
+
+//     location.href = "selectCategory.pro?category=" + category;
+// }

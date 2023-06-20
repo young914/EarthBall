@@ -21,4 +21,6 @@ public interface ProductService {
 
   ArrayList<Product> selectTopList();
 
+  ArrayList<Product> selectCategoryList(int category, PageInfo pi);
+
 }

@@ -58,4 +58,22 @@
 		WHERE PRODUCT_NO = #{productNo}
 	</select>
 
+	<select id="lowPriceList" resultType="com.kh.earthball.fo.product.vo.Product">
+		SELECT PRODUCT_NO, PRODUCT_NAME, CATEGORY, PRICE, DISCOUNT, STOCK, CREATE_DATE, STATUS, CHANGER_NAME
+		FROM PRODUCT
+		JOIN PRODUCT_ATTA USING (PRODUCT_NO)
+		WHERE STATUS = 'Y'
+		AND FILE_LEVEL = 0
+		ORDER BY PRICE
+	</select>
+
+	<select id="highPriceList" resultType="com.kh.earthball.fo.product.vo.Product">
+		SELECT PRODUCT_NO, PRODUCT_NAME, CATEGORY, PRICE, DISCOUNT, STOCK, CREATE_DATE, STATUS, CHANGER_NAME
+		FROM PRODUCT
+		JOIN PRODUCT_ATTA USING (PRODUCT_NO)
+		WHERE STATUS = 'Y'
+		AND FILE_LEVEL = 0
+		ORDER BY PRICE DESC
+	</select>
+
 </mapper>
