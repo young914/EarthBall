@@ -160,37 +160,41 @@
 
 $("#cancel_btn").on("click", function() {
 
-	let paymentNo = $(this).parent().parent().children(0).eq(0).text();
-	let memberId = $(this).parent().parent().children(0).eq(1).text();
+	if(window.confirm("정말로 취소처리 하시겠습니까? \n(결제관리페이지에서 취소 후 눌러주세요.)")) {
 
-	$.ajax({
-		url : "/acceptCancel",
-		type : "post",
-		data : {
-			memberId : memberId,
-			paymentNo : paymentNo
-		},
-		success : function(result) {
+		let paymentNo = $(this).parent().parent().children(0).eq(0).text();
+		let memberId = $(this).parent().parent().children(0).eq(1).text();
 
-			if(result == "1") {
+		$.ajax({
+			url : "/acceptCancel",
+			type : "post",
+			data : {
+				memberId : memberId,
+				paymentNo : paymentNo
+			},
+			success : function(result) {
 
-				var msg = "취소처리가 반영되었습니다.";
+				if(result == "1") {
+
+					var msg = "취소처리가 반영되었습니다.";
+					alert(msg);
+					location.reload();
+
+				} else {
+
+					var msg = "취소처리에 실패하였습니다. 다시 시도해 주세요.";
+					alert(msg);
+
+				}
+			},
+			error : function() {
+
+				var msg = "알 수 없는 이유로 취소요청에 실패하였습니다.";
 				alert(msg);
-				location.reload();
-
-			} else {
-
-				var msg = "취소처리에 실패하였습니다. 다시 시도해 주세요.";
-				alert(msg);
-
 			}
-		},
-		error : function() {
+		});
 
-			var msg = "알 수 없는 이유로 취소요청에 실패하였습니다.";
-			alert(msg);
-		}
-	});
+	}
 });
 
 $(document).ready(function(){
