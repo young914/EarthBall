@@ -27,7 +27,7 @@
   <jsp:include page="/WEB-INF/jsp/bo/common/commonHead.jsp" />
   <style>
   /* 취소확인 버튼 스타일 */
-  #cancel_btn {
+  .cancel_btn {
   	width : 80px;
     height : 30px;
     font-size : 16px;
@@ -92,7 +92,7 @@
                     <td class="text-center chConNo" data-ch-con-no="${cancel.paymentDate}"><strong>${cancel.paymentDate}</strong></td>
                     <c:choose>
                     	<c:when test="${ cancel.status == 'R' }">
-                    		<td class="text-center chConNo" data-ch-con-no="${cancel.status}"><button id="cancel_btn">취소하기</button></td>
+                    		<td class="text-center chConNo" data-ch-con-no="${cancel.status}"><button class="cancel_btn">취소하기</button></td>
                     	</c:when>
                     	<c:when test="${ cancel.status == 'N' }">
                     		<td class="text-center chConNo" data-ch-con-no="${cancel.status}"><strong>취소완료</strong></td>
@@ -158,7 +158,7 @@
 <jsp:include page="/WEB-INF/jsp/bo/common/commonScript.jsp" />
 <script type="text/javascript">
 
-$("#cancel_btn").on("click", function() {
+$(".cancel_btn").on("click", function() {
 
 	if(window.confirm("정말로 취소처리 하시겠습니까? \n(결제관리페이지에서 취소 후 눌러주세요.)")) {
 
