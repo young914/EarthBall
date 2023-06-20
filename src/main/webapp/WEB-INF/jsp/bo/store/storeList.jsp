@@ -186,7 +186,6 @@
                     <th width="150">매장전화번호</th>
                     <th width="150">영업시간</th>
                     <th width="70">좋아요수</th>
-                    <th width="70">수정</th>
                     <th width="70">삭제</th>
                 </tr>
                 </thead>
@@ -199,7 +198,6 @@
                         <td>${ s.storePhone}</td>
                         <td>${ s.businessHours }</td>
                         <td>${ s.storeLikes }</td>
-                        <td><button type="button" class="btn btn-warning"  onclick="event.stopPropagation(); updateStore('${ s.storeNo }');">수정</button></td>
                         <td><button type="button" class="btn btn-danger"  onclick="event.stopPropagation(); deleteStore('${ s.storeNo }');">삭제</button></td>
                     </tr>
                 </c:forEach>
@@ -270,10 +268,6 @@
 
   function createStore() {
     location.href = "storeEnrollForm.st";
-  }
-  function updateStore(storeNo) {
-    
-    location.href = "storeUpdateForm.st?storeNo=" + storeNo;
   }
   function deleteStore(storeNo) {
     location.href = "deleteStore.st?storeNo=" + storeNo;

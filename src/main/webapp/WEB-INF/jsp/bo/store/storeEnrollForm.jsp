@@ -115,18 +115,18 @@
 											style="width: 70%; height: 25px; border-radius: 10px; border: none; background-color: #19a7ce; color: white; font-weight: 600;">
 										</td>
 										<td style="width: 500px;">
-											<input type="text" name="storeAddress" required style="width: 50%;" id="address_kakao" placeholder="도로명 주소로 선택해주세요!">
+											<input type="text" name="storeAddress" required style="width: 50%;" id="address_kakao" placeholder="도로명 주소로 선택해주세요!" oninput="checkAddress()" />
 										</td>
 									</tr>
 									<tr>
 										<td> 상세주소 </td>
 										<td>
-											<input type="text" required style="width: 50%;" name="storeDetailAddress" placeholder="최대한 자세하게 적어주세요!">
+											<input type="text" style="width: 50%;" name="storeDetailAddress" placeholder="최대한 자세하게 적어주세요!">
 										</td>
 									</tr>
 									<tr>
 										<td>전화번호</td>
-										<td><input type="text" name="storePhone" required style="width: 50%;" placeholder="최대한 자세하게 적어주세요!"></td>
+										<td><input type="text" name="storePhone" required style="width: 50%;" pattern="(\d{4}-\d{4}-\d{4})|(\d{3}-\d{4}-\d{4})" placeholder="xxxx-xxxx-xxxx 또는 xxx-xxxx-xxxx 형식으로 입력해주세요!" title="xxxx-xxxx-xxxx 또는 xxx-xxxx-xxxx 형식으로 입력해주세요!" /></td>
 									</tr>
 									<tr style="margin: 10px 0;">
 										<td >운영시간</td>
@@ -409,6 +409,18 @@ window.onload = function(){
         }).open();
     });
 }
+
+function checkAddress() {
+  var addressInput = document.getElementById("address_kakao");
+  var addressValue = addressInput.value;
+  
+  if (addressValue.includes("길") || addressValue.includes("로")) {
+    addressInput.setCustomValidity("");
+  } else {
+    addressInput.setCustomValidity("주소에는 '길'이나 '로'가 포함되어야 합니다.");
+  }
+}
+
 </script>
 </body>
 </html>

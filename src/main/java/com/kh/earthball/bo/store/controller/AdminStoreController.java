@@ -103,10 +103,10 @@ public class AdminStoreController {
     int result = storeService.insertStore(s,list);
 
     if(result>0) {
-      session.setAttribute("alertMsg", "매장추가 성공");
+      session.setAttribute("alertMsg", "매장신청 성공");
       return  "redirect:/main";
     }else {
-      session.setAttribute("alertMsg", "매장추가 실패");
+      session.setAttribute("alertMsg", "매장신청 실패");
       return "redirect:/main";
     }
   }
